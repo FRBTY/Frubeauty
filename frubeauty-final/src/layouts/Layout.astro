@@ -1,0 +1,236 @@
+---
+import { siteConfig, openingHoursSchema, analytics } from '../config/site';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
+const {
+  title = 'FRUBEAUTY — Kozmetika és smink Zuglóban | Pecze-Kovács Fruzsina',
+  description = `Pihentető arckezelés Janssen hatóanyagokkal, természetes szempilla-lift, szemöldök-laminálás és személyre szabott smink. Bejelentkezés online, ${siteConfig.postalCode} Budapest, ${siteConfig.streetAddress}`,
+  image = '/og-image.jpg',
+  canonical = Astro.url.href,
+} = Astro.props;
+
+const businessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BeautySalon',
+  name: 'FRUBEAUTY',
+  image: 'https://frubeauty.com/og-image.jpg',
+  '@id': 'https://frubeauty.com',
+  url: 'https://frubeauty.com',
+  telephone: siteConfig.phone,
+  email: siteConfig.email,
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: siteConfig.streetAddress,
+    addressLocality: siteConfig.locality,
+    postalCode: siteConfig.postalCode,
+    addressCountry: siteConfig.country,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: siteConfig.geo.latitude,
+    longitude: siteConfig.geo.longitude,
+  },
+  openingHoursSpecification: openingHoursSchema.map((h) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: h.dayOfWeek,
+    opens: h.opens,
+    closes: h.closes,
+  })),
+  sameAs: [siteConfig.instagram, siteConfig.facebook],
+};
+
+const hasGA4 = analytics.ga4Id && analytics.ga4Id.length > 0;
+const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
+---
+
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#1A1410" />
+    <link rel="canonical" href={canonical} />
+    <link rel="preload" as="image" href="/media/hero-poster.jpg" />
+    <link rel="preload" as="video" href="/media/hero.mp4" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Pecze-Kovács Fruzsina" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="hu_HU" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Geist:wght@400;500;600&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Geist:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
+
+    {/* ============ ANALYTICS (csak ha siteConfig-ban van ID) ============
+        A GA4 + Meta Pixel scriptek FELTÉTELESEN inject-elődnek, kizárólag
+        akkor, ha a site.ts-ben van valódi mérési azonosító. Default üres →
+        zéró tracking script töltődik be, így a sebesség/Privacy nem sérül. */}
+    {hasGA4 && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${analytics.ga4Id}`}></script>
+        <script is:inline define:vars={{ ga4Id: analytics.ga4Id }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){ window.dataLayer.push(arguments); }
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', ga4Id, { send_page_view: true });
+        </script>
+      </>
+    )}
+    {hasPixel && (
+      <script is:inline define:vars={{ pixelId: analytics.metaPixelId }}>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', pixelId);
+        fbq('track', 'PageView');
+      </script>
+    )}
+  </head>
+  <body class="bg-ink text-creamSoft font-body antialiased selection:bg-gold selection:text-ink">
+    <slot />
+
+    {/* ============ GLOBAL BOOKING CTA TRACKER ============
+        Minden olyan link, ami a Notino-foglalási domain-re mutat, automatikusan
+        UTM-paramétert kap (forrás = az aktuális oldal path-je), és kattintáskor
+        eseményt tüzel a GA4-be és a Meta Pixel-be — feltéve hogy az ID-k be
+        vannak állítva. Nulla refaktor a komponensekben: csak href-egyezés kell. */}
+    <script is:inline>
+      (function () {
+        var BOOKING_HOST = 'notino.hu';
+        function pathSegment() {
+          var p = (location.pathname || '/').replace(/^\/+|\/+$/g, '');
+          return p === '' ? 'home' : p.split('/')[0].replace(/[^a-z0-9-_]/gi, '-').toLowerCase();
+        }
+        function addUtm(href, segment) {
+          try {
+            var u = new URL(href, location.origin);
+            if (u.host.indexOf(BOOKING_HOST) === -1) return href;
+            if (!u.searchParams.has('utm_source'))   u.searchParams.set('utm_source', 'site');
+            if (!u.searchParams.has('utm_medium'))   u.searchParams.set('utm_medium', 'cta');
+            if (!u.searchParams.has('utm_campaign')) u.searchParams.set('utm_campaign', segment);
+            return u.toString();
+          } catch (e) { return href; }
+        }
+        function decorate() {
+          var seg = pathSegment();
+          var links = document.querySelectorAll('a[href*="' + BOOKING_HOST + '"]');
+          links.forEach(function (a) {
+            var orig = a.getAttribute('href');
+            if (!orig) return;
+            a.setAttribute('href', addUtm(orig, seg));
+            a.setAttribute('data-book-cta', '1');
+          });
+        }
+        function fireEvents() {
+          try { if (window.gtag) window.gtag('event', 'book_click', { event_category: 'cta', event_label: pathSegment() }); } catch (e) {}
+          try { if (window.fbq) window.fbq('track', 'InitiateCheckout'); } catch (e) {}
+        }
+        // Decorate now and re-run on DOMContentLoaded for React-island links.
+        decorate();
+        document.addEventListener('DOMContentLoaded', decorate);
+        document.addEventListener('click', function (ev) {
+          var t = ev.target instanceof Element ? ev.target.closest('a[data-book-cta]') : null;
+          if (!t) return;
+          fireEvents();
+        }, true);
+        // Re-decorate when SPA-style nav or hydration adds new links.
+        new MutationObserver(function () { decorate(); })
+          .observe(document.body, { childList: true, subtree: true });
+      })();
+    </script>
+
+    <style is:global>
+      :root {
+        --ease-out-strong:    cubic-bezier(0.23, 1, 0.32, 1);
+        --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+        --ease-drawer:        cubic-bezier(0.32, 0.72, 0, 1);
+      }
+
+      .font-display {
+        font-feature-settings: 'ss01', 'ss02';
+        font-variation-settings: 'SOFT' 30, 'opsz' 144;
+      }
+
+      /* Italic on display = the "tökéletes" emphasis style */
+      .font-display em, em.display {
+        font-style: italic;
+        font-variation-settings: 'SOFT' 50, 'opsz' 144;
+        color: var(--gold, #B8884A);
+      }
+
+      body {
+        font-size: 16px;
+        line-height: 1.65;
+        font-feature-settings: 'kern', 'liga', 'calt';
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      @media (min-width: 768px) { body { font-size: 17px; } }
+      p { line-height: 1.7; }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 100px;
+        background: #1A1410;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+      }
+
+      :where(a, button):focus-visible {
+        outline: 2px solid rgba(184, 136, 74, 0.55);
+        outline-offset: 3px;
+        border-radius: 6px;
+      }
+
+      /* Trust bar fade-in — zero-JS first impression.
+         Ha a JS lassan tölt, a CSS már bemutatta a contentet. */
+      .zero-js-fade {
+        opacity: 1;
+        animation: zeroJsFade 600ms var(--ease-out-strong) both;
+      }
+      @keyframes zeroJsFade {
+        from { opacity: 0; transform: translateY(8px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .zero-js-fade { animation: none; }
+      }
+    </style>
+  </body>
+</html>

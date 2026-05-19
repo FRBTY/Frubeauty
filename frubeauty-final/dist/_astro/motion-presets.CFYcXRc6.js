@@ -1,0 +1,1 @@
+const s=[.23,1,.32,1],i=[.32,.72,0,1],a={hidden:{opacity:0,y:16},visible:{opacity:1,y:0,transition:{duration:.55,ease:s}}},t={type:"spring",stiffness:140,damping:18,mass:.6},e={hidden:{clipPath:"inset(0 0 100% 0)"},visible:{clipPath:"inset(0 0 0 0)",transition:{duration:.9,ease:s}}};export{s as a,a as b,e as c,i as e,t as s};

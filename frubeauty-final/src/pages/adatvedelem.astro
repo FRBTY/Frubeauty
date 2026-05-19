@@ -1,0 +1,190 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { AnnouncementBar } from '../components/AnnouncementBar';
+import { NavBar } from '../components/NavBar';
+import { Reveal } from '../components/Reveal';
+import { CookieBanner } from '../components/CookieBanner';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const lastUpdated = '2026. május 17.';
+const config = {
+  booking: 'https://www.notino.hu/szalonok/pecze-kovacs-fruzsina-sminkes,-szemoldok-es-szempilla-stylist',
+  instagram: 'https://www.instagram.com/frubeauty/',
+  facebook: 'https://www.facebook.com/profile.php?id=61572135977337',
+  email: 'kfruzsi0197@gmail.com',
+  phone: '+36702159954',
+  phoneDisplay: '+36 70 215 9954',
+  address: '1143 Budapest, Egressy út 16.',
+  fullName: 'Pecze-Kovács Fruzsina E.V.',
+  taxNumber: '91311670-1-42',
+};
+---
+
+<Layout
+  title="Adatvédelmi tájékoztató | FRUBEAUTY"
+  description="A FRUBEAUTY adatvédelmi és sütikezelési tájékoztatója — GDPR-megfelelő."
+>
+  <div class="fixed top-0 inset-x-0 z-50">
+    <AnnouncementBar client:load />
+    <NavBar client:load bookingUrl={config.booking} instagram={config.instagram} facebook={config.facebook} />
+  </div>
+
+  <section class="pt-32 sm:pt-40 pb-20 sm:pb-28">
+    <div class="max-w-[820px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:load as="div">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Jogi</p>
+        <h1 class="font-display font-light text-cream leading-[1.05] tracking-tightest-" style="font-size: clamp(2.25rem, 5vw, 3.25rem);">
+          Adatvédelmi tájékoztató
+        </h1>
+        <p class="mt-4 text-creamMute text-sm">Utolsó frissítés: {lastUpdated}</p>
+      </Reveal>
+
+      <article class="mt-12 prose-frubeauty">
+        <h2>1. Az adatkezelő</h2>
+        <p>
+          A jelen tájékoztató a <strong>{config.fullName}</strong> egyéni vállalkozó
+          (a továbbiakban: „Adatkezelő") által a <strong>frubeauty.com</strong> weboldal
+          (a továbbiakban: „Weboldal") működtetése során végzett személyes adatok
+          kezeléséről nyújt tájékoztatást a GDPR (az Európai Parlament és a Tanács
+          (EU) 2016/679 rendelete) és az információs önrendelkezési jogról szóló
+          2011. évi CXII. törvény („Infotv.") rendelkezéseinek megfelelően.
+        </p>
+        <ul>
+          <li><strong>Név:</strong> {config.fullName}</li>
+          <li><strong>Adószám:</strong> {config.taxNumber}</li>
+          <li><strong>Székhely:</strong> {config.address}</li>
+          <li><strong>E-mail:</strong> <a href={`mailto:${config.email}`}>{config.email}</a></li>
+          <li><strong>Telefon:</strong> <a href={`tel:${config.phone}`}>{config.phoneDisplay}</a></li>
+        </ul>
+
+        <h2>2. Milyen adatokat kezelünk és miért</h2>
+        <h3>2.1 Időpontfoglalás</h3>
+        <p>
+          A foglalás a <strong>Notino</strong> (vagy aktuális partner) külső
+          rendszerén történik. Az ott megadott adatokra (név, e-mail, telefonszám)
+          a Notino saját adatkezelési szabályzata vonatkozik. Az Adatkezelő a
+          foglalás kapcsán kapott adatokat a szolgáltatás teljesítéséhez és
+          számlázáshoz használja fel.
+        </p>
+        <ul>
+          <li><strong>Kezelt adatok:</strong> név, e-mail, telefonszám, foglalt időpont, szolgáltatás típusa</li>
+          <li><strong>Jogalap:</strong> szerződés teljesítése (GDPR 6. cikk (1) b))</li>
+          <li><strong>Megőrzési idő:</strong> a szerződés teljesítését követő 8 év (számviteli kötelezettség)</li>
+        </ul>
+
+        <h3>2.2 Kapcsolatfelvétel e-mailben vagy telefonon</h3>
+        <ul>
+          <li><strong>Kezelt adatok:</strong> a vendég által önként megadott adatok (név, elérhetőség, üzenet tartalma)</li>
+          <li><strong>Jogalap:</strong> érintett hozzájárulása (GDPR 6. cikk (1) a))</li>
+          <li><strong>Megőrzési idő:</strong> a megkeresés lezárását követő 6 hónap, hacsak nem köttetik szerződés</li>
+        </ul>
+
+        <h3>2.3 Sütik (cookies)</h3>
+        <p>
+          A Weboldal kétféle sütit használ:
+        </p>
+        <ul>
+          <li>
+            <strong>Szükséges sütik:</strong> a Weboldal alapvető működéséhez
+            (pl. a süti-banner döntés tárolása) szükségesek. Ezek hozzájárulás
+            nélkül is elhelyezhetők.
+          </li>
+          <li>
+            <strong>Statisztikai sütik (opcionális):</strong> anonim látogatás-mérés
+            (jelenleg nincs aktív analitika; ha bekapcsolásra kerül, kizárólag az
+            „Összes elfogadása" gomb megnyomása után).
+          </li>
+        </ul>
+        <p>
+          A süti-választást a böngésződ <strong>localStorage</strong>-ában tároljuk.
+          A választást bármikor visszavonhatod a böngésződ adatainak törlésével.
+        </p>
+
+        <h2>3. Adattovábbítás, adatfeldolgozók</h2>
+        <ul>
+          <li><strong>Notino</strong> (vagy aktuális foglalási partner) — időpontfoglalás kezelése</li>
+          <li><strong>Netlify Inc.</strong> — a Weboldal tárhelyszolgáltatója (USA, GDPR-megfelelő SCC alapján)</li>
+          <li><strong>Google Maps</strong> — a beágyazott térkép szolgáltatója (csak ha a térkép betöltődik)</li>
+        </ul>
+
+        <h2>4. A te jogaid</h2>
+        <p>A GDPR alapján kérheted:</p>
+        <ul>
+          <li>tájékoztatást a kezelt adataidról;</li>
+          <li>adataid helyesbítését;</li>
+          <li>adataid törlését („elfeledtetéshez való jog");</li>
+          <li>az adatkezelés korlátozását;</li>
+          <li>adathordozhatóságot;</li>
+          <li>tiltakozás jogát.</li>
+        </ul>
+        <p>
+          Kéréseidet a <a href={`mailto:${config.email}`}>{config.email}</a> címre küldve teheted meg.
+          Az Adatkezelő legkésőbb 30 napon belül érdemben válaszol.
+        </p>
+
+        <h2>5. Jogorvoslat</h2>
+        <p>
+          Panaszt a <strong>Nemzeti Adatvédelmi és Információszabadság Hatóságnál</strong>
+          (NAIH, 1055 Budapest, Falk Miksa utca 9-11., <a href="https://naih.hu" target="_blank" rel="noopener">naih.hu</a>)
+          tehetsz, vagy a hatáskörrel rendelkező bírósághoz fordulhatsz.
+        </p>
+
+        <h2>6. A tájékoztató módosítása</h2>
+        <p>
+          A jelen tájékoztatót az Adatkezelő bármikor egyoldalúan módosíthatja.
+          A módosítás a Weboldalon való közzététellel lép hatályba.
+        </p>
+      </article>
+
+      <div class="mt-16 pt-8 border-t border-whisper text-sm text-creamMute">
+        <a href="/" class="hover:text-cream transition-colors">← Vissza a főoldalra</a>
+      </div>
+    </div>
+  </section>
+
+  <SiteFooter />
+  <CookieBanner client:load />
+
+  <style is:global>
+    .prose-frubeauty {
+      color: var(--cream-soft, #E4D6C2);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+    @media (min-width: 768px) {
+      .prose-frubeauty { font-size: 17px; }
+    }
+    .prose-frubeauty h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      color: #F5E8D3;
+      font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+      letter-spacing: -0.01em;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+    }
+    .prose-frubeauty h3 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      color: #F5E8D3;
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    .prose-frubeauty p { margin-bottom: 1.25rem; }
+    .prose-frubeauty ul {
+      list-style: disc;
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .prose-frubeauty li { margin-bottom: 0.5rem; }
+    .prose-frubeauty strong { color: #F5E8D3; font-weight: 500; }
+    .prose-frubeauty a {
+      color: #C9A36C;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 200ms;
+    }
+    .prose-frubeauty a:hover { color: #B8884A; }
+  </style>
+</Layout>

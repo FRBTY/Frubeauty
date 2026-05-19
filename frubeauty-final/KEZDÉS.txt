@@ -1,0 +1,81 @@
+FRUBEAUTY — telepítési útmutató
+================================
+
+ELŐFELTÉTEL
+-----------
+Telepítve kell legyen a Node.js (20-as vagy újabb).
+Ha nincs, töltsd le innen: https://nodejs.org/
+
+LÉPÉSEK
+-------
+
+1. CSOMAGOLD KI A ZIP-ET
+   Másold ki TELJESEN egy mappába (pl. C:\Users\Bence\Desktop\frubeauty).
+   A mappának pontosan így kell kinéznie:
+
+   frubeauty/
+   ├── package.json
+   ├── astro.config.mjs
+   ├── tailwind.config.mjs
+   ├── tsconfig.json
+   ├── netlify.toml
+   ├── README.md
+   ├── DESIGN.md
+   ├── KEZDÉS.txt              (ez a fájl)
+   └── src/
+       ├── layouts/
+       │   └── Layout.astro
+       └── pages/
+           └── index.astro
+
+
+2. NYISS EGY TERMINÁLT EBBEN A MAPPÁBAN
+   PowerShell vagy CMD megnyitása:
+   - Nyisd meg File Explorerben a mappát
+   - Címsorba kattints, írd be: powershell, majd Enter
+   VAGY:
+   - Shift + Jobb klikk a mappa üres területén → "Open in Terminal"
+
+
+3. ELLENŐRIZD HOGY A HELYES MAPPÁBAN VAGY
+   Írd be:
+       dir
+   Látnod kell a package.json fájlt és a src mappát.
+
+
+4. TELEPÍTSD A FÜGGŐSÉGEKET (egyszer kell csak)
+   Írd be:
+       npm install
+   
+   Pár percig fut, akkor jó ha a végén nem ír "ERROR"-t.
+
+
+5. INDÍTSD EL A FEJLESZTŐI SZERVERT
+   Írd be:
+       npm run dev
+   
+   Várd meg amíg azt írja: "Local: http://localhost:4321/"
+   Nyisd meg böngészőben.
+
+
+HIBAELHÁRÍTÁS
+-------------
+
+"Missing pages directory: src/pages"
+  → A src mappa nincs ott, vagy nem a jó helyen van.
+    Ellenőrizd a dir paranccsal, hogy a "src" mappa
+    közvetlenül a package.json mellett van-e.
+
+"command not found: npm"
+  → Nincs Node.js telepítve. Telepítsd a nodejs.org-ról.
+
+"EACCES" vagy jogosultsági hiba
+  → Indítsd a terminált rendszergazdaként
+    (jobb klikk a PowerShell ikonon → "Run as administrator").
+
+A képek hiányoznak / üresen mutat dobozokat
+  → Ez normális. A public/img mappába kell tenned a saját
+    képeidet, ezek hiányoznak. Lásd README.md.
+
+Bármi más
+  → Másold ki a teljes hibaüzenetet és küldd vissza.

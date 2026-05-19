@@ -1,0 +1,347 @@
+---
+/**
+ * /blog/[slug] — individual blog post page.
+ *
+ * Renders the Markdown body through Astro's content collection render() API,
+ * with full article schema, OG image inheritance, prev/next navigation and a
+ * related-posts strip (same category).
+ *
+ * Typography is locked in via the `.prose-frubeauty` class — see <style> block.
+ * Dropping into Tailwind Typography plugin was tempting but would have pulled
+ * in a stylesheet bigger than the page itself; the handcrafted scope is ~80 lines.
+ */
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteContact from '../../components/SiteContact.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import { Reveal } from '../../components/Reveal';
+import { CookieBanner } from '../../components/CookieBanner';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.data.slug ?? post.id },
+    props: { post, allPosts: posts },
+  }));
+}
+
+const { post, allPosts } = Astro.props;
+const { Content } = await render(post);
+
+const dateFormatter = new Intl.DateTimeFormat('hu-HU', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+// Related posts: same category, exclude current, max 2
+const related = allPosts
+  .filter((p) => p.id !== post.id && p.data.category === post.data.category)
+  .slice(0, 2);
+
+// Sort all posts by date desc for prev/next
+const sorted = [...allPosts].sort(
+  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
+);
+const currentIdx = sorted.findIndex((p) => p.id === post.id);
+const prev = currentIdx > 0 ? sorted[currentIdx - 1] : null;
+const next = currentIdx < sorted.length - 1 ? sorted[currentIdx + 1] : null;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.excerpt,
+  image: `https://frubeauty.com${post.data.cover}`,
+  datePublished: post.data.publishedAt.toISOString(),
+  ...(post.data.updatedAt && { dateModified: post.data.updatedAt.toISOString() }),
+  author: {
+    '@type': 'Person',
+    name: 'Pecze-Kovács Fruzsina',
+    url: 'https://frubeauty.com',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FRUBEAUTY',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://frubeauty.com/favicon.svg',
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `https://frubeauty.com/blog/${post.data.slug ?? post.id}`,
+  },
+};
+---
+
+<Layout
+  title={`${post.data.title} | FRUBEAUTY Blog`}
+  description={post.data.excerpt}
+  image={post.data.cover}
+  canonical={`https://frubeauty.com/blog/${post.data.slug ?? post.id}`}
+>
+  <SiteHeader />
+
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+  {/* ============ COVER + META ============ */}
+  <article class="pt-32 sm:pt-40">
+    <header class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:load as="div" distance={20}>
+        <div class="flex items-center gap-3 text-[11px] uppercase tracking-caps text-creamMute mb-6">
+          <span class="text-gold">{post.data.category}</span>
+          <span aria-hidden>·</span>
+          <span>{post.data.readingMinutes} perc olvasás</span>
+          <span aria-hidden>·</span>
+          <time datetime={post.data.publishedAt.toISOString()}>
+            {dateFormatter.format(post.data.publishedAt)}
+          </time>
+        </div>
+        <h1
+          class="font-display font-light text-cream leading-[1.06] tracking-tightest-"
+          style="font-size: clamp(2rem, 5vw, 3.5rem);"
+        >
+          {post.data.title}
+        </h1>
+        <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[60ch]">
+          {post.data.excerpt}
+        </p>
+      </Reveal>
+    </header>
+
+    <Reveal client:load as="div" className="max-w-[700px] mx-auto px-5 sm:px-8 lg:px-12 mt-12 sm:mt-16" delay={0.1} distance={20}>
+      <div class="rounded-3xl bg-inkRise ring-1 ring-whisperStrong">
+        <img
+          src={post.data.cover}
+          alt={post.data.coverAlt}
+          class="w-full h-auto object-contain"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </Reveal>
+
+    {/* ============ BODY ============ */}
+    <div class="max-w-[900px] mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-24">
+      <Reveal client:visible as="div" className="prose-frubeauty">
+        <Content />
+      </Reveal>
+    </div>
+  </article>
+
+  {/* ============ PREV / NEXT ============ */}
+  {(prev || next) && (
+    <section class="pb-16 sm:pb-24 border-t border-whisper">
+      <div class="max-w-[1100px] mx-auto px-5 sm:px-8 lg:px-12 pt-12 sm:pt-16">
+        <Reveal client:visible as="nav" className="grid sm:grid-cols-2 gap-6 sm:gap-8" aria-label="Cikkek navigáció">
+          {prev ? (
+            <a
+              href={`/blog/${prev.data.slug ?? prev.id}`}
+              class="group flex flex-col bg-inkSoft border border-whisper rounded-3xl p-6 sm:p-7 md:hover:border-whisperStrong transition-colors duration-500"
+            >
+              <span class="text-[11px] uppercase tracking-caps text-creamMute mb-3">← Előző cikk</span>
+              <span class="font-display text-lg sm:text-xl font-medium text-cream group-hover:text-gold transition-colors duration-300 leading-snug">
+                {prev.data.title}
+              </span>
+            </a>
+          ) : <div aria-hidden></div>}
+          {next ? (
+            <a
+              href={`/blog/${next.data.slug ?? next.id}`}
+              class="group flex flex-col sm:items-end sm:text-right bg-inkSoft border border-whisper rounded-3xl p-6 sm:p-7 md:hover:border-whisperStrong transition-colors duration-500"
+            >
+              <span class="text-[11px] uppercase tracking-caps text-creamMute mb-3">Következő cikk →</span>
+              <span class="font-display text-lg sm:text-xl font-medium text-cream group-hover:text-gold transition-colors duration-300 leading-snug">
+                {next.data.title}
+              </span>
+            </a>
+          ) : <div aria-hidden></div>}
+        </Reveal>
+      </div>
+    </section>
+  )}
+
+  {/* ============ RELATED ============ */}
+  {related.length > 0 && (
+    <section class="py-20 sm:py-28 bg-inkSoft">
+      <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+        <Reveal client:visible as="div" className="mb-10 sm:mb-12 flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <p class="text-[11px] uppercase tracking-caps text-gold mb-4">Hasonló cikkek</p>
+            <h2
+              class="font-display font-light leading-[1.1] tracking-tight text-cream"
+              style="font-size: clamp(1.5rem, 3vw, 2rem);"
+            >
+              További olvasnivaló a kategóriából.
+            </h2>
+          </div>
+          <a href="/blog" class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors">
+            Összes cikk →
+          </a>
+        </Reveal>
+        <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+          {related.map((p) => (
+            <Reveal client:visible as="article">
+              <a
+                href={`/blog/${p.data.slug ?? p.id}`}
+                class="group flex flex-col h-full bg-ink border border-whisper rounded-3xl overflow-hidden md:hover:border-whisperStrong transition-colors duration-500"
+              >
+                <div class="aspect-[16/10] overflow-hidden bg-inkRise">
+                  <img
+                    src={p.data.cover}
+                    alt={p.data.coverAlt}
+                    loading="lazy"
+                    class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  />
+                </div>
+                <div class="p-6 sm:p-7 flex-1">
+                  <div class="flex items-center gap-3 text-[11px] uppercase tracking-caps text-creamMute">
+                    <span class="text-gold">{p.data.category}</span>
+                    <span aria-hidden>·</span>
+                    <span>{p.data.readingMinutes} perc</span>
+                  </div>
+                  <h3 class="mt-3 font-display text-lg sm:text-xl font-medium leading-snug text-cream group-hover:text-gold transition-colors duration-300">
+                    {p.data.title}
+                  </h3>
+                </div>
+              </a>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {/* ============ KAPCSOLAT / FOGLALÁS ============ */}
+  <SiteContact
+    eyebrow="Foglalás"
+    heading={'Készen állsz a <em class="display">személyes</em> változásra?'}
+    intro="A cikkek a kezdet. A személyes konzultáció a pontos folytatás — gyere be Egressy útra, és ülünk neki, hogy a te helyzetedre szabjuk a tervet."
+  />
+
+  <div class="py-10 text-center border-t border-whisper">
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="inline-flex items-center gap-2 text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors duration-200">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
+      Vissza az oldal tetejére
+    </button>
+  </div>
+
+  <SiteFooter />
+
+  <CookieBanner client:load />
+</Layout>
+
+<style is:global>
+  /* ===== Prose typography for blog posts =====
+     Scoped to .prose-frubeauty so it doesn't leak to other pages. */
+  .prose-frubeauty {
+    color: rgb(228 214 194); /* creamSoft */
+    font-size: 17px;
+    line-height: 1.75;
+  }
+  .prose-frubeauty > p,
+  .prose-frubeauty > h2,
+  .prose-frubeauty > h3,
+  .prose-frubeauty > ul,
+  .prose-frubeauty > ol,
+  .prose-frubeauty > blockquote {
+    max-width: 65ch;
+  }
+  @media (min-width: 768px) {
+    .prose-frubeauty { font-size: 18px; }
+  }
+
+  .prose-frubeauty p {
+    margin-block: 1.25em;
+  }
+  .prose-frubeauty p:first-child { margin-top: 0; }
+  .prose-frubeauty > :last-child { margin-bottom: 0; }
+
+  .prose-frubeauty h2 {
+    font-family: 'Fraunces', ui-serif, Georgia, serif;
+    font-weight: 500;
+    color: rgb(245 232 211); /* cream */
+    font-size: clamp(1.5rem, 2.6vw, 1.875rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-top: 2.5em;
+    margin-bottom: 0.7em;
+  }
+  .prose-frubeauty h3 {
+    font-family: 'Fraunces', ui-serif, Georgia, serif;
+    font-weight: 500;
+    color: rgb(245 232 211);
+    font-size: clamp(1.125rem, 1.8vw, 1.375rem);
+    line-height: 1.3;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+  }
+
+  .prose-frubeauty strong {
+    color: rgb(245 232 211);
+    font-weight: 600;
+  }
+  .prose-frubeauty em {
+    font-style: italic;
+    color: rgb(245 232 211);
+  }
+
+  .prose-frubeauty a {
+    color: rgb(184 136 74); /* gold */
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color 200ms ease;
+  }
+  .prose-frubeauty a:hover {
+    color: rgb(201 163 108); /* goldSoft */
+  }
+
+  .prose-frubeauty ul,
+  .prose-frubeauty ol {
+    margin-block: 1.25em;
+    padding-left: 1.6em;
+  }
+  .prose-frubeauty ul { list-style-type: disc; }
+  .prose-frubeauty ol { list-style-type: decimal; }
+  .prose-frubeauty li { margin-block: 0.4em; }
+  .prose-frubeauty li::marker { color: rgb(184 136 74); }
+
+  .prose-frubeauty blockquote {
+    border-left: 2px solid rgb(184 136 74);
+    padding-left: 1.25em;
+    margin-block: 1.5em;
+    font-style: italic;
+    color: rgb(245 232 211);
+  }
+
+  .prose-frubeauty hr {
+    border: 0;
+    border-top: 1px solid rgba(245, 232, 211, 0.08);
+    margin-block: 2.5em;
+  }
+
+  .prose-frubeauty code {
+    background: rgba(245, 232, 211, 0.08);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  .prose-frubeauty img {
+    width: 100%;
+    height: auto;
+    border-radius: 1.5rem;
+    margin-block: 2em;
+    box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Cover image styling for tall images like 1179x2096 */
+  [class*="rounded-3xl"] img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+</style>
