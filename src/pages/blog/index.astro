@@ -1,0 +1,193 @@
+---
+/**
+ * /blog — main listing of all published posts.
+ *
+ * Sorted desc by publishedAt. Draft posts filtered out in production.
+ * Each card links to /blog/[slug] (handled by [...slug].astro).
+ *
+ * SEO: the index has its own canonical + descriptive meta, and each card
+ * uses a real <article> so the structure is parseable for both screen
+ * readers and crawlers.
+ */
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteContact from '../../components/SiteContact.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import { Reveal } from '../../components/Reveal';
+import { StaggerGroup, StaggerItem } from '../../components/StaggerGroup';
+import { CookieBanner } from '../../components/CookieBanner';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort(
+  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
+);
+
+const dateFormatter = new Intl.DateTimeFormat('hu-HU', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const featured = posts[0];
+const rest = posts.slice(1);
+---
+
+<Layout
+  title="Blog — szépségápolás, smink és arckezelés | FRUBEAUTY"
+  description="Cikkek bőrápolásról, sminkről és szempilla-kezelésekről egy kozmetikus és sminkes szemszögéből. Konkrét tippek a Zuglói szalonom mindennapjaiból."
+>
+  <SiteHeader />
+
+  {/* ============ HERO ============ */}
+  <section class="pt-32 sm:pt-40 pb-12 sm:pb-16">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:load as="div" className="max-w-3xl">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-6">FRUBEAUTY · Blog</p>
+        <h1
+          class="font-display font-light text-cream leading-[1.04] tracking-tightest-"
+          style="font-size: clamp(2.25rem, 5.5vw, 4rem);"
+        >
+          Amit a <em class="display">szalonban</em> elmondanék — most leírva.
+        </h1>
+        <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[60ch]">
+          Konkrét tippek arckezelésről, sminkről és szempilla-kezelésekről —
+          úgy, ahogy egy vendégnek elmagyaráznám a kezelőágy mellett.
+          Heti egy új cikk nem lesz; de ami megjelenik, azt érdemes elolvasni.
+        </p>
+      </Reveal>
+    </div>
+  </section>
+
+  {posts.length === 0 ? (
+    <section class="py-24 text-center">
+      <p class="text-creamMute">Egyelőre nincsenek publikált cikkek. Hamarosan!</p>
+    </section>
+  ) : (
+    <>
+      {/* ============ FEATURED POST ============ */}
+      {featured && (
+        <section class="pb-16 sm:pb-24">
+          <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+            <Reveal client:visible as="article">
+              <a
+                href={`/blog/${featured.data.slug ?? featured.id}`}
+                class="group grid lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-inkSoft border border-whisper rounded-3xl overflow-hidden md:hover:border-whisperStrong transition-colors duration-500"
+              >
+                <div class="lg:col-span-7 aspect-[16/10] lg:aspect-auto lg:h-full overflow-hidden bg-inkRise">
+                  <img
+                    src={featured.data.cover}
+                    alt={featured.data.coverAlt}
+                    loading="eager"
+                    fetchpriority="high"
+                    class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  />
+                </div>
+                <div class="lg:col-span-5 p-7 sm:p-10 lg:pl-2 lg:pr-12 lg:py-12">
+                  <div class="flex items-center gap-3 text-[11px] uppercase tracking-caps text-creamMute">
+                    <span class="text-gold">{featured.data.category}</span>
+                    <span aria-hidden>·</span>
+                    <span>{featured.data.readingMinutes} perc olvasás</span>
+                  </div>
+                  <h2 class="mt-4 font-display text-2xl sm:text-3xl lg:text-4xl font-medium leading-snug text-cream group-hover:text-gold transition-colors duration-300">
+                    {featured.data.title}
+                  </h2>
+                  <p class="mt-5 text-creamSoft leading-[1.7]">
+                    {featured.data.excerpt}
+                  </p>
+                  <div class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group-hover:text-gold transition-colors duration-200">
+                    Olvasd el
+                    <span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span>
+                  </div>
+                </div>
+              </a>
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* ============ MORE POSTS ============ */}
+      {rest.length > 0 && (
+        <section class="pb-24 sm:pb-32">
+          <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+            <Reveal client:visible as="div" className="mb-10 sm:mb-12">
+              <p class="text-[11px] uppercase tracking-caps text-gold mb-4">További cikkek</p>
+              <h2
+                class="font-display font-light leading-[1.1] tracking-tight text-cream"
+                style="font-size: clamp(1.5rem, 3vw, 2rem);"
+              >
+                Olvasd <em class="display">tovább</em>.
+              </h2>
+            </Reveal>
+
+            <StaggerGroup
+              client:visible
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+              staggerDelay={0.07}
+            >
+              {rest.map((post) => (
+                <StaggerItem>
+                  <article class="group flex flex-col h-full bg-inkSoft border border-whisper rounded-3xl overflow-hidden md:hover:-translate-y-0.5 md:hover:border-whisperStrong transition-[transform,border-color] duration-500 ease-out">
+                    <a
+                      href={`/blog/${post.data.slug ?? post.id}`}
+                      class="flex flex-col h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"
+                    >
+                      <div class="aspect-[16/10] overflow-hidden bg-inkRise">
+                        <img
+                          src={post.data.cover}
+                          alt={post.data.coverAlt}
+                          loading="lazy"
+                          class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                        />
+                      </div>
+                      <div class="p-6 sm:p-7 flex flex-col flex-1">
+                        <div class="flex items-center gap-3 text-[11px] uppercase tracking-caps text-creamMute">
+                          <span class="text-gold">{post.data.category}</span>
+                          <span aria-hidden>·</span>
+                          <span>{post.data.readingMinutes} perc</span>
+                        </div>
+                        <h3 class="mt-3 font-display text-xl sm:text-2xl font-medium leading-snug text-cream">
+                          {post.data.title}
+                        </h3>
+                        <p class="mt-3 text-creamSoft leading-relaxed flex-1">
+                          {post.data.excerpt}
+                        </p>
+                        <div class="mt-5 pt-5 border-t border-whisper flex items-center justify-between text-[11px] uppercase tracking-caps">
+                          <time class="text-creamMute" datetime={post.data.publishedAt.toISOString()}>
+                            {dateFormatter.format(post.data.publishedAt)}
+                          </time>
+                          <span class="font-medium text-cream group-hover:text-gold transition-colors duration-200 inline-flex items-center">
+                            Olvasd el
+                            <span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span>
+                          </span>
+                        </div>
+                      </div>
+                    </a>
+                  </article>
+                </StaggerItem>
+              ))}
+            </StaggerGroup>
+          </div>
+        </section>
+      )}
+    </>
+  )}
+
+  {/* ============ KAPCSOLAT / FOGLALÁS ============ */}
+  <SiteContact
+    eyebrow="Foglalás"
+    heading={'A cikkből döntés — <em class="display">időpont</em>.'}
+    intro="Olvastad, eldöntötted, készen állsz. A foglalás online működik — pár kattintással kiválaszthatod a kezelést és az idősávot. Kérdéseket a foglalás előtt is szívesen veszek emailen."
+  />
+
+  <div class="py-10 text-center border-t border-whisper">
+    <a href="/" class="inline-flex items-center gap-2 text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors duration-200">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+      Vissza a főoldalra
+    </a>
+  </div>
+
+  <SiteFooter />
+
+  <CookieBanner client:load />
+</Layout>

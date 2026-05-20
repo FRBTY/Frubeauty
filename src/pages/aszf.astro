@@ -1,0 +1,188 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { AnnouncementBar } from '../components/AnnouncementBar';
+import { NavBar } from '../components/NavBar';
+import { Reveal } from '../components/Reveal';
+import { CookieBanner } from '../components/CookieBanner';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const lastUpdated = '2026. május 17.';
+const config = {
+  booking: 'https://www.notino.hu/szalonok/pecze-kovacs-fruzsina-sminkes,-szemoldok-es-szempilla-stylist',
+  instagram: 'https://www.instagram.com/frubeauty/',
+  facebook: 'https://www.facebook.com/profile.php?id=61572135977337',
+  email: 'kfruzsi0197@gmail.com',
+  phone: '+36702159954',
+  phoneDisplay: '+36 70 215 9954',
+  address: '1143 Budapest, Egressy út 16.',
+  fullName: 'Pecze-Kovács Fruzsina E.V.',
+  taxNumber: '91311670-1-42',
+};
+---
+
+<Layout
+  title="Általános Szerződési Feltételek | FRUBEAUTY"
+  description="A FRUBEAUTY szépségszalon általános szerződési feltételei."
+>
+  <div class="fixed top-0 inset-x-0 z-50">
+    <AnnouncementBar client:load />
+    <NavBar client:load bookingUrl={config.booking} instagram={config.instagram} facebook={config.facebook} />
+  </div>
+
+  <section class="pt-32 sm:pt-40 pb-20 sm:pb-28">
+    <div class="max-w-[820px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:load as="div">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Jogi</p>
+        <h1 class="font-display font-light text-cream leading-[1.05] tracking-tightest-" style="font-size: clamp(2.25rem, 5vw, 3.25rem);">
+          Általános Szerződési Feltételek
+        </h1>
+        <p class="mt-4 text-creamMute text-sm">Utolsó frissítés: {lastUpdated}</p>
+      </Reveal>
+
+      <article class="mt-12 prose-frubeauty">
+        <h2>1. Bevezető</h2>
+        <p>
+          A jelen Általános Szerződési Feltételek (a továbbiakban: <strong>ÁSZF</strong>)
+          a <strong>{config.fullName}</strong> egyéni vállalkozó (a továbbiakban:
+          „Szolgáltató") és a kozmetikai szolgáltatást igénybe vevő vendég (a
+          továbbiakban: „Vendég") közötti jogviszony feltételeit rögzítik.
+        </p>
+        <ul>
+          <li><strong>Szolgáltató neve:</strong> {config.fullName}</li>
+          <li><strong>Adószám:</strong> {config.taxNumber}</li>
+          <li><strong>Székhely / szalon címe:</strong> {config.address}</li>
+          <li><strong>E-mail:</strong> <a href={`mailto:${config.email}`}>{config.email}</a></li>
+          <li><strong>Telefon:</strong> <a href={`tel:${config.phone}`}>{config.phoneDisplay}</a></li>
+        </ul>
+
+        <h2>2. A szerződés tárgya</h2>
+        <p>
+          A Szolgáltató a szalonjában kozmetikai szolgáltatásokat nyújt: arckezelés,
+          szempilla-lifting, szemöldök-laminálás, festés, alkalmi smink. A részletes
+          szolgáltatás-lista és aktuális árak a <a href="/">főoldalon</a> találhatók.
+        </p>
+
+        <h2>3. Időpontfoglalás</h2>
+        <p>
+          A Vendég időpontot az online foglalási rendszeren (Notino vagy aktuális
+          partner), telefonon, vagy e-mailben tud foglalni. A foglalás akkor válik
+          érvényessé, amikor a Szolgáltató azt visszaigazolja.
+        </p>
+
+        <h2>4. Lemondás</h2>
+        <ul>
+          <li>
+            <strong>24 órával az időpont előtt:</strong> a Vendég díjmentesen lemondhatja
+            vagy átteheti a foglalást.
+          </li>
+          <li>
+            <strong>24 órán belül:</strong> kérünk egy rövid SMS-t vagy hívást.
+            Betegség, vis maior vagy más nem várt esemény esetén természetesen nem
+            számítunk fel díjat.
+          </li>
+          <li>
+            <strong>Megjelenés nélküli (no-show) elmaradás:</strong> a Szolgáltató
+            fenntartja a jogot, hogy ismételt no-show esetén a következő időpont
+            foglalásához előleget kérjen.
+          </li>
+        </ul>
+
+        <h2>5. Árak és fizetés</h2>
+        <p>
+          A szolgáltatások aktuális árai a Weboldalon és a szalonban kifüggesztve
+          szerepelnek. A Szolgáltató fenntartja az árak egyoldalú módosításának
+          jogát; a már lefoglalt időpontok árát ez nem érinti.
+        </p>
+        <p>
+          A fizetés a szolgáltatás teljesítését követően készpénzben vagy bankkártyával
+          (terminál vagy átutalás) történik. Számlát minden vendégnek igény szerint
+          (a kezelés végén szóban jelezve) kiállítunk.
+        </p>
+
+        <h2>6. Egészségügyi tájékoztatás</h2>
+        <p>
+          A Vendég köteles a kezelés megkezdése előtt tájékoztatni a Szolgáltatót
+          minden olyan körülményről, amely a kezelést befolyásolhatja (különösen:
+          terhesség, allergia, gyulladás, gyógyszerszedés, közelmúltban végzett
+          beavatkozás). Ezen információk elhallgatásából eredő esetleges
+          következményekért a Szolgáltató felelősséget nem vállal.
+        </p>
+        <p>
+          A Szolgáltató a kezelést egészségügyi indok alapján bármikor visszautasíthatja.
+        </p>
+
+        <h2>7. Felelősség</h2>
+        <p>
+          A Szolgáltató kizárólag szakszerű, a hatályos szakmai és higiéniai
+          előírásoknak megfelelő szolgáltatást nyújt. A használt termékek
+          (Janssen Cosmetics és más professzionális márkák) hivatalos forrásból
+          származnak.
+        </p>
+        <p>
+          A Szolgáltató felelőssége a szándékos vagy súlyosan gondatlan magatartással
+          okozott károkra terjed ki. A Vendégnél meglévő, de elhallgatott egészségügyi
+          probléma következtében előálló bőrreakciókért nem vállalunk felelősséget.
+        </p>
+
+        <h2>8. Panaszkezelés</h2>
+        <p>
+          Panasszal a Vendég közvetlenül a Szolgáltatóhoz fordulhat a fenti
+          elérhetőségeken. A Szolgáltató 30 napon belül érdemben válaszol.
+          A Vendég jogosult fogyasztói panaszával a területileg illetékes
+          békéltető testülethez (Budapesti Békéltető Testület) vagy a
+          fogyasztóvédelmi hatósághoz fordulni.
+        </p>
+
+        <h2>9. Az ÁSZF módosítása</h2>
+        <p>
+          A Szolgáltató fenntartja a jogot, hogy az ÁSZF-et egyoldalúan módosítsa.
+          A módosítás a Weboldalon való közzétételtől hatályos. A módosítás a már
+          lefoglalt időpontokra nem vonatkozik.
+        </p>
+
+        <h2>10. Irányadó jog</h2>
+        <p>
+          A jelen ÁSZF-re a magyar jog az irányadó. Az itt nem szabályozott
+          kérdésekben a Polgári Törvénykönyv és a vonatkozó magyar jogszabályok
+          rendelkezései irányadók.
+        </p>
+      </article>
+
+      <div class="mt-16 pt-8 border-t border-whisper text-sm text-creamMute">
+        <a href="/" class="hover:text-cream transition-colors">← Vissza a főoldalra</a>
+      </div>
+    </div>
+  </section>
+
+  <SiteFooter />
+  <CookieBanner client:load />
+
+  <style is:global>
+    .prose-frubeauty {
+      color: var(--cream-soft, #E4D6C2);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+    @media (min-width: 768px) { .prose-frubeauty { font-size: 17px; } }
+    .prose-frubeauty h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      color: #F5E8D3;
+      font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+      letter-spacing: -0.01em;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+    }
+    .prose-frubeauty p { margin-bottom: 1.25rem; }
+    .prose-frubeauty ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1.5rem; }
+    .prose-frubeauty li { margin-bottom: 0.5rem; }
+    .prose-frubeauty strong { color: #F5E8D3; font-weight: 500; }
+    .prose-frubeauty a {
+      color: #C9A36C;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 200ms;
+    }
+    .prose-frubeauty a:hover { color: #B8884A; }
+  </style>
+</Layout>

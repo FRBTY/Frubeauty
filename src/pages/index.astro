@@ -1,0 +1,500 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { AnnouncementBar } from '../components/AnnouncementBar';
+import { NavBar } from '../components/NavBar';
+import { HeroMedia } from '../components/HeroMedia';
+import { MagneticCTA } from '../components/MagneticCTA';
+import { Reveal } from '../components/Reveal';
+import { ServicesGrid } from '../components/ServicesGrid';
+import { AudienceList } from '../components/AudienceList';
+import { ProcessSteps } from '../components/ProcessSteps';
+import { TestimonialsGrid } from '../components/TestimonialsGrid';
+import { GalleryGrid } from '../components/GalleryGrid';
+import { FAQ } from '../components/FAQ';
+import { CookieBanner } from '../components/CookieBanner';
+import { BlogSection } from '../components/BlogSection';
+import { LampContainer } from '../components/ui/lamp';
+import { getCollection } from 'astro:content';
+import { siteConfig, openingHours, recencyProof } from '../config/site';
+
+// Pull the 3 most recent published posts so the homepage stays in sync with
+// the content collection — adding a new .md to src/content/blog/ updates this
+// strip automatically.
+const allBlogPosts = await getCollection('blog', ({ data }) => !data.draft);
+const homepagePosts = allBlogPosts
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
+  .slice(0, 3)
+  .map((p) => ({
+    slug: p.data.slug ?? p.id,
+    title: p.data.title,
+    excerpt: p.data.excerpt,
+    category: p.data.category,
+    readingMinutes: p.data.readingMinutes,
+    publishedAt: p.data.publishedAt.toISOString().slice(0, 10),
+    cover: p.data.cover,
+  }));
+
+// Single source of truth — minden contact/booking adatot a siteConfig kezel.
+// Korábbi lokális `config = {...}` duplikáció törölve (#audit secondary).
+const config = siteConfig;
+
+const services = [
+  { title: 'Arckezelés', subtitle: 'Janssen Cosmetics hatóanyagokkal', body: 'Bőrtípusra szabott kezelés: regeneráló, hidratáló vagy mélytisztító. Az első alkalommal bőranalízissel kezdünk.', priceFrom: '11 000 Ft-tól', duration: '60–90 perc', href: '/arckezeles-zuglo', image: '/img/service-arckezeles.jpg', alt: 'Arckezelés Janssen Cosmetics termékekkel a FRUBEAUTY szalonban' },
+  { title: 'Szempilla & szemöldök', subtitle: 'Lifting, festés, laminálás', body: 'Természetes, 6–8 hétig tartó eredmény. Reggel nincs többé szempillaspirál és szemöldökceruza.', priceFrom: '11 000 Ft-tól', duration: '60–120 perc', href: '/szempilla-lifting-zuglo', image: '/img/szempilla-szemoldok-hero.jpg', alt: 'Szempilla lifting és szemöldök laminálás előtte-utána' },
+  { title: 'Smink', subtitle: 'Esküvő, ballagás, fotózás', body: 'Próbasmink, helyszíni igazítás, hosszan tartó eredmény. A stílust együtt találjuk ki.', priceFrom: '13 000 Ft-tól', duration: '60–90 perc', href: '/sminkes-zuglo', image: '/img/smink-menyasszony-munka.jpg', alt: 'Alkalmi esküvői smink a FRUBEAUTY szalonban' },
+];
+
+// Aspirational / future-self framing (#audit #3) — pain-first helyett identitás-építés.
+// Daniel Kahneman: people approach gains more strongly when self-image is positive.
+const audienceProfiles = [
+  { headline: 'Egy nyugodt 90 perc — és a tükörből a kipihent éned néz vissza', body: 'A Janssen mélyregeneráló kezelés visszahozza a bőr természetes ragyogását. Tedd magad a hét legfontosabb találkozójává.', cta: 'Arckezelések', href: '/arckezeles-zuglo' },
+  { headline: 'Esküvő, ballagás vagy egy fontos esemény közeledik', body: 'Próbasmink, alkalmi smink és tartós szempilla-lift egy csomagban. Reggel mehetsz nyugodtan, a smink ott lesz este is.', cta: 'Alkalmi smink', href: '/sminkes-zuglo' },
+  { headline: 'Képzeld el a reggelt smink nélkül — és mégis úgy érzed, készen állsz', body: 'A szempilla-lifting és szemöldök-laminálás 6–8 hétig megspórolja a reggeli sminket. Felkelsz, és kész vagy.', cta: 'Szempilla & szemöldök', href: '/szempilla-lifting-zuglo' },
+];
+
+const processSteps = [
+  { step: '01', title: 'Online foglalás egyszerűen a Notino felületén', body: 'Pár kattintás, választasz időpontot és kezelést.' },
+  { step: '02', title: 'Ingyenes konzultáció', body: 'A kezelés előtt 10 percet beszélgetünk a bőrödről, az igényeidről, és a várható eredményről.' },
+  { step: '03', title: 'Személyre szabott kezelés', body: 'Nem sablon, hanem az aktuális állapotodra szabott protokoll. Mindent végig elmondok, amit csinálok.' },
+  { step: '04', title: 'Utógondozás', body: 'Megbeszéljük az otthoni teendőket, hogy az eredmény minél tovább tartson.' },
+];
+
+// Outcome-vezérelt testimonials (#audit #10). A „Google" link a saját Google
+// review-listához visz (page-szintű permalink). Ha egy adott review-ra direkt
+// link is rendelkezésre áll, az a `googleUrl` mezőbe kerül — addig fallbackként
+// a `googleReviewsUrl` szolgál (TestimonialsGrid kezeli).
+const testimonials = [
+  { name: 'Emese Simon', rating: 5, text: 'Csodaszép sminket kaptam, annyira tudta Fruzsina, hogy mi áll jól, könnyen ment a választás, és jól is éreztem magam benne egész nap egy esküvőn — tartósnak bizonyult.', service: 'Alkalmi smink' },
+  { name: 'Orosz-Adamcsek Zsuzsanna', rating: 5, text: 'Szinte azonnal kaptam időpontot, nagyon rugalmas volt Fruzsi. Minden kérésemet figyelembe vette és egy csodás sminket készített nekem. Visszatérek még hozzá a közeljövőben is.', service: 'Alkalmi smink' },
+  { name: 'Anita Kolozs', rating: 5, text: 'Nagyon kedvesen, barátságosan fogadott. Nagyon jó hangulatban telt a pillázás. És a végeredmény is gyönyörű lett! Köszönöm szépen.', service: 'Szempilla lifting' },
+  { name: 'Gabriella Hendrik', rating: 5, text: 'Már az első pillanattól kezdve kedvesen és figyelmesen fogadott, végig érezhető volt a profizmus és a hozzáértés. A végeredmény magáért beszél: gyönyörű lett a pillám. Biztosan visszatérek még, és szívből ajánlom mindenkinek!', service: 'Szempilla lifting' },
+];
+
+const faqs = [
+  { q: 'Fáj a szempilla lifting?', a: 'Egyáltalán nem. Csukott szemmel fekszel, és semmiféle szúrást vagy húzást nem érzel. A legtöbb vendég kifejezetten pihentetőnek tartja a 45 percet.' },
+  { q: 'Mennyi idő egy első arckezelés?', a: 'Az első alkalommal 90 percre számolj — ebből 15 perc bőranalízis és beszélgetés. A visszatérő kezelések általában 60 percesek.' },
+  { q: 'Mit hozzak magammal alkalmi sminkre?', a: 'Egy fényképet a ruhádról és a hajadról (ha tudod, hogyan lesz aznap). Próbasminkre érdemes smink nélkül érkezni, hogy tisztán induljunk.' },
+  { q: 'Mikor látszik a végső eredmény a szemöldök-laminálásnál?', a: 'A formát rögtön a kezelés után látod, de a teljes „letisztult" eredményhez 24 óra kell, mert a szőrszálak akkor veszik fel a végleges állást.' },
+  { q: 'Le lehet mondani az időpontot?', a: 'Igen, 24 órával az időpont előtt bármikor díjmentesen.' },
+];
+
+const openingHours = [
+  { day: 'Hétfő',     hours: '08:30 – 19:30' },
+  { day: 'Kedd',      hours: '08:30 – 19:30' },
+  { day: 'Szerda',    hours: '08:30 – 19:30' },
+  { day: 'Csütörtök', hours: '08:30 – 19:30' },
+  { day: 'Péntek',    hours: '08:30 – 19:30' },
+  { day: 'Szombat',   hours: '08:00 – 13:00' },
+  { day: 'Vasárnap',  hours: 'Zárva' },
+];
+
+const galleryImages = [
+  '/img/szempilla-lifting-budapest-egressy-ut-zuglo.jpg',
+  '/img/szemoldok-laminalas-szempilla-lifting-budapest-egressy-ut-munka.jpg',
+  '/img/smink-menyasszonyi-zuglo-14-kerulet-egressy-ut.jpg',
+  '/img/smink-kismama-fotozas-budapest-egressy-ut.jpg',
+];
+---
+
+<Layout>
+  {/* AnnouncementBar + NavBar share a fixed top container so they stack visually
+      and dismiss-collapse happens in the same flow (no z-index fight). */}
+  <div class="fixed top-0 inset-x-0 z-50">
+    <AnnouncementBar
+      client:load
+      enabled={recencyProof.enabled}
+      dailyRandomRange={[2, 5]}
+    />
+    <NavBar client:load bookingUrl={config.booking} instagram={config.instagram} facebook={config.facebook} />
+  </div>
+
+  {/* ============ HERO with Lamp ============ */}
+  <section class="relative overflow-hidden pt-44 sm:pt-52">
+    <LampContainer client:visible className="!min-h-[88vh] sm:!min-h-[92vh]">
+      <Reveal client:visible as="div" className="text-center max-w-[920px] mx-auto" distance={20}>
+        <p class="text-[11px] sm:text-xs uppercase tracking-caps text-black mb-5 sm:mb-7">
+          FRUBEAUTY · Zugló, XIV. kerület
+        </p>
+        <h1
+          class="font-display font-light text-cream leading-[1.06] tracking-tightest-"
+          style="font-size: clamp(2rem, 5.5vw, 4.5rem);"
+        >
+          Ébredj minden nap tökéletes <em class="display">bőrrel</em> és kész tekintettel.
+        </h1>
+        <p class="mt-6 sm:mt-8 text-base sm:text-lg text-creamSoft max-w-[58ch] mx-auto leading-[1.65] sm:leading-[1.7]">
+          Személyre szabott arckezelések, tartós szempilla- és szemöldökformázás, valamint alkalmi sminkek, amelyek kiemelik a természetes szépséged.
+        </p>
+        <div class="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
+          <MagneticCTA client:visible href={config.booking} external variant="primary">
+            Időpontot foglalok
+          </MagneticCTA>
+          <MagneticCTA client:visible href="#szolgaltatasok" variant="secondary">
+            Megnézem az árakat
+          </MagneticCTA>
+        </div>
+
+        <div class="mt-8 sm:mt-9 flex items-center justify-center gap-5 text-[12px] uppercase tracking-caps text-creamMute">
+          <a href={config.instagram} target="_blank" rel="noopener" class="inline-flex items-center gap-2 hover:text-gold transition-colors duration-200" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden>
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+            </svg>
+            Instagram
+          </a>
+          <span class="text-creamDim" aria-hidden>·</span>
+          <a href={config.facebook} target="_blank" rel="noopener" class="inline-flex items-center gap-2 hover:text-gold transition-colors duration-200" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+              <path d="M22 12.07C22 6.51 17.52 2 12 2S2 6.51 2 12.07c0 5.02 3.66 9.18 8.44 9.93v-7.02H7.9v-2.91h2.54V9.83c0-2.52 1.49-3.91 3.78-3.91 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.77l-.44 2.91h-2.33V22c4.78-.75 8.43-4.91 8.43-9.93Z"/>
+            </svg>
+            Facebook
+          </a>
+        </div>
+      </Reveal>
+    </LampContainer>
+
+    {/* Video pulled outside Lamp — sits below it in clean dark canvas */}
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 -mt-16 sm:-mt-20 pb-16 sm:pb-20">
+      <Reveal client:visible as="div" distance={20}>
+        <HeroMedia
+          client:visible
+          videoSrc="/media/hero.mp4"
+          posterSrc="/media/hero-poster.jpg"
+          alt="Pecze-Kovács Fruzsina szempilla lifting és szemöldök laminálás munka közben — FRUBEAUTY Zugló"
+          aspect="9 / 16"
+          maxWidthClass="max-w-[380px]"
+        />
+      </Reveal>
+    </div>
+  </section>
+
+  {/* ============ TRUST BAR (zero-JS, #audit #7) ============
+       A trust signal az első impressziónál a legfontosabb — ezért NEM React-szigetbe
+       csomagolva, hanem CSS-only fade-in-nel. Lassú 3G / JS-nélküli pathon is
+       azonnal látható az 5,0 értékelés és a Janssen brand. */}
+  <section class="border-y border-whisper bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
+      <div class="zero-js-fade grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
+        <div class="flex flex-col items-center md:items-start">
+          <span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span>
+          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">
+            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">
+              40+ Google értékelés →
+            </a>
+          </span>
+        </div>
+        <div class="flex flex-col items-center md:items-start">
+          <span class="text-2xl font-display font-medium tracking-tight text-cream">Janssen</span>
+          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">Cosmetics partner</span>
+        </div>
+        <div class="flex flex-col items-center md:items-start">
+          <span class="text-2xl font-display font-medium tracking-tight text-cream">5+ év</span>
+          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">szakmai tapasztalat</span>
+        </div>
+        <div class="flex flex-col items-center md:items-start">
+          <span class="text-2xl font-display font-medium tracking-tight text-cream">Egressy út 16.</span>
+          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">
+            <a href={config.mapsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">
+              1143 Budapest →
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ============ SZOLGÁLTATÁSOK ============ */}
+  <section id="szolgaltatasok" class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl mx-auto text-center">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Szolgáltatások</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">
+          Három <em class="display">személyre szabott</em> kezelés.
+        </h2>
+      </Reveal>
+      <ServicesGrid client:visible services={services} />
+    </div>
+  </section>
+
+  {/* ============ AKINEK SZÓL ============ */}
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl mx-auto text-center">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Akinek a kezelés szól</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">
+          Talán pont egy <em class="display">ilyen időszakot</em> élsz meg…
+        </h2>
+      </Reveal>
+      <AudienceList client:visible profiles={audienceProfiles} />
+    </div>
+  </section>
+
+  {/* ============ FOLYAMAT ============ */}
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl mx-auto text-center">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Hogyan zajlik</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">
+          Foglalástól az eredményig — <em class="display">négy lépés</em>.
+        </h2>
+      </Reveal>
+      <ProcessSteps client:visible steps={processSteps} />
+    </div>
+  </section>
+
+  {/* ============ RÓLAM ============ */}
+  <section id="rolam" class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        <Reveal client:visible as="div" className="lg:col-span-5 lg:order-2">
+          <div class="aspect-[4/5] overflow-hidden rounded-2xl bg-inkRise ring-1 ring-whisperStrong">
+            <img
+              src="/img/pecze-kovacs-fruzsina-zuglo-kozmetikus.jpg"
+              alt="Pecze-Kovács Fruzsina, a FRUBEAUTY alapítója a szalonban"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </Reveal>
+        <Reveal client:visible as="div" className="lg:col-span-7 lg:order-1" delay={0.1}>
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Rólam</p>
+          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">
+            Pecze-Kovács <em class="display">Fruzsina</em> vagyok.
+          </h2>
+          <div class="mt-7 space-y-5 text-creamSoft leading-[1.7] text-[16px] sm:text-[17px] max-w-[60ch]">
+            <p>
+              A FRUBEAUTY alapítója és kozmetikusa. Szenvedélyem a bőrápolás és a precíz esztétika.
+              Zuglói szalonomat azért hoztam létre, hogy egy olyan helyet teremtsek neked, ahol a modern technológia találkozik a személyre szabott figyelemmel.
+            </p>
+            <p>
+              Kozmetikusként nemcsak a felszínt kezelem: a <span class="text-cream">Janssen Cosmetics</span> professzionális hatóanyagaival és a legújabb szempilla lifting technikákkal azon dolgozom, hogy minden vendégem ragyogva és magabiztosan lépjen ki az ajtómon. Legyen szó egy pihentető arckezelésről vagy egy fontos eseményre készülő alkalmi sminkről, nálam <em class="display">te</em> vagy a középpontban.
+            </p>
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+  {/* ============ VÉLEMÉNYEK ============ */}
+  <section id="velemenyek" class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 flex flex-wrap items-end justify-between gap-6">
+        <div class="max-w-2xl">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Vélemények</p>
+          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">
+            Akik már <em class="display">voltak</em> nálam.
+          </h2>
+        </div>
+        <a
+          href={config.googleReviewsUrl}
+          target="_blank"
+          rel="noopener"
+          class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors"
+        >
+          Összes Google-on →
+        </a>
+      </Reveal>
+      <TestimonialsGrid client:visible items={testimonials} />
+    </div>
+  </section>
+
+  {/* ============ GALÉRIA ============ */}
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl mx-auto text-center">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Galéria</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">
+          Eredmények a <em class="display">vendégeimmel</em>.
+        </h2>
+        <p class="mt-4 text-sm text-creamMute">Kattints a képekre a teljes nézethez</p>
+      </Reveal>
+      <GalleryGrid client:visible count={4} images={galleryImages} />
+      <Reveal client:visible as="div" className="mt-12 text-center" delay={0.1}>
+        <a
+          href={config.instagram}
+          target="_blank"
+          rel="noopener"
+          class="group inline-flex items-center text-[12px] uppercase tracking-caps text-cream hover:text-gold transition-colors"
+        >
+          Több munkám az Instagramon
+          <span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span>
+        </a>
+      </Reveal>
+    </div>
+  </section>
+
+  {/* ============ BLOG ============ */}
+  <section id="blog" class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 flex flex-wrap items-end justify-between gap-6">
+        <div class="max-w-2xl">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Tippek és tudás</p>
+          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">
+            Cikkek a <em class="display">szépségápolásról</em>.
+          </h2>
+        </div>
+        <a
+          href="/blog"
+          class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors"
+        >
+          Összes cikk →
+        </a>
+      </Reveal>
+      <BlogSection client:visible posts={homepagePosts.length ? homepagePosts : undefined} />
+    </div>
+  </section>
+
+  {/* ============ FAQ ============ */}
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 text-center">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Gyakori kérdések</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">
+          Amit a legtöbben <em class="display">kérdeznek</em>.
+        </h2>
+      </Reveal>
+      <FAQ client:visible items={faqs} />
+    </div>
+  </section>
+
+  {/* ============ KAPCSOLAT / FOGLALÁS ============ */}
+  <section id="kapcsolat" class="py-20 sm:py-28 bg-inkDeep">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16">
+        <Reveal client:visible as="div" className="lg:col-span-6">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Foglalás</p>
+          <h2 class="font-display font-light leading-[1.05] tracking-tight text-cream" style="font-size: clamp(2rem, 4.5vw, 3.5rem);">
+            Találkozzunk az <em class="display">Egressy</em> úton.
+          </h2>
+          <p class="mt-6 text-creamSoft text-base sm:text-lg max-w-[50ch] leading-[1.7]">
+            Online foglalási rendszer 0–24 órában, válaszadás munkanapokon pár órán belül.
+          </p>
+          <div class="mt-9 flex flex-wrap gap-3">
+            <MagneticCTA client:visible href={config.booking} external variant="on-dark-primary">
+              Időpontot foglalok
+            </MagneticCTA>
+            <a
+              href={`tel:${config.phone}`}
+              class="inline-flex items-center justify-center px-6 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-cream text-ink rounded-full hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-150 gap-2"
+              aria-label={`Hívás most: ${config.phoneDisplay}`}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden>
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
+              </svg>
+              HÍVJ MOST!
+            </a>
+          </div>
+        </Reveal>
+
+        <Reveal client:visible as="div" className="lg:col-span-6 grid sm:grid-cols-2 gap-6 lg:gap-8" delay={0.1}>
+          <div class="border-t border-whisper pt-6">
+            <p class="text-[11px] uppercase tracking-caps text-creamMute mb-3">Cím</p>
+            <p class="text-lg leading-snug text-cream">{config.address}</p>
+            <a
+              href={config.mapsUrl}
+              target="_blank"
+              rel="noopener"
+              class="mt-3 inline-flex items-center px-4 py-2 text-[11px] uppercase tracking-caps font-medium bg-gold text-ink rounded-full hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-150 gap-2"
+              aria-label="Útvonaltervezés a Google Mapsen"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden>
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              Útvonaltervezés →
+            </a>
+          </div>
+
+          <div class="border-t border-whisper pt-6">
+            <p class="text-[11px] uppercase tracking-caps text-creamMute mb-3">Email</p>
+            <a href={`mailto:${config.email}`} class="text-lg leading-snug text-cream hover:text-gold transition-colors break-all">
+              {config.email}
+            </a>
+            <a
+              href={`mailto:${config.email}?subject=${encodeURIComponent('Érdeklődés a FRUBEAUTY oldalról')}`}
+              class="mt-3 inline-flex items-center px-4 py-2 text-[11px] uppercase tracking-caps font-medium bg-gold text-ink rounded-full hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-150"
+            >
+              Írj nekem emailt →
+            </a>
+          </div>
+
+          <div class="border-t border-whisper pt-6 sm:col-span-2">
+            <p class="text-[11px] uppercase tracking-caps text-creamMute mb-4">Nyitvatartás</p>
+            <dl class="grid grid-cols-2 gap-y-2 gap-x-6 text-[15px] text-creamSoft">
+              {openingHours.map((d) => (
+                <>
+                  <dt class="text-creamMute">{d.day}</dt>
+                  <dd class="text-right text-cream">{d.hours}</dd>
+                </>
+              ))}
+            </dl>
+          </div>
+
+          <div class="border-t border-whisper pt-6 sm:col-span-2">
+            <p class="text-[11px] uppercase tracking-caps text-creamMute mb-4">Kövess be Instán és Facebookon.</p>
+            <div class="flex items-center gap-3">
+              <a
+                href={config.instagram}
+                target="_blank"
+                rel="noopener"
+                aria-label="Frubeauty Instagram profil"
+                class="inline-flex w-11 h-11 items-center justify-center rounded-full border border-whisperStrong text-cream hover:text-gold hover:border-gold transition-colors duration-200"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden>
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                </svg>
+              </a>
+              <a
+                href={config.facebook}
+                target="_blank"
+                rel="noopener"
+                aria-label="Frubeauty Facebook oldal"
+                class="inline-flex w-11 h-11 items-center justify-center rounded-full border border-whisperStrong text-cream hover:text-gold hover:border-gold transition-colors duration-200"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <path d="M22 12.07C22 6.51 17.52 2 12 2S2 6.51 2 12.07c0 5.02 3.66 9.18 8.44 9.93v-7.02H7.9v-2.91h2.54V9.83c0-2.52 1.49-3.91 3.78-3.91 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.77l-.44 2.91h-2.33V22c4.78-.75 8.43-4.91 8.43-9.93Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+
+  {/* ============ FOOTER ============ */}
+  <footer class="bg-inkDeep text-creamMute border-t border-whisper">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10 flex flex-wrap items-center justify-between gap-6">
+      <div>
+        <p class="font-display text-lg text-cream tracking-tight">FRUBEAUTY</p>
+        <p class="text-xs mt-1">© {new Date().getFullYear()} Pecze-Kovács Fruzsina e.v. · Minden jog fenntartva</p>
+      </div>
+      <div class="flex items-center gap-5 text-[12px] uppercase tracking-caps">
+        <a href={config.instagram} target="_blank" rel="noopener" class="hover:text-cream transition-colors" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden class="inline-block align-middle">
+            <rect x="3" y="3" width="18" height="18" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+        <a href={config.facebook} target="_blank" rel="noopener" class="hover:text-cream transition-colors" aria-label="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden class="inline-block align-middle">
+            <path d="M22 12.07C22 6.51 17.52 2 12 2S2 6.51 2 12.07c0 5.02 3.66 9.18 8.44 9.93v-7.02H7.9v-2.91h2.54V9.83c0-2.52 1.49-3.91 3.78-3.91 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.77l-.44 2.91h-2.33V22c4.78-.75 8.43-4.91 8.43-9.93Z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="py-10 text-center border-t border-whisper">
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="inline-flex items-center gap-2 text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors duration-200">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
+      Vissza az oldal tetejére
+    </button>
+  </div>
+
+  <CookieBanner client:load />
+</Layout>

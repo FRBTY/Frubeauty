@@ -1,0 +1,405 @@
+---
+/**
+ * /szempilla-lifting-zuglo — dedikált aloldal a szempilla liftingre és
+ * szemöldök laminálásra. Design: a sminkes-zuglo.astro template-jét követi
+ * a vizuális konzisztencia érdekében.
+ */
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteContact from '../components/SiteContact.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { Reveal } from '../components/Reveal';
+import { MagneticCTA } from '../components/MagneticCTA';
+import { ProcessSteps } from '../components/ProcessSteps';
+import { TestimonialsGrid } from '../components/TestimonialsGrid';
+import { GalleryGrid } from '../components/GalleryGrid';
+import { FAQ } from '../components/FAQ';
+import { CookieBanner } from '../components/CookieBanner';
+import { HeroMedia } from '../components/HeroMedia';
+import { PriceList } from '../components/PriceList';
+import { siteConfig } from '../config/site';
+
+const services = [
+  {
+    id: 'szemoldok-laminalas',
+    eyebrow: 'Szemöldök kezelés',
+    title: 'Szemöldök',
+    titleAccent: 'Laminálás',
+    titleSuffix: '+ Formázás',
+    description:
+      'A szemöldök laminálás a rakoncátlan szálakat rendezi és fixálja — dúsabb, határozottabb megjelenést ad az arcnak. Festéssel és formázással együtt, tetoválás és tű nélkül.',
+    warning: 'Várandósság idején nem ajánlott igénybevenni a szolgáltatást.',
+    bullets: [
+      'Fixált forma',
+      'Optikai dúsítás — ritkás szemöldök is tömöttnek látszik',
+      '6 hétig tartós, időálló stílus',
+      'Személyre szabott forma és festés',
+    ],
+    duration: '~ 60 perc',
+    price: '11 000 Ft',
+    priceSuffix: 'egyedi kezelés',
+    image: '/img/szemoldok-laminalas-budapest-egressy-ut-frubeauty-munka.jpg',
+    imageAlt: 'Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló',
+    imageSide: 'right' as const,
+  },
+  {
+    id: 'szempilla-lifting',
+    eyebrow: 'Szempilla kezelés',
+    title: 'Szempilla',
+    titleAccent: 'Lifting',
+    titleSuffix: '+ Festés',
+    description:
+      'A szempilla lifting a saját pilláidat emeli meg a tövétől — optikailag hosszabbnak, dúsabbnak tűnnek, tus nélkül is. Koreai technikával, bőrbarát anyagokkal.',
+    warning: 'Várandósság idején nem ajánlott igénybevenni a szolgáltatást.',
+    bullets: [
+      'Reggel tus és fésülés nélkül is tökéletes tekintet',
+      '6–8 hétig tartós, vízálló eredmény',
+      'Kíméletes, ragasztómentes eljárás',
+      'Szempilla festéssel együtt egyszerre',
+    ],
+    duration: '~ 90 perc',
+    price: '12 000 Ft',
+    priceSuffix: 'egyedi kezelés',
+    image: '/img/szempillalifting-budapest-egressy-ut-munka-szempilla-oldal-2-kep.jpg',
+    imageAlt: 'Szempilla lifting munka — natúr pillaív, FRUBEAUTY Zugló',
+    imageSide: 'left' as const,
+  },
+];
+
+const packages = [
+  { tier: 'Alap', title: 'Szempilla Lifting', titleAccent: '+ Festés', subtitle: 'Természetes íveltség + tartós festés', priceOld: null as string | null, price: '12 000 Ft', priceMeta: 'egyedi kezelés · ~90 perc', dailyEquivalent: '≈ napi 285 Ft, 6 héten át', savings: null as string | null, duration: '~ 90 perc', features: ['Szempilla lifting koreai technikával','Szempilla festés','6–8 hétig tartós eredmény','Reggel tus nélkül is tökéletes'], highlight: false, ribbon: null as string | null },
+  { tier: 'Ajánlott', title: 'Teljes', titleAccent: 'Tekintet', subtitle: 'Lifting + laminálás egyszerre', priceOld: '23 000 Ft', price: '18 000 Ft', priceMeta: 'kombinált csomag · ~120 perc', dailyEquivalent: '≈ napi 430 Ft — kevesebb egy kávénál', savings: '5 000 Ft megtakarítás', duration: '~ 120 perc', features: ['Szempilla lifting koreai technikával','Szemöldök laminálás + formázás','Szempilla és szemöldök festés','Csupán 2 óra alatt'], highlight: true, ribbon: 'Legtöbben ezt választják' },
+  { tier: 'Prémium', title: 'Teljes', titleAccent: 'Megújulás', subtitle: 'Relax Glow arcmasszázs + teljes tekintet', priceOld: '29 000 Ft', price: '26 000 Ft', priceMeta: 'prémium csomag · ~160 perc', dailyEquivalent: '≈ napi 620 Ft — teljes élmény', savings: '3 000 Ft megtakarítás', duration: '~ 160 perc', features: ['Minden, ami a Teljes Tekintet csomagban','Relax Glow arcmasszázs','Személyes bőrápolási tanácsadás','Prioritásos időpontfoglalás'], highlight: false, ribbon: null },
+];
+
+const otherServices = [
+  { eyebrow: 'Kiegészítő kezelések', title: 'Egyéb szempilla és szemöldök szolgáltatások.', items: [
+    { name: 'Szemöldök laminálás festés nélkül + formázás', duration: '60 perc', description: 'Ez a szolgáltatás azoknak szól, akik a maximálisan természetes, mégis rendezett megjelenést kedvelik. A rakoncátlan szálakat fixáljuk és formába rendezzük — festék nélkül.', price: '9 000 Ft' },
+    { name: 'Szemöldök- és szempillafestés', duration: '60 perc', description: 'Az eljárás során a szemöldököt és a szempillákat tartós festékkel festem be — ezzel kiemelve a tekintetet és ápolt, rendezett összhatást adva.', price: '7 000 Ft' },
+    { name: 'Szemöldök formázás és festés', duration: '60 perc', description: 'A szemöldök színezését, az ideális forma kialakítását és a felesleges szálak kiszedését tartalmazza.', price: '5 000 Ft' },
+    { name: 'Szempillafestés', duration: '30 perc', description: 'A szempillák hangsúlyosabbak lesznek a festésnek köszönhetően — világos pillának külön nagyon ajánlott.', price: '4 000 Ft' },
+  ] },
+];
+
+const includedPoints = [
+  { eyebrow: '01', title: 'Koreai technika', body: 'A klasszikus szilikon-formás megoldás helyett koreai lash lift technikát alkalmazok — szelídebb, mégis látványosabb íveltség, hosszabb tartóssággal.' },
+  { eyebrow: '02', title: 'Bőrbarát anyagok', body: 'Csak dermatológiailag tesztelt, ragasztómentes hatóanyagokkal dolgozom. Érzékeny szemkörnyékre is alkalmas — nincs csípés, nincs irritáció.' },
+  { eyebrow: '03', title: 'Személyre szabott forma', body: 'A szempilla- és szemöldökforma az arckaraktered szerint igazodik — nem egy sablonos, mindenkinek ugyanúgy néz ki eredményt kapsz.' },
+  { eyebrow: '04', title: 'Egyetlen vendég, teljes figyelem', body: 'Egyszerre csak egy vendéget fogadok. Nincs kapkodás, nincs egymást követő futószalag — a kezelés a te ritmusodban zajlik.' },
+];
+
+const processSteps = [
+  { step: '01', title: 'Konzultáció', body: 'Megbeszéljük az elvárt eredményt, bőrtípust és esetleges érzékenységet. Ha első alkalommal jársz, együtt nézzük meg, melyik forma és intenzitás illik az arcodhoz.' },
+  { step: '02', title: 'Előkészítés', body: 'A terület alapos megtisztítása — zsírmentes, maradványmentes felület. Ez a lépés dönti el, hogy a lifting és a festés mennyi ideig tart majd.' },
+  { step: '03', title: 'Kezelés', body: 'A lifting vagy laminálás folyamata koreai technikával, bőrbarát anyagokkal. Csukott szemmel fekszel — a legtöbb vendég kifejezetten pihentetőnek tartja a kezelést.' },
+  { step: '04', title: 'Végeredmény', body: 'Festés, formázás — tükörbe nézel és imádni fogod. Megbeszéljük az otthoni teendőket is, hogy az eredmény a teljes 6–8 hetet kibírja.' },
+];
+
+const testimonials = [
+  { name: 'Hajni Kiss', rating: 5, text: 'Szempilla liftingen és szemöldöklamináláson voltam Fruzsinál, és nagyon megvoltam elégedve az eredménnyel!', service: 'Szempilla lifting + szemöldök laminálás' },
+  { name: 'Kitti Varga-Tóth', rating: 5, text: 'Szempilla lifting a kedvencem, többször is voltam már és biztosan megyek még. Profi szakember, szívből ajánlom mindenkinek.', service: 'Szempilla lifting' },
+  { name: 'Marietta Kurja', rating: 5, text: 'Először jártam szempilla liftingen, így nagy bizalommal fordultam Fruzsinához, aki csodás munkát végzett, miközben jó hangulatban telt a kezelés!', service: 'Szempilla lifting' },
+  { name: 'Gabriella Hendrik', rating: 5, text: 'Már az első pillanattól kezdve kedvesen és figyelmesen fogadott, végig érezhető volt a profizmus és a hozzáértés. A végeredmény magáért beszél: gyönyörű lett a pillám. Biztosan visszatérek még, és szívből ajánlom mindenkinek!', service: 'Szempilla lifting' },
+  { name: 'Krisztina Daczó', rating: 5, text: 'Először jártam Fruzsinál szemöldök lamináláson, és nagyon meg vagyok elégedve. Nagyon kellemes volt a légkör és Fruzsi személyisége is nagyon pozitív. Rugalmas az időpontokat illetően, amit nagyon köszönök neki!', service: 'Szemöldök laminálás' },
+  { name: 'Virág Pataki', rating: 5, text: 'Fruzsi csodás szakember, hazaérve is minden tükörben a szemöldököm néztem!', service: 'Szemöldök laminálás' },
+  { name: 'Erika Hojsz-Koczó', rating: 5, text: 'Nemrég jártam Fruzsinál, szemöldök laminálást és festést kértem. Nagyon elégedett vagyok a végeredménnyel! Biztos, hogy fogok még menni hozzá, de akkor már pillát is liftingelünk, mert miért ne?!', service: 'Szemöldök laminálás' },
+  { name: 'Anita Kolozs', rating: 5, text: 'Nagyon kedvesen, barátságosan fogadott. Nagyon jó hangulatban telt a pillázás. És a végeredmény is gyönyörű lett! Köszönöm szépen.', service: 'Szempilla lifting' },
+];
+
+const faqs = [
+  { q: 'Fáj a szempilla lifting?', a: 'Egyáltalán nem. Csukott szemmel fekszel, és semmiféle szúrást vagy húzást nem érzel. A legtöbb vendég kifejezetten pihentetőnek tartja a 90 percet.' },
+  { q: 'Meddig tart a szempilla lifting eredménye?', a: 'A lifting és a festés együtt 6–8 hétig tart, attól függően, milyen gyorsan újul meg a pilládon a természetes ciklus. A szemöldök laminálás kb. 6 hetes tartósságra számíthat.' },
+  { q: 'Mennyi idő után látszik a végső forma a szemöldök lamináláson?', a: 'A formát rögtön a kezelés után látod, de a teljes „letisztult" eredményhez 24 óra kell, mert a szőrszálak akkor veszik fel a végleges állást. Az első 24 órában érdemes elkerülni a vizes-gőzös környezetet.' },
+  { q: 'Mit hozzak magammal a kezelésre?', a: 'Semmit. Smink nélkül érkezz (a szemkörnyékre nézve), ennyi elég. A többi szakmai eszközt és anyagot én biztosítom — bőrbarát, koreai technika, dermatológiailag tesztelt termékek.' },
+  { q: 'Mit tehetek otthon, hogy minél tovább tartson?', a: 'A kezelés utáni 24 órában kerüld a vizet, gőzt, szaunát. Pilládat ne dörzsöld, ne használj olajos sminklemosót a szemkörnyéken. A részletes utógondozási útmutatót a kezelés végén szóban is átbeszéljük.' },
+  { q: 'Le lehet mondani vagy módosítani az időpontot?', a: 'Igen, 24 órával az időpont előtt bármikor díjmentesen.' },
+];
+
+const galleryImages = [
+  '/img/szempilla-lifting-szemoldok-laminalas-zuglo-budapest-egressy-ut.jpg',
+  '/img/szemoldok-laminalas-budapest-egressy-ut-zuglo-munka.jpg',
+  '/img/szemoldok-laminalas-budapest-munka-egressy-zuglo.jpg',
+  '/img/szempilla-lifting-budapest-egressy-ut-munka.jpg',
+  '/img/szempillalifting-szemoldoklaminalas-budapest-egressy-ut-munka.jpg',
+  '/img/szempilla-lifting-szemoldok-laminalas-zuglo-budapest-munka.jpg',
+  '/img/szempilla-lifting-szemoldok-laminalas-vendeg-kep-egressy-ut-zuglo.jpg',
+  '/img/szemoldok-laminalas-vendeg-kep-budapest-egressy-ut-kozmetika.jpg',
+];
+---
+
+<Layout
+  title="Szempilla lifting és szemöldök laminálás Zugló | FRUBEAUTY"
+  description="Szempilla lifting és szemöldök laminálás Zuglóban, a 14. kerületben. Koreai technika, bőrbarát anyagok, 6–8 hét tartós eredmény. Reggeli sminkrutin nélkül."
+>
+  <SiteHeader />
+
+  <section class="relative overflow-hidden pt-32 sm:pt-40 pb-16 sm:pb-24">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end">
+        <Reveal client:load as="div" className="lg:col-span-7" distance={20}>
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Szempilla &amp; szemöldök · 1143 Budapest · XIV. kerület</p>
+          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Ébredj <em class="display">tökéletes</em> pillákkal és szemöldökkel — minden nap.</h1>
+          <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">Szempilla lifting és szemöldök laminálás — tartós, természetes eredmény a zuglói szalonban. Reggeli rutin nélkül, koreai technikával, bőrbarát anyagokkal.</p>
+          <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
+            <MagneticCTA client:load href={siteConfig.booking} external variant="primary">Időpontot foglalok</MagneticCTA>
+            <MagneticCTA client:load href="#csomagok" variant="secondary">Árak</MagneticCTA>
+          </div>
+          <p class="mt-6 text-[12px] uppercase tracking-caps text-creamMute">Online foglalás · Egressy út 16. · XIV. kerület</p>
+        </Reveal>
+        <Reveal client:load as="div" className="lg:col-span-5" distance={20} delay={0.1}>
+          <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-whisperStrong">
+            <img src="/img/szempilla-szemoldok-szolgaltatas-budapest-egressy-ut-szempillaoldal1kep.jpg" alt="Szempilla lifting és szemöldök laminálás — FRUBEAUTY zuglói szalon" class="w-full h-full object-cover" loading="eager" fetchpriority="high" />
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-whisper bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
+      <Reveal client:visible as="div" className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={siteConfig.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">40+ Google értékelés →</a></span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">120+</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">elégedett vendég</span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">6–8 hét</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">tartós eredmény</span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Koreai</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">lash lift technika</span></div>
+      </Reveal>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <Reveal client:visible as="div" className="lg:col-span-5">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">A megközelítés</p>
+          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">A szemek szépségére <em class="display">specializálódtam</em>.</h2>
+        </Reveal>
+        <Reveal client:visible as="div" className="lg:col-span-7 space-y-5 text-creamSoft leading-[1.7] text-[16px] sm:text-[17px]" delay={0.1}>
+          <p>Kozmetikusként a szemek szépségére specializálódtam — szempilla liftingre és szemöldök laminálásra. Hiszem, hogy minden vendég egyedi, és az eredménynek <span class="text-cream">természetesnek</span>, mégis <span class="text-cream">látványosnak</span> kell lennie.</p>
+          <p>A zuglói szalonomban egyszerre csak <span class="text-gold font-medium">egy vendéget</span> fogadok, hogy minden kezelés teljes figyelmet és gondoskodást kapjon. Janssen kozmetikai termékekkel és koreai technikával dolgozom.</p>
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+  <section id="csomagok" class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-16 sm:mb-20 max-w-2xl">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Kezelések</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Két <em class="display">alapkezelés</em>, három csomag.</h2>
+        <p class="mt-5 text-creamSoft leading-[1.7]">A vendégeim 78%-a a Teljes Tekintet csomagot választja — egyszerre spórolsz időt és pénzt is. Az árak a teljes szolgáltatást tartalmazzák.</p>
+      </Reveal>
+      <div class="space-y-20 sm:space-y-28">
+        {services.map((svc, i) => (
+          <Reveal client:visible as="div" delay={0.05 * i}>
+            <div class={`grid lg:grid-cols-12 gap-10 lg:gap-16 items-center ${svc.imageSide === 'left' ? '' : 'lg:[&>div:first-child]:order-1'}`}>
+              <div class={`lg:col-span-7 ${svc.imageSide === 'right' ? 'lg:order-2' : ''}`}>
+                <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-whisperStrong">
+                  <img src={svc.image} alt={svc.imageAlt} class="w-full h-full object-contain" loading="lazy" />
+                </div>
+              </div>
+              <div class={`lg:col-span-5 ${svc.imageSide === 'right' ? 'lg:order-1' : ''}`}>
+                <span class="inline-block text-[11px] uppercase tracking-caps text-gold border border-gold/30 rounded-full px-4 py-1.5 mb-6">{svc.eyebrow}</span>
+                <h3 class="font-display font-light leading-[1.05] tracking-tight text-cream" style="font-size: clamp(1.75rem, 3.6vw, 2.75rem);">{svc.title} <em class="display">{svc.titleAccent}</em><br />{svc.titleSuffix}</h3>
+                <p class="mt-5 text-creamSoft leading-[1.7] max-w-[52ch]">{svc.description}</p>
+                {svc.warning && (
+                  <div class="mt-6 inline-flex items-start gap-3 rounded-2xl bg-gold/10 border border-gold/30 px-4 py-3.5 animate-in fade-in slide-in-from-bottom-2 duration-700">
+                    <span class="flex-shrink-0 text-xl mt-0.5" aria-hidden>⚠</span>
+                    <p class="text-sm text-creamSoft leading-snug max-w-[40ch]">{svc.warning}</p>
+                  </div>
+                )}
+                <ul class="mt-7 space-y-3.5 max-w-[52ch]">
+                  {svc.bullets.map((b) => (
+                    <li class="flex items-start gap-3 py-2 border-b border-whisper last:border-b-0">
+                      <span class="flex-shrink-0 w-6 h-6 rounded-full bg-gold/15 text-gold inline-flex items-center justify-center mt-0.5" aria-hidden>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                      </span>
+                      <span class="text-[15px] text-creamSoft leading-snug">{b}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p class="mt-8 text-[11px] uppercase tracking-caps text-creamMute">{svc.duration}</p>
+                <p class="mt-3"><span class="font-display text-3xl sm:text-4xl font-medium tracking-tight text-cream">{svc.price}</span><span class="text-sm text-creamMute ml-2">· {svc.priceSuffix}</span></p>
+                <div class="mt-7"><MagneticCTA client:load href={siteConfig.booking} external variant="primary">Időpontot foglalok</MagneticCTA></div>
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-14 sm:mb-20 max-w-2xl">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Csomagajánlatok</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Válaszd azt, ami <em class="display">Neked</em> szól.</h2>
+        <p class="mt-5 text-creamSoft leading-[1.7]">A vendégeim 78%-a a Teljes Tekintet csomagot választja — egyszerre spórolsz időt és pénzt.</p>
+      </Reveal>
+      <div class="grid md:grid-cols-3 gap-5 lg:gap-7 items-stretch">
+        {packages.map((p, i) => (
+          <Reveal client:visible as="div" delay={0.05 * i} className="h-full">
+            <article class={`relative h-full flex flex-col rounded-3xl p-7 sm:p-8 transition-all duration-500 ${p.highlight ? 'bg-inkDeep ring-2 ring-gold/50 md:scale-[1.02] md:-translate-y-1 shadow-[0_20px_60px_-20px_rgba(184,136,74,0.35)]' : 'bg-ink border border-whisper hover:border-whisperStrong'}`}>
+              {p.ribbon && (<div class="absolute -top-3 left-1/2 -translate-x-1/2 z-10"><span class="inline-block text-[10px] uppercase tracking-caps font-semibold bg-gold text-ink px-4 py-1.5 rounded-full whitespace-nowrap">{p.ribbon}</span></div>)}
+              <p class={`text-[11px] uppercase tracking-caps mb-4 ${p.highlight ? 'text-gold' : 'text-creamMute'}`}>{p.tier}</p>
+              <h3 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.5rem, 2.4vw, 1.875rem);">{p.title}{' '}<em class="display">{p.titleAccent}</em></h3>
+              <p class="mt-2 text-sm text-creamMute leading-snug max-w-[28ch]">{p.subtitle}</p>
+              <div class="mt-6">{p.priceOld && (<p class="text-sm text-creamMute mb-1">Külön: <span class="line-through">{p.priceOld}</span></p>)}<p class="font-display text-3xl sm:text-4xl font-medium tracking-tight text-cream">{p.price}</p><p class="text-xs text-creamMute mt-2">{p.priceMeta}</p></div>
+              {p.savings && (<div class="mt-4"><span class="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-caps font-medium bg-gold/15 text-gold border border-gold/30 px-3 py-1.5 rounded-full"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden><polyline points="20 6 9 17 4 12" /></svg>{p.savings}</span></div>)}
+              <p class="mt-4 text-[12px] italic text-creamSoft/70 leading-snug">{p.dailyEquivalent}</p>
+              <div class={`my-7 border-t ${p.highlight ? 'border-whisperStrong' : 'border-whisper'}`}></div>
+              <p class="text-[11px] uppercase tracking-caps text-creamMute mb-4">{p.duration}</p>
+              <ul class="space-y-3 flex-1">{p.features.map((f) => (<li class="flex items-start gap-2.5"><span class={`flex-shrink-0 w-4 h-4 rounded-full inline-flex items-center justify-center mt-0.5 ${p.highlight ? 'bg-gold/25 text-gold' : 'bg-gold/15 text-gold'}`} aria-hidden><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span><span class="text-[14px] text-creamSoft leading-snug">{f}</span></li>))}</ul>
+              <div class="mt-8"><MagneticCTA client:load href={siteConfig.booking} external variant={p.highlight ? 'primary' : 'secondary'}>Időpontot foglalok</MagneticCTA></div>
+            </article>
+          </Reveal>
+        ))}
+      </div>
+      <Reveal client:visible as="div" className="mt-12 sm:mt-16 max-w-max mx-auto">
+        <div class="inline-flex items-center gap-3 rounded-full border border-gold/30 bg-gold/[0.06] px-5 py-3">
+          <span class="flex-shrink-0 w-7 h-7 rounded-full bg-gold/15 text-gold inline-flex items-center justify-center" aria-hidden><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4" /></svg></span>
+          <span class="text-[12px] sm:text-[13px] uppercase tracking-caps font-medium text-cream">Elégedettségi garancia</span>
+        </div>
+      </Reveal>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <Reveal client:visible as="div" className="lg:col-span-5">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Mit kapsz az árért</p>
+          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Nem csak a <em class="display">festéket</em>.</h2>
+          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">Négy dologért fizetsz — a koreai technikáért, a bőrbarát anyagokért, a személyre szabott formáért, és a teljes figyelmemért.</p>
+        </Reveal>
+        <div class="lg:col-span-7 grid sm:grid-cols-2 gap-5">
+          {includedPoints.map((b, i) => (
+            <Reveal client:visible as="div" delay={0.05 * (i + 1)}>
+              <article class="bg-inkSoft border border-whisper rounded-3xl p-6 sm:p-7 h-full md:hover:border-whisperStrong transition-colors duration-500">
+                <p class="text-[11px] uppercase tracking-caps text-gold mb-3">{b.eyebrow}</p>
+                <h3 class="font-display text-lg sm:text-xl font-medium text-cream leading-snug">{b.title}</h3>
+                <p class="mt-3 text-sm sm:text-[15px] text-creamSoft leading-[1.7]">{b.body}</p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Egyéb szolgáltatások</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Gyorsabb, <em class="display">célzott</em> kezelések.</h2>
+        <p class="mt-5 text-creamSoft leading-[1.7]">Ha nincs szükséged a teljes liftingre vagy laminálásra — csak egy festésre vagy formázásra — ezek a rövidebb, kiegészítő szolgáltatások éppen a tieid. Külön is foglalhatók.</p>
+      </Reveal>
+      <PriceList client:visible categories={otherServices} />
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        <Reveal client:visible as="div" className="lg:col-span-6">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Munka közben</p>
+          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Szemöldök <em class="display">laminálás</em> élesben.</h2>
+          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">Betekintés az előkészületekbe — pontosan ugyanaz a precíz technika, amit te is megkapsz Zuglóban az Egressy úton. Bőrbarát anyagok, koreai megközelítés, csukott szem, pihentető atmoszféra.</p>
+          <a href={siteConfig.instagram} target="_blank" rel="noopener" class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Több munkám Instán<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
+        </Reveal>
+        <Reveal client:visible as="div" className="lg:col-span-6" delay={0.1}>
+          <HeroMedia client:visible videoSrc="/media/szemoldok-laminalas.mp4" posterSrc="/media/szemoldok-laminalas-poster.jpg" alt="Szemöldök laminálás Zuglóban — FRUBEAUTY Pecze-Kovács Fruzsina" aspect="9 / 16" maxWidthClass="max-w-[380px]" />
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl mx-auto text-center">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">A kezelés menete</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Átláthatóan — <em class="display">négy lépés</em>.</h2>
+      </Reveal>
+      <ProcessSteps client:visible steps={processSteps} />
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl mx-auto text-center">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Munkáim</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);"><em class="display">Vendégeim</em>.</h2>
+        <p class="mt-4 text-sm text-creamMute">Kattints a képekre a teljes nézethez</p>
+      </Reveal>
+      <GalleryGrid client:visible count={8} images={galleryImages} size="large" />
+      <Reveal client:visible as="div" className="mt-16 sm:mt-20" delay={0.1}>
+        <div class="grid gap-10 sm:gap-12 md:grid-cols-2 max-w-4xl mx-auto items-start">
+          <div>
+            <p class="text-[11px] uppercase tracking-caps text-gold mb-4 text-center">Szemöldök laminálás</p>
+            <HeroMedia client:visible videoSrc="/media/szemoldok-laminalas-munkakozben-budapest-egressy-ut.mp4" posterSrc="/media/szemoldok-laminalas-munkakozben-budapest-egressy-ut-poster.jpg" alt="Szemöldök laminálás munka közben — FRUBEAUTY Zugló, Egressy út" aspect="9 / 16" maxWidthClass="max-w-[380px]" />
+          </div>
+          <div>
+            <p class="text-[11px] uppercase tracking-caps text-gold mb-4 text-center">Szempilla lifting</p>
+            <HeroMedia client:visible videoSrc="/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet.mp4" posterSrc="/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet-poster.jpg" alt="Szempilla lifting munka közben — FRUBEAUTY Zugló, 14. kerület" aspect="9 / 16" maxWidthClass="max-w-[380px]" />
+          </div>
+        </div>
+      </Reveal>
+      <Reveal client:visible as="div" className="mt-12 text-center" delay={0.15}>
+        <a href={siteConfig.instagram} target="_blank" rel="noopener" class="group inline-flex items-center text-[12px] uppercase tracking-caps text-cream hover:text-gold transition-colors">Több munkám az Instagramon<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
+      </Reveal>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 flex flex-wrap items-end justify-between gap-6">
+        <div class="max-w-2xl">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Akik már voltak nálam</p>
+          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Visszajelzés <em class="display">a kezelésekről</em>.</h2>
+        </div>
+        <a href={siteConfig.googleReviewsUrl} target="_blank" rel="noopener" class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors">Összes Google-on →</a>
+      </Reveal>
+      <TestimonialsGrid client:visible items={testimonials} />
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 text-center">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Gyakori kérdések</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Amit a kezelésekről <em class="display">kérdezni szoktak</em>.</h2>
+      </Reveal>
+      <FAQ client:visible items={faqs} />
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        <div class="lg:col-span-6">
+          <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-whisperStrong">
+            <img src="/img/arckezeles-1.jpg" alt="Janssen arckezelés — FRUBEAUTY Zugló" class="w-full h-full object-cover" loading="lazy" />
+          </div>
+        </div>
+        <div class="lg:col-span-6">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Egészben gondolkodj</p>
+          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">A szem mellé <em class="display">tiszta bőr</em>.</h2>
+          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">A szempilla lifting önmagában is gyönyörű — de együtt egy Janssen arckezeléssel egészen más szintű végeredményt kapsz. A vendégeim jelentős része egy kombinált alkalomban kéri.</p>
+          <a href="/arckezeles-zuglo" class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Arckezelés Zuglóban<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
+        </div>
+      </Reveal>
+    </div>
+  </section>
+
+  <SiteContact eyebrow="Foglalás" heading={'Ébredj <em class="display">tökéletes</em> pillákkal és szemöldökkel.'} intro="Online foglalási rendszer 0–24 órában. Az első alkalmat érdemes a Teljes Tekintet csomaggal kezdeni — a vendégeim 78%-a ezt választja." />
+
+  <div class="py-10 text-center border-t border-whisper">
+    <a href="/" class="inline-flex items-center gap-2 text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors duration-200">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+      Vissza a főoldalra
+    </a>
+  </div>
+
+  <SiteFooter />
+
+  <CookieBanner client:load />
+</Layout>

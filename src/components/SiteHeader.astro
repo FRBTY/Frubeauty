@@ -1,0 +1,38 @@
+---
+/**
+ * Shared header for all pages — AnnouncementBar + NavBar in a fixed top container.
+ *
+ * Lives in a single component so adding a new page (e.g. /arckezeles-zuglo, /blog)
+ * never duplicates the markup, and any future edit (e.g. a new promo, a nav link
+ * rename) happens in exactly one place.
+ *
+ * Pages can opt out of the announcement bar with `withAnnouncement={false}` —
+ * useful for long-form pages where the extra 40-ish pixels would push the hero
+ * too far down.
+ */
+import { AnnouncementBar } from './AnnouncementBar';
+import { NavBar } from './NavBar';
+import { siteConfig, recencyProof } from '../config/site';
+
+interface Props {
+  withAnnouncement?: boolean;
+}
+
+const { withAnnouncement = true } = Astro.props;
+---
+
+<div class="fixed top-0 inset-x-0 z-50">
+  {withAnnouncement && (
+    <AnnouncementBar
+      client:load
+      enabled={recencyProof.enabled}
+      dailyRandomRange={[2, 5]}
+    />
+  )}
+  <NavBar
+    client:load
+    bookingUrl={siteConfig.booking}
+    instagram={siteConfig.instagram}
+    facebook={siteConfig.facebook}
+  />
+</div>
