@@ -92,7 +92,7 @@ const galleryImages = [
       and dismiss-collapse happens in the same flow (no z-index fight). */}
   <div class="fixed top-0 inset-x-0 z-50">
     <AnnouncementBar
-      client:load
+      client:idle
       enabled={recencyProof.enabled}
       dailyRandomRange={[2, 5]}
     />
@@ -102,7 +102,10 @@ const galleryImages = [
   {/* ============ HERO with Lamp ============ */}
   <section class="relative overflow-hidden pt-44 sm:pt-52">
     <LampContainer client:visible className="!min-h-[88vh] sm:!min-h-[92vh]">
-      <Reveal client:load as="div" className="text-center max-w-[920px] mx-auto" distance={20}>
+      {/* hero-reveal: CSS-only animáció, nincs JS-függőség.
+          A Reveal client:load opacity:0-val SSR-elte a H1-et → FCP/LCP 3.6s/3.9s.
+          Statikus div + CSS keyframe: a szöveg azonnal látható az első festésnél. */}
+      <div class="hero-reveal text-center max-w-[920px] mx-auto">
         <p class="text-[11px] sm:text-xs uppercase tracking-caps text-black mb-5 sm:mb-7">
           FRUBEAUTY · Zugló, XIV. kerület
         </p>
@@ -116,10 +119,10 @@ const galleryImages = [
           Személyre szabott arckezelések, tartós szempilla- és szemöldökformázás, valamint alkalmi sminkek, amelyek kiemelik a természetes szépséged.
         </p>
         <div class="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
-          <MagneticCTA client:load href={config.booking} external variant="primary">
+          <MagneticCTA client:visible href={config.booking} external variant="primary">
             Időpontot foglalok
           </MagneticCTA>
-          <MagneticCTA client:load href="#szolgaltatasok" variant="secondary">
+          <MagneticCTA client:visible href="#szolgaltatasok" variant="secondary">
             Megnézem az árakat
           </MagneticCTA>
         </div>
@@ -141,7 +144,7 @@ const galleryImages = [
             Facebook
           </a>
         </div>
-      </Reveal>
+      </div>
     </LampContainer>
 
     {/* Video pulled outside Lamp — Reveal removed: poster is the LCP element,
@@ -487,5 +490,12 @@ const galleryImages = [
     </button>
   </div>
 
-  <CookieBanner client:load />
+  <CookieBanner client:idle />
+</Layout>
+th="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
+      Vissza az oldal tetejére
+    </button>
+  </div>
+
+  <CookieBanner client:idle />
 </Layout>

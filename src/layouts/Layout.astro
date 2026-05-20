@@ -224,4 +224,33 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
         border-radius: 6px;
       }
 
-     
+      /* ===== HERO FADE-IN: CSS-only, nincs JS-függőség =====
+         Felváltja a Reveal client:load-ot a hero szekcióban.
+         A Framer Motion SSR opacity:0 inline style-t emit → H1 láthatatlan
+         hydration-ig → ez okozza az FCP 3.6s-t.
+         CSS animáció azonnal fut, a böngészőnek nem kell JS-t kivárnia. */
+      @keyframes heroFadeUp {
+        from { opacity: 0; transform: translateY(12px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .hero-reveal {
+        animation: heroFadeUp 0.65s cubic-bezier(0.23, 1, 0.32, 1) both;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .hero-reveal { animation: none; opacity: 1; }
+      }
+
+      /* CSS-only zero-JS fade — trust bar és egyéb statikus elemek */
+      @keyframes zeroJsFade {
+        from { opacity: 0; transform: translateY(8px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .zero-js-fade {
+        animation: zeroJsFade 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0.15s both;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .zero-js-fade { animation: none; opacity: 1; }
+      }
+    </style>
+  </body>
+</html>

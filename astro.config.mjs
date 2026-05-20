@@ -10,9 +10,10 @@ export default defineConfig({
   integrations: [tailwind(), sitemap(), react()],
   compressHTML: true,
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'always',
   },
   vite: {
+    cacheDir: '/tmp/vite-frubeauty',
     ssr: {
       noExternal: ['framer-motion'],
     },

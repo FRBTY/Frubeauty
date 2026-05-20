@@ -62,15 +62,19 @@ export function HeroMedia({
         className="relative overflow-hidden rounded-3xl bg-inkRise ring-1 ring-whisperStrong shadow-[0_30px_80px_-30px_rgba(0,0,0,0.6)]"
         style={{ aspectRatio: aspect }}
       >
-        <motion.img
+        {/* LCP image: nincs initial transform az SSR HTML-ben (parallax csak hydration után indul).
+            width/height megakadályozza a CLS-t a layout paint-nél. */}
+        <img
           src={posterSrc}
           alt={alt}
-          style={{ y }}
+          width={380}
+          height={676}
           className={`absolute inset-0 w-full h-[112%] -top-[6%] object-cover transition-opacity duration-700 ease-out ${
             videoReady ? 'opacity-0' : 'opacity-100'
           }`}
           loading="eager"
           fetchPriority="high"
+          decoding="sync"
         />
         {shouldMountVideo && videoSrc && (
           <motion.video
