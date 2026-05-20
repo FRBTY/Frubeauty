@@ -38,7 +38,7 @@ const services = [
     duration: '~ 60 perc',
     price: '11 000 Ft',
     priceSuffix: 'egyedi kezelés',
-    image: '/img/szemoldok-laminalas-budapest-egressy-ut-frubeauty-munka.jpg',
+    image: '/img/szemoldok-laminalas-budapest-egressy-ut-frubeauty-munka.webp',
     imageAlt: 'Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló',
     imageSide: 'right' as const,
   },
@@ -60,7 +60,7 @@ const services = [
     duration: '~ 90 perc',
     price: '12 000 Ft',
     priceSuffix: 'egyedi kezelés',
-    image: '/img/szempillalifting-budapest-egressy-ut-munka-szempilla-oldal-2-kep.jpg',
+    image: '/img/szempillalifting-budapest-egressy-ut-munka-szempilla-oldal-2-kep.webp',
     imageAlt: 'Szempilla lifting munka — natúr pillaív, FRUBEAUTY Zugló',
     imageSide: 'left' as const,
   },
@@ -116,15 +116,16 @@ const faqs = [
 ];
 
 const galleryImages = [
-  '/img/szempilla-lifting-szemoldok-laminalas-zuglo-budapest-egressy-ut.jpg',
-  '/img/szemoldok-laminalas-budapest-egressy-ut-zuglo-munka.jpg',
-  '/img/szemoldok-laminalas-budapest-munka-egressy-zuglo.jpg',
-  '/img/szempilla-lifting-budapest-egressy-ut-munka.jpg',
-  '/img/szempillalifting-szemoldoklaminalas-budapest-egressy-ut-munka.jpg',
-  '/img/szempilla-lifting-szemoldok-laminalas-zuglo-budapest-munka.jpg',
-  '/img/szempilla-lifting-szemoldok-laminalas-vendeg-kep-egressy-ut-zuglo.jpg',
-  '/img/szemoldok-laminalas-vendeg-kep-budapest-egressy-ut-kozmetika.jpg',
+  '/img/szempilla-lifting-szemoldok-laminalas-zuglo-budapest-egressy-ut.webp',
+  '/img/szemoldok-laminalas-budapest-egressy-ut-zuglo-munka.webp',
+  '/img/szemoldok-laminalas-budapest-munka-egressy-zuglo.webp',
+  '/img/szempilla-lifting-budapest-egressy-ut-munka.webp',
+  '/img/szempillalifting-szemoldoklaminalas-budapest-egressy-ut-munka.webp',
+  '/img/szempilla-lifting-szemoldok-laminalas-zuglo-budapest-munka.webp',
+  '/img/szempilla-lifting-szemoldok-laminalas-vendeg-kep-egressy-ut-zuglo.webp',
+  '/img/szemoldok-laminalas-vendeg-kep-budapest-egressy-ut-kozmetika.webp',
 ];
+const config = { ...siteConfig };
 ---
 
 <Layout
@@ -141,14 +142,14 @@ const galleryImages = [
           <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Ébredj <em class="display">tökéletes</em> pillákkal és szemöldökkel — minden nap.</h1>
           <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">Szempilla lifting és szemöldök laminálás — tartós, természetes eredmény a zuglói szalonban. Reggeli rutin nélkül, koreai technikával, bőrbarát anyagokkal.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
-            <MagneticCTA client:load href={siteConfig.booking} external variant="primary">Időpontot foglalok</MagneticCTA>
+            <MagneticCTA client:load href={config.booking} external variant="primary">Időpontot foglalok</MagneticCTA>
             <MagneticCTA client:load href="#csomagok" variant="secondary">Árak</MagneticCTA>
           </div>
           <p class="mt-6 text-[12px] uppercase tracking-caps text-creamMute">Online foglalás · Egressy út 16. · XIV. kerület</p>
         </Reveal>
         <Reveal client:load as="div" className="lg:col-span-5" distance={20} delay={0.1}>
           <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-whisperStrong">
-            <img src="/img/szempilla-szemoldok-szolgaltatas-budapest-egressy-ut-szempillaoldal1kep.jpg" alt="Szempilla lifting és szemöldök laminálás — FRUBEAUTY zuglói szalon" class="w-full h-full object-cover" loading="eager" fetchpriority="high" />
+            <img src="/img/szempilla-szemoldok-szolgaltatas-budapest-egressy-ut-szempillaoldal1kep.webp" alt="Szempilla lifting és szemöldök laminálás — FRUBEAUTY zuglói szalon" class="w-full h-full object-cover" loading="eager" fetchpriority="high" />
           </div>
         </Reveal>
       </div>
@@ -158,7 +159,7 @@ const galleryImages = [
   <section class="border-y border-whisper bg-inkSoft">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
       <Reveal client:visible as="div" className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={siteConfig.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">40+ Google értékelés →</a></span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">40+ Google értékelés →</a></span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">120+</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">elégedett vendég</span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">6–8 hét</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">tartós eredmény</span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Koreai</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">lash lift technika</span></div>
@@ -219,7 +220,7 @@ const galleryImages = [
                 </ul>
                 <p class="mt-8 text-[11px] uppercase tracking-caps text-creamMute">{svc.duration}</p>
                 <p class="mt-3"><span class="font-display text-3xl sm:text-4xl font-medium tracking-tight text-cream">{svc.price}</span><span class="text-sm text-creamMute ml-2">· {svc.priceSuffix}</span></p>
-                <div class="mt-7"><MagneticCTA client:load href={siteConfig.booking} external variant="primary">Időpontot foglalok</MagneticCTA></div>
+                <div class="mt-7"><MagneticCTA client:load href={config.booking} external variant="primary">Időpontot foglalok</MagneticCTA></div>
               </div>
             </div>
           </Reveal>
@@ -249,7 +250,7 @@ const galleryImages = [
               <div class={`my-7 border-t ${p.highlight ? 'border-whisperStrong' : 'border-whisper'}`}></div>
               <p class="text-[11px] uppercase tracking-caps text-creamMute mb-4">{p.duration}</p>
               <ul class="space-y-3 flex-1">{p.features.map((f) => (<li class="flex items-start gap-2.5"><span class={`flex-shrink-0 w-4 h-4 rounded-full inline-flex items-center justify-center mt-0.5 ${p.highlight ? 'bg-gold/25 text-gold' : 'bg-gold/15 text-gold'}`} aria-hidden><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span><span class="text-[14px] text-creamSoft leading-snug">{f}</span></li>))}</ul>
-              <div class="mt-8"><MagneticCTA client:load href={siteConfig.booking} external variant={p.highlight ? 'primary' : 'secondary'}>Időpontot foglalok</MagneticCTA></div>
+              <div class="mt-8"><MagneticCTA client:load href={config.booking} external variant={p.highlight ? 'primary' : 'secondary'}>Időpontot foglalok</MagneticCTA></div>
             </article>
           </Reveal>
         ))}
@@ -304,10 +305,10 @@ const galleryImages = [
           <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Munka közben</p>
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Szemöldök <em class="display">laminálás</em> élesben.</h2>
           <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">Betekintés az előkészületekbe — pontosan ugyanaz a precíz technika, amit te is megkapsz Zuglóban az Egressy úton. Bőrbarát anyagok, koreai megközelítés, csukott szem, pihentető atmoszféra.</p>
-          <a href={siteConfig.instagram} target="_blank" rel="noopener" class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Több munkám Instán<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
+          <a href={config.instagram} target="_blank" rel="noopener" class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Több munkám Instán<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
         </Reveal>
         <Reveal client:visible as="div" className="lg:col-span-6" delay={0.1}>
-          <HeroMedia client:visible videoSrc="/media/szemoldok-laminalas.mp4" posterSrc="/media/szemoldok-laminalas-poster.jpg" alt="Szemöldök laminálás Zuglóban — FRUBEAUTY Pecze-Kovács Fruzsina" aspect="9 / 16" maxWidthClass="max-w-[380px]" />
+          <HeroMedia client:visible videoSrc="/media/szemoldok-laminalas.mp4" posterSrc="/media/szemoldok-laminalas-poster.webp" alt="Szemöldök laminálás Zuglóban — FRUBEAUTY Pecze-Kovács Fruzsina" aspect="9 / 16" maxWidthClass="max-w-[380px]" />
         </Reveal>
       </div>
     </div>
@@ -335,16 +336,16 @@ const galleryImages = [
         <div class="grid gap-10 sm:gap-12 md:grid-cols-2 max-w-4xl mx-auto items-start">
           <div>
             <p class="text-[11px] uppercase tracking-caps text-gold mb-4 text-center">Szemöldök laminálás</p>
-            <HeroMedia client:visible videoSrc="/media/szemoldok-laminalas-munkakozben-budapest-egressy-ut.mp4" posterSrc="/media/szemoldok-laminalas-munkakozben-budapest-egressy-ut-poster.jpg" alt="Szemöldök laminálás munka közben — FRUBEAUTY Zugló, Egressy út" aspect="9 / 16" maxWidthClass="max-w-[380px]" />
+            <HeroMedia client:visible videoSrc="/media/szemoldok-laminalas-munkakozben-budapest-egressy-ut.mp4" posterSrc="/media/szemoldok-laminalas-munkakozben-budapest-egressy-ut-poster.webp" alt="Szemöldök laminálás munka közben — FRUBEAUTY Zugló, Egressy út" aspect="9 / 16" maxWidthClass="max-w-[380px]" />
           </div>
           <div>
             <p class="text-[11px] uppercase tracking-caps text-gold mb-4 text-center">Szempilla lifting</p>
-            <HeroMedia client:visible videoSrc="/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet.mp4" posterSrc="/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet-poster.jpg" alt="Szempilla lifting munka közben — FRUBEAUTY Zugló, 14. kerület" aspect="9 / 16" maxWidthClass="max-w-[380px]" />
+            <HeroMedia client:visible videoSrc="/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet.mp4" posterSrc="/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet-poster.webp" alt="Szempilla lifting munka közben — FRUBEAUTY Zugló, 14. kerület" aspect="9 / 16" maxWidthClass="max-w-[380px]" />
           </div>
         </div>
       </Reveal>
       <Reveal client:visible as="div" className="mt-12 text-center" delay={0.15}>
-        <a href={siteConfig.instagram} target="_blank" rel="noopener" class="group inline-flex items-center text-[12px] uppercase tracking-caps text-cream hover:text-gold transition-colors">Több munkám az Instagramon<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
+        <a href={config.instagram} target="_blank" rel="noopener" class="group inline-flex items-center text-[12px] uppercase tracking-caps text-cream hover:text-gold transition-colors">Több munkám az Instagramon<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
       </Reveal>
     </div>
   </section>
@@ -356,7 +357,7 @@ const galleryImages = [
           <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Akik már voltak nálam</p>
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Visszajelzés <em class="display">a kezelésekről</em>.</h2>
         </div>
-        <a href={siteConfig.googleReviewsUrl} target="_blank" rel="noopener" class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors">Összes Google-on →</a>
+        <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors">Összes Google-on →</a>
       </Reveal>
       <TestimonialsGrid client:visible items={testimonials} />
     </div>
@@ -377,7 +378,7 @@ const galleryImages = [
       <Reveal client:visible as="div" className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <div class="lg:col-span-6">
           <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-whisperStrong">
-            <img src="/img/arckezeles-1.jpg" alt="Janssen arckezelés — FRUBEAUTY Zugló" class="w-full h-full object-cover" loading="lazy" />
+            <img src="/img/arckezeles-1.webp" alt="Janssen arckezelés — FRUBEAUTY Zugló" class="w-full h-full object-cover" loading="lazy" />
           </div>
         </div>
         <div class="lg:col-span-6">
@@ -393,13 +394,4 @@ const galleryImages = [
   <SiteContact eyebrow="Foglalás" heading={'Ébredj <em class="display">tökéletes</em> pillákkal és szemöldökkel.'} intro="Online foglalási rendszer 0–24 órában. Az első alkalmat érdemes a Teljes Tekintet csomaggal kezdeni — a vendégeim 78%-a ezt választja." />
 
   <div class="py-10 text-center border-t border-whisper">
-    <a href="/" class="inline-flex items-center gap-2 text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors duration-200">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
-      Vissza a főoldalra
-    </a>
-  </div>
-
-  <SiteFooter />
-
-  <CookieBanner client:load />
-</Layout>
+    <a href="/" class="inli

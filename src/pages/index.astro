@@ -35,13 +35,14 @@ const homepagePosts = allBlogPosts
   }));
 
 // Single source of truth — minden contact/booking adatot a siteConfig kezel.
-// Korábbi lokális `config = {...}` duplikáció törölve (#audit secondary).
-const config = siteConfig;
+// Spread: siteConfig as const literal-type → widened string type for JSX attrs.
+// (Astro 5 + esbuild strict mode nem kezeli jól a literal string types-t JSX href-ekben.)
+const config = { ...siteConfig };
 
 const services = [
-  { title: 'Arckezelés', subtitle: 'Janssen Cosmetics hatóanyagokkal', body: 'Bőrtípusra szabott kezelés: regeneráló, hidratáló vagy mélytisztító. Az első alkalommal bőranalízissel kezdünk.', priceFrom: '11 000 Ft-tól', duration: '60–90 perc', href: '/arckezeles-zuglo', image: '/img/service-arckezeles.jpg', alt: 'Arckezelés Janssen Cosmetics termékekkel a FRUBEAUTY szalonban' },
-  { title: 'Szempilla & szemöldök', subtitle: 'Lifting, festés, laminálás', body: 'Természetes, 6–8 hétig tartó eredmény. Reggel nincs többé szempillaspirál és szemöldökceruza.', priceFrom: '11 000 Ft-tól', duration: '60–120 perc', href: '/szempilla-lifting-zuglo', image: '/img/szempilla-szemoldok-hero.jpg', alt: 'Szempilla lifting és szemöldök laminálás előtte-utána' },
-  { title: 'Smink', subtitle: 'Esküvő, ballagás, fotózás', body: 'Próbasmink, helyszíni igazítás, hosszan tartó eredmény. A stílust együtt találjuk ki.', priceFrom: '13 000 Ft-tól', duration: '60–90 perc', href: '/sminkes-zuglo', image: '/img/smink-menyasszony-munka.jpg', alt: 'Alkalmi esküvői smink a FRUBEAUTY szalonban' },
+  { title: 'Arckezelés', subtitle: 'Janssen Cosmetics hatóanyagokkal', body: 'Bőrtípusra szabott kezelés: regeneráló, hidratáló vagy mélytisztító. Az első alkalommal bőranalízissel kezdünk.', priceFrom: '11 000 Ft-tól', duration: '60–90 perc', href: '/arckezeles-zuglo', image: '/img/service-arckezeles.webp', alt: 'Arckezelés Janssen Cosmetics termékekkel a FRUBEAUTY szalonban' },
+  { title: 'Szempilla & szemöldök', subtitle: 'Lifting, festés, laminálás', body: 'Természetes, 6–8 hétig tartó eredmény. Reggel nincs többé szempillaspirál és szemöldökceruza.', priceFrom: '11 000 Ft-tól', duration: '60–120 perc', href: '/szempilla-lifting-zuglo', image: '/img/szempilla-szemoldok-hero.webp', alt: 'Szempilla lifting és szemöldök laminálás előtte-utána' },
+  { title: 'Smink', subtitle: 'Esküvő, ballagás, fotózás', body: 'Próbasmink, helyszíni igazítás, hosszan tartó eredmény. A stílust együtt találjuk ki.', priceFrom: '13 000 Ft-tól', duration: '60–90 perc', href: '/sminkes-zuglo', image: '/img/smink-menyasszony-munka.webp', alt: 'Alkalmi esküvői smink a FRUBEAUTY szalonban' },
 ];
 
 // Aspirational / future-self framing (#audit #3) — pain-first helyett identitás-építés.
@@ -78,21 +79,11 @@ const faqs = [
   { q: 'Le lehet mondani az időpontot?', a: 'Igen, 24 órával az időpont előtt bármikor díjmentesen.' },
 ];
 
-const openingHours = [
-  { day: 'Hétfő',     hours: '08:30 – 19:30' },
-  { day: 'Kedd',      hours: '08:30 – 19:30' },
-  { day: 'Szerda',    hours: '08:30 – 19:30' },
-  { day: 'Csütörtök', hours: '08:30 – 19:30' },
-  { day: 'Péntek',    hours: '08:30 – 19:30' },
-  { day: 'Szombat',   hours: '08:00 – 13:00' },
-  { day: 'Vasárnap',  hours: 'Zárva' },
-];
-
 const galleryImages = [
-  '/img/szempilla-lifting-budapest-egressy-ut-zuglo.jpg',
-  '/img/szemoldok-laminalas-szempilla-lifting-budapest-egressy-ut-munka.jpg',
-  '/img/smink-menyasszonyi-zuglo-14-kerulet-egressy-ut.jpg',
-  '/img/smink-kismama-fotozas-budapest-egressy-ut.jpg',
+  '/img/szempilla-lifting-budapest-egressy-ut-zuglo.webp',
+  '/img/szemoldok-laminalas-szempilla-lifting-budapest-egressy-ut-munka.webp',
+  '/img/smink-menyasszonyi-zuglo-14-kerulet-egressy-ut.webp',
+  '/img/smink-kismama-fotozas-budapest-egressy-ut.webp',
 ];
 ---
 
@@ -111,7 +102,7 @@ const galleryImages = [
   {/* ============ HERO with Lamp ============ */}
   <section class="relative overflow-hidden pt-44 sm:pt-52">
     <LampContainer client:visible className="!min-h-[88vh] sm:!min-h-[92vh]">
-      <Reveal client:visible as="div" className="text-center max-w-[920px] mx-auto" distance={20}>
+      <Reveal client:load as="div" className="text-center max-w-[920px] mx-auto" distance={20}>
         <p class="text-[11px] sm:text-xs uppercase tracking-caps text-black mb-5 sm:mb-7">
           FRUBEAUTY · Zugló, XIV. kerület
         </p>
@@ -125,10 +116,10 @@ const galleryImages = [
           Személyre szabott arckezelések, tartós szempilla- és szemöldökformázás, valamint alkalmi sminkek, amelyek kiemelik a természetes szépséged.
         </p>
         <div class="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
-          <MagneticCTA client:visible href={config.booking} external variant="primary">
+          <MagneticCTA client:load href={config.booking} external variant="primary">
             Időpontot foglalok
           </MagneticCTA>
-          <MagneticCTA client:visible href="#szolgaltatasok" variant="secondary">
+          <MagneticCTA client:load href="#szolgaltatasok" variant="secondary">
             Megnézem az árakat
           </MagneticCTA>
         </div>
@@ -153,18 +144,18 @@ const galleryImages = [
       </Reveal>
     </LampContainer>
 
-    {/* Video pulled outside Lamp — sits below it in clean dark canvas */}
+    {/* Video pulled outside Lamp — Reveal removed: poster is the LCP element,
+        wrapping it in opacity:0 delays LCP until hydration. HeroMedia renders
+        the poster eagerly via SSR; video lazy-loads after idle. */}
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 -mt-16 sm:-mt-20 pb-16 sm:pb-20">
-      <Reveal client:visible as="div" distance={20}>
-        <HeroMedia
-          client:visible
-          videoSrc="/media/hero.mp4"
-          posterSrc="/media/hero-poster.jpg"
-          alt="Pecze-Kovács Fruzsina szempilla lifting és szemöldök laminálás munka közben — FRUBEAUTY Zugló"
-          aspect="9 / 16"
-          maxWidthClass="max-w-[380px]"
-        />
-      </Reveal>
+      <HeroMedia
+        client:visible
+        videoSrc="/media/hero.mp4"
+        posterSrc="/media/hero-poster.webp"
+        alt="Pecze-Kovács Fruzsina szempilla lifting és szemöldök laminálás munka közben — FRUBEAUTY Zugló"
+        aspect="9 / 16"
+        maxWidthClass="max-w-[380px]"
+      />
     </div>
   </section>
 
@@ -249,7 +240,7 @@ const galleryImages = [
         <Reveal client:visible as="div" className="lg:col-span-5 lg:order-2">
           <div class="aspect-[4/5] overflow-hidden rounded-2xl bg-inkRise ring-1 ring-whisperStrong">
             <img
-              src="/img/pecze-kovacs-fruzsina-zuglo-kozmetikus.jpg"
+              src="/img/pecze-kovacs-fruzsina-zuglo-kozmetikus.webp"
               alt="Pecze-Kovács Fruzsina, a FRUBEAUTY alapítója a szalonban"
               class="w-full h-full object-cover"
               loading="lazy"

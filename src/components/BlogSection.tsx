@@ -22,7 +22,7 @@ const defaultPosts: BlogPost[] = [
     category: 'Szempilla',
     readingMinutes: 5,
     publishedAt: '2026-04-12',
-    cover: '/img/szempilla-lifting-vagy-festes-blog-cover.jpg',
+    cover: '/img/szempilla-lifting-vagy-festes-blog-cover.webp',
   },
   {
     slug: 'janssen-arckezeles-bortipusok',
@@ -31,7 +31,7 @@ const defaultPosts: BlogPost[] = [
     category: 'Arckezelés',
     readingMinutes: 8,
     publishedAt: '2026-03-28',
-    cover: '/img/janssen-arckezeles-bortipusok-blog-cover.jpg',
+    cover: '/img/janssen-arckezeles-bortipusok-blog-cover.webp',
   },
   {
     slug: 'eskuvoi-smink-felkesziules',
@@ -40,7 +40,7 @@ const defaultPosts: BlogPost[] = [
     category: 'Alkalmi smink',
     readingMinutes: 7,
     publishedAt: '2026-02-15',
-    cover: '/img/eskuvoi-smink-felkesziules-blog-cover.jpg',
+    cover: '/img/eskuvoi-smink-felkesziules-blog-cover.webp',
   },
 ];
 

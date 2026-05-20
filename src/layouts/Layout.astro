@@ -58,8 +58,7 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#1A1410" />
     <link rel="canonical" href={canonical} />
-    <link rel="preload" as="image" href="/media/hero-poster.jpg" />
-    <link rel="preload" as="video" href="/media/hero.mp4" />
+    <link rel="preload" as="image" href="/media/hero-poster.webp" type="image/webp" fetchpriority="high" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
@@ -78,15 +77,22 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Geist:wght@400;500;600&display=swap"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Geist:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    {/* Non-render-blocking font load via script injection — avoids onload string
+        attribute which conflicts with TypeScript's HTMLLinkElement.onload type. */}
+    <script is:inline>
+      (function(){
+        var l=document.createElement('link');
+        l.rel='stylesheet';
+        l.href='https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,400&family=Geist:wght@400;500;600&display=swap';
+        document.head.appendChild(l);
+      })();
+    </script>
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,400&family=Geist:wght@400;500;600&display=swap"
+      />
+    </noscript>
     <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
 
     {/* ============ ANALYTICS (csak ha siteConfig-ban van ID) ============
@@ -218,19 +224,4 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
         border-radius: 6px;
       }
 
-      /* Trust bar fade-in — zero-JS first impression.
-         Ha a JS lassan tölt, a CSS már bemutatta a contentet. */
-      .zero-js-fade {
-        opacity: 1;
-        animation: zeroJsFade 600ms var(--ease-out-strong) both;
-      }
-      @keyframes zeroJsFade {
-        from { opacity: 0; transform: translateY(8px); }
-        to   { opacity: 1; transform: translateY(0); }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .zero-js-fade { animation: none; }
-      }
-    </style>
-  </body>
-</html>
+     

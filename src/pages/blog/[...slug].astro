@@ -319,29 +319,36 @@ const articleSchema = {
 
   .prose-frubeauty hr {
     border: 0;
-    border-top: 1px solid rgba(245, 232, 211, 0.08);
+    border-top: 1px solid rgba(245, 232, 211, 0.12);
     margin-block: 2.5em;
   }
 
-  .prose-frubeauty code {
-    background: rgba(245, 232, 211, 0.08);
-    padding: 0.15em 0.4em;
-    border-radius: 4px;
-    font-size: 0.9em;
-  }
-
   .prose-frubeauty img {
-    width: 100%;
-    height: auto;
-    border-radius: 1.5rem;
+    border-radius: 1rem;
     margin-block: 2em;
-    box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.4);
+    max-width: 100%;
+    height: auto;
   }
 
-  /* Cover image styling for tall images like 1179x2096 */
-  [class*="rounded-3xl"] img {
-    display: block;
-    width: 100%;
-    height: auto;
+  .prose-frubeauty code {
+    font-size: 0.875em;
+    background: rgba(245, 232, 211, 0.08);
+    border-radius: 4px;
+    padding: 0.15em 0.4em;
+    color: rgb(245 232 211);
+  }
+
+  .prose-frubeauty pre {
+    background: rgba(245, 232, 211, 0.06);
+    border-radius: 0.75rem;
+    padding: 1.25em 1.5em;
+    overflow-x: auto;
+    margin-block: 1.75em;
+  }
+
+  .prose-frubeauty pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.9em;
   }
 </style>

@@ -1,5 +1,6 @@
 import { StaggerGroup, StaggerItem } from './StaggerGroup';
-import { siteConfig } from '../config/site';
+import { siteConfig as _siteConfig } from '../config/site';
+const siteConfig = { ..._siteConfig };
 
 export interface PriceItem {
   name: string;

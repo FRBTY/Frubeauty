@@ -69,16 +69,17 @@ const faqs = [
 ];
 
 const galleryImages = [
-  '/img/budapest-egressy-ut-smink-frubeauty.jpg',
-  '/img/alkalmi_kep_smink_alkalmi_smink_budapest_egressy_ut.jpeg',
-  '/img/alkalmi-smink-budapest-egressy-ut-zuglo_munka.jpeg',
-  '/img/eskuvoi-smink-budapest-egressy-ut-zuglo-munka.jpg',
-  '/img/eskuvoi-smink-zuglo-egressy-ut-budapest-munka.jpg',
-  '/img/eskuvoi-smink-budapest-egressy-ut-zuglo.jpg',
-  '/img/menyasszonyi-probasmink-zuglo-budapest-egressy-ut.jpg',
-  '/img/smink-budapest-alkalmi-budapest-egressy-ut.jpg',
-  '/img/smink-budapest-alkalmi-egressy-ut-zuglo.jpg',
+  '/img/budapest-egressy-ut-smink-frubeauty.webp',
+  '/img/alkalmi_kep_smink_alkalmi_smink_budapest_egressy_ut.webp',
+  '/img/alkalmi-smink-budapest-egressy-ut-zuglo_munka.webp',
+  '/img/eskuvoi-smink-budapest-egressy-ut-zuglo-munka.webp',
+  '/img/eskuvoi-smink-zuglo-egressy-ut-budapest-munka.webp',
+  '/img/eskuvoi-smink-budapest-egressy-ut-zuglo.webp',
+  '/img/menyasszonyi-probasmink-zuglo-budapest-egressy-ut.webp',
+  '/img/smink-budapest-alkalmi-budapest-egressy-ut.webp',
+  '/img/smink-budapest-alkalmi-egressy-ut-zuglo.webp',
 ];
+const config = { ...siteConfig };
 ---
 
 <Layout title="Alkalmi és esküvői smink Zugló | FRUBEAUTY" description="Menyasszonyi, alkalmi, fotózási és nappali smink Zuglóban, a 14. kerületben. Próbasmink + tartós fixálás professzionális termékekkel. Helyszíni kiszállás egyedi egyeztetéssel.">
@@ -92,13 +93,13 @@ const galleryImages = [
           <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Esküvői és alkalmi <em class="display">smink</em> Zuglóban — a fontos pillanatokra.</h1>
           <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">Menyasszony, örömanya, ballagó, vagy fotózásra készülő – a cél ugyanaz: a smink, ami reggel felkerül, éjfélkor is pontosan ugyanúgy nézzen vissza a tükörből. Olyan professzionális technikával és textúrákkal dolgozom, amelyek észrevétlenül simulnak a bőrödre, miközben ellenállnak a könnyeknek, az öleléseknek és az áttáncolt éjszakának is.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
-            <MagneticCTA client:load href={siteConfig.booking} external variant="primary">Időpontot foglalok</MagneticCTA>
+            <MagneticCTA client:load href={config.booking} external variant="primary">Időpontot foglalok</MagneticCTA>
             <MagneticCTA client:load href="#csomagok" variant="secondary">Árak</MagneticCTA>
           </div>
           <p class="mt-6 text-[12px] uppercase tracking-caps text-creamMute">Helyszíni kiszállás Budapesten és környékén · Egyedi egyeztetés</p>
         </Reveal>
         <Reveal client:load as="div" className="lg:col-span-5" distance={20} delay={0.1}>
-          <HeroMedia client:load videoSrc="/media/smink-oldal-video-frubeauty-budapest-zuglo.mp4" posterSrc="/media/smink-oldal-video-frubeauty-budapest-zuglo-poster.jpg" alt="Menyasszonyi és alkalmi smink — FRUBEAUTY Zugló, Pecze-Kovács Fruzsina" aspect="4 / 5" maxWidthClass="max-w-full" />
+          <HeroMedia client:load videoSrc="/media/smink-oldal-video-frubeauty-budapest-zuglo.mp4" posterSrc="/media/smink-oldal-video-frubeauty-budapest-zuglo-poster.webp" alt="Menyasszonyi és alkalmi smink — FRUBEAUTY Zugló, Pecze-Kovács Fruzsina" aspect="4 / 5" maxWidthClass="max-w-full" />
         </Reveal>
       </div>
     </div>
@@ -107,7 +108,7 @@ const galleryImages = [
   <section class="border-y border-whisper bg-inkSoft">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
       <Reveal client:visible as="div" className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={siteConfig.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">40+ Google értékelés →</a></span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">40+ Google értékelés →</a></span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">100+ esküvő</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">megélt nagy nap</span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">12+ óra</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">átlagos viselési idő</span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Kiszállás</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">Budapest és környéke</span></div>
@@ -165,7 +166,7 @@ const galleryImages = [
               <div class={`my-7 border-t ${p.highlight ? 'border-whisperStrong' : 'border-whisper'}`}></div>
               <p class="text-[11px] uppercase tracking-caps text-creamMute mb-4">{p.duration}</p>
               <ul class="space-y-3 flex-1">{p.features.map((f) => (<li class="flex items-start gap-2.5"><span class={`flex-shrink-0 w-4 h-4 rounded-full inline-flex items-center justify-center mt-0.5 ${p.highlight ? 'bg-gold/25 text-gold' : 'bg-gold/15 text-gold'}`} aria-hidden><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span><span class="text-[14px] text-creamSoft leading-snug">{f}</span></li>))}</ul>
-              <div class="mt-8"><MagneticCTA client:load href={siteConfig.booking} external variant={p.highlight ? 'primary' : 'secondary'}>Időpontot foglalok</MagneticCTA></div>
+              <div class="mt-8"><MagneticCTA client:load href={config.booking} external variant={p.highlight ? 'primary' : 'secondary'}>Időpontot foglalok</MagneticCTA></div>
             </article>
           </Reveal>
         ))}
@@ -209,10 +210,10 @@ const galleryImages = [
           <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Munka közben</p>
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Pár perc <em class="display">backstage</em>.</h2>
           <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">Egy podcast-felvétel előtti smink — pontosan ugyanaz a precíz technika, amit a nagy napodon is megkapsz. Természetes textúrák, fókuszált kontúrozás, hosszan tartó fixálás.</p>
-          <a href={siteConfig.instagram} target="_blank" rel="noopener" class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Több munkám Instán<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
+          <a href={config.instagram} target="_blank" rel="noopener" class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Több munkám Instán<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
         </Reveal>
         <Reveal client:visible as="div" className="lg:col-span-6" delay={0.1}>
-          <HeroMedia client:visible videoSrc="/media/podcast-smink.mp4" posterSrc="/media/podcast-smink-poster.jpg" alt="Pecze-Kovács Fruzsina smink munka közben egy podcast felvételen — FRUBEAUTY Zugló" aspect="9 / 16" maxWidthClass="max-w-[380px]" />
+          <HeroMedia client:visible videoSrc="/media/podcast-smink.mp4" posterSrc="/media/podcast-smink-poster.webp" alt="Pecze-Kovács Fruzsina smink munka közben egy podcast felvételen — FRUBEAUTY Zugló" aspect="9 / 16" maxWidthClass="max-w-[380px]" />
         </Reveal>
       </div>
     </div>
@@ -237,7 +238,7 @@ const galleryImages = [
       </Reveal>
       <GalleryGrid client:visible count={9} images={galleryImages} size="large" />
       <Reveal client:visible as="div" className="mt-12 text-center" delay={0.1}>
-        <a href={siteConfig.instagram} target="_blank" rel="noopener" class="group inline-flex items-center text-[12px] uppercase tracking-caps text-cream hover:text-gold transition-colors">Több munkám az Instagramon<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
+        <a href={config.instagram} target="_blank" rel="noopener" class="group inline-flex items-center text-[12px] uppercase tracking-caps text-cream hover:text-gold transition-colors">Több munkám az Instagramon<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
       </Reveal>
     </div>
   </section>
@@ -249,7 +250,7 @@ const galleryImages = [
           <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Akik már voltak nálam</p>
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Visszajelzés <em class="display">sminkről</em>.</h2>
         </div>
-        <a href={siteConfig.googleReviewsUrl} target="_blank" rel="noopener" class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors">Összes Google-on →</a>
+        <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors">Összes Google-on →</a>
       </Reveal>
       <TestimonialsGrid client:visible items={testimonials} />
     </div>
@@ -287,12 +288,4 @@ const galleryImages = [
 
   <div class="py-10 text-center border-t border-whisper">
     <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="inline-flex items-center gap-2 text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors duration-200">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
-      Vissza az oldal tetejére
-    </button>
-  </div>
-
-  <SiteFooter />
-
-  <CookieBanner client:load />
-</Layout>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d=
