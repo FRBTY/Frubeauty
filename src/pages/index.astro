@@ -3,8 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import { AnnouncementBar } from '../components/AnnouncementBar';
 import { NavBar } from '../components/NavBar';
 import { HeroMedia } from '../components/HeroMedia';
-import { MagneticCTA } from '../components/MagneticCTA';
 import { Reveal } from '../components/Reveal';
+import LampStatic from '../components/ui/LampStatic.astro';
 import { ServicesGrid } from '../components/ServicesGrid';
 import { AudienceList } from '../components/AudienceList';
 import { ProcessSteps } from '../components/ProcessSteps';
@@ -13,7 +13,6 @@ import { GalleryGrid } from '../components/GalleryGrid';
 import { FAQ } from '../components/FAQ';
 import { CookieBanner } from '../components/CookieBanner';
 import { BlogSection } from '../components/BlogSection';
-import { LampContainer } from '../components/ui/lamp';
 import { getCollection } from 'astro:content';
 import { siteConfig, openingHours, recencyProof } from '../config/site';
 
@@ -96,15 +95,16 @@ const galleryImages = [
       enabled={recencyProof.enabled}
       dailyRandomRange={[2, 5]}
     />
-    <NavBar client:load bookingUrl={config.booking} instagram={config.instagram} facebook={config.facebook} />
+    <NavBar client:visible bookingUrl={config.booking} instagram={config.instagram} facebook={config.facebook} />
   </div>
 
-  {/* ============ HERO with Lamp ============ */}
+  {/* ============ HERO with Lamp ============
+      LampStatic: CSS-only Astro component — eliminates lamp.js (7.62 KiB) from
+      critical request chain. MagneticCTA replaced with static <a> tags — eliminates
+      MagneticCTA.js + use-transform.js (2212ms chain). HeroMedia client:idle so
+      the poster <img> is pure SSR HTML with no hydration dependency for LCP. */}
   <section class="relative overflow-hidden pt-44 sm:pt-52">
-    <LampContainer client:visible className="!min-h-[88vh] sm:!min-h-[92vh]">
-      {/* hero-reveal: CSS-only animáció, nincs JS-függőség.
-          A Reveal client:load opacity:0-val SSR-elte a H1-et → FCP/LCP 3.6s/3.9s.
-          Statikus div + CSS keyframe: a szöveg azonnal látható az első festésnél. */}
+    <LampStatic>
       <div class="hero-reveal text-center max-w-[920px] mx-auto">
         <p class="text-[11px] sm:text-xs uppercase tracking-caps text-black mb-5 sm:mb-7">
           FRUBEAUTY · Zugló, XIV. kerület
@@ -118,13 +118,23 @@ const galleryImages = [
         <p class="mt-6 sm:mt-8 text-base sm:text-lg text-creamSoft max-w-[58ch] mx-auto leading-[1.65] sm:leading-[1.7]">
           Személyre szabott arckezelések, tartós szempilla- és szemöldökformázás, valamint alkalmi sminkek, amelyek kiemelik a természetes szépséged.
         </p>
+
+        {/* Static CTAs — no JS, no hydration. */}
         <div class="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
-          <MagneticCTA client:visible href={config.booking} external variant="primary">
+          <a
+            href={config.booking}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200"
+          >
             Időpontot foglalok
-          </MagneticCTA>
-          <MagneticCTA client:visible href="#szolgaltatasok" variant="secondary">
+          </a>
+          <a
+            href="#szolgaltatasok"
+            class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200"
+          >
             Megnézem az árakat
-          </MagneticCTA>
+          </a>
         </div>
 
         <div class="mt-8 sm:mt-9 flex items-center justify-center gap-5 text-[12px] uppercase tracking-caps text-creamMute">
@@ -145,14 +155,11 @@ const galleryImages = [
           </a>
         </div>
       </div>
-    </LampContainer>
+    </LampStatic>
 
-    {/* Video pulled outside Lamp — Reveal removed: poster is the LCP element,
-        wrapping it in opacity:0 delays LCP until hydration. HeroMedia renders
-        the poster eagerly via SSR; video lazy-loads after idle. */}
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 -mt-16 sm:-mt-20 pb-16 sm:pb-20">
       <HeroMedia
-        client:visible
+        client:idle
         videoSrc="/media/hero.mp4"
         posterSrc="/media/hero-poster.webp"
         alt="Pecze-Kovács Fruzsina szempilla lifting és szemöldök laminálás munka közben — FRUBEAUTY Zugló"
@@ -364,9 +371,9 @@ const galleryImages = [
             Online foglalási rendszer 0–24 órában, válaszadás munkanapokon pár órán belül.
           </p>
           <div class="mt-9 flex flex-wrap gap-3">
-            <MagneticCTA client:visible href={config.booking} external variant="on-dark-primary">
+            <a href={config.booking} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">
               Időpontot foglalok
-            </MagneticCTA>
+            </a>
             <a
               href={`tel:${config.phone}`}
               class="inline-flex items-center justify-center px-6 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-cream text-ink rounded-full hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-150 gap-2"
@@ -484,18 +491,17 @@ const galleryImages = [
   </footer>
 
   <div class="py-10 text-center border-t border-whisper">
-    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="inline-flex items-center gap-2 text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors duration-200">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
+    <a href="#" id="scroll-top-btn" class="inline-flex items-center gap-2 text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors duration-200">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
       Vissza az oldal tetejére
-    </button>
+    </a>
   </div>
-
-  <CookieBanner client:idle />
-</Layout>
-th="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
-      Vissza az oldal tetejére
-    </button>
-  </div>
+  <script is:inline>
+    document.getElementById('scroll-top-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
 
   <CookieBanner client:idle />
 </Layout>

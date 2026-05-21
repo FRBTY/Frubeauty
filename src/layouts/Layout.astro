@@ -59,6 +59,8 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
     <meta name="theme-color" content="#1A1410" />
     <link rel="canonical" href={canonical} />
     <link rel="preload" as="image" href="/media/hero-poster.webp" type="image/webp" fetchpriority="high" />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-latin-ext-normal.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-latin-normal.woff2" crossorigin />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
@@ -73,32 +75,7 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    {/* Non-render-blocking font load via script injection — avoids onload string
-        attribute which conflicts with TypeScript's HTMLLinkElement.onload type. */}
-    <script is:inline>
-      (function(){
-        var l=document.createElement('link');
-        l.rel='stylesheet';
-        l.href='https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,400&family=Geist:wght@400;500;600&display=swap';
-        document.head.appendChild(l);
-      })();
-    </script>
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,400&family=Geist:wght@400;500;600&display=swap"
-      />
-    </noscript>
     <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
-
-    {/* ============ ANALYTICS (csak ha siteConfig-ban van ID) ============
-        A GA4 + Meta Pixel scriptek FELTÉTELESEN inject-elődnek, kizárólag
-        akkor, ha a site.ts-ben van valódi mérési azonosító. Default üres →
-        zéró tracking script töltődik be, így a sebesség/Privacy nem sérül. */}
     {hasGA4 && (
       <>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${analytics.ga4Id}`}></script>
@@ -128,12 +105,6 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
   </head>
   <body class="bg-ink text-creamSoft font-body antialiased selection:bg-gold selection:text-ink">
     <slot />
-
-    {/* ============ GLOBAL BOOKING CTA TRACKER ============
-        Minden olyan link, ami a Notino-foglalási domain-re mutat, automatikusan
-        UTM-paramétert kap (forrás = az aktuális oldal path-je), és kattintáskor
-        eseményt tüzel a GA4-be és a Meta Pixel-be — feltéve hogy az ID-k be
-        vannak állítva. Nulla refaktor a komponensekben: csak href-egyezés kell. */}
     <script is:inline>
       (function () {
         var BOOKING_HOST = 'notino.hu';
@@ -165,7 +136,6 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
           try { if (window.gtag) window.gtag('event', 'book_click', { event_category: 'cta', event_label: pathSegment() }); } catch (e) {}
           try { if (window.fbq) window.fbq('track', 'InitiateCheckout'); } catch (e) {}
         }
-        // Decorate now and re-run on DOMContentLoaded for React-island links.
         decorate();
         document.addEventListener('DOMContentLoaded', decorate);
         document.addEventListener('click', function (ev) {
@@ -173,13 +143,69 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
           if (!t) return;
           fireEvents();
         }, true);
-        // Re-decorate when SPA-style nav or hydration adds new links.
         new MutationObserver(function () { decorate(); })
           .observe(document.body, { childList: true, subtree: true });
       })();
     </script>
 
     <style is:global>
+      @font-face {
+        font-family: 'Fraunces';
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url('/fonts/fraunces-latin-ext-normal.woff2') format('woff2');
+        unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+      }
+      @font-face {
+        font-family: 'Fraunces';
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url('/fonts/fraunces-latin-normal.woff2') format('woff2');
+        unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+      }
+      @font-face {
+        font-family: 'Fraunces';
+        font-style: italic;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url('/fonts/fraunces-latin-ext-italic.woff2') format('woff2');
+        unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+      }
+      @font-face {
+        font-family: 'Fraunces';
+        font-style: italic;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url('/fonts/fraunces-latin-italic.woff2') format('woff2');
+        unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+      }
+      @font-face {
+        font-family: 'Geist';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/geist-400.woff2') format('woff2');
+        unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+      }
+      @font-face {
+        font-family: 'Geist';
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url('/fonts/geist-500.woff2') format('woff2');
+        unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+      }
+      @font-face {
+        font-family: 'Geist';
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url('/fonts/geist-600.woff2') format('woff2');
+        unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+      }
+
       :root {
         --ease-out-strong:    cubic-bezier(0.23, 1, 0.32, 1);
         --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
@@ -191,7 +217,6 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
         font-variation-settings: 'SOFT' 30, 'opsz' 144;
       }
 
-      /* Italic on display = the "tökéletes" emphasis style */
       .font-display em, em.display {
         font-style: italic;
         font-variation-settings: 'SOFT' 50, 'opsz' 144;
@@ -224,11 +249,6 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
         border-radius: 6px;
       }
 
-      /* ===== HERO FADE-IN: CSS-only, nincs JS-függőség =====
-         Felváltja a Reveal client:load-ot a hero szekcióban.
-         A Framer Motion SSR opacity:0 inline style-t emit → H1 láthatatlan
-         hydration-ig → ez okozza az FCP 3.6s-t.
-         CSS animáció azonnal fut, a böngészőnek nem kell JS-t kivárnia. */
       @keyframes heroFadeUp {
         from { opacity: 0; transform: translateY(12px); }
         to   { opacity: 1; transform: translateY(0); }
@@ -240,7 +260,6 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
         .hero-reveal { animation: none; opacity: 1; }
       }
 
-      /* CSS-only zero-JS fade — trust bar és egyéb statikus elemek */
       @keyframes zeroJsFade {
         from { opacity: 0; transform: translateY(8px); }
         to   { opacity: 1; transform: translateY(0); }

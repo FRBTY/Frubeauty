@@ -189,9 +189,9 @@ const config = { ...siteConfig };
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Két <em class="display">alapkezelés</em>, három csomag.</h2>
         <p class="mt-5 text-creamSoft leading-[1.7]">A vendégeim 78%-a a Teljes Tekintet csomagot választja — egyszerre spórolsz időt és pénzt is. Az árak a teljes szolgáltatást tartalmazzák.</p>
       </Reveal>
-      <div class="space-y-20 sm:space-y-28">
+      <div>
         {services.map((svc, i) => (
-          <Reveal client:visible as="div" delay={0.05 * i}>
+          <Reveal client:visible as="div" delay={0.05 * i} className={i > 0 ? 'mt-20 sm:mt-28' : ''}>
             <div class={`grid lg:grid-cols-12 gap-10 lg:gap-16 items-center ${svc.imageSide === 'left' ? '' : 'lg:[&>div:first-child]:order-1'}`}>
               <div class={`lg:col-span-7 ${svc.imageSide === 'right' ? 'lg:order-2' : ''}`}>
                 <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-whisperStrong">

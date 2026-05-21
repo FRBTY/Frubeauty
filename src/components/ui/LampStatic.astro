@@ -1,0 +1,95 @@
+---
+/**
+ * LampStatic — CSS-only lamp beam component.
+ * Replaces the framer-motion LampContainer on the hero section to eliminate
+ * lamp.js (7.62 KiB) from the critical request chain.
+ * All animations are pure CSS keyframes — zero JS, zero hydration.
+ */
+interface Props {
+  className?: string;
+}
+const { className = '' } = Astro.props;
+const rootClass = `lamp-root relative flex flex-col items-center justify-center overflow-hidden bg-ink w-full z-0 min-h-[88vh] sm:min-h-[92vh] ${className}`.trim();
+---
+
+<div class={rootClass}>
+  <!-- beam + glow layer -->
+  <div class="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0">
+
+    <!-- Left cone -->
+    <div
+      class="lamp-cone-left absolute inset-auto right-1/2 h-56 overflow-visible from-gold via-transparent to-transparent text-cream"
+      style="background-image: conic-gradient(from 70deg at center top, var(--tw-gradient-stops))"
+    >
+      <div class="absolute w-full left-0 bg-ink h-40 bottom-0 z-20" style="-webkit-mask-image: linear-gradient(to top, white, transparent); mask-image: linear-gradient(to top, white, transparent);"></div>
+      <div class="absolute w-40 h-full left-0 bg-ink bottom-0 z-20" style="-webkit-mask-image: linear-gradient(to right, white, transparent); mask-image: linear-gradient(to right, white, transparent);"></div>
+    </div>
+
+    <!-- Right cone -->
+    <div
+      class="lamp-cone-right absolute inset-auto left-1/2 h-56 from-transparent via-transparent to-gold text-cream"
+      style="background-image: conic-gradient(from 290deg at center top, var(--tw-gradient-stops))"
+    >
+      <div class="absolute w-40 h-full right-0 bg-ink bottom-0 z-20" style="-webkit-mask-image: linear-gradient(to left, white, transparent); mask-image: linear-gradient(to left, white, transparent);"></div>
+      <div class="absolute w-full right-0 bg-ink h-40 bottom-0 z-20" style="-webkit-mask-image: linear-gradient(to top, white, transparent); mask-image: linear-gradient(to top, white, transparent);"></div>
+    </div>
+
+    <!-- Blur mask behind the beam -->
+    <div class="absolute top-1/2 h-48 w-full translate-y-12 scale-x-150 bg-ink blur-2xl"></div>
+    <div class="absolute top-1/2 z-50 h-48 w-full bg-transparent opacity-10 backdrop-blur-md"></div>
+
+    <!-- Gold glow bulb -->
+    <div class="absolute inset-auto z-50 h-36 w-[28rem] -translate-y-1/2 rounded-full bg-gold opacity-40 blur-3xl"></div>
+
+    <!-- Inner bright bulb -->
+    <div class="lamp-bulb absolute inset-auto z-30 h-36 w-64 -translate-y-[6rem] rounded-full bg-goldGlow blur-2xl"></div>
+
+    <!-- Hair-thin gold rail -->
+    <div class="lamp-rail absolute inset-auto z-50 h-px w-[30rem] -translate-y-[7rem] bg-goldSoft"></div>
+
+    <!-- Top ink mask -->
+    <div class="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-ink"></div>
+  </div>
+
+  <!-- Content slot -->
+  <div class="relative z-50 flex -translate-y-36 sm:-translate-y-44 flex-col items-center px-5 w-full">
+    <slot />
+  </div>
+</div>
+
+<style>
+  @keyframes lampConeExpand {
+    from { width: 15rem; opacity: 0.5; }
+    to   { width: 30rem; opacity: 1; }
+  }
+  @keyframes lampBulbExpand {
+    from { width: 8rem; }
+    to   { width: 16rem; }
+  }
+  @keyframes lampRailExpand {
+    from { width: 15rem; }
+    to   { width: 30rem; }
+  }
+
+  .lamp-cone-left,
+  .lamp-cone-right {
+    width: 30rem;
+    opacity: 1;
+    animation: lampConeExpand 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+  .lamp-bulb {
+    animation: lampBulbExpand 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+  .lamp-rail {
+    animation: lampRailExpand 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lamp-cone-left,
+    .lamp-cone-right,
+    .lamp-bulb,
+    .lamp-rail {
+      animation: none;
+    }
+  }
+</style>
