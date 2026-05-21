@@ -148,7 +148,7 @@ const config = { ...siteConfig };
           <p class="mt-6 text-[12px] uppercase tracking-caps text-creamMute">Online foglalás · Egressy út 16. · XIV. kerület</p>
         </Reveal>
         <Reveal client:load as="div" className="lg:col-span-5" distance={20} delay={0.1}>
-          <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-whisperStrong">
+          <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-black">
             <img src="/img/szempilla-szemoldok-szolgaltatas-budapest-egressy-ut-szempillaoldal1kep.webp" alt="Szempilla lifting és szemöldök laminálás — FRUBEAUTY zuglói szalon" class="w-full h-full object-cover" loading="eager" fetchpriority="high" />
           </div>
         </Reveal>
@@ -194,7 +194,7 @@ const config = { ...siteConfig };
           <Reveal client:visible as="div" delay={0.05 * i} className={i > 0 ? 'mt-20 sm:mt-28' : ''}>
             <div class={`grid lg:grid-cols-12 gap-10 lg:gap-16 items-center ${svc.imageSide === 'left' ? '' : 'lg:[&>div:first-child]:order-1'}`}>
               <div class={`lg:col-span-7 ${svc.imageSide === 'right' ? 'lg:order-2' : ''}`}>
-                <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-whisperStrong">
+                <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-black">
                   <img src={svc.image} alt={svc.imageAlt} class="w-full h-full object-contain" loading="lazy" />
                 </div>
               </div>
@@ -377,7 +377,7 @@ const config = { ...siteConfig };
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div" className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <div class="lg:col-span-6">
-          <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-whisperStrong">
+          <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-black">
             <img src="/img/arckezeles-1.webp" alt="Janssen arckezelés — FRUBEAUTY Zugló" class="w-full h-full object-cover" loading="lazy" />
           </div>
         </div>
@@ -394,4 +394,4 @@ const config = { ...siteConfig };
   <SiteContact eyebrow="Foglalás" heading={'Ébredj <em class="display">tökéletes</em> pillákkal és szemöldökkel.'} intro="Online foglalási rendszer 0–24 órában. Az első alkalmat érdemes a Teljes Tekintet csomaggal kezdeni — a vendégeim 78%-a ezt választja." />
 
   <div class="py-10 text-center border-t border-whisper">
-    <a href="/" class="inli
+    <a href="/" cl

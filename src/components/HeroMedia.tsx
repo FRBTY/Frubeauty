@@ -39,7 +39,7 @@ export function HeroMedia({
   return (
     <div className={`mx-auto ${maxWidthClass}`}>
       <div
-        className="relative overflow-hidden rounded-3xl bg-inkRise ring-1 ring-whisperStrong shadow-[0_30px_80px_-30px_rgba(0,0,0,0.6)]"
+        className="relative overflow-hidden rounded-3xl bg-inkRise ring-1 ring-black shadow-[0_30px_80px_-30px_rgba(0,0,0,0.6)]"
         style={{ aspectRatio: aspect }}
       >
         <img

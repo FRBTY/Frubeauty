@@ -248,7 +248,7 @@ const galleryImages = [
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <Reveal client:visible as="div" className="lg:col-span-5 lg:order-2">
-          <div class="aspect-[4/5] overflow-hidden rounded-2xl bg-inkRise ring-1 ring-whisperStrong">
+          <div class="aspect-[4/5] overflow-hidden rounded-2xl bg-inkRise ring-1 ring-black">
             <img
               src="/img/pecze-kovacs-fruzsina-zuglo-kozmetikus.webp"
               alt="Pecze-Kovács Fruzsina, a FRUBEAUTY alapítója a szalonban"
@@ -497,11 +497,4 @@ const galleryImages = [
     </a>
   </div>
   <script is:inline>
-    document.getElementById('scroll-top-btn').addEventListener('click', function(e) {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  </script>
-
-  <CookieBanner client:idle />
-</Layout>
+    document.getElementById('scroll-top-btn').addEv
