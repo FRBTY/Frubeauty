@@ -11,7 +11,7 @@ export default defineConfig({
     inlineStylesheets: 'always',
   },
   vite: {
-    cacheDir: '/tmp/vite-fb2',
+    cacheDir: '/tmp/vite-fb3',
     ssr: {
       noExternal: ['framer-motion'],
     },

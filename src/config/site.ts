@@ -52,16 +52,25 @@ export const openingHoursSchema = [
 /**
  * Analytics measurement IDs. ÜRES default = nem inject-elődik semmilyen script.
  * Töltsd ki, amikor a GA4 / Meta Pixel valódi azonosítóval rendelkezik.
- *  - ga4Id:       'G-XXXXXXXXXX'
- *  - metaPixelId: '123456789012345'
+ *  - ga4Id:                    'G-XXXXXXXXXX'
+ *  - metaPixelId:              '123456789012345'
+ *  - googleAdsId:              'AW-XXXXXXXXXX'
+ *  - googleAdsConversionLabel: a konverzió esemény label-je
+ *  - googleAdsConversionValue: ajánlott konverziós érték HUF-ban
  */
 interface AnalyticsConfig {
   ga4Id: string;
   metaPixelId: string;
+  googleAdsId: string;
+  googleAdsConversionLabel: string;
+  googleAdsConversionValue: number;
 }
 export const analytics: AnalyticsConfig = {
   ga4Id: '',
   metaPixelId: '',
+  googleAdsId: 'AW-17992123771',
+  googleAdsConversionLabel: 'LHaBCP_fj6McEPuKqIND',
+  googleAdsConversionValue: 12500,
 };
 
 /**

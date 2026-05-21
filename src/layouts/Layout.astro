@@ -48,6 +48,10 @@ const businessSchema = {
 
 const hasGA4 = analytics.ga4Id && analytics.ga4Id.length > 0;
 const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
+const hasGoogleAds = analytics.googleAdsId && analytics.googleAdsId.length > 0;
+// Az elsődleges gtag script forrása: ha GA4 van, azt töltjük be (és aztán config-oljuk az Ads-t is);
+// ha csak Ads van, akkor az Ads ID-t használjuk loader ID-ként.
+const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googleAdsId : '');
 ---
 
 <!doctype html>
@@ -76,15 +80,22 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
     <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
-    {hasGA4 && (
+    {primaryGtagId && (
       <>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${analytics.ga4Id}`}></script>
-        <script is:inline define:vars={{ ga4Id: analytics.ga4Id }}>
+        {/* Egyetlen gtag.js loader — mindkét ID-t (GA4 + Ads) kezeli */}
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${primaryGtagId}`}></script>
+        <script is:inline define:vars={{
+          ga4Id: analytics.ga4Id,
+          googleAdsId: analytics.googleAdsId,
+          hasGA4,
+          hasGoogleAds,
+        }}>
           window.dataLayer = window.dataLayer || [];
           function gtag(){ window.dataLayer.push(arguments); }
           window.gtag = gtag;
           gtag('js', new Date());
-          gtag('config', ga4Id, { send_page_view: true });
+          if (hasGA4)       gtag('config', ga4Id, { send_page_view: true });
+          if (hasGoogleAds) gtag('config', googleAdsId);
         </script>
       </>
     )}
@@ -135,6 +146,17 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
         function fireEvents() {
           try { if (window.gtag) window.gtag('event', 'book_click', { event_category: 'cta', event_label: pathSegment() }); } catch (e) {}
           try { if (window.fbq) window.fbq('track', 'InitiateCheckout'); } catch (e) {}
+          // Google Ads konverzió mérés — "Időpontfoglalás" esemény
+          try {
+            if (window.gtag) {
+              window.gtag('event', 'conversion', {
+                'send_to': 'AW-17992123771/LHaBCP_fj6McEPuKqIND',
+                'value': 12500.0,
+                'currency': 'HUF',
+                'event_callback': function() {}
+              });
+            }
+          } catch (e) {}
         }
         decorate();
         document.addEventListener('DOMContentLoaded', decorate);
