@@ -57,7 +57,9 @@ export function BlogSection({ posts = defaultPosts }: BlogSectionProps) {
               <div className="aspect-[4/5] overflow-hidden bg-inkRise">
                 <img
                   src={p.cover}
-                  alt=""
+                  alt={p.title}
+                  width={800}
+                  height={1000}
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                 />

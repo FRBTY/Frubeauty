@@ -21,6 +21,8 @@ export function ServiceCard({ service: s }: { service: ServiceCardData }) {
         <motion.img
           src={s.image}
           alt={s.alt}
+          width={800}
+          height={1000}
           loading="lazy"
           variants={reduced ? { hidden: { opacity: 0 }, visible: { opacity: 1 } } : clipReveal}
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
@@ -40,9 +42,8 @@ export function ServiceCard({ service: s }: { service: ServiceCardData }) {
           <a
             href={s.href}
             className="inline-flex items-center justify-center w-full px-5 py-3 text-[12px] uppercase tracking-caps font-semibold bg-gold text-ink rounded-full hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-150"
-            aria-label={`Kattints ide az árakért: ${s.title}`}
           >
-            Kattints ide az árakért
+            {s.title} — árak és foglalás
             <span aria-hidden className="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-0.5">→</span>
           </a>
         </div>

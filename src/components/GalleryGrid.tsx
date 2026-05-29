@@ -38,6 +38,8 @@ export function GalleryGrid({
       ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 lg:gap-8'
       : 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4';
   const tileAspect = size === 'large' ? 'aspect-[4/5]' : 'aspect-square';
+  const tileW = 800;
+  const tileH = size === 'large' ? 1000 : 800;
 
   return (
     <>
@@ -53,6 +55,8 @@ export function GalleryGrid({
               <img
                 src={src}
                 alt={alts[i]}
+                width={tileW}
+                height={tileH}
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] group-active:scale-[1.04]"
               />

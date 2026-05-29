@@ -4,8 +4,12 @@ excerpt: "A próbasmink nem stílusgyakorlat vagy barátnős csacsogás. Ez a na
 category: "Alkalmi smink"
 readingMinutes: 7
 publishedAt: 2026-02-15
-cover: "/img/smink_menyasszonyi_zuglo_14.kerület_egressy_ut.jpeg"
+cover: "/img/smink-menyasszonyi-zuglo-14-kerulet-egressy-ut.webp"
+coverWidth: 1400
+coverHeight: 2100
 coverAlt: "Esküvői próbasmink és menyasszonyi smink Budapesten — FRUBEAUTY Zugló"
+metaTitle: "Esküvői smink Budapesten — próbasmink | FRUBEAUTY"
+metaDescription: "Hogyan készülj az esküvői próbasminkre tudatos menyasszonyként? Mit hozz, mit hagyj otthon, és mi történik a 90 perc alatt — zuglói sminkes tippek."
 ---
 
 Az esküvői próbasmink nem egy kötetlen stílusgyakorlat vagy barátnős csacsogás. **Ez a nagy napod legfontosabb vizuális szerződése.** Ezen a találkozón dől el, hogy a sminked bírni fogja-e a sírást, a gratulációk záporát, a fotós vakukat és az áttáncolt éjszakát reggel 10-től hajnali 2-ig.

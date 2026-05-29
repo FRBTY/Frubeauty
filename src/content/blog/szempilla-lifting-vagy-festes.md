@@ -4,8 +4,12 @@ excerpt: "Rengeteg nő téved abba a hibába, hogy egy trendi Insta-fotó alapj�
 category: "Szempilla"
 readingMinutes: 5
 publishedAt: 2026-04-12
-cover: "/img/BLOG_Szempilla_lifting_budapest-egressy_ut_zuglo.jpeg"
+cover: "/img/BLOG_Szempilla_lifting_budapest-egressy_ut_zuglo.webp"
+coverWidth: 1400
+coverHeight: 1229
 coverAlt: "Szempilla lifting és tartós festés összehasonlítás — FRUBEAUTY zuglói szakértő"
+metaTitle: "Szempilla lifting vagy festés? | FRUBEAUTY Zugló"
+metaDescription: "Szempilla lifting vagy tartós festés? A zuglói szakértő elmondja, melyik kinek való, és melyikkel érsz el drámaibb, tartósabb eredményt."
 ---
 
 Rengeteg nő esik abba a hibába, hogy lát egy trendi fotót az Instagramon, és azonnal szempilla liftingre foglal időpontot — miközben lehet, hogy egy sima tartós festéssel vagy egy szemöldök-laminálással sokkal drámaibb hatást érne el.

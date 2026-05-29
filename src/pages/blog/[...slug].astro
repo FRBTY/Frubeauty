@@ -77,8 +77,8 @@ const articleSchema = {
 ---
 
 <Layout
-  title={`${post.data.title} | FRUBEAUTY Blog`}
-  description={post.data.excerpt}
+  title={post.data.metaTitle ?? `${post.data.title} | FRUBEAUTY Blog`}
+  description={post.data.metaDescription ?? post.data.excerpt}
   image={post.data.cover}
   canonical={`https://frubeauty.com/blog/${post.data.slug ?? post.id}`}
 >
@@ -95,7 +95,7 @@ const articleSchema = {
           <span aria-hidden>·</span>
           <span>{post.data.readingMinutes} perc olvasás</span>
           <span aria-hidden>·</span>
-          <time datetime={post.data.publishedAt.toISOString()}>
+          <time itemprop="datePublished" datetime={post.data.publishedAt.toISOString()}>
             {dateFormatter.format(post.data.publishedAt)}
           </time>
         </div>
@@ -108,6 +108,13 @@ const articleSchema = {
         <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[60ch]">
           {post.data.excerpt}
         </p>
+        <address class="author byline mt-7 flex items-center gap-3 not-italic" itemprop="author" itemscope itemtype="https://schema.org/Person">
+          <span class="w-10 h-10 rounded-full bg-gold/15 text-gold flex items-center justify-center text-sm font-medium" aria-hidden>FP</span>
+          <p class="text-sm text-creamSoft">
+            Írta: <a href="/#kapcsolat" rel="author" itemprop="name" class="text-cream font-medium hover:text-gold transition-colors">Pecze-Kovács Fruzsina</a>
+            <span class="text-creamMute" itemprop="jobTitle"> — kozmetikus &amp; sminkes, Zugló</span>
+          </p>
+        </address>
       </Reveal>
     </header>
 
@@ -116,6 +123,8 @@ const articleSchema = {
         <img
           src={post.data.cover}
           alt={post.data.coverAlt}
+          width={post.data.coverWidth}
+          height={post.data.coverHeight}
           class="w-full h-auto object-contain"
           loading="eager"
           fetchpriority="high"
@@ -192,6 +201,8 @@ const articleSchema = {
                   <img
                     src={p.data.cover}
                     alt={p.data.coverAlt}
+                    width="800"
+                    height="500"
                     loading="lazy"
                     class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   />

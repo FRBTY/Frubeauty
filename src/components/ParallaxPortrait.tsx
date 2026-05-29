@@ -50,6 +50,8 @@ export function ParallaxPortrait({
       <motion.img
         src={src}
         alt={alt}
+        width={800}
+        height={1000}
         style={{ y }}
         // Slightly larger than container so parallax doesn't reveal background
         className="absolute inset-0 w-full h-[112%] -top-[6%] object-cover will-change-transform"

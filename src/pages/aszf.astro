@@ -51,15 +51,16 @@ const config = {
           </button>
           <div class="aszf-body" hidden>
             <table class="aszf-table">
+              <caption class="sr-only">Szolgáltató adatai</caption>
               <tbody>
-                <tr><td>Cégnév / vállalkozó neve</td><td>{config.fullName}</td></tr>
-                <tr><td>Adószám</td><td>{config.taxNumber}</td></tr>
-                <tr><td>Nyilvántartási szám</td><td>{config.registrationNumber}</td></tr>
-                <tr><td>Székhely / szalon címe</td><td>{config.address}</td></tr>
-                <tr><td>E-mail</td><td><a href={`mailto:${config.email}`}>{config.email}</a></td></tr>
-                <tr><td>Telefon</td><td><a href={`tel:${config.phone}`}>{config.phoneDisplay}</a></td></tr>
-                <tr><td>Nyilvántartó hatóság</td><td>Budapest Főváros XIV. kerület Zugló Önkormányzatának Polgármesteri Hivatala</td></tr>
-                <tr><td>Tevékenység</td><td>Kozmetikai és szépészeti szolgáltatások</td></tr>
+                <tr><th scope="row">Cégnév / vállalkozó neve</th><td>{config.fullName}</td></tr>
+                <tr><th scope="row">Adószám</th><td>{config.taxNumber}</td></tr>
+                <tr><th scope="row">Nyilvántartási szám</th><td>{config.registrationNumber}</td></tr>
+                <tr><th scope="row">Székhely / szalon címe</th><td>{config.address}</td></tr>
+                <tr><th scope="row">E-mail</th><td>{config.email}</td></tr>
+                <tr><th scope="row">Telefon</th><td>{config.phoneDisplay}</td></tr>
+                <tr><th scope="row">Nyilvántartó hatóság</th><td>Budapest Főváros XIV. kerület Zugló Önkormányzatának Polgármesteri Hivatala</td></tr>
+                <tr><th scope="row">Tevékenység</th><td>Kozmetikai és szépészeti szolgáltatások</td></tr>
               </tbody>
             </table>
             <p>
@@ -76,11 +77,12 @@ const config = {
           </button>
           <div class="aszf-body" hidden>
             <table class="aszf-table">
+              <caption class="sr-only">Tárhelyszolgáltató adatai</caption>
               <tbody>
-                <tr><td>Üzemeltető neve</td><td>Netlify, Inc.</td></tr>
-                <tr><td>Székhely</td><td>512 2nd Street, Suite 200, San Francisco, CA 94107, USA</td></tr>
-                <tr><td>Weboldal</td><td><a href="https://www.netlify.com" target="_blank" rel="noopener">www.netlify.com</a></td></tr>
-                <tr><td>Adatkezelési tájékoztató</td><td><a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">netlify.com/privacy</a></td></tr>
+                <tr><th scope="row">Üzemeltető neve</th><td>Netlify, Inc.</td></tr>
+                <tr><th scope="row">Székhely</th><td>512 2nd Street, Suite 200, San Francisco, CA 94107, USA</td></tr>
+                <tr><th scope="row">Weboldal</th><td>www.netlify.com</td></tr>
+                <tr><th scope="row">Adatkezelési tájékoztató</th><td>netlify.com/privacy</td></tr>
               </tbody>
             </table>
             <p>
@@ -273,7 +275,7 @@ const config = {
               <li>
                 <strong>Budapesti Békéltető Testület</strong><br />
                 1016 Budapest, Krisztina krt. 99. III. em. 310. &nbsp;·&nbsp; Tel: +36 1 488-2131<br />
-                E-mail: bekelteto.testulet@bkik.hu &nbsp;·&nbsp; Web: <a href="https://bekeltetobizottsag.hu" target="_blank" rel="noopener">bekeltetobizottsag.hu</a>
+                E-mail: bekelteto.testulet@bkik.hu &nbsp;·&nbsp; Web: <a href="https://bekeltet.bkik.hu" target="_blank" rel="noopener">bekeltet.bkik.hu</a>
               </li>
               <li>
                 <strong>Online vitarendezési platform (ODR):</strong> <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>
@@ -409,13 +411,13 @@ const config = {
     .aszf-body a { color: #C9A36C; text-decoration: underline; text-underline-offset: 3px; transition: color 200ms; }
     .aszf-body a:hover { color: #B8884A; }
     .aszf-table { width: 100%; border-collapse: collapse; margin-bottom: 1.25rem; font-size: 14px; }
-    .aszf-table td { padding: 0.55rem 0.75rem; vertical-align: top; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .aszf-table td:first-child { width: 42%; color: rgba(200,184,154,0.6); white-space: nowrap; }
+    .aszf-table th, .aszf-table td { padding: 0.55rem 0.75rem; vertical-align: top; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: left; font-weight: 400; }
+    .aszf-table th:first-child { width: 42%; color: rgba(200,184,154,0.6); white-space: nowrap; }
     .aszf-table td:last-child { color: #C8B89A; }
     @media (max-width: 480px) {
-      .aszf-table td:first-child { white-space: normal; width: auto; }
+      .aszf-table th:first-child { white-space: normal; width: auto; }
       .aszf-table tr { display: flex; flex-direction: column; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 0.5rem 0; }
-      .aszf-table td { padding: 0.3rem 0; border: none; }
+      .aszf-table th, .aszf-table td { padding: 0.3rem 0; border: none; }
     }
   </style>
 </Layout>

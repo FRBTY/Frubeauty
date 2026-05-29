@@ -22,6 +22,13 @@ const blog = defineCollection({
     updatedAt: z.coerce.date().optional(),
     cover: z.string().startsWith('/'),
     coverAlt: z.string().min(8),
+    /** Cover intrinsic pixel dimensions — reserves space to prevent CLS. */
+    coverWidth: z.number().int().positive().optional(),
+    coverHeight: z.number().int().positive().optional(),
+    /** SEO <title> override (≤60 chars). Default = title. */
+    metaTitle: z.string().max(60).optional(),
+    /** SEO meta description override (≤160 chars). Default = excerpt. */
+    metaDescription: z.string().max(160).optional(),
     /** Optional override slug. Default = filename. */
     slug: z.string().optional(),
     /** Hide draft posts from the index. */

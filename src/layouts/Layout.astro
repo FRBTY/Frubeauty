@@ -9,8 +9,8 @@ export interface Props {
 }
 
 const {
-  title = 'FRUBEAUTY — Kozmetika és smink Zuglóban | Pecze-Kovács Fruzsina',
-  description = `Pihentető arckezelés Janssen hatóanyagokkal, természetes szempilla-lift, szemöldök-laminálás és személyre szabott smink. Bejelentkezés online, ${siteConfig.postalCode} Budapest, ${siteConfig.streetAddress}`,
+  title = 'Kozmetika és smink Zuglóban — FRUBEAUTY | Pecze-Kovács',
+  description = `Arckezelés Janssen hatóanyagokkal, szempilla-lift, szemöldök-laminálás és személyre szabott smink Zuglóban. Online foglalás — ${siteConfig.postalCode} Budapest, ${siteConfig.streetAddress}`,
   image = '/og-image.jpg',
   canonical = Astro.url.href,
 } = Astro.props;
@@ -115,7 +115,15 @@ const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googl
     )}
   </head>
   <body class="bg-ink text-creamSoft font-body antialiased selection:bg-gold selection:text-ink">
-    <slot />
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-3 focus:left-3 focus:px-4 focus:py-2 focus:rounded-full focus:bg-gold focus:text-ink focus:text-sm focus:font-medium"
+    >
+      Ugrás a tartalomra
+    </a>
+    <main id="main-content" tabindex="-1" class="outline-none">
+      <slot />
+    </main>
     <script is:inline>
       (function () {
         var BOOKING_HOST = 'notino.hu';
