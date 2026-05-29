@@ -13,9 +13,9 @@ interface HeroMediaProps {
  * Parallax removed: eliminated useTransform/useScroll framer-motion chunk from
  * the critical request chain. Result: use-transform.js no longer in LCP path.
  *
- * Mobilon NEM töltjük le a ~1.3MB hero videót: csak a poster kép jelenik meg.
- * A videó kizárólag desktopon (lg+, >=1024px) mountol, így mobilon nem terheli
- * a sávszélességet a kritikus betöltési ablakban (PC élmény változatlan).
+ * A videó akkor mountol és indul el, amikor a viewportba ér (IntersectionObserver,
+ * 200px rootMargin), mobilon és desktopon egyaránt. A hajtás alatti videók így csak
+ * görgetéskor töltődnek, a hero pedig azonnal (mert eleve látszik).
  */
 export function HeroMedia({
   videoSrc,
@@ -26,24 +26,34 @@ export function HeroMedia({
 }: HeroMediaProps) {
   const [videoReady, setVideoReady] = useState(false);
   const [shouldMountVideo, setShouldMountVideo] = useState(false);
-  const prefersReduced = useRef(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    prefersReduced.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
-    if (prefersReduced.current || !videoSrc || !isDesktop) return;
-    const id = window.requestIdleCallback
-      ? window.requestIdleCallback(() => setShouldMountVideo(true), { timeout: 1200 })
-      : window.setTimeout(() => setShouldMountVideo(true), 600);
-    return () => {
-      if (typeof id === 'number') window.clearTimeout(id);
-      else window.cancelIdleCallback?.(id as unknown as number);
-    };
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced || !videoSrc) return;
+    const el = containerRef.current;
+    if (!el) return;
+    if (!('IntersectionObserver' in window)) {
+      setShouldMountVideo(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setShouldMountVideo(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, [videoSrc]);
 
   return (
     <div className={`mx-auto ${maxWidthClass}`}>
       <div
+        ref={containerRef}
         className="relative overflow-hidden rounded-3xl bg-inkRise ring-1 ring-black shadow-[0_30px_80px_-30px_rgba(0,0,0,0.6)]"
         style={{ aspectRatio: aspect }}
       >
