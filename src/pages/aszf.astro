@@ -17,6 +17,7 @@ const config = {
   address: '1143 Budapest, Egressy út 16.',
   fullName: 'Pecze-Kovács Fruzsina E.V.',
   taxNumber: '91311670-1-42',
+  registrationNumber: '60862950',
 };
 ---
 
@@ -53,6 +54,7 @@ const config = {
               <tbody>
                 <tr><td>Cégnév / vállalkozó neve</td><td>{config.fullName}</td></tr>
                 <tr><td>Adószám</td><td>{config.taxNumber}</td></tr>
+                <tr><td>Nyilvántartási szám</td><td>{config.registrationNumber}</td></tr>
                 <tr><td>Székhely / szalon címe</td><td>{config.address}</td></tr>
                 <tr><td>E-mail</td><td><a href={`mailto:${config.email}`}>{config.email}</a></td></tr>
                 <tr><td>Telefon</td><td><a href={`tel:${config.phone}`}>{config.phoneDisplay}</a></td></tr>

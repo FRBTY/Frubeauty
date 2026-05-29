@@ -202,12 +202,6 @@ const config = { ...siteConfig };
                 <span class="inline-block text-[11px] uppercase tracking-caps text-gold border border-gold/30 rounded-full px-4 py-1.5 mb-6">{svc.eyebrow}</span>
                 <h3 class="font-display font-light leading-[1.05] tracking-tight text-cream" style="font-size: clamp(1.75rem, 3.6vw, 2.75rem);">{svc.title} <em class="display">{svc.titleAccent}</em><br />{svc.titleSuffix}</h3>
                 <p class="mt-5 text-creamSoft leading-[1.7] max-w-[52ch]">{svc.description}</p>
-                {svc.warning && (
-                  <div class="mt-6 inline-flex items-start gap-3 rounded-2xl bg-gold/10 border border-gold/30 px-4 py-3.5 animate-in fade-in slide-in-from-bottom-2 duration-700">
-                    <span class="flex-shrink-0 text-xl mt-0.5" aria-hidden>⚠</span>
-                    <p class="text-sm text-creamSoft leading-snug max-w-[40ch]">{svc.warning}</p>
-                  </div>
-                )}
                 <ul class="mt-7 space-y-3.5 max-w-[52ch]">
                   {svc.bullets.map((b) => (
                     <li class="flex items-start gap-3 py-2 border-b border-whisper last:border-b-0">
@@ -221,6 +215,9 @@ const config = { ...siteConfig };
                 <p class="mt-8 text-[11px] uppercase tracking-caps text-creamMute">{svc.duration}</p>
                 <p class="mt-3"><span class="font-display text-3xl sm:text-4xl font-medium tracking-tight text-cream">{svc.price}</span><span class="text-sm text-creamMute ml-2">· {svc.priceSuffix}</span></p>
                 <div class="mt-7"><MagneticCTA client:load href={config.booking} external variant="primary">Időpontot foglalok</MagneticCTA></div>
+                {svc.warning && (
+                  <p class="mt-4 text-[11px] text-creamMute/60 leading-snug max-w-[44ch]">* {svc.warning}</p>
+                )}
               </div>
             </div>
           </Reveal>
