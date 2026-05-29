@@ -36,7 +36,6 @@ const rootClass = `lamp-root relative flex flex-col items-center justify-center 
 
     <!-- Blur mask behind the beam -->
     <div class="absolute top-1/2 h-48 w-full translate-y-12 scale-x-150 bg-ink blur-2xl"></div>
-    <div class="absolute top-1/2 z-50 h-48 w-full bg-transparent opacity-10 backdrop-blur-md"></div>
 
     <!-- Gold glow bulb -->
     <div class="absolute inset-auto z-50 h-36 w-[28rem] -translate-y-1/2 rounded-full bg-gold opacity-40 blur-3xl"></div>
@@ -58,30 +57,25 @@ const rootClass = `lamp-root relative flex flex-col items-center justify-center 
 </div>
 
 <style>
-  @keyframes lampConeExpand {
-    from { width: 15rem; opacity: 0.5; }
-    to   { width: 30rem; opacity: 1; }
-  }
-  @keyframes lampBulbExpand {
-    from { width: 8rem; }
-    to   { width: 16rem; }
-  }
-  @keyframes lampRailExpand {
-    from { width: 15rem; }
-    to   { width: 30rem; }
+  /* A belépő animáció opacity-fade (kompozitált) — NEM width-et animál, ami
+     minden képkockán layoutot kényszerítene a hero kritikus festési ablakában.
+     A lámpa a végső méretén renderel, csak finoman beúszik. */
+  @keyframes lampFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
   }
 
   .lamp-cone-left,
   .lamp-cone-right {
     width: 30rem;
     opacity: 1;
-    animation: lampConeExpand 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+    animation: lampFadeIn 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
   }
   .lamp-bulb {
-    animation: lampBulbExpand 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+    animation: lampFadeIn 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
   }
   .lamp-rail {
-    animation: lampRailExpand 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+    animation: lampFadeIn 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -12,6 +12,10 @@ interface HeroMediaProps {
  * Hero media — vertical video first, image fallback.
  * Parallax removed: eliminated useTransform/useScroll framer-motion chunk from
  * the critical request chain. Result: use-transform.js no longer in LCP path.
+ *
+ * Mobilon NEM töltjük le a ~1.3MB hero videót: csak a poster kép jelenik meg.
+ * A videó kizárólag desktopon (lg+, >=1024px) mountol, így mobilon nem terheli
+ * a sávszélességet a kritikus betöltési ablakban (PC élmény változatlan).
  */
 export function HeroMedia({
   videoSrc,
@@ -26,7 +30,8 @@ export function HeroMedia({
 
   useEffect(() => {
     prefersReduced.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced.current || !videoSrc) return;
+    const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+    if (prefersReduced.current || !videoSrc || !isDesktop) return;
     const id = window.requestIdleCallback
       ? window.requestIdleCallback(() => setShouldMountVideo(true), { timeout: 1200 })
       : window.setTimeout(() => setShouldMountVideo(true), 600);
