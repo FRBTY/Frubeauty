@@ -3,8 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import { AnnouncementBar } from '../components/AnnouncementBar';
 import { NavBar } from '../components/NavBar';
 import { HeroMedia } from '../components/HeroMedia';
-import { MagneticCTA } from '../components/MagneticCTA';
 import { Reveal } from '../components/Reveal';
+import LampStatic from '../components/ui/LampStatic.astro';
 import { ServicesGrid } from '../components/ServicesGrid';
 import { AudienceList } from '../components/AudienceList';
 import { ProcessSteps } from '../components/ProcessSteps';
@@ -13,9 +13,9 @@ import { GalleryGrid } from '../components/GalleryGrid';
 import { FAQ } from '../components/FAQ';
 import { CookieBanner } from '../components/CookieBanner';
 import { BlogSection } from '../components/BlogSection';
-import { LampContainer } from '../components/ui/lamp';
 import { getCollection } from 'astro:content';
 import { siteConfig, openingHours, recencyProof } from '../config/site';
+import SiteFooter from '../components/SiteFooter.astro';
 
 // Pull the 3 most recent published posts so the homepage stays in sync with
 // the content collection — adding a new .md to src/content/blog/ updates this
@@ -35,13 +35,14 @@ const homepagePosts = allBlogPosts
   }));
 
 // Single source of truth — minden contact/booking adatot a siteConfig kezel.
-// Korábbi lokális `config = {...}` duplikáció törölve (#audit secondary).
-const config = siteConfig;
+// Spread: siteConfig as const literal-type → widened string type for JSX attrs.
+// (Astro 5 + esbuild strict mode nem kezeli jól a literal string types-t JSX href-ekben.)
+const config = { ...siteConfig };
 
 const services = [
-  { title: 'Arckezelés', subtitle: 'Janssen Cosmetics hatóanyagokkal', body: 'Bőrtípusra szabott kezelés: regeneráló, hidratáló vagy mélytisztító. Az első alkalommal bőranalízissel kezdünk.', priceFrom: '11 000 Ft-tól', duration: '60–90 perc', href: '/arckezeles-zuglo', image: '/img/service-arckezeles.jpg', alt: 'Arckezelés Janssen Cosmetics termékekkel a FRUBEAUTY szalonban' },
-  { title: 'Szempilla & szemöldök', subtitle: 'Lifting, festés, laminálás', body: 'Természetes, 6–8 hétig tartó eredmény. Reggel nincs többé szempillaspirál és szemöldökceruza.', priceFrom: '11 000 Ft-tól', duration: '60–120 perc', href: '/szempilla-lifting-zuglo', image: '/img/szempilla-szemoldok-hero.jpg', alt: 'Szempilla lifting és szemöldök laminálás előtte-utána' },
-  { title: 'Smink', subtitle: 'Esküvő, ballagás, fotózás', body: 'Próbasmink, helyszíni igazítás, hosszan tartó eredmény. A stílust együtt találjuk ki.', priceFrom: '13 000 Ft-tól', duration: '60–90 perc', href: '/sminkes-zuglo', image: '/img/smink-menyasszony-munka.jpg', alt: 'Alkalmi esküvői smink a FRUBEAUTY szalonban' },
+  { title: 'Arckezelés', subtitle: 'Janssen Cosmetics hatóanyagokkal', body: 'Bőrtípusra szabott kezelés: regeneráló, hidratáló vagy mélytisztító. Az első alkalommal bőranalízissel kezdünk.', priceFrom: '11 000 Ft-tól', duration: '60–90 perc', href: '/arckezeles-zuglo', image: '/img/service-arckezeles.webp', alt: 'Arckezelés Janssen Cosmetics termékekkel a FRUBEAUTY szalonban' },
+  { title: 'Szempilla & szemöldök', subtitle: 'Lifting, festés, laminálás', body: 'Természetes, 6–8 hétig tartó eredmény. Reggel nincs többé szempillaspirál és szemöldökceruza.', priceFrom: '11 000 Ft-tól', duration: '60–120 perc', href: '/szempilla-lifting-zuglo', image: '/img/szempilla-szemoldok-hero.webp', alt: 'Szempilla lifting és szemöldök laminálás előtte-utána' },
+  { title: 'Smink', subtitle: 'Esküvő, ballagás, fotózás', body: 'Próbasmink, helyszíni igazítás, hosszan tartó eredmény. A stílust együtt találjuk ki.', priceFrom: '13 000 Ft-tól', duration: '60–90 perc', href: '/sminkes-zuglo', image: '/img/smink-menyasszony-munka.webp', alt: 'Alkalmi esküvői smink a FRUBEAUTY szalonban' },
 ];
 
 // Aspirational / future-self framing (#audit #3) — pain-first helyett identitás-építés.
@@ -78,40 +79,61 @@ const faqs = [
   { q: 'Le lehet mondani az időpontot?', a: 'Igen, 24 órával az időpont előtt bármikor díjmentesen.' },
 ];
 
-const openingHours = [
-  { day: 'Hétfő',     hours: '08:30 – 19:30' },
-  { day: 'Kedd',      hours: '08:30 – 19:30' },
-  { day: 'Szerda',    hours: '08:30 – 19:30' },
-  { day: 'Csütörtök', hours: '08:30 – 19:30' },
-  { day: 'Péntek',    hours: '08:30 – 19:30' },
-  { day: 'Szombat',   hours: '08:00 – 13:00' },
-  { day: 'Vasárnap',  hours: 'Zárva' },
+const galleryImages = [
+  '/img/szempilla-lifting-budapest-egressy-ut-zuglo.webp',
+  '/img/szemoldok-laminalas-szempilla-lifting-budapest-egressy-ut-munka.webp',
+  '/img/smink-menyasszonyi-zuglo-14-kerulet-egressy-ut.webp',
+  '/img/smink-kismama-fotozas-budapest-egressy-ut.webp',
 ];
 
-const galleryImages = [
-  '/img/szempilla-lifting-budapest-egressy-ut-zuglo.jpg',
-  '/img/szemoldok-laminalas-szempilla-lifting-budapest-egressy-ut-munka.jpg',
-  '/img/smink-menyasszonyi-zuglo-14-kerulet-egressy-ut.jpg',
-  '/img/smink-kismama-fotozas-budapest-egressy-ut.jpg',
+// SEO: per-kép alt szövegek a főoldali galériához — kulcsszavas, leíró
+const galleryAlts = [
+  'Szempilla lifting eredmény — FRUBEAUTY Zugló, Egressy út',
+  'Szemöldök laminálás és szempilla lifting munka — FRUBEAUTY Budapest',
+  'Menyasszonyi smink Zugló — FRUBEAUTY XIV. kerület, Egressy út',
+  'Kismama fotózás smink Budapest — FRUBEAUTY Zugló',
 ];
+
+// SEO: FAQPage schema a főoldali GYIK szekcióhoz → featured snippet esély
+const homepageFaqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a,
+    },
+  })),
+};
 ---
 
-<Layout>
+<Layout
+  title="Kozmetika Zugló — ★5,0 · 40+ Vélemény | Arckezelés, Szempilla Lifting | FRUBEAUTY"
+  description="★5,0 · 40+ Google-értékelés · Janssen arckezelés, szempilla lifting, szemöldök laminálás Zuglóban. 11.000 Ft-tól → Foglalj most!"
+  additionalSchemas={[homepageFaqSchema]}
+  preloadImage="/media/hero-poster.webp"
+>
   {/* AnnouncementBar + NavBar share a fixed top container so they stack visually
       and dismiss-collapse happens in the same flow (no z-index fight). */}
   <div class="fixed top-0 inset-x-0 z-50">
     <AnnouncementBar
-      client:load
+      client:idle
       enabled={recencyProof.enabled}
       dailyRandomRange={[2, 5]}
     />
-    <NavBar client:load bookingUrl={config.booking} instagram={config.instagram} facebook={config.facebook} />
+    <NavBar client:visible bookingUrl={config.booking} instagram={config.instagram} facebook={config.facebook} />
   </div>
 
-  {/* ============ HERO with Lamp ============ */}
+  {/* ============ HERO with Lamp ============
+      LampStatic: CSS-only Astro component — eliminates lamp.js (7.62 KiB) from
+      critical request chain. MagneticCTA replaced with static <a> tags — eliminates
+      MagneticCTA.js + use-transform.js (2212ms chain). HeroMedia client:idle so
+      the poster <img> is pure SSR HTML with no hydration dependency for LCP. */}
   <section class="relative overflow-hidden pt-44 sm:pt-52">
-    <LampContainer client:visible className="!min-h-[88vh] sm:!min-h-[92vh]">
-      <Reveal client:visible as="div" className="text-center max-w-[920px] mx-auto" distance={20}>
+    <LampStatic>
+      <div class="hero-reveal text-center max-w-[920px] mx-auto">
         <p class="text-[11px] sm:text-xs uppercase tracking-caps text-black mb-5 sm:mb-7">
           FRUBEAUTY · Zugló, XIV. kerület
         </p>
@@ -124,13 +146,23 @@ const galleryImages = [
         <p class="mt-6 sm:mt-8 text-base sm:text-lg text-creamSoft max-w-[58ch] mx-auto leading-[1.65] sm:leading-[1.7]">
           Személyre szabott arckezelések, tartós szempilla- és szemöldökformázás, valamint alkalmi sminkek, amelyek kiemelik a természetes szépséged.
         </p>
+
+        {/* Static CTAs — no JS, no hydration. */}
         <div class="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
-          <MagneticCTA client:visible href={config.booking} external variant="primary">
+          <a
+            href={config.booking}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200"
+          >
             Időpontot foglalok
-          </MagneticCTA>
-          <MagneticCTA client:visible href="#szolgaltatasok" variant="secondary">
+          </a>
+          <a
+            href="#szolgaltatasok"
+            class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200"
+          >
             Megnézem az árakat
-          </MagneticCTA>
+          </a>
         </div>
 
         <div class="mt-8 sm:mt-9 flex items-center justify-center gap-5 text-[12px] uppercase tracking-caps text-creamMute">
@@ -150,21 +182,18 @@ const galleryImages = [
             Facebook
           </a>
         </div>
-      </Reveal>
-    </LampContainer>
+      </div>
+    </LampStatic>
 
-    {/* Video pulled outside Lamp — sits below it in clean dark canvas */}
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 -mt-16 sm:-mt-20 pb-16 sm:pb-20">
-      <Reveal client:visible as="div" distance={20}>
-        <HeroMedia
-          client:visible
-          videoSrc="/media/hero.mp4"
-          posterSrc="/media/hero-poster.jpg"
-          alt="Pecze-Kovács Fruzsina szempilla lifting és szemöldök laminálás munka közben — FRUBEAUTY Zugló"
-          aspect="9 / 16"
-          maxWidthClass="max-w-[380px]"
-        />
-      </Reveal>
+      <HeroMedia
+        client:idle
+        videoSrc="/media/hero.mp4"
+        posterSrc="/media/hero-poster.webp"
+        alt="Pecze-Kovács Fruzsina szempilla lifting és szemöldök laminálás munka közben — FRUBEAUTY Zugló"
+        aspect="9 / 16"
+        maxWidthClass="max-w-[380px]"
+      />
     </div>
   </section>
 
@@ -247,10 +276,12 @@ const galleryImages = [
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <Reveal client:visible as="div" className="lg:col-span-5 lg:order-2">
-          <div class="aspect-[4/5] overflow-hidden rounded-2xl bg-inkRise ring-1 ring-whisperStrong">
+          <div class="aspect-[4/5] overflow-hidden rounded-2xl bg-inkRise ring-1 ring-black">
             <img
-              src="/img/pecze-kovacs-fruzsina-zuglo-kozmetikus.jpg"
+              src="/img/pecze-kovacs-fruzsina-zuglo-kozmetikus.webp"
               alt="Pecze-Kovács Fruzsina, a FRUBEAUTY alapítója a szalonban"
+              width="800"
+              height="1000"
               class="w-full h-full object-cover"
               loading="lazy"
             />
@@ -308,7 +339,7 @@ const galleryImages = [
         </h2>
         <p class="mt-4 text-sm text-creamMute">Kattints a képekre a teljes nézethez</p>
       </Reveal>
-      <GalleryGrid client:visible count={4} images={galleryImages} />
+      <GalleryGrid client:visible count={4} images={galleryImages} alts={galleryAlts} />
       <Reveal client:visible as="div" className="mt-12 text-center" delay={0.1}>
         <a
           href={config.instagram}
@@ -370,13 +401,13 @@ const galleryImages = [
             Online foglalási rendszer 0–24 órában, válaszadás munkanapokon pár órán belül.
           </p>
           <div class="mt-9 flex flex-wrap gap-3">
-            <MagneticCTA client:visible href={config.booking} external variant="on-dark-primary">
+            <a href={config.booking} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">
               Időpontot foglalok
-            </MagneticCTA>
+            </a>
             <a
               href={`tel:${config.phone}`}
               class="inline-flex items-center justify-center px-6 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-cream text-ink rounded-full hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-150 gap-2"
-              aria-label={`Hívás most: ${config.phoneDisplay}`}
+              aria-label={`Hívj most! ${config.phoneDisplay}`}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden>
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
@@ -401,7 +432,7 @@ const galleryImages = [
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                 <circle cx="12" cy="10" r="3" />
               </svg>
-              Útvonaltervezés →
+              Útvonaltervezés <span aria-hidden="true">→</span>
             </a>
           </div>
 
@@ -465,36 +496,13 @@ const galleryImages = [
   </section>
 
 
-  {/* ============ FOOTER ============ */}
-  <footer class="bg-inkDeep text-creamMute border-t border-whisper">
-    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10 flex flex-wrap items-center justify-between gap-6">
-      <div>
-        <p class="font-display text-lg text-cream tracking-tight">FRUBEAUTY</p>
-        <p class="text-xs mt-1">© {new Date().getFullYear()} Pecze-Kovács Fruzsina e.v. · Minden jog fenntartva</p>
-      </div>
-      <div class="flex items-center gap-5 text-[12px] uppercase tracking-caps">
-        <a href={config.instagram} target="_blank" rel="noopener" class="hover:text-cream transition-colors" aria-label="Instagram">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden class="inline-block align-middle">
-            <rect x="3" y="3" width="18" height="18" rx="5" />
-            <circle cx="12" cy="12" r="4" />
-            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-          </svg>
-        </a>
-        <a href={config.facebook} target="_blank" rel="noopener" class="hover:text-cream transition-colors" aria-label="Facebook">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden class="inline-block align-middle">
-            <path d="M22 12.07C22 6.51 17.52 2 12 2S2 6.51 2 12.07c0 5.02 3.66 9.18 8.44 9.93v-7.02H7.9v-2.91h2.54V9.83c0-2.52 1.49-3.91 3.78-3.91 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.77l-.44 2.91h-2.33V22c4.78-.75 8.43-4.91 8.43-9.93Z"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-  </footer>
+  <SiteFooter />
 
   <div class="py-10 text-center border-t border-whisper">
-    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="inline-flex items-center gap-2 text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors duration-200">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
+    <a href="#" id="scroll-top-btn" class="inline-flex items-center gap-2 text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors duration-200">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
       Vissza az oldal tetejére
-    </button>
+    </a>
   </div>
-
-  <CookieBanner client:load />
-</Layout>
+  <script is:inline>
+    document.getElementById('scroll-top-btn').addEv

@@ -6,25 +6,39 @@ export interface Props {
   description?: string;
   image?: string;
   canonical?: string;
+  /** Above-the-fold LCP image to preload. Pass undefined on text-led pages so
+      we don't waste mobile bandwidth preloading an image that isn't the LCP. */
+  preloadImage?: string;
+  /** Extra JSON-LD schema objects (FAQPage, Service stb.) az adott aloldalhoz.
+      A Layout a <head>-ben rendereli őket a globális businessSchema után. */
+  additionalSchemas?: object[];
 }
 
 const {
-  title = 'FRUBEAUTY — Kozmetika és smink Zuglóban | Pecze-Kovács Fruzsina',
-  description = `Pihentető arckezelés Janssen hatóanyagokkal, természetes szempilla-lift, szemöldök-laminálás és személyre szabott smink. Bejelentkezés online, ${siteConfig.postalCode} Budapest, ${siteConfig.streetAddress}`,
+  title = 'Kozmetika és smink Zuglóban — FRUBEAUTY | Pecze-Kovács',
+  description = `Arckezelés Janssen hatóanyagokkal, szempilla-lift, szemöldök-laminálás és személyre szabott smink Zuglóban. Online foglalás — ${siteConfig.postalCode} Budapest, ${siteConfig.streetAddress}`,
   image = '/og-image.jpg',
   canonical = Astro.url.href,
+  preloadImage,
+  additionalSchemas = [],
 } = Astro.props;
+
+// OG/Twitter image-nek abszolút URL kell — Facebook és Twitter nem követi a
+// relatív útvonalakat. Ha az image már http/https-sel kezdődik, marad úgy.
+const absoluteOgImage = image.startsWith('http')
+  ? image
+  : `https://frubeauty.com${image}`;
 
 const businessSchema = {
   '@context': 'https://schema.org',
   '@type': 'BeautySalon',
-  name: 'FRUBEAUTY',
+  name: 'FRUBEAUTY – Pecze-Kovács Fruzsina',
   image: 'https://frubeauty.com/og-image.jpg',
   '@id': 'https://frubeauty.com',
   url: 'https://frubeauty.com',
   telephone: siteConfig.phone,
   email: siteConfig.email,
-  priceRange: '$$',
+  priceRange: '11000-26000 Ft',
   address: {
     '@type': 'PostalAddress',
     streetAddress: siteConfig.streetAddress,
@@ -43,11 +57,22 @@ const businessSchema = {
     opens: h.opens,
     closes: h.closes,
   })),
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5.0',
+    reviewCount: '40',
+    bestRating: '5',
+    worstRating: '1',
+  },
   sameAs: [siteConfig.instagram, siteConfig.facebook],
 };
 
 const hasGA4 = analytics.ga4Id && analytics.ga4Id.length > 0;
 const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
+const hasGoogleAds = analytics.googleAdsId && analytics.googleAdsId.length > 0;
+// Az elsődleges gtag script forrása: ha GA4 van, azt töltjük be (és aztán config-oljuk az Ads-t is);
+// ha csak Ads van, akkor az Ads ID-t használjuk loader ID-ként.
+const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googleAdsId : '');
 ---
 
 <!doctype html>
@@ -58,8 +83,9 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#1A1410" />
     <link rel="canonical" href={canonical} />
-    <link rel="preload" as="image" href="/media/hero-poster.jpg" />
-    <link rel="preload" as="video" href="/media/hero.mp4" />
+    {preloadImage && (
+      <link rel="preload" as="image" href={preloadImage} type="image/webp" fetchpriority="high" />
+    )}
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
@@ -68,42 +94,53 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
     <meta property="og:locale" content="hu_HU" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={absoluteOgImage} />
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Geist:wght@400;500;600&display=swap"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Geist:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="twitter:image" content={absoluteOgImage} />
     <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
+    {additionalSchemas.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
+    {primaryGtagId && (
+      <script is:inline define:vars={{
+        ga4Id: analytics.ga4Id,
+        googleAdsId: analytics.googleAdsId,
+        hasGA4,
+        hasGoogleAds,
+        primaryGtagId,
+      }}>
+        // A gtag stub azonnal definiálódik, így a config + a konverziós események
+        // queue-olnak a dataLayer-be. A nehéz gtag.js letöltést viszont leszedjük a
+        // kritikus útvonalról (mobil PSI) — első interakcióra vagy idle-re töltjük be.
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ window.dataLayer.push(arguments); }
+        window.gtag = gtag;
+        gtag('js', new Date());
+        if (hasGA4)       gtag('config', ga4Id, { send_page_view: true });
+        if (hasGoogleAds) gtag('config', googleAdsId);
 
-    {/* ============ ANALYTICS (csak ha siteConfig-ban van ID) ============
-        A GA4 + Meta Pixel scriptek FELTÉTELESEN inject-elődnek, kizárólag
-        akkor, ha a site.ts-ben van valódi mérési azonosító. Default üres →
-        zéró tracking script töltődik be, így a sebesség/Privacy nem sérül. */}
-    {hasGA4 && (
-      <>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${analytics.ga4Id}`}></script>
-        <script is:inline define:vars={{ ga4Id: analytics.ga4Id }}>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){ window.dataLayer.push(arguments); }
-          window.gtag = gtag;
-          gtag('js', new Date());
-          gtag('config', ga4Id, { send_page_view: true });
-        </script>
-      </>
+        // A nehéz gtag.js letöltést az első valódi felhasználói interakcióhoz
+        // kötjük (scroll/tap/billentyű) — így a kód NEM kerül a kritikus betöltési
+        // ablakba (mobil PSI: nincs third-party parse a mért TBT-ben). Valódi
+        // látogató mindig interaktál (legalább görget) → követés és konverzió-
+        // mérés továbbra is működik (a stub queue-olja a parancsokat addig is).
+        var gtagLoaded = false;
+        var opts = { once: true, passive: true, capture: true };
+        var events = ['pointerdown', 'mousemove', 'touchstart', 'keydown', 'scroll', 'wheel'];
+        function loadGtag() {
+          if (gtagLoaded) return;
+          gtagLoaded = true;
+          events.forEach(function (e) { window.removeEventListener(e, loadGtag, opts); });
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + primaryGtagId;
+          document.head.appendChild(s);
+        }
+        events.forEach(function (e) { window.addEventListener(e, loadGtag, opts); });
+      </script>
     )}
     {hasPixel && (
       <script is:inline define:vars={{ pixelId: analytics.metaPixelId }}>
@@ -121,13 +158,15 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
     )}
   </head>
   <body class="bg-ink text-creamSoft font-body antialiased selection:bg-gold selection:text-ink">
-    <slot />
-
-    {/* ============ GLOBAL BOOKING CTA TRACKER ============
-        Minden olyan link, ami a Notino-foglalási domain-re mutat, automatikusan
-        UTM-paramétert kap (forrás = az aktuális oldal path-je), és kattintáskor
-        eseményt tüzel a GA4-be és a Meta Pixel-be — feltéve hogy az ID-k be
-        vannak állítva. Nulla refaktor a komponensekben: csak href-egyezés kell. */}
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-3 focus:left-3 focus:px-4 focus:py-2 focus:rounded-full focus:bg-gold focus:text-ink focus:text-sm focus:font-medium"
+    >
+      Ugrás a tartalomra
+    </a>
+    <main id="main-content" tabindex="-1" class="outline-none">
+      <slot />
+    </main>
     <script is:inline>
       (function () {
         var BOOKING_HOST = 'notino.hu';
@@ -158,26 +197,128 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
         function fireEvents() {
           try { if (window.gtag) window.gtag('event', 'book_click', { event_category: 'cta', event_label: pathSegment() }); } catch (e) {}
           try { if (window.fbq) window.fbq('track', 'InitiateCheckout'); } catch (e) {}
+          // Google Ads konverzió mérés — "Időpontfoglalás" esemény
+          try {
+            if (window.gtag) {
+              window.gtag('event', 'conversion', {
+                'send_to': 'AW-17992123771/LHaBCP_fj6McEPuKqIND',
+                'value': 12500.0,
+                'currency': 'HUF',
+                'event_callback': function() {}
+              });
+            }
+          } catch (e) {}
         }
-        // Decorate now and re-run on DOMContentLoaded for React-island links.
-        decorate();
-        document.addEventListener('DOMContentLoaded', decorate);
+        // A konverzió-mérés közvetlenül a booking-host linkre köt — független a
+        // decorate() futásától, így mindig tűz, akkor is, ha a linket egy React
+        // sziget hidratálta be a decorate után.
         document.addEventListener('click', function (ev) {
-          var t = ev.target instanceof Element ? ev.target.closest('a[data-book-cta]') : null;
+          var t = ev.target instanceof Element ? ev.target.closest('a[href*="' + BOOKING_HOST + '"]') : null;
           if (!t) return;
           fireEvents();
         }, true);
-        // Re-decorate when SPA-style nav or hydration adds new links.
-        new MutationObserver(function () { decorate(); })
-          .observe(document.body, { childList: true, subtree: true });
+
+        // decorate() bounded futtatása — NINCS perzisztens MutationObserver, ami
+        // minden DOM-mutációnál teljes querySelectorAll-t (forced reflow) hajtana
+        // végre a szigetek hidratálása közben. A statikus linkeket azonnal, a
+        // szigetekbe renderelteket pedig a hidratálás lecsengése után dekoráljuk.
+        decorate();
+        document.addEventListener('DOMContentLoaded', decorate);
+        window.addEventListener('load', decorate);
+        if (window.requestIdleCallback) window.requestIdleCallback(decorate, { timeout: 2500 });
+        else window.setTimeout(decorate, 1800);
       })();
     </script>
 
     <style is:global>
+      /* Metric-matched fallback for Fraunces (computed from Georgia via capsize):
+         the headline is laid out in this fallback at the exact same box size, so
+         when the real Fraunces swaps in there is no reflow → no CLS. This lets us
+         drop the render-competing font preloads and give the LCP image full
+         bandwidth on mobile. */
+      @font-face {
+        font-family: 'Fraunces Fallback';
+        src: local('Georgia'), local('Times New Roman');
+        size-adjust: 116.2%;
+        ascent-override: 84.17%;
+        descent-override: 21.95%;
+        line-gap-override: 0%;
+      }
+      /* Metrika-illesztett tartalék a Geist body fonthoz (Arial-ra kalibrálva,
+         @capsizecss/unpack-kal számolva). A doboz mérete azonos a Geist-tel, így
+         a font-swap NEM okoz reflow-t / CLS-t — fontos, mert a hero LCP bekezdés
+         a body fontot használja és azonnal (opacity 1) festődik. */
+      @font-face {
+        font-family: 'Geist Fallback';
+        src: local('Arial');
+        size-adjust: 105.8%;
+        ascent-override: 94.99%;
+        descent-override: 27.88%;
+        line-gap-override: 0%;
+      }
+      @font-face {
+        font-family: 'Fraunces';
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: optional;
+        src: url('/fonts/fraunces-latin-ext-normal.woff2') format('woff2');
+        unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+      }
+      @font-face {
+        font-family: 'Fraunces';
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: optional;
+        src: url('/fonts/fraunces-latin-normal.woff2') format('woff2');
+        unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+      }
+      /* Fraunces italic @font-face SZÁNDÉKOSAN eltávolítva: a két italic fájl
+         ~152 KiB volt, VeryHigh prioritással töltött a kritikus ablakban, csak a
+         display headingek <em> kiemeléséhez (pl. a hero "bőrrel" szó). Helyette a
+         böngésző szintetikus dőltet rajzol a már betöltött normal Fraunces-ből
+         (font-synthesis: style, alapból engedélyezett) — a kinézet gyakorlatilag
+         azonos, de 152 KiB-tal kevesebb tölt a mobil kritikus útban. */
+      @font-face {
+        font-family: 'Geist';
+        font-style: normal;
+        font-weight: 400;
+        font-display: optional;
+        src: url('/fonts/geist-400.woff2') format('woff2');
+        unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+      }
+      @font-face {
+        font-family: 'Geist';
+        font-style: normal;
+        font-weight: 500;
+        font-display: optional;
+        src: url('/fonts/geist-500.woff2') format('woff2');
+        unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+      }
+      @font-face {
+        font-family: 'Geist';
+        font-style: normal;
+        font-weight: 600;
+        font-display: optional;
+        src: url('/fonts/geist-600.woff2') format('woff2');
+        unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+      }
+
       :root {
         --ease-out-strong:    cubic-bezier(0.23, 1, 0.32, 1);
         --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
         --ease-drawer:        cubic-bezier(0.32, 0.72, 0, 1);
+      }
+
+      /* A hosszú landing oldalon a böngésző alapból az ÖSSZES szekciót
+         layoutolja az első festés előtt (~900ms Style & Layout mobilon, ami a
+         szimulált FCP/LCP-t felhúzza). A content-visibility:auto kihagyja a
+         képernyőn kívüli szekciók render/layout költségét, amíg a felhasználó
+         oda nem görget. A contain-intrinsic-size (auto + becsült magasság)
+         fenntartja a görgetősáv arányát, így nincs elcsúszás. A hero (első
+         section) mindig azonnal renderel. */
+      main > section:not(:first-of-type) {
+        content-visibility: auto;
+        contain-intrinsic-size: auto 700px;
       }
 
       .font-display {
@@ -185,7 +326,6 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
         font-variation-settings: 'SOFT' 30, 'opsz' 144;
       }
 
-      /* Italic on display = the "tökéletes" emphasis style */
       .font-display em, em.display {
         font-style: italic;
         font-variation-settings: 'SOFT' 50, 'opsz' 144;
@@ -218,18 +358,32 @@ const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
         border-radius: 6px;
       }
 
-      /* Trust bar fade-in — zero-JS first impression.
-         Ha a JS lassan tölt, a CSS már bemutatta a contentet. */
-      .zero-js-fade {
-        opacity: 1;
-        animation: zeroJsFade 600ms var(--ease-out-strong) both;
+      /* A hero-reveal CSAK transform-ot animál (opacity végig 1), így a Chrome az
+         LCP-t a legelső festéskor regisztrálja — nincs opacity-fade okozta LCP
+         késleltetés. A font-swap CLS-t a font-display:optional + a metrika-
+         illesztett tartalék fontok (Fraunces/Geist Fallback) szüntetik meg:
+         ha a webfont nem ér be ~100ms alatt, a tartalék marad a látogatásra
+         (nincs swap → nincs reflow), a font cache-elve a következő látogatásra. */
+      @keyframes heroFadeUp {
+        from { transform: translateY(12px); }
+        to   { transform: translateY(0); }
       }
+      .hero-reveal {
+        animation: heroFadeUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .hero-reveal { animation: none; opacity: 1; }
+      }
+
       @keyframes zeroJsFade {
         from { opacity: 0; transform: translateY(8px); }
         to   { opacity: 1; transform: translateY(0); }
       }
+      .zero-js-fade {
+        animation: zeroJsFade 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0.15s both;
+      }
       @media (prefers-reduced-motion: reduce) {
-        .zero-js-fade { animation: none; }
+        .zero-js-fade { animation: none; opacity: 1; }
       }
     </style>
   </body>

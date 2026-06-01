@@ -12,6 +12,11 @@ const CONSENT_KEY = 'frubeauty_cookie_consent_v1';
  *  - Three actions: accept all / essential only / settings link to /adatvedelem.
  *  - Decision persisted in localStorage so we don't show again.
  *
+ * Positioning:
+ *  - Mobile: full-width bar anchored to the very bottom edge (bottom-0, rounded-t-2xl)
+ *    so it sits below viewport content and cannot overlap hero CTA buttons.
+ *  - Desktop (sm+): compact card, bottom-right corner.
+ *
  * NOTE: This component only displays the banner and records the choice.
  * If you add analytics (GA4, Hotjar, etc.) later, gate them behind:
  *   window.localStorage.getItem('frubeauty_cookie_consent_v1') === 'all'
@@ -46,27 +51,24 @@ export function CookieBanner() {
     <AnimatePresence>
       {show && (
         <motion.div
-          initial={reduced ? { opacity: 0 } : { opacity: 0, y: 24 }}
+          initial={reduced ? { opacity: 0 } : { opacity: 0, y: 40 }}
           animate={reduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
-          exit={reduced ? { opacity: 0 } : { opacity: 0, y: 24 }}
-          transition={{ duration: 0.45, ease: easeOutStrong }}
+          exit={reduced ? { opacity: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.4, ease: easeOutStrong }}
           role="dialog"
           aria-labelledby="cookie-banner-title"
           aria-describedby="cookie-banner-body"
-          className="fixed bottom-4 inset-x-4 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-md z-[60] bg-inkRise text-creamSoft border border-whisperStrong rounded-2xl shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)] p-5 sm:p-6"
+          /* Mobile: full-width bottom bar, flush to screen edge — cannot overlap content above.
+             Desktop (sm+): compact card anchored bottom-right, away from page CTAs. */
+          className="fixed bottom-0 inset-x-0 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-md sm:rounded-2xl z-[60] bg-inkRise text-creamSoft border border-whisperStrong rounded-t-2xl shadow-[0_-8px_40px_-10px_rgba(0,0,0,0.5)] sm:shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)] px-5 py-5 sm:p-6"
         >
-          <h2 id="cookie-banner-title" className="font-display text-lg text-cream font-medium leading-snug">
-            Sütik a kényelmesebb böngészésért
-          </h2>
-          <p id="cookie-banner-body" className="mt-2 text-sm leading-relaxed text-creamSoft/90">
-            Az oldal működéséhez szükséges sütik mindig aktívak. A statisztikai sütik
-            (anonim látogatás-mérés) segítenek jobbá tenni az oldalt — ezekhez kérünk
-            engedélyt. Bővebben az{' '}
+          <p id="cookie-banner-body" className="text-sm leading-relaxed text-creamSoft/90">
+            Weboldalunk működéséhez elengedhetetlen, valamint a látogatottság elemzéséhez és a hirdetéseink optimalizálásához statisztikai és marketing sütiket használunk. Az „Összes elfogadása" gombbal hozzájárulsz az adatok feldolgozásához. A beállításaidat bármikor módosíthatod.{' '}
             <a href="/adatvedelem" className="underline underline-offset-2 hover:text-gold transition-colors">
-              adatvédelmi tájékoztatóban
-            </a>.
+              Részletek
+            </a>
           </p>
-          <div className="mt-5 flex flex-col sm:flex-row gap-2">
+          <div className="mt-4 flex flex-row gap-2">
             <button
               type="button"
               onClick={() => decide('all')}

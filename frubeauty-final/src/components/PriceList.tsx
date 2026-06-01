@@ -1,5 +1,6 @@
 import { StaggerGroup, StaggerItem } from './StaggerGroup';
-import { siteConfig } from '../config/site';
+import { siteConfig as _siteConfig } from '../config/site';
+const siteConfig = { ..._siteConfig };
 
 export interface PriceItem {
   name: string;
@@ -80,7 +81,7 @@ export function PriceList({ categories }: PriceListProps) {
                       className="inline-flex items-center px-4 py-2 text-[11px] uppercase tracking-caps font-semibold bg-gold text-ink rounded-full hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-150 whitespace-nowrap"
                       aria-label={`Ezt szeretném: ${item.name}`}
                     >
-                      Ezt szeretném →
+                      Ezt szeretném <span aria-hidden className="ml-1">→</span>
                     </a>
                     {item.footnote && (
                       <p className="text-[11px] text-creamMute leading-snug max-w-[28ch] text-left sm:text-right italic">

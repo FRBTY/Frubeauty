@@ -1,6 +1,4 @@
-import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { easeOutStrong } from './motion-presets';
+import { useEffect, useRef, useState } from 'react';
 
 interface NavBarProps {
   bookingUrl: string;
@@ -17,20 +15,51 @@ const navLinks = [
   { href: '/#velemenyek',             label: 'Vélemények' },
 ];
 
+/**
+ * NavBar — tiszta CSS + React state, NINCS framer-motion.
+ * A scroll-alapú elrejtés és a háttér-váltás passzív scroll listenerrel,
+ * a transzformok/áttűnések CSS transition-nel mennek (kompozitált).
+ * Így a 32 KiB motion chunk nem terheli a kritikus betöltési utat.
+ */
 export function NavBar({ bookingUrl, instagram, facebook }: NavBarProps) {
-  const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
   const [solid, setSolid] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const reduced = useReducedMotion();
+  const prevYRef = useRef(0);
+  const menuOpenRef = useRef(false);
 
-  useMotionValueEvent(scrollY, 'change', (y) => {
-    const prev = scrollY.getPrevious() ?? 0;
-    setSolid(y > 80);
-    if (menuOpen || reduced) { setHidden(false); return; }
-    if (y > 240 && y > prev) setHidden(true);
-    else if (y < prev) setHidden(false);
-  });
+  useEffect(() => { menuOpenRef.current = menuOpen; }, [menuOpen]);
+
+  useEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let ticking = false;
+
+    const evaluate = () => {
+      ticking = false;
+      const y = window.scrollY;
+      const prev = prevYRef.current;
+      setSolid(y > 80);
+      if (menuOpenRef.current || reduced) {
+        setHidden(false);
+      } else if (y > 240 && y > prev) {
+        setHidden(true);
+      } else if (y < prev) {
+        setHidden(false);
+      }
+      prevYRef.current = y;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(evaluate);
+      }
+    };
+
+    prevYRef.current = window.scrollY;
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -46,11 +75,9 @@ export function NavBar({ bookingUrl, instagram, facebook }: NavBarProps) {
 
   return (
     <>
-      <motion.header
-        initial={{ transform: 'translate3d(0,0,0)' }}
-        animate={{ transform: hidden ? 'translate3d(0,-100px,0)' : 'translate3d(0,0,0)' }}
-        transition={{ duration: 0.4, ease: easeOutStrong }}
-        className={`relative transition-[background-color,backdrop-filter,border-color] duration-300 ease-out ${
+      <header
+        style={{ transform: hidden ? 'translate3d(0,-100px,0)' : 'translate3d(0,0,0)' }}
+        className={`relative transition-[transform,background-color,backdrop-filter,border-color] duration-300 ease-strong-out motion-reduce:transition-none ${
           solid || menuOpen
             ? 'bg-ink/92 backdrop-blur-md border-b border-whisper'
             : 'bg-ink/70 backdrop-blur-sm border-b border-whisper'
@@ -134,59 +161,56 @@ export function NavBar({ bookingUrl, instagram, facebook }: NavBarProps) {
             </button>
           </div>
         </nav>
-      </motion.header>
+      </header>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={reduced ? { opacity: 0 } : { opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduced ? { opacity: 0 } : { opacity: 0, y: -20 }}
-            transition={{ duration: 0.32, ease: easeOutStrong }}
-            id="mobile-nav"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Mobil menü"
-            className="lg:hidden fixed inset-x-0 top-16 z-40 bg-ink/95 backdrop-blur-md border-b border-whisper"
+      <div
+        id="mobile-nav"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobil menü"
+        aria-hidden={!menuOpen}
+        className={`lg:hidden fixed inset-x-0 top-16 z-40 bg-ink/95 backdrop-blur-md border-b border-whisper transition-[opacity,transform] duration-300 ease-strong-out motion-reduce:transition-opacity ${
+          menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5 pointer-events-none'
+        }`}
+      >
+        <div className="max-w-[1280px] mx-auto px-5 sm:px-8 py-6 flex flex-col gap-1">
+          {navLinks.map((l) => (
+            <a
+              key={l.label}
+              href={l.href}
+              tabIndex={menuOpen ? 0 : -1}
+              onClick={() => setMenuOpen(false)}
+              className="block py-3.5 px-2 text-[14px] uppercase tracking-caps text-cream hover:text-gold border-b border-whisper last:border-0 transition-colors"
+            >
+              {l.label}
+            </a>
+          ))}
+          <a
+            href={bookingUrl}
+            target="_blank"
+            rel="noopener"
+            tabIndex={menuOpen ? 0 : -1}
+            onClick={() => setMenuOpen(false)}
+            className="mt-4 inline-flex items-center justify-center px-6 py-3.5 text-[13px] uppercase tracking-caps font-medium bg-gold text-ink rounded-full hover:bg-goldSoft transition-colors"
           >
-            <div className="max-w-[1280px] mx-auto px-5 sm:px-8 py-6 flex flex-col gap-1">
-              {navLinks.map((l) => (
-                <a
-                  key={l.label}
-                  href={l.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="block py-3.5 px-2 text-[14px] uppercase tracking-caps text-cream hover:text-gold border-b border-whisper last:border-0 transition-colors"
-                >
-                  {l.label}
-                </a>
-              ))}
-              <a
-                href={bookingUrl}
-                target="_blank"
-                rel="noopener"
-                onClick={() => setMenuOpen(false)}
-                className="mt-4 inline-flex items-center justify-center px-6 py-3.5 text-[13px] uppercase tracking-caps font-medium bg-gold text-ink rounded-full hover:bg-goldSoft transition-colors"
-              >
-                Időpontot foglalok
-              </a>
-              <div className="mt-4 flex items-center justify-center gap-3 pt-3 border-t border-whisper">
-                <a href={instagram} target="_blank" rel="noopener" aria-label="Instagram" className="w-11 h-11 inline-flex items-center justify-center rounded-full text-cream hover:text-gold border border-whisperStrong">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
-                    <rect x="3" y="3" width="18" height="18" rx="5" />
-                    <circle cx="12" cy="12" r="4" />
-                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-                  </svg>
-                </a>
-                <a href={facebook} target="_blank" rel="noopener" aria-label="Facebook" className="w-11 h-11 inline-flex items-center justify-center rounded-full text-cream hover:text-gold border border-whisperStrong">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                    <path d="M22 12.07C22 6.51 17.52 2 12 2S2 6.51 2 12.07c0 5.02 3.66 9.18 8.44 9.93v-7.02H7.9v-2.91h2.54V9.83c0-2.52 1.49-3.91 3.78-3.91 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.77l-.44 2.91h-2.33V22c4.78-.75 8.43-4.91 8.43-9.93Z"/>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            Időpontot foglalok
+          </a>
+          <div className="mt-4 flex items-center justify-center gap-3 pt-3 border-t border-whisper">
+            <a href={instagram} target="_blank" rel="noopener" aria-label="Instagram" tabIndex={menuOpen ? 0 : -1} className="w-11 h-11 inline-flex items-center justify-center rounded-full text-cream hover:text-gold border border-whisperStrong">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
+            <a href={facebook} target="_blank" rel="noopener" aria-label="Facebook" tabIndex={menuOpen ? 0 : -1} className="w-11 h-11 inline-flex items-center justify-center rounded-full text-cream hover:text-gold border border-whisperStrong">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <path d="M22 12.07C22 6.51 17.52 2 12 2S2 6.51 2 12.07c0 5.02 3.66 9.18 8.44 9.93v-7.02H7.9v-2.91h2.54V9.83c0-2.52 1.49-3.91 3.78-3.91 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.77l-.44 2.91h-2.33V22c4.78-.75 8.43-4.91 8.43-9.93Z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

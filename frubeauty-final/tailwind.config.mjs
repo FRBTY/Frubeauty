@@ -29,8 +29,8 @@ export default {
         success:  '#7A8F6D',
       },
       fontFamily: {
-        display: ['Fraunces', 'ui-serif', 'Georgia', 'serif'],
-        body: ['Geist', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['Fraunces', 'Fraunces Fallback', 'ui-serif', 'Georgia', 'serif'],
+        body: ['Geist', 'Geist Fallback', 'system-ui', '-apple-system', 'sans-serif'],
       },
       borderColor: {
         whisper:       'rgba(245, 232, 211, 0.08)',

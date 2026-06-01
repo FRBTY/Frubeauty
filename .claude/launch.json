@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "frubeauty-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "frubeauty-final", "--", "--port", "4328"],
+      "port": 4328
+    },
+    {
+      "name": "frubeauty-preview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "preview", "--prefix", "frubeauty-final", "--", "--port", "4327"],
+      "port": 4327
+    }
+  ]
+}

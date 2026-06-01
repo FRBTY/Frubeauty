@@ -1,6 +1,4 @@
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { easeOutStrong } from './motion-presets';
 
 const DISMISS_KEY = 'frubeauty_promo_dismissed_v5';
 
@@ -61,11 +59,13 @@ function incrementTodayCount(): number {
  *  - Globális delegált click-listener fogja minden `<a href*="notino">` klikket.
  *  - Ha még nincs klikk aznap → a bar NEM jelenik meg (zero-noise).
  *  - Klikk után a számláló frissül, a bar megjelenik (vagy a szám nő).
+ *
+ * Animáció: tiszta CSS grid-rows 0fr→1fr (height-auto trükk) + opacity —
+ * NINCS framer-motion, így a 32 KiB motion chunk nem kerül a kritikus útba.
  */
 export function AnnouncementBar({ enabled = true }: AnnouncementBarProps) {
   const [visible, setVisible] = useState(false);
   const [count, setCount] = useState(0);
-  const reduced = useReducedMotion();
 
   useEffect(() => {
     if (!enabled) return;
@@ -113,38 +113,33 @@ export function AnnouncementBar({ enabled = true }: AnnouncementBarProps) {
   if (!shouldShow) return null;
 
   return (
-    <AnimatePresence initial={false}>
-      {visible && (
-        <motion.div
-          initial={reduced ? { opacity: 0 } : { height: 0, opacity: 0 }}
-          animate={reduced ? { opacity: 1 } : { height: 'auto', opacity: 1 }}
-          exit={reduced ? { opacity: 0 } : { height: 0, opacity: 0 }}
-          transition={{ duration: 0.4, ease: easeOutStrong }}
-          className="relative z-[60] bg-gold text-ink overflow-hidden"
-          role="region"
-          aria-label="Friss foglalások"
-        >
-          <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-2.5 flex items-center justify-center gap-3 sm:gap-4 text-[12px] sm:text-[13px]">
-            <span className="inline-flex w-1.5 h-1.5 rounded-full bg-ink flex-shrink-0 animate-pulse" aria-hidden />
-            <p className="text-center leading-snug">
-              <span className="font-medium">Ma már {count} új foglalás érkezett.</span>
-              <span className="hidden sm:inline mx-2 opacity-60">·</span>
-              <span className="block sm:inline font-semibold mt-0.5 sm:mt-0">Foglalj te is online.</span>
-            </p>
-            <button
-              type="button"
-              onClick={dismiss}
-              aria-label="Bezárás"
-              className="ml-2 flex-shrink-0 w-7 h-7 inline-flex items-center justify-center rounded-full text-ink hover:bg-ink/15 transition-colors duration-200"
-            >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden>
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div
+      className="relative z-[60] grid transition-[grid-template-rows,opacity] duration-[400ms] ease-strong-out motion-reduce:transition-opacity"
+      style={{ gridTemplateRows: visible ? '1fr' : '0fr', opacity: visible ? 1 : 0 }}
+      role="region"
+      aria-label="Friss foglalások"
+    >
+      <div className="overflow-hidden bg-gold text-ink">
+        <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-2.5 flex items-center justify-center gap-3 sm:gap-4 text-[12px] sm:text-[13px]">
+          <span className="inline-flex w-1.5 h-1.5 rounded-full bg-ink flex-shrink-0 animate-pulse" aria-hidden />
+          <p className="text-center leading-snug">
+            <span className="font-medium">Ma már {count} új foglalás érkezett.</span>
+            <span className="hidden sm:inline mx-2 opacity-60">·</span>
+            <span className="block sm:inline font-semibold mt-0.5 sm:mt-0">Foglalj te is online.</span>
+          </p>
+          <button
+            type="button"
+            onClick={dismiss}
+            aria-label="Bezárás"
+            className="ml-2 flex-shrink-0 w-7 h-7 inline-flex items-center justify-center rounded-full text-ink hover:bg-ink/15 transition-colors duration-200"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden>
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

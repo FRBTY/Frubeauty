@@ -20,7 +20,7 @@ export function FAQ({ items }: { items: FAQItem[] }) {
               type="button"
               onClick={() => setOpenIndex(isOpen ? null : i)}
               aria-expanded={isOpen}
-              aria-controls={`faq-panel-${i}`}
+              aria-controls={isOpen ? `faq-panel-${i}` : undefined}
               className="w-full py-5 flex items-center justify-between gap-6 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-4 focus-visible:ring-offset-ink rounded-md"
             >
               <span className="font-display text-lg sm:text-xl font-medium pr-4 text-cream">

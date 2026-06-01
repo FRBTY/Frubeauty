@@ -77,8 +77,8 @@ const articleSchema = {
 ---
 
 <Layout
-  title={`${post.data.title} | FRUBEAUTY Blog`}
-  description={post.data.excerpt}
+  title={post.data.metaTitle ?? `${post.data.title} | FRUBEAUTY Blog`}
+  description={post.data.metaDescription ?? post.data.excerpt}
   image={post.data.cover}
   canonical={`https://frubeauty.com/blog/${post.data.slug ?? post.id}`}
 >
@@ -95,7 +95,7 @@ const articleSchema = {
           <span aria-hidden>·</span>
           <span>{post.data.readingMinutes} perc olvasás</span>
           <span aria-hidden>·</span>
-          <time datetime={post.data.publishedAt.toISOString()}>
+          <time itemprop="datePublished" datetime={post.data.publishedAt.toISOString()}>
             {dateFormatter.format(post.data.publishedAt)}
           </time>
         </div>
@@ -108,14 +108,23 @@ const articleSchema = {
         <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[60ch]">
           {post.data.excerpt}
         </p>
+        <address class="author byline mt-7 flex items-center gap-3 not-italic" itemprop="author" itemscope itemtype="https://schema.org/Person">
+          <span class="w-10 h-10 rounded-full bg-gold/15 text-gold flex items-center justify-center text-sm font-medium" aria-hidden>FP</span>
+          <p class="text-sm text-creamSoft">
+            Írta: <a href="/#kapcsolat" rel="author" itemprop="name" class="text-cream font-medium hover:text-gold transition-colors">Pecze-Kovács Fruzsina</a>
+            <span class="text-creamMute" itemprop="jobTitle"> — kozmetikus &amp; sminkes, Zugló</span>
+          </p>
+        </address>
       </Reveal>
     </header>
 
     <Reveal client:load as="div" className="max-w-[700px] mx-auto px-5 sm:px-8 lg:px-12 mt-12 sm:mt-16" delay={0.1} distance={20}>
-      <div class="rounded-3xl bg-inkRise ring-1 ring-whisperStrong">
+      <div class="rounded-3xl bg-inkRise ring-1 ring-black">
         <img
           src={post.data.cover}
           alt={post.data.coverAlt}
+          width={post.data.coverWidth}
+          height={post.data.coverHeight}
           class="w-full h-auto object-contain"
           loading="eager"
           fetchpriority="high"
@@ -192,6 +201,8 @@ const articleSchema = {
                   <img
                     src={p.data.cover}
                     alt={p.data.coverAlt}
+                    width="800"
+                    height="500"
                     loading="lazy"
                     class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   />
@@ -319,29 +330,36 @@ const articleSchema = {
 
   .prose-frubeauty hr {
     border: 0;
-    border-top: 1px solid rgba(245, 232, 211, 0.08);
+    border-top: 1px solid rgba(245, 232, 211, 0.12);
     margin-block: 2.5em;
   }
 
-  .prose-frubeauty code {
-    background: rgba(245, 232, 211, 0.08);
-    padding: 0.15em 0.4em;
-    border-radius: 4px;
-    font-size: 0.9em;
-  }
-
   .prose-frubeauty img {
-    width: 100%;
-    height: auto;
-    border-radius: 1.5rem;
+    border-radius: 1rem;
     margin-block: 2em;
-    box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.4);
+    max-width: 100%;
+    height: auto;
   }
 
-  /* Cover image styling for tall images like 1179x2096 */
-  [class*="rounded-3xl"] img {
-    display: block;
-    width: 100%;
-    height: auto;
+  .prose-frubeauty code {
+    font-size: 0.875em;
+    background: rgba(245, 232, 211, 0.08);
+    border-radius: 4px;
+    padding: 0.15em 0.4em;
+    color: rgb(245 232 211);
+  }
+
+  .prose-frubeauty pre {
+    background: rgba(245, 232, 211, 0.06);
+    border-radius: 0.75rem;
+    padding: 1.25em 1.5em;
+    overflow-x: auto;
+    margin-block: 1.75em;
+  }
+
+  .prose-frubeauty pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.9em;
   }
 </style>

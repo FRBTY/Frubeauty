@@ -4,8 +4,11 @@ excerpt: "A legnagyobb hiba egy sablonos tisztító arckezelésre befizetni. A b
 category: "Arckezelés"
 readingMinutes: 8
 publishedAt: 2026-03-28
-cover: "/img/janssen-arckezeles-bortipusok-blog-cover.jpg"
+cover: "/img/janssen-arckezeles-bortipusok-blog-cover.webp"
+coverWidth: 1179
+coverHeight: 2096
 coverAlt: "Janssen Cosmetics arckezelés bőrtípusonként — FRUBEAUTY Zugló, Egressy út"
+metaTitle: "Janssen arckezelés bőrtípusonként | FRUBEAUTY"
 ---
 
 A legnagyobb hiba, amit elkövethetsz, ha egy sablonos „tisztító arckezelésre" fizetsz be, ahol ugyanazt a krémet kenik rád, mint az előtted lévő öt vendégre. **A bőröd nem sablon alapján működik.**

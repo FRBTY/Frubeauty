@@ -5,6 +5,9 @@ import { Lightbox } from './Lightbox';
 interface GalleryGridProps {
   count?: number;
   altPrefix?: string;
+  /** Per-kép egyedi alt szövegek — ha megadott, felülírja az altPrefix generált változatát.
+   *  SEO szempontból minden képnek egyedi, kulcsszavas alt szöveg kell. */
+  alts?: string[];
   images?: string[];
   imageSrc?: (i: number) => string;
   /**
@@ -18,6 +21,7 @@ interface GalleryGridProps {
 export function GalleryGrid({
   count = 8,
   altPrefix = 'Vendég eredmény',
+  alts: altsProp,
   images,
   imageSrc,
   size = 'compact',
@@ -31,13 +35,18 @@ export function GalleryGrid({
   };
 
   const all = Array.from({ length: count }).map((_, i) => resolve(i));
-  const alts = Array.from({ length: count }).map((_, i) => `${altPrefix} ${i + 1}`);
+  // Ha per-kép alt szöveg van megadva, azt használjuk; egyébként a generált prefix + index.
+  const alts = Array.from({ length: count }).map((_, i) =>
+    altsProp && altsProp[i] ? altsProp[i] : `${altPrefix} ${i + 1}`
+  );
 
   const gridClass =
     size === 'large'
       ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 lg:gap-8'
       : 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4';
   const tileAspect = size === 'large' ? 'aspect-[4/5]' : 'aspect-square';
+  const tileW = 800;
+  const tileH = size === 'large' ? 1000 : 800;
 
   return (
     <>
@@ -53,6 +62,8 @@ export function GalleryGrid({
               <img
                 src={src}
                 alt={alts[i]}
+                width={tileW}
+                height={tileH}
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] group-active:scale-[1.04]"
               />

@@ -6,7 +6,7 @@ import { Reveal } from '../components/Reveal';
 import { CookieBanner } from '../components/CookieBanner';
 import SiteFooter from '../components/SiteFooter.astro';
 
-const lastUpdated = '2026. május 17.';
+const lastUpdated = '2026. május 21.';
 const config = {
   booking: 'https://www.notino.hu/szalonok/pecze-kovacs-fruzsina-sminkes,-szemoldok-es-szempilla-stylist',
   instagram: 'https://www.instagram.com/frubeauty/',
@@ -17,12 +17,13 @@ const config = {
   address: '1143 Budapest, Egressy út 16.',
   fullName: 'Pecze-Kovács Fruzsina E.V.',
   taxNumber: '91311670-1-42',
+  registrationNumber: '60862950',
 };
 ---
 
 <Layout
   title="Általános Szerződési Feltételek | FRUBEAUTY"
-  description="A FRUBEAUTY szépségszalon általános szerződési feltételei."
+  description="A FRUBEAUTY szépségszalon általános szerződési feltételei – kozmetikai szolgáltatások, időpontfoglalás, árak, felelősség és panaszkezelés."
 >
   <div class="fixed top-0 inset-x-0 z-50">
     <AnnouncementBar client:load />
@@ -31,6 +32,7 @@ const config = {
 
   <section class="pt-32 sm:pt-40 pb-20 sm:pb-28">
     <div class="max-w-[820px] mx-auto px-5 sm:px-8 lg:px-12">
+
       <Reveal client:load as="div">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Jogi</p>
         <h1 class="font-display font-light text-cream leading-[1.05] tracking-tightest-" style="font-size: clamp(2.25rem, 5vw, 3.25rem);">
@@ -39,114 +41,259 @@ const config = {
         <p class="mt-4 text-creamMute text-sm">Utolsó frissítés: {lastUpdated}</p>
       </Reveal>
 
-      <article class="mt-12 prose-frubeauty">
-        <h2>1. Bevezető</h2>
-        <p>
-          A jelen Általános Szerződési Feltételek (a továbbiakban: <strong>ÁSZF</strong>)
-          a <strong>{config.fullName}</strong> egyéni vállalkozó (a továbbiakban:
-          „Szolgáltató") és a kozmetikai szolgáltatást igénybe vevő vendég (a
-          továbbiakban: „Vendég") közötti jogviszony feltételeit rögzítik.
-        </p>
-        <ul>
-          <li><strong>Szolgáltató neve:</strong> {config.fullName}</li>
-          <li><strong>Adószám:</strong> {config.taxNumber}</li>
-          <li><strong>Székhely / szalon címe:</strong> {config.address}</li>
-          <li><strong>E-mail:</strong> <a href={`mailto:${config.email}`}>{config.email}</a></li>
-          <li><strong>Telefon:</strong> <a href={`tel:${config.phone}`}>{config.phoneDisplay}</a></li>
-        </ul>
+      <div class="mt-12 aszf-accordion">
 
-        <h2>2. A szerződés tárgya</h2>
-        <p>
-          A Szolgáltató a szalonjában kozmetikai szolgáltatásokat nyújt: arckezelés,
-          szempilla-lifting, szemöldök-laminálás, festés, alkalmi smink. A részletes
-          szolgáltatás-lista és aktuális árak a <a href="/">főoldalon</a> találhatók.
-        </p>
+        <!-- 1. Szolgáltató adatai -->
+        <div class="aszf-item" id="s1">
+          <button type="button" class="aszf-summary" aria-expanded="false">
+            <span>1. Szolgáltató adatai</span>
+            <span class="aszf-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="aszf-body" hidden>
+            <table class="aszf-table">
+              <caption class="sr-only">Szolgáltató adatai</caption>
+              <tbody>
+                <tr><th scope="row">Cégnév / vállalkozó neve</th><td>{config.fullName}</td></tr>
+                <tr><th scope="row">Adószám</th><td>{config.taxNumber}</td></tr>
+                <tr><th scope="row">Nyilvántartási szám</th><td>{config.registrationNumber}</td></tr>
+                <tr><th scope="row">Székhely / szalon címe</th><td>{config.address}</td></tr>
+                <tr><th scope="row">E-mail</th><td>{config.email}</td></tr>
+                <tr><th scope="row">Telefon</th><td>{config.phoneDisplay}</td></tr>
+                <tr><th scope="row">Nyilvántartó hatóság</th><td>Budapest Főváros XIV. kerület Zugló Önkormányzatának Polgármesteri Hivatala</td></tr>
+                <tr><th scope="row">Tevékenység</th><td>Kozmetikai és szépészeti szolgáltatások</td></tr>
+              </tbody>
+            </table>
+            <p>
+              A Szolgáltató az elektronikus kereskedelmi szolgáltatások, valamint az információs társadalommal összefüggő szolgáltatások egyes kérdéseiről szóló 2001. évi CVIII. törvény (Eker. tv.) 4. § (1) bekezdése alapján közzéteszi az alábbi adatait.
+            </p>
+          </div>
+        </div>
 
-        <h2>3. Időpontfoglalás</h2>
-        <p>
-          A Vendég időpontot az online foglalási rendszeren (Notino vagy aktuális
-          partner), telefonon, vagy e-mailben tud foglalni. A foglalás akkor válik
-          érvényessé, amikor a Szolgáltató azt visszaigazolja.
-        </p>
+        <!-- 2. Tárhelyszolgáltató adatai -->
+        <div class="aszf-item" id="s2">
+          <button type="button" class="aszf-summary" aria-expanded="false">
+            <span>2. Tárhelyszolgáltató adatai</span>
+            <span class="aszf-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="aszf-body" hidden>
+            <table class="aszf-table">
+              <caption class="sr-only">Tárhelyszolgáltató adatai</caption>
+              <tbody>
+                <tr><th scope="row">Üzemeltető neve</th><td>Netlify, Inc.</td></tr>
+                <tr><th scope="row">Székhely</th><td>512 2nd Street, Suite 200, San Francisco, CA 94107, USA</td></tr>
+                <tr><th scope="row">Weboldal</th><td>www.netlify.com</td></tr>
+                <tr><th scope="row">Adatkezelési tájékoztató</th><td>netlify.com/privacy</td></tr>
+              </tbody>
+            </table>
+            <p>
+              A weboldalt a Netlify, Inc. tárhelyszolgáltatásán üzemeltetjük. A tárhelyszolgáltató az Eker. tv. 2. § la) pontja értelmében „közvetítő szolgáltatónak" minősül, és az általa tárolt adatok tekintetében a 10–11. § szerint korlátozott felelősséggel rendelkezik.
+            </p>
+          </div>
+        </div>
 
-        <h2>4. Lemondás</h2>
-        <ul>
-          <li>
-            <strong>24 órával az időpont előtt:</strong> a Vendég díjmentesen lemondhatja
-            vagy átteheti a foglalást.
-          </li>
-          <li>
-            <strong>24 órán belül:</strong> kérünk egy rövid SMS-t vagy hívást.
-            Betegség, vis maior vagy más nem várt esemény esetén természetesen nem
-            számítunk fel díjat.
-          </li>
-          <li>
-            <strong>Megjelenés nélküli (no-show) elmaradás:</strong> a Szolgáltató
-            fenntartja a jogot, hogy ismételt no-show esetén a következő időpont
-            foglalásához előleget kérjen.
-          </li>
-        </ul>
+        <!-- 3. Alapvető rendelkezések -->
+        <div class="aszf-item" id="s3">
+          <button type="button" class="aszf-summary" aria-expanded="false">
+            <span>3. Alapvető rendelkezések</span>
+            <span class="aszf-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="aszf-body" hidden>
+            <p>
+              A jelen Általános Szerződési Feltételek (a továbbiakban: <strong>ÁSZF</strong>) a <strong>{config.fullName}</strong> egyéni vállalkozó (a továbbiakban: „Szolgáltató") és a Vendég (fogyasztó vagy vállalkozás) között a Weboldalon keresztül vagy a szalonban igénybe vett kozmetikai szolgáltatásokra vonatkozó jogviszonyt szabályozzák.
+            </p>
+            <p>
+              Az ÁSZF a Polgári Törvénykönyvről szóló 2013. évi V. törvény (Ptk.), a fogyasztó és a vállalkozás közötti szerződések részletes szabályairól szóló 45/2014. (II. 26.) Korm. rendelet, az Eker. tv., valamint az egyéb hatályos magyar jogszabályok rendelkezéseinek figyelembevételével készült.
+            </p>
+            <p>
+              A Vendég a szolgáltatás igénybevételével, illetve az időpont foglalásával elfogadja a jelen ÁSZF feltételeit. Az ÁSZF hatályos verziója mindig elérhető a Weboldalon (frubeauty.hu/aszf). A Szolgáltató fenntartja a jogot az ÁSZF egyoldalú módosítására; a változások a közzétételkor lépnek hatályba, és nem érintik a már visszaigazolt foglalásokat.
+            </p>
+            <p>
+              Irányadó nyelv: <strong>magyar</strong>. Irányadó jog: <strong>magyar jog</strong>. A szerződés írásba foglaltnak minősül; a Szolgáltató azt iktatja, és utólag hozzáférhetővé teszi.
+            </p>
+          </div>
+        </div>
 
-        <h2>5. Árak és fizetés</h2>
-        <p>
-          A szolgáltatások aktuális árai a Weboldalon és a szalonban kifüggesztve
-          szerepelnek. A Szolgáltató fenntartja az árak egyoldalú módosításának
-          jogát; a már lefoglalt időpontok árát ez nem érinti.
-        </p>
-        <p>
-          A fizetés a szolgáltatás teljesítését követően készpénzben vagy bankkártyával
-          (terminál vagy átutalás) történik. Számlát minden vendégnek igény szerint
-          (a kezelés végén szóban jelezve) kiállítunk.
-        </p>
+        <!-- 4. Időpontfoglalás és szerződés létrejötte -->
+        <div class="aszf-item" id="s4">
+          <button type="button" class="aszf-summary" aria-expanded="false">
+            <span>4. Időpontfoglalás és szerződés létrejötte</span>
+            <span class="aszf-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="aszf-body" hidden>
+            <p>
+              A Vendég időpontot az alábbi módokon foglalhat:
+            </p>
+            <ul>
+              <li>az online foglalási rendszeren keresztül (Notino platform, 0–24 óra);</li>
+              <li>telefonon a <a href={`tel:${config.phone}`}>{config.phoneDisplay}</a> számon (munkanapokon 9–18 óra között);</li>
+              <li>e-mailben a <a href={`mailto:${config.email}`}>{config.email}</a> címen.</li>
+            </ul>
+            <p>
+              A szerződés a Szolgáltató visszaigazolásával jön létre. Online foglalásnál az automatikus visszaigazoló e-mail minősül elfogadásnak. Telefonos vagy e-mailes foglalásnál a Szolgáltató külön megerősítést küld. A Vendég köteles valóságos és pontos elérhetőséget megadni; a hibás adatok miatt elmaradt visszaigazolásért a Szolgáltató nem felel.
+            </p>
+            <p><strong>Lemondási feltételek:</strong></p>
+            <ul>
+              <li><strong>24 órával az időpont előtt vagy korábban:</strong> a foglalás díjmentesen lemondható vagy átütemezható.</li>
+              <li><strong>24 órán belül:</strong> kérünk rövid SMS-t vagy telefonhívást. Dokumentált betegség, váratlan vis maior esemény esetén lemondási díj nem kerül felszámításra.</li>
+              <li><strong>Megjelenés nélküli elmaradás (no-show):</strong> ismételt no-show esetén a Szolgáltató jogosult a következő foglaláshoz előleg fizetését kérni, amelynek mértékéről előzetesen tájékoztatja a Vendéget.</li>
+            </ul>
+            <p>
+              A Vendég a 45/2014. (II. 26.) Korm. rendelet 29. § (1) bekezdés m) pontja alapján a szolgáltatás teljesítésének megkezdése után <strong>nem gyakorolhat elállási jogot</strong>, amennyiben a teljesítés megkezdéséhez kifejezetten hozzájárult és tudomásul vette, hogy a teljesítés megkezdése után az elállás jogát elveszíti.
+            </p>
+          </div>
+        </div>
 
-        <h2>6. Egészségügyi tájékoztatás</h2>
-        <p>
-          A Vendég köteles a kezelés megkezdése előtt tájékoztatni a Szolgáltatót
-          minden olyan körülményről, amely a kezelést befolyásolhatja (különösen:
-          terhesség, allergia, gyulladás, gyógyszerszedés, közelmúltban végzett
-          beavatkozás). Ezen információk elhallgatásából eredő esetleges
-          következményekért a Szolgáltató felelősséget nem vállal.
-        </p>
-        <p>
-          A Szolgáltató a kezelést egészségügyi indok alapján bármikor visszautasíthatja.
-        </p>
+        <!-- 5. Szolgáltatás teljesítése -->
+        <div class="aszf-item" id="s5">
+          <button type="button" class="aszf-summary" aria-expanded="false">
+            <span>5. Szolgáltatás teljesítése</span>
+            <span class="aszf-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="aszf-body" hidden>
+            <p>
+              A szolgáltatás teljesítési helye: <strong>1143 Budapest, Egressy út 16.</strong> (FRUBEAUTY szalon). A kezelések kizárólag előzetes foglalással vehetők igénybe.
+            </p>
+            <p><strong>Vendég tájékoztatási kötelezettsége:</strong> A Vendég köteles a kezelés megkezdése előtt tájékoztatni a Szolgáltatót minden releváns egészségügyi körülményről, különösen:</p>
+            <ul>
+              <li>terhesség vagy szoptatás;</li>
+              <li>ismert allergiák, bőrérzékenység;</li>
+              <li>aktív bőrgyulladás, fertőzés a kezelendő területen;</li>
+              <li>közelmúltban végzett bőrgyógyászati beavatkozás, lézeres kezelés;</li>
+              <li>rendszeres gyógyszerszedés (különösen vérhígítók, izotretinoin);</li>
+              <li>bármely krónikus betegség, amely a kezelést befolyásolhatja.</li>
+            </ul>
+            <p>
+              Az elhallgatott egészségügyi információ következtében keletkező bőrreakcióért, szövődményért a Szolgáltató felelősséget nem vállal.
+            </p>
+            <p>
+              A Szolgáltató a kezelést <strong>bármikor visszautasíthatja</strong>, ha szakmai megítélése szerint az egészségügyi állapot a kezelés elvégzését nem teszi lehetővé. Visszautasítás esetén előre befizetett díj visszajár.
+            </p>
+            <p>
+              Az igénybe vehető szolgáltatások és kezelési protokollok az aktuális <a href="/">weboldalon</a> és a szalonban megtekinthetők. A Szolgáltató jogosult a szolgáltatáskínálatot módosítani; a visszaigazolt foglalások tartalmát ez nem érinti.
+            </p>
+          </div>
+        </div>
 
-        <h2>7. Felelősség</h2>
-        <p>
-          A Szolgáltató kizárólag szakszerű, a hatályos szakmai és higiéniai
-          előírásoknak megfelelő szolgáltatást nyújt. A használt termékek
-          (Janssen Cosmetics és más professzionális márkák) hivatalos forrásból
-          származnak.
-        </p>
-        <p>
-          A Szolgáltató felelőssége a szándékos vagy súlyosan gondatlan magatartással
-          okozott károkra terjed ki. A Vendégnél meglévő, de elhallgatott egészségügyi
-          probléma következtében előálló bőrreakciókért nem vállalunk felelősséget.
-        </p>
+        <!-- 6. Árak és fizetés -->
+        <div class="aszf-item" id="s6">
+          <button type="button" class="aszf-summary" aria-expanded="false">
+            <span>6. Árak és fizetés</span>
+            <span class="aszf-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="aszf-body" hidden>
+            <p>
+              Az aktuális árak a Weboldalon és a szalon árlistáján szerepelnek. Az árak <strong>magyar forintban (HUF) értendők</strong>. Egyéni vállalkozóként a Szolgáltató alanyi adómentes; a feltüntetett árak végső, ÁFÁ-t nem tartalmazó díjak.
+            </p>
+            <p>
+              A Szolgáltató fenntartja az árak egyoldalú módosításának jogát. A visszaigazolt foglalás időpontjában érvényes ár a mérvadó; árváltozás a visszaigazolt időpontot nem érinti.
+            </p>
+            <p><strong>Fizetési módok:</strong></p>
+            <ul>
+              <li>Készpénz – a kezelés befejezésekor, a szalonban;</li>
+              <li>Banki átutalás – a kezelés előtt (az adatok foglaláskor megküldésre kerülnek).</li>
+            </ul>
+            <p>
+              Számla minden szolgáltatás végén kiállításra kerül.
+            </p>
+          </div>
+        </div>
 
-        <h2>8. Panaszkezelés</h2>
-        <p>
-          Panasszal a Vendég közvetlenül a Szolgáltatóhoz fordulhat a fenti
-          elérhetőségeken. A Szolgáltató 30 napon belül érdemben válaszol.
-          A Vendég jogosult fogyasztói panaszával a területileg illetékes
-          békéltető testülethez (Budapesti Békéltető Testület) vagy a
-          fogyasztóvédelmi hatósághoz fordulni.
-        </p>
+        <!-- 7. Szavatosság és jótállás -->
+        <div class="aszf-item" id="s7">
+          <button type="button" class="aszf-summary" aria-expanded="false">
+            <span>7. Szavatosság és jótállás</span>
+            <span class="aszf-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="aszf-body" hidden>
+            <p>
+              A Szolgáltató az elvégzett kezelésekre a Ptk. 6:157–6:167. §-ai szerinti <strong>kellékszavatossági felelősséget</strong> vállalja. Hibás teljesítés esetén a Vendég az alábbi igényeket érvényesítheti:
+            </p>
+            <ul>
+              <li><strong>Kijavítás:</strong> a Szolgáltató díjmentesen korrigálja a hibát, ha az szakmailag lehetséges;</li>
+              <li><strong>Árleszállítás:</strong> ha a kijavítás nem lehetséges vagy aránytalan terhet jelent;</li>
+              <li><strong>Elállás / díj visszatérítése:</strong> ha a hiba oly mértékű, hogy azonnali elállást indokol, vagy a kijavítás nem vezet eredményre.</li>
+            </ul>
+            <p>
+              A Vendég <strong>haladéktalanul, de legkésőbb a hiba felfedezésétől számított 2 hónapon belül</strong> köteles a hibát bejelenteni. A szavatossági igény a teljesítés napjától számított <strong>1 éven belül</strong> érvényesíthető (Ptk. 6:163. §).
+            </p>
+            <p>
+              Jogszabály által kötelezően előírt jótállás kozmetikai szolgáltatásokra nem vonatkozik; a Szolgáltató önkéntes jótállást nem vállal.
+            </p>
+            <p>
+              Az igényt az alábbi elérhetőségeken lehet bejelenteni: <a href="mailto:kfruzsi0197@gmail.com">kfruzsi0197@gmail.com</a> vagy <a href="tel:+36702159954">+36 70 215 9954</a>.
+            </p>
+          </div>
+        </div>
 
-        <h2>9. Az ÁSZF módosítása</h2>
-        <p>
-          A Szolgáltató fenntartja a jogot, hogy az ÁSZF-et egyoldalúan módosítsa.
-          A módosítás a Weboldalon való közzétételtől hatályos. A módosítás a már
-          lefoglalt időpontokra nem vonatkozik.
-        </p>
+        <!-- 8. Felelősség -->
+        <div class="aszf-item" id="s8">
+          <button type="button" class="aszf-summary" aria-expanded="false">
+            <span>8. Felelősség</span>
+            <span class="aszf-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="aszf-body" hidden>
+            <p>
+              A Szolgáltató az elvégzett kezelések kapcsán kizárólag <strong>szándékos vagy súlyosan gondatlan</strong> magatartással okozott károkért felel. Enyhe gondatlanságból eredő, előre nem látható következménykárokért a Szolgáltató felelőssége – a fogyasztói jogok sérelme nélkül – kizárt.
+            </p>
+            <p><strong>A Szolgáltató nem felel különösen:</strong></p>
+            <ul>
+              <li>a Vendég által elhallgatott egészségügyi állapotból eredő bőrreakciókért, szövődményekért;</li>
+              <li>a Vendég által a kezelés előtt, alatt vagy után alkalmazott termékekből eredő hatásokért;</li>
+              <li>az utógondozási előírások be nem tartásából adódó következményekért;</li>
+              <li>vis maior eseményekért (természeti katasztrófa, járvány, hatósági intézkedés, áramszünet stb.);</li>
+              <li>a Vendég személyes tárgyaiban keletkező károkért.</li>
+            </ul>
+            <p>
+              A Szolgáltató által használt termékek (pl. Janssen Cosmetics és más professzionális márkák) hivatalos, engedélyezett forgalmazóktól származnak, és az érvényes kozmetikai biztonsági előírásoknak megfelelnek.
+            </p>
+            <p>
+              Amennyiben a Vendég nem fogyasztónak minősülő vállalkozás, a Ptk. 6:152. § alapján a Felek felelősségét kölcsönösen korlátozzák a közvetlen, tényleges károkra.
+            </p>
+          </div>
+        </div>
 
-        <h2>10. Irányadó jog</h2>
-        <p>
-          A jelen ÁSZF-re a magyar jog az irányadó. Az itt nem szabályozott
-          kérdésekben a Polgári Törvénykönyv és a vonatkozó magyar jogszabályok
-          rendelkezései irányadók.
-        </p>
-      </article>
+        <!-- 9. Panaszkezelés és jogérvényesítés -->
+        <div class="aszf-item" id="s9">
+          <button type="button" class="aszf-summary" aria-expanded="false">
+            <span>9. Panaszkezelés és jogérvényesítés</span>
+            <span class="aszf-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="aszf-body" hidden>
+            <p>
+              A Vendég panaszát az alábbi elérhetőségeken jelezheti:
+            </p>
+            <ul>
+              <li><strong>E-mail:</strong> <a href="mailto:kfruzsi0197@gmail.com">kfruzsi0197@gmail.com</a></li>
+              <li><strong>Telefon:</strong> <a href="tel:+36702159954">+36 70 215 9954</a></li>
+              <li><strong>Személyesen:</strong> 1143 Budapest, Egressy út 16.</li>
+            </ul>
+            <p>
+              A Szolgáltató a panaszokat <strong>30 napon belül</strong> érdemben megvizsgálja és írásban válaszol (a fogyasztóvédelemről szóló 1997. évi CLV. törvény 17/A. § alapján). Az írásos panaszokat iktatja, és 5 évig megőrzi.
+            </p>
+            <p><strong>Fogyasztói jogérvényesítési lehetőségek:</strong></p>
+            <ul>
+              <li>
+                <strong>Budapesti Békéltető Testület</strong><br />
+                1016 Budapest, Krisztina krt. 99. III. em. 310. &nbsp;·&nbsp; Tel: +36 1 488-2131<br />
+                E-mail: bekelteto.testulet@bkik.hu &nbsp;·&nbsp; Web: <a href="https://bekeltet.bkik.hu" target="_blank" rel="noopener">bekeltet.bkik.hu</a>
+              </li>
+              <li>
+                <strong>Online vitarendezési platform (ODR):</strong> <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>
+              </li>
+              <li>
+                <strong>Fogyasztóvédelmi hatóság:</strong> Budapest Főváros Kormányhivatala – Fogyasztóvédelmi Főosztály (<a href="https://www.kormanyhivatal.hu" target="_blank" rel="noopener">kormanyhivatal.hu</a>)
+              </li>
+              <li>
+                <strong>Bírósági eljárás:</strong> a Ptk. és a Pp. rendelkezései szerint illetékes bíróság előtt kezdeményezhető.
+              </li>
+            </ul>
+            <p>
+              A Szolgáltató törekszik a panaszok békés, peren kívüli rendezésére, és a békéltető testületi eljárásban együttműköd.
+            </p>
+          </div>
+        </div>
+
+      </div><!-- /.aszf-accordion -->
 
       <div class="mt-16 pt-8 border-t border-whisper text-sm text-creamMute">
         <a href="/" class="hover:text-cream transition-colors">← Vissza a főoldalra</a>
@@ -157,32 +304,120 @@ const config = {
   <SiteFooter />
   <CookieBanner client:load />
 
+  <script is:inline>
+    (function () {
+      var items = document.querySelectorAll('.aszf-accordion .aszf-item');
+      items.forEach(function (item) {
+        var btn = item.querySelector('.aszf-summary');
+        var body = item.querySelector('.aszf-body');
+        if (!btn || !body) return;
+        btn.addEventListener('click', function () {
+          var isOpen = item.classList.contains('is-open');
+          // Close all
+          items.forEach(function (el) {
+            el.classList.remove('is-open');
+            el.querySelector('.aszf-summary').setAttribute('aria-expanded', 'false');
+            el.querySelector('.aszf-body').setAttribute('hidden', '');
+          });
+          // Open clicked (unless it was already open)
+          if (!isOpen) {
+            item.classList.add('is-open');
+            btn.setAttribute('aria-expanded', 'true');
+            body.removeAttribute('hidden');
+          }
+        });
+      });
+    })();
+  </script>
+
   <style is:global>
-    .prose-frubeauty {
-      color: var(--cream-soft, #E4D6C2);
-      font-size: 16px;
-      line-height: 1.75;
+    .aszf-accordion {
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
-    @media (min-width: 768px) { .prose-frubeauty { font-size: 17px; } }
-    .prose-frubeauty h2 {
+    .aszf-item {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    /* button reset */
+    .aszf-summary {
+      appearance: none;
+      -webkit-appearance: none;
+      background: none;
+      border: none;
+      outline: none;
+      text-align: left;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.375rem 0;
+      cursor: pointer;
       font-family: 'Fraunces', serif;
-      font-weight: 500;
+      font-weight: 300;
+      font-size: clamp(1.0625rem, 2.2vw, 1.25rem);
       color: #F5E8D3;
-      font-size: clamp(1.5rem, 2.5vw, 1.875rem);
       letter-spacing: -0.01em;
-      margin-top: 3rem;
-      margin-bottom: 1rem;
-    }
-    .prose-frubeauty p { margin-bottom: 1.25rem; }
-    .prose-frubeauty ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1.5rem; }
-    .prose-frubeauty li { margin-bottom: 0.5rem; }
-    .prose-frubeauty strong { color: #F5E8D3; font-weight: 500; }
-    .prose-frubeauty a {
-      color: #C9A36C;
-      text-decoration: underline;
-      text-underline-offset: 3px;
       transition: color 200ms;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
-    .prose-frubeauty a:hover { color: #B8884A; }
+    .aszf-summary:hover { color: #fff; }
+    .aszf-summary:focus-visible {
+      outline: 2px solid rgba(184,136,74,0.55);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    .aszf-icon {
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-family: sans-serif;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      transition: transform 300ms cubic-bezier(0.4,0,0.2,1), border-color 200ms, color 200ms;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .aszf-item.is-open > .aszf-summary .aszf-icon {
+      transform: rotate(45deg);
+      border-color: rgba(201,163,108,0.5);
+      color: #C9A36C;
+    }
+    .aszf-item.is-open > .aszf-summary { color: #fff; }
+    .aszf-body {
+      padding: 0 0 1.75rem 0;
+      color: #C8B89A;
+      font-size: 15px;
+      line-height: 1.75;
+      animation: aszfFadeIn 220ms ease forwards;
+    }
+    @media (min-width: 640px) { .aszf-body { font-size: 16px; } }
+    @keyframes aszfFadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .aszf-body p { margin-bottom: 1rem; }
+    .aszf-body p:last-child { margin-bottom: 0; }
+    .aszf-body ul { list-style: none; padding: 0; margin: 0.5rem 0 1rem 0; }
+    .aszf-body ul li { position: relative; padding-left: 1.25rem; margin-bottom: 0.5rem; }
+    .aszf-body ul li::before { content: '–'; position: absolute; left: 0; color: #C9A36C; }
+    .aszf-body strong { color: #F5E8D3; font-weight: 500; }
+    .aszf-body a { color: #C9A36C; text-decoration: underline; text-underline-offset: 3px; transition: color 200ms; }
+    .aszf-body a:hover { color: #B8884A; }
+    .aszf-table { width: 100%; border-collapse: collapse; margin-bottom: 1.25rem; font-size: 14px; }
+    .aszf-table th, .aszf-table td { padding: 0.55rem 0.75rem; vertical-align: top; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: left; font-weight: 400; }
+    .aszf-table th:first-child { width: 42%; color: rgba(200,184,154,0.6); white-space: nowrap; }
+    .aszf-table td:last-child { color: #C8B89A; }
+    @media (max-width: 480px) {
+      .aszf-table th:first-child { white-space: normal; width: auto; }
+      .aszf-table tr { display: flex; flex-direction: column; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 0.5rem 0; }
+      .aszf-table th, .aszf-table td { padding: 0.3rem 0; border: none; }
+    }
   </style>
 </Layout>

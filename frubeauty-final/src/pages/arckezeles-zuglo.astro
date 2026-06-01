@@ -65,9 +65,54 @@ const janssenBenefits = [
   { eyebrow: '02', title: 'Bőrgyógyászati teszteken átfutott formulák', body: 'Minden termék független dermatológiai teszten megy keresztül. Érzékeny bőrűek is biztonsággal próbálhatják — a SOS Sensitive protokoll pont erre épül.' },
   { eyebrow: '03', title: 'Külön rendszer minden bőrtípusra', body: 'Zsíros, kombinált, érzékeny, érett, dehidratált — mindegyikre saját line. Nincs „univerzális" kezelés, mert univerzális bőr sincs.' },
 ];
+const config = { ...siteConfig };
+
+// ── SEO: FAQPage schema (featured snippet esélyes kérdésekre) ─────────────
+const arcFaqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a,
+    },
+  })),
+};
+
+// ── SEO: Service schema az arckezelésekhez ────────────────────────────────
+const arcServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Janssen Arckezelés Zugló',
+  description:
+    'Professzionális Janssen Cosmetics arckezelés Zuglóban, XIV. kerületben. Anti-aging, mélytisztító, hidratáló és érzékeny bőrre szabott protokollok.',
+  provider: {
+    '@type': 'BeautySalon',
+    name: 'FRUBEAUTY – Pecze-Kovács Fruzsina',
+    url: 'https://frubeauty.com',
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Budapest' },
+    { '@type': 'AdministrativeArea', name: 'Zugló' },
+  ],
+  offers: {
+    '@type': 'AggregateOffer',
+    lowPrice: '11000',
+    highPrice: '21500',
+    priceCurrency: 'HUF',
+    availability: 'https://schema.org/InStock',
+  },
+};
 ---
 
-<Layout title="Arckezelés és kozmetika Zugló | Janssen Cosmetics — FRUBEAUTY" description="Professzionális arckezelés és arctisztítás Zuglóban, a 14. kerületben. Janssen Cosmetics hatóanyagokkal — anti-aging, hidratáló, érzékeny bőrre szabott protokoll. Foglalás online.">
+<Layout
+  title="Arckezelés Zugló – 16.900 Ft-tól | ★5,0 · 40 Vélemény | FRUBEAUTY"
+  description="★5,0 · 40+ Google-értékelés · Janssen arckezelés Zuglóban, XIV. kerület. Anti-aging, mélytisztító, hidratáló protokollok bőrtípusra szabva. 16.900 Ft-tól → Foglalj most!"
+  additionalSchemas={[arcFaqSchema, arcServiceSchema]}
+  preloadImage="/media/arckezeles-zuglo-poster.webp"
+>
   <SiteHeader />
 
   <section class="relative overflow-hidden pt-32 sm:pt-40 pb-16 sm:pb-24">
@@ -78,13 +123,13 @@ const janssenBenefits = [
           <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Janssen <em class="display">arckezelés</em> Zugló szívében — bőrtípusra szabva.</h1>
           <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">Személyre szabott bőrápolás prémium Janssen kozmetikumokkal az Egressy úton. Add vissza bőröd egészséges ragyogását szakértő kezek között.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
-            <MagneticCTA client:load href={siteConfig.booking} external variant="primary">Időpontot foglalok</MagneticCTA>
+            <MagneticCTA client:load href={config.booking} external variant="primary">Időpontot foglalok</MagneticCTA>
             <MagneticCTA client:load href="#arak" variant="secondary">Árak</MagneticCTA>
           </div>
           <p class="mt-6 text-[12px] uppercase tracking-caps text-creamMute">Online foglalás · Egressy út 16. · XIV. kerület</p>
         </Reveal>
         <Reveal client:load as="div" className="lg:col-span-5" distance={20} delay={0.1}>
-          <HeroMedia client:load videoSrc="/media/arckezeles-zuglo.mp4" posterSrc="/media/arckezeles-zuglo-poster.jpg" alt="Janssen Cosmetics arckezelés a FRUBEAUTY zuglói szalonban — Pecze-Kovács Fruzsina" aspect="4 / 5" maxWidthClass="max-w-full" />
+          <HeroMedia client:load videoSrc="/media/arckezeles-zuglo.mp4" posterSrc="/media/arckezeles-zuglo-poster.webp" alt="Janssen Cosmetics arckezelés a FRUBEAUTY zuglói szalonban — Pecze-Kovács Fruzsina" aspect="4 / 5" maxWidthClass="max-w-full" />
         </Reveal>
       </div>
     </div>
@@ -93,10 +138,10 @@ const janssenBenefits = [
   <section class="border-y border-whisper bg-inkSoft">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
       <Reveal client:visible as="div" className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={siteConfig.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">40+ Google értékelés →</a></span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">40+ Google értékelés →</a></span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Janssen</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">Cosmetics partner</span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">7 protokoll</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">minden bőrtípusra</span></div>
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Egressy út 16.</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={siteConfig.mapsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">1143 Budapest →</a></span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Egressy út 16.</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.mapsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">1143 Budapest →</a></span></div>
       </Reveal>
     </div>
   </section>
@@ -148,7 +193,7 @@ const janssenBenefits = [
               <div class={`my-7 border-t ${p.highlight ? 'border-whisperStrong' : 'border-whisper'}`}></div>
               <p class="text-[11px] uppercase tracking-caps text-creamMute mb-4">{p.duration}</p>
               <ul class="space-y-3 flex-1">{p.features.map((f) => (<li class="flex items-start gap-2.5"><span class={`flex-shrink-0 w-4 h-4 rounded-full inline-flex items-center justify-center mt-0.5 ${p.highlight ? 'bg-gold/25 text-gold' : 'bg-gold/15 text-gold'}`} aria-hidden><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span><span class="text-[14px] text-creamSoft leading-snug">{f}</span></li>))}</ul>
-              <div class="mt-8"><MagneticCTA client:load href={siteConfig.booking} external variant={p.highlight ? 'primary' : 'secondary'}>Időpontot foglalok</MagneticCTA></div>
+              <div class="mt-8"><MagneticCTA client:load href={config.booking} external variant={p.highlight ? 'primary' : 'secondary'}>Időpontot foglalok</MagneticCTA></div>
             </article>
           </Reveal>
         ))}
@@ -202,7 +247,7 @@ const janssenBenefits = [
           <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Akik már voltak nálam</p>
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Visszajelzés <em class="display">arckezelésekről</em>.</h2>
         </div>
-        <a href={siteConfig.googleReviewsUrl} target="_blank" rel="noopener" class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors">Összes Google-on →</a>
+        <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors">Összes Google-on →</a>
       </Reveal>
       <TestimonialsGrid client:visible items={testimonials} />
     </div>
@@ -228,8 +273,8 @@ const janssenBenefits = [
           <a href="/sminkes-zuglo" class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Alkalmi és esküvői smink<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
         </div>
         <div class="lg:col-span-6 order-1 lg:order-2">
-          <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-whisperStrong">
-            <img src="/img/smink-keszul-munkakozben-budapest-egressy-ut.jpg" alt="Alkalmi smink a FRUBEAUTY szalonban — előzetesen arckezelt bőrre" class="w-full h-full object-cover" loading="lazy" />
+          <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-black">
+            <img src="/img/smink-keszul-munkakozben-budapest-egressy-ut.webp" alt="Alkalmi smink a FRUBEAUTY szalonban — előzetesen arckezelt bőrre" width="800" height="1000" class="w-full h-full object-cover" loading="lazy" />
           </div>
         </div>
       </Reveal>
@@ -238,14 +283,11 @@ const janssenBenefits = [
 
   <SiteContact eyebrow="Foglalás" heading={'Tisztábban, <em class="display">fényesebben</em>.'} intro="Online foglalás 0–24 órában, válasz munkanapokon pár órán belül. Az első időpont előtt nyugodtan írj emailt, ha bizonytalan vagy melyik protokoll a tiéd — pár sorban segítek dönteni." />
 
+  <SiteFooter />
+
   <div class="py-10 text-center border-t border-whisper">
     <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="inline-flex items-center gap-2 text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors duration-200">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
       Vissza az oldal tetejére
     </button>
   </div>
-
-  <SiteFooter />
-
-  <CookieBanner client:load />
-</Layout>

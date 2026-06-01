@@ -19,6 +19,7 @@ interface Props {
 }
 
 const { withAnnouncement = true } = Astro.props;
+const config = { ...siteConfig };
 ---
 
 <div class="fixed top-0 inset-x-0 z-50">
@@ -31,8 +32,8 @@ const { withAnnouncement = true } = Astro.props;
   )}
   <NavBar
     client:load
-    bookingUrl={siteConfig.booking}
-    instagram={siteConfig.instagram}
-    facebook={siteConfig.facebook}
+    bookingUrl={config.booking}
+    instagram={config.instagram}
+    facebook={config.facebook}
   />
 </div>

@@ -1,5 +1,7 @@
 import { StaggerGroup, StaggerItem } from './StaggerGroup';
-import { siteConfig } from '../config/site';
+import { siteConfig as _siteConfig } from '../config/site';
+// Spread widens as-const literal types to string — needed for JSX href attrs
+const siteConfig = { ..._siteConfig };
 
 export interface Testimonial {
   name: string;

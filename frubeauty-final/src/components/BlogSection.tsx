@@ -22,7 +22,7 @@ const defaultPosts: BlogPost[] = [
     category: 'Szempilla',
     readingMinutes: 5,
     publishedAt: '2026-04-12',
-    cover: '/img/szempilla-lifting-vagy-festes-blog-cover.jpg',
+    cover: '/img/szempilla-lifting-vagy-festes-blog-cover.webp',
   },
   {
     slug: 'janssen-arckezeles-bortipusok',
@@ -31,7 +31,7 @@ const defaultPosts: BlogPost[] = [
     category: 'Arckezelés',
     readingMinutes: 8,
     publishedAt: '2026-03-28',
-    cover: '/img/janssen-arckezeles-bortipusok-blog-cover.jpg',
+    cover: '/img/janssen-arckezeles-bortipusok-blog-cover.webp',
   },
   {
     slug: 'eskuvoi-smink-felkesziules',
@@ -40,7 +40,7 @@ const defaultPosts: BlogPost[] = [
     category: 'Alkalmi smink',
     readingMinutes: 7,
     publishedAt: '2026-02-15',
-    cover: '/img/eskuvoi-smink-felkesziules-blog-cover.jpg',
+    cover: '/img/eskuvoi-smink-felkesziules-blog-cover.webp',
   },
 ];
 
@@ -57,7 +57,9 @@ export function BlogSection({ posts = defaultPosts }: BlogSectionProps) {
               <div className="aspect-[4/5] overflow-hidden bg-inkRise">
                 <img
                   src={p.cover}
-                  alt=""
+                  alt={p.title}
+                  width={800}
+                  height={1000}
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                 />
