@@ -1,5 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { easeOutStrong } from './motion-presets';
 
 interface LightboxProps {
@@ -30,6 +31,9 @@ export function Lightbox({
 }: LightboxProps) {
   const reduced = useReducedMotion();
   const isOpen = openIndex !== null;
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
 
   // Body scroll lock + keyboard nav
   useEffect(() => {
@@ -57,7 +61,9 @@ export function Lightbox({
     [openIndex, images.length, onNavigate],
   );
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <motion.div
@@ -131,6 +137,7 @@ export function Lightbox({
           </div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
