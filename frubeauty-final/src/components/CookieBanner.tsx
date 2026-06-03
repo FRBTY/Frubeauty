@@ -63,7 +63,7 @@ export function CookieBanner() {
           className="fixed bottom-0 inset-x-0 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-md sm:rounded-2xl z-[60] bg-inkRise text-creamSoft border border-whisperStrong rounded-t-2xl shadow-[0_-8px_40px_-10px_rgba(0,0,0,0.5)] sm:shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)] px-5 py-5 sm:p-6"
         >
           <p id="cookie-banner-body" className="text-sm leading-relaxed text-creamSoft/90">
-            Weboldalunk működéséhez elengedhetetlen, valamint a látogatottság elemzéséhez és a hirdetéseink optimalizálásához statisztikai és marketing sütiket használunk. Az „Összes elfogadása" gombbal hozzájárulsz az adatok feldolgozásához. A beállításaidat bármikor módosíthatod.{' '}
+            Weboldalunk működéséhez elengedhetetlen, valamint a látogatottság elemzéséhez és a hirdetéseink optimalizálásához statisztikai és marketing sütiket használunk. Az „Összes elfogadása” gombbal hozzájárulsz az adatok feldolgozásához. A beállításaidat bármikor módosíthatod.{' '}
             <a href="/adatvedelem" className="underline underline-offset-2 hover:text-gold transition-colors">
               Részletek
             </a>

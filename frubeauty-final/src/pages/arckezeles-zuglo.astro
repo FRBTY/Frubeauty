@@ -52,7 +52,7 @@ const testimonials = [
 ];
 
 const faqs = [
-  { q: 'Milyen márkájú termékekkel dolgozol?', a: 'Kizárólag Janssen Cosmetics professzionális hatóanyagaival. A német márka „cosmeceutical" szemlélete azt jelenti, hogy a hatóanyagok mélyebbre is eljutnak — nem csak a felszínt érinti a kezelés. Minden bőrtípusra van célzott megoldás.' },
+  { q: 'Milyen márkájú termékekkel dolgozol?', a: 'Kizárólag Janssen Cosmetics professzionális hatóanyagaival. A német márka „cosmeceutical” szemlélete azt jelenti, hogy a hatóanyagok mélyebbre is eljutnak — nem csak a felszínt érinti a kezelés. Minden bőrtípusra van célzott megoldás.' },
   { q: 'Mennyire lesz piros az arcom egy mélytisztítás után?', a: 'A tisztítás utáni pír teljesen természetes, de a nyugtató pakolásokkal és professzionális utóápolással általában 1–3 órán belül elhalványul. A legtöbb vendég délután bátran visszamegy dolgozni vagy találkozóra.' },
   { q: 'Milyen gyakran érdemes járni kozmetikushoz?', a: 'A bőr megújulási ciklusa nagyjából 28 nap, így a fenntartó kezelést havonta egyszer ajánlom. Anti-aging vagy mélytisztító kúra esetén ezt az ütemet kicsit lerövidíthetjük az első három alkalom erejéig — de ezt mindig az aktuális bőrállapot dönti el.' },
   { q: 'Sminkben is jöhetek a kezelésre?', a: 'Igen. Minden arckezelést alapos, kíméletes letisztítással kezdek — nem probléma, ha smink van rajtad.' },
@@ -61,9 +61,9 @@ const faqs = [
 ];
 
 const janssenBenefits = [
-  { eyebrow: '01', title: 'Hatóanyagok, amik valóban mélyre jutnak', body: 'A „cosmeceutical" szó nem marketing — molekula-méretű hatóanyagokat jelent, amik átjutnak a stratum corneum-on. Eredmény: nem tüneti, hanem strukturális változás.' },
+  { eyebrow: '01', title: 'Hatóanyagok, amik valóban mélyre jutnak', body: 'A „cosmeceutical” szó nem marketing — molekula-méretű hatóanyagokat jelent, amik átjutnak a stratum corneum-on. Eredmény: nem tüneti, hanem strukturális változás.' },
   { eyebrow: '02', title: 'Bőrgyógyászati teszteken átfutott formulák', body: 'Minden termék független dermatológiai teszten megy keresztül. Érzékeny bőrűek is biztonsággal próbálhatják — a SOS Sensitive protokoll pont erre épül.' },
-  { eyebrow: '03', title: 'Külön rendszer minden bőrtípusra', body: 'Zsíros, kombinált, érzékeny, érett, dehidratált — mindegyikre saját line. Nincs „univerzális" kezelés, mert univerzális bőr sincs.' },
+  { eyebrow: '03', title: 'Külön rendszer minden bőrtípusra', body: 'Zsíros, kombinált, érzékeny, érett, dehidratált — mindegyikre saját line. Nincs „univerzális” kezelés, mert univerzális bőr sincs.' },
 ];
 const config = { ...siteConfig };
 
@@ -169,7 +169,7 @@ const arcServiceSchema = {
       <Reveal client:visible as="div" className="mb-16 sm:mb-20 max-w-2xl">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Kezelések és árak</p>
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Három <em class="display">irány</em>, hét protokoll.</h2>
-        <p class="mt-5 text-creamSoft leading-[1.7]">Az árak a teljes kezelést tartalmazzák — minden hatóanyag, eszköz és a befejező fényvédő. Nincs külön „belépő" vagy felár.</p>
+        <p class="mt-5 text-creamSoft leading-[1.7]">Az árak a teljes kezelést tartalmazzák — minden hatóanyag, eszköz és a befejező fényvédő. Nincs külön „belépő” vagy felár.</p>
       </Reveal>
       <PriceList client:visible categories={priceCategories} />
     </div>

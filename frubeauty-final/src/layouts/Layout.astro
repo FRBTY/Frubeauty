@@ -351,11 +351,20 @@ const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googl
         descent-override: 27.88%;
         line-gap-override: 0%;
       }
+      /* Fraunces latin-ext subset — a hosszú magyar ékezetek (ő U+0151, ű U+0171,
+         Ő U+0150, Ű U+0170) a Latin Extended-A blokkban vannak, amit az alap latin
+         subset NEM fed le. A címsor-font (font-display = Fraunces) ezért az ő/ű-nél a
+         'Fraunces Fallback' (Georgia) glyphre esett vissza → eltérő betűkép a
+         címsorokban (jól látható pl. a "műszempilla" és "tiszta bőr" h2-kben).
+         'swap' (NEM 'optional'), ugyanabból az okból, mint a Geist latin-ext lent:
+         az apró subset 'optional'-lel gyakran nem ér be a ~100 ms-os ablakba, így az
+         ő/ű a tartalék fonton ragad. CLS elhanyagolható: csak néhány glyph vált, és a
+         'Fraunces Fallback' metrika-illesztett (size-adjust). */
       @font-face {
         font-family: 'Fraunces';
         font-style: normal;
         font-weight: 100 900;
-        font-display: optional;
+        font-display: swap;
         src: url('/fonts/fraunces-latin-ext-normal.woff2') format('woff2');
         unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
       }

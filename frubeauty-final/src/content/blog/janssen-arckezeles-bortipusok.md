@@ -11,9 +11,9 @@ coverAlt: "Janssen Cosmetics arckezelés bőrtípusonként — FRUBEAUTY Zugló,
 metaTitle: "Janssen arckezelés bőrtípusonként | FRUBEAUTY"
 ---
 
-A legnagyobb hiba, amit elkövethetsz, ha egy sablonos „tisztító arckezelésre" fizetsz be, ahol ugyanazt a krémet kenik rád, mint az előtted lévő öt vendégre. **A bőröd nem sablon alapján működik.**
+A legnagyobb hiba, amit elkövethetsz, ha egy sablonos „tisztító arckezelésre” fizetsz be, ahol ugyanazt a krémet kenik rád, mint az előtted lévő öt vendégre. **A bőröd nem sablon alapján működik.**
 
-A Budapest XIV. kerületében, az Egressy úton található kozmetika stúdiómban a német prémium kategóriás Janssen Cosmetics célzott kabinprotokolljaival dolgozom. Ez nem wellness-kényeztetés, hanem tiszta, hatóanyag-központú bőrkorrekció. Nálunk az „arckezelés" kifejezés 7 különböző, mérnöki pontossággal összeállított protokollt takar.
+A Budapest XIV. kerületében, az Egressy úton található kozmetika stúdiómban a német prémium kategóriás Janssen Cosmetics célzott kabinprotokolljaival dolgozom. Ez nem wellness-kényeztetés, hanem tiszta, hatóanyag-központú bőrkorrekció. Nálunk az „arckezelés” kifejezés 7 különböző, mérnöki pontossággal összeállított protokollt takar.
 
 Határozzuk meg, hogy a te bőrödnek melyikre van szüksége, mielőtt időpontot választasz.
 
@@ -63,7 +63,7 @@ Sokan összetévesztik a száraz bőrt a vízhiányossal. A zsíros bőr is lehe
 
 **A protokoll:** Hydro Radiance (90 perc).
 
-**Hogyan működik?** Különböző molekulasúlyú hialuronsavval és nedvességmágnes-hatóanyagokkal töltjük fel a bőr mélyebb rétegeit. Azonnali „plumping" hatás, a bőr újra élettel teli és ragyogó lesz.
+**Hogyan működik?** Különböző molekulasúlyú hialuronsavval és nedvességmágnes-hatóanyagokkal töltjük fel a bőr mélyebb rétegeit. Azonnali „plumping” hatás, a bőr újra élettel teli és ragyogó lesz.
 
 ## 6. Tini bőr (14–18 év): Young Skin protokoll
 

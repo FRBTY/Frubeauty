@@ -1,4 +1,23 @@
 User-agent: *
 Allow: /
 
+# AI-keresők és LLM-crawlerek engedélyezése (GEO: Gemini / Perplexity / ChatGPT)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
 Sitemap: https://frubeauty.com/sitemap-index.xml

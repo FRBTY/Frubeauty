@@ -27,7 +27,7 @@ const defaultPosts: BlogPost[] = [
   {
     slug: 'janssen-arckezeles-bortipusok',
     title: 'Janssen arckezelés bőrtípusonként: melyik protokoll hozza el a változást?',
-    excerpt: 'A legnagyobb hiba egy sablonos „tisztító arckezelésre" befizetni. A bőröd nem sablon — hét különböző Janssen protokoll közül melyikre van valójában szükséged.',
+    excerpt: 'A legnagyobb hiba egy sablonos „tisztító arckezelésre” befizetni. A bőröd nem sablon — hét különböző Janssen protokoll közül melyikre van valójában szükséged.',
     category: 'Arckezelés',
     readingMinutes: 8,
     publishedAt: '2026-03-28',

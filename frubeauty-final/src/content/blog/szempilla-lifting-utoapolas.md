@@ -14,23 +14,23 @@ metaDescription: "Hogyan ápold a szempilla liftinget, hogy 6–8 hétig tartson
 
 A vendégeim leggyakoribb kérdése nem az, hogy *fáj-e* a szempilla lifting (nem fáj), hanem az, hogy **miért tartott az egyik ismerősének csak három hétig.** A válasz szinte mindig ugyanaz: nem a kezelésen múlt, hanem az utóápoláson.
 
-A lifting a saját pilláid tövét emeli meg és rögzíti ívelt formába. Ez egy kíméletes, mégis precíz kémiai folyamat — és pont úgy, ahogy egy friss hajfestést sem mosol le aznap este, a liftinget is hagyni kell „megülni". Az alábbi hét szabály betartásával reálisan kihozod a teljes **6–8 hetet**; figyelmen kívül hagyva pedig feleannyi is lehet.
+A lifting a saját pilláid tövét emeli meg és rögzíti ívelt formába. Ez egy kíméletes, mégis precíz kémiai folyamat — és pont úgy, ahogy egy friss hajfestést sem mosol le aznap este, a liftinget is hagyni kell „megülni”. Az alábbi hét szabály betartásával reálisan kihozod a teljes **6–8 hetet**; figyelmen kívül hagyva pedig feleannyi is lehet.
 
 ## 1. Az első 24 óra: a kritikus ablak
 
-A kezelés után a pilláid még „dolgoznak" — a kötések ekkor véglegesednek. Ebben az időszakban **kerülj minden vizet, gőzt és párát**: ne zuhanyozz forró vízzel az arcodra, ne menj szaunába, gőzfürdőbe, és kerüld a hosszú, párás főzést is.
+A kezelés után a pilláid még „dolgoznak” — a kötések ekkor véglegesednek. Ebben az időszakban **kerülj minden vizet, gőzt és párát**: ne zuhanyozz forró vízzel az arcodra, ne menj szaunába, gőzfürdőbe, és kerüld a hosszú, párás főzést is.
 
-Ez az a 24 óra, ami a legtöbb idő előtti „lelapulásért" felelős. Ha kibírod, a többi szabály már sokkal megengedőbb.
+Ez az a 24 óra, ami a legtöbb idő előtti „lelapulásért” felelős. Ha kibírod, a többi szabály már sokkal megengedőbb.
 
 ## 2. Mosás: az olaj a láthatatlan ellenség
 
-Az első nap után nyugodtan moshatod az arcod — de **olajmentes** arctisztítóval. Az olajos sminklemosók és a kétfázisú szemfestéklemosók fellazítják a lifting kötéseit, és pár használat alatt „kiengedik" az ívet.
+Az első nap után nyugodtan moshatod az arcod — de **olajmentes** arctisztítóval. Az olajos sminklemosók és a kétfázisú szemfestéklemosók fellazítják a lifting kötéseit, és pár használat alatt „kiengedik” az ívet.
 
-Keress „oil-free" vagy micellás (olajmentes) terméket, és a szemkörnyéket finoman, lefelé törölgesd — ne dörzsöld körkörösen.
+Keress „oil-free” vagy micellás (olajmentes) terméket, és a szemkörnyéket finoman, lefelé törölgesd — ne dörzsöld körkörösen.
 
 ## 3. Alvás: a párna sokat ronthat
 
-Ha hasra vagy oldalra fekve alszol, a párnába nyomott pillák reggelre megtörhetnek vagy szétállhatnak. Az ideális a **háton alvás**, de ha ez nem megy, egy selyem párnahuzat sokat segít: kevésbé „kapja meg" a pillát, mint a pamut.
+Ha hasra vagy oldalra fekve alszol, a párnába nyomott pillák reggelre megtörhetnek vagy szétállhatnak. Az ideális a **háton alvás**, de ha ez nem megy, egy selyem párnahuzat sokat segít: kevésbé „kapja meg” a pillát, mint a pamut.
 
 ## 4. Smink: kell-e egyáltalán spirál?
 
@@ -40,7 +40,7 @@ A vízálló spirál eltávolításához ugyanis dörzsölés és olaj kell — 
 
 ## 5. Ne dörzsöld, ne csavargasd
 
-Tudom, csábító reggel megdörzsölni az álmos szemet — de a mechanikus húzgálás az, ami a leggyorsabban „kihúzza" a pillát a formából. És felejtsd el a **mechanikus szempillagöndörítőt**: a liftinget pont azért csináltad, hogy ne legyen rá szükség, a fémkanál pedig megtörheti a kezelt szálakat.
+Tudom, csábító reggel megdörzsölni az álmos szemet — de a mechanikus húzgálás az, ami a leggyorsabban „kihúzza” a pillát a formából. És felejtsd el a **mechanikus szempillagöndörítőt**: a liftinget pont azért csináltad, hogy ne legyen rá szükség, a fémkanál pedig megtörheti a kezelt szálakat.
 
 ## 6. Tápláld a pilládat (a megfelelő helyen)
 
@@ -48,7 +48,7 @@ Egy kevés **pillaszérum** vagy ricinusolaj a szálak hosszára (a tőtől elta
 
 ## 7. Időzítsd jól a következő alkalmat
 
-A lifting addig tart, amíg a kezelt szálak a természetes ciklusukban ki nem hullanak — ez nagyjából **6–8 hét**. A legszebb, folyamatos eredményért érdemes a következő időpontot már a 6. hét környékére foglalni, mielőtt teljesen „kinő".
+A lifting addig tart, amíg a kezelt szálak a természetes ciklusukban ki nem hullanak — ez nagyjából **6–8 hét**. A legszebb, folyamatos eredményért érdemes a következő időpontot már a 6. hét környékére foglalni, mielőtt teljesen „kinő”.
 
 Egy fontos megkötés: két lifting között hagyj időt a pilládnak — a túl gyakori ismétlés szárazíthat. Egy jó szakember meg is mondja, ha még várni kell.
 
@@ -62,7 +62,7 @@ Egy fontos megkötés: két lifting között hagyj időt a pilládnak — a túl
 6. Pillaszérum a **hosszra**, az első nap után.
 7. Új időpont a **6. hét** környékén.
 
-Ez a hét pont nem bonyolult — de együtt ezek döntik el, hogy a lifting három hét múlva már „kiengedett", vagy nyolc héten át ugyanolyan szép marad, mint a kezelés másnapján.
+Ez a hét pont nem bonyolult — de együtt ezek döntik el, hogy a lifting három hét múlva már „kiengedett”, vagy nyolc héten át ugyanolyan szép marad, mint a kezelés másnapján.
 
 Ha szeretnéd a részleteket élőben is átbeszélni — vagy még csak most ismerkednél a kezeléssel —, nézd meg a [szempilla lifting oldalamat Zuglóban](/szempilla-lifting-zuglo), ahol az árakat és a menetet is megtalálod.
 
