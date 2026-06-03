@@ -46,8 +46,13 @@ const rootClass = `lamp-root relative flex flex-col items-center justify-center 
     <!-- Hair-thin gold rail -->
     <div class="lamp-rail absolute inset-auto z-50 h-px w-[30rem] -translate-y-[7rem] bg-goldSoft"></div>
 
-    <!-- Top ink mask -->
-    <div class="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-ink"></div>
+    <!-- Top ink mask — lágy alsó él: a maszk alja kifut (mask-image fade), így a
+         fénynyaláb teteje nem kemény vízszintes vonalként vágódik el ("doboz"),
+         hanem a homályos izzó finoman átolvad a sötétbe. -->
+    <div
+      class="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-ink"
+      style="-webkit-mask-image: linear-gradient(to bottom, white 45%, transparent); mask-image: linear-gradient(to bottom, white 45%, transparent);"
+    ></div>
   </div>
 
   <!-- Content slot -->
@@ -70,6 +75,11 @@ const rootClass = `lamp-root relative flex flex-col items-center justify-center 
     width: 30rem;
     opacity: 1;
     animation: lampFadeIn 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+    /* Lágy felső él: a fénykúp teteje ne kemény vízszintes vonalként induljon
+       (ez adta a "dobozos" hatást), hanem finoman ússzon ki a homályos izzóba.
+       A maszk a kúp tetejét átlátszóra fokozza, így a nyaláb teteje izzás, nem él. */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.35) 22%, #fff 55%);
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.35) 22%, #fff 55%);
   }
   .lamp-bulb {
     animation: lampFadeIn 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;

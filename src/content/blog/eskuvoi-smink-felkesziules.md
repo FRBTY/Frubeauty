@@ -22,7 +22,7 @@ Ha a maximumot akarod kihozni a próbasminkből, az alábbi protokoll szerint ke
 
 Ahhoz, hogy az arcod karakteréhez és az esküvő stílusához passzoló kompozíciót tervezzek, látnom kell a teljes koncepciót:
 
-**A menyasszonyi ruha fotója:** nem elég annyi, hogy „fehér". Látnom kell a dekoltázs kivágását, az anyag textúráját és az árnyalatot (hófehér, ekrü, ivory). Egy mélyen dekoltált, drámai ruhához teljesen más intenzitású smink dukál, mint egy zárt, csipkés, romantikus darabhoz.
+**A menyasszonyi ruha fotója:** nem elég annyi, hogy „fehér”. Látnom kell a dekoltázs kivágását, az anyag textúráját és az árnyalatot (hófehér, ekrü, ivory). Egy mélyen dekoltált, drámai ruhához teljesen más intenzitású smink dukál, mint egy zárt, csipkés, romantikus darabhoz.
 
 **A tervezett frizura skicce vagy képe:** teljesen másképp esnek a fények az arcra egy feltűzött alkalmi frizuránál, mint egy leengedett, hollywoodi hullámnál. A smink arányait a haj határozza meg.
 

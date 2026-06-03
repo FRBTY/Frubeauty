@@ -8,7 +8,7 @@ export interface Testimonial {
   rating: number;
   text: string;
   service: string;
-  /** Konkrét outcome — pl. „6 hét tartós lifting" (#audit #10). */
+  /** Konkrét outcome — pl. „6 hét tartós lifting” (#audit #10). */
   outcome?: string;
   /** Optional direct Google review permalink. Fallback: site-szintű review-lista. */
   googleUrl?: string;
@@ -30,7 +30,7 @@ export function TestimonialsGrid({ items }: { items: Testimonial[] }) {
                 ))}
               </div>
               <blockquote className="font-display text-xl sm:text-2xl font-light leading-snug text-cream flex-1">
-                „{t.text}"
+                „{t.text}”
               </blockquote>
               {t.outcome && (
                 <p className="mt-5 text-[11px] uppercase tracking-caps text-gold/90">

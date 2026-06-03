@@ -20,7 +20,7 @@ Vendégként nem a te dolgod ismerni a technikai különbségeket, az viszont az
 
 A lifting nem dúsít, és nem növeszt új szálakat. A saját pilláidat emeli meg a tőtől egy speciális szilikon technológiával, ívet adva a legmakacsabb, egyenesen előre vagy lefelé növekvő szálaknak is.
 
-**A hatás:** olyan, mintha a nap 24 órájában professzionális szempillagöndörítőt használnál. Nyitja a tekintetet, fáradt szemeknél pedig azonnali „facelift" hatást nyújt.
+**A hatás:** olyan, mintha a nap 24 órájában professzionális szempillagöndörítőt használnál. Nyitja a tekintetet, fáradt szemeknél pedig azonnali „facelift” hatást nyújt.
 
 **Időtartam:** 45–60 perc a székben, az eredmény pedig 6–8 hétig tart, a saját pilláid természetes cserélődési ciklusától függően.
 
@@ -37,9 +37,9 @@ A festés nem változtat a pilla állásán vagy ívén, kizárólag a pigmentá
 | Probléma | Megoldás |
 |---|---|
 | Egyenes, merev, lefelé növekvő szálak | Szempilla lifting |
-| Szőke, világos, „láthatatlan" pillavégek | Tartós festés |
+| Szőke, világos, „láthatatlan” pillavégek | Tartós festés |
 | Aszimmetrikus, rakoncátlan szemöldök | Szemöldök-laminálás |
-| A „reggel felébredek és tökéletes vagyok" hatás | Lifting + festés kombináció (a legnépszerűbb) |
+| A „reggel felébredek és tökéletes vagyok” hatás | Lifting + festés kombináció (a legnépszerűbb) |
 
 ## Miért a kombinált kezelés a top választás?
 

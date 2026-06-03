@@ -14,7 +14,7 @@ interface MagneticCTAProps {
 /**
  * CTA gomb — statikus <a>, framer-motion NÉLKÜL.
  *
- * A korábbi „magnetic" pointer-követő effekt (useMotionValue/useSpring/useTransform)
+ * A korábbi „magnetic” pointer-követő effekt (useMotionValue/useSpring/useTransform)
  * a framer-motion + use-transform chunkot a KRITIKUS útba húzta a fizetett landing
  * oldalakon (lásd a főoldal döntését: ott már statikus <a>-ra váltottunk). A press/
  * hover visszajelzést tiszta CSS adja (active:scale, hover:bg). Mivel a komponens így

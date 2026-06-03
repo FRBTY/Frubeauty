@@ -77,7 +77,7 @@ export const analytics: AnalyticsConfig = {
  * AnnouncementBar master kapcsoló. FONTOS: a bar NEM statikus/kézi számot mutat —
  * az AnnouncementBar komponens élő, böngészőnkénti localStorage-számláló (a MAI
  * Notino-CTA kattintásokat számolja az adott eszközön), és csak akkor jelenik meg,
- * ha már volt katt. Ezért NINCS „bookingsToday"/„updatedAt" — nem kell heti kézi
+ * ha már volt katt. Ezért NINCS „bookingsToday”/„updatedAt” — nem kell heti kézi
  * frissítés, és nem mutatunk idegenek nevében fabrikált számot. Csak az enabled él.
  */
 interface RecencyProof {

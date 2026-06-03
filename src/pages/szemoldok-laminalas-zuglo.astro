@@ -225,7 +225,7 @@ const testimonials = [
 const faqs = [
   { q: 'Fáj a szemöldök laminálás?', a: 'Egyáltalán nem. A laminálás teljesen fájdalommentes — a szőrszálakat kíméletes anyagokkal kezeljük, a bőrt nem érintjük tűvel. A legtöbb vendég 60 percen át pihentető kezelésként éli meg.' },
   { q: 'Meddig tart a szemöldök laminálás eredménye?', a: 'A laminálás és a festés együtt kb. 6 hétig tart, attól függően, milyen gyorsan nő vissza a szemöldöked. Az otthoni ápolással (első 24 óra vízmentes, kerüld az olajt a szemöldök területén) az eredmény a teljes időszakot kitölti.' },
-  { q: 'Mennyi idő után látszik a végső forma?', a: 'A formát rögtön a kezelés után látod, de a teljes „letisztult" eredményhez 24 óra kell — ekkor veszik fel a szőrszálak a végleges állást. Az első 24 órában érdemes elkerülni a vizes-gőzös környezetet.' },
+  { q: 'Mennyi idő után látszik a végső forma?', a: 'A formát rögtön a kezelés után látod, de a teljes „letisztult” eredményhez 24 óra kell — ekkor veszik fel a szőrszálak a végleges állást. Az első 24 órában érdemes elkerülni a vizes-gőzös környezetet.' },
   { q: 'Mit hozzak magammal a kezelésre?', a: 'Semmit. Smink nélkül érkezz (a szemöldök területére nézve), ennyi elég. A többi szakmai eszközt és anyagot én biztosítom — bőrbarát, koreai technika, dermatológiailag tesztelt termékek.' },
   { q: 'Mit tehetek otthon, hogy minél tovább tartson?', a: 'A kezelés utáni 24 órában kerüld a vizet, gőzt, szaunát. A szemöldök területét ne dörzsöld, ne használj zsíros arckrémet vagy sminklemosót ott. A részletes utógondozási útmutatót a kezelés végén szóban is átbeszéljük.' },
   { q: 'Le lehet mondani vagy módosítani az időpontot?', a: 'Igen, 24 órával az időpont előtt bármikor díjmentesen.' },
@@ -364,6 +364,12 @@ const breadcrumbSchema = {
         <div class="hero-reveal lg:col-span-7">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Szemöldök kezelés · 1143 Budapest · XIV. kerület</p>
           <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Szemöldök laminálás <em class="display">Zuglóban</em> — dúsabb, rendezett szemöldök tű nélkül.</h1>
+          {/* Above-the-fold trust-sor: ★5,0 a hero első képernyőjén (mobilon is). */}
+          <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] tracking-caps">
+            <span class="text-gold font-medium">★ 5,0</span>
+            <span class="text-creamMute/50" aria-hidden="true">·</span>
+            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="uppercase text-creamMute hover:text-cream transition-colors">40+ Google-értékelés →</a>
+          </div>
           <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">A szemöldök laminálás a rakoncátlan szálakat rendezi, fixálja és dúsabbnak mutatja — tű és tetoválás nélkül. Zuglóban (Egressy út 16.) koreai technikával, bőrbarát anyagokkal végzem; az eredmény ~6 hétig tart. 11.000 Ft (festéssel és formázással együtt), ~60 perc.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
             <a href={config.booking} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
@@ -663,7 +669,7 @@ const breadcrumbSchema = {
         <p class="mt-5 text-creamSoft leading-[1.7] max-w-[62ch]">A három legnépszerűbb szemöldök-kezelés — egymás mellett. A különbség nem csak a hatásban mutatkozik meg, hanem a tartósságban, a kockázatban és az árban is.</p>
       </Reveal>
       <Reveal client:visible as="div" delay={0.05} className="grid md:grid-cols-3 gap-5 sm:gap-6">
-        <article class="bg-inkSoft border border-gold/30 rounded-3xl p-6 sm:p-8">
+        <article class="bg-inkSoft border-2 border-gold/70 rounded-3xl p-6 sm:p-8 shadow-[0_0_48px_-10px_rgba(184,136,74,0.55)]">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-4">Szemöldök laminálás</p>
           <h3 class="font-display text-xl font-medium text-cream mb-5 leading-snug">Természetes, visszafordítható</h3>
           <ul class="space-y-3">

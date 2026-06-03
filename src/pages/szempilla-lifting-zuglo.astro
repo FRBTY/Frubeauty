@@ -108,7 +108,7 @@ const testimonials = [
 const faqs = [
   { q: 'Fáj a szempilla lifting?', a: 'Egyáltalán nem. Csukott szemmel fekszel, és semmiféle szúrást vagy húzást nem érzel. A legtöbb vendég kifejezetten pihentetőnek tartja a 90 percet.' },
   { q: 'Meddig tart a szempilla lifting eredménye?', a: 'A lifting és a festés együtt 6–8 hétig tart, attól függően, milyen gyorsan újul meg a pilládon a természetes ciklus. A szemöldök laminálás kb. 6 hetes tartósságra számíthat.' },
-  { q: 'Mennyi idő után látszik a végső forma a szemöldök lamináláson?', a: 'A formát rögtön a kezelés után látod, de a teljes „letisztult" eredményhez 24 óra kell, mert a szőrszálak akkor veszik fel a végleges állást. Az első 24 órában érdemes elkerülni a vizes-gőzös környezetet.' },
+  { q: 'Mennyi idő után látszik a végső forma a szemöldök lamináláson?', a: 'A formát rögtön a kezelés után látod, de a teljes „letisztult” eredményhez 24 óra kell, mert a szőrszálak akkor veszik fel a végleges állást. Az első 24 órában érdemes elkerülni a vizes-gőzös környezetet.' },
   { q: 'Mit hozzak magammal a kezelésre?', a: 'Semmit. Smink nélkül érkezz (a szemkörnyékre nézve), ennyi elég. A többi szakmai eszközt és anyagot én biztosítom — bőrbarát, koreai technika, dermatológiailag tesztelt termékek.' },
   { q: 'Mit tehetek otthon, hogy minél tovább tartson?', a: 'A kezelés utáni 24 órában kerüld a vizet, gőzt, szaunát. Pilládat ne dörzsöld, ne használj olajos sminklemosót a szemkörnyéken. A részletes utógondozási útmutatót a kezelés végén szóban is átbeszéljük.' },
   { q: 'Le lehet mondani vagy módosítani az időpontot?', a: 'Igen, 24 órával az időpont előtt bármikor díjmentesen.' },
@@ -117,7 +117,6 @@ const faqs = [
 const galleryImages = [
   '/img/szempilla_lifting_szemoldok_laminalas_zuglo_budapest_munka_.webp',
   '/img/szempilla-lifting-3.webp',
-  '/img/service-szempilla.webp',
   '/img/szempilla-szemoldok-vendeg-uj.webp',
   '/img/szempilla-lifting-budapest-egressy-ut-munka.webp',
 ];
@@ -126,7 +125,6 @@ const galleryImages = [
 const galleryAlts = [
   'Szempilla lifting eredménye közelről — emelt, ívelt pillák, FRUBEAUTY Zugló',
   'Szempilla lifting előtte-utána — emelt, dúsabb pillák, FRUBEAUTY Budapest',
-  'Szempilla lifting és szemöldök eredménye — ápolt tekintet, FRUBEAUTY Egressy út',
   'Szempilla lifting és szemöldök laminálás — natúr, ápolt tekintet, FRUBEAUTY Budapest',
   'Szempilla lifting és ápolt szemöldök — természetes tekintet, FRUBEAUTY Zugló',
 ];
@@ -243,6 +241,13 @@ const serviceSchemas = [
         <div class="hero-reveal lg:col-span-7">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Szempilla lifting · 1143 Budapest · XIV. kerület</p>
           <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Szempilla lifting <em class="display">Zuglóban</em> — reggel smink nélkül, tökéletes tekintet.</h1>
+          {/* Above-the-fold trust-sor: a ★5,0 a hero ELSŐ képernyőjén (mobilon is),
+              nem csak a lenti stats-sávban — azonnali bizonyíték a pogo-stick ellen. */}
+          <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] tracking-caps">
+            <span class="text-gold font-medium">★ 5,0</span>
+            <span class="text-creamMute/50" aria-hidden="true">·</span>
+            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="uppercase text-creamMute hover:text-cream transition-colors">40+ Google-értékelés →</a>
+          </div>
           <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">A szempilla lifting a saját pilláid tövét emeli meg és rögzíti ívelt formába, így tus nélkül is hosszabbnak, dúsabbnak látszanak. Zuglóban (Egressy út 16.) koreai technikával, ragasztómentes, bőrbarát anyagokkal végzem; az eredmény 6–8 hétig tart. Ár: 12.000 Ft (festéssel együtt), időtartam ~90 perc.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
             <a href={config.booking} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
@@ -337,7 +342,7 @@ const serviceSchemas = [
     </div>
   </section>
 
-  <section class="py-20 sm:py-28">
+  <section id="csomagajanlatok" class="py-20 sm:py-28">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div" className="mb-14 sm:mb-20 max-w-2xl">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Csomagajánlatok</p>
@@ -439,13 +444,7 @@ const serviceSchemas = [
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);"><em class="display">Vendégeim</em>.</h2>
         <p class="mt-4 text-sm text-creamMute">Kattints a képekre a teljes nézethez</p>
       </Reveal>
-      <GalleryGrid client:visible count={5} images={galleryImages} alts={galleryAlts} size="large" />
-      <Reveal client:visible as="div" className="mt-16 sm:mt-20" delay={0.1}>
-        <div class="max-w-[380px] mx-auto">
-          <p class="text-[11px] uppercase tracking-caps text-gold mb-4 text-center">Szempilla lifting</p>
-          <HeroMedia client:visible videoSrc="/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet.mp4" posterSrc="/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet-poster.webp" alt="Szempilla lifting munka közben — FRUBEAUTY Zugló, 14. kerület" aspect="9 / 16" maxWidthClass="max-w-full" />
-        </div>
-      </Reveal>
+      <GalleryGrid client:visible count={4} images={galleryImages} alts={galleryAlts} size="large" />
       <Reveal client:visible as="div" className="mt-12 text-center" delay={0.15}>
         <a href={config.instagram} target="_blank" rel="noopener" class="group inline-flex items-center text-[12px] uppercase tracking-caps text-cream hover:text-gold transition-colors">Több munkám az Instagramon<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
       </Reveal>
@@ -483,7 +482,7 @@ const serviceSchemas = [
         <p class="mt-5 text-creamSoft leading-[1.7] max-w-[62ch]">Sokan küzdenek a döntéssel. A különbség nem csak a kinézetben, hanem az életmódban és az utógondozásban rejlik.</p>
       </Reveal>
       <Reveal client:visible as="div" delay={0.05} className="grid md:grid-cols-2 gap-5 sm:gap-6">
-        <article class="bg-inkSoft border border-gold/30 rounded-3xl p-6 sm:p-8">
+        <article class="bg-inkSoft border-2 border-gold/70 rounded-3xl p-6 sm:p-8 shadow-[0_0_48px_-10px_rgba(184,136,74,0.55)]">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-4">Szempilla lifting</p>
           <h3 class="font-display text-xl font-medium text-cream mb-5 leading-snug">Természetes, karbantartás nélkül</h3>
           <ul class="space-y-3">

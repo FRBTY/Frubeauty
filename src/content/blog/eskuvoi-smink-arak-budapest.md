@@ -12,7 +12,7 @@ metaTitle: "Esküvői smink ára Budapesten 2026 | FRUBEAUTY"
 metaDescription: "Mennyibe kerül az esküvői smink Budapesten? Próbasmink, menyasszonyi smink, örömanya és kiszállás árak — és mi van valójában az árban."
 ---
 
-A legelső kérdés, ami egy menyasszonynak eszébe jut: *„mennyibe fog ez kerülni?"* Teljesen jogos — de a puszta szám önmagában félrevezető. Egy 12 000 forintos és egy 30 000 forintos „menyasszonyi smink" között ugyanis nem feltétlenül a smink minőségében van a különbség, hanem abban, **mi van benne**: van-e próbasmink, bőrelőkészítés, tartós fixálás, és mennyi idő jut rád.
+A legelső kérdés, ami egy menyasszonynak eszébe jut: *„mennyibe fog ez kerülni?”* Teljesen jogos — de a puszta szám önmagában félrevezető. Egy 12 000 forintos és egy 30 000 forintos „menyasszonyi smink” között ugyanis nem feltétlenül a smink minőségében van a különbség, hanem abban, **mi van benne**: van-e próbasmink, bőrelőkészítés, tartós fixálás, és mennyi idő jut rád.
 
 Nézzük át átláthatóan, mibe kerül az alkalmi és esküvői smink Budapesten, mi mozgatja az árat, és mit kapsz a pénzedért nálam, Zuglóban.
 
@@ -39,14 +39,14 @@ Próbasmink nélkül az esküvő reggelén tippelünk — és az a lehető legro
 
 ## Mi befolyásolja az árat?
 
-- **Próbasmink:** a komoly menyasszonyi ár szinte mindig tartalmaz (vagy feltételez) egy próbát. Ha valahol „olcsó" a menyasszonyi smink, kérdezd meg, benne van-e a próba.
+- **Próbasmink:** a komoly menyasszonyi ár szinte mindig tartalmaz (vagy feltételez) egy próbát. Ha valahol „olcsó” a menyasszonyi smink, kérdezd meg, benne van-e a próba.
 - **Helyszíni kiszállás:** ha a sminkes hozzád vagy a helyszínre megy, a kiszállás díja a távolságtól és a korai időponttól függ. Ezt érdemes előre tisztázni — nálam egyedi egyeztetés alapján, a helyszínen fizetendő.
 - **Létszám:** koszorúslányok, örömanya — több arc több időt és tervezést jelent. Örömanya sminket azonos napra én is vállalok, külön egyeztetéssel.
 - **Szezon és időpont:** a főszezonban (május–szeptember) a szombatok gyorsan betelnek. Itt nem feltétlenül az ár nő, hanem a szabad időpont fogy — érdemes korán foglalni.
 
 ## Mi van az árban — nálam?
 
-Amikor nálam egy árat kimondok, az a **teljes folyamatot** fedi, nincs rejtett „belépő":
+Amikor nálam egy árat kimondok, az a **teljes folyamatot** fedi, nincs rejtett „belépő”:
 
 - **Bőrelőkészítés és hidratálás** minden smink előtt (köztük Janssen ápolók) — ha az alap nem stabil, a smink sem tart.
 - **Hosszan tartó fixálás** — a smink kibírja az ölelést, a könnyet, az evést és az áttáncolt éjszakát. Egy esküvőn ez nem extra, hanem alapelvárás.
@@ -55,7 +55,7 @@ Amikor nálam egy árat kimondok, az a **teljes folyamatot** fedi, nincs rejtett
 
 ## Miért nem a legolcsóbbat érdemes választani
 
-Az esküvői sminked **minden fotón rajtad lesz** — életed végéig. Egy rosszul megválasztott, délutánra megcsúszó vagy „túltolt", maszkszerű smink pont azokon a képeken látszik, amiket a legtöbbet fogsz nézni. A néhány ezer forint különbség egy életre szóló dokumentumon a legrosszabb helyen megspórolt összeg.
+Az esküvői sminked **minden fotón rajtad lesz** — életed végéig. Egy rosszul megválasztott, délutánra megcsúszó vagy „túltolt”, maszkszerű smink pont azokon a képeken látszik, amiket a legtöbbet fogsz nézni. A néhány ezer forint különbség egy életre szóló dokumentumon a legrosszabb helyen megspórolt összeg.
 
 A jó hír: a minőséghez **nem kell a legdrágábbat** választani — elég egy olyan sminkes, aki próbasminkkel dolgozik, ismeri a tartós technikákat, és időt szán rád.
 

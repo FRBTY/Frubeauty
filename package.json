@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "deploy": "npm run build && netlify deploy --prod"
   },
   "dependencies": {
     "@astrojs/react": "^4.1.0",
