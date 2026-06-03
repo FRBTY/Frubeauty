@@ -123,9 +123,12 @@ export function AnnouncementBar({ enabled = true }: AnnouncementBarProps) {
         <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-2.5 flex items-center justify-center gap-3 sm:gap-4 text-[12px] sm:text-[13px]">
           <span className="inline-flex w-1.5 h-1.5 rounded-full bg-ink flex-shrink-0 animate-pulse" aria-hidden />
           <p className="text-center leading-snug">
-            <span className="font-medium">Ma már {count} új foglalás érkezett.</span>
+            {/* Igazmondó felirat: a bar a SAJÁT, mai Notino-CTA kattintásod után jelenik
+                meg, ezért nem állítunk idegenek foglalásairól semmit — befejezésre
+                ösztönző (cart-reminder) üzenet, nem hamis social proof. */}
+            <span className="font-medium">Elkezdted az online foglalást.</span>
             <span className="hidden sm:inline mx-2 opacity-60">·</span>
-            <span className="block sm:inline font-semibold mt-0.5 sm:mt-0">Foglalj te is online.</span>
+            <span className="block sm:inline font-semibold mt-0.5 sm:mt-0">Fejezd be a Notino felületén →</span>
           </p>
           <button
             type="button"

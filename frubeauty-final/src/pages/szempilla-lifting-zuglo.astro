@@ -21,36 +21,14 @@ import { siteConfig } from '../config/site';
 
 const services = [
   {
-    id: 'szemoldok-laminalas',
-    eyebrow: 'Szemöldök kezelés',
-    title: 'Szemöldök',
-    titleAccent: 'Laminálás',
-    titleSuffix: '+ Formázás',
-    description:
-      'A szemöldök laminálás a rakoncátlan szálakat rendezi és fixálja — dúsabb, határozottabb megjelenést ad az arcnak. Festéssel és formázással együtt, tetoválás és tű nélkül.',
-    warning: 'Várandósság idején nem ajánlott igénybevenni a szolgáltatást.',
-    bullets: [
-      'Fixált forma',
-      'Optikai dúsítás — ritkás szemöldök is tömöttnek látszik',
-      '6 hétig tartós, időálló stílus',
-      'Személyre szabott forma és festés',
-    ],
-    duration: '~ 60 perc',
-    price: '11 000 Ft',
-    priceSuffix: 'egyedi kezelés',
-    image: '/img/szemoldok-laminalas-budapest-egressy-ut-frubeauty-munka.webp',
-    imageAlt: 'Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló',
-    imageSide: 'right' as const,
-  },
-  {
     id: 'szempilla-lifting',
     eyebrow: 'Szempilla kezelés',
     title: 'Szempilla',
     titleAccent: 'Lifting',
     titleSuffix: '+ Festés',
     description:
-      'A szempilla lifting a saját pilláidat emeli meg a tövétől — optikailag hosszabbnak, dúsabbnak tűnnek, tus nélkül is. Koreai technikával, bőrbarát anyagokkal.',
-    warning: 'Várandósság idején nem ajánlott igénybevenni a szolgáltatást.',
+      'A szempilla lifting a saját pilláidat emeli meg a tövüktől — optikailag hosszabbnak, dúsabbnak tűnnek, tus nélkül is. Koreai technikával, bőrbarát anyagokkal.',
+    warning: 'Várandósság idején nem ajánlott igénybe venni a szolgáltatást.',
     bullets: [
       'Reggel tus és fésülés nélkül is tökéletes tekintet',
       '6–8 hétig tartós, vízálló eredmény',
@@ -63,6 +41,30 @@ const services = [
     image: '/img/szempillalifting-budapest-egressy-ut-munka-szempilla-oldal-2-kep.webp',
     imageAlt: 'Szempilla lifting munka — natúr pillaív, FRUBEAUTY Zugló',
     imageSide: 'left' as const,
+    linkHref: null as string | null,
+  },
+  {
+    id: 'szemoldok-laminalas',
+    eyebrow: 'Szemöldök kezelés',
+    title: 'Szemöldök',
+    titleAccent: 'Laminálás',
+    titleSuffix: '+ Formázás',
+    description:
+      'A szemöldök laminálás a rakoncátlan szálakat rendezi és fixálja — dúsabb, határozottabb megjelenést ad az arcnak. Festéssel és formázással együtt, tetoválás és tű nélkül.',
+    warning: 'Várandósság idején nem ajánlott igénybe venni a szolgáltatást.',
+    bullets: [
+      'Fixált forma',
+      'Optikai dúsítás — ritkás szemöldök is tömöttnek látszik',
+      '~6 hétig tartós, időálló stílus',
+      'Személyre szabott forma és festés',
+    ],
+    duration: '~ 60 perc',
+    price: '11 000 Ft',
+    priceSuffix: 'egyedi kezelés',
+    image: '/img/szemoldok-laminalas-budapest-egressy-ut-frubeauty-munka.webp',
+    imageAlt: 'Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló',
+    imageSide: 'right' as const,
+    linkHref: '/szemoldok-laminalas-zuglo' as string | null,
   },
 ];
 
@@ -84,26 +86,23 @@ const otherServices = [
 const includedPoints = [
   { eyebrow: '01', title: 'Koreai technika', body: 'A klasszikus szilikon-formás megoldás helyett koreai lash lift technikát alkalmazok — szelídebb, mégis látványosabb íveltség, hosszabb tartóssággal.' },
   { eyebrow: '02', title: 'Bőrbarát anyagok', body: 'Csak dermatológiailag tesztelt, ragasztómentes hatóanyagokkal dolgozom. Érzékeny szemkörnyékre is alkalmas — nincs csípés, nincs irritáció.' },
-  { eyebrow: '03', title: 'Személyre szabott forma', body: 'A szempilla- és szemöldökforma az arckaraktered szerint igazodik — nem egy sablonos, mindenkinek ugyanúgy néz ki eredményt kapsz.' },
+  { eyebrow: '03', title: 'Személyre szabott forma', body: 'A szempilla- és szemöldökforma az arckarakteredhez igazodik — nem sablonos, mindenkinek ugyanolyan eredményt kapsz, hanem rád szabottat.' },
   { eyebrow: '04', title: 'Egyetlen vendég, teljes figyelem', body: 'Egyszerre csak egy vendéget fogadok. Nincs kapkodás, nincs egymást követő futószalag — a kezelés a te ritmusodban zajlik.' },
 ];
 
 const processSteps = [
   { step: '01', title: 'Konzultáció', body: 'Megbeszéljük az elvárt eredményt, bőrtípust és esetleges érzékenységet. Ha első alkalommal jársz, együtt nézzük meg, melyik forma és intenzitás illik az arcodhoz.' },
   { step: '02', title: 'Előkészítés', body: 'A terület alapos megtisztítása — zsírmentes, maradványmentes felület. Ez a lépés dönti el, hogy a lifting és a festés mennyi ideig tart majd.' },
-  { step: '03', title: 'Kezelés', body: 'A lifting vagy laminálás folyamata koreai technikával, bőrbarát anyagokkal. Csukott szemmel fekszel — a legtöbb vendég kifejezetten pihentetőnek tartja a kezelést.' },
+  { step: '03', title: 'Kezelés', body: 'A lifting koreai technikával, ragasztómentes bőrbarát anyagokkal zajlik. Csukott szemmel fekszel — a legtöbb vendég kifejezetten pihentetőnek tartja a 90 percet. Sokan el is szundítanak.' },
   { step: '04', title: 'Végeredmény', body: 'Festés, formázás — tükörbe nézel és imádni fogod. Megbeszéljük az otthoni teendőket is, hogy az eredmény a teljes 6–8 hetet kibírja.' },
 ];
 
 const testimonials = [
-  { name: 'Hajni Kiss', rating: 5, text: 'Szempilla liftingen és szemöldöklamináláson voltam Fruzsinál, és nagyon megvoltam elégedve az eredménnyel!', service: 'Szempilla lifting + szemöldök laminálás' },
   { name: 'Kitti Varga-Tóth', rating: 5, text: 'Szempilla lifting a kedvencem, többször is voltam már és biztosan megyek még. Profi szakember, szívből ajánlom mindenkinek.', service: 'Szempilla lifting' },
   { name: 'Marietta Kurja', rating: 5, text: 'Először jártam szempilla liftingen, így nagy bizalommal fordultam Fruzsinához, aki csodás munkát végzett, miközben jó hangulatban telt a kezelés!', service: 'Szempilla lifting' },
   { name: 'Gabriella Hendrik', rating: 5, text: 'Már az első pillanattól kezdve kedvesen és figyelmesen fogadott, végig érezhető volt a profizmus és a hozzáértés. A végeredmény magáért beszél: gyönyörű lett a pillám. Biztosan visszatérek még, és szívből ajánlom mindenkinek!', service: 'Szempilla lifting' },
-  { name: 'Krisztina Daczó', rating: 5, text: 'Először jártam Fruzsinál szemöldök lamináláson, és nagyon meg vagyok elégedve. Nagyon kellemes volt a légkör és Fruzsi személyisége is nagyon pozitív. Rugalmas az időpontokat illetően, amit nagyon köszönök neki!', service: 'Szemöldök laminálás' },
-  { name: 'Virág Pataki', rating: 5, text: 'Fruzsi csodás szakember, hazaérve is minden tükörben a szemöldököm néztem!', service: 'Szemöldök laminálás' },
-  { name: 'Erika Hojsz-Koczó', rating: 5, text: 'Nemrég jártam Fruzsinál, szemöldök laminálást és festést kértem. Nagyon elégedett vagyok a végeredménnyel! Biztos, hogy fogok még menni hozzá, de akkor már pillát is liftingelünk, mert miért ne?!', service: 'Szemöldök laminálás' },
   { name: 'Anita Kolozs', rating: 5, text: 'Nagyon kedvesen, barátságosan fogadott. Nagyon jó hangulatban telt a pillázás. És a végeredmény is gyönyörű lett! Köszönöm szépen.', service: 'Szempilla lifting' },
+  { name: 'Hajni Kiss', rating: 5, text: 'Szempilla liftingen és szemöldöklamináláson voltam Fruzsinál, és nagyon megvoltam elégedve az eredménnyel!', service: 'Szempilla lifting + szemöldök laminálás' },
 ];
 
 const faqs = [
@@ -116,26 +115,20 @@ const faqs = [
 ];
 
 const galleryImages = [
-  '/img/szempilla-lifting-szemoldok-laminalas-zuglo-budapest-egressy-ut.webp',
-  '/img/szemoldok-laminalas-budapest-egressy-ut-zuglo-munka.webp',
-  '/img/szemoldok-laminalas-budapest-munka-egressy-zuglo.webp',
+  '/img/szempilla_lifting_szemoldok_laminalas_zuglo_budapest_munka_.webp',
+  '/img/szempilla-lifting-3.webp',
+  '/img/service-szempilla.webp',
+  '/img/szempilla-szemoldok-vendeg-uj.webp',
   '/img/szempilla-lifting-budapest-egressy-ut-munka.webp',
-  '/img/szempillalifting-szemoldoklaminalas-budapest-egressy-ut-munka.webp',
-  '/img/szempilla-lifting-szemoldok-laminalas-zuglo-budapest-munka.webp',
-  '/img/szempilla-lifting-szemoldok-laminalas-vendeg-kep-egressy-ut-zuglo.webp',
-  '/img/szemoldok-laminalas-vendeg-kep-budapest-egressy-ut-kozmetika.webp',
 ];
 
 // SEO: per-kép alt szövegek — kulcsszavas, egyedi leírás minden képhez
 const galleryAlts = [
-  'Szempilla lifting és szemöldök laminálás előtte-utána — FRUBEAUTY Zugló, Egressy út',
-  'Szemöldök laminálás munka eredménye — FRUBEAUTY Budapest, XIV. kerület',
-  'Szemöldök laminálás Zugló — FRUBEAUTY Egressy út kozmetika',
-  'Szempilla lifting munka — natúr pillaív FRUBEAUTY Budapest',
-  'Szempilla lifting és szemöldök laminálás egyszerre — FRUBEAUTY Zugló',
-  'Szempilla lifting szemöldök laminálás vendég eredmény — Budapest XIV. kerület',
-  'Szempilla lifting előtte-utána vendég kép — FRUBEAUTY Egressy út Zugló',
-  'Szemöldök laminálás vendég eredmény — FRUBEAUTY Budapest kozmetika',
+  'Szempilla lifting eredménye közelről — emelt, ívelt pillák, FRUBEAUTY Zugló',
+  'Szempilla lifting előtte-utána — emelt, dúsabb pillák, FRUBEAUTY Budapest',
+  'Szempilla lifting és szemöldök eredménye — ápolt tekintet, FRUBEAUTY Egressy út',
+  'Szempilla lifting és szemöldök laminálás — natúr, ápolt tekintet, FRUBEAUTY Budapest',
+  'Szempilla lifting és ápolt szemöldök — természetes tekintet, FRUBEAUTY Zugló',
 ];
 const config = { ...siteConfig };
 
@@ -153,7 +146,58 @@ const faqSchema = {
   })),
 };
 
-// ── SEO: Service schema az egyes kezelésekhez ────────────────────────────
+// ── SEO: HowTo schema (a kezelés 4 lépése) ───────────────────────────────
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'Szempilla lifting menete — FRUBEAUTY Zugló',
+  description:
+    'A szempilla lifting 4 lépésben, koreai technikával, ragasztómentes, bőrbarát anyagokkal a zuglói szalonban.',
+  totalTime: 'PT90M',
+  step: processSteps.map((s) => ({
+    '@type': 'HowToStep',
+    name: s.title,
+    text: s.body,
+  })),
+};
+
+// ── SEO: VideoObject schema ────────────────────────────────────────────────
+const videoSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: 'Szempilla lifting munka közben — FRUBEAUTY Zugló, 14. kerület',
+  description:
+    'Szempilla lifting koreai technikával, ragasztómentes, bőrbarát anyagokkal a zuglói szalonban. Pecze-Kovács Fruzsina kozmetikus.',
+  thumbnailUrl:
+    'https://frubeauty.com/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet-poster.webp',
+  contentUrl:
+    'https://frubeauty.com/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet.mp4',
+  uploadDate: '2026-01-01',
+  publisher: { '@id': 'https://frubeauty.com/#business' },
+};
+
+// SEO: a self-serving Review schema eltávolítva — a saját domainen elhelyezett,
+// magunkról szóló értékelés-jelölés LocalBusiness-nél nem hoz csillagot és
+// policy-kockázatos. A vélemények a Google Business Profile-on élnek.
+
+// ── SEO: BreadcrumbList schema ────────────────────────────────────────────
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Főoldal', item: 'https://frubeauty.com' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Szempilla lifting Zugló',
+      item: 'https://frubeauty.com/szempilla-lifting-zuglo',
+    },
+  ],
+};
+
+// ── SEO: Service schema — CSAK a szempilla lifting. A szemöldök laminálásnak külön
+//    dedikált oldala van (/szemoldok-laminalas-zuglo), ezért a szemöldök Service
+//    schemát onnan szolgáljuk ki — itt kivettük, hogy ne kannibalizáljuk a kulcsszót.
 const serviceSchemas = [
   {
     '@context': 'https://schema.org',
@@ -177,56 +221,40 @@ const serviceSchemas = [
       availability: 'https://schema.org/InStock',
     },
   },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: 'Szemöldök Laminálás + Formázás Zugló',
-    description:
-      'Szemöldök laminálás, festés és formázás Zuglóban, a XIV. kerületben. 6 hétig tartós, természetes dúsabb megjelenés.',
-    provider: {
-      '@type': 'BeautySalon',
-      name: 'FRUBEAUTY – Pecze-Kovács Fruzsina',
-      url: 'https://frubeauty.com',
-    },
-    areaServed: [
-      { '@type': 'City', name: 'Budapest' },
-      { '@type': 'AdministrativeArea', name: 'Zugló' },
-    ],
-    offers: {
-      '@type': 'Offer',
-      price: '11000',
-      priceCurrency: 'HUF',
-      availability: 'https://schema.org/InStock',
-    },
-  },
 ];
 ---
 
 <Layout
   title="Szempilla Lifting Zugló – 12.000 Ft | ★5,0 · 40 Vélemény | FRUBEAUTY"
-  description="★5,0 · 40+ Google-értékelés · Szempilla lifting + szemöldök laminálás Zuglóban, XIV. kerület. Koreai technika, 6–8 hétig tartós. 12.000 Ft-tól → Foglalj most!"
-  additionalSchemas={[faqSchema, ...serviceSchemas]}
+  description="★5,0 · 40+ Google-értékelés · Szempilla lifting Zuglóban, XIV. kerület. Koreai technika, ragasztómentes, 6–8 hétig tartós. 12.000 Ft-tól → Foglalj most!"
+  additionalSchemas={[faqSchema, howToSchema, videoSchema, breadcrumbSchema, ...serviceSchemas]}
+  preloadImage="/img/szempilla-szemoldok-szolgaltatas-budapest-egressy-ut-szempillaoldal1kep.webp"
 >
   <SiteHeader />
 
   <section class="relative overflow-hidden pt-32 sm:pt-40 pb-16 sm:pb-24">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end">
-        <Reveal client:load as="div" className="lg:col-span-7" distance={20}>
-          <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Szempilla &amp; szemöldök · 1143 Budapest · XIV. kerület</p>
-          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Szempilla lifting és szemöldök laminálás <em class="display">Zuglóban</em> — reggel smink nélkül.</h1>
-          <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">Szempilla lifting és szemöldök laminálás — tartós, természetes eredmény a zuglói szalonban. Reggeli rutin nélkül, koreai technikával, bőrbarát anyagokkal.</p>
+        {/* Hero STATIKUS, JS nélkül (a főoldal mintájára): se Reveal/framer-motion,
+            se MagneticCTA a kritikus úton — ez a fizetett Ads-landing, itt számít a
+            legjobban a mobil LCP. A reveal tiszta CSS (.hero-reveal: csak transform,
+            opacity végig 1 → az LCP az első festéskor regisztrálódik, nincs hidratálási
+            függőség). A hero LCP-képét a Layout preloadImage propja előtölti. */}
+        <div class="hero-reveal lg:col-span-7">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Szempilla lifting · 1143 Budapest · XIV. kerület</p>
+          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Szempilla lifting <em class="display">Zuglóban</em> — reggel smink nélkül, tökéletes tekintet.</h1>
+          <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">A szempilla lifting a saját pilláid tövét emeli meg és rögzíti ívelt formába, így tus nélkül is hosszabbnak, dúsabbnak látszanak. Zuglóban (Egressy út 16.) koreai technikával, ragasztómentes, bőrbarát anyagokkal végzem; az eredmény 6–8 hétig tart. Ár: 12.000 Ft (festéssel együtt), időtartam ~90 perc.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
-            <MagneticCTA client:load href={config.booking} external variant="primary">Időpontot foglalok</MagneticCTA>
-            <MagneticCTA client:load href="#csomagok" variant="secondary">Árak</MagneticCTA>
+            <a href={config.booking} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+            <a href="#csomagok" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Árak</a>
           </div>
           <p class="mt-6 text-[12px] uppercase tracking-caps text-creamMute">Online foglalás · Egressy út 16. · XIV. kerület</p>
-        </Reveal>
-        <Reveal client:load as="div" className="lg:col-span-5" distance={20} delay={0.1}>
+        </div>
+        <div class="lg:col-span-5">
           <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-black">
-            <img src="/img/szempilla-szemoldok-szolgaltatas-budapest-egressy-ut-szempillaoldal1kep.webp" alt="Szempilla lifting és szemöldök laminálás — FRUBEAUTY zuglói szalon" width="800" height="1000" class="w-full h-full object-cover" loading="eager" fetchpriority="high" />
+            <img src="/img/szempilla-szemoldok-szolgaltatas-budapest-egressy-ut-szempillaoldal1kep.webp" alt="Szempilla lifting eredmény — FRUBEAUTY zuglói szalon, Egressy út" width="800" height="1000" class="w-full h-full object-cover" loading="eager" fetchpriority="high" />
           </div>
-        </Reveal>
+        </div>
       </div>
     </div>
   </section>
@@ -250,8 +278,8 @@ const serviceSchemas = [
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">A szemek szépségére <em class="display">specializálódtam</em>.</h2>
         </Reveal>
         <Reveal client:visible as="div" className="lg:col-span-7 space-y-5 text-creamSoft leading-[1.7] text-[16px] sm:text-[17px]" delay={0.1}>
-          <p>Kozmetikusként a szemek szépségére specializálódtam — szempilla liftingre és szemöldök laminálásra. Hiszem, hogy minden vendég egyedi, és az eredménynek <span class="text-cream">természetesnek</span>, mégis <span class="text-cream">látványosnak</span> kell lennie.</p>
-          <p>A zuglói szalonomban egyszerre csak <span class="text-gold font-medium">egy vendéget</span> fogadok, hogy minden kezelés teljes figyelmet és gondoskodást kapjon. Janssen kozmetikai termékekkel és koreai technikával dolgozom.</p>
+          <p>Nem általános szépségápolással foglalkozom, hanem kifejezetten a pillákkal — azzal, hogy a saját szempilláid úgy nézzenek ki ébredés után, mintha ki lennél sminkelve. <span class="text-cream">Koreai lash lift technikával</span>, ragasztó nélkül.</p>
+          <p>A zuglói szalonomban egyszerre csak <span class="text-gold font-medium">egy vendéget</span> fogadok. Nincs várakozóterem-hangulat, nincs kapkodás — a ~90 perc a tiéd, és az eredményt a tükörnél fogod értékelni igazán.</p>
         </Reveal>
       </div>
     </div>
@@ -289,7 +317,15 @@ const serviceSchemas = [
                 </ul>
                 <p class="mt-8 text-[11px] uppercase tracking-caps text-creamMute">{svc.duration}</p>
                 <p class="mt-3"><span class="font-display text-3xl sm:text-4xl font-medium tracking-tight text-cream">{svc.price}</span><span class="text-sm text-creamMute ml-2">· {svc.priceSuffix}</span></p>
-                <div class="mt-7"><MagneticCTA client:load href={config.booking} external variant="primary">Időpontot foglalok</MagneticCTA></div>
+                <div class="mt-7">
+                  {svc.linkHref ? (
+                    <a href={svc.linkHref} class="inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">
+                      Bővebben a szemöldök laminálásról<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span>
+                    </a>
+                  ) : (
+                    <MagneticCTA href={config.booking} external variant="primary">Időpontot foglalok</MagneticCTA>
+                  )}
+                </div>
                 {svc.warning && (
                   <p class="mt-4 text-[11px] text-creamMute/60 leading-snug max-w-[44ch]">* {svc.warning}</p>
                 )}
@@ -322,7 +358,7 @@ const serviceSchemas = [
               <div class={`my-7 border-t ${p.highlight ? 'border-whisperStrong' : 'border-whisper'}`}></div>
               <p class="text-[11px] uppercase tracking-caps text-creamMute mb-4">{p.duration}</p>
               <ul class="space-y-3 flex-1">{p.features.map((f) => (<li class="flex items-start gap-2.5"><span class={`flex-shrink-0 w-4 h-4 rounded-full inline-flex items-center justify-center mt-0.5 ${p.highlight ? 'bg-gold/25 text-gold' : 'bg-gold/15 text-gold'}`} aria-hidden><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span><span class="text-[14px] text-creamSoft leading-snug">{f}</span></li>))}</ul>
-              <div class="mt-8"><MagneticCTA client:load href={config.booking} external variant={p.highlight ? 'primary' : 'secondary'}>Időpontot foglalok</MagneticCTA></div>
+              <div class="mt-8"><MagneticCTA href={config.booking} external variant={p.highlight ? 'primary' : 'secondary'}>Időpontot foglalok</MagneticCTA></div>
             </article>
           </Reveal>
         ))}
@@ -375,12 +411,12 @@ const serviceSchemas = [
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <Reveal client:visible as="div" className="lg:col-span-6">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Munka közben</p>
-          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Szemöldök <em class="display">laminálás</em> élesben.</h2>
+          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Szempilla lifting <em class="display">élesben</em>.</h2>
           <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">Betekintés az előkészületekbe — pontosan ugyanaz a precíz technika, amit te is megkapsz Zuglóban az Egressy úton. Bőrbarát anyagok, koreai megközelítés, csukott szem, pihentető atmoszféra.</p>
           <a href={config.instagram} target="_blank" rel="noopener" class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Több munkám Instán<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
         </Reveal>
         <Reveal client:visible as="div" className="lg:col-span-6" delay={0.1}>
-          <HeroMedia client:visible videoSrc="/media/szemoldok-laminalas.mp4" posterSrc="/media/szemoldok-laminalas-poster.webp" alt="Szemöldök laminálás Zuglóban — FRUBEAUTY Pecze-Kovács Fruzsina" aspect="9 / 16" maxWidthClass="max-w-[380px]" />
+          <HeroMedia client:visible videoSrc="/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet.mp4" posterSrc="/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet-poster.webp" alt="Szempilla lifting munka közben — FRUBEAUTY Zugló, 14. kerület" aspect="9 / 16" maxWidthClass="max-w-[380px]" />
         </Reveal>
       </div>
     </div>
@@ -403,17 +439,11 @@ const serviceSchemas = [
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);"><em class="display">Vendégeim</em>.</h2>
         <p class="mt-4 text-sm text-creamMute">Kattints a képekre a teljes nézethez</p>
       </Reveal>
-      <GalleryGrid client:visible count={8} images={galleryImages} alts={galleryAlts} size="large" />
+      <GalleryGrid client:visible count={5} images={galleryImages} alts={galleryAlts} size="large" />
       <Reveal client:visible as="div" className="mt-16 sm:mt-20" delay={0.1}>
-        <div class="grid gap-10 sm:gap-12 md:grid-cols-2 max-w-4xl mx-auto items-start">
-          <div>
-            <p class="text-[11px] uppercase tracking-caps text-gold mb-4 text-center">Szemöldök laminálás</p>
-            <HeroMedia client:visible videoSrc="/media/szemoldok-laminalas-munkakozben-budapest-egressy-ut.mp4" posterSrc="/media/szemoldok-laminalas-munkakozben-budapest-egressy-ut-poster.webp" alt="Szemöldök laminálás munka közben — FRUBEAUTY Zugló, Egressy út" aspect="9 / 16" maxWidthClass="max-w-[380px]" />
-          </div>
-          <div>
-            <p class="text-[11px] uppercase tracking-caps text-gold mb-4 text-center">Szempilla lifting</p>
-            <HeroMedia client:visible videoSrc="/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet.mp4" posterSrc="/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet-poster.webp" alt="Szempilla lifting munka közben — FRUBEAUTY Zugló, 14. kerület" aspect="9 / 16" maxWidthClass="max-w-[380px]" />
-          </div>
+        <div class="max-w-[380px] mx-auto">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-4 text-center">Szempilla lifting</p>
+          <HeroMedia client:visible videoSrc="/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet.mp4" posterSrc="/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet-poster.webp" alt="Szempilla lifting munka közben — FRUBEAUTY Zugló, 14. kerület" aspect="9 / 16" maxWidthClass="max-w-full" />
         </div>
       </Reveal>
       <Reveal client:visible as="div" className="mt-12 text-center" delay={0.15}>
@@ -475,14 +505,14 @@ const serviceSchemas = [
         </article>
         <article class="bg-ink border border-whisper rounded-3xl p-6 sm:p-8">
           <p class="text-[11px] uppercase tracking-caps text-creamMute mb-4">Műszempilla</p>
-          <h3 class="font-display text-xl font-medium text-cream mb-5 leading-snug">Látványos, de igényes</h3>
+          <h3 class="font-display text-xl font-medium text-cream mb-5 leading-snug">Extrém volumen, folyamatos odafigyelés</h3>
           <ul class="space-y-3">
             {[
-              { text: 'Drámai, szembetűnő hatás lehetséges', pro: true },
-              { text: 'Testre szabható hossz és sűrűség', pro: true },
-              { text: '2–3 hetente visszatöltés szükséges', pro: false },
-              { text: 'Ragasztóanyag — allergiás kockázat', pro: false },
-              { text: 'Intenzívebb napi utógondozás', pro: false },
+              { text: 'Extra dús, sminkelt hatás épített szálakkal', pro: true },
+              { text: 'Egyéni igényekre szabható hossz és sűrűség', pro: true },
+              { text: '2–3 hetente kötelező stúdiólátogatás (visszatöltés)', pro: false },
+              { text: 'Ragasztóanyag használata (allergia-kockázat)', pro: false },
+              { text: 'Fokozott napi óvatosság és fix tisztítási rutin', pro: false },
             ].map((item) => (
               <li class="flex items-start gap-3">
                 <span class={`flex-shrink-0 w-5 h-5 rounded-full inline-flex items-center justify-center mt-0.5 ${item.pro ? 'bg-gold/15 text-gold' : 'bg-whisper text-creamMute'}`} aria-hidden>
@@ -498,8 +528,8 @@ const serviceSchemas = [
         </article>
       </Reveal>
       <Reveal client:visible as="div" delay={0.1} className="mt-8 p-6 sm:p-8 rounded-3xl bg-gold/[0.06] border border-gold/20">
-        <p class="text-[15px] sm:text-base text-creamSoft leading-[1.7]">Ha <span class="text-cream font-medium">természetes szépségeden szeretnél javítani</span> és nem akarsz kéthetente visszajárni visszatöltésre, a szempilla lifting az egyértelmű választás. A koreai technikával végzett kezelés a XIV. kerületi szalonban különösen óvatos — bőrbarát anyagokkal, ragasztó nélkül, érzékeny szemkörnyékre is. <span class="text-cream font-medium">12.000 Ft-tól, 6–8 hétre.</span></p>
-        <div class="mt-5"><MagneticCTA client:load href={config.booking} external variant="primary">Időpontot foglalok</MagneticCTA></div>
+        <p class="text-[15px] sm:text-base text-creamSoft leading-[1.7]">Ha nem akarsz minden reggel tust felkenni — és nincs kedved 2–3 hetente visszatöltésre menni —, <span class="text-cream font-medium">a lifting az egyértelmű válasz</span>. Koreai technikával, ragasztó nélkül, érzékeny szemkörnyékre is alkalmas. <span class="text-cream font-medium">12.000 Ft, 6–8 hétre.</span></p>
+        <div class="mt-5"><MagneticCTA href={config.booking} external variant="primary">Időpontot foglalok</MagneticCTA></div>
       </Reveal>
     </div>
   </section>
@@ -515,14 +545,14 @@ const serviceSchemas = [
         <div class="lg:col-span-6">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Egészben gondolkodj</p>
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">A szem mellé <em class="display">tiszta bőr</em>.</h2>
-          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">A szempilla lifting önmagában is gyönyörű — de együtt egy Janssen arckezeléssel egészen más szintű végeredményt kapsz. A vendégeim jelentős része egy kombinált alkalomban kéri.</p>
+          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">A szempilla lifting önmagában is sokat tesz — de ha Janssen arckezeléssel kombináljuk, a végeredmény egészen más szint. Nem véletlen, hogy a vendégeim jó részénél mindkettő szerepel ugyanazon az alkalmon.</p>
           <a href="/arckezeles-zuglo" class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Arckezelés Zuglóban<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
         </div>
       </Reveal>
     </div>
   </section>
 
-  <SiteContact eyebrow="Foglalás" heading={'Ébredj <em class="display">tökéletes</em> pillákkal és szemöldökkel.'} intro="Online foglalási rendszer 0–24 órában. Az első alkalmat érdemes a Teljes Tekintet csomaggal kezdeni — a vendégeim 78%-a ezt választja." />
+  <SiteContact eyebrow="Foglalás" heading={'Holnap reggel tus nélkül is <em class="display">tökéletes</em> a tekintet.'} intro="Online foglalási rendszer 0–24 órában. Az első alkalomra a Teljes Tekintet csomagot ajánlom — egyszerre spórolsz időt és pénzt." />
 
   <SiteFooter />
 

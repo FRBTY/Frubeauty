@@ -29,42 +29,108 @@ const absoluteOgImage = image.startsWith('http')
   ? image
   : `https://frubeauty.com${image}`;
 
+// @graph: összefüggő entitás-gráf (BeautySalon + Person + WebSite) —
+// a különálló objektumok @id-vel hivatkoznak egymásra, így az AI-keresők
+// és a Google Knowledge Graph egységes entitásként látják a szalont és Fruzsinát.
 const businessSchema = {
   '@context': 'https://schema.org',
-  '@type': 'BeautySalon',
-  name: 'FRUBEAUTY – Pecze-Kovács Fruzsina',
-  image: 'https://frubeauty.com/og-image.jpg',
-  '@id': 'https://frubeauty.com',
-  url: 'https://frubeauty.com',
-  telephone: siteConfig.phone,
-  email: siteConfig.email,
-  priceRange: '11000-26000 Ft',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: siteConfig.streetAddress,
-    addressLocality: siteConfig.locality,
-    postalCode: siteConfig.postalCode,
-    addressCountry: siteConfig.country,
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: siteConfig.geo.latitude,
-    longitude: siteConfig.geo.longitude,
-  },
-  openingHoursSpecification: openingHoursSchema.map((h) => ({
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: h.dayOfWeek,
-    opens: h.opens,
-    closes: h.closes,
-  })),
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5.0',
-    reviewCount: '40',
-    bestRating: '5',
-    worstRating: '1',
-  },
-  sameAs: [siteConfig.instagram, siteConfig.facebook],
+  '@graph': [
+    {
+      '@type': 'BeautySalon',
+      '@id': 'https://frubeauty.com/#business',
+      name: 'FRUBEAUTY – Pecze-Kovács Fruzsina',
+      url: 'https://frubeauty.com',
+      image: ['https://frubeauty.com/og-image.jpg'],
+      telephone: siteConfig.phone,
+      email: siteConfig.email,
+      priceRange: '4000–26000 Ft',
+      currenciesAccepted: 'HUF',
+      paymentAccepted: 'Készpénz, Bankkártya',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: siteConfig.streetAddress,
+        addressLocality: siteConfig.locality,
+        addressRegion: 'Zugló (XIV. kerület)',
+        postalCode: siteConfig.postalCode,
+        addressCountry: siteConfig.country,
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: siteConfig.geo.latitude,
+        longitude: siteConfig.geo.longitude,
+      },
+      hasMap: siteConfig.mapsUrl,
+      founder: { '@id': 'https://frubeauty.com/#fruzsina' },
+      employee: { '@id': 'https://frubeauty.com/#fruzsina' },
+      openingHoursSpecification: openingHoursSchema.map((h) => ({
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: h.dayOfWeek,
+        opens: h.opens,
+        closes: h.closes,
+      })),
+      // AggregateRating SZÁNDÉKOSAN eltávolítva: a saját domainen elhelyezett,
+      // önmagunkról szóló (self-serving) értékelés-jelölés LocalBusiness-nél nem ad
+      // csillagos rich resultot, és strukturált-adat manual action kockázata van.
+      // A csillagokat a Google Business Profile hozza a Mapsen/lokális találatban
+      // és az Ads helybővítményben — arra támaszkodunk.
+      areaServed: [
+        { '@type': 'AdministrativeArea', name: 'Zugló (XIV. kerület)' },
+        { '@type': 'City', name: 'Budapest' },
+      ],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Szempilla és szemöldök kezelések',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: { '@type': 'Service', name: 'Szempilla lifting + festés', url: 'https://frubeauty.com/szempilla-lifting-zuglo' },
+            price: '12000',
+            priceCurrency: 'HUF',
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: { '@type': 'Service', name: 'Szemöldök laminálás + formázás', url: 'https://frubeauty.com/szemoldok-laminalas-zuglo' },
+            price: '11000',
+            priceCurrency: 'HUF',
+          },
+        ],
+      },
+      sameAs: [
+        siteConfig.instagram,
+        siteConfig.facebook,
+        'https://www.notino.hu/szalonok/pecze-kovacs-fruzsina-sminkes,-szemoldok-es-szempilla-stylist',
+      ],
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://frubeauty.com/#fruzsina',
+      name: 'Pecze-Kovács Fruzsina',
+      jobTitle: 'Kozmetikus, szempilla- és szemöldök-stylist',
+      image: 'https://frubeauty.com/img/fruzsina-portrait.jpg',
+      worksFor: { '@id': 'https://frubeauty.com/#business' },
+      knowsAbout: [
+        'szempilla lifting',
+        'szemöldök laminálás',
+        'koreai lash lift',
+        'Janssen arckezelés',
+        'alkalmi smink',
+      ],
+      hasCredential: {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'Kozmetikus szakképesítés',
+        name: 'Koreai lash lift technika',
+      },
+      sameAs: [siteConfig.instagram, siteConfig.facebook],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://frubeauty.com/#website',
+      url: 'https://frubeauty.com',
+      name: 'FRUBEAUTY',
+      publisher: { '@id': 'https://frubeauty.com/#business' },
+      inLanguage: 'hu-HU',
+    },
+  ],
 };
 
 const hasGA4 = analytics.ga4Id && analytics.ga4Id.length > 0;
@@ -140,6 +206,18 @@ const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googl
           document.head.appendChild(s);
         }
         events.forEach(function (e) { window.addEventListener(e, loadGtag, opts); });
+
+        // Fallback a GA4-hez: interakció NÉLKÜLI látogatónál (no-interaction bounce)
+        // is rögzüljön a session. A load esemény UTÁN, idle-ben töltünk — a kritikus
+        // betöltési ablakon kívül, hogy a mobil PSI-t minimálisan érintse. Idempotens
+        // (a gtagLoaded guard miatt sosem tölt kétszer; az interakció továbbra is
+        // azonnal triggereli, ez csak biztonsági háló a némán távozókra).
+        function idleLoadGtag() {
+          if (window.requestIdleCallback) window.requestIdleCallback(loadGtag, { timeout: 4000 });
+          else window.setTimeout(loadGtag, 3000);
+        }
+        if (document.readyState === 'complete') idleLoadGtag();
+        else window.addEventListener('load', idleLoadGtag, { once: true });
       </script>
     )}
     {hasPixel && (
@@ -170,6 +248,13 @@ const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googl
     <script is:inline>
       (function () {
         var BOOKING_HOST = 'notino.hu';
+        // Google Ads konverziós azonosítók. A telefonhívás (tel: katt) jelenleg
+        // UGYANARRA az "Időpontfoglalás" konverzióra fut, mint az online foglalás.
+        // Ha külön hívás-konverziós akciót hozol létre a Google Ads-ben, csak
+        // cseréld le a CALL_SEND_TO értékét az új címkére (AW-17992123771/ÚJ_LABEL).
+        var BOOK_SEND_TO = 'AW-17992123771/LHaBCP_fj6McEPuKqIND';
+        var CALL_SEND_TO = 'AW-17992123771/LHaBCP_fj6McEPuKqIND';
+        var CONVERSION_VALUE = 12500.0;
         function pathSegment() {
           var p = (location.pathname || '/').replace(/^\/+|\/+$/g, '');
           return p === '' ? 'home' : p.split('/')[0].replace(/[^a-z0-9-_]/gi, '-').toLowerCase();
@@ -194,28 +279,38 @@ const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googl
             a.setAttribute('data-book-cta', '1');
           });
         }
-        function fireEvents() {
-          try { if (window.gtag) window.gtag('event', 'book_click', { event_category: 'cta', event_label: pathSegment() }); } catch (e) {}
-          try { if (window.fbq) window.fbq('track', 'InitiateCheckout'); } catch (e) {}
-          // Google Ads konverzió mérés — "Időpontfoglalás" esemény
+        function fireAdsConversion(sendTo) {
           try {
             if (window.gtag) {
               window.gtag('event', 'conversion', {
-                'send_to': 'AW-17992123771/LHaBCP_fj6McEPuKqIND',
-                'value': 12500.0,
+                'send_to': sendTo,
+                'value': CONVERSION_VALUE,
                 'currency': 'HUF',
                 'event_callback': function() {}
               });
             }
           } catch (e) {}
         }
-        // A konverzió-mérés közvetlenül a booking-host linkre köt — független a
+        // Online foglalási szándék — Notino-linkre kattintás.
+        function fireEvents() {
+          try { if (window.gtag) window.gtag('event', 'book_click', { event_category: 'cta', event_label: pathSegment() }); } catch (e) {}
+          try { if (window.fbq) window.fbq('track', 'InitiateCheckout'); } catch (e) {}
+          fireAdsConversion(BOOK_SEND_TO);
+        }
+        // Telefonos foglalási szándék — tel: linkre kattintás (mobilon hívásindítás).
+        function fireCallEvents() {
+          try { if (window.gtag) window.gtag('event', 'call_click', { event_category: 'cta', event_label: pathSegment() }); } catch (e) {}
+          try { if (window.fbq) window.fbq('track', 'Contact'); } catch (e) {}
+          fireAdsConversion(CALL_SEND_TO);
+        }
+        // A konverzió-mérés közvetlenül a linkre köt (capture fázis) — független a
         // decorate() futásától, így mindig tűz, akkor is, ha a linket egy React
-        // sziget hidratálta be a decorate után.
+        // sziget hidratálta be. Notino-link → online foglalás; tel: → telefonos
+        // foglalási szándék.
         document.addEventListener('click', function (ev) {
-          var t = ev.target instanceof Element ? ev.target.closest('a[href*="' + BOOKING_HOST + '"]') : null;
-          if (!t) return;
-          fireEvents();
+          if (!(ev.target instanceof Element)) return;
+          if (ev.target.closest('a[href*="' + BOOKING_HOST + '"]')) { fireEvents(); return; }
+          if (ev.target.closest('a[href^="tel:"]')) { fireCallEvents(); return; }
         }, true);
 
         // decorate() bounded futtatása — NINCS perzisztens MutationObserver, ami
@@ -301,6 +396,43 @@ const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googl
         font-display: optional;
         src: url('/fonts/geist-600.woff2') format('woff2');
         unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+      }
+
+      /* Geist latin-ext subset — a hosszú magyar ékezetes betűk (ő U+0151, ű U+0171,
+         Ő U+0150, Ű U+0170) a Latin Extended-A blokkban vannak, amit a fenti latin
+         subset NEM fed le. Enélkül a Geist-ből hiányzik az ő/ű glyph, ezért a böngésző
+         a 'Geist Fallback' (Arial) betűre esik vissza CSAK ezeknél a karaktereknél →
+         látható, eltérő betűkép a szövegben.
+         FONTOS: itt 'swap' (NEM 'optional') a font-display, mert a latin-ext külön,
+         apró (~8 KB) fájl — 'optional'-lel gyakran nem ér be a ~100 ms-os ablakba, így
+         az ő/ű a tartalék Arialon maradt. A 'swap'-pel a Geist ő/ű minden betöltésnél
+         megjelenik, amint a fájl megérkezik. CLS-kockázat elhanyagolható: csak néhány
+         glyph vált, a 'Geist Fallback' pedig metrika-illesztett (size-adjust), így a
+         szélesség gyakorlatilag azonos. A unicode-range miatt csak akkor tölt, ha
+         tényleg van ilyen karakter a szövegben. */
+      @font-face {
+        font-family: 'Geist';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/geist-latin-ext-400.woff2') format('woff2');
+        unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+      }
+      @font-face {
+        font-family: 'Geist';
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url('/fonts/geist-latin-ext-500.woff2') format('woff2');
+        unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+      }
+      @font-face {
+        font-family: 'Geist';
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url('/fonts/geist-latin-ext-600.woff2') format('woff2');
+        unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
       }
 
       :root {
