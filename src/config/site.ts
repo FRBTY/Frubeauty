@@ -66,7 +66,7 @@ interface AnalyticsConfig {
   googleAdsConversionValue: number;
 }
 export const analytics: AnalyticsConfig = {
-  ga4Id: '',
+  ga4Id: 'G-L276HPZTL5',
   metaPixelId: '',
   googleAdsId: 'AW-17992123771',
   googleAdsConversionLabel: 'LHaBCP_fj6McEPuKqIND',
@@ -74,19 +74,15 @@ export const analytics: AnalyticsConfig = {
 };
 
 /**
- * Recency social proof — heti manuális frissítés. A bar csak akkor jelenik meg,
- * ha az `enabled === true` és a `bookingsToday >= 1`. Mai dátum string kötelező
- * (formátum: YYYY-MM-DD) — ha a felhasználó visszatér másnap, akkor új szám
- * megjelenítése előtt frissítsd ezt is.
+ * AnnouncementBar master kapcsoló. FONTOS: a bar NEM statikus/kézi számot mutat —
+ * az AnnouncementBar komponens élő, böngészőnkénti localStorage-számláló (a MAI
+ * Notino-CTA kattintásokat számolja az adott eszközön), és csak akkor jelenik meg,
+ * ha már volt katt. Ezért NINCS „bookingsToday"/„updatedAt" — nem kell heti kézi
+ * frissítés, és nem mutatunk idegenek nevében fabrikált számot. Csak az enabled él.
  */
 interface RecencyProof {
   enabled: boolean;
-  bookingsToday: number;
-  /** Frissítés napja — manuális. */
-  updatedAt: string;
 }
 export const recencyProof: RecencyProof = {
   enabled: true,
-  bookingsToday: 4,
-  updatedAt: '2026-05-18',
 };

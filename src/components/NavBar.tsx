@@ -7,12 +7,13 @@ interface NavBarProps {
 }
 
 const navLinks = [
-  { href: '/',                        label: 'Főoldal' },
-  { href: '/arckezeles-zuglo',        label: 'Arckezelés' },
-  { href: '/sminkes-zuglo',           label: 'Smink' },
-  { href: '/szempilla-lifting-zuglo', label: 'Szempilla/Szemöldök' },
-  { href: '/blog',                    label: 'Blog' },
-  { href: '/#velemenyek',             label: 'Vélemények' },
+  { href: '/',                            label: 'Főoldal' },
+  { href: '/arckezeles-zuglo',            label: 'Arckezelés' },
+  { href: '/sminkes-zuglo',               label: 'Smink' },
+  { href: '/szempilla-lifting-zuglo',     label: 'Szempilla' },
+  { href: '/szemoldok-laminalas-zuglo',   label: 'Szemöldök' },
+  { href: '/blog',                        label: 'Blog' },
+  { href: '/#velemenyek',                 label: 'Vélemények' },
 ];
 
 /**

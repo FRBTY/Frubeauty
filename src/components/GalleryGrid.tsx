@@ -5,6 +5,9 @@ import { Lightbox } from './Lightbox';
 interface GalleryGridProps {
   count?: number;
   altPrefix?: string;
+  /** Per-kép egyedi alt szövegek — ha megadott, felülírja az altPrefix generált változatát.
+   *  SEO szempontból minden képnek egyedi, kulcsszavas alt szöveg kell. */
+  alts?: string[];
   images?: string[];
   imageSrc?: (i: number) => string;
   /**
@@ -18,6 +21,7 @@ interface GalleryGridProps {
 export function GalleryGrid({
   count = 8,
   altPrefix = 'Vendég eredmény',
+  alts: altsProp,
   images,
   imageSrc,
   size = 'compact',
@@ -31,7 +35,10 @@ export function GalleryGrid({
   };
 
   const all = Array.from({ length: count }).map((_, i) => resolve(i));
-  const alts = Array.from({ length: count }).map((_, i) => `${altPrefix} ${i + 1}`);
+  // Ha per-kép alt szöveg van megadva, azt használjuk; egyébként a generált prefix + index.
+  const alts = Array.from({ length: count }).map((_, i) =>
+    altsProp && altsProp[i] ? altsProp[i] : `${altPrefix} ${i + 1}`
+  );
 
   const gridClass =
     size === 'large'

@@ -85,16 +85,42 @@ const galleryImages = [
   '/img/smink-menyasszonyi-zuglo-14-kerulet-egressy-ut.webp',
   '/img/smink-kismama-fotozas-budapest-egressy-ut.webp',
 ];
+
+// SEO: per-kép alt szövegek a főoldali galériához — kulcsszavas, leíró
+const galleryAlts = [
+  'Szempilla lifting eredmény — FRUBEAUTY Zugló, Egressy út',
+  'Szemöldök laminálás és szempilla lifting munka — FRUBEAUTY Budapest',
+  'Menyasszonyi smink Zugló — FRUBEAUTY XIV. kerület, Egressy út',
+  'Kismama fotózás smink Budapest — FRUBEAUTY Zugló',
+];
+
+// SEO: FAQPage schema a főoldali GYIK szekcióhoz → featured snippet esély
+const homepageFaqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a,
+    },
+  })),
+};
 ---
 
-<Layout preloadImage="/media/hero-poster.webp">
+<Layout
+  title="Kozmetika Zugló – Szempilla Lifting, Arckezelés ★5,0 | FRUBEAUTY"
+  description="★5,0 · 40+ Google-értékelés · Janssen arckezelés, szempilla lifting, szemöldök laminálás Zuglóban. 11.000 Ft-tól → Foglalj most!"
+  additionalSchemas={[homepageFaqSchema]}
+  preloadImage="/media/hero-poster.webp"
+>
   {/* AnnouncementBar + NavBar share a fixed top container so they stack visually
       and dismiss-collapse happens in the same flow (no z-index fight). */}
   <div class="fixed top-0 inset-x-0 z-50">
     <AnnouncementBar
       client:idle
       enabled={recencyProof.enabled}
-      dailyRandomRange={[2, 5]}
     />
     <NavBar client:visible bookingUrl={config.booking} instagram={config.instagram} facebook={config.facebook} />
   </div>
@@ -312,7 +338,7 @@ const galleryImages = [
         </h2>
         <p class="mt-4 text-sm text-creamMute">Kattints a képekre a teljes nézethez</p>
       </Reveal>
-      <GalleryGrid client:visible count={4} images={galleryImages} />
+      <GalleryGrid client:visible count={4} images={galleryImages} alts={galleryAlts} />
       <Reveal client:visible as="div" className="mt-12 text-center" delay={0.1}>
         <a
           href={config.instagram}

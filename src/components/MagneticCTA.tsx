@@ -1,12 +1,4 @@
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useReducedMotion,
-  useTransform,
-} from 'framer-motion';
-import { useRef, type ReactNode, type MouseEvent } from 'react';
-import { springMagnetic } from './motion-presets';
+import type { ReactNode } from 'react';
 
 interface MagneticCTAProps {
   href: string;
@@ -20,12 +12,15 @@ interface MagneticCTAProps {
 }
 
 /**
- * Primary CTA with spring-based magnetic pointer tracking.
+ * CTA gomb — statikus <a>, framer-motion NÉLKÜL.
  *
- * Dark-mode variants:
- *  - primary       = gold pill, ink text     (hero CTA, main page)
- *  - secondary     = outlined cream, transparent
- *  - on-dark-primary / on-dark-secondary kept for footer contact area, same look on ink bg
+ * A korábbi „magnetic" pointer-követő effekt (useMotionValue/useSpring/useTransform)
+ * a framer-motion + use-transform chunkot a KRITIKUS útba húzta a fizetett landing
+ * oldalakon (lásd a főoldal döntését: ott már statikus <a>-ra váltottunk). A press/
+ * hover visszajelzést tiszta CSS adja (active:scale, hover:bg). Mivel a komponens így
+ * nem használ hookot, client direktíva nélkül statikus HTML-ként renderel (NULLA JS),
+ * de hidratálva is olcsó (nincs framer-motion import). A props-API változatlan, így a
+ * meglévő használatok nem törnek.
  */
 export function MagneticCTA({
   href,
@@ -36,30 +31,6 @@ export function MagneticCTA({
   ariaLabel,
   caps = true,
 }: MagneticCTAProps) {
-  const reduced = useReducedMotion();
-  const ref = useRef<HTMLAnchorElement>(null);
-
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const sx = useSpring(mx, springMagnetic);
-  const sy = useSpring(my, springMagnetic);
-
-  const transform = useTransform(
-    [sx, sy],
-    ([x, y]: number[]) => `translate3d(${x}px, ${y}px, 0)`
-  );
-
-  function handleMove(e: MouseEvent<HTMLAnchorElement>) {
-    if (reduced) return;
-    const r = ref.current?.getBoundingClientRect();
-    if (!r) return;
-    const cx = r.left + r.width / 2;
-    const cy = r.top + r.height / 2;
-    mx.set((e.clientX - cx) * 0.18);
-    my.set((e.clientY - cy) * 0.18);
-  }
-  function handleLeave() { mx.set(0); my.set(0); }
-
   const base =
     `inline-flex items-center justify-center rounded-full transition-colors duration-200 ${
       caps
@@ -78,18 +49,14 @@ export function MagneticCTA({
   };
 
   return (
-    <motion.a
-      ref={ref}
+    <a
       href={href}
       target={external ? '_blank' : undefined}
       rel={external ? 'noopener' : undefined}
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
       aria-label={ariaLabel}
-      style={{ transform }}
-      className={`${base} ${variants[variant]} ${className} will-change-transform`}
+      className={`${base} ${variants[variant]} ${className}`}
     >
       <span className="pointer-events-none">{children}</span>
-    </motion.a>
+    </a>
   );
 }

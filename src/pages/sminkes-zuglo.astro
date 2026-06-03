@@ -17,7 +17,7 @@ import { siteConfig } from '../config/site';
 const priceCategories = [
   { eyebrow: 'A nagy nap', title: 'Menyasszonyi csomag.', items: [
     { name: 'Menyasszonyi próbasmink', duration: '90–120 perc', description: 'Az esküvő előtt 4–8 héttel. Együtt tervezzük meg a végleges stílust — színek, intenzitás, fixálás.', price: '15 000 Ft' },
-    { name: 'Menyasszonyi smink — a nagy napon', duration: '90 perc', description: 'A próbasmink alapján. Bőrelőkészítés, hosszú-tartású alapozás, professzionális fixálás.', price: '25 000 Ft', badge: 'Csomagban is elérhető' },
+    { name: 'Menyasszonyi smink — a nagy napon', duration: '90 perc', description: 'A próbasmink alapján. Bőrelőkészítés, hosszan tartó alapozás, professzionális fixálás.', price: '25 000 Ft', badge: 'Csomagban is elérhető' },
     { name: 'Örömanya smink', duration: '60–75 perc', description: 'Diszkrét, korhoz illő, fotózásra is alkalmas. A menyasszonyi sminkkel azonos napra ütemezve külön egyeztetéssel.', price: '15 000 Ft' },
   ] },
   { eyebrow: 'Alkalmak és fotózás', title: 'Ünnepi, üzleti, kreatív.', items: [
@@ -39,7 +39,7 @@ const packages = [
 
 const includedPoints = [
   { eyebrow: '01', title: 'Bőrelőkészítés és hidratálás', body: 'Minden smink alapos tisztítással és hidratálással indul. Ha az alap nem stabil, a smink sem tart.' },
-  { eyebrow: '02', title: 'Hosszú-tartású fixálás', body: 'Professzionális fixálók és technikák — a smink kibírja az ölelést, a könnyet, az evést és a délutáni táncot. Egy esküvőn ez nem extra, hanem alapelvárás.' },
+  { eyebrow: '02', title: 'Hosszan tartó fixálás', body: 'Professzionális fixálók és technikák — a smink kibírja az ölelést, a könnyet, az evést és a délutáni táncot. Egy esküvőn ez nem extra, hanem alapelvárás.' },
   { eyebrow: '03', title: 'Bőrbarát alapanyagok', body: 'Csak professzionális, bőrgyógyászatilag tesztelt termékek — köztük Janssen ápolók a smink előtt. Érzékeny bőrre is alkalmas.' },
   { eyebrow: '04', title: 'Folyamatos képzés', body: 'A folyamatos fejlődés nálam alapelv. Évente több továbbképzésen veszek részt, hogy a legújabb tartós technikák és a modern trendek éppúgy a kezemben legyenek, mint a tökéletesen kivitelezett klasszikus formák.' },
 ];
@@ -79,28 +79,49 @@ const galleryImages = [
   '/img/smink-budapest-alkalmi-budapest-egressy-ut.webp',
   '/img/smink-budapest-alkalmi-egressy-ut-zuglo.webp',
 ];
+
+// SEO: per-kép alt szövegek a galériához
+const galleryAlts = [
+  'Alkalmi smink Budapest — FRUBEAUTY Egressy út Zugló',
+  'Alkalmi smink munka Budapest, Egressy út — FRUBEAUTY',
+  'Alkalmi smink Zugló — FRUBEAUTY XIV. kerület, Egressy út',
+  'Esküvői smink Budapest Zugló — FRUBEAUTY Egressy út munka',
+  'Esküvői smink Zugló, Egressy út — FRUBEAUTY Budapest',
+  'Menyasszonyi smink Budapest — FRUBEAUTY Zugló XIV. kerület',
+  'Menyasszonyi próbasmink Zugló Budapest — FRUBEAUTY Egressy út',
+  'Alkalmi smink Budapest — FRUBEAUTY XIV. kerület kozmetika',
+  'Alkalmi smink Zugló, Egressy út — FRUBEAUTY Budapest',
+];
+
 const config = { ...siteConfig };
 ---
 
-<Layout title="Alkalmi és esküvői smink Zugló | FRUBEAUTY" description="Menyasszonyi, alkalmi, fotózási és nappali smink Zuglóban. Próbasmink és tartós fixálás professzionális termékekkel, igény szerint helyszíni kiszállással." preloadImage="/media/smink-oldal-video-frubeauty-budapest-zuglo-poster.webp">
+<Layout
+  title="Esküvői és Alkalmi Smink Zugló – 13.000 Ft-tól | ★5,0 · 40 Vélemény | FRUBEAUTY"
+  description="★5,0 · 40+ Google-értékelés · Esküvői, menyasszonyi és alkalmi smink Zuglóban. Próbasmink, tartós fixálás, helyszíni kiszállás. 13.000 Ft-tól → Foglalj most!"
+  preloadImage="/media/smink-oldal-video-frubeauty-budapest-zuglo-poster.webp"
+>
   <SiteHeader />
 
   <section class="relative overflow-hidden pt-32 sm:pt-40 pb-16 sm:pb-24">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end">
-        <Reveal client:load as="div" className="lg:col-span-7" distance={20}>
+        {/* Hero STATIKUS (a főoldal/szempilla mintára): nincs Reveal/framer-motion és
+            nincs MagneticCTA a kritikus úton. A HeroMedia poszter SSR-ben azonnal
+            látszik; a videó client:visible-re hidratál. LCP-poszter: Layout preloadImage. */}
+        <div class="hero-reveal lg:col-span-7">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Smink · 1143 Budapest · XIV. kerület</p>
           <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Esküvői és alkalmi <em class="display">smink</em> Zuglóban — a fontos pillanatokra.</h1>
           <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">Menyasszony, örömanya, ballagó, vagy fotózásra készülő – a cél ugyanaz: a smink, ami reggel felkerül, éjfélkor is pontosan ugyanúgy nézzen vissza a tükörből. Olyan professzionális technikával és textúrákkal dolgozom, amelyek észrevétlenül simulnak a bőrödre, miközben ellenállnak a könnyeknek, az öleléseknek és az áttáncolt éjszakának is.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
-            <MagneticCTA client:load href={config.booking} external variant="primary">Időpontot foglalok</MagneticCTA>
-            <MagneticCTA client:load href="#csomagok" variant="secondary">Árak</MagneticCTA>
+            <a href={config.booking} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+            <a href="#csomagok" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Árak</a>
           </div>
           <p class="mt-6 text-[12px] uppercase tracking-caps text-creamMute">Helyszíni kiszállás Budapesten és környékén · Egyedi egyeztetés</p>
-        </Reveal>
-        <Reveal client:load as="div" className="lg:col-span-5" distance={20} delay={0.1}>
-          <HeroMedia client:load videoSrc="/media/smink-oldal-video-frubeauty-budapest-zuglo.mp4" posterSrc="/media/smink-oldal-video-frubeauty-budapest-zuglo-poster.webp" alt="Menyasszonyi és alkalmi smink — FRUBEAUTY Zugló, Pecze-Kovács Fruzsina" aspect="4 / 5" maxWidthClass="max-w-full" />
-        </Reveal>
+        </div>
+        <div class="lg:col-span-5">
+          <HeroMedia client:visible videoSrc="/media/smink-oldal-video-frubeauty-budapest-zuglo.mp4" posterSrc="/media/smink-oldal-video-frubeauty-budapest-zuglo-poster.webp" alt="Menyasszonyi és alkalmi smink — FRUBEAUTY Zugló, Pecze-Kovács Fruzsina" aspect="4 / 5" maxWidthClass="max-w-full" />
+        </div>
       </div>
     </div>
   </section>
@@ -166,7 +187,7 @@ const config = { ...siteConfig };
               <div class={`my-7 border-t ${p.highlight ? 'border-whisperStrong' : 'border-whisper'}`}></div>
               <p class="text-[11px] uppercase tracking-caps text-creamMute mb-4">{p.duration}</p>
               <ul class="space-y-3 flex-1">{p.features.map((f) => (<li class="flex items-start gap-2.5"><span class={`flex-shrink-0 w-4 h-4 rounded-full inline-flex items-center justify-center mt-0.5 ${p.highlight ? 'bg-gold/25 text-gold' : 'bg-gold/15 text-gold'}`} aria-hidden><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span><span class="text-[14px] text-creamSoft leading-snug">{f}</span></li>))}</ul>
-              <div class="mt-8"><MagneticCTA client:load href={config.booking} external variant={p.highlight ? 'primary' : 'secondary'}>Időpontot foglalok</MagneticCTA></div>
+              <div class="mt-8"><MagneticCTA href={config.booking} external variant={p.highlight ? 'primary' : 'secondary'}>Időpontot foglalok</MagneticCTA></div>
             </article>
           </Reveal>
         ))}
@@ -236,7 +257,7 @@ const config = { ...siteConfig };
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);"><em class="display">Vendégeim</em>.</h2>
         <p class="mt-4 text-sm text-creamMute">Kattints a képekre a teljes nézethez</p>
       </Reveal>
-      <GalleryGrid client:visible count={9} images={galleryImages} size="large" />
+      <GalleryGrid client:visible count={9} images={galleryImages} alts={galleryAlts} size="large" />
       <Reveal client:visible as="div" className="mt-12 text-center" delay={0.1}>
         <a href={config.instagram} target="_blank" rel="noopener" class="group inline-flex items-center text-[12px] uppercase tracking-caps text-cream hover:text-gold transition-colors">Több munkám az Instagramon<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
       </Reveal>

@@ -66,27 +66,74 @@ const janssenBenefits = [
   { eyebrow: '03', title: 'Külön rendszer minden bőrtípusra', body: 'Zsíros, kombinált, érzékeny, érett, dehidratált — mindegyikre saját line. Nincs „univerzális" kezelés, mert univerzális bőr sincs.' },
 ];
 const config = { ...siteConfig };
+
+// ── SEO: FAQPage schema (featured snippet esélyes kérdésekre) ─────────────
+const arcFaqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a,
+    },
+  })),
+};
+
+// ── SEO: Service schema az arckezelésekhez ────────────────────────────────
+const arcServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Janssen Arckezelés Zugló',
+  description:
+    'Professzionális Janssen Cosmetics arckezelés Zuglóban, XIV. kerületben. Anti-aging, mélytisztító, hidratáló és érzékeny bőrre szabott protokollok.',
+  provider: {
+    '@type': 'BeautySalon',
+    name: 'FRUBEAUTY – Pecze-Kovács Fruzsina',
+    url: 'https://frubeauty.com',
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Budapest' },
+    { '@type': 'AdministrativeArea', name: 'Zugló' },
+  ],
+  offers: {
+    '@type': 'AggregateOffer',
+    lowPrice: '11000',
+    highPrice: '21500',
+    priceCurrency: 'HUF',
+    availability: 'https://schema.org/InStock',
+  },
+};
 ---
 
-<Layout title="Arckezelés Zuglóban — Janssen Cosmetics | FRUBEAUTY" description="Professzionális arckezelés Zuglóban Janssen Cosmetics hatóanyagokkal — anti-aging, hidratáló és érzékeny bőrre szabott protokollok. Online foglalás." preloadImage="/media/arckezeles-zuglo-poster.webp">
+<Layout
+  title="Arckezelés Zugló – 16.900 Ft-tól | ★5,0 · 40 Vélemény | FRUBEAUTY"
+  description="★5,0 · 40+ Google-értékelés · Janssen arckezelés Zuglóban, XIV. kerület. Anti-aging, mélytisztító, hidratáló protokollok bőrtípusra szabva. 16.900 Ft-tól → Foglalj most!"
+  additionalSchemas={[arcFaqSchema, arcServiceSchema]}
+  preloadImage="/media/arckezeles-zuglo-poster.webp"
+>
   <SiteHeader />
 
   <section class="relative overflow-hidden pt-32 sm:pt-40 pb-16 sm:pb-24">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end">
-        <Reveal client:load as="div" className="lg:col-span-7" distance={20}>
+        {/* Hero STATIKUS (a főoldal/szempilla mintára): nincs Reveal/framer-motion és
+            nincs MagneticCTA a kritikus úton. A HeroMedia poszter SSR-ben azonnal
+            látszik; a videó client:visible-re hidratál. LCP-poszter: Layout preloadImage. */}
+        <div class="hero-reveal lg:col-span-7">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Arckezelés · 1143 Budapest · XIV. kerület</p>
           <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Janssen <em class="display">arckezelés</em> Zugló szívében — bőrtípusra szabva.</h1>
           <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">Személyre szabott bőrápolás prémium Janssen kozmetikumokkal az Egressy úton. Add vissza bőröd egészséges ragyogását szakértő kezek között.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
-            <MagneticCTA client:load href={config.booking} external variant="primary">Időpontot foglalok</MagneticCTA>
-            <MagneticCTA client:load href="#arak" variant="secondary">Árak</MagneticCTA>
+            <a href={config.booking} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+            <a href="#arak" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Árak</a>
           </div>
           <p class="mt-6 text-[12px] uppercase tracking-caps text-creamMute">Online foglalás · Egressy út 16. · XIV. kerület</p>
-        </Reveal>
-        <Reveal client:load as="div" className="lg:col-span-5" distance={20} delay={0.1}>
-          <HeroMedia client:load videoSrc="/media/arckezeles-zuglo.mp4" posterSrc="/media/arckezeles-zuglo-poster.webp" alt="Janssen Cosmetics arckezelés a FRUBEAUTY zuglói szalonban — Pecze-Kovács Fruzsina" aspect="4 / 5" maxWidthClass="max-w-full" />
-        </Reveal>
+        </div>
+        <div class="lg:col-span-5">
+          <HeroMedia client:visible videoSrc="/media/arckezeles-zuglo.mp4" posterSrc="/media/arckezeles-zuglo-poster.webp" alt="Janssen Cosmetics arckezelés a FRUBEAUTY zuglói szalonban — Pecze-Kovács Fruzsina" aspect="4 / 5" maxWidthClass="max-w-full" />
+        </div>
       </div>
     </div>
   </section>
@@ -149,7 +196,7 @@ const config = { ...siteConfig };
               <div class={`my-7 border-t ${p.highlight ? 'border-whisperStrong' : 'border-whisper'}`}></div>
               <p class="text-[11px] uppercase tracking-caps text-creamMute mb-4">{p.duration}</p>
               <ul class="space-y-3 flex-1">{p.features.map((f) => (<li class="flex items-start gap-2.5"><span class={`flex-shrink-0 w-4 h-4 rounded-full inline-flex items-center justify-center mt-0.5 ${p.highlight ? 'bg-gold/25 text-gold' : 'bg-gold/15 text-gold'}`} aria-hidden><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span><span class="text-[14px] text-creamSoft leading-snug">{f}</span></li>))}</ul>
-              <div class="mt-8"><MagneticCTA client:load href={config.booking} external variant={p.highlight ? 'primary' : 'secondary'}>Időpontot foglalok</MagneticCTA></div>
+              <div class="mt-8"><MagneticCTA href={config.booking} external variant={p.highlight ? 'primary' : 'secondary'}>Időpontot foglalok</MagneticCTA></div>
             </article>
           </Reveal>
         ))}
