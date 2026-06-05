@@ -184,6 +184,45 @@ const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googl
         window.dataLayer = window.dataLayer || [];
         function gtag(){ window.dataLayer.push(arguments); }
         window.gtag = gtag;
+
+        // --- Google Consent Mode V2 ---
+        // GDPR opt-in: alapból MINDEN hirdetési és analitikai tárolás TILTOTT, amíg a
+        // látogató a cookie bannerben rá nem bólint. Consent-jelzés nélkül a Google Tag
+        // EU-ban visszatartja az adatküldést → 0 mért forgalom és konverzió. A 'default'
+        // parancsnak a gtag config / gtag.js letöltése ELŐTT kell lefutnia, ezért áll itt.
+        gtag('consent', 'default', {
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          analytics_storage: 'denied',
+          wait_for_update: 500
+        });
+        // Visszatérő látogató, aki KORÁBBAN elfogadta: a banner nem jelenik meg újra,
+        // ezért a tárolt döntést betöltéskor itt azonnal érvényesítjük (különben
+        // 'denied'-en ragadna). Az élő bannerre-kattintás a lenti listeneren át jön.
+        try {
+          if (window.localStorage.getItem('frubeauty_cookie_consent_v1') === 'all') {
+            gtag('consent', 'update', {
+              ad_storage: 'granted',
+              ad_user_data: 'granted',
+              ad_personalization: 'granted',
+              analytics_storage: 'granted'
+            });
+          }
+        } catch (e) {}
+        // A CookieBanner (React) a döntéskor 'cookie-consent' eseményt szór ('all' |
+        // 'essential'); itt kötjük rá a Consent Mode update-et, így minden gtag-hívás
+        // egy helyen, a stub mellett marad. 'essential' → marad a denied.
+        window.addEventListener('cookie-consent', function (ev) {
+          var granted = ev && ev.detail === 'all';
+          gtag('consent', 'update', {
+            ad_storage: granted ? 'granted' : 'denied',
+            ad_user_data: granted ? 'granted' : 'denied',
+            ad_personalization: granted ? 'granted' : 'denied',
+            analytics_storage: granted ? 'granted' : 'denied'
+          });
+        });
+
         gtag('js', new Date());
         if (hasGA4)       gtag('config', ga4Id, { send_page_view: true });
         if (hasGoogleAds) gtag('config', googleAdsId);
