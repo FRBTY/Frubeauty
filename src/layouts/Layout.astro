@@ -134,11 +134,16 @@ const businessSchema = {
 };
 
 const hasGA4 = analytics.ga4Id && analytics.ga4Id.length > 0;
+const hasGoogleTag = analytics.googleTagId && analytics.googleTagId.length > 0;
 const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
 const hasGoogleAds = analytics.googleAdsId && analytics.googleAdsId.length > 0;
-// Az elsődleges gtag script forrása: ha GA4 van, azt töltjük be (és aztán config-oljuk az Ads-t is);
-// ha csak Ads van, akkor az Ads ID-t használjuk loader ID-ként.
-const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googleAdsId : '');
+// A gtag.js LOADER ID-je. FONTOS: az egyesített Google-tagnél (GT-…) a GA4 (G-)
+// és az Ads (AW-) is csak DESTINATION — a 'G-…' ID-ra a googletagmanager.com
+// 404-et ad, ami némán megöli a teljes mérést. Ezért a loader a GT- ID-t kapja,
+// és külön config-oljuk a GA4 + Ads destinationöket. Sorrend: GT- > AW- > G-.
+const primaryGtagId = hasGoogleTag
+  ? analytics.googleTagId
+  : (hasGoogleAds ? analytics.googleAdsId : (hasGA4 ? analytics.ga4Id : ''));
 ---
 
 <!doctype html>

@@ -60,6 +60,7 @@ export const openingHoursSchema = [
  */
 interface AnalyticsConfig {
   ga4Id: string;
+  googleTagId: string;
   metaPixelId: string;
   googleAdsId: string;
   googleAdsConversionLabel: string;
@@ -67,6 +68,11 @@ interface AnalyticsConfig {
 }
 export const analytics: AnalyticsConfig = {
   ga4Id: 'G-L276HPZTL5',
+  // Az egyesített Google-tag (loader ID). A GA4 (G-) és az Ads (AW-) is ennek a
+  // destinationje. A gtag.js-t EZZEL kell betölteni: a 'G-L276HPZTL5' ID-ra a
+  // googletagmanager.com 404-et ad (csak destination, nem önálló loader), ezért
+  // a régi G--alapú betöltés némán megölte a GA4 + Ads mérést is.
+  googleTagId: 'GT-NC66MFGW',
   metaPixelId: '',
   googleAdsId: 'AW-17992123771',
   googleAdsConversionLabel: 'LHaBCP_fj6McEPuKqIND',
