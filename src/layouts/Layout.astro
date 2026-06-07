@@ -227,36 +227,22 @@ const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googl
         if (hasGA4)       gtag('config', ga4Id, { send_page_view: true });
         if (hasGoogleAds) gtag('config', googleAdsId);
 
-        // A nehéz gtag.js letöltést az első valódi felhasználói interakcióhoz
-        // kötjük (scroll/tap/billentyű) — így a kód NEM kerül a kritikus betöltési
-        // ablakba (mobil PSI: nincs third-party parse a mért TBT-ben). Valódi
-        // látogató mindig interaktál (legalább görget) → követés és konverzió-
-        // mérés továbbra is működik (a stub queue-olja a parancsokat addig is).
-        var gtagLoaded = false;
-        var opts = { once: true, passive: true, capture: true };
-        var events = ['pointerdown', 'mousemove', 'touchstart', 'keydown', 'scroll', 'wheel'];
-        function loadGtag() {
-          if (gtagLoaded) return;
-          gtagLoaded = true;
-          events.forEach(function (e) { window.removeEventListener(e, loadGtag, opts); });
+        // gtag.js EAGER (azonnali) async betöltése. A korábbi "csak az első
+        // interakcióra töltünk" lazy hack ELRONTOTTA az Ads-konverziókat: a
+        // látogató első interakciója gyakran MAGA a CTA-kattintás. Ekkor a
+        // window.gtag még csak a stub → a 'conversion' event a dataLayer queue-ba
+        // kerül, a böngésző AZONNAL elnavigál a Notino-ra, a gtag.js pedig egy már
+        // elhagyott oldalon töltene be → a konverzió sosem megy ki. Az async
+        // betöltés nem blokkolja a renderelést (nincs érdemi LCP/TBT-hatás egy
+        // statikus oldalon), viszont a kattintásig a gtag.js szinte biztosan kész,
+        // és a konverzió sendBeacon-nel, navigáció ELŐTT kimegy. A konverziómérés
+        // megbízhatósága fontosabb, mint pár ms szintetikus PSI-pont.
+        (function () {
           var s = document.createElement('script');
           s.async = true;
           s.src = 'https://www.googletagmanager.com/gtag/js?id=' + primaryGtagId;
           document.head.appendChild(s);
-        }
-        events.forEach(function (e) { window.addEventListener(e, loadGtag, opts); });
-
-        // Fallback a GA4-hez: interakció NÉLKÜLI látogatónál (no-interaction bounce)
-        // is rögzüljön a session. A load esemény UTÁN, idle-ben töltünk — a kritikus
-        // betöltési ablakon kívül, hogy a mobil PSI-t minimálisan érintse. Idempotens
-        // (a gtagLoaded guard miatt sosem tölt kétszer; az interakció továbbra is
-        // azonnal triggereli, ez csak biztonsági háló a némán távozókra).
-        function idleLoadGtag() {
-          if (window.requestIdleCallback) window.requestIdleCallback(loadGtag, { timeout: 4000 });
-          else window.setTimeout(loadGtag, 3000);
-        }
-        if (document.readyState === 'complete') idleLoadGtag();
-        else window.addEventListener('load', idleLoadGtag, { once: true });
+        })();
       </script>
     )}
     {hasPixel && (
