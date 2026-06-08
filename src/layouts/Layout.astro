@@ -406,12 +406,32 @@ const primaryGtagId = hasGoogleTag
         src: url('/fonts/fraunces-latin-normal.woff2') format('woff2');
         unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
       }
-      /* Fraunces italic @font-face SZÁNDÉKOSAN eltávolítva: a két italic fájl
-         ~152 KiB volt, VeryHigh prioritással töltött a kritikus ablakban, csak a
-         display headingek <em> kiemeléséhez (pl. a hero "bőrrel" szó). Helyette a
-         böngésző szintetikus dőltet rajzol a már betöltött normal Fraunces-ből
-         (font-synthesis: style, alapból engedélyezett) — a kinézet gyakorlatilag
-         azonos, de 152 KiB-tal kevesebb tölt a mobil kritikus útban. */
+      /* Fraunces VALÓDI italic @font-face-ek (latin + latin-ext) visszakötve.
+         Korábban el voltak távolítva (perf), és a böngésző szintetikus dőltet
+         rajzolt a normal Fraunces-ből (font-synthesis). A szintetikus ferdítés
+         viszont eltorzítja a magyar kettős éles ékezetet (ő U+0151, ű U+0171,
+         Ő U+0150, Ű U+0170) — a két éles vonás összemosódik / breve-szerűvé
+         válik (jól látható a hero "bőrrel" <em> szóban). A valódi italic glyph
+         helyesen rajzolt kettős éles ékezetet ad.
+         PERF: font-display: swap + NINCS preload → a két fájl lazy-n, a kritikus
+         úton kívül tölt (nem blokkolja az LCP-t). A latin-ext külön, kis fájl,
+         csak akkor tölt, ha tényleg van ilyen karakter (unicode-range). */
+      @font-face {
+        font-family: 'Fraunces';
+        font-style: italic;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url('/fonts/fraunces-latin-ext-italic.woff2') format('woff2');
+        unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+      }
+      @font-face {
+        font-family: 'Fraunces';
+        font-style: italic;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url('/fonts/fraunces-latin-italic.woff2') format('woff2');
+        unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+      }
       @font-face {
         font-family: 'Geist';
         font-style: normal;
