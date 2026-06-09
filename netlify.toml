@@ -5,6 +5,33 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# ---------------------------------------------------------------------------
+# 301 átirányítások: a RÉGI Wix-oldal még indexelt URL-jei → az új megfelelő oldalak.
+# A GSC-ben ezek 404-re futottak (a /book-online még pozíció 2,7-en is megjelent),
+# így a maradék rangsor/forgalom elveszett. A konkrét szabályok ELŐBB, a /service-page
+# gyűjtő (*) UTOLJÁRA — a Netlify az első találatot alkalmazza (first match wins).
+# ---------------------------------------------------------------------------
+[[redirects]]
+  from = "/book-online"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/service-page/szempillafestés"
+  to = "/szempilla-lifting-zuglo/"
+  status = 301
+
+[[redirects]]
+  from = "/service-page/szemöldökformázás-festéssel-laminálással"
+  to = "/szemoldok-laminalas-zuglo/"
+  status = 301
+
+# A /service-page régi Wix-prefix hosszú farka (minden egyéb szolgáltatás-oldal) → kezdőlap.
+[[redirects]]
+  from = "/service-page/*"
+  to = "/"
+  status = 301
+
 [[headers]]
   for = "/*"
   [headers.values]

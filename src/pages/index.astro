@@ -39,9 +39,14 @@ const homepagePosts = allBlogPosts
 // (Astro 5 + esbuild strict mode nem kezeli jól a literal string types-t JSX href-ekben.)
 const config = { ...siteConfig };
 
+// A „Szempilla & szemöldök" korábban egy bundle-kártya volt, ami csak a lash-oldalra
+// linkelt — emiatt a dedikált /szemoldok-laminalas-zuglo oldal árva volt a kezdőlapról,
+// és a „szemöldök laminálás" (112 megjelenés/hó, GSC) a kezdőlapra rangsorolt helyette.
+// Szétbontva: minden fő szolgáltatás saját, kulcsszó-anchoros belső linket kap.
 const services = [
   { title: 'Arckezelés', subtitle: 'Janssen Cosmetics hatóanyagokkal', body: 'Bőrtípusra szabott kezelés: regeneráló, hidratáló vagy mélytisztító. Az első alkalommal bőranalízissel kezdünk.', priceFrom: '11 000 Ft-tól', duration: '60–90 perc', href: '/arckezeles-zuglo', image: '/img/service-arckezeles.webp', alt: 'Arckezelés Janssen Cosmetics termékekkel a FRUBEAUTY szalonban' },
-  { title: 'Szempilla & szemöldök', subtitle: 'Lifting, festés, laminálás', body: 'Természetes, 6–8 hétig tartó eredmény. Reggel nincs többé szempillaspirál és szemöldökceruza.', priceFrom: '11 000 Ft-tól', duration: '60–120 perc', href: '/szempilla-lifting-zuglo', image: '/img/szempilla-szemoldok-hero.webp', alt: 'Szempilla lifting és szemöldök laminálás előtte-utána' },
+  { title: 'Szempilla lifting', subtitle: 'Lifting + festés', body: 'Természetes íveltség, 6–8 hétig tartó eredmény. Reggel nincs többé szempillaspirál — felkelsz és kész vagy.', priceFrom: '12 000 Ft-tól', duration: '~ 90 perc', href: '/szempilla-lifting-zuglo', image: '/img/szempilla-szemoldok-hero.webp', alt: 'Szempilla lifting előtte-utána a FRUBEAUTY szalonban' },
+  { title: 'Szemöldök laminálás', subtitle: 'Formázás + festés', body: 'Dúsabb, rendezett szemöldök tű nélkül, koreai technikával — ~6 hétig tartós, ápolt tekintet.', priceFrom: '11 000 Ft-tól', duration: '~ 60 perc', href: '/szemoldok-laminalas-zuglo', image: '/img/szemoldok-laminalas-zuglo-munka-uj.webp', alt: 'Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló' },
   { title: 'Smink', subtitle: 'Esküvő, ballagás, fotózás', body: 'Próbasmink, helyszíni igazítás, hosszan tartó eredmény. A stílust együtt találjuk ki.', priceFrom: '13 000 Ft-tól', duration: '60–90 perc', href: '/sminkes-zuglo', image: '/img/smink-menyasszony-munka.webp', alt: 'Alkalmi esküvői smink a FRUBEAUTY szalonban' },
 ];
 
