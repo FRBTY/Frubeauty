@@ -28,6 +28,11 @@ export function HeroMedia({
   const [shouldMountVideo, setShouldMountVideo] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // AVIF poszter (~50%-kal kisebb, mint a WebP) — minden -poster.webp mellé
+  // generálva van .avif. A <picture> AVIF-source-t ad, az <img> WebP-fallbacket
+  // a ritka AVIF-képtelen böngészőkre. Az LCP-elem így kevesebb byte.
+  const posterAvif = posterSrc.replace(/\.webp$/, '.avif');
+
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced || !videoSrc) return;
@@ -57,18 +62,21 @@ export function HeroMedia({
         className="relative overflow-hidden rounded-3xl bg-inkRise ring-1 ring-black shadow-[0_30px_80px_-30px_rgba(0,0,0,0.6)]"
         style={{ aspectRatio: aspect }}
       >
-        <img
-          src={posterSrc}
-          alt={alt}
-          width={380}
-          height={676}
-          className={`absolute inset-0 w-full h-[112%] -top-[6%] object-cover transition-opacity duration-700 ease-out ${
-            videoReady ? 'opacity-0' : 'opacity-100'
-          }`}
-          loading="eager"
-          fetchPriority="high"
-          decoding="sync"
-        />
+        <picture>
+          <source srcSet={posterAvif} type="image/avif" />
+          <img
+            src={posterSrc}
+            alt={alt}
+            width={380}
+            height={676}
+            className={`absolute inset-0 w-full h-[112%] -top-[6%] object-cover transition-opacity duration-700 ease-out ${
+              videoReady ? 'opacity-0' : 'opacity-100'
+            }`}
+            loading="eager"
+            fetchPriority="high"
+            decoding="sync"
+          />
+        </picture>
         {shouldMountVideo && videoSrc && (
           <video
             src={videoSrc}

@@ -155,7 +155,7 @@ const primaryGtagId = hasGoogleTag
     <meta name="theme-color" content="#1A1410" />
     <link rel="canonical" href={canonical} />
     {preloadImage && (
-      <link rel="preload" as="image" href={preloadImage} type="image/webp" fetchpriority="high" />
+      <link rel="preload" as="image" href={preloadImage} type={preloadImage.endsWith('.avif') ? 'image/avif' : 'image/webp'} fetchpriority="high" />
     )}
     <title>{title}</title>
     <meta name="description" content={description} />

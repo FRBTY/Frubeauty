@@ -226,7 +226,7 @@ const serviceSchemas = [
   title="Szempilla Lifting Zugló – 12.000 Ft ★5,0 | FRUBEAUTY"
   description="★5,0 · 40+ Google-értékelés · Szempilla lifting Zuglóban, XIV. kerület. Koreai technika, ragasztómentes, 6–8 hétig tartós. 12.000 Ft-tól → Foglalj most!"
   additionalSchemas={[faqSchema, howToSchema, videoSchema, breadcrumbSchema, ...serviceSchemas]}
-  preloadImage="/img/szempilla-szemoldok-szolgaltatas-budapest-egressy-ut-szempillaoldal1kep.webp"
+  preloadImage="/img/szempilla-szemoldok-szolgaltatas-budapest-egressy-ut-szempillaoldal1kep.avif"
 >
   <SiteHeader />
 
@@ -257,7 +257,10 @@ const serviceSchemas = [
         </div>
         <div class="lg:col-span-5">
           <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-black">
-            <img src="/img/szempilla-szemoldok-szolgaltatas-budapest-egressy-ut-szempillaoldal1kep.webp" alt="Szempilla lifting eredmény — FRUBEAUTY zuglói szalon, Egressy út" width="800" height="1000" class="w-full h-full object-cover" loading="eager" fetchpriority="high" />
+            <picture>
+              <source srcset="/img/szempilla-szemoldok-szolgaltatas-budapest-egressy-ut-szempillaoldal1kep.avif" type="image/avif" />
+              <img src="/img/szempilla-szemoldok-szolgaltatas-budapest-egressy-ut-szempillaoldal1kep.webp" alt="Szempilla lifting eredmény — FRUBEAUTY zuglói szalon, Egressy út" width="800" height="1000" class="w-full h-full object-cover" loading="eager" fetchpriority="high" />
+            </picture>
           </div>
         </div>
       </div>
