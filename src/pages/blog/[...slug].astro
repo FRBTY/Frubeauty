@@ -59,7 +59,7 @@ const articleSchema = {
   author: {
     '@type': 'Person',
     name: 'Pecze-Kovács Fruzsina',
-    url: 'https://frubeauty.com',
+    url: 'https://frubeauty.com/rolam/',
   },
   publisher: {
     '@type': 'Organization',
@@ -71,7 +71,7 @@ const articleSchema = {
   },
   mainEntityOfPage: {
     '@type': 'WebPage',
-    '@id': `https://frubeauty.com/blog/${post.data.slug ?? post.id}`,
+    '@id': `https://frubeauty.com/blog/${post.data.slug ?? post.id}/`,
   },
 };
 ---
@@ -80,7 +80,7 @@ const articleSchema = {
   title={post.data.metaTitle ?? `${post.data.title} | FRUBEAUTY Blog`}
   description={post.data.metaDescription ?? post.data.excerpt}
   image={post.data.cover}
-  canonical={`https://frubeauty.com/blog/${post.data.slug ?? post.id}`}
+  canonical={`https://frubeauty.com/blog/${post.data.slug ?? post.id}/`}
 >
   <SiteHeader />
 
@@ -111,7 +111,7 @@ const articleSchema = {
         <address class="author byline mt-7 flex items-center gap-3 not-italic" itemprop="author" itemscope itemtype="https://schema.org/Person">
           <span class="w-10 h-10 rounded-full bg-gold/15 text-gold flex items-center justify-center text-sm font-medium" aria-hidden>FP</span>
           <p class="text-sm text-creamSoft">
-            Írta: <a href="/#kapcsolat" rel="author" itemprop="name" class="text-cream font-medium hover:text-gold transition-colors">Pecze-Kovács Fruzsina</a>
+            Írta: <a href="/rolam/" rel="author" itemprop="name" class="text-cream font-medium hover:text-gold transition-colors">Pecze-Kovács Fruzsina</a>
             <span class="text-creamMute" itemprop="jobTitle"> — kozmetikus &amp; sminkes, Zugló</span>
           </p>
         </address>
@@ -147,7 +147,7 @@ const articleSchema = {
         <Reveal client:visible as="nav" className="grid sm:grid-cols-2 gap-6 sm:gap-8" aria-label="Cikkek navigáció">
           {prev ? (
             <a
-              href={`/blog/${prev.data.slug ?? prev.id}`}
+              href={`/blog/${prev.data.slug ?? prev.id}/`}
               class="group flex flex-col bg-inkSoft border border-whisper rounded-3xl p-6 sm:p-7 md:hover:border-whisperStrong transition-colors duration-500"
             >
               <span class="text-[11px] uppercase tracking-caps text-creamMute mb-3">← Előző cikk</span>
@@ -158,7 +158,7 @@ const articleSchema = {
           ) : <div aria-hidden></div>}
           {next ? (
             <a
-              href={`/blog/${next.data.slug ?? next.id}`}
+              href={`/blog/${next.data.slug ?? next.id}/`}
               class="group flex flex-col sm:items-end sm:text-right bg-inkSoft border border-whisper rounded-3xl p-6 sm:p-7 md:hover:border-whisperStrong transition-colors duration-500"
             >
               <span class="text-[11px] uppercase tracking-caps text-creamMute mb-3">Következő cikk →</span>
@@ -186,7 +186,7 @@ const articleSchema = {
               További olvasnivaló a kategóriából.
             </h2>
           </div>
-          <a href="/blog" class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors">
+          <a href="/blog/" class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors">
             Összes cikk →
           </a>
         </Reveal>
@@ -194,7 +194,7 @@ const articleSchema = {
           {related.map((p) => (
             <Reveal client:visible as="article">
               <a
-                href={`/blog/${p.data.slug ?? p.id}`}
+                href={`/blog/${p.data.slug ?? p.id}/`}
                 class="group flex flex-col h-full bg-ink border border-whisper rounded-3xl overflow-hidden md:hover:border-whisperStrong transition-colors duration-500"
               >
                 <div class="aspect-[16/10] overflow-hidden bg-inkRise">

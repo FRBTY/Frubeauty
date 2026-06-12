@@ -44,18 +44,18 @@ const config = { ...siteConfig };
 // és a „szemöldök laminálás" (112 megjelenés/hó, GSC) a kezdőlapra rangsorolt helyette.
 // Szétbontva: minden fő szolgáltatás saját, kulcsszó-anchoros belső linket kap.
 const services = [
-  { title: 'Arckezelés', subtitle: 'Janssen Cosmetics hatóanyagokkal', body: 'Bőrtípusra szabott kezelés: regeneráló, hidratáló vagy mélytisztító. Az első alkalommal bőranalízissel kezdünk.', priceFrom: '11 000 Ft-tól', duration: '60–90 perc', href: '/arckezeles-zuglo', image: '/img/service-arckezeles.webp', alt: 'Arckezelés Janssen Cosmetics termékekkel a FRUBEAUTY szalonban' },
-  { title: 'Szempilla lifting', subtitle: 'Lifting + festés', body: 'Természetes íveltség, 6–8 hétig tartó eredmény. Reggel nincs többé szempillaspirál — felkelsz és kész vagy.', priceFrom: '12 000 Ft-tól', duration: '~ 90 perc', href: '/szempilla-lifting-zuglo', image: '/img/szempilla-szemoldok-hero.webp', alt: 'Szempilla lifting előtte-utána a FRUBEAUTY szalonban' },
-  { title: 'Szemöldök laminálás', subtitle: 'Formázás + festés', body: 'Dúsabb, rendezett szemöldök tű nélkül, koreai technikával — ~6 hétig tartós, ápolt tekintet.', priceFrom: '11 000 Ft-tól', duration: '~ 60 perc', href: '/szemoldok-laminalas-zuglo', image: '/img/szemoldok-laminalas-zuglo-munka-uj.webp', alt: 'Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló' },
-  { title: 'Smink', subtitle: 'Esküvő, ballagás, fotózás', body: 'Próbasmink, helyszíni igazítás, hosszan tartó eredmény. A stílust együtt találjuk ki.', priceFrom: '13 000 Ft-tól', duration: '60–90 perc', href: '/sminkes-zuglo', image: '/img/smink-menyasszony-munka.webp', alt: 'Alkalmi esküvői smink a FRUBEAUTY szalonban' },
+  { title: 'Arckezelés', subtitle: 'Janssen Cosmetics hatóanyagokkal', body: 'Bőrtípusra szabott kezelés: regeneráló, hidratáló vagy mélytisztító. Az első alkalommal bőranalízissel kezdünk.', priceFrom: '11 000 Ft-tól', duration: '60–90 perc', href: '/arckezeles-zuglo/', image: '/img/service-arckezeles.webp', alt: 'Arckezelés Janssen Cosmetics termékekkel a FRUBEAUTY szalonban' },
+  { title: 'Szempilla lifting', subtitle: 'Lifting + festés', body: 'Természetes íveltség, 6–8 hétig tartó eredmény. Reggel nincs többé szempillaspirál — felkelsz és kész vagy.', priceFrom: '12 000 Ft-tól', duration: '~ 90 perc', href: '/szempilla-lifting-zuglo/', image: '/img/szempilla-szemoldok-hero.webp', alt: 'Szempilla lifting előtte-utána a FRUBEAUTY szalonban' },
+  { title: 'Szemöldök laminálás', subtitle: 'Formázás + festés', body: 'Dúsabb, rendezett szemöldök tű nélkül, koreai technikával — ~6 hétig tartós, ápolt tekintet.', priceFrom: '11 000 Ft-tól', duration: '~ 60 perc', href: '/szemoldok-laminalas-zuglo/', image: '/img/szemoldok-laminalas-zuglo-munka-uj.webp', alt: 'Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló' },
+  { title: 'Smink', subtitle: 'Esküvő, ballagás, fotózás', body: 'Próbasmink, helyszíni igazítás, hosszan tartó eredmény. A stílust együtt találjuk ki.', priceFrom: '13 000 Ft-tól', duration: '60–90 perc', href: '/sminkes-zuglo/', image: '/img/smink-menyasszony-munka.webp', alt: 'Alkalmi esküvői smink a FRUBEAUTY szalonban' },
 ];
 
 // Aspirational / future-self framing (#audit #3) — pain-first helyett identitás-építés.
 // Daniel Kahneman: people approach gains more strongly when self-image is positive.
 const audienceProfiles = [
-  { headline: 'Egy nyugodt 90 perc — és a tükörből a kipihent éned néz vissza', body: 'A Janssen mélyregeneráló kezelés visszahozza a bőr természetes ragyogását. Tedd magad a hét legfontosabb találkozójává.', cta: 'Arckezelések', href: '/arckezeles-zuglo' },
-  { headline: 'Esküvő, ballagás vagy egy fontos esemény közeledik', body: 'Próbasmink, alkalmi smink és tartós szempilla-lift egy csomagban. Reggel mehetsz nyugodtan, a smink ott lesz este is.', cta: 'Alkalmi smink', href: '/sminkes-zuglo' },
-  { headline: 'Képzeld el a reggelt smink nélkül — és mégis úgy érzed, készen állsz', body: 'A szempilla-lifting és szemöldök-laminálás 6–8 hétig megspórolja a reggeli sminket. Felkelsz, és kész vagy.', cta: 'Szempilla & szemöldök', href: '/szempilla-lifting-zuglo' },
+  { headline: 'Egy nyugodt 90 perc — és a tükörből a kipihent éned néz vissza', body: 'A Janssen mélyregeneráló kezelés visszahozza a bőr természetes ragyogását. Tedd magad a hét legfontosabb találkozójává.', cta: 'Arckezelések', href: '/arckezeles-zuglo/' },
+  { headline: 'Esküvő, ballagás vagy egy fontos esemény közeledik', body: 'Próbasmink, alkalmi smink és tartós szempilla-lift egy csomagban. Reggel mehetsz nyugodtan, a smink ott lesz este is.', cta: 'Alkalmi smink', href: '/sminkes-zuglo/' },
+  { headline: 'Képzeld el a reggelt smink nélkül — és mégis úgy érzed, készen állsz', body: 'A szempilla-lifting és szemöldök-laminálás 6–8 hétig megspórolja a reggeli sminket. Felkelsz, és kész vagy.', cta: 'Szempilla & szemöldök', href: '/szempilla-lifting-zuglo/' },
 ];
 
 const processSteps = [
@@ -115,10 +115,10 @@ const homepageFaqSchema = {
 ---
 
 <Layout
-  title="Kozmetika Zugló – Szempilla Lifting, Arckezelés ★5,0 | FRUBEAUTY"
+  title="Kozmetika Zugló – Szempilla Lifting ★5,0 | FRUBEAUTY"
   description="★5,0 · 40+ Google-értékelés · Janssen arckezelés, szempilla lifting, szemöldök laminálás Zuglóban. 11.000 Ft-tól → Foglalj most!"
   additionalSchemas={[homepageFaqSchema]}
-  preloadImage="/media/hero-poster.webp"
+  preloadImage="/media/hero-poster.avif"
 >
   {/* AnnouncementBar + NavBar share a fixed top container so they stack visually
       and dismiss-collapse happens in the same flow (no z-index fight). */}
@@ -369,7 +369,7 @@ const homepageFaqSchema = {
           </h2>
         </div>
         <a
-          href="/blog"
+          href="/blog/"
           class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors"
         >
           Összes cikk →

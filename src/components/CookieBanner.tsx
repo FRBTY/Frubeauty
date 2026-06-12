@@ -68,7 +68,7 @@ export function CookieBanner() {
         >
           <p id="cookie-banner-body" className="text-sm leading-relaxed text-creamSoft/90">
             Weboldalunk működéséhez elengedhetetlen, valamint a látogatottság elemzéséhez és a hirdetéseink optimalizálásához statisztikai és marketing sütiket használunk. Az „Összes elfogadása” gombbal hozzájárulsz az adatok feldolgozásához. A beállításaidat bármikor módosíthatod.{' '}
-            <a href="/adatvedelem" className="underline underline-offset-2 hover:text-gold transition-colors">
+            <a href="/adatvedelem/" className="underline underline-offset-2 hover:text-gold transition-colors">
               Részletek
             </a>
           </p>

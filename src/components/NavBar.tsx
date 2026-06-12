@@ -8,11 +8,11 @@ interface NavBarProps {
 
 const navLinks = [
   { href: '/',                            label: 'Főoldal' },
-  { href: '/arckezeles-zuglo',            label: 'Arckezelés' },
-  { href: '/sminkes-zuglo',               label: 'Smink' },
-  { href: '/szempilla-lifting-zuglo',     label: 'Szempilla' },
-  { href: '/szemoldok-laminalas-zuglo',   label: 'Szemöldök' },
-  { href: '/blog',                        label: 'Blog' },
+  { href: '/arckezeles-zuglo/',            label: 'Arckezelés' },
+  { href: '/sminkes-zuglo/',               label: 'Smink' },
+  { href: '/szempilla-lifting-zuglo/',     label: 'Szempilla' },
+  { href: '/szemoldok-laminalas-zuglo/',   label: 'Szemöldök' },
+  { href: '/blog/',                        label: 'Blog' },
   { href: '/#velemenyek',                 label: 'Vélemények' },
 ];
 
@@ -170,6 +170,7 @@ export function NavBar({ bookingUrl, instagram, facebook }: NavBarProps) {
         aria-modal="true"
         aria-label="Mobil menü"
         aria-hidden={!menuOpen}
+        {...(!menuOpen ? ({ inert: '' } as any) : {})}
         className={`lg:hidden fixed inset-x-0 top-16 z-40 bg-ink/95 backdrop-blur-md border-b border-whisper transition-[opacity,transform] duration-300 ease-strong-out motion-reduce:transition-opacity ${
           menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5 pointer-events-none'
         }`}

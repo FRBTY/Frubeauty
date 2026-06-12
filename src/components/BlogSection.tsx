@@ -53,7 +53,7 @@ export function BlogSection({ posts = defaultPosts }: BlogSectionProps) {
       {posts.map((p) => (
         <StaggerItem key={p.slug}>
           <article className="group flex flex-col h-full bg-inkSoft border border-whisper rounded-3xl overflow-hidden md:hover:-translate-y-0.5 md:hover:border-whisperStrong transition-[transform,border-color] duration-500 ease-out">
-            <a href={`/blog/${p.slug}`} className="flex flex-col h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60">
+            <a href={`/blog/${p.slug}/`} className="flex flex-col h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60">
               <div className="aspect-[4/5] overflow-hidden bg-inkRise">
                 <img
                   src={p.cover}

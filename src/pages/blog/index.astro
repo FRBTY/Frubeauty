@@ -71,7 +71,7 @@ const rest = posts.slice(1);
           <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
             <Reveal client:visible as="article">
               <a
-                href={`/blog/${featured.data.slug ?? featured.id}`}
+                href={`/blog/${featured.data.slug ?? featured.id}/`}
                 class="group grid lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-inkSoft border border-whisper rounded-3xl overflow-hidden md:hover:border-whisperStrong transition-colors duration-500"
               >
                 <div class="lg:col-span-7 aspect-[16/10] lg:aspect-auto lg:h-full overflow-hidden bg-inkRise">
@@ -131,7 +131,7 @@ const rest = posts.slice(1);
                 <StaggerItem>
                   <article class="group flex flex-col h-full bg-inkSoft border border-whisper rounded-3xl overflow-hidden md:hover:-translate-y-0.5 md:hover:border-whisperStrong transition-[transform,border-color] duration-500 ease-out">
                     <a
-                      href={`/blog/${post.data.slug ?? post.id}`}
+                      href={`/blog/${post.data.slug ?? post.id}/`}
                       class="flex flex-col h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"
                     >
                       <div class="aspect-[16/10] overflow-hidden bg-inkRise">
