@@ -93,12 +93,68 @@ const galleryAlts = [
   'Alkalmi smink Zugló, Egressy út — FRUBEAUTY Budapest',
 ];
 
+// ── SEO: FAQPage schema (featured snippet esélyes kérdésekre) ─────────────
+const sminkFaqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a,
+    },
+  })),
+};
+
+// ── SEO: Service schema az alkalmi/esküvői sminkhez ───────────────────────
+const sminkServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Esküvői és alkalmi smink Zugló',
+  description:
+    'Menyasszonyi, alkalmi és fotózásra készülő smink Zuglóban, XIV. kerületben. Próbasmink, tartós fixálás, helyszíni kiszállás Budapesten és környékén.',
+  provider: {
+    '@type': 'BeautySalon',
+    '@id': 'https://frubeauty.com/#business',
+    name: 'FRUBEAUTY – Pecze-Kovács Fruzsina',
+    url: 'https://frubeauty.com',
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Budapest' },
+    { '@type': 'AdministrativeArea', name: 'Zugló' },
+  ],
+  offers: {
+    '@type': 'AggregateOffer',
+    lowPrice: '13000',
+    highPrice: '48000',
+    priceCurrency: 'HUF',
+    availability: 'https://schema.org/InStock',
+  },
+};
+
+// ── SEO: BreadcrumbList schema ────────────────────────────────────────────
+const sminkBreadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Főoldal', item: 'https://frubeauty.com' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Esküvői és alkalmi smink Zugló',
+      item: 'https://frubeauty.com/sminkes-zuglo/',
+    },
+  ],
+};
+
 const config = { ...siteConfig };
 ---
 
 <Layout
   title="Esküvői & Alkalmi Smink Zugló – 13.000 Ft ★5,0 | FRUBEAUTY"
   description="★5,0 · 40+ Google-értékelés · Esküvői, menyasszonyi és alkalmi smink Zuglóban. Próbasmink, tartós fixálás, helyszíni kiszállás. 13.000 Ft-tól → Foglalj most!"
+  additionalSchemas={[sminkFaqSchema, sminkServiceSchema, sminkBreadcrumbSchema]}
   preloadImage="/media/smink-oldal-video-frubeauty-budapest-zuglo-poster.avif"
 >
   <SiteHeader />

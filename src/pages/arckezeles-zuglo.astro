@@ -105,12 +105,27 @@ const arcServiceSchema = {
     availability: 'https://schema.org/InStock',
   },
 };
+
+// ── SEO: BreadcrumbList schema ────────────────────────────────────────────
+const arcBreadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Főoldal', item: 'https://frubeauty.com' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Arckezelés Zugló',
+      item: 'https://frubeauty.com/arckezeles-zuglo/',
+    },
+  ],
+};
 ---
 
 <Layout
   title="Arckezelés Zugló – 16.900 Ft-tól ★5,0 | FRUBEAUTY"
   description="★5,0 · 40+ Google-értékelés · Janssen arckezelés Zuglóban, XIV. kerület. Anti-aging, mélytisztító és hidratáló kezelések. 16.900 Ft-tól → Foglalj most!"
-  additionalSchemas={[arcFaqSchema, arcServiceSchema]}
+  additionalSchemas={[arcFaqSchema, arcServiceSchema, arcBreadcrumbSchema]}
   preloadImage="/media/arckezeles-zuglo-poster.avif"
 >
   <SiteHeader />

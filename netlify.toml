@@ -6,6 +6,20 @@
   NODE_VERSION = "20"
 
 # ---------------------------------------------------------------------------
+# Hoszt-kanonizálás: www → csupasz domain (apex), 301-gyel, force=true.
+# A GSC-ben a www.frubeauty.com külön oldalként jelent meg → megosztott
+# entitás-/link-jelek. Ez a szabály a kanonikus apex-re tereli a www-t (a path
+# megmarad: :splat). ELSŐ a redirect-listában (first match wins), így a www-s
+# kérés egy hoppal a végleges, slashes apex-URL-re ér.
+# Megjegyzés: ha a Netlify "primary domain" beállítás már apex-re terel, ez
+# redundáns, de ártalmatlan biztosíték — és verzióban követhető (IaC).
+[[redirects]]
+  from = "https://www.frubeauty.com/*"
+  to = "https://frubeauty.com/:splat"
+  status = 301
+  force = true
+
+# ---------------------------------------------------------------------------
 # 301 átirányítások: a RÉGI Wix-oldal még indexelt URL-jei → az új megfelelő oldalak.
 # A GSC-ben ezek 404-re futottak (a /book-online még pozíció 2,7-en is megjelent),
 # így a maradék rangsor/forgalom elveszett. A konkrét szabályok ELŐBB, a /service-page
