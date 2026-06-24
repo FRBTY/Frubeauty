@@ -4,6 +4,7 @@ excerpt: "Lifting vagy műszempilla-építés? Az egyik a saját pilládból hoz
 category: "Szempilla"
 readingMinutes: 6
 publishedAt: 2026-05-28
+updatedAt: 2026-06-24
 cover: "/img/szempilla-szemoldok-munka.webp"
 coverWidth: 1200
 coverHeight: 1600
@@ -33,6 +34,23 @@ A FRUBEAUTY-nál a [szempilla lifting festéssel együtt 12 000 Ft](/szempilla-l
 ## Mikor jobb mégis a műszempilla?
 
 Ha egy konkrét eseményre — esküvőre, fotózásra — maximális drámát szeretnél, vagy nagyon ritka, világos szálú a pillád, a műszempilla látványosabb választás. Ilyenkor érdemes alkalmi [sminkkel](/sminkes-zuglo/) együtt megtervezni, hogy a végeredmény egységes legyen.
+
+## Gyakori kérdések: lifting vagy műszempilla
+
+**Mi a fő különbség a kettő között?**
+A lifting a saját pilláidat emeli meg és festi; a műszempilla-építés új szálakat ragaszt a meglévőkhöz.
+
+**Melyik tart tovább?**
+A lifting 6–8 hétig, töltés nélkül. A műszempilla 2–3 hetente töltést igényel, különben szabálytalanná válik.
+
+**Melyik olcsóbb hosszú távon?**
+A lifting: 12 000 Ft 6–8 hétre, utánkövetés nélkül. A műszempilla minden töltése újabb kiadás, így havi szinten jellemzően drágább.
+
+**Károsítja a műszempilla a saját pilláimat?**
+A ragasztott szálak terhelik a sajátodat, és a helytelen ápolás gyengítheti őket. A lifting nem ragaszt semmit, ezért nem terheli a szálakat.
+
+**Eseményre melyiket válasszam?**
+Esküvőre, fotózásra a műszempilla látványosabb drámát ad; ha viszont ápolásmentes, natúr hatást szeretnél a hétköznapokra, a lifting a jobb választás.
 
 ## Még bizonytalan vagy?
 

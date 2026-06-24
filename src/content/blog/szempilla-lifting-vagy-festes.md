@@ -4,7 +4,7 @@ excerpt: "Sokan egy trendi Insta-fotó alapján foglalnak liftinget — miközbe
 category: "Szempilla"
 readingMinutes: 5
 publishedAt: 2026-04-12
-updatedAt: 2026-06-12
+updatedAt: 2026-06-24
 cover: "/img/BLOG_Szempilla_lifting_budapest-egressy_ut_zuglo.webp"
 coverWidth: 1400
 coverHeight: 1229
@@ -45,6 +45,23 @@ A festés nem változtat a pilla állásán vagy ívén — kizárólag a színt
 ## Miért a kombinált kezelés a legnépszerűbb?
 
 A vendégeim döntő többsége nem választ a kettő közül, hanem együtt kéri őket. A lifting és a festés együtt adja azt a sötét, ívelt, karakteres keretet, ami mellett a szempillaspirál feleslegessé válik. Ha ezt szemöldök laminálással egészíted ki, az egész arckarakter megváltozik — mesterkélt, művi hatás nélkül. A kombinációk árait a [szempilla lifting árak 2026](/blog/szempilla-lifting-arak-2026/) cikkben szedtem össze.
+
+## Gyakori kérdések: lifting vagy festés
+
+**Mi a különbség a szempilla lifting és a festés között?**
+A lifting a pilláid ívét emeli meg, a festés a színüket sötétíti. A kettő nem helyettesíti egymást — más problémát old meg.
+
+**Honnan tudom, melyik kell nekem?**
+Ha a pilláid egyenesen vagy lefelé nőnek, lifting kell. Ha az ívük jó, csak a végük kiszőkült, elég a festés. Bizonytalanságban a konzultáción felmérem.
+
+**Elég önmagában a festés?**
+Akkor igen, ha a pilláid íve rendben van, és csak a színük halvány — ilyenkor 4 000 Ft-ért, fél óra alatt látványos a kontraszt.
+
+**Mennyibe kerül külön és együtt?**
+A festés önmagában 4 000 Ft, a lifting + festés kombináció 12 000 Ft. A részletes árakat a [szempilla lifting árak 2026](/blog/szempilla-lifting-arak-2026/) cikkben találod.
+
+**Csináltatható egyszerre a kettő?**
+Igen, és a vendégeim többsége ezt választja — a lifting + festés együtt adja azt a sötét, ívelt keretet, ami mellett a szempillaspirál feleslegessé válik.
 
 ## Hogyan tovább?
 

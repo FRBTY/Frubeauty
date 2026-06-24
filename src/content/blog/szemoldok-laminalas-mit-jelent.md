@@ -4,6 +4,7 @@ excerpt: "Mi az a szemöldök laminálás, és mire jó? Tűmentes kezelés, ame
 category: "Szempilla"
 readingMinutes: 4
 publishedAt: 2026-04-20
+updatedAt: 2026-06-24
 cover: "/img/szemoldok-laminalas-vendeg-kep-budapest-egressy-ut-kozmetika.webp"
 coverWidth: 1200
 coverHeight: 1852
@@ -35,5 +36,22 @@ A teljes kezelés körülbelül **60 perc**, és fájdalommentes — nincs tű, 
 ## Kinek ajánlott — és kinek nem?
 
 Ha a szemöldököd alapvetően elég sűrű, csak **rendezetlen, lefelé nő, vagy nincs határozott íve**, a laminálás ideális. Ha viszont kopasz, hiányos foltjaid vannak, a laminálásnak nincs miből dolgoznia — ilyenkor más irány lehet észszerű, erről a [szemöldök laminálás vs. microblading](/blog/szemoldok-laminalas-vs-microblading/) cikkben írok.
+
+## Gyakori kérdések a szemöldök laminálásról
+
+**Mit jelent a szemöldök laminálás?**
+Tűmentes kozmetikai kezelés, amely a saját szemöldökszálaidat rögzíti a kívánt irányba, és dúsabbnak, rendezettebbnek mutatja a szemöldököd. Nem tetoválás és nem pótlás — a meglévő szálaiddal dolgozik.
+
+**Fáj a szemöldök laminálás?**
+Nem. Nincs tű és nincs bőrsértés; a legtöbb vendég pihentető kezelésként éli meg a kb. 60 percet.
+
+**Meddig tart az eredmény?**
+Átlagosan 6 hétig, a saját szőrnövekedési ciklusodtól függően. A részleteket a [meddig tart a laminálás](/blog/szemoldok-laminalas-meddig-tart/) cikkben írom le.
+
+**Kinek nem ajánlott?**
+Ha kopasz, hiányos foltjaid vannak, a laminálásnak nincs miből dolgoznia — ilyenkor a [microblading](/blog/szemoldok-laminalas-vs-microblading/) lehet észszerűbb.
+
+**Mennyibe kerül?**
+A FRUBEAUTY-nál formázással és festéssel együtt 11 000 Ft.
 
 A teljes szolgáltatást a [szemöldök laminálás Zuglóban](/szemoldok-laminalas-zuglo/) oldalon találod — formázással és festéssel együtt **11 000 Ft**-ért; a tartósság részleteit pedig a [meddig tart a laminálás](/blog/szemoldok-laminalas-meddig-tart/) bejegyzésben.

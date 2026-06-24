@@ -4,6 +4,7 @@ excerpt: "Hidratáló vagy anti-aging arckezelés? A kettő más problémát old
 category: "Bőrápolás"
 readingMinutes: 5
 publishedAt: 2026-04-15
+updatedAt: 2026-06-24
 cover: "/img/arckezeles-zuglo-uj.webp"
 coverWidth: 1400
 coverHeight: 1866
@@ -34,6 +35,23 @@ A bőr állapotát az időjárás, a stressz, az alvás és a hormonális ciklus
 Nálam a hidratáló irány a **Hydro Radiance** protokoll (90 perc, 19 500 Ft): különböző molekulasúlyú hialuronsavval tölti fel a bőr mélyebb rétegeit. Az anti-aging irány a **Timeless Lift** (120 perc, 21 500 Ft): lifting-ampullák, sejtmegújító maszkok és manuális arcmasszázs, ultrahanggal támogatva. A kettő nem zárja ki egymást — érett, de kiszáradt bőrnél gyakran hidratálással kezdünk, és utána jön a feszesítés.
 
 A bőrtípusok és a Janssen-protokollok teljes párosítását a [Janssen arckezelés bőrtípusonként](/blog/janssen-arckezeles-bortipusok/) cikkben írtam le.
+
+## Gyakori kérdések: hidratáló vagy anti-aging
+
+**Hidratáló vagy anti-aging arckezelés — melyik kell nekem?**
+A tünetből indulj ki, ne az életkorból: húzódó, fénytelen, feszülő bőrhöz hidratáló kell; mély ráncokhoz, rugalmasságvesztéshez anti-aging.
+
+**Tényleg nem az életkor dönti el?**
+Nem. Egy 25 évesnek is lehet szüksége intenzív feltöltésre, és egy érettebb bőr fő gondja is lehet egyszerűen a kiszáradás. A „szárazságránc" gyakran csak vízhiány.
+
+**Lehet a kettőt kombinálni?**
+Igen. Érett, de kiszáradt bőrnél gyakran hidratálással kezdünk, és utána jön a feszesítés.
+
+**Mennyibe kerülnek ezek a kezelések?**
+A hidratáló Hydro Radiance 19 500 Ft (90 perc), az anti-aging Timeless Lift 21 500 Ft (120 perc). A teljes árlistát az [arckezelés árak 2026](/blog/arckezeles-arak-2026/) cikkben találod.
+
+**Honnan tudom biztosan, melyik az enyém?**
+A bőranalízisből — minden első kezelés alapáras része, felár nélkül.
 
 ## Hogyan döntsd el biztosan?
 
