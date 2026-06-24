@@ -9,7 +9,6 @@ import { ProcessSteps } from '../components/ProcessSteps';
 import { TestimonialsGrid } from '../components/TestimonialsGrid';
 import { GalleryGrid } from '../components/GalleryGrid';
 import { FAQ } from '../components/FAQ';
-import { PriceList } from '../components/PriceList';
 import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
 import { siteConfig } from '../config/site';
@@ -107,6 +106,18 @@ const sminkFaqSchema = {
   })),
 };
 
+// ── SEO: tételes ár-ajánlatok az ár-táblázathoz (a schema = a látható tartalom) ──
+const pricedOffers = priceCategories
+  .flatMap((cat) => cat.items)
+  .filter((it) => /\d/.test(it.price))
+  .map((it) => ({
+    '@type': 'Offer',
+    name: it.name,
+    price: it.price.replace(/[^\d]/g, ''),
+    priceCurrency: 'HUF',
+    availability: 'https://schema.org/InStock',
+  }));
+
 // ── SEO: Service schema az alkalmi/esküvői sminkhez ───────────────────────
 const sminkServiceSchema = {
   '@context': 'https://schema.org',
@@ -131,6 +142,11 @@ const sminkServiceSchema = {
     priceCurrency: 'HUF',
     availability: 'https://schema.org/InStock',
   },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Esküvői, menyasszonyi és alkalmi smink árak — Zugló',
+    itemListElement: pricedOffers,
+  },
 };
 
 // ── SEO: BreadcrumbList schema ────────────────────────────────────────────
@@ -152,8 +168,8 @@ const config = { ...siteConfig };
 ---
 
 <Layout
-  title="Esküvői & Alkalmi Smink Zugló – 13.000 Ft ★5,0 | FRUBEAUTY"
-  description="★5,0 · 40+ Google-értékelés · Esküvői, menyasszonyi és alkalmi smink Zuglóban. Próbasmink, tartós fixálás, helyszíni kiszállás. 13.000 Ft-tól → Foglalj most!"
+  title="Esküvői Smink Árak Zugló – 13.000 Ft ★5,0 | FRUBEAUTY"
+  description="★5,0 · 40+ értékelés · Esküvői, menyasszonyi és alkalmi smink Zuglóban (Budapest XIV.). Próbasmink, tartós fixálás. Árak 13.000 Ft-tól → Foglalj most!"
   additionalSchemas={[sminkFaqSchema, sminkServiceSchema, sminkBreadcrumbSchema]}
   preloadImage="/media/smink-oldal-video-frubeauty-budapest-zuglo-poster.avif"
 >
@@ -212,13 +228,51 @@ const config = { ...siteConfig };
 
   <section id="csomagok" class="py-20 sm:py-28 bg-inkSoft">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
-      <Reveal client:visible as="div" className="mb-16 sm:mb-20 max-w-2xl">
-        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Csomagok és árak</p>
-        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Három <em class="display">irány</em>, nyolc szolgáltatás.</h2>
-        <p class="mt-5 text-creamSoft leading-[1.7]">Az árak a teljes szolgáltatást tartalmazzák — bőrelőkészítés, smink, fixálás. Kiszállás külön, egyedi egyeztetés alapján.</p>
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Árak · 2026</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Esküvői smink árak <em class="display">Zuglóban</em>.</h2>
+        <p class="mt-5 text-creamSoft leading-[1.7]">Átlátható, fix árak — minden tétel a teljes szolgáltatást tartalmazza: bőrelőkészítés, smink és professzionális fixálás. A helyszíni kiszállás díja külön, egyedi egyeztetés alapján.</p>
         <p class="mt-4 text-creamSoft leading-[1.7]">Esküvőre készülsz? A teljes <a href="/blog/eskuvoi-smink-arak-budapest/" class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors">esküvői smink ár-útmutató</a> tételesen végigveszi, mi mennyibe kerül és mitől függ az ár.</p>
       </Reveal>
-      <PriceList client:visible categories={priceCategories} />
+
+      <div class="overflow-x-auto rounded-3xl border border-whisper bg-ink/40">
+        <table class="w-full text-left border-collapse">
+          <caption class="sr-only">Esküvői, menyasszonyi és alkalmi smink árak — FRUBEAUTY Zugló, Budapest XIV. kerület, 2026</caption>
+          <thead>
+            <tr class="border-b border-whisperStrong">
+              <th scope="col" class="py-4 px-5 sm:px-7 text-[11px] uppercase tracking-caps text-creamMute font-medium">Szolgáltatás</th>
+              <th scope="col" class="hidden sm:table-cell py-4 px-3 text-[11px] uppercase tracking-caps text-creamMute font-medium whitespace-nowrap">Időtartam</th>
+              <th scope="col" class="py-4 px-5 sm:px-7 text-[11px] uppercase tracking-caps text-creamMute font-medium text-right">Ár</th>
+            </tr>
+          </thead>
+          {priceCategories.map((cat) => (
+            <tbody>
+              <tr>
+                <th colspan="3" scope="colgroup" class="pt-8 pb-3 px-5 sm:px-7 text-left text-[11px] uppercase tracking-caps text-gold font-medium border-b border-whisper">{cat.eyebrow}</th>
+              </tr>
+              {cat.items.map((item) => (
+                <tr class="border-b border-whisper align-top">
+                  <td class="py-5 px-5 sm:px-7">
+                    <div class="flex items-center gap-2.5 flex-wrap">
+                      <span class="font-display text-base sm:text-lg font-medium text-cream leading-snug">{item.name}</span>
+                      {item.badge && (<span class="text-[10px] uppercase tracking-caps font-medium bg-gold/15 text-gold border border-gold/30 px-2 py-0.5 rounded-full">{item.badge}</span>)}
+                    </div>
+                    {item.description && (<p class="mt-1.5 text-[13px] sm:text-sm text-creamSoft leading-relaxed max-w-[64ch]">{item.description}</p>)}
+                    <span class="sm:hidden mt-2 inline-block text-[11px] uppercase tracking-caps text-creamMute">{item.duration}</span>
+                  </td>
+                  <td class="hidden sm:table-cell py-5 px-3 text-[12px] uppercase tracking-caps text-creamMute whitespace-nowrap">{item.duration}</td>
+                  <td class="py-5 px-5 sm:px-7 text-right"><span class="font-display text-lg sm:text-xl font-medium tracking-tight text-gold whitespace-nowrap">{item.price}</span></td>
+                </tr>
+              ))}
+            </tbody>
+          ))}
+        </table>
+      </div>
+
+      <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+        <a href={config.booking} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+        <p class="text-[12px] uppercase tracking-caps text-creamMute">Az árak tájékoztató jellegűek · Kiszállás egyedi egyeztetés alapján</p>
+      </div>
     </div>
   </section>
 
