@@ -21,22 +21,49 @@
 
 # ---------------------------------------------------------------------------
 # 301 átirányítások: a RÉGI Wix-oldal még indexelt URL-jei → az új megfelelő oldalak.
-# A GSC-ben ezek 404-re futottak (a /book-online még pozíció 2,7-en is megjelent),
-# így a maradék rangsor/forgalom elveszett. A konkrét szabályok ELŐBB, a /service-page
-# gyűjtő (*) UTOLJÁRA — a Netlify az első találatot alkalmazza (first match wins).
+# A GSC-ben ezek a Wix-URL-ek MÉG INDEXELTEK (www.frubeauty.com/service-page/...),
+# így a rangsor/authority-jük a megfelelő money page-re terelendő.
+#
+# FONTOS (2026-06-24 audit): a Googlebot a kérést PERCENT-KÓDOLVA küldi
+# (szempillafest%C3%A9s), a Netlify pedig a kódolt útra illeszt. Ezért az ékezetes
+# LITERÁL `from` szabályok SOHA nem tüzeltek → minden /service-page a gyűjtővel a
+# főoldalra esett (curl-lel verifikálva). Megoldás: az ENCODED `from` az elsődleges
+# (ez egyezik a bejövő úttal); a literál alatta marad ártalmatlan fallbacknek.
+# A konkrét szabályok ELŐBB, a /service-page gyűjtő (*) UTOLJÁRA (first match wins).
+# Deploy után KÖTELEZŐ curl-ellenőrzés, hogy a money page-re visz, nem a főoldalra.
 # ---------------------------------------------------------------------------
 [[redirects]]
   from = "/book-online"
   to = "/"
   status = 301
 
+# --- Szempilla festés (Wix) → szempilla lifting money page ---
+[[redirects]]
+  from = "/service-page/szempillafest%C3%A9s"
+  to = "/szempilla-lifting-zuglo/"
+  status = 301
 [[redirects]]
   from = "/service-page/szempillafestés"
   to = "/szempilla-lifting-zuglo/"
   status = 301
 
+# --- Szemöldök formázás+festés+laminálás (Wix) → szemöldök laminálás money page ---
+[[redirects]]
+  from = "/service-page/szem%C3%B6ld%C3%B6kform%C3%A1z%C3%A1s-fest%C3%A9ssel-lamin%C3%A1l%C3%A1ssal"
+  to = "/szemoldok-laminalas-zuglo/"
+  status = 301
 [[redirects]]
   from = "/service-page/szemöldökformázás-festéssel-laminálással"
+  to = "/szemoldok-laminalas-zuglo/"
+  status = 301
+
+# --- Szemöldök formázás és festés (Wix, külön indexelt slug) → szemöldök laminálás money page ---
+[[redirects]]
+  from = "/service-page/szem%C3%B6ld%C3%B6k-form%C3%A1z%C3%A1s-%C3%A9s-fest%C3%A9s"
+  to = "/szemoldok-laminalas-zuglo/"
+  status = 301
+[[redirects]]
+  from = "/service-page/szemöldök-formázás-és-festés"
   to = "/szemoldok-laminalas-zuglo/"
   status = 301
 
