@@ -9,6 +9,7 @@ import { ProcessSteps } from '../components/ProcessSteps';
 import { TestimonialsGrid } from '../components/TestimonialsGrid';
 import { GalleryGrid } from '../components/GalleryGrid';
 import { FAQ } from '../components/FAQ';
+import RelatedArticles from '../components/RelatedArticles.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
 import { siteConfig } from '../config/site';
@@ -398,8 +399,22 @@ const config = { ...siteConfig };
     </div>
   </section>
 
-  <section class="py-20 sm:py-28 bg-inkSoft">
-    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
-      <Reveal client:visible as="div" className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-        <div class="lg:col-span-6">
+  <RelatedArticles
+    heading={'Esküvői smink — <em class="display">kapcsolódó cikkek</em>.'}
+    slugs={['eskuvoi-smink-arak-budapest', 'eskuvoi-smink-felkesziules']}
+  />
+
+  <SiteContact eyebrow="Foglalás" heading={'Készüljünk fel a <em class="display">nagy napra</em>.'} intro="Online foglalási rendszer 0–24 órában. Esküvői próbasminkre érdemes 4–8 héttel előtte időpontot foglalni — a szezonban (május–szeptember) a szombatok gyorsan betelnek." />
+
+  <SiteFooter />
+
+  <CookieBanner client:idle />
+
+  <div class="py-10 text-center border-t border-whisper">
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Vissza az oldal tetejére" class="inline-flex items-center gap-2 text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors duration-200">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
+      Vissza az oldal tetejére
+    </button>
+  </div>
+</Layout>
   

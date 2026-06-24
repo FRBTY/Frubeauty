@@ -4,7 +4,7 @@ excerpt: "Az arckezelés Zuglóban 11 000 és 21 500 Ft között mozog — a 30 
 category: "Arckezelés"
 readingMinutes: 5
 publishedAt: 2026-06-05
-updatedAt: 2026-06-12
+updatedAt: 2026-06-24
 cover: "/img/arckezeles-1.webp"
 coverWidth: 1400
 coverHeight: 1866
@@ -47,6 +47,23 @@ A bőr strukturális változásához jellemzően nem egy, hanem három egymásra
 ## Melyik kezelés való neked?
 
 Ne az árlista alapján találgass — az első alkalom **bőranalízissel** indul: megnézzük, mire van valódi szüksége a bőrödnek, és onnan választunk protokollt. A bőrtípusok és a Janssen-protokollok részletes párosítását a [Janssen arckezelés bőrtípusonként](/blog/janssen-arckezeles-bortipusok/) cikkben írtam le; ha a hidratálás és az anti-aging között bizonytalankodsz, a [hidratáló vagy anti-aging arckezelés](/blog/hidratalo-vagy-antiaging-arckezeles/) bejegyzés segít.
+
+## Gyakori kérdések az arckezelés áráról
+
+**Mennyibe kerül egy arckezelés Zuglóban?**
+A FRUBEAUTY-nál 2026-ban 11 000 és 21 500 Ft között, a protokoll hosszától és mélységétől függően. A 30 perces Relax & Glow arcmasszázs 11 000 Ft, a 120 perces Timeless Lift anti-aging 21 500 Ft.
+
+**Benne van a bőranalízis az árban?**
+Igen. Az első alkalom mindig bőranalízissel indul, felár nélkül — ez alapján választunk protokollt, nem találgatásból.
+
+**Hány alkalom kell, hogy látszódjon az eredmény?**
+Egy kezelés azonnali frissességet ad, de a bőr strukturális változásához jellemzően három, egymásra épülő alkalom kell. Erre való a Signature RESET csomag (3× Deep Clean Expert, 49 500 Ft, 9 000 Ft megtakarítás).
+
+**Milyen termékekkel dolgozol?**
+Kizárólag Janssen Cosmetics „cosmeceutical" hatóanyagokkal, amelyek a felszínnél mélyebben dolgoznak — ez az árkülönbség jelentős része a drogériás kezelésekhez képest.
+
+**Melyik kezelést válasszam?**
+Ne az árlista alapján dönts — a bőranalízis után együtt választjuk ki. A bőrtípus–protokoll párosítást a [Janssen arckezelés bőrtípusonként](/blog/janssen-arckezeles-bortipusok/) cikk részletezi.
 
 A teljes szolgáltatást, a csomagokat és a foglalást az [arckezelés Zuglóban](/arckezeles-zuglo/) oldalon találod.
 

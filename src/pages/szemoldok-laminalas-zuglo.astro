@@ -14,6 +14,7 @@ import { ProcessSteps } from '../components/ProcessSteps';
 import { TestimonialsGrid } from '../components/TestimonialsGrid';
 import { GalleryGrid } from '../components/GalleryGrid';
 import { FAQ } from '../components/FAQ';
+import RelatedArticles from '../components/RelatedArticles.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
 import { PriceList } from '../components/PriceList';
@@ -761,6 +762,11 @@ const breadcrumbSchema = {
       </Reveal>
     </div>
   </section>
+
+  <RelatedArticles
+    heading={'Szemöldök laminálás — <em class="display">kapcsolódó cikkek</em>.'}
+    slugs={['szemoldok-laminalas-mit-jelent', 'szemoldok-laminalas-arak-2026', 'szemoldok-laminalas-vs-microblading']}
+  />
 
   <SiteContact
     eyebrow="Foglalás"

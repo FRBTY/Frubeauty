@@ -4,6 +4,7 @@ excerpt: "Mitől koreai egy szempilla lifting? Kíméletesebb hatóanyagok, pont
 category: "Szempilla"
 readingMinutes: 5
 publishedAt: 2026-04-28
+updatedAt: 2026-06-24
 cover: "/img/szempillalifting-budapest-egressy-ut-munka-szempilla-oldal-2-kep.webp"
 coverWidth: 1200
 coverHeight: 1800
@@ -32,5 +33,26 @@ A koreai szempilla lifting célja ugyanaz, mint a hagyományosé — a saját pi
 ## Kinek ajánlom?
 
 Szinte mindenkinek, aki **természetes, mégis látható** eredményt szeretne — és különösen annak, akinek a pillái vékonyak, vagy már megsínylettek egy korábbi, erősebb kezelést. A koreai technika a FRUBEAUTY [szempilla lifting](/szempilla-lifting-zuglo/) szolgáltatásának alapja: festéssel együtt **12 000 Ft**, körülbelül 90 perc alatt.
+
+## Hogyan zajlik a kezelés?
+
+A pillákat egy szilikon emelőre fektetem, majd a lágyító oldat megnyitja a szál szerkezetét, hogy felvegye az emelt ívet. Ezt rögzítő, végül tápláló fázis követi — közben festés is történik, hogy a hatás teljes legyen. Végig csukott szemmel pihensz; a legtöbb vendég el is szundít. A folyamat **fájdalommentes**, mert a szemhéjat és a szálat sem éri tű vagy húzás.
+
+## Gyakori kérdések a koreai szempilla liftingről
+
+**Mi a különbség a koreai és a hagyományos szempilla lifting között?**
+A cél ugyanaz — a saját pillák megemelése —, de a koreai rendszer kíméletesebb hatóanyaggal és pontosabb ívvel dolgozik, így kisebb a szálterhelés és természetesebb az eredmény.
+
+**Fáj a koreai szempilla lifting?**
+Nem. A kezelés tű nélküli, a szemhéjat nem érinti húzás vagy szúrás — a legtöbb vendég pihentető élményként éli meg.
+
+**Meddig tart a koreai lifting eredménye?**
+Jellemzően 6–8 hétig, vagyis a saját pillák egy teljes növekedési ciklusáig.
+
+**Károsítja a pilláimat?**
+Pont ez a koreai technika lényege: a kíméletesebb anyag kisebb terhelést jelent, ezért vékonyabb vagy korábban igénybe vett pillákra is alkalmas.
+
+**Mennyibe kerül?**
+A koreai szempilla lifting festéssel együtt 12 000 Ft. A részletes árakat a [szempilla lifting árak 2026](/blog/szempilla-lifting-arak-2026/) cikkben írom le.
 
 Ha a lifting és a festés között döntenél, segít a [szempilla lifting vagy festés](/blog/szempilla-lifting-vagy-festes/) cikk; az árak részleteit a [szempilla lifting árak 2026](/blog/szempilla-lifting-arak-2026/) bejegyzésben találod, az eredmény megőrzéséhez pedig az [utóápolási útmutatót](/blog/szempilla-lifting-utoapolas/) érdemes elolvasnod.

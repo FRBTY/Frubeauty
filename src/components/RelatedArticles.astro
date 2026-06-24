@@ -1,0 +1,85 @@
+---
+/**
+ * RelatedArticles — topikus klaszter belső linkelés.
+ *
+ * A money page-ek (pillér) innen linkelnek LE a támogató blog-cikkekre, leíró
+ * anchorral. Ez zárja a topic clustert (a cikkek már felfelé linkelnek), átadja
+ * a pillér link-equityjét a klaszternek, és segíti a kevésbé erős posztok
+ * indexelését/rangsorát. SSR (nincs JS-island), a linkek garantáltan a HTML-ben.
+ *
+ * Használat:
+ *   <RelatedArticles slugs={['koreai-szempilla-lifting', 'szempilla-lifting-arak-2026']} />
+ */
+import { getCollection } from 'astro:content';
+
+interface Props {
+  slugs: string[];
+  eyebrow?: string;
+  heading?: string;
+}
+const { slugs, eyebrow = 'Tudástár', heading = 'Kapcsolódó <em class="display">cikkek</em>.' } = Astro.props;
+
+const all = await getCollection('blog', ({ data }) => !data.draft);
+// A megadott sorrendet tartjuk; csak a létező posztokat rendereljük.
+const posts = slugs
+  .map((s) => all.find((p) => (p.data.slug ?? p.id) === s || p.id === s))
+  .filter((p): p is NonNullable<typeof p> => Boolean(p));
+---
+
+{posts.length > 0 && (
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="mb-12 sm:mb-16 flex flex-wrap items-end justify-between gap-6">
+        <div class="max-w-2xl">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">{eyebrow}</p>
+          <h2
+            class="font-display font-light leading-[1.1] tracking-tight text-cream"
+            style="font-size: clamp(1.875rem, 4vw, 3rem);"
+            set:html={heading}
+          />
+        </div>
+        <a href="/blog/" class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors whitespace-nowrap">Összes cikk →</a>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-7">
+        {posts.map((post) => {
+          const url = `/blog/${post.data.slug ?? post.id}/`;
+          return (
+            <article class="group h-full">
+              <a
+                href={url}
+                class="flex flex-col h-full rounded-3xl overflow-hidden bg-ink border border-whisper hover:border-whisperStrong transition-colors duration-500"
+              >
+                <div class="relative overflow-hidden" style="aspect-ratio: 3 / 2;">
+                  <img
+                    src={post.data.cover}
+                    alt={post.data.coverAlt}
+                    width={post.data.coverWidth}
+                    height={post.data.coverHeight}
+                    loading="lazy"
+                    decoding="async"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <div class="flex flex-col flex-1 p-6 sm:p-7">
+                  <div class="flex items-center gap-3 text-[11px] uppercase tracking-caps text-creamMute mb-3">
+                    <span class="text-gold">{post.data.category}</span>
+                    <span aria-hidden="true">·</span>
+                    <span>{post.data.readingMinutes} perc olvasás</span>
+                  </div>
+                  <h3 class="font-display text-lg sm:text-xl font-medium text-cream leading-snug group-hover:text-gold transition-colors duration-300">
+                    {post.data.title}
+                  </h3>
+                  <p class="mt-3 text-sm text-creamSoft leading-relaxed flex-1">{post.data.excerpt}</p>
+                  <span class="mt-5 inline-flex items-center text-[12px] uppercase tracking-caps text-cream group-hover:text-gold transition-colors">
+                    Elolvasom<span aria-hidden="true" class="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  </span>
+                </div>
+              </a>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+)}

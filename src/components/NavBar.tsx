@@ -164,12 +164,14 @@ export function NavBar({ bookingUrl, instagram, facebook }: NavBarProps) {
         </nav>
       </header>
 
+      {/* Mobil menü — záráskor `inert`: kiveszi a subtree-t a tab-sorrendből ÉS az
+          a11y-fából egyben, így NEM kell aria-hidden (a fókuszálható linkek aria-hidden
+          alatt WCAG-hibát adnának). Nyitva: se inert, se aria-hidden → interaktív. */}
       <div
         id="mobile-nav"
         role="dialog"
         aria-modal="true"
         aria-label="Mobil menü"
-        aria-hidden={!menuOpen}
         {...(!menuOpen ? ({ inert: '' } as any) : {})}
         className={`lg:hidden fixed inset-x-0 top-16 z-40 bg-ink/95 backdrop-blur-md border-b border-whisper transition-[opacity,transform] duration-300 ease-strong-out motion-reduce:transition-opacity ${
           menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5 pointer-events-none'

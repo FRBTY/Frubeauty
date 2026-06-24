@@ -8,6 +8,7 @@ import { MagneticCTA } from '../components/MagneticCTA';
 import { ProcessSteps } from '../components/ProcessSteps';
 import { TestimonialsGrid } from '../components/TestimonialsGrid';
 import { FAQ } from '../components/FAQ';
+import RelatedArticles from '../components/RelatedArticles.astro';
 import { PriceList } from '../components/PriceList';
 import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
@@ -298,6 +299,11 @@ const arcBreadcrumbSchema = {
       </Reveal>
     </div>
   </section>
+
+  <RelatedArticles
+    heading={'Arckezelés — <em class="display">kapcsolódó cikkek</em>.'}
+    slugs={['arckezeles-arak-2026', 'janssen-arckezeles-bortipusok', 'hidratalo-vagy-antiaging-arckezeles']}
+  />
 
   <SiteContact eyebrow="Foglalás" heading={'Tisztábban, <em class="display">fényesebben</em>.'} intro="Online foglalás 0–24 órában, válasz munkanapokon pár órán belül. Az első időpont előtt nyugodtan írj emailt, ha bizonytalan vagy melyik protokoll a tiéd — pár sorban segítek dönteni." />
 
