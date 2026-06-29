@@ -79,7 +79,7 @@ const businessSchema = {
       ],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'Szempilla és szemöldök kezelések',
+        name: 'FRUBEAUTY szépségszalon szolgáltatások',
         itemListElement: [
           {
             '@type': 'Offer',
@@ -91,6 +91,21 @@ const businessSchema = {
             '@type': 'Offer',
             itemOffered: { '@type': 'Service', name: 'Szemöldök laminálás + formázás', url: 'https://frubeauty.com/szemoldok-laminalas-zuglo/' },
             price: '11000',
+            priceCurrency: 'HUF',
+          },
+          {
+            // Ár = a money-page-en marketingelt „-tól" arckezelés-ár (SOS Sensitive),
+            // NEM a 11 000 Ft-os Relax & Glow masszázs add-on, hogy ne adjunk
+            // félrevezetően alacsony „arckezelés-tól" jelet az entitás-gráfban.
+            '@type': 'Offer',
+            itemOffered: { '@type': 'Service', name: 'Janssen arckezelés', url: 'https://frubeauty.com/arckezeles-zuglo/' },
+            price: '16900',
+            priceCurrency: 'HUF',
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: { '@type': 'Service', name: 'Alkalmi és esküvői smink', url: 'https://frubeauty.com/sminkes-zuglo/' },
+            price: '13000',
             priceCurrency: 'HUF',
           },
         ],
