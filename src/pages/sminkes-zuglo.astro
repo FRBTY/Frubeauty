@@ -142,6 +142,7 @@ const sminkServiceSchema = {
     highPrice: '48000',
     priceCurrency: 'HUF',
     availability: 'https://schema.org/InStock',
+    priceValidUntil: '2026-12-31',
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
@@ -170,7 +171,7 @@ const config = { ...siteConfig };
 
 <Layout
   title="Esküvői Smink Árak Zugló – 13.000 Ft ★5,0 | FRUBEAUTY"
-  description="★5,0 · 40+ értékelés · Esküvői, menyasszonyi és alkalmi smink Zuglóban (Budapest XIV.). Próbasmink, tartós fixálás. Árak 13.000 Ft-tól → Foglalj most!"
+  description="★5,0 · 45+ értékelés · Esküvői, menyasszonyi és alkalmi smink Zuglóban (Budapest XIV.). Próbasmink, tartós fixálás. Árak 13.000 Ft-tól → Foglalj most!"
   additionalSchemas={[sminkFaqSchema, sminkServiceSchema, sminkBreadcrumbSchema]}
   preloadImage="/media/smink-oldal-video-frubeauty-budapest-zuglo-poster.avif"
 >
@@ -202,7 +203,7 @@ const config = { ...siteConfig };
   <section class="border-y border-whisper bg-inkSoft">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
       <Reveal client:visible as="div" className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">40+ Google értékelés →</a></span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">45+ Google értékelés →</a></span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">100+ esküvő</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">megélt nagy nap</span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">12+ óra</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">átlagos viselési idő</span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Kiszállás</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">Budapest és környéke</span></div>

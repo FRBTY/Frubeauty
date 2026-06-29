@@ -74,6 +74,63 @@ const articleSchema = {
     '@id': `https://frubeauty.com/blog/${post.data.slug ?? post.id}/`,
   },
 };
+
+// ── SEO: BreadcrumbList — Főoldal › Blog › cikk ───────────────────────────────
+const postUrl = `https://frubeauty.com/blog/${post.data.slug ?? post.id}/`;
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Főoldal', item: 'https://frubeauty.com' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://frubeauty.com/blog/' },
+    { '@type': 'ListItem', position: 3, name: post.data.title, item: postUrl },
+  ],
+};
+
+// ── SEO: FAQPage — a cikk „Gyakori kérdések" szekciójából AUTOMATIKUSAN kinyerve.
+// Nincs frontmatter-duplikáció: a törzs egységes `**Kérdés?**` + válasz-bekezdés
+// formátumát parse-oljuk, így minden új cikk is megkapja a schemát, ha van
+// GYIK-szekciója. A markdown-jelölőket (link, félkövér) sima szöveggé tisztítjuk.
+function stripInlineMd(s: string): string {
+  return s
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1') // [szöveg](url) → szöveg
+    .replace(/\*\*([^*]+)\*\*/g, '$1')        // **félkövér** → félkövér
+    .replace(/[*_`]/g, '')                       // maradék hangsúly-jelek
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+function extractFaq(body: string | undefined): { q: string; a: string }[] {
+  if (!body) return [];
+  // A GYIK-szekció a fejléctől a következő H2-ig (vagy a törzs végéig). NINCS /m
+  // flag, hogy a `$` a teljes string végét jelentse; a `\n##\s` lookahead csak
+  // valódi H2-re áll meg (H3-ra nem).
+  const section = body.match(
+    /\n##\s+(?:Gyakori kérdések|GYIK|Kérdések)[^\n]*\n([\s\S]*?)(?=\n##\s|$)/,
+  );
+  if (!section) return [];
+  const pairs: { q: string; a: string }[] = [];
+  const re = /\*\*(.+?\?)\*\*\s*\n+([\s\S]*?)(?=\n\s*\n|\n\*\*|$)/g;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(section[1])) !== null) {
+    const q = stripInlineMd(m[1]);
+    const a = stripInlineMd(m[2]);
+    if (q && a) pairs.push({ q, a });
+  }
+  return pairs;
+}
+const faqPairs = extractFaq(post.body);
+const faqSchema =
+  faqPairs.length >= 2
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqPairs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      }
+    : null;
 ---
 
 <Layout
@@ -85,6 +142,10 @@ const articleSchema = {
   <SiteHeader />
 
   <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  {faqSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  )}
 
   {/* ============ COVER + META ============ */}
   <article class="pt-32 sm:pt-40">

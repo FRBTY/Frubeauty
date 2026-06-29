@@ -23,7 +23,7 @@ megvan. Arról szól, **hol van a pénz, amit még nem szedsz fel.**
 | Platform | **Astro 5 statikus site** (nem WordPress/Wix/Shopify) |
 | Márka / személy | FRUBEAUTY / Pecze-Kovács Fruzsina (tulajdonos-kozmetikus) |
 | Foglalás | Notino szalon-profil |
-| GBP | 5,0★ / ~40 vélemény — **DE a profil neve nem „FRUBEAUTY"** |
+| GBP | **5,0★ / 47 vélemény** · név ✅ már „FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus" (06-29 élőben verifikálva) |
 | Mérés | GA4 (`G-L276HPZTL5`) + Ads (`AW-17992123771`) + Consent Mode V2 — ÉL |
 
 **Ami már él a kódban (NE építsd újra):** 4 dedikált money-page; oldalanként
@@ -78,10 +78,10 @@ Itt van a pénzed nagy része, és itt vagy a legjobban alultöltve. Lokális sz
 a kattintások többsége a **Maps 3-as packből** jön — oda nem a webrangsor, hanem a
 **GBP-jelek** visznek be.
 
-### 2.1 Azonnali, egyetlen unforced error: GBP-név
+### 2.1 GBP-név — ✅ KÉSZ (06-29 élőben verifikálva)
 
-- ✅ **Csináld:** GBP-név → **„FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus"** (a Google szabálya: a valós, használt üzleti név mehet).
-- ❌ **NE:** „…Szempilla Lifting Zugló" kulcsszó-tömés → felfüggesztés-kockázat.
+A profil neve már **„FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus"** (pontosan a javasolt forma; a 06-12-i audit óta megváltozott). A #1 entitás-kar megtörtént — a tulajdonosi GBP-nézet és a publikus knowledge panel is ezt mutatja.
+- ❌ Tartsd így — **NE** told meg „…Szempilla Lifting Zugló" típusú kulcsszóval (felfüggesztés-kockázat).
 
 ### 2.2 Kanonikus NAP (karakterre pontosan, MINDENHOL)
 
@@ -101,7 +101,7 @@ Igényeld/töröld; nézd meg a Maps-en a duplikált régi cégprofilt (claim �
 | # | Teendő | Miért rangsor-jel |
 |---|---|---|
 | 1 | Szolgáltatás-lista **árakkal** (lift 12 000, laminálás 11 000, arckezelés 16 900-tól, smink 13 000-tól) | Maps „Szolgáltatások" szűrő |
-| 2 | Elsődleges kategória **Kozmetikus** → hozza a „kozmetikus zugló" (most org. poz. 69!) | proximity + kategória = fő pack-jel |
+| 2 | ⚠️ **Kategória — NYITOTT:** az elsődleges most **„Szépségszalon"** (06-29 verifikálva). A „kozmetikus zugló"-hoz (poz. 69) a **„Kozmetikus"** legyen LEGALÁBB másodlagos kategória; ha a kozmetikus-rangsor stuck marad, teszteld elsődlegesként. (A másodlagosok read-only nézetből nem látszottak.) | proximity + kategória = fő pack-jel |
 | 3 | **Heti 1 GBP-poszt** (előtte-utána + 1 mondat + link a money-page-re), Instáról újrahasznosítva | aktivitás-jel |
 | 4 | **Vélemény-velocity:** QR a szalonba + utánkövető SMS a `googleReviewsUrl`-lel. Cél: **havi 4-6 új, kulcsszavas** vélemény („szempilla lifting", „Zugló" a szövegbe). **Válaszolj MINDRE.** | a leghatásosabb pack-jel |
 | 5 | Rendszeres fotó-feltöltés (munka közben, belső, portré) | frissesség-jel |
@@ -192,7 +192,7 @@ vélemény-tömeg, tartalom-érés lassú). A legtöbb szalon itt feladja, és v
 | GSC katt/hó | ~50 | **150+** |
 | CTR | 2,7% | **4,5%+** |
 | „kozmetikus zugló" | poz. 69 | **top 20 + Maps-pack** |
-| Google-vélemény | 40 | **55+** |
+| Google-vélemény | 47 (06-29) | **55+** |
 | GBP útvonal+hívás/hó | ? (mérd!) | +50% |
 
 ---
@@ -211,5 +211,6 @@ vélemény-tömeg, tartalom-érés lassú). A legtöbb szalon itt feladja, és v
 alsó értéke (az a Relax & Glow masszázs add-on). Ha az árstruktúra változik, ezt és a
 money-page schemáját együtt frissítsd.
 
-> **Deploy:** a kód-változások a working tree-ben vannak. Élesítés `npm run deploy`-jal
-> (figyelem: git-bypass — working tree megy élesbe).
+> **Deploy:** ✅ **ÉLESÍTVE 2026-06-29** — a production `frubeauty.com` szerveren
+> élőben verifikálva (Offer-katalógus 4 szolgáltatás + a bővített hub-and-spoke
+> spoke-linkek mind kint vannak).

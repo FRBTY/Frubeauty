@@ -91,6 +91,7 @@ const arcServiceSchema = {
     'Professzionális Janssen Cosmetics arckezelés Zuglóban, XIV. kerületben. Anti-aging, mélytisztító, hidratáló és érzékeny bőrre szabott protokollok.',
   provider: {
     '@type': 'BeautySalon',
+    '@id': 'https://frubeauty.com/#business',
     name: 'FRUBEAUTY – Pecze-Kovács Fruzsina',
     url: 'https://frubeauty.com',
   },
@@ -104,6 +105,7 @@ const arcServiceSchema = {
     highPrice: '21500',
     priceCurrency: 'HUF',
     availability: 'https://schema.org/InStock',
+    priceValidUntil: '2026-12-31',
   },
 };
 
@@ -125,7 +127,7 @@ const arcBreadcrumbSchema = {
 
 <Layout
   title="Janssen Arckezelés Zugló – 16.900 Ft ★5,0 | FRUBEAUTY"
-  description="★5,0 · 40+ értékelés · Janssen arckezelés Zuglóban (Budapest XIV.). Anti-aging, mélytisztító, hidratáló — pattanásos bőrre is. 16.900 Ft-tól → Foglalj!"
+  description="★5,0 · 45+ értékelés · Janssen arckezelés Zuglóban (Budapest XIV.). Anti-aging, mélytisztító, hidratáló — pattanásos bőrre is. 16.900 Ft-tól → Foglalj!"
   additionalSchemas={[arcFaqSchema, arcServiceSchema, arcBreadcrumbSchema]}
   preloadImage="/media/arckezeles-zuglo-poster.avif"
 >
@@ -157,7 +159,7 @@ const arcBreadcrumbSchema = {
   <section class="border-y border-whisper bg-inkSoft">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
       <Reveal client:visible as="div" className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">40+ Google értékelés →</a></span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">45+ Google értékelés →</a></span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Janssen</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">Cosmetics partner</span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">7 protokoll</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">minden bőrtípusra</span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Egressy út 16.</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.mapsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">1143 Budapest →</a></span></div>

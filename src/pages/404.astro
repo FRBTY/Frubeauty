@@ -1,0 +1,76 @@
+---
+/**
+ * 404 — branded „nem található" oldal.
+ *
+ * A Netlify a statikus 404.html-t HTTP 404 státusszal szolgálja ki minden
+ * nem illeszkedő útvonalra, így a Wix-migráció maradék halott URL-jeiről
+ * érkező látogatót NEM egy üres hibaoldal fogadja, hanem a money-page-ekre
+ * mutató belső linkek — a forgalom egy része így megmenthető.
+ */
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { CookieBanner } from '../components/CookieBanner';
+import { siteConfig } from '../config/site';
+
+const config = { ...siteConfig };
+
+const links = [
+  { href: '/arckezeles-zuglo/', label: 'Arckezelés', sub: 'Janssen hatóanyagok' },
+  { href: '/szempilla-lifting-zuglo/', label: 'Szempilla lifting', sub: 'Lifting + festés' },
+  { href: '/szemoldok-laminalas-zuglo/', label: 'Szemöldök laminálás', sub: 'Formázás + festés' },
+  { href: '/sminkes-zuglo/', label: 'Alkalmi & esküvői smink', sub: 'Próbasminkkel' },
+];
+---
+
+<Layout
+  title="404 — Az oldal nem található | FRUBEAUTY"
+  description="A keresett oldal nem található. Nézd meg a FRUBEAUTY szolgáltatásait Zuglóban: arckezelés, szempilla lifting, szemöldök laminálás és alkalmi smink."
+>
+  <SiteHeader />
+
+  <section class="relative overflow-hidden pt-40 sm:pt-52 pb-24 sm:pb-32">
+    <div class="max-w-[820px] mx-auto px-5 sm:px-8 lg:px-12 text-center">
+      <p class="font-display font-light text-gold leading-none" style="font-size: clamp(4rem, 14vw, 8rem);">404</p>
+      <h1 class="mt-4 font-display font-light text-cream leading-[1.08] tracking-tightest-" style="font-size: clamp(1.875rem, 5vw, 3rem);">
+        Ez az oldal <em class="display">nincs meg</em> — de a kezelés igen.
+      </h1>
+      <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[52ch] mx-auto">
+        Lehet, hogy a régi oldal egy linkje vezetett ide. Innen pár kattintással
+        eljutsz oda, amit kerestél — vagy foglalj rögtön időpontot.
+      </p>
+
+      <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+        <a href="/" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">
+          Vissza a főoldalra
+        </a>
+        <a href={config.booking} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">
+          Időpontot foglalok
+        </a>
+      </div>
+
+      <div class="mt-14 grid sm:grid-cols-2 gap-4 text-left">
+        {links.map((l) => (
+          <a href={l.href} class="group flex items-center justify-between gap-4 rounded-2xl bg-inkSoft border border-whisper px-6 py-5 hover:border-whisperStrong transition-colors duration-300">
+            <span>
+              <span class="block font-display text-lg font-medium text-cream group-hover:text-gold transition-colors">{l.label}</span>
+              <span class="block text-[12px] uppercase tracking-caps text-creamMute mt-1">{l.sub}</span>
+            </span>
+            <span aria-hidden class="text-creamMute group-hover:text-gold transition-[color,transform] duration-300 group-hover:translate-x-1">→</span>
+          </a>
+        ))}
+      </div>
+
+      <p class="mt-10 text-[12px] uppercase tracking-caps text-creamMute">
+        <a href="/blog/" class="hover:text-cream transition-colors">Blog</a>
+        <span class="mx-2" aria-hidden>·</span>
+        <a href="/rolam/" class="hover:text-cream transition-colors">Rólam</a>
+        <span class="mx-2" aria-hidden>·</span>
+        <a href={`tel:${config.phone}`} class="hover:text-cream transition-colors">{config.phoneDisplay}</a>
+      </p>
+    </div>
+  </section>
+
+  <SiteFooter />
+  <CookieBanner client:idle />
+</Layout>

@@ -31,11 +31,44 @@ const dateFormatter = new Intl.DateTimeFormat('hu-HU', {
 
 const featured = posts[0];
 const rest = posts.slice(1);
+
+// ── SEO: Blog (CollectionPage) schema — a listaoldal entitása + a posztok listája,
+//    a kiadó a kanonikus #business node. Segíti a Google-t a blog mint koherens
+//    tartalmi hub megértésében.
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  '@id': 'https://frubeauty.com/blog/#blog',
+  name: 'FRUBEAUTY Blog',
+  description:
+    'Cikkek bőrápolásról, sminkről, szempilla- és szemöldök-kezelésekről egy zuglói kozmetikus szemszögéből.',
+  url: 'https://frubeauty.com/blog/',
+  inLanguage: 'hu-HU',
+  publisher: { '@id': 'https://frubeauty.com/#business' },
+  blogPost: posts.map((p) => ({
+    '@type': 'BlogPosting',
+    headline: p.data.title,
+    url: `https://frubeauty.com/blog/${p.data.slug ?? p.id}/`,
+    datePublished: p.data.publishedAt.toISOString(),
+    ...(p.data.updatedAt && { dateModified: p.data.updatedAt.toISOString() }),
+  })),
+};
+
+// ── SEO: BreadcrumbList — Főoldal › Blog ─────────────────────────────────────
+const blogBreadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Főoldal', item: 'https://frubeauty.com' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://frubeauty.com/blog/' },
+  ],
+};
 ---
 
 <Layout
   title="Blog — szépségápolás, smink és arckezelés | FRUBEAUTY"
   description="Cikkek bőrápolásról, sminkről és szempilla-kezelésekről egy kozmetikus és sminkes szemszögéből. Konkrét tippek a Zuglói szalonom mindennapjaiból."
+  additionalSchemas={[blogSchema, blogBreadcrumbSchema]}
 >
   <SiteHeader />
 
