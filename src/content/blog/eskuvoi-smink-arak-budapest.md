@@ -6,8 +6,8 @@ readingMinutes: 6
 publishedAt: 2026-05-28
 updatedAt: 2026-06-12
 cover: "/img/menyasszonyi-probasmink-zuglo-budapest-egressy-ut.webp"
-coverWidth: 1100
-coverHeight: 1925
+coverWidth: 1200
+coverHeight: 1494
 coverAlt: "Menyasszonyi próbasmink Budapesten — FRUBEAUTY Zugló, Egressy út"
 metaTitle: "Esküvői smink árak 2026: 25 000 Ft-tól | FRUBEAUTY"
 metaDescription: "Mennyibe kerül az esküvői smink Budapesten 2026-ban? Menyasszonyi smink 25 000 Ft, próbasmink 15 000 Ft, csomagban 35 000 Ft — és ami az árban van."
