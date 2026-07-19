@@ -18,7 +18,7 @@ A hidratáló arckezelés a **vízhiányos, fénytelen bőrt** tölti fel, az an
 ## Melyik tünetre melyik?
 
 | Tünet | Hidratáló | Anti-aging |
-|---|---|---|
+| :--- | :---: | :---: |
 | Húzódó, feszülő érzés | ✅ | |
 | Fénytelen, fáradt bőr | ✅ | |
 | Apró szárazságráncok | ✅ | ✅ |

@@ -30,7 +30,7 @@ Ha csak a pilláid színe halvány, de az ívükkel elégedett vagy, a 4 000 Ft-
 Nálam az ár a **teljes kezelést** fedi, nincs külön „belépő” vagy rejtett felár:
 
 | Tétel | Benne van az árban |
-|---|---|
+| :--- | :---: |
 | Szempilla lifting (koreai technika) | ✅ |
 | Tartós szempillafestés | ✅ |
 | Ápoló utókezelés a székben | ✅ |

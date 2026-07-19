@@ -29,7 +29,7 @@ Ha a szálaid maguktól is jól állnak, és csak színt meg tiszta vonalat szer
 ## Mit tartalmaz a szemöldök laminálás ára?
 
 | Tétel | Benne van az árban |
-|---|---|
+| :--- | :---: |
 | Szemöldök laminálás (koreai technika) | ✅ |
 | Formázás — szálak rendezése, vonal kialakítása | ✅ |
 | Szemöldökfestés | ✅ |

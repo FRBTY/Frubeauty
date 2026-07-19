@@ -21,8 +21,60 @@ for (const file of readdirSync(blogDir)) {
   if (date) lastmodBySlug[slug] = new Date(date).toISOString();
 }
 
+// Reszponziv tablak: minden markdown-tablat vizszintesen gorgetheto kontenerbe
+// csomagolunk, hogy mobilon SOHA ne csorduljon tul a lap (a szeles ar-/osszehasonlito
+// tablak a konteneren belul gorgethetok). A 4+ oszlopos tablaknak min-width-et adunk,
+// hogy ne zsufolodjanak ossze, hanem olvashato oszlopszelesseggel gorogjenek.
+function rehypeResponsiveTables() {
+  const isEl = (n, tag) => n && n.type === 'element' && (!tag || n.tagName === tag);
+  const firstRowCols = (table) => {
+    const findTr = (node) => {
+      if (!node.children) return null;
+      for (const c of node.children) {
+        if (isEl(c, 'tr')) return c;
+        const nested = findTr(c);
+        if (nested) return nested;
+      }
+      return null;
+    };
+    const tr = findTr(table);
+    if (!tr) return 0;
+    return tr.children.filter((c) => isEl(c, 'th') || isEl(c, 'td')).length;
+  };
+  return (tree) => {
+    const walk = (node) => {
+      if (!Array.isArray(node.children)) return;
+      for (let i = 0; i < node.children.length; i++) {
+        const child = node.children[i];
+        if (isEl(child, 'table') && !child.__wrapped) {
+          child.__wrapped = true;
+          const cols = firstRowCols(child);
+          if (cols >= 4) {
+            child.properties = child.properties || {};
+            const prev = child.properties.style ? `${child.properties.style};` : '';
+            child.properties.style = `${prev}min-width:${cols * 7}rem`;
+          }
+          node.children[i] = {
+            type: 'element',
+            tagName: 'div',
+            properties: { className: ['table-wrap'] },
+            children: [child],
+          };
+          walk(child); // a tabla belsejet bejarjuk (nincs benne beagyazott tabla)
+        } else {
+          walk(child);
+        }
+      }
+    };
+    walk(tree);
+  };
+}
+
 export default defineConfig({
   site: 'https://frubeauty.com',
+  markdown: {
+    rehypePlugins: [rehypeResponsiveTables],
+  },
   // Netlify a záró slash nélküli URL-eket 301-gyel a slashes verzióra irányítja.
   // A 'always' + 'directory' formátummal a belső linkek, a sitemap és a kanonikus
   // URL-ek mind a végleges (slashes) változatra mutatnak → nincs 301-hop, nem
