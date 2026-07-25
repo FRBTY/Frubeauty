@@ -372,30 +372,141 @@ const primaryGtagId = hasGoogleTag
       })();
     </script>
 
+    <script is:inline>
+      /* --- Fejlécmagasság FESTÉS ELŐTT ---------------------------------------
+         Az AnnouncementBar futásidőben jelenik meg (client:idle/​load sziget) és
+         ~54 px-et ad a fix fejléchez. A hero padding-ja eddig beégetett érték
+         volt (pt-44/pt-52), ezért a fejléc alatti optikai rés 143 px-ről 89-re
+         ugrott, amint a sáv megjelent — ez volt az elcsúszás.
+
+         A sáv megjelenésének feltétele tisztán localStorage-ból eldönthető
+         (mai Notino-kattintás száma ≥ 1 ÉS nincs elvetve), amit itt, a <head>-ben
+         SZINKRONBAN kiolvasunk. Így a hero már az ELSŐ layoutnál a helyes
+         paddinget kapja → a sáv utólagos beanimálása NEM okoz layout shiftet
+         (0 CLS), a fejléc alatti rés pedig mindkét állapotban ugyanaz.
+         A kulcsoknak egyezniük kell az AnnouncementBar.tsx-beliekkel. */
+      (function () {
+        try {
+          var d = new Date();
+          var key = 'frubeauty_booking_clicks_' + d.getFullYear() + '-' +
+            String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+          var clicks = parseInt(window.localStorage.getItem(key) || '0', 10);
+          var dismissed = window.localStorage.getItem('frubeauty_promo_dismissed_v5');
+          if (clicks >= 1 && !dismissed) document.documentElement.dataset.announcement = 'on';
+        } catch (e) {}
+      })();
+
+      /* Utólagos korrekció: ha a fejléc a becsülttől eltérő magasságú lesz
+         (pl. a sáv szövege két sorba tördel, vagy a user elveti a sávot), a
+         valós magasság kerül a változóba. Debounce-olva, hogy a sáv 400 ms-os
+         nyitó animációjának KÖZTES értékei ne kerüljenek bele — különben a hero
+         együtt csúszna az animációval. */
+      (function () {
+        var root = document.documentElement, t;
+        function init() {
+          var el = document.querySelector('.fixed.top-0');
+          if (!el || !window.ResizeObserver) return;
+          new ResizeObserver(function () {
+            clearTimeout(t);
+            t = setTimeout(function () {
+              var h = el.getBoundingClientRect().height;
+              if (h > 0) root.style.setProperty('--header-h', h + 'px');
+            }, 150);
+          }).observe(el);
+        }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+        else init();
+      })();
+
+      /* --- Betűk EGY hullámban ------------------------------------------------
+         Mérve a betűfájlok két hullámban érkeztek, ~900 ms különbséggel:
+           1. hullám  634–713 ms: geist-400/500, fraunces-latin(+italic), latin-ext-italic
+           2. hullám 1524–1550 ms: geist-600 ÉS fraunces-latin-ext-normal
+         A második hullámban van a NORMÁL súlyú ő/ű (fraunces-latin-ext) — ezért
+         villant fel másodszor is a szöveg, jóval az első csere után.
+
+         A késés oka, hogy ezek a glyphek csak lejjebb, a content-visibility:auto
+         szekciókban fordulnak elő, így a böngésző csak ott fedezi fel őket.
+         A Font Loading API-val előre kérjük őket, de CSAK az LCP megfestése UTÁN,
+         tehát a kritikus útból semmit nem veszünk el — a preload-mentes stratégia
+         és az LCP-kép sávszélessége érintetlen marad. A szöveg-hint (őűŐŰ) miatt
+         csak a tényleg szükséges unicode-range subsetek töltenek. */
+      (function () {
+        if (!document.fonts || !document.fonts.load) return;
+        var done = false;
+        var HU = 'őűŐŰ';
+        function warm() {
+          if (done) return;
+          done = true;
+          var specs = [
+            ['300 1rem Fraunces', HU], ['400 1rem Fraunces', HU], ['500 1rem Fraunces', HU],
+            ['italic 300 1rem Fraunces', HU],
+            ['400 1rem Geist', HU], ['500 1rem Geist', HU], ['600 1rem Geist', 'a' + HU]
+          ];
+          for (var i = 0; i < specs.length; i++) {
+            try { document.fonts.load(specs[i][0], specs[i][1]); } catch (e) {}
+          }
+        }
+        if (window.PerformanceObserver) {
+          try {
+            var po = new PerformanceObserver(function () { warm(); po.disconnect(); });
+            po.observe({ type: 'largest-contentful-paint', buffered: true });
+          } catch (e) {}
+        }
+        window.addEventListener('load', warm, { once: true });
+      })();
+    </script>
+
     <style is:global>
-      /* Metric-matched fallback for Fraunces (computed from Georgia via capsize):
-         the headline is laid out in this fallback at the exact same box size, so
-         when the real Fraunces swaps in there is no reflow → no CLS. This lets us
-         drop the render-competing font preloads and give the LCP image full
-         bandwidth on mobile. */
+      /* ===== Metrika-illesztett tartalék fontok =====================
+         A korábbi kalibráció capsize-zal készült, ami a FÜGGŐLEGES metrikákat
+         (ascent/descent/cap height) illeszti — a betűSZÉLESSÉGET nem. Mérve
+         viszont pont a szélesség tért el drasztikusan, és a látható „felvillanás"
+         is ebből jött:
+
+           Fraunces opsz 144, 72 px, ugyanaz a hero-sor
+             valódi Fraunces ............ 1378,6 px
+             régi tartalék (Georgia) .... 2006,0 px   → +45,5%
+
+         Ezért a tartalékokat mostantól SZÉLESSÉGRE kalibráljuk, a függőleges
+         dobozt pedig az ascent/descent-override skálázásával tartjuk változatlanul
+         (effektív ascent = override × size-adjust — a szorzat ugyanaz maradt,
+         tehát a sormagasság és a CLS-viselkedés nem változik).
+
+         Két tartalék kell, mert a két optikai regiszter metrikája gyökeresen más:
+           • display (h1/h2, opsz 144): erősen sűrített, kontrasztos vágat →
+             a Times New Roman áll hozzá a legközelebb (1,131× a Georgia 1,252×
+             helyett), és vékonyabb is, tehát a „vastag felvillanás" is megszűnik.
+           • text (minden más .font-display, opsz auto): itt a Georgia a legjobb
+             (0,938×).
+         Mért arányok stabilak a méretskálán (display 1,4549–1,4551 32→72 px
+         között), tehát egyetlen size-adjust minden fokozatra jó. */
+      @font-face {
+        font-family: 'Fraunces Display Fallback';
+        src: local('Times New Roman'), local('Georgia');
+        size-adjust: 88.4%;
+        ascent-override: 110.64%;
+        descent-override: 28.85%;
+        line-gap-override: 0%;
+      }
       @font-face {
         font-family: 'Fraunces Fallback';
         src: local('Georgia'), local('Times New Roman');
-        size-adjust: 116.2%;
-        ascent-override: 84.17%;
-        descent-override: 21.95%;
+        size-adjust: 106.6%;
+        ascent-override: 91.75%;
+        descent-override: 23.93%;
         line-gap-override: 0%;
       }
-      /* Metrika-illesztett tartalék a Geist body fonthoz (Arial-ra kalibrálva,
-         @capsizecss/unpack-kal számolva). A doboz mérete azonos a Geist-tel, így
-         a font-swap NEM okoz reflow-t / CLS-t — fontos, mert a hero LCP bekezdés
-         a body fontot használja és azonnal (opacity 1) festődik. */
+      /* Metrika-illesztett tartalék a Geist body fonthoz (Arial). Ugyanaz a
+         korrekció: a régi 105,8% mellett az Arial 3,05%-kal szélesebb volt a
+         Geist-nél (536,8 px → 553,2 px egy hero-bekezdés-soron), ezért a
+         size-adjust 102,7%-ra csökken, a függőleges doboz változatlan. */
       @font-face {
         font-family: 'Geist Fallback';
         src: local('Arial');
-        size-adjust: 105.8%;
-        ascent-override: 94.99%;
-        descent-override: 27.88%;
+        size-adjust: 102.7%;
+        ascent-override: 97.86%;
+        descent-override: 28.72%;
         line-gap-override: 0%;
       }
       /* Fraunces latin-ext subset — a hosszú magyar ékezetek (ő U+0151, ű U+0171,
@@ -515,6 +626,17 @@ const primaryGtagId = hasGoogleTag
         --ease-out-strong:    cubic-bezier(0.23, 1, 0.32, 1);
         --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
         --ease-drawer:        cubic-bezier(0.32, 0.72, 0, 1);
+        /* A fix fejléc magassága (AnnouncementBar + NavBar). A hero padding-ja
+           ebből számol, így a fejléc alatti optikai rés akkor is ugyanaz marad,
+           ha a bejelentő sáv megjelenik vagy eltűnik. A default a sáv nélküli
+           NavBar magassága (h-16), hogy JS nélkül is helyes legyen. */
+        --header-h: 4rem;
+        /* Az AnnouncementBar egysoros magassága (py-2.5 + 13px/leading-snug),
+           mérve: 54 px. Ha a sáv paddingje változik, EZT is állítsd. */
+        --announcement-h: 3.375rem;
+      }
+      :root[data-announcement='on'] {
+        --header-h: calc(4rem + var(--announcement-h));
       }
 
       /* A hosszú landing oldalon a böngésző alapból az ÖSSZES szekciót
@@ -529,16 +651,50 @@ const primaryGtagId = hasGoogleTag
         contain-intrinsic-size: auto 700px;
       }
 
+      /* A subsetelt Fraunces fvar táblájában CSAK két tengely van:
+         opsz 9–144 (default 9) és wght 100–900. SOFT és WONK NINCS benne, tehát
+         a korábbi 'SOFT' 30 / 'SOFT' 50 néma no-op volt — a címsor és a benne lévő
+         arany <em> között szánt "lágyság"-különbség sosem renderelődött.
+
+         Az opsz fix 144-re kötése viszont valódi hiba volt: az a ~144 px-es
+         plakátméret rajza, kis fokozaton hajszálvékony és össze van húzva.
+         Mérve (Fraunces 500, „Szemöldök laminálás"): 20 px-en 165,0 px az opsz 144
+         szóhossza a helyes 201,4 px helyett → 22%-kal keskenyebb betűkép a
+         navigációs logón, a szolgáltatás-H3-akon és az áraknál.
+
+         Megoldás: a display MÉRETŰ címsorok (h1/h2, 30–72 px) megtartják a 144-et
+         — erre van kalibrálva a metrika-illesztett 'Fraunces Fallback' is, így az
+         LCP-elem swap-CLS-e nem változik —, minden más display szöveg optikai
+         mérete a tényleges betűmérethez igazodik (font-optical-sizing: auto).
+         FONTOS: az opsz default 9, ezért az 'auto' kiírása nem elhagyható. */
       .font-display {
         font-feature-settings: 'ss01', 'ss02';
-        font-variation-settings: 'SOFT' 30, 'opsz' 144;
+        font-optical-sizing: auto;
       }
 
+      /* A display regiszterhez a rá kalibrált tartalék tartozik (lásd a
+         @font-face blokkot fent) — enélkül a h1/h2 a text-tartalékon renderelne,
+         ami itt 45%-kal szélesebb lenne a valódi Fraunces-nél. */
+      h1.font-display, h2.font-display {
+        font-variation-settings: 'opsz' 144;
+        font-family: 'Fraunces', 'Fraunces Display Fallback', ui-serif, Georgia, serif;
+      }
+
+      /* A font-variation-settings öröklődik, ezért az <em> a szülő címsor optikai
+         méretét kapja meg — nem írjuk felül, különben a kis H3-akban lévő em
+         visszaesne a 144-es rajzra. */
       .font-display em, em.display {
         font-style: italic;
-        font-variation-settings: 'SOFT' 50, 'opsz' 144;
         color: var(--gold, #B8884A);
       }
+
+      /* Sortörés. A display címsorok eddig „mohó" tördelést kaptak, ezért az
+         utolsó soron egyetlen szó maradhatott árván (a hero-ban a „tekintettel."),
+         ami optikailag elcsúszott, aszimmetrikus tömböt ad. A balance a sorokat
+         egyenlő hosszúságúra osztja; bekezdéseknél a pretty csak a fattyú-szót
+         előzi meg, sortörés-költség nélkül. */
+      h1, h2, h3 { text-wrap: balance; }
+      p, li { text-wrap: pretty; }
 
       body {
         font-size: 16px;
