@@ -116,7 +116,7 @@ const homepageFaqSchema = {
 
 <Layout
   title="Kozmetikus Zugló · Szempilla Stylist ★5,0 | FRUBEAUTY"
-  description="★5,0 · 45+ értékelés · Kozmetikus, szempilla- és szemöldök-stylist Zuglóban (Budapest, XIV.). Janssen arckezelés is. 11.000 Ft-tól → Foglalj online!"
+  description="★5,0 · 50+ értékelés · Kozmetikus, szempilla- és szemöldök-stylist Zuglóban (Budapest, XIV.). Janssen arckezelés is. 11.000 Ft-tól → Foglalj online!"
   additionalSchemas={[homepageFaqSchema]}
   preloadImage="/media/hero-poster.avif"
 >
@@ -139,16 +139,22 @@ const homepageFaqSchema = {
     <LampStatic>
       <div class="hero-reveal text-center max-w-[920px] mx-auto">
         <p class="text-[11px] sm:text-xs uppercase tracking-caps text-gold mb-5 sm:mb-7">
-          FRUBEAUTY · Zugló, XIV. kerület
+          FRUBEAUTY · Budapest XIV. · Zugló, Egressy út
         </p>
+        {/* Message match a Title-lel ("Kozmetikus Zugló · Szempilla Stylist"): a korábbi
+            H1 ("Ébredj minden nap tökéletes bőrrel…") nulla kulcsszót vitt, így aki
+            "kozmetikus"-ra keresve érkezett (85 megj./poz. 2,9, GSC), egy versre landolt.
+            Az aspirációs ígéret megmarad, csak elé kerül az entitás + geo.
+            SZÁNDÉKOSAN nincs benne szolgáltatás-fej-kulcsszó (szemöldök laminálás /
+            szempilla lifting) — az a kezdőlap money-page-kannibalizációját erősítené. */}
         <h1
           class="font-display font-light text-cream leading-[1.12] tracking-tightest-"
           style="font-size: clamp(2rem, 5.5vw, 4.5rem);"
         >
-          Ébredj minden nap tökéletes <em class="display">bőrrel</em> és kész tekintettel.
+          Kozmetikus <em class="display">Zuglóban</em> — hogy tökéletes bőrrel és kész tekintettel ébredj.
         </h1>
         <p class="mt-6 sm:mt-8 text-base sm:text-lg text-creamSoft max-w-[58ch] mx-auto leading-[1.65] sm:leading-[1.7]">
-          Személyre szabott arckezelések, tartós szempilla- és szemöldökformázás, valamint alkalmi sminkek, amelyek kiemelik a természetes szépséged.
+          Kozmetikus és sminkes Zuglóban, a XIV. kerületi Egressy úton — személyre szabott arckezelés, tartós szempilla- és szemöldökkezelés, alkalmi smink. Egyszerre egy vendéggel, teljes figyelemmel.
         </p>
 
         {/* Static CTAs — no JS, no hydration. */}
@@ -212,7 +218,7 @@ const homepageFaqSchema = {
           <span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span>
           <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">
             <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">
-              45+ Google értékelés →
+              50+ Google értékelés →
             </a>
           </span>
         </div>

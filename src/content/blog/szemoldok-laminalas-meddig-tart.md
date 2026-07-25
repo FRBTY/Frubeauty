@@ -1,5 +1,5 @@
 ---
-title: "Szemöldök laminálás: meddig tart az eredmény?"
+title: "Szemöldök laminálás: meddig tart? 6 hét — és mitől függ"
 excerpt: "Meddig marad szép egy szemöldök laminálás? Átlagosan 6 hétig — de az első 24 óra dönti el, hogy a maximumot hozod-e ki belőle. Itt van, mitől függ a tartósság, és mit kerülj el."
 category: "Szempilla"
 readingMinutes: 4
@@ -9,8 +9,8 @@ cover: "/img/szemoldok-laminalas-budapest-egressy-ut-zuglo-munka.webp"
 coverWidth: 1100
 coverHeight: 1469
 coverAlt: "Szemöldök laminálás tartós eredménye — FRUBEAUTY Zugló"
-metaTitle: "Szemöldök laminálás: meddig tart? | FRUBEAUTY"
-metaDescription: "Meddig tart a szemöldök laminálás? Átlagosan 6 hétig. Mitől függ a tartósság, mit kerülj az első 24 órában, és hogyan hozd ki belőle a maximumot."
+metaTitle: "Szemöldök laminálás meddig tart? 6 hét, ha ezt betartod"
+metaDescription: "A szemöldök laminálás 6 hétig tart — de csak akkor, ha az első 24 órában elkerülöd ezt a 4 dolgot. Kozmetikus válasza a tartósságról, táblázattal."
 ---
 
 A szemöldök laminálás eredménye átlagosan **6 hétig** tart — nagyjából addig, amíg a szemöldökszálak természetes cseréje le nem zajlik. A pontos tartósság két dolgon múlik: a saját szőrnövekedési ciklusodon, és azon, mennyire tartod be az első napok utóápolási szabályait.
@@ -53,4 +53,4 @@ Néhány naponta egy csepp szemöldökápoló olaj rugalmasan és fényesen tart
 **Milyen gyakran ismételhető?**
 Jellemzően 5–6 hetente, amikor a szálak kezdenek visszaállni — így az átmenet folyamatos.
 
-A teljes szolgáltatást a [szemöldök laminálás Zuglóban](/szemoldok-laminalas-zuglo/) oldalon találod; a pontos árakat a [szemöldök laminálás árak 2026](/blog/szemoldok-laminalas-arak-2026/) cikkben vezetem, és ha még az eljárás lényege sem tiszta, kezdd a [mit jelent a szemöldök laminálás](/blog/szemoldok-laminalas-mit-jelent/) bejegyzéssel.
+A teljes szolgáltatást a [szemöldök laminálás](/szemoldok-laminalas-zuglo/) oldalon találod; a pontos árakat a [szemöldök laminálás árak 2026](/blog/szemoldok-laminalas-arak-2026/) cikkben vezetem, és ha még az eljárás lényege sem tiszta, kezdd a [mit jelent a szemöldök laminálás](/blog/szemoldok-laminalas-mit-jelent/) bejegyzéssel.

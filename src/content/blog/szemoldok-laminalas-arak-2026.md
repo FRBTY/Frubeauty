@@ -1,5 +1,5 @@
 ---
-title: "Szemöldök laminálás árak 2026 — ennyibe kerül Zuglóban"
+title: "Szemöldök laminálás ára 2026 — ennyibe kerül Budapesten"
 excerpt: "A szemöldök laminálás Zuglóban 11 000 Ft, formázással és festéssel együtt. Tételes árlista 2026-ra: az olcsóbb alternatívák, a 18 000 Ft-os kombinált csomag, és hogy mi mennyit ér."
 category: "Szempilla"
 readingMinutes: 5
@@ -9,8 +9,8 @@ cover: "/img/szemoldok-laminalas-budapest-egressy-ut-frubeauty-munka.webp"
 coverWidth: 1200
 coverHeight: 1800
 coverAlt: "Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló"
-metaTitle: "Szemöldök laminálás árak 2026 | FRUBEAUTY Zugló"
-metaDescription: "Szemöldök laminálás árak 2026-ban Zuglóban: 11 000 Ft formázással és festéssel együtt. Tételes árlista az olcsóbb változatokkal és a kombinált csomaggal."
+metaTitle: "Szemöldök laminálás ára 2026: 11.000 Ft | FRUBEAUTY Budapest"
+metaDescription: "Mennyibe kerül a szemöldök laminálás 2026-ban? Budapesten nálam 11.000 Ft formázással és festéssel. Tételes árlista 5.000 Ft-tól, plusz a 18.000 Ft-os csomag."
 ---
 
 A szemöldök laminálás a FRUBEAUTY-nál Zuglóban 2026-ban **11 000 Ft**, és ebben a formázás és a festés is benne van. A kezelés tű nélkül, koreai technikával ad dúsabb, rendezett szemöldököt; az eredmény körülbelül 6 hétig tart, az alkalom nagyjából 60 perc.
@@ -73,6 +73,6 @@ Körülbelül 6 hétig, attól függően, milyen gyorsan nő vissza a szemöldö
 **Olcsóbb a szemöldök laminálás, mint a microblading?**
 Igen, és kíméletesebb is: a microblading féltartós tetoválás, 1–2 évig a bőrben marad, és jellemzően a laminálás árának többszöröse. A laminálás tű nélküli, és pár hét alatt kinő, ha változtatnál.
 
-A teljes szolgáltatás, a csomagok és a foglalás a [szemöldök laminálás Zuglóban](/szemoldok-laminalas-zuglo/) oldalon érhető el.
+A teljes szolgáltatás, a csomagok és a foglalás a [szemöldök laminálás Budapesten](/szemoldok-laminalas-zuglo/) oldalon érhető el.
 
 *Frissítve: 2026. június. Az árak tájékoztató jellegűek — az aktuális árlistát a foglalási oldalon találod.*
