@@ -4,7 +4,7 @@ excerpt: "A menyasszonyi smink Budapesten 25–60 ezer Ft, a próbasmink 12–25
 category: "Alkalmi smink"
 readingMinutes: 6
 publishedAt: 2026-05-28
-updatedAt: 2026-06-12
+updatedAt: 2026-07-26
 cover: "/img/menyasszonyi-probasmink-zuglo-budapest-egressy-ut.webp"
 coverWidth: 1200
 coverHeight: 1494
@@ -72,4 +72,4 @@ Ha közeledik a nagy nap — vagy csak egy fontos esemény —, írj bátran, é
 
 [Foglalj próbasmink-időpontot a Notino felületén →](https://www.notino.hu/szalonok/pecze-kovacs-fruzsina-sminkes,-szemoldok-es-szempilla-stylist/)
 
-*Frissítve: 2026. június. Az árak tájékoztató jellegűek — az aktuális árlistát a foglalási oldalon találod.*
+*Frissítve: 2026. július. Az árak tájékoztató jellegűek — az aktuális árlistát a foglalási oldalon találod.*

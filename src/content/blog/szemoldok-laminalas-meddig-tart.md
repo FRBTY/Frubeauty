@@ -4,7 +4,7 @@ excerpt: "Meddig marad szép egy szemöldök laminálás? Átlagosan 6 hétig �
 category: "Szempilla"
 readingMinutes: 4
 publishedAt: 2026-05-12
-updatedAt: 2026-06-24
+updatedAt: 2026-07-26
 cover: "/img/szemoldok-laminalas-budapest-egressy-ut-zuglo-munka.webp"
 coverWidth: 1100
 coverHeight: 1469

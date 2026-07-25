@@ -4,7 +4,7 @@ excerpt: "A szemöldök laminálás Zuglóban 11 000 Ft, formázással és fest�
 category: "Szempilla"
 readingMinutes: 5
 publishedAt: 2026-06-08
-updatedAt: 2026-06-24
+updatedAt: 2026-07-26
 cover: "/img/szemoldok-laminalas-budapest-egressy-ut-frubeauty-munka.webp"
 coverWidth: 1200
 coverHeight: 1800
@@ -75,4 +75,4 @@ Igen, és kíméletesebb is: a microblading féltartós tetoválás, 1–2 évig
 
 A teljes szolgáltatás, a csomagok és a foglalás a [szemöldök laminálás Budapesten](/szemoldok-laminalas-zuglo/) oldalon érhető el.
 
-*Frissítve: 2026. június. Az árak tájékoztató jellegűek — az aktuális árlistát a foglalási oldalon találod.*
+*Frissítve: 2026. július. Az árak tájékoztató jellegűek — az aktuális árlistát a foglalási oldalon találod.*
