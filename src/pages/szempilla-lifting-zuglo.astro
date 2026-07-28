@@ -116,6 +116,8 @@ const faqs = [
 ];
 
 const galleryImages = [
+  '/img/szempilla-lifting-elotte-utana-kozelrol-zuglo-egressy-ut.webp',
+  '/img/szempilla-lifting-szemoldok-laminalas-vendeg-zuglo-egressy-ut.webp',
   '/img/szempilla_lifting_szemoldok_laminalas_zuglo_budapest_munka_.webp',
   '/img/szempilla-lifting-3.webp',
   '/img/szempilla-szemoldok-vendeg-uj.webp',
@@ -124,6 +126,8 @@ const galleryImages = [
 
 // SEO: per-kép alt szövegek — kulcsszavas, egyedi leírás minden képhez
 const galleryAlts = [
+  'Szempilla lifting előtte-utána közelről — emelt, ívelt szempillák, FRUBEAUTY Budapest, Egressy út',
+  'Szempilla lifting és szemöldök laminálás egy vendégen — nyitottabb tekintet, FRUBEAUTY Zugló, Egressy út',
   'Szempilla lifting eredménye közelről — emelt, ívelt pillák, FRUBEAUTY Zugló',
   'Szempilla lifting előtte-utána — emelt, dúsabb pillák, FRUBEAUTY Budapest',
   'Szempilla lifting és szemöldök laminálás — natúr, ápolt tekintet, FRUBEAUTY Budapest',
@@ -450,7 +454,7 @@ const serviceSchemas = [
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);"><em class="display">Vendégeim</em>.</h2>
         <p class="mt-4 text-sm text-creamMute">Kattints a képekre a teljes nézethez</p>
       </Reveal>
-      <GalleryGrid client:visible count={4} images={galleryImages} alts={galleryAlts} size="large" />
+      <GalleryGrid client:visible count={6} images={galleryImages} alts={galleryAlts} size="large" />
       <Reveal client:visible as="div" className="mt-12 text-center" delay={0.15}>
         <a href={config.instagram} target="_blank" rel="noopener" class="group inline-flex items-center text-[12px] uppercase tracking-caps text-cream hover:text-gold transition-colors">Több munkám az Instagramon<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
       </Reveal>

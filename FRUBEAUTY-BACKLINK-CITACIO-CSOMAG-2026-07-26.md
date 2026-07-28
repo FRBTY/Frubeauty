@@ -39,9 +39,9 @@ Nyitvatartás:
   Vasárnap      zárva
 ```
 
-> **Már javítva a kódban, de MÉG NEM ÉLES:** a weboldal JSON-LD-je eddig `FRUBEAUTY – Pecze-Kovács Fruzsina` néven futott, a GBP viszont `…Fruzsina **Kozmetikus**`-t mond. Ez NAP-eltérés volt, ami gyengíti az entitás-egyezést. A schema a working tree-ben a GBP-hez igazítva (`Layout.astro` + 3 aloldal, 4 sor).
+> **✅ ÉLES (2026-07-26).** A weboldal JSON-LD-je korábban `FRUBEAUTY – Pecze-Kovács Fruzsina` néven futott, a GBP viszont `…Fruzsina **Kozmetikus**`-t mond. Ez NAP-eltérés volt, ami gyengíti az entitás-egyezést. Javítva és kitolva (`Layout.astro` + 3 money page).
 >
-> **Élesben ellenőrizve 2026-07-26-án:** a frubeauty.com kezdőlapja továbbra is `"name":"FRUBEAUTY – Pecze-Kovács Fruzsina"`-t szolgál ki. A low-hanging-fruit csomag többi része (money page címek → „Budapest", új H1, blog exact-match anchorok) **már kint van** — a névfix az egyetlen ki nem tolt változtatás. **Amíg nincs deploy, a Sáv A citációkat ne kezdd el**, mert a katalógusokba beírt névnek egyeznie kell azzal, amit a site állít magáról.
+> **Élesben verifikálva:** a kezdőlap és mind a három aloldal `"name":"FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus"`-t szolgál ki, a JSON-LD hibátlanul parse-olódik (BeautySalon + Person + WebSite, illetve FAQPage). **A Sáv A citációk mostantól indíthatók** — a fenti NAP-blokk és az, amit a site állít magáról, egyezik.
 
 > **Ellenőrizendő a GBP-ben:** a Google tudáspanel jelenleg **„Szépségszalon"**-t ír kategóriaként, nem „Kozmetikus"-t. Lehet, hogy csak általánosított címkét jelenít meg, de érdemes ránézni, hogy az elsődleges kategória tényleg `Kozmetikus`-e.
 

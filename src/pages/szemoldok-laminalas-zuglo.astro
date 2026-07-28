@@ -233,6 +233,7 @@ const faqs = [
 ];
 
 const galleryImages = [
+  '/img/szemoldok-laminalas-vendeg-eredmeny-zuglo-egressy-ut.webp',
   '/img/szemoldok-laminalas-zuglo-munka-uj.webp',
   '/img/szemoldok-laminalas-budapest-egressy-ut-zuglo-munka.webp',
   '/img/szemoldok-laminalas-vendeg-kep-budapest-egressy-ut-kozmetika.webp',
@@ -241,6 +242,7 @@ const galleryImages = [
 ];
 
 const galleryAlts = [
+  'Szemöldök laminálás eredménye vendégen — dús, rendezett szemöldök, FRUBEAUTY Zugló, Egressy út',
   'Szemöldök laminálás eredménye — dús, rendezett szálak, FRUBEAUTY Zugló',
   'Szemöldök laminálás — természetes, ápolt forma, FRUBEAUTY Budapest',
   'Szemöldök laminálás oldalnézetből — fixált, ívelt forma, FRUBEAUTY Budapest',
@@ -631,7 +633,7 @@ const breadcrumbSchema = {
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);"><em class="display">Vendégeim</em>.</h2>
         <p class="mt-4 text-sm text-creamMute">Kattints a képekre a teljes nézethez</p>
       </Reveal>
-      <GalleryGrid client:visible count={5} images={galleryImages} alts={galleryAlts} size="large" />
+      <GalleryGrid client:visible count={6} images={galleryImages} alts={galleryAlts} size="large" />
       <Reveal client:visible as="div" className="mt-12 sm:mt-16 text-center" delay={0.15}>
         <a href={config.instagram} target="_blank" rel="noopener" class="group inline-flex items-center text-[12px] uppercase tracking-caps text-cream hover:text-gold transition-colors">Több munkám az Instagramon<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
       </Reveal>

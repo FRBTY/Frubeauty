@@ -69,6 +69,9 @@ const faqs = [
 ];
 
 const galleryImages = [
+  '/img/alkalmi-smink-elotte-utana-zuglo-egressy-ut-budapest.webp',
+  '/img/alkalmi-smink-vendeg-zuglo-egressy-ut-budapest.webp',
+  '/img/nappali-smink-termeszetes-zuglo-egressy-ut-budapest.webp',
   '/img/budapest-egressy-ut-smink-frubeauty.webp',
   '/img/alkalmi_kep_smink_alkalmi_smink_budapest_egressy_ut.webp',
   '/img/alkalmi-smink-budapest-egressy-ut-zuglo_munka.webp',
@@ -82,6 +85,9 @@ const galleryImages = [
 
 // SEO: per-kép alt szövegek a galériához
 const galleryAlts = [
+  'Alkalmi smink előtte-utána — természetes hatású smink, FRUBEAUTY Zugló, Egressy út',
+  'Alkalmi smink vendégen — hangsúlyos szemsmink, FRUBEAUTY Budapest, Egressy út',
+  'Természetes nappali smink — tartós alapozás, FRUBEAUTY Zugló XIV. kerület',
   'Alkalmi smink Budapest — FRUBEAUTY Egressy út Zugló',
   'Alkalmi smink munka Budapest, Egressy út — FRUBEAUTY',
   'Alkalmi smink Zugló — FRUBEAUTY XIV. kerület, Egressy út',
@@ -370,7 +376,7 @@ const config = { ...siteConfig };
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);"><em class="display">Vendégeim</em>.</h2>
         <p class="mt-4 text-sm text-creamMute">Kattints a képekre a teljes nézethez</p>
       </Reveal>
-      <GalleryGrid client:visible count={9} images={galleryImages} alts={galleryAlts} size="large" />
+      <GalleryGrid client:visible count={12} images={galleryImages} alts={galleryAlts} size="large" />
       <Reveal client:visible as="div" className="mt-12 text-center" delay={0.1}>
         <a href={config.instagram} target="_blank" rel="noopener" class="group inline-flex items-center text-[12px] uppercase tracking-caps text-cream hover:text-gold transition-colors">Több munkám az Instagramon<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
       </Reveal>
