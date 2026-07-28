@@ -688,6 +688,21 @@ const primaryGtagId = hasGoogleTag
         color: var(--gold, #B8884A);
       }
 
+      /* A hero címsorában lévő arany <em> a lámpa fénykúpja ELŐTT áll, nem sima
+         ink háttéren: ott a #B8884A csak ~3,2:1-et adott (a többi címsoron 6,2:1).
+         Ezért a hero kiemelése a világosabb goldGlow tónust kapja → 5,7:1, úgy,
+         hogy a hue és a "meleg arany" karakter változatlan.
+
+         A letter-spacing visszaállítása normálra szintén szándékos: a h1 örökölt
+         -0,022em-je egy dőlt, talpas betűn a szomszédos szavakba tolta a szót
+         ("Kozmetikus|Zuglóban|—"), a záró inline padding pedig a dőlés miatti
+         jobb oldali túllógásnak ad helyet. */
+      .lamp-root h1 em.display {
+        color: #D9B27D;
+        letter-spacing: normal;
+        padding-inline-end: 0.06em;
+      }
+
       /* Sortörés. A display címsorok eddig „mohó" tördelést kaptak, ezért az
          utolsó soron egyetlen szó maradhatott árván (a hero-ban a „tekintettel."),
          ami optikailag elcsúszott, aszimmetrikus tömböt ad. A balance a sorokat

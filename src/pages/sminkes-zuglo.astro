@@ -263,7 +263,7 @@ const config = { ...siteConfig };
                   <td class="py-5 px-5 sm:px-7">
                     <div class="flex items-center gap-2.5 flex-wrap">
                       <span class="font-display text-base sm:text-lg font-medium text-cream leading-snug">{item.name}</span>
-                      {item.badge && (<span class="text-[10px] uppercase tracking-caps font-medium bg-gold/15 text-gold border border-gold/30 px-2 py-0.5 rounded-full">{item.badge}</span>)}
+                      {item.badge && (<span class="text-[10px] uppercase tracking-caps font-medium bg-gold/15 text-goldSoft border border-goldSoft/30 px-2 py-0.5 rounded-full">{item.badge}</span>)}
                     </div>
                     {item.description && (<p class="mt-1.5 text-[13px] sm:text-sm text-creamSoft leading-relaxed max-w-[64ch]">{item.description}</p>)}
                     <span class="sm:hidden mt-2 inline-block text-[11px] uppercase tracking-caps text-creamMute">{item.duration}</span>
@@ -301,7 +301,7 @@ const config = { ...siteConfig };
               <p class="mt-2 text-sm text-creamMute leading-snug max-w-[28ch]">{p.subtitle}</p>
               {p.footnote && (<p class="mt-2 text-[10.5px] italic text-creamMute/80 leading-snug max-w-[30ch]">{p.footnote}</p>)}
               <div class="mt-6">{p.priceOld && (<p class="text-sm text-creamMute mb-1">Külön: <span class="line-through">{p.priceOld}</span></p>)}<p class="font-display text-3xl sm:text-4xl font-medium tracking-tight text-cream">{p.price}</p><p class="text-xs text-creamMute mt-2">{p.priceMeta}</p></div>
-              {p.savings && (<div class="mt-4"><span class="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-caps font-medium bg-gold/15 text-gold border border-gold/30 px-3 py-1.5 rounded-full"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden><polyline points="20 6 9 17 4 12" /></svg>{p.savings}</span></div>)}
+              {p.savings && (<div class="mt-4"><span class="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-caps font-medium bg-gold/15 text-goldSoft border border-goldSoft/30 px-3 py-1.5 rounded-full"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden><polyline points="20 6 9 17 4 12" /></svg>{p.savings}</span></div>)}
               <p class="mt-4 text-[12px] italic text-creamSoft/70 leading-snug">{p.dailyEquivalent}</p>
               <div class={`my-7 border-t ${p.highlight ? 'border-whisperStrong' : 'border-whisper'}`}></div>
               <p class="text-[11px] uppercase tracking-caps text-creamMute mb-4">{p.duration}</p>

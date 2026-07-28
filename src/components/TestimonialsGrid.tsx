@@ -46,7 +46,9 @@ export function TestimonialsGrid({ items }: { items: Testimonial[] }) {
                   href={reviewUrl}
                   target="_blank"
                   rel="noopener nofollow"
-                  className="text-xs text-creamMute hover:text-gold transition-colors inline-flex items-center gap-1"
+                  // -my-1 + py-1: 16 px magas linkből 24 px-es érintőfelület
+                  // (WCAG 2.5.8 AA), a figcaption sormagasságának változtatása nélkül.
+                  className="text-xs text-creamMute hover:text-gold transition-colors inline-flex items-center gap-1 -my-1 py-1"
                   aria-label={`${t.name} véleménye a Google-on`}
                 >
                   Google

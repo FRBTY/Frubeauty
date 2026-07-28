@@ -73,7 +73,10 @@ export function HeroMedia({
               videoReady ? 'opacity-0' : 'opacity-100'
             }`}
             loading="eager"
-            fetchPriority="high"
+            /* Kisbetűs alak: a React 18 a camelCase fetchPriority-t nem ismeri fel,
+               ezért minden renderre figyelmeztetést dobott a konzolba (a HTML
+               ugyan működött, mert az attribútumnév kis-nagybetű-független). */
+            fetchpriority="high"
             decoding="sync"
           />
         </picture>
