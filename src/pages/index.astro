@@ -14,7 +14,7 @@ import { FAQ } from '../components/FAQ';
 import { CookieBanner } from '../components/CookieBanner';
 import { BlogSection } from '../components/BlogSection';
 import { getCollection } from 'astro:content';
-import { siteConfig, openingHours, recencyProof } from '../config/site';
+import { siteConfig, openingHours, recencyProof, relFor } from '../config/site';
 import SiteFooter from '../components/SiteFooter.astro';
 
 // Pull the 3 most recent published posts so the homepage stays in sync with
@@ -138,7 +138,20 @@ const homepageFaqSchema = {
   <section class="relative overflow-hidden pt-[calc(var(--header-h)+7rem)] sm:pt-[calc(var(--header-h)+9rem)]">
     <LampStatic>
       <div class="hero-reveal text-center max-w-[920px] mx-auto">
-        <p class="text-[11px] sm:text-xs uppercase tracking-caps text-gold mb-5 sm:mb-7">
+        {/* A kicker korábban text-gold volt, csupasz szövegként a lámpa fényében:
+            arany az aranyon = 1,0–2,9:1 kontraszt, optikailag eltűnt.
+            Puszta fekete szöveg viszont nem megoldás, mert a lámpanyaláb függőleges
+            helyzete a viewport MAGASSÁGÁVAL vándorol (a nyaláb a flex-1 sávban
+            középre igazodik, a tartalom alatta ül): alacsony ablaknál a kicker a
+            fényben van, magasnál a fény fölé csúszik és sötétbe kerül. Bármelyik
+            fix szövegszín az egyik esetben elveszik.
+            Ezért a kicker saját, tömör világos chipet kap — a hátterét így nem a
+            lámpa adja, hanem önmaga: fekete szöveg krém alapon, minden ablakméretben
+            ~15:1. A chip-forma amúgy is a site nyelve (lásd a landing oldalak
+            eyebrow-badge-eit), csak itt kitöltött, mert itt kontrasztot kell vinnie.
+            w-fit + mx-auto és NEM inline-block: az inline-block baseline-leadinget
+            adna, ami ~30 px-el feljebb tolná az egész hero-tartalmat. */}
+        <p class="w-fit mx-auto mb-5 sm:mb-7 rounded-full bg-cream px-5 py-2 text-[11px] sm:text-xs uppercase tracking-caps text-inkDeep font-medium">
           FRUBEAUTY · Budapest XIV. · Zugló, Egressy út
         </p>
         {/* Message match a Title-lel ("Kozmetikus Zugló · Szempilla Stylist"): a korábbi
@@ -151,7 +164,7 @@ const homepageFaqSchema = {
           class="font-display font-light text-cream leading-[1.12] tracking-tightest-"
           style="font-size: clamp(2rem, 5.5vw, 4.5rem);"
         >
-          Kozmetikus <em class="display">Zuglóban</em> — hogy tökéletes bőrrel és kész tekintettel ébredj.
+          Kozmetikus <em class="display">Zuglóban</em> — tökéletes bőrrel és kész tekintettel ébredj.
         </h1>
         <p class="mt-6 sm:mt-8 text-base sm:text-lg text-creamSoft max-w-[58ch] mx-auto leading-[1.65] sm:leading-[1.7]">
           Kozmetikus és sminkes Zuglóban, a XIV. kerületi Egressy úton — személyre szabott arckezelés, tartós szempilla- és szemöldökkezelés, alkalmi smink. Egyszerre egy vendéggel, teljes figyelemmel.
@@ -162,7 +175,7 @@ const homepageFaqSchema = {
           <a
             href={config.booking}
             target="_blank"
-            rel="noopener"
+            rel={relFor(config.booking)}
             class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200"
           >
             Időpontot foglalok
@@ -411,7 +424,7 @@ const homepageFaqSchema = {
             Online foglalási rendszer 0–24 órában, válaszadás munkanapokon pár órán belül.
           </p>
           <div class="mt-9 flex flex-wrap gap-3">
-            <a href={config.booking} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">
+            <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">
               Időpontot foglalok
             </a>
             <a

@@ -12,7 +12,7 @@ import { FAQ } from '../components/FAQ';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
-import { siteConfig } from '../config/site';
+import { siteConfig, relFor } from '../config/site';
 
 const priceCategories = [
   { eyebrow: 'A nagy nap', title: 'Menyasszonyi csomag.', items: [
@@ -191,10 +191,10 @@ const config = { ...siteConfig };
             látszik; a videó client:visible-re hidratál. LCP-poszter: Layout preloadImage. */}
         <div class="hero-reveal lg:col-span-7">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Smink · 1143 Budapest · XIV. kerület</p>
-          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Esküvői és alkalmi smink Budapesten — <em class="display">árak</em> tételesen, rejtett díj nélkül.</h1>
-          <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">A menyasszonyi smink nálam <strong class="font-medium text-cream">25.000 Ft</strong>, próbasminkkel csomagban 35.000 Ft, az alkalmi smink 15.000 Ft — mindegyik árban benne van a bőrelőkészítés és a hosszan tartó fixálás. Budapesten, a XIV. kerületi Egressy úton dolgozom, esküvői helyszínre kiszállással is.</p>
+          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Esküvői smink <em class="display">árak</em> Budapesten — tételesen, rejtett díj nélkül.</h1>
+          <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">Az esküvői smink árak nálam tételesen: menyasszonyi smink <strong class="font-medium text-cream">25.000 Ft</strong>, próbasminkkel csomagban 35.000 Ft, alkalmi smink 15.000 Ft — mindegyik árban benne van a bőrelőkészítés és a hosszan tartó fixálás. Budapesten, a XIV. kerületi Egressy úton dolgozom, esküvői helyszínre kiszállással is.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
-            <a href={config.booking} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+            <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
             <a href="#csomagok" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Árak</a>
           </div>
           <p class="mt-6 text-[12px] uppercase tracking-caps text-creamMute">Helyszíni kiszállás Budapesten és környékén · Egyedi egyeztetés</p>
@@ -278,7 +278,7 @@ const config = { ...siteConfig };
       </div>
 
       <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
-        <a href={config.booking} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+        <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
         <p class="text-[12px] uppercase tracking-caps text-creamMute">Az árak tájékoztató jellegűek · Kiszállás egyedi egyeztetés alapján</p>
       </div>
     </div>

@@ -18,7 +18,7 @@ import RelatedArticles from '../components/RelatedArticles.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
 import { PriceList } from '../components/PriceList';
-import { siteConfig } from '../config/site';
+import { siteConfig, relFor } from '../config/site';
 
 const services = [
   {
@@ -257,7 +257,7 @@ const serviceSchemas = [
           </div>
           <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">A szempilla lifting — más néven szempilla laminálás — a saját pilláid tövét emeli meg ívelt formába, így tus és műszempilla nélkül is hosszabbnak látszanak. Budapesten, Zuglóban (Egressy út 16.), ragasztómentes koreai technikával, szempilla festéssel: <strong class="font-medium text-cream">12.000 Ft</strong>, ~90 perc, 6–8 hétig tart.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
-            <a href={config.booking} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+            <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
             <a href="#csomagok" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Árak</a>
           </div>
           <p class="mt-6 text-[12px] uppercase tracking-caps text-creamMute">Online foglalás · Egressy út 16. · XIV. kerület</p>

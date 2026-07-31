@@ -4,7 +4,7 @@ import SiteHeader from '../components/SiteHeader.astro';
 import SiteContact from '../components/SiteContact.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { CookieBanner } from '../components/CookieBanner';
-import { siteConfig } from '../config/site';
+import { siteConfig, relFor } from '../config/site';
 
 const config = { ...siteConfig };
 
@@ -47,7 +47,7 @@ const profileSchema = {
             <span class="text-creamMute">Egressy út 16. · XIV. kerület</span>
           </div>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
-            <a href={config.booking} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+            <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
             <a href="/arckezeles-zuglo/" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Szolgáltatások</a>
           </div>
         </div>

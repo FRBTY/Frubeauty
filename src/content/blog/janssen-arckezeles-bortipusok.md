@@ -1,6 +1,6 @@
 ---
-title: "Janssen arckezelés bőrtípusonként: melyik protokoll hozza el a változást a bőrödön?"
-excerpt: "A legnagyobb hiba sablonos arckezelésre befizetni — a bőröd nem sablon. Hat célzott Janssen-protokoll közül választunk bőranalízis alapján: itt az útmutató, melyik mit old meg."
+title: "Janssen arckezelés bőrtípusonként: melyik protokoll való a bőrödnek?"
+excerpt: "A Janssen arckezelés hat célzott protokollt kínál: kombinált, zsíros, érzékeny, érett, vízhiányos és tini bőrre. Bőranalízis alapján választunk — itt az útmutató, melyik protokoll mit old meg."
 category: "Arckezelés"
 readingMinutes: 8
 publishedAt: 2026-03-28

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { relFor } from '../config/site';
 
 interface NavBarProps {
   bookingUrl: string;
@@ -131,7 +132,7 @@ export function NavBar({ bookingUrl, instagram, facebook }: NavBarProps) {
             <a
               href={bookingUrl}
               target="_blank"
-              rel="noopener"
+              rel={relFor(bookingUrl)}
               className="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink rounded-full hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-150"
             >
               Foglalás
@@ -192,7 +193,7 @@ export function NavBar({ bookingUrl, instagram, facebook }: NavBarProps) {
           <a
             href={bookingUrl}
             target="_blank"
-            rel="noopener"
+            rel={relFor(bookingUrl)}
             tabIndex={menuOpen ? 0 : -1}
             onClick={() => setMenuOpen(false)}
             className="mt-4 inline-flex items-center justify-center px-6 py-3.5 text-[13px] uppercase tracking-caps font-medium bg-gold text-ink rounded-full hover:bg-goldSoft transition-colors"

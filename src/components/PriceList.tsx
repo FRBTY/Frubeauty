@@ -1,5 +1,5 @@
 import { StaggerGroup, StaggerItem } from './StaggerGroup';
-import { siteConfig as _siteConfig } from '../config/site';
+import { siteConfig as _siteConfig, relFor } from '../config/site';
 const siteConfig = { ..._siteConfig };
 
 export interface PriceItem {
@@ -80,7 +80,7 @@ export function PriceList({ categories }: PriceListProps) {
                     <a
                       href={siteConfig.booking}
                       target="_blank"
-                      rel="noopener"
+                      rel={relFor(siteConfig.booking)}
                       className="inline-flex items-center px-4 py-2 text-[11px] uppercase tracking-caps font-semibold bg-gold text-ink rounded-full hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-150 whitespace-nowrap"
                       aria-label={`Ezt szeretném: ${item.name}`}
                     >

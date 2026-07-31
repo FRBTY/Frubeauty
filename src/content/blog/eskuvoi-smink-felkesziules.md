@@ -1,6 +1,6 @@
 ---
-title: "Esküvői smink Budapesten: így készülj a próbasminkre tudatos menyasszonyként"
-excerpt: "A próbasmink nem kötetlen stílusgyakorlat, hanem a nagy napod legfontosabb vizuális szerződése. Mit hozz magaddal, mit hagyj otthon, és mi történik a 90 perc alatt — lépésről lépésre."
+title: "Esküvői smink Budapesten: így készülj a próbasminkre"
+excerpt: "Az esküvői próbasmink a nagy nap főpróbája: 90 perc alatt véglegesítjük a sminket, és fotó készül róla, hogy az esküvő reggelén ne kelljen tippelni. Mit hozz magaddal — lépésről lépésre."
 category: "Alkalmi smink"
 readingMinutes: 7
 publishedAt: 2026-02-15

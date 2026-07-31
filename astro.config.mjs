@@ -70,10 +70,39 @@ function rehypeResponsiveTables() {
   };
 }
 
+// Markdown-beli KULSO linkek rel/target kiegeszitese. A markdown-renderer csupasz
+// <a href="https://...">-t ad: se rel, se target. Ket kovetkezmenye volt (Ahrefs-
+// audit, 2026-07-31): (1) a cikkekbol indulo ~5 Notino-foglalasi link jeloletlen
+// maradt, holott sitewide kereskedelmi partnerrol van szo → `sponsored`; (2) minden
+// kulso link `noopener` nelkul nyilt. A .astro oldalak <a>-jait a config/site.ts
+// relFor() kezeli — ez a plugin ugyanazt a szabalyt viszi a markdownra, hogy uj
+// cikk irasakor ne kelljen kezzel emlekezni ra.
+function rehypeExternalLinkRel() {
+  return (tree) => {
+    const walk = (node) => {
+      if (!Array.isArray(node.children)) return;
+      for (const child of node.children) {
+        if (child.type === 'element' && child.tagName === 'a') {
+          const href = String(child.properties?.href ?? '');
+          if (/^https?:\/\//.test(href)) {
+            child.properties = child.properties || {};
+            child.properties.target = '_blank';
+            child.properties.rel = href.includes('notino.hu')
+              ? 'noopener sponsored'
+              : 'noopener';
+          }
+        }
+        walk(child);
+      }
+    };
+    walk(tree);
+  };
+}
+
 export default defineConfig({
   site: 'https://frubeauty.com',
   markdown: {
-    rehypePlugins: [rehypeResponsiveTables],
+    rehypePlugins: [rehypeResponsiveTables, rehypeExternalLinkRel],
   },
   // Netlify a záró slash nélküli URL-eket 301-gyel a slashes verzióra irányítja.
   // A 'always' + 'directory' formátummal a belső linkek, a sitemap és a kanonikus

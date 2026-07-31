@@ -65,7 +65,7 @@ Igen, mindkettő. A 11 000 Ft a teljes kezelés: laminálás + formázás + fest
 5 000 Ft. Ha a szálaid maguktól jól állnak, és csak tiszta vonalat meg színt szeretnél, ez is elég lehet.
 
 **Mennyibe kerül a szemöldök laminálás és a szempilla lifting együtt?**
-A Teljes Tekintet csomag 18 000 Ft (külön 23 000 Ft lenne) — egyszerre 5 000 Ft megtakarítás.
+A Teljes Tekintet csomag 18 000 Ft (külön 23 000 Ft lenne) — egyszerre 5 000 Ft megtakarítás. A pillás rész részletei a [szempilla lifting](/szempilla-lifting-zuglo/) oldalon.
 
 **Meddig tart a szemöldök laminálás eredménye?**
 Körülbelül 6 hétig, attól függően, milyen gyorsan nő vissza a szemöldököd. Hat hétre elosztva ez napi 261 Ft.

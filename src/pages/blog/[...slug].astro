@@ -138,6 +138,9 @@ const faqSchema =
   description={post.data.metaDescription ?? post.data.excerpt}
   image={post.data.cover}
   canonical={`https://frubeauty.com/blog/${post.data.slug ?? post.id}/`}
+  ogType="article"
+  publishedTime={post.data.publishedAt.toISOString()}
+  modifiedTime={(post.data.updatedAt ?? post.data.publishedAt).toISOString()}
 >
   <SiteHeader />
 

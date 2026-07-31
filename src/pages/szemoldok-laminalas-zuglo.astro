@@ -18,7 +18,7 @@ import RelatedArticles from '../components/RelatedArticles.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
 import { PriceList } from '../components/PriceList';
-import { siteConfig } from '../config/site';
+import { siteConfig, relFor } from '../config/site';
 
 const services = [
   {
@@ -366,7 +366,7 @@ const breadcrumbSchema = {
             A poszter LCP-képét a Layout preloadImage propja előtölti. */}
         <div class="hero-reveal lg:col-span-7">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Szemöldök kezelés · 1143 Budapest · XIV. kerület</p>
-          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Szemöldök laminálás <em class="display">Budapesten</em> — dúsabb, rendezett szemöldök tű nélkül.</h1>
+          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Szemöldök laminálás <em class="display">Budapesten</em> — dúsabb, rendezett ív tű nélkül.</h1>
           {/* Above-the-fold trust-sor: ★5,0 a hero első képernyőjén (mobilon is). */}
           <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] tracking-caps">
             <span class="text-gold font-medium">★ 5,0</span>
@@ -375,7 +375,7 @@ const breadcrumbSchema = {
           </div>
           <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">A szemöldök laminálás tűmentes kezelés: a saját szálaidat rögzíti a kívánt irányba, így rendezettebbnek és dúsabbnak látszanak. Budapesten, a XIV. kerületi Egressy úton, koreai technikával. Ár: <strong class="font-medium text-cream">11.000 Ft</strong> — a szemöldök formázás és a festés is benne van. ~60 perc, 6 hétig tart.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
-            <a href={config.booking} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+            <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
             <a href="#csomagok" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Árak</a>
           </div>
           <p class="mt-6 text-[12px] uppercase tracking-caps text-creamMute">Online foglalás · Egressy út 16. · XIV. kerület</p>

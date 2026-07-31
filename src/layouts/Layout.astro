@@ -12,6 +12,15 @@ export interface Props {
   /** Extra JSON-LD schema objects (FAQPage, Service stb.) az adott aloldalhoz.
       A Layout a <head>-ben rendereli őket a globális businessSchema után. */
   additionalSchemas?: object[];
+  /** OG-tartalomtípus. Blogcikken 'article' (publikálási/módosítási dátummal),
+      minden más oldalon marad a 'website'. Az Ahrefs-audit (2026-07-31) mind a
+      23 oldalon 'website'-ot talált — a cikkeken ez rossz típusjelzést ad a
+      közösségi előnézeteknek és az AI-crawlereknek. */
+  ogType?: 'website' | 'article';
+  /** ISO dátum az article:published_time-hoz (csak ogType='article' esetén). */
+  publishedTime?: string;
+  /** ISO dátum az article:modified_time-hoz (csak ogType='article' esetén). */
+  modifiedTime?: string;
 }
 
 const {
@@ -21,6 +30,9 @@ const {
   canonical = Astro.url.href,
   preloadImage,
   additionalSchemas = [],
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
 } = Astro.props;
 
 // OG/Twitter image-nek abszolút URL kell — Facebook és Twitter nem követi a
@@ -178,7 +190,14 @@ const primaryGtagId = hasGoogleTag
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Pecze-Kovács Fruzsina" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    {ogType === 'article' && publishedTime && (
+      <meta property="article:published_time" content={publishedTime} />
+    )}
+    {ogType === 'article' && modifiedTime && (
+      <meta property="article:modified_time" content={modifiedTime} />
+    )}
+    {ogType === 'article' && <meta property="article:author" content="Pecze-Kovács Fruzsina" />}
     <meta property="og:locale" content="hu_HU" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

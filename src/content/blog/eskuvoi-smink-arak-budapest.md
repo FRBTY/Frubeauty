@@ -1,6 +1,6 @@
 ---
-title: "Mennyibe kerül az esküvői smink Budapesten? Árak és ami mögöttük van (2026)"
-excerpt: "A menyasszonyi smink Budapesten 25–60 ezer Ft, a próbasmink 12–25 ezer. A szám önmagában mégis félrevezető — az számít, mi van benne. Tételes árak és a kérdések, amiket foglalás előtt tegyél fel."
+title: "Mennyibe kerül az esküvői smink Budapesten? Árak 2026-ban"
+excerpt: "Az esküvői smink árak Budapesten 25–60 ezer Ft, a próbasmink 12–25 ezer. A szám önmagában mégis félrevezető — az számít, mi van benne. Tételes árak és a kérdések, amiket foglalás előtt tegyél fel."
 category: "Alkalmi smink"
 readingMinutes: 6
 publishedAt: 2026-05-28

@@ -1,6 +1,6 @@
 ---
 title: "Szempilla lifting vagy festés? A zuglói szakértő válaszol"
-excerpt: "Sokan egy trendi Insta-fotó alapján foglalnak liftinget — miközben egy 4 000 Ft-os festéssel vagy egy szemöldök-laminálással járnának jobban. Tegyük tisztába, melyik mit tud, és melyik való neked."
+excerpt: "Szempilla lifting vagy festés? A lifting ívet ad és megemeli a szálakat (12 000 Ft), a festés csak színt (4 000 Ft) — más problémát oldanak meg. Tegyük tisztába, melyik mit tud, és melyik való neked."
 category: "Szempilla"
 readingMinutes: 5
 publishedAt: 2026-04-12

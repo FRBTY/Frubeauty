@@ -1,6 +1,6 @@
 ---
 title: "Szemöldök laminálás vs. microblading — melyiket válaszd?"
-excerpt: "Laminálás vagy microblading? Az egyik tűmentes és pár hét alatt kinő, a másik féltartós tetoválás, amit 1–2 évig viselsz. Összevetettem tartósságban, fájdalomban és kockázatban, hogy jól dönts."
+excerpt: "Szemöldök laminálás vagy microblading? Az egyik tűmentes és pár hét alatt kinő, a másik féltartós tetoválás, amit 1–2 évig viselsz. Összevetettem tartósságban, fájdalomban és kockázatban."
 category: "Szempilla"
 readingMinutes: 6
 publishedAt: 2026-05-20

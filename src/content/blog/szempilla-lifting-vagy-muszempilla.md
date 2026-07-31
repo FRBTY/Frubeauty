@@ -1,6 +1,6 @@
 ---
 title: "Szempilla lifting vagy műszempilla? Melyik való neked?"
-excerpt: "Lifting vagy műszempilla-építés? Az egyik a saját pilládból hozza ki a maximumot, a másik új szálakat ragaszt. Összevetettem a kettőt tartósságban, ápolásban és költségben."
+excerpt: "Szempilla lifting vagy műszempilla-építés? Az egyik a saját pilládból hozza ki a maximumot, a másik új szálakat ragaszt. Összevetettem a kettőt tartósságban, ápolásban és költségben."
 category: "Szempilla"
 readingMinutes: 6
 publishedAt: 2026-05-28
