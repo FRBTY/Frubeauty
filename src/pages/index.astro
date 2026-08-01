@@ -76,11 +76,21 @@ const testimonials = [
   { name: 'Gabriella Hendrik', rating: 5, text: 'Már az első pillanattól kezdve kedvesen és figyelmesen fogadott, végig érezhető volt a profizmus és a hozzáértés. A végeredmény magáért beszél: gyönyörű lett a pillám. Biztosan visszatérek még, és szívből ajánlom mindenkinek!', service: 'Szempilla lifting' },
 ];
 
+// A kezdőlapi FAQ SZÁNDÉKOSAN szalon-szintű, nem szolgáltatás-szintű.
+// Korábban négy kérdés a money page-ek fej-kulcsszavaira vonatkozott, és a
+// „Fáj a szempilla lifting?” SZÓ SZERINT duplikálódott a /szempilla-lifting-zuglo/
+// FAQPage sémájával — vagyis a kezdőlap strukturált adatban is bejelentette
+// ugyanazt a témát, amiért a money page verseng. A szolgáltatás-kérdések maradnak
+// ott, ahol relevánsak (money page FAQ), itt pedig az kerül, amire a kezdőlap
+// LEGITIMEN rangsorol: „kozmetikus” (98 megj., poz 2,8) és „kozmetikus budapest”
+// (22 megj., poz 2,0) — vagyis hol vagy, mikor, hogyan foglalok.
+// Minden adat a siteConfig/openingHours-ból ellenőrizve. Kerüli a money page-ek
+// pontos fej-kulcsszavait („szempilla lifting”, „szemöldök laminálás”).
 const faqs = [
-  { q: 'Fáj a szempilla lifting?', a: 'Egyáltalán nem. Csukott szemmel fekszel, és semmiféle szúrást vagy húzást nem érzel. A legtöbb vendég kifejezetten pihentetőnek tartja a 45 percet.' },
-  { q: 'Mennyi idő egy első arckezelés?', a: 'Az első alkalommal 90 percre számolj — ebből 15 perc bőranalízis és beszélgetés. A visszatérő kezelések általában 60 percesek.' },
-  { q: 'Mit hozzak magammal alkalmi sminkre?', a: 'Egy fényképet a ruhádról és a hajadról (ha tudod, hogyan lesz aznap). Próbasminkre érdemes smink nélkül érkezni, hogy tisztán induljunk.' },
-  { q: 'Mikor látszik a végső eredmény a szemöldök-laminálásnál?', a: 'A formát rögtön a kezelés után látod, de a teljes „letisztult” eredményhez 24 óra kell, mert a szőrszálak akkor veszik fel a végleges állást.' },
+  { q: 'Hogyan tudok időpontot foglalni?', a: 'Online, a Notino felületén, a nap bármely szakában — a szabad időpontok valós időben látszanak. Ha bizonytalan vagy, melyik kezelés való neked, írj Instagramon vagy e-mailben, és segítek választani.' },
+  { q: 'Hol talállak meg, és mikor vagy nyitva?', a: '1143 Budapest, Egressy út 16. — Zuglóban, a XIV. kerületben. Hétfőtől péntekig 8:30–19:30, szombaton 8:00–13:00, vasárnap zárva.' },
+  { q: 'Mi történik az első alkalommal?', a: 'A kezelés előtt körülbelül 10 percet beszélgetünk arról, mit szeretnél és mire van szüksége a bőrödnek. Csak utána kezdünk — nem sablonnal dolgozom.' },
+  { q: 'Egyszerre több kezelést is kérhetek?', a: 'Igen. A leggyakoribb kombináció a pilla- és szemöldökkezelés együtt: Teljes Tekintet csomagban 18 000 Ft a külön 23 000 Ft helyett, nagyjából 120 perc alatt.' },
   { q: 'Le lehet mondani az időpontot?', a: 'Igen, 24 órával az időpont előtt bármikor díjmentesen.' },
 ];
 

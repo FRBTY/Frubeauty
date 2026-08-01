@@ -1,7 +1,7 @@
 ---
 title: "Szemöldök laminálás: meddig tart? 6 hét — és mitől függ"
 excerpt: "Meddig marad szép egy szemöldök laminálás? Átlagosan 6 hétig — de az első 24 óra dönti el, hogy a maximumot hozod-e ki belőle. Itt van, mitől függ a tartósság, és mit kerülj el."
-category: "Szempilla"
+category: "Szemöldök"
 readingMinutes: 4
 publishedAt: 2026-05-12
 updatedAt: 2026-07-26

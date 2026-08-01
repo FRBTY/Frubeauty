@@ -1,7 +1,7 @@
 ---
 title: "Szemöldök laminálás — mit jelent és hogyan zajlik?"
 excerpt: "Mi az a szemöldök laminálás, és mire jó? Tűmentes kezelés, amely a saját szálaidat rendezi és mutatja dúsabbnak — tetoválás és pótlás nélkül. Lépésről lépésre, az 5 perces konzultációtól a festésig."
-category: "Szempilla"
+category: "Szemöldök"
 readingMinutes: 4
 publishedAt: 2026-04-20
 updatedAt: 2026-06-24

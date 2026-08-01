@@ -1,7 +1,7 @@
 ---
 title: "Szemöldök laminálás ára 2026 — ennyibe kerül Budapesten"
 excerpt: "A szemöldök laminálás Zuglóban 11 000 Ft, formázással és festéssel együtt. Tételes árlista 2026-ra: az olcsóbb alternatívák, a 18 000 Ft-os kombinált csomag, és hogy mi mennyit ér."
-category: "Szempilla"
+category: "Szemöldök"
 readingMinutes: 5
 publishedAt: 2026-06-08
 updatedAt: 2026-07-26

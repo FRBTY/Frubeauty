@@ -16,7 +16,12 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string().min(8).max(120),
     excerpt: z.string().min(20).max(200),
-    category: z.enum(['Szempilla', 'Arckezelés', 'Alkalmi smink', 'Bőrápolás']),
+    // 'Szemöldök' 2026-07-31-én vált külön a 'Szempilla'-tól: a négy szemöldök-cikk
+    // tévesen 'Szempilla' volt, így a kártyákon rossz címke jelent meg, ÉS a cikkek
+    // „kapcsolódó posztok” blokkja (blog/[...slug].astro, azonos kategória) keresztbe
+    // ajánlott pilla- és szemöldök-tartalmat. A szétválasztás szűkíti a topikus
+    // klasztereket — minden cikk a saját témáján belül linkel tovább.
+    category: z.enum(['Szempilla', 'Szemöldök', 'Arckezelés', 'Alkalmi smink', 'Bőrápolás']),
     readingMinutes: z.number().int().positive().max(30),
     publishedAt: z.coerce.date(),
     updatedAt: z.coerce.date().optional(),
