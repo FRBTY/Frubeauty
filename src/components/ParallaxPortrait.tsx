@@ -56,8 +56,7 @@ export function ParallaxPortrait({
         // Slightly larger than container so parallax doesn't reveal background
         className="absolute inset-0 w-full h-[112%] -top-[6%] object-cover will-change-transform"
         loading="eager"
-        // Kisbetűs alak — lásd HeroMedia: a React 18 a camelCase változatot nem ismeri.
-        fetchpriority="high"
+        fetchPriority="high"
       />
     </div>
   );

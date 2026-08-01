@@ -60,7 +60,7 @@ export function CookieBanner() {
           exit={reduced ? { opacity: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.4, ease: easeOutStrong }}
           role="dialog"
-          aria-labelledby="cookie-banner-title"
+          aria-label="Sütibeállítások"
           aria-describedby="cookie-banner-body"
           /* Mobile: full-width bottom bar, flush to screen edge — cannot overlap content above.
              Desktop (sm+): compact card anchored bottom-right, away from page CTAs. */

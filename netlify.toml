@@ -14,6 +14,12 @@
 # Megjegyzés: ha a Netlify "primary domain" beállítás már apex-re terel, ez
 # redundáns, de ártalmatlan biztosíték — és verzióban követhető (IaC).
 [[redirects]]
+  from = "http://www.frubeauty.com/*"
+  to = "https://frubeauty.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "https://www.frubeauty.com/*"
   to = "https://frubeauty.com/:splat"
   status = 301
@@ -35,6 +41,20 @@
 [[redirects]]
   from = "/book-online"
   to = "/"
+  status = 301
+
+# A statikus index.html változatok közvetlenül a végleges, záró perjeles URL-re mennek.
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/blog/:slug/index.html"
+  to = "/blog/:slug/"
+  status = 301
+[[redirects]]
+  from = "/:path/index.html"
+  to = "/:path/"
   status = 301
 
 # --- Szempilla festés (Wix) → szempilla lifting money page ---
@@ -67,11 +87,8 @@
   to = "/szemoldok-laminalas-zuglo/"
   status = 301
 
-# A /service-page régi Wix-prefix hosszú farka (minden egyéb szolgáltatás-oldal) → kezdőlap.
-[[redirects]]
-  from = "/service-page/*"
-  to = "/"
-  status = 301
+# Nincs /service-page/* catch-all: csak a fenti, bizonyított legacy URL-ek
+# irányítódnak át. Az ismeretlen régi slugok valódi 404-et kapnak.
 
 [[headers]]
   for = "/*"
@@ -81,4 +98,3 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
- 

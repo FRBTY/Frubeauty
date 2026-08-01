@@ -7,7 +7,7 @@ import { Reveal } from '../components/Reveal';
 import { MagneticCTA } from '../components/MagneticCTA';
 import { ProcessSteps } from '../components/ProcessSteps';
 import { TestimonialsGrid } from '../components/TestimonialsGrid';
-import { FAQ } from '../components/FAQ';
+import FAQList from '../components/FAQList.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import { PriceList } from '../components/PriceList';
 import { CookieBanner } from '../components/CookieBanner';
@@ -127,7 +127,7 @@ const arcBreadcrumbSchema = {
 
 <Layout
   title="Arckezelés Budapesten – kozmetikus Zuglóban | FRUBEAUTY"
-  description="Arckezelés Budapesten, Zuglóban: bőranalízissel induló Janssen protokoll — mélytisztító, hidratáló, anti-aging kezelés 16.000 Ft-tól. ★5,0 · 50+ értékelés."
+  description="Arckezelés Budapesten, Zuglóban: bőranalízissel induló Janssen protokoll — mélytisztító, hidratáló, anti-aging kezelés 16.900 Ft-tól. ★5,0 · 50+ értékelés."
   additionalSchemas={[arcFaqSchema, arcServiceSchema, arcBreadcrumbSchema]}
   preloadImage="/media/arckezeles-zuglo-poster.avif"
 >
@@ -159,9 +159,9 @@ const arcBreadcrumbSchema = {
   <section class="border-y border-whisper bg-inkSoft">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
       <Reveal client:visible as="div" className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">50+ Google értékelés →</a></span></div>
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Janssen</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">Cosmetics partner</span></div>
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">7 protokoll</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">minden bőrtípusra</span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">Google</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">Értékelések megnyitása →</a></span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Janssen</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">Cosmetics termékek</span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">7 protokoll</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">az árlistán</span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Egressy út 16.</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.mapsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">1143 Budapest →</a></span></div>
       </Reveal>
     </div>
@@ -280,7 +280,7 @@ const arcBreadcrumbSchema = {
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Gyakori kérdések</p>
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Amit az arckezelésről <em class="display">kérdezni szoktak</em>.</h2>
       </Reveal>
-      <FAQ client:visible items={faqs} />
+      <FAQList items={faqs} />
     </div>
   </section>
 

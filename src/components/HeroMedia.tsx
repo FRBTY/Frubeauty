@@ -13,9 +13,9 @@ interface HeroMediaProps {
  * Parallax removed: eliminated useTransform/useScroll framer-motion chunk from
  * the critical request chain. Result: use-transform.js no longer in LCP path.
  *
- * A videó akkor mountol és indul el, amikor a viewportba ér (IntersectionObserver,
- * 200px rootMargin), mobilon és desktopon egyaránt. A hajtás alatti videók így csak
- * görgetéskor töltődnek, a hero pedig azonnal (mert eleve látszik).
+ * Automatikus videó csak desktopon, viewport-közelben és idle időben indul.
+ * Mobilon, Save-Data/2G vagy reduced-motion mellett a poszter marad, amíg a
+ * látogató kifejezetten meg nem nyomja a lejátszás gombot.
  */
 export function HeroMedia({
   videoSrc,
@@ -35,24 +35,51 @@ export function HeroMedia({
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced || !videoSrc) return;
+    const desktop = window.matchMedia('(min-width: 768px)').matches;
+    const connection = (navigator as Navigator & {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    }).connection;
+    const slowConnection = ['slow-2g', '2g'].includes(connection?.effectiveType ?? '');
+    if (prefersReduced || !desktop || connection?.saveData || slowConnection || !videoSrc) return;
     const el = containerRef.current;
     if (!el) return;
+
+    let idleId: number | undefined;
+    let timerId: number | undefined;
+    const idleWindow = window as typeof window & {
+      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    const mountWhenIdle = () => {
+      if (idleWindow.requestIdleCallback) {
+        idleId = idleWindow.requestIdleCallback(() => setShouldMountVideo(true), { timeout: 1500 });
+      } else {
+        timerId = window.setTimeout(() => setShouldMountVideo(true), 600);
+      }
+    };
+
     if (!('IntersectionObserver' in window)) {
-      setShouldMountVideo(true);
-      return;
+      mountWhenIdle();
+      return () => {
+        if (idleId !== undefined) idleWindow.cancelIdleCallback?.(idleId);
+        if (timerId !== undefined) window.clearTimeout(timerId);
+      };
     }
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) {
-          setShouldMountVideo(true);
+          mountWhenIdle();
           observer.disconnect();
         }
       },
       { rootMargin: '200px' },
     );
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (idleId !== undefined) idleWindow.cancelIdleCallback?.(idleId);
+      if (timerId !== undefined) window.clearTimeout(timerId);
+    };
   }, [videoSrc]);
 
   return (
@@ -73,10 +100,7 @@ export function HeroMedia({
               videoReady ? 'opacity-0' : 'opacity-100'
             }`}
             loading="eager"
-            /* Kisbetűs alak: a React 18 a camelCase fetchPriority-t nem ismeri fel,
-               ezért minden renderre figyelmeztetést dobott a konzolba (a HTML
-               ugyan működött, mert az attribútumnév kis-nagybetű-független). */
-            fetchpriority="high"
+            fetchPriority="high"
             decoding="sync"
           />
         </picture>
@@ -94,6 +118,17 @@ export function HeroMedia({
               videoReady ? 'opacity-100' : 'opacity-0'
             }`}
           />
+        )}
+        {videoSrc && !videoReady && (
+          <button
+            type="button"
+            onClick={() => setShouldMountVideo(true)}
+            className="absolute bottom-4 left-4 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/25 bg-ink/80 px-4 py-2.5 text-xs font-medium uppercase tracking-caps text-cream backdrop-blur-sm hover:bg-ink focus-visible:ring-2 focus-visible:ring-gold/70"
+            aria-label="Bemutatkozó videó lejátszása"
+          >
+            <span aria-hidden>▶</span>
+            Videó
+          </button>
         )}
         <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-ink/40 to-transparent pointer-events-none" aria-hidden />
       </div>

@@ -22,7 +22,7 @@ export function TestimonialsGrid({ items }: { items: Testimonial[] }) {
         return (
           <StaggerItem key={`${t.name}-${t.service}`}>
             <figure className="bg-inkSoft border border-whisper rounded-3xl p-7 sm:p-9 flex flex-col h-full">
-              <div className="flex gap-0.5 text-gold mb-5" aria-label={`${t.rating} csillagos értékelés`}>
+              <div className="flex gap-0.5 text-gold mb-5" role="img" aria-label={`${t.rating} csillagos értékelés`}>
                 {Array.from({ length: t.rating }).map((_, i) => (
                   <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                     <path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.5 5.79 22l2.39-8.15L2 9.36h7.61z" />

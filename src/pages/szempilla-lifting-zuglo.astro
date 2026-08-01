@@ -13,7 +13,7 @@ import { MagneticCTA } from '../components/MagneticCTA';
 import { ProcessSteps } from '../components/ProcessSteps';
 import { TestimonialsGrid } from '../components/TestimonialsGrid';
 import { GalleryGrid } from '../components/GalleryGrid';
-import { FAQ } from '../components/FAQ';
+import FAQList from '../components/FAQList.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
@@ -28,8 +28,8 @@ const services = [
     titleAccent: 'Lifting',
     titleSuffix: '+ Festés',
     description:
-      'A szempilla lifting a saját pilláidat emeli meg a tövüktől — optikailag hosszabbnak, dúsabbnak tűnnek, tus nélkül is. Koreai technikával, bőrbarát anyagokkal.',
-    warning: 'Várandósság idején nem ajánlott igénybe venni a szolgáltatást.',
+      'A szempilla lifting a saját pilláidat emeli meg a tövüktől — optikailag hosszabbnak, dúsabbnak tűnnek, tus nélkül is. Koreai technikával, festéssel együtt.',
+    warning: 'Várandósság, szoptatás, ismert allergia vagy szemkörnyéki panasz esetén foglalás előtt kérj egyéni egyeztetést.',
     bullets: [
       'Reggel tus és fésülés nélkül is tökéletes tekintet',
       '6–8 hétig tartós, vízálló eredmény',
@@ -52,7 +52,7 @@ const services = [
     titleSuffix: '+ Formázás',
     description:
       'A szemöldök laminálás a rakoncátlan szálakat rendezi és fixálja — dúsabb, határozottabb megjelenést ad az arcnak. Festéssel és formázással együtt, tetoválás és tű nélkül.',
-    warning: 'Várandósság idején nem ajánlott igénybe venni a szolgáltatást.',
+    warning: 'Várandósság, szoptatás, ismert allergia vagy bőrpanasz esetén foglalás előtt kérj egyéni egyeztetést.',
     bullets: [
       'Fixált forma',
       'Optikai dúsítás — ritkás szemöldök is tömöttnek látszik',
@@ -71,7 +71,7 @@ const services = [
 
 const packages = [
   { tier: 'Alap', title: 'Szempilla Lifting', titleAccent: '+ Festés', subtitle: 'Természetes íveltség + tartós festés', priceOld: null as string | null, price: '12 000 Ft', priceMeta: 'egyedi kezelés · ~90 perc', dailyEquivalent: '≈ napi 285 Ft, 6 héten át', savings: null as string | null, duration: '~ 90 perc', features: ['Szempilla lifting koreai technikával','Szempilla festés','6–8 hétig tartós eredmény','Reggel tus nélkül is tökéletes'], highlight: false, ribbon: null as string | null },
-  { tier: 'Ajánlott', title: 'Teljes', titleAccent: 'Tekintet', subtitle: 'Lifting + laminálás egyszerre', priceOld: '23 000 Ft', price: '18 000 Ft', priceMeta: 'kombinált csomag · ~120 perc', dailyEquivalent: '≈ napi 430 Ft — kevesebb egy kávénál', savings: '5 000 Ft megtakarítás', duration: '~ 120 perc', features: ['Szempilla lifting koreai technikával','Szemöldök laminálás + formázás','Szempilla és szemöldök festés','Csupán 2 óra alatt'], highlight: true, ribbon: 'Legtöbben ezt választják' },
+  { tier: 'Ajánlott', title: 'Teljes', titleAccent: 'Tekintet', subtitle: 'Lifting + laminálás egyszerre', priceOld: '23 000 Ft', price: '18 000 Ft', priceMeta: 'kombinált csomag · ~120 perc', dailyEquivalent: '≈ napi 430 Ft — kevesebb egy kávénál', savings: '5 000 Ft megtakarítás', duration: '~ 120 perc', features: ['Szempilla lifting koreai technikával','Szemöldök laminálás + formázás','Szempilla és szemöldök festés','Csupán 2 óra alatt'], highlight: true, ribbon: 'Kombinált csomag' },
   { tier: 'Prémium', title: 'Teljes', titleAccent: 'Megújulás', subtitle: 'Relax Glow arcmasszázs + teljes tekintet', priceOld: '29 000 Ft', price: '26 000 Ft', priceMeta: 'prémium csomag · ~160 perc', dailyEquivalent: '≈ napi 620 Ft — teljes élmény', savings: '3 000 Ft megtakarítás', duration: '~ 160 perc', features: ['Minden, ami a Teljes Tekintet csomagban','Relax Glow arcmasszázs','Személyes bőrápolási tanácsadás','Prioritásos időpontfoglalás'], highlight: false, ribbon: null },
 ];
 
@@ -86,7 +86,7 @@ const otherServices = [
 
 const includedPoints = [
   { eyebrow: '01', title: 'Koreai technika', body: 'A klasszikus szilikon-formás megoldás helyett koreai lash lift technikát alkalmazok — szelídebb, mégis látványosabb íveltség, hosszabb tartóssággal.' },
-  { eyebrow: '02', title: 'Bőrbarát anyagok', body: 'Csak dermatológiailag tesztelt, ragasztómentes hatóanyagokkal dolgozom. Érzékeny szemkörnyékre is alkalmas — nincs csípés, nincs irritáció.' },
+  { eyebrow: '02', title: 'Előzetes egyeztetés', body: 'A kezelés előtt átbeszéljük az ismert allergiákat, érzékenységet és az aktuális szemkörnyéki panaszokat; szükség esetén a kezelést elhalasztjuk.' },
   { eyebrow: '03', title: 'Személyre szabott forma', body: 'A szempilla- és szemöldökforma az arckarakteredhez igazodik — nem sablonos, mindenkinek ugyanolyan eredményt kapsz, hanem rád szabottat.' },
   { eyebrow: '04', title: 'Egyetlen vendég, teljes figyelem', body: 'Egyszerre csak egy vendéget fogadok. Nincs kapkodás, nincs egymást követő futószalag — a kezelés a te ritmusodban zajlik.' },
 ];
@@ -94,7 +94,7 @@ const includedPoints = [
 const processSteps = [
   { step: '01', title: 'Konzultáció', body: 'Megbeszéljük az elvárt eredményt, bőrtípust és esetleges érzékenységet. Ha első alkalommal jársz, együtt nézzük meg, melyik forma és intenzitás illik az arcodhoz.' },
   { step: '02', title: 'Előkészítés', body: 'A terület alapos megtisztítása — zsírmentes, maradványmentes felület. Ez a lépés dönti el, hogy a lifting és a festés mennyi ideig tart majd.' },
-  { step: '03', title: 'Kezelés', body: 'A lifting koreai technikával, ragasztómentes bőrbarát anyagokkal zajlik. Csukott szemmel fekszel — a legtöbb vendég kifejezetten pihentetőnek tartja a 90 percet. Sokan el is szundítanak.' },
+  { step: '03', title: 'Kezelés', body: 'A lifting koreai technikával zajlik. Csukott szemmel fekszel; a kezelés közben végig jelzem, melyik lépés következik, és bármikor szólhatsz, ha kellemetlenséget érzel.' },
   { step: '04', title: 'Végeredmény', body: 'Festés, formázás — tükörbe nézel és imádni fogod. Megbeszéljük az otthoni teendőket is, hogy az eredmény a teljes 6–8 hetet kibírja.' },
 ];
 
@@ -112,7 +112,7 @@ const faqs = [
   // Itt korábban egy SZEMÖLDÖK-laminálás kérdés állt — rossz oldalon volt, hígította
   // a pilla-oldal témáját, és duplikálta a /szemoldok-laminalas-zuglo/ FAQ-ját.
   { q: 'Mennyi idő után látszik a végleges ív?', a: 'Az ívet rögtön a kezelés után látod, de a teljes eredményhez 24 óra kell, mert a szálak akkor veszik fel a végleges állást. Az első 24 órában érdemes elkerülni a vizes-gőzös környezetet.' },
-  { q: 'Mit hozzak magammal a kezelésre?', a: 'Semmit. Smink nélkül érkezz (a szemkörnyékre nézve), ennyi elég. A többi szakmai eszközt és anyagot én biztosítom — bőrbarát, koreai technika, dermatológiailag tesztelt termékek.' },
+  { q: 'Mit hozzak magammal a kezelésre?', a: 'Semmit. Smink nélkül érkezz (a szemkörnyékre nézve), ennyi elég. A kezeléshez szükséges szakmai eszközöket és professzionális termékeket én biztosítom.' },
   { q: 'Mit tehetek otthon, hogy minél tovább tartson?', a: 'A kezelés utáni 24 órában kerüld a vizet, gőzt, szaunát. Pilládat ne dörzsöld, ne használj olajos sminklemosót a szemkörnyéken. A részletes utógondozási útmutatót a kezelés végén szóban is átbeszéljük.' },
   { q: 'Le lehet mondani vagy módosítani az időpontot?', a: 'Igen, 24 órával az időpont előtt bármikor díjmentesen.' },
 ];
@@ -157,7 +157,7 @@ const howToSchema = {
   '@type': 'HowTo',
   name: 'Szempilla lifting menete — FRUBEAUTY Zugló',
   description:
-    'A szempilla lifting 4 lépésben, koreai technikával, ragasztómentes, bőrbarát anyagokkal a zuglói szalonban.',
+    'A szempilla lifting 4 lépésben, koreai technikával a zuglói szalonban.',
   totalTime: 'PT90M',
   step: processSteps.map((s) => ({
     '@type': 'HowToStep',
@@ -172,12 +172,11 @@ const videoSchema = {
   '@type': 'VideoObject',
   name: 'Szempilla lifting munka közben — FRUBEAUTY Zugló, 14. kerület',
   description:
-    'Szempilla lifting koreai technikával, ragasztómentes, bőrbarát anyagokkal a zuglói szalonban. Pecze-Kovács Fruzsina kozmetikus.',
+    'Szempilla lifting koreai technikával, ragasztó nélkül a zuglói szalonban. Pecze-Kovács Fruzsina kozmetikus.',
   thumbnailUrl:
     'https://frubeauty.com/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet-poster.webp',
   contentUrl:
     'https://frubeauty.com/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet.mp4',
-  uploadDate: '2026-01-01',
   publisher: { '@id': 'https://frubeauty.com/#business' },
 };
 
@@ -209,7 +208,7 @@ const serviceSchemas = [
     '@type': 'Service',
     name: 'Szempilla Lifting + Festés Zugló',
     description:
-      'Koreai technikával végzett szempilla lifting és festés a XIV. kerületben. 6–8 hétig tartós, ragasztómentes, bőrbarát eljárás.',
+      'Koreai technikával végzett szempilla lifting és festés a XIV. kerületben. Az eredmény jellemzően 6–8 hétig tart.',
     provider: {
       '@type': 'BeautySalon',
       '@id': 'https://frubeauty.com/#business',
@@ -249,7 +248,7 @@ const serviceSchemas = [
             függőség). A hero LCP-képét a Layout preloadImage propja előtölti. */}
         <div class="hero-reveal lg:col-span-7">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Szempilla lifting · 1143 Budapest · XIV. kerület</p>
-          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Szempilla lifting <em class="display">Zuglóban</em> — 6–8 hétig ívelt pillák, tus nélkül.</h1>
+          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Szempilla lifting <em class="display">Zuglóban</em>.</h1>
           {/* Above-the-fold trust-sor: a ★5,0 a hero ELSŐ képernyőjén (mobilon is),
               nem csak a lenti stats-sávban — azonnali bizonyíték a pogo-stick ellen. */}
           <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] tracking-caps">
@@ -279,8 +278,8 @@ const serviceSchemas = [
   <section class="border-y border-whisper bg-inkSoft">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
       <Reveal client:visible as="div" className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">50+ Google értékelés →</a></span></div>
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">120+</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">elégedett vendég</span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">Google</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">Értékelések megnyitása →</a></span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">12 000 Ft</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">festéssel együtt</span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">6–8 hét</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">tartós eredmény</span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Koreai</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">lash lift technika</span></div>
       </Reveal>
@@ -307,7 +306,7 @@ const serviceSchemas = [
       <Reveal client:visible as="div" className="mb-16 sm:mb-20 max-w-2xl">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Kezelések</p>
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Két <em class="display">alapkezelés</em>, három csomag.</h2>
-        <p class="mt-5 text-creamSoft leading-[1.7]">A vendégeim 78%-a a Teljes Tekintet csomagot választja — egyszerre spórolsz időt és pénzt is. Az árak a teljes szolgáltatást tartalmazzák.</p>
+        <p class="mt-5 text-creamSoft leading-[1.7]">A Teljes Tekintet csomag a szempilla liftinget és a szemöldök laminálást egy időpontban, kedvezőbb együttes áron tartalmazza.</p>
       </Reveal>
       <div>
         {services.map((svc, i) => (
@@ -359,7 +358,7 @@ const serviceSchemas = [
       <Reveal client:visible as="div" className="mb-14 sm:mb-20 max-w-2xl">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Csomagajánlatok</p>
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Válaszd azt, ami <em class="display">Neked</em> szól.</h2>
-        <p class="mt-5 text-creamSoft leading-[1.7]">A vendégeim 78%-a a Teljes Tekintet csomagot választja — egyszerre spórolsz időt és pénzt.</p>
+        <p class="mt-5 text-creamSoft leading-[1.7]">Az önálló kezelések mellett kombinált csomag is foglalható, ha a pillákat és a szemöldököt ugyanazon az alkalmon szeretnéd elkészíttetni.</p>
       </Reveal>
       <div class="grid md:grid-cols-3 gap-5 lg:gap-7 items-stretch">
         {packages.map((p, i) => (
@@ -395,7 +394,7 @@ const serviceSchemas = [
         <Reveal client:visible as="div" className="lg:col-span-5">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Mit kapsz az árért</p>
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Nem csak a <em class="display">festéket</em>.</h2>
-          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">Négy dologért fizetsz — a koreai technikáért, a bőrbarát anyagokért, a személyre szabott formáért, és a teljes figyelmemért.</p>
+          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">Négy dologért fizetsz — a koreai technikáért, a felhasznált professzionális termékekért, a személyre szabott formáért és a teljes figyelmemért.</p>
         </Reveal>
         <div class="lg:col-span-7 grid sm:grid-cols-2 gap-5">
           {includedPoints.map((b, i) => (
@@ -482,7 +481,7 @@ const serviceSchemas = [
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Gyakori kérdések</p>
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Amit a kezelésekről <em class="display">kérdezni szoktak</em>.</h2>
       </Reveal>
-      <FAQ client:visible items={faqs} />
+      <FAQList items={faqs} />
     </div>
   </section>
 

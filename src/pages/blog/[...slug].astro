@@ -50,25 +50,14 @@ const next = currentIdx < sorted.length - 1 ? sorted[currentIdx + 1] : null;
 
 const articleSchema = {
   '@context': 'https://schema.org',
-  '@type': 'Article',
+  '@type': 'BlogPosting',
   headline: post.data.title,
   description: post.data.excerpt,
   image: `https://frubeauty.com${post.data.cover}`,
   datePublished: post.data.publishedAt.toISOString(),
   ...(post.data.updatedAt && { dateModified: post.data.updatedAt.toISOString() }),
-  author: {
-    '@type': 'Person',
-    name: 'Pecze-Kovács Fruzsina',
-    url: 'https://frubeauty.com/rolam/',
-  },
-  publisher: {
-    '@type': 'Organization',
-    name: 'FRUBEAUTY',
-    logo: {
-      '@type': 'ImageObject',
-      url: 'https://frubeauty.com/favicon.svg',
-    },
-  },
+  author: { '@id': 'https://frubeauty.com/#fruzsina' },
+  publisher: { '@id': 'https://frubeauty.com/#business' },
   mainEntityOfPage: {
     '@type': 'WebPage',
     '@id': `https://frubeauty.com/blog/${post.data.slug ?? post.id}/`,
@@ -137,6 +126,7 @@ const faqSchema =
   title={post.data.metaTitle ?? `${post.data.title} | FRUBEAUTY Blog`}
   description={post.data.metaDescription ?? post.data.excerpt}
   image={post.data.cover}
+  imageAlt={post.data.coverAlt}
   canonical={`https://frubeauty.com/blog/${post.data.slug ?? post.id}/`}
   ogType="article"
   publishedTime={post.data.publishedAt.toISOString()}
@@ -198,9 +188,9 @@ const faqSchema =
 
     {/* ============ BODY ============ */}
     <div class="max-w-[900px] mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-24">
-      <Reveal client:visible as="div" className="prose-frubeauty">
+      <div class="prose-frubeauty">
         <Content />
-      </Reveal>
+      </div>
     </div>
   </article>
 

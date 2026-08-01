@@ -37,7 +37,9 @@ export function Reveal({
   return (
     <MotionTag
       ref={ref}
-      initial="hidden"
+      // A szerver mindig látható állapotot küld. Így a tartalom JavaScript,
+      // hidratálás vagy IntersectionObserver nélkül sem marad opacity:0-n.
+      initial="visible"
       animate={inView ? 'visible' : 'hidden'}
       variants={
         reduced

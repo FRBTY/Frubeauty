@@ -13,7 +13,7 @@ import { MagneticCTA } from '../components/MagneticCTA';
 import { ProcessSteps } from '../components/ProcessSteps';
 import { TestimonialsGrid } from '../components/TestimonialsGrid';
 import { GalleryGrid } from '../components/GalleryGrid';
-import { FAQ } from '../components/FAQ';
+import FAQList from '../components/FAQList.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
@@ -29,7 +29,7 @@ const services = [
     titleSuffix: '+ Formázás',
     description:
       'A szemöldök laminálás a rakoncátlan szálakat rendezi, fixálja és dúsabbnak mutatja — festéssel és formázással együtt, tetoválás és tű nélkül.',
-    warning: 'Várandósság idején nem ajánlott igénybe venni a szolgáltatást.',
+    warning: 'Várandósság, szoptatás, ismert allergia vagy bőrpanasz esetén foglalás előtt kérj egyéni egyeztetést.',
     bullets: [
       'Fixált, rendezett forma — napokig magától áll',
       'Optikai dúsítás — ritkás szemöldök is tömöttnek látszik',
@@ -53,7 +53,7 @@ const services = [
     titleSuffix: '+ Festés',
     description:
       'A szempilla lifting tökéletesen kiegészíti a szemöldök laminálást. A Teljes Tekintet csomagban együtt foglalható — 6–8 hétig tartós, koreai technikával, ragasztómentes.',
-    warning: 'Várandósság idején nem ajánlott igénybe venni a szolgáltatást.',
+    warning: 'Várandósság, szoptatás, ismert allergia vagy szemkörnyéki panasz esetén foglalás előtt kérj egyéni egyeztetést.',
     bullets: [
       'Reggel tus és fésülés nélkül is tökéletes tekintet',
       '6–8 hétig tartós, vízálló eredmény',
@@ -109,7 +109,7 @@ const packages = [
       'Csupán 2 óra alatt',
     ],
     highlight: true,
-    ribbon: 'Legtöbben ezt választják',
+    ribbon: 'Kombinált csomag',
   },
   {
     tier: 'Prémium',
@@ -178,8 +178,8 @@ const includedPoints = [
   },
   {
     eyebrow: '02',
-    title: 'Bőrbarát anyagok',
-    body: 'Csak dermatológiailag tesztelt, kíméletes hatóanyagokkal dolgozom. Érzékeny bőrre is alkalmas — nincs irritáció, nincs mellékhatás.',
+    title: 'Előzetes egyeztetés',
+    body: 'A kezelés előtt átbeszéljük az ismert allergiákat, érzékenységet és az aktuális bőrpanaszokat; szükség esetén a kezelést elhalasztjuk.',
   },
   {
     eyebrow: '03',
@@ -227,7 +227,7 @@ const faqs = [
   { q: 'Fáj a szemöldök laminálás?', a: 'Egyáltalán nem. A laminálás teljesen fájdalommentes — a szőrszálakat kíméletes anyagokkal kezeljük, a bőrt nem érintjük tűvel. A legtöbb vendég 60 percen át pihentető kezelésként éli meg.' },
   { q: 'Meddig tart a szemöldök laminálás eredménye?', a: 'A laminálás és a festés együtt kb. 6 hétig tart, attól függően, milyen gyorsan nő vissza a szemöldöked. Az otthoni ápolással (első 24 óra vízmentes, kerüld az olajt a szemöldök területén) az eredmény a teljes időszakot kitölti.' },
   { q: 'Mennyi idő után látszik a végső forma?', a: 'A formát rögtön a kezelés után látod, de a teljes „letisztult” eredményhez 24 óra kell — ekkor veszik fel a szőrszálak a végleges állást. Az első 24 órában érdemes elkerülni a vizes-gőzös környezetet.' },
-  { q: 'Mit hozzak magammal a kezelésre?', a: 'Semmit. Smink nélkül érkezz (a szemöldök területére nézve), ennyi elég. A többi szakmai eszközt és anyagot én biztosítom — bőrbarát, koreai technika, dermatológiailag tesztelt termékek.' },
+  { q: 'Mit hozzak magammal a kezelésre?', a: 'Semmit. Smink nélkül érkezz (a szemöldök területére nézve), ennyi elég. A kezeléshez szükséges szakmai eszközöket és professzionális termékeket én biztosítom.' },
   { q: 'Mit tehetek otthon, hogy minél tovább tartson?', a: 'A kezelés utáni 24 órában kerüld a vizet, gőzt, szaunát. A szemöldök területét ne dörzsöld, ne használj zsíros arckrémet vagy sminklemosót ott. A részletes utógondozási útmutatót a kezelés végén szóban is átbeszéljük.' },
   { q: 'Le lehet mondani vagy módosítani az időpontot?', a: 'Igen, 24 órával az időpont előtt bármikor díjmentesen.' },
 ];
@@ -269,7 +269,7 @@ const serviceSchema = {
   '@type': 'Service',
   name: 'Szemöldök Laminálás + Formázás Zugló',
   description:
-    'Koreai technikával végzett szemöldök laminálás, festés és formázás a XIV. kerületben. ~6 hétig tartós, bőrbarát, természetes hatás tű nélkül.',
+    'Koreai technikával végzett szemöldök laminálás, festés és formázás a XIV. kerületben. Körülbelül 6 hétig tartós, természetes hatás tű nélkül.',
   url: 'https://frubeauty.com/szemoldok-laminalas-zuglo/',
   provider: { '@type': 'BeautySalon', '@id': 'https://frubeauty.com/#business' },
   areaServed: [
@@ -291,7 +291,7 @@ const howToSchema = {
   '@type': 'HowTo',
   name: 'Szemöldök laminálás menete — FRUBEAUTY Zugló',
   description:
-    'A szemöldök laminálás 4 lépésben, koreai technikával, bőrbarát anyagokkal a zuglói szalonban.',
+    'A szemöldök laminálás 4 lépésben, koreai technikával a zuglói szalonban.',
   totalTime: 'PT60M',
   step: processSteps.map((s) => ({
     '@type': 'HowToStep',
@@ -307,12 +307,11 @@ const videoSchemas = [
     '@type': 'VideoObject',
     name: 'Szemöldök laminálás munka közben — FRUBEAUTY Zugló, Egressy út',
     description:
-      'Szemöldök laminálás koreai technikával, bőrbarát anyagokkal a zuglói szalonban. Pecze-Kovács Fruzsina kozmetikus, Zugló XIV. kerület.',
+      'Szemöldök laminálás koreai technikával a zuglói szalonban. Pecze-Kovács Fruzsina kozmetikus, Zugló XIV. kerület.',
     thumbnailUrl:
       'https://frubeauty.com/media/szemoldok-laminalas-munkakozben-budapest-egressy-ut-poster.webp',
     contentUrl:
       'https://frubeauty.com/media/szemoldok-laminalas-munkakozben-budapest-egressy-ut.mp4',
-    uploadDate: '2026-01-01',
     publisher: { '@id': 'https://frubeauty.com/#business' },
   },
   {
@@ -323,7 +322,6 @@ const videoSchemas = [
       'Szemöldök laminálás természetes dúsítással a zuglói szalonban. Tű nélkül, koreai technikával, ~6 hétig tartós eredmény.',
     thumbnailUrl: 'https://frubeauty.com/media/szemoldok-laminalas-poster.webp',
     contentUrl: 'https://frubeauty.com/media/szemoldok-laminalas.mp4',
-    uploadDate: '2026-01-01',
     publisher: { '@id': 'https://frubeauty.com/#business' },
   },
 ];
@@ -399,9 +397,9 @@ const breadcrumbSchema = {
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
       <Reveal client:visible as="div" className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
         <div class="flex flex-col items-center md:items-start">
-          <span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span>
+          <span class="text-2xl font-display font-medium tracking-tight text-gold">Google</span>
           <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">
-            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">50+ Google értékelés →</a>
+            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">Értékelések megnyitása →</a>
           </span>
         </div>
         <div class="flex flex-col items-center md:items-start">
@@ -443,7 +441,7 @@ const breadcrumbSchema = {
       <Reveal client:visible as="div" className="mb-16 sm:mb-20 max-w-2xl">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Kezelések</p>
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Az <em class="display">alapkezelés</em> és a combo.</h2>
-        <p class="mt-5 text-creamSoft leading-[1.7]">A vendégeim 78%-a a Teljes Tekintet csomagot választja — egyszerre spórolsz időt és pénzt is. Az árak a teljes szolgáltatást tartalmazzák.</p>
+        <p class="mt-5 text-creamSoft leading-[1.7]">A Teljes Tekintet csomag a szemöldök laminálást és a szempilla liftinget egy időpontban, kedvezőbb együttes áron tartalmazza.</p>
       </Reveal>
       <div>
         {services.map((svc, i) => (
@@ -496,7 +494,7 @@ const breadcrumbSchema = {
       <Reveal client:visible as="div" className="mb-14 sm:mb-20 max-w-2xl">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Csomagajánlatok</p>
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Válaszd azt, ami <em class="display">Neked</em> szól.</h2>
-        <p class="mt-5 text-creamSoft leading-[1.7]">A vendégeim 78%-a a Teljes Tekintet csomagot választja — egyszerre spórolsz időt és pénzt.</p>
+        <p class="mt-5 text-creamSoft leading-[1.7]">Az önálló kezelés mellett kombinált csomag is foglalható, ha a szemöldököt és a pillákat ugyanazon az alkalmon szeretnéd elkészíttetni.</p>
       </Reveal>
       <div class="grid md:grid-cols-3 gap-5 lg:gap-7 items-stretch">
         {packages.map((p, i) => (
@@ -561,7 +559,7 @@ const breadcrumbSchema = {
         <Reveal client:visible as="div" className="lg:col-span-5">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Mit kapsz az árért</p>
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Nem csak a <em class="display">laminálást</em>.</h2>
-          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">Négy dologért fizetsz — a koreai technikáért, a bőrbarát anyagokért, a személyre szabott formáért, és a teljes figyelmemért.</p>
+          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">Négy dologért fizetsz — a koreai technikáért, a felhasznált professzionális termékekért, a személyre szabott formáért és a teljes figyelmemért.</p>
         </Reveal>
         <div class="lg:col-span-7 grid sm:grid-cols-2 gap-5">
           {includedPoints.map((b, i) => (
@@ -661,7 +659,7 @@ const breadcrumbSchema = {
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Gyakori kérdések</p>
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Amit a szemöldök laminálásról <em class="display">kérdezni szoktak</em>.</h2>
       </Reveal>
-      <FAQ client:visible items={faqs} />
+      <FAQList items={faqs} />
     </div>
   </section>
 
@@ -759,7 +757,7 @@ const breadcrumbSchema = {
         <div class="lg:col-span-6">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Egészben gondolkodj</p>
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">A szemöldök mellé <em class="display">tökéletes pillák</em>.</h2>
-          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">A szemöldök laminálás önmagában is rengeteget dob az arcon — de ha szempilla liftinggel kombináljuk, a végeredmény egészen más szint. A vendégeim 78%-a ezt a kettőt együtt foglalja, egy alkalomban.</p>
+          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">A szemöldök laminálás mellé ugyanazon az alkalmon szempilla lifting is foglalható, kedvezőbb kombinált áron.</p>
           <a href="/szempilla-lifting-zuglo/" class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Szempilla lifting Zuglóban<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
         </div>
       </Reveal>
@@ -774,7 +772,7 @@ const breadcrumbSchema = {
   <SiteContact
     eyebrow="Foglalás"
     heading={'Nézz tükörbe — <em class="display">rendezett</em> szemöldökkel.'}
-    intro="Online foglalási rendszer 0–24 órában. Az első alkalmat érdemes a Teljes Tekintet csomaggal kezdeni — a vendégeim 78%-a ezt választja."
+    intro="Online foglalási rendszer 0–24 órában. A szemöldök laminálás önállóan vagy szempilla liftinggel kombinált csomagban is foglalható."
   />
 
   <SiteFooter />

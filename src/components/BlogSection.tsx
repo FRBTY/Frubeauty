@@ -8,6 +8,7 @@ export interface BlogPost {
   readingMinutes: number;
   publishedAt: string;
   cover: string;
+  coverAlt: string;
 }
 
 interface BlogSectionProps {
@@ -23,6 +24,7 @@ const defaultPosts: BlogPost[] = [
     readingMinutes: 5,
     publishedAt: '2026-04-12',
     cover: '/img/szempilla-lifting-vagy-festes-blog-cover.webp',
+    coverAlt: 'Szempilla lifting eredménye festés után a FRUBEAUTY szalonban',
   },
   {
     slug: 'janssen-arckezeles-bortipusok',
@@ -32,6 +34,7 @@ const defaultPosts: BlogPost[] = [
     readingMinutes: 8,
     publishedAt: '2026-03-28',
     cover: '/img/janssen-arckezeles-bortipusok-blog-cover.webp',
+    coverAlt: 'Janssen Cosmetics arckezelés a FRUBEAUTY zuglói szalonjában',
   },
   {
     slug: 'eskuvoi-smink-felkesziules',
@@ -41,6 +44,7 @@ const defaultPosts: BlogPost[] = [
     readingMinutes: 7,
     publishedAt: '2026-02-15',
     cover: '/img/eskuvoi-smink-felkesziules-blog-cover.webp',
+    coverAlt: 'Menyasszonyi próbasmink készítése Budapesten',
   },
 ];
 
@@ -57,7 +61,7 @@ export function BlogSection({ posts = defaultPosts }: BlogSectionProps) {
               <div className="aspect-[4/5] overflow-hidden bg-inkRise">
                 <img
                   src={p.cover}
-                  alt={p.title}
+                  alt={p.coverAlt}
                   width={800}
                   height={1000}
                   loading="lazy"

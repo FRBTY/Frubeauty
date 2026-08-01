@@ -8,7 +8,7 @@ import { MagneticCTA } from '../components/MagneticCTA';
 import { ProcessSteps } from '../components/ProcessSteps';
 import { TestimonialsGrid } from '../components/TestimonialsGrid';
 import { GalleryGrid } from '../components/GalleryGrid';
-import { FAQ } from '../components/FAQ';
+import FAQList from '../components/FAQList.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
@@ -32,8 +32,8 @@ const priceCategories = [
 ];
 
 const packages = [
-  { tier: 'Alap', title: 'Alkalmi', titleAccent: 'Smink', subtitle: 'Egy alkalom, egy esemény', priceOld: null as string | null, price: '15 000 Ft', priceMeta: 'egyedi smink · ~60–75 perc', dailyEquivalent: '≈ 12+ óra tartós eredmény', savings: null as string | null, duration: '~ 60–75 perc', features: ['Bőrelőkészítés és hidratálás','Teljes alkalmi smink — szem, ajak, kontúr','Hosszan tartó fixálás','Bőrbarát, professzionális termékek'], highlight: false, ribbon: null as string | null, footnote: null as string | null },
-  { tier: 'Ajánlott', title: 'Menyasszonyi', titleAccent: 'Csomag', subtitle: 'Próbasmink + Menyasszonyi smink együtt', priceOld: '40 000 Ft', price: '35 000 Ft', priceMeta: 'próba + esküvő · 2 alkalom', dailyEquivalent: '≈ 12+ óra fixálás · 0 retus', savings: '5 000 Ft megtakarítás', duration: '~ 90–120 + 90 perc', features: ['Menyasszonyi próbasmink, dokumentálva','A nagy napi smink — a próba alapján','Bőrelőkészítés Janssen ápolókkal','Touch-up tippek és termékajánlás'], highlight: true, ribbon: 'Legtöbben ezt választják', footnote: '*Kiszállási díj külön kerül felszámolásra és a helyszínen fizetendő.' },
+  { tier: 'Alap', title: 'Alkalmi', titleAccent: 'Smink', subtitle: 'Egy alkalom, egy esemény', priceOld: null as string | null, price: '15 000 Ft', priceMeta: 'egyedi smink · ~60–75 perc', dailyEquivalent: 'bőrelőkészítéssel és fixálással', savings: null as string | null, duration: '~ 60–75 perc', features: ['Bőrelőkészítés és hidratálás','Teljes alkalmi smink — szem, ajak, kontúr','Hosszan tartó fixálás','Professzionális termékek'], highlight: false, ribbon: null as string | null, footnote: null as string | null },
+  { tier: 'Ajánlott', title: 'Menyasszonyi', titleAccent: 'Csomag', subtitle: 'Próbasmink + Menyasszonyi smink együtt', priceOld: '40 000 Ft', price: '35 000 Ft', priceMeta: 'próba + esküvő · 2 alkalom', dailyEquivalent: 'két előre egyeztetett alkalom', savings: '5 000 Ft megtakarítás', duration: '~ 90–120 + 90 perc', features: ['Menyasszonyi próbasmink, dokumentálva','A nagy napi smink — a próba alapján','Bőrelőkészítés Janssen ápolókkal','Touch-up tippek és termékajánlás'], highlight: true, ribbon: 'Próba + nagy nap', footnote: '*Kiszállási díj külön kerül felszámolásra és a helyszínen fizetendő.' },
   { tier: 'Prémium', title: 'Teljes', titleAccent: 'Esküvő', subtitle: 'Menyasszony + örömanya egy napon', priceOld: '55 000 Ft', price: '48 000 Ft', priceMeta: 'menyasszony + örömanya · 1 reggel', dailyEquivalent: '≈ napi 1 600 Ft — egy esküvőre', savings: '7 000 Ft megtakarítás', duration: '~ 90 + 60–75 perc', features: ['Minden, ami a Menyasszonyi Csomagban','Örömanya smink — diszkrét, korhoz illő','Külön egyeztetés a sorrendről','Prioritásos szezonális időpont'], highlight: false, ribbon: null, footnote: '*Kiszállási díj külön kerül felszámolásra és a helyszínen fizetendő.' },
 ];
 
@@ -176,7 +176,7 @@ const config = { ...siteConfig };
 ---
 
 <Layout
-  title="Esküvői smink árak Budapest 2026 – 25.000 Ft | FRUBEAUTY"
+  title="Sminkes Budapest – esküvői és alkalmi smink | FRUBEAUTY"
   description="Esküvői smink árak Budapesten 2026: menyasszonyi smink 25.000 Ft, próbasminkkel csomagban 35.000 Ft, alkalmi smink 15.000 Ft — rejtett díj nélkül."
   additionalSchemas={[sminkFaqSchema, sminkServiceSchema, sminkBreadcrumbSchema]}
   preloadImage="/media/smink-oldal-video-frubeauty-budapest-zuglo-poster.avif"
@@ -191,7 +191,7 @@ const config = { ...siteConfig };
             látszik; a videó client:visible-re hidratál. LCP-poszter: Layout preloadImage. */}
         <div class="hero-reveal lg:col-span-7">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Smink · 1143 Budapest · XIV. kerület</p>
-          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Esküvői smink <em class="display">árak</em> Budapesten — tételesen, rejtett díj nélkül.</h1>
+          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Esküvői és alkalmi <em class="display">smink</em> Budapesten.</h1>
           <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">Az esküvői smink árak nálam tételesen: menyasszonyi smink <strong class="font-medium text-cream">25.000 Ft</strong>, próbasminkkel csomagban 35.000 Ft, alkalmi smink 15.000 Ft — mindegyik árban benne van a bőrelőkészítés és a hosszan tartó fixálás. Budapesten, a XIV. kerületi Egressy úton dolgozom, esküvői helyszínre kiszállással is.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
             <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
@@ -209,9 +209,9 @@ const config = { ...siteConfig };
   <section class="border-y border-whisper bg-inkSoft">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
       <Reveal client:visible as="div" className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">50+ Google értékelés →</a></span></div>
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">100+ esküvő</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">megélt nagy nap</span></div>
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">12+ óra</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">átlagos viselési idő</span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">Google</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">Értékelések megnyitása →</a></span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">25 000 Ft</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">menyasszonyi smink</span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">35 000 Ft</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">próbasminkkel</span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Kiszállás</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">Budapest és környéke</span></div>
       </Reveal>
     </div>
@@ -226,8 +226,8 @@ const config = { ...siteConfig };
         </Reveal>
         <Reveal client:visible as="div" className="lg:col-span-7 space-y-5 text-creamSoft leading-[1.7] text-[16px] sm:text-[17px]" delay={0.1}>
           <p>Az esküvői és alkalmi smink nálam nem maszk. A cél az, hogy a fotókon is a legfrissebb, <span class="text-cream">önazonos önmagad</span> lásd viszont – nem egy idegent.</p>
-          <p>Ezért <span class="text-gold font-medium">nem hiszek</span> a túltolt, nehéz sminkekben. Olyan technikával dolgozom, ami észrevétlenül emeli ki az adottságaidat, miközben garantáltan kibírja a könnyeket, az öleléseket és az áttáncolt éjszakát is.</p>
-          <p>A nagy nap előtt minden esetben próbasminket javaslok: itt teszteljük le a bőröd reakcióit és a tartósságot, hogy a helyszínen már nulla kompromisszum és teljes biztonság legyen.</p>
+          <p>Ezért <span class="text-gold font-medium">nem hiszek</span> a túltolt, nehéz sminkekben. Olyan technikával dolgozom, amely kiemeli az adottságaidat; a fixálást az eseményhez és a bőrtípusodhoz igazítom.</p>
+          <p>A nagy nap előtt próbasminket javaslok: itt egyeztetjük a színeket, az intenzitást és az összhatást, majd fotóval dokumentáljuk a közösen elfogadott tervet.</p>
           <p>Ha természetes, mégis megbízható sminket szeretnél, várlak szeretettel.</p>
         </Reveal>
       </div>
@@ -289,7 +289,7 @@ const config = { ...siteConfig };
       <Reveal client:visible as="div" className="mb-14 sm:mb-20 max-w-2xl">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Csomagajánlatok</p>
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Válaszd azt, ami <em class="display">Neked</em> szól.</h2>
-        <p class="mt-5 text-creamSoft leading-[1.7]">A menyasszonyaim 70%-a a Menyasszonyi Csomagot választja — próba + nagy nap együtt, garantált tartóssággal és nulla helyszíni meglepetéssel.</p>
+        <p class="mt-5 text-creamSoft leading-[1.7]">A Menyasszonyi Csomag a próbasminket és a nagy napi sminket együtt tartalmazza, így a színeket és a kívánt összhatást előre egyeztetjük.</p>
       </Reveal>
       <div class="grid md:grid-cols-3 gap-5 lg:gap-7 items-stretch">
         {packages.map((p, i) => (
@@ -402,7 +402,7 @@ const config = { ...siteConfig };
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Gyakori kérdések</p>
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Amit a sminkről <em class="display">kérdezni szoktak</em>.</h2>
       </Reveal>
-      <FAQ client:visible items={faqs} />
+      <FAQList items={faqs} />
     </div>
   </section>
 
@@ -424,4 +424,3 @@ const config = { ...siteConfig };
     </button>
   </div>
 </Layout>
-  

@@ -10,7 +10,7 @@ import { AudienceList } from '../components/AudienceList';
 import { ProcessSteps } from '../components/ProcessSteps';
 import { TestimonialsGrid } from '../components/TestimonialsGrid';
 import { GalleryGrid } from '../components/GalleryGrid';
-import { FAQ } from '../components/FAQ';
+import FAQList from '../components/FAQList.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { BlogSection } from '../components/BlogSection';
 import { getCollection } from 'astro:content';
@@ -32,6 +32,7 @@ const homepagePosts = allBlogPosts
     readingMinutes: p.data.readingMinutes,
     publishedAt: p.data.publishedAt.toISOString().slice(0, 10),
     cover: p.data.cover,
+    coverAlt: p.data.coverAlt,
   }));
 
 // Single source of truth — minden contact/booking adatot a siteConfig kezel.
@@ -44,7 +45,7 @@ const config = { ...siteConfig };
 // és a „szemöldök laminálás" (112 megjelenés/hó, GSC) a kezdőlapra rangsorolt helyette.
 // Szétbontva: minden fő szolgáltatás saját, kulcsszó-anchoros belső linket kap.
 const services = [
-  { title: 'Arckezelés', subtitle: 'Janssen Cosmetics hatóanyagokkal', body: 'Bőrtípusra szabott kezelés: regeneráló, hidratáló vagy mélytisztító. Az első alkalommal bőranalízissel kezdünk.', priceFrom: '11 000 Ft-tól', duration: '60–90 perc', href: '/arckezeles-zuglo/', image: '/img/service-arckezeles.webp', alt: 'Arckezelés Janssen Cosmetics termékekkel a FRUBEAUTY szalonban' },
+  { title: 'Arckezelés', subtitle: 'Janssen Cosmetics hatóanyagokkal', body: 'Bőrtípusra szabott kezelés: regeneráló, hidratáló vagy mélytisztító. Az első alkalommal bőranalízissel kezdünk.', priceFrom: '16 900 Ft-tól', duration: '60–120 perc', href: '/arckezeles-zuglo/', image: '/img/service-arckezeles.webp', alt: 'Arckezelés Janssen Cosmetics termékekkel a FRUBEAUTY szalonban' },
   { title: 'Szempilla lifting', subtitle: 'Lifting + festés', body: 'Természetes íveltség, 6–8 hétig tartó eredmény. Reggel nincs többé szempillaspirál — felkelsz és kész vagy.', priceFrom: '12 000 Ft-tól', duration: '~ 90 perc', href: '/szempilla-lifting-zuglo/', image: '/img/szempilla-szemoldok-hero.webp', alt: 'Szempilla lifting előtte-utána a FRUBEAUTY szalonban' },
   { title: 'Szemöldök laminálás', subtitle: 'Formázás + festés', body: 'Dúsabb, rendezett szemöldök tű nélkül, koreai technikával — ~6 hétig tartós, ápolt tekintet.', priceFrom: '11 000 Ft-tól', duration: '~ 60 perc', href: '/szemoldok-laminalas-zuglo/', image: '/img/szemoldok-laminalas-zuglo-munka-uj.webp', alt: 'Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló' },
   { title: 'Smink', subtitle: 'Esküvő, ballagás, fotózás', body: 'Próbasmink, helyszíni igazítás, hosszan tartó eredmény. A stílust együtt találjuk ki.', priceFrom: '13 000 Ft-tól', duration: '60–90 perc', href: '/sminkes-zuglo/', image: '/img/smink-menyasszony-munka.webp', alt: 'Alkalmi esküvői smink a FRUBEAUTY szalonban' },
@@ -174,7 +175,7 @@ const homepageFaqSchema = {
           class="font-display font-light text-cream leading-[1.12] tracking-tightest-"
           style="font-size: clamp(2rem, 5.5vw, 4.5rem);"
         >
-          Kozmetikus <em class="display">Zuglóban</em> — tökéletes bőrrel és kész tekintettel ébredj.
+          Kozmetikus <em class="display">Zuglóban</em>.
         </h1>
         <p class="mt-6 sm:mt-8 text-base sm:text-lg text-creamSoft max-w-[58ch] mx-auto leading-[1.65] sm:leading-[1.7]">
           Kozmetikus és sminkes Zuglóban, a XIV. kerületi Egressy úton — személyre szabott arckezelés, tartós szempilla- és szemöldökkezelés, alkalmi smink. Egyszerre egy vendéggel, teljes figyelemmel.
@@ -233,25 +234,25 @@ const homepageFaqSchema = {
   {/* ============ TRUST BAR (zero-JS, #audit #7) ============
        A trust signal az első impressziónál a legfontosabb — ezért NEM React-szigetbe
        csomagolva, hanem CSS-only fade-in-nel. Lassú 3G / JS-nélküli pathon is
-       azonnal látható az 5,0 értékelés és a Janssen brand. */}
+       azonnal látható, ellenőrizhető üzleti tényeket mutat. */}
   <section class="border-y border-whisper bg-inkSoft">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
       <div class="zero-js-fade grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
         <div class="flex flex-col items-center md:items-start">
-          <span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span>
+          <span class="text-2xl font-display font-medium tracking-tight text-gold">Google</span>
           <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">
             <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">
-              50+ Google értékelés →
+              Értékelések megnyitása →
             </a>
           </span>
         </div>
         <div class="flex flex-col items-center md:items-start">
           <span class="text-2xl font-display font-medium tracking-tight text-cream">Janssen</span>
-          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">Cosmetics partner</span>
+          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">Cosmetics termékek</span>
         </div>
         <div class="flex flex-col items-center md:items-start">
-          <span class="text-2xl font-display font-medium tracking-tight text-cream">5+ év</span>
-          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">szakmai tapasztalat</span>
+          <span class="text-2xl font-display font-medium tracking-tight text-cream">1 vendég</span>
+          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">egy időpontban</span>
         </div>
         <div class="flex flex-col items-center md:items-start">
           <span class="text-2xl font-display font-medium tracking-tight text-cream">Egressy út 16.</span>
@@ -417,7 +418,7 @@ const homepageFaqSchema = {
           Amit a legtöbben <em class="display">kérdeznek</em>.
         </h2>
       </Reveal>
-      <FAQ client:visible items={faqs} />
+      <FAQList items={faqs} />
     </div>
   </section>
 

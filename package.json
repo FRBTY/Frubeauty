@@ -5,6 +5,9 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "typecheck": "tsc --noEmit",
+    "seo:smoke": "node scripts/seo-smoke.mjs",
+    "validate": "npm run typecheck && npm run build && npm run seo:smoke",
     "preview": "astro preview",
     "deploy": "npm run build && netlify deploy --prod"
   },
