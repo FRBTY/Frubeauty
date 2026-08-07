@@ -1,5 +1,11 @@
 ---
-import { siteConfig, openingHoursSchema, analytics } from '../config/site';
+import {
+  siteConfig,
+  openingHoursSchema,
+  analytics,
+  businessIdentity,
+  sameAsProfiles,
+} from '../config/site';
 
 export interface Props {
   title?: string;
@@ -58,11 +64,17 @@ const businessSchema = {
     {
       '@type': 'BeautySalon',
       '@id': 'https://frubeauty.com/#business',
-      name: 'FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus',
+      name: businessIdentity.name,
+      legalName: businessIdentity.legalName,
+      // A katalógus-űrlapok és az AI-összefoglalók ezt a mezőt olvassák először,
+      // ha „mivel foglalkozik a vállalkozás" a kérdés. Ugyanaz a szöveg megy a
+      // citációkba is (site.ts) — a NAP-egyezés a leírásra is vonatkozik.
+      description: businessIdentity.descriptionMedium,
       url: 'https://frubeauty.com',
       image: ['https://frubeauty.com/og-image.jpg'],
       telephone: siteConfig.phone,
       email: siteConfig.email,
+      knowsLanguage: 'hu',
       priceRange: '4000–49500 Ft',
       currenciesAccepted: 'HUF',
       paymentAccepted: 'Készpénz, Bankkártya',
@@ -130,11 +142,11 @@ const businessSchema = {
           },
         ],
       },
-      sameAs: [
-        siteConfig.instagram,
-        siteConfig.facebook,
-        'https://www.notino.hu/szalonok/pecze-kovacs-fruzsina-sminkes,-szemoldok-es-szempilla-stylist',
-      ],
+      // A GBP-találat (mapsUrl) is bekerült: a `hasMap` csak annyit mond, hogy
+      // „itt a térkép", a `sameAs` viszont azt állítja, hogy a Maps-profil és ez
+      // az oldal UGYANAZ az entitás — ez a kapcsolat köti össze a webes és a
+      // lokális jelenlétet a Knowledge Graphban.
+      sameAs: [...sameAsProfiles],
     },
     {
       '@type': 'Person',
@@ -152,7 +164,10 @@ const businessSchema = {
         'Janssen arckezelés',
         'alkalmi smink',
       ],
-      sameAs: [siteConfig.instagram, siteConfig.facebook],
+      // A Notino-oldal címe szó szerint „Pecze-Kovács Fruzsina Kozmetikus,
+      // Sminkes, Szemöldök és szempilla stylist" — vagyis SZEMÉLY-profil, nem
+      // szalonlistázás, ezért a Person node-ra is illik.
+      sameAs: [siteConfig.instagram, siteConfig.facebook, siteConfig.booking],
     },
     {
       '@type': 'WebSite',

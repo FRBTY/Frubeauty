@@ -23,6 +23,50 @@ export const siteConfig = {
 } as const;
 
 /**
+ * Kanonikus üzleti adatlap — EGY forrás a névhez, a kategóriákhoz és a
+ * leírásokhoz. Ebből él a JSON-LD (`Layout.astro`) és a `public/llms.txt`,
+ * és **ugyanezt kell bemásolni minden katalógus-regisztrációba is**: a citáció
+ * csak akkor erősíti az entitást, ha minden felületen karakterre azonos.
+ *
+ * A hiteles forrás a Google Business Profile — a `name` betű szerint azzal
+ * egyezik. Ha a GBP-ben változik a név, ELŐBB itt kell átírni, és csak utána
+ * a katalógusokban.
+ *
+ * Szándékosan NINCS benne értékelés-szám: az hetente változik, és egy elavult
+ * „52 értékelés" a katalógusokban évekig kint ragadna.
+ */
+export const businessIdentity = {
+  /** Kanonikus megjelenített név. Ez megy minden űrlap „cégnév" mezőjébe. */
+  name: 'FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus',
+  /** Vállalkozási forma szerinti név — ahol jogi/számlázási nevet kérnek. */
+  legalName: 'Pecze-Kovács Fruzsina e.v.',
+  primaryCategory: 'Kozmetikus',
+  secondaryCategory: 'Szépségszalon',
+  /** ~90 karakter — rövid katalógus-mezőkhöz, meta-jellegű helyekre. */
+  descriptionShort:
+    'Kozmetikus Zuglóban: Janssen arckezelés, szempilla lifting, szemöldök laminálás, smink.',
+  /** ~250 karakter — a legtöbb katalógus fő leírásmezője és a JSON-LD `description`. */
+  descriptionMedium:
+    'A FRUBEAUTY Pecze-Kovács Fruzsina egyszemélyes kozmetikai szalonja Budapest XIV. kerületében, az Egressy úton. Janssen Cosmetics arckezelések, koreai technikás szempilla lifting és szemöldök laminálás, valamint esküvői és alkalmi smink. Egyszerre egy vendég, teljes figyelemmel.',
+  /** ~600 karakter — részletes profilokhoz, ahol van hely kifejteni. */
+  descriptionLong:
+    'A FRUBEAUTY Pecze-Kovács Fruzsina kozmetikus egyszemélyes szalonja Budapest XIV. kerületében, Zuglóban, az Egressy út 16. szám alatt. Az arckezelések kizárólag Janssen Cosmetics professzionális hatóanyagaival készülnek, minden alkalom bőranalízissel indul — mélytisztító, hidratáló és anti-aging protokollokkal. A szemkezelések koreai technikával: a szempilla lifting festéssel 12.000 Ft és 6–8 hétig tart, a szemöldök laminálás formázással és festéssel 11.000 Ft, tű és tetoválás nélkül. Emellett menyasszonyi próbasmink, esküvői és alkalmi smink, kiszállással. Egyszerre csak egy vendég, így nincs kapkodás.',
+} as const;
+
+/**
+ * `sameAs` — a márka hivatalos, verifikált profiljai. Ez az entitás-gráf gerince:
+ * a Google és az LLM-ek ezekből kötik össze a weboldalt a Maps-találattal és a
+ * közösségi profilokkal. Csak olyan URL kerülhet ide, ami tényleg a miénk és él
+ * — scraper-aggregátorok (pl. beautynailhairsalons.com) NEM.
+ */
+export const sameAsProfiles = [
+  siteConfig.instagram,
+  siteConfig.facebook,
+  siteConfig.mapsUrl,
+  siteConfig.booking,
+] as const;
+
+/**
  * Kimenő link `rel` értéke. A Notino a kereskedelmi foglalási partnerünk, és
  * sitewide (minden oldalon, ~28 helyen) linkelünk rá — ez a minta fizetett/
  * affiliate elhelyezésnek olvasható, miközben befelé NULLA dofollow link érkezik
