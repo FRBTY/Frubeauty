@@ -115,9 +115,26 @@ Ne küldd be az űrlapot. Amikor kész, szólj, és én nézem át.
 
 ## 5. Amit nem én csinálok meg
 
-**Fiókot nem hozok létre és jelszót nem írok be** egyik felületen sem — ez rád marad, felületenként 2 perc. Ugyanígy: a beküldés (`Mentés`, `Elküldöm`) gombot sem nyomom meg helyetted, mert az a te neveddel tett, visszavonhatatlan lépés.
+**Fiókot nem hozok létre és jelszót nem írok be** egyik felületen sem — ez rád marad, felületenként 2 perc. Ugyanígy: a beküldés (`Mentés`, `Elküldöm`) gombot sem nyomom meg helyetted, mert az a te neveddel tett, visszavonhatatlan lépés. **CAPTCHA-t sem oldok meg és nem kerülök meg.**
 
-**Amit viszont át tudok venni:** ha bejelentkeztél és megnyitottad az űrlapot, végigvezetem a kitöltést a böngészőben — a hosszú részt (leírás, nyitvatartás, szolgáltatás-checkboxok, kategóriák) én töltöm ki, te csak a képet rakod fel és beküldöd. Szólj, és nekiállunk.
+### ⚠️ Munkamegosztás — 2026-08-07-i tapasztalat alapján javítva
+
+Az eredeti terv az volt, hogy a regisztrációt a Claude Browser paneljében csinálod, és onnan átveszem az űrlapot. **Ez captcha-s oldalnál nem működik.**
+
+A Cylex regisztrációján a reCAPTCHA felismeri a távvezérelt böngészőt (a panel CDP-vel hajtott), és **nem engedi bepipálni a „Nem vagyok robot"-ot** — a Cylex saját hibaüzenete is azt írja: *„Ha nem látja a CAPTCHA-t, kapcsolja ki a VPN-t, vagy használjon másik böngészőt."* Nem géphiba, nem VPN: a bot-védelem dolgozik rendeltetésszerűen.
+
+**A helyes sorrend ezért minden katalógusnál:**
+
+| Lépés | Hol | Ki |
+|---|---|---|
+| Regisztráció / bejelentkezés (captcha, jelszó) | **saját Chrome** | te |
+| Cégadatlap kitöltése (a hosszú, unalmas rész) | saját Chrome + **Claude in Chrome bővítmény** | a bővítmény, a §4 promptjával |
+| Kép/logó feltöltése | saját Chrome | te (a bővítmény nem tud képet feltölteni) |
+| Beküldés | saját Chrome | te |
+
+A Browser panel így a **felderítésre** marad jó (megnéztem vele, melyik katalógus ad dofollow-t, és milyen mezőket kér az űrlap) — a bejelentkezett munkamenetre nem.
+
+**Egy fontos következmény:** mivel a kitöltést a Chrome-bővítmény végzi és nem én, a `https://frubeauty.com/llms.txt` élesben létezése nem kényelmi kérdés, hanem **előfeltétel**. A bővítmény onnan veszi az adatokat. ✅ Élesben verifikálva 2026-08-07-én.
 
 ---
 
@@ -131,6 +148,56 @@ Ne küldd be az űrlapot. Amikor kész, szólj, és én nézem át.
 | 4 | Guest-post follow-up (08-10, az 5 kiküldött pitchre) | 10 perc | 0–2 szerkesztőségi link |
 | 5 | ittlakunk + Miutcánk + azeskuvo | 30 perc | citáció (Local Pack, entitás) |
 | 6 | 2–3 hét múlva: **ellenőrizd, átfutott-e a Cylex a Firmaniára és a Nyitva.hu-ra**. Ha nem, külön jelentkezés | 10 perc | a 2. lépés beváltása |
+
+## 6/a. Végrehajtási napló
+
+### ✅ Cylex — beküldve 2026-08-07
+
+Amit ténylegesen rögzítettünk (a Claude in Chrome bővítménnyel kitöltve, a user küldte be):
+
+| Mező | Érték |
+|---|---|
+| Cég neve | `FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus` (gondolatjellel, karakterre a kanonikus) |
+| Hivatalos név | `Pecze-Kovács Fruzsina e.v.` |
+| Cím | Egressy út 16 · Budapest · 1143 · Kerület: XIV · **megjelenítve** (nem elrejtve) |
+| Koordináta | `47.505856 / 19.102443` |
+| Telefon | `+36 70 215 9954` |
+| E-mail | `kfruzsi0197@gmail.com`, megjelenítve |
+| Honlap | `https://frubeauty.com/` |
+| Facebook | automatikusan a `sameAs`-ból |
+| Elsődleges kategória | Egészség & szépségápolás » **Szépségszalon, kozmetika** |
+| Leírások | a kanonikus közepes + hosszú, utóbbi a teljes árlistával |
+
+**Két tanulság a folyamatból:**
+
+1. **A honlap-crawl a döntő lépés.** A regisztráció 2. lépésében a Cylex felajánlja, hogy ~60 másodperc alatt lekéri a honlapról a regisztrációhoz szükséges összes adatot — és meg is tette: a webcímet, a Facebook-oldalt és a koordináta-javaslatot is a `frubeauty.com`-ról szedte. **A mai on-site munka (bővített JSON-LD + `llms.txt`) itt térült meg közvetlenül.** Minden további katalógusnál előbb a site-nak kell rendben lennie, csak utána van értelme regisztrálni.
+2. **A Cylex Google-autocomplete-je hibás.** A cégnév-mezőben a „Google-adatok átvétele" opcióra kattintva a mező értéke szó szerint `[object Object]` lett (DOM-ból ellenőrizve), és a legördülő beragadt. Kerüld: a névmezőben az „**Új adatlap létrehozása ezzel a névvel**" opciót válaszd, a Google-importot pedig a **2. lépés külön gombjával** kérd — az hibátlanul működik.
+
+**Nyitott, ellenőrizendő:** a belépéskor a Cylex jelezte, hogy a manuális kérelmek feldolgozása **2–3 hét**. Ezért a Firmania/Nyitva.hu átfutást **~2026-09-18 körül** nézd meg, ne korábban:
+
+- [ ] Megjelent-e a listázás a `cylex.hu`-n?
+- [ ] Átfutott-e a **Firmania.hu**-ra? (ha igen: **dofollow link**)
+- [ ] Átfutott-e a **Nyitva.hu**-ra? (ha igen: **dofollow link**)
+- [ ] Ha 6 hét után sincs átfutás → külön jelentkezés mindkettőre
+
+### ⛔ Aranyoldalak — 2026-08-07: szerveroldali hiba, elhalasztva
+
+A regisztráció beküldéskor hibára fut. Megnéztem: **a `/regisztracio` lap maga ép** (Symfony-űrlap, captcha nélkül, nulla hibaüzenet a lapon), tehát a hiba az ő oldalukon, beküldéskor keletkezik — kliensoldalról nincs mit tenni.
+
+**Nem ejtjük**, mert a dofollow-megállapítás újraellenőrizve áll: a `/kozmetika/budapest/` kategórialapon 15 webcím-link van, ebből **7 valódi saját domainre** mutat (bognardori.hu, budaisoszoba.hu, sbgk.hu…), tehát nem csak a fizetős `uzleti.hu` mikrosite-ok kapnak linket.
+
+**Terv:** 3–4 nap múlva újra. Ha akkor is hibázik, kerülő út az üzemeltető: **MTT Media Kft.** (`mtt.hu/kapcsolat`) — cégadatot ők is fel tudnak vinni.
+
+### ⚠️ Amit MOST nem szabad: Firmania / Nyitva.hu külön regisztráció
+
+Kézenfekvőnek tűnik, hogy ha az Aranyoldalak áll, akkor menjünk rá közvetlenül a Firmaniára és a Nyitva.hu-ra — hiszen ott van a két dofollow. **Ne.** Mindkettő a Cylex adatbázisából él, és a 08-07-i Cylex-beküldés feldolgozása még fut (2–3 hét). Ha most külön is bejelentkezünk, és közben a Cylex is átfut, **duplikált listázás** lesz belőle — az pedig aktívan ront a NAP-konzisztencián, ami az egész citációs program lényege. Előbb a ~09-18-i ellenőrzés, utána döntünk.
+
+### Ehelyett: a két e-mailes Sáv B célpont (se regisztráció, se captcha, se szerver)
+
+Mindkettő **2026-08-07-én újraellenőrizve**:
+
+- **B1 Janssen `/kozmetikus-kereso/`** — a lap továbbra is **teljesen üres** (a tartalom-konténer 0 karakter, a „kozmetikus/szalon/partner" szó elő sem fordul benne). A 07-26-i tárgyalási alap tehát változatlanul érvényes.
+- **B4c Ceremóniamester Szövetség** — a doksi 72 kimenő linket írt; ma **155 külső link van rajta, és továbbra is NULLA nofollow** (mintavétel: `topart-hotel.hu`, `lantaibirtok.hu` → `rel="noopener"`). A „Beauty" kategória létezik és vékony.
 
 **Mérés (GSC → Links, illetve Ahrefs):**
 

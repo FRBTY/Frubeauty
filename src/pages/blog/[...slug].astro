@@ -144,7 +144,9 @@ const faqSchema =
   <article class="pt-[calc(var(--header-h)+4rem)] sm:pt-[calc(var(--header-h)+6rem)]">
     <header class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:load as="div" distance={20}>
-        <div class="flex items-center gap-3 text-[11px] uppercase tracking-caps text-creamMute mb-6">
+        {/* flex-wrap: a „Frissítve" dátummal négy elem kerül a sorba, ami 375 px-en
+            túlcsordult (nowrap mellett 352 > 335 px). Tördeléssel tisztán tör. */}
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] uppercase tracking-caps text-creamMute mb-6">
           <span class="text-gold">{post.data.category}</span>
           <span aria-hidden>·</span>
           <span>{post.data.readingMinutes} perc olvasás</span>
@@ -152,6 +154,24 @@ const faqSchema =
           <time itemprop="datePublished" datetime={post.data.publishedAt.toISOString()}>
             {dateFormatter.format(post.data.publishedAt)}
           </time>
+          {/* SEO: a frissítés dátuma LÁTHATÓAN is kell. A BlogPosting sémában a
+              `dateModified` eddig is benne volt, a Google mégis a publikálás
+              dátumát mutatta a SERP-ben (élő ellenőrzés: „2026. máj. 12." egy
+              07-26-án frissített cikknél) — a látható dátumot részesíti előnyben.
+              Örökzöld, „meddig tart / mennyibe kerül" típusú cikkeknél a frissebb
+              dátum a találatban mérhető CTR-tényező. */}
+          {post.data.updatedAt
+            && post.data.updatedAt.getTime() !== post.data.publishedAt.getTime() && (
+            <>
+              <span aria-hidden>·</span>
+              <span>
+                Frissítve:{' '}
+                <time itemprop="dateModified" datetime={post.data.updatedAt.toISOString()}>
+                  {dateFormatter.format(post.data.updatedAt)}
+                </time>
+              </span>
+            </>
+          )}
         </div>
         <h1
           class="font-display font-light text-cream leading-[1.06] tracking-tightest-"

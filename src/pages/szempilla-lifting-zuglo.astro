@@ -19,6 +19,7 @@ import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
 import { PriceList } from '../components/PriceList';
 import { siteConfig, relFor } from '../config/site';
+import { videoObjectSchema } from '../config/videos';
 
 const services = [
   {
@@ -167,18 +168,9 @@ const howToSchema = {
 };
 
 // ── SEO: VideoObject schema ────────────────────────────────────────────────
-const videoSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'VideoObject',
-  name: 'Szempilla lifting munka közben — FRUBEAUTY Zugló, 14. kerület',
-  description:
-    'Szempilla lifting koreai technikával, ragasztó nélkül a zuglói szalonban. Pecze-Kovács Fruzsina kozmetikus.',
-  thumbnailUrl:
-    'https://frubeauty.com/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet-poster.webp',
-  contentUrl:
-    'https://frubeauty.com/media/szempilla-lifting-video-frubeauty-zuglo-budapest-14kerulet.mp4',
-  publisher: { '@id': 'https://frubeauty.com/#business' },
-};
+// A mezők a központi videó-katalógusból jönnek (src/config/videos.ts), hogy az
+// `uploadDate`/`duration` ne tudjon újra kimaradni — pont ezt hiányolta a GSC.
+const videoSchema = videoObjectSchema('szempilla-lifting');
 
 // SEO: a self-serving Review schema eltávolítva — a saját domainen elhelyezett,
 // magunkról szóló értékelés-jelölés LocalBusiness-nél nem hoz csillagot és
@@ -248,7 +240,7 @@ const serviceSchemas = [
             függőség). A hero LCP-képét a Layout preloadImage propja előtölti. */}
         <div class="hero-reveal lg:col-span-7">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Szempilla lifting · 1143 Budapest · XIV. kerület</p>
-          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Szempilla lifting <em class="display">Zuglóban</em>.</h1>
+          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Szempilla lifting <em class="display">Budapesten</em>, Zuglóban.</h1>
           {/* Above-the-fold trust-sor: a ★5,0 a hero ELSŐ képernyőjén (mobilon is),
               nem csak a lenti stats-sávban — azonnali bizonyíték a pogo-stick ellen. */}
           <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] tracking-caps">

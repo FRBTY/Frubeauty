@@ -27,6 +27,7 @@ export function HeroMedia({
   const [videoReady, setVideoReady] = useState(false);
   const [shouldMountVideo, setShouldMountVideo] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   // AVIF poszter (~50%-kal kisebb, mint a WebP) — minden -poster.webp mellé
   // generálva van .avif. A <picture> AVIF-source-t ad, az <img> WebP-fallbacket
@@ -82,6 +83,18 @@ export function HeroMedia({
     };
   }, [videoSrc]);
 
+  // Az `autoPlay` attribútum helyett explicit play(): az elem már a HTML-ben ott
+  // van, így a később bekapcsolt autoPlay attribútum nem indítaná el megbízhatóan.
+  useEffect(() => {
+    if (!shouldMountVideo) return;
+    const el = videoRef.current;
+    if (!el) return;
+    el.load(); // preload="none" → "metadata" váltás után kell a kézi load
+    void el.play().catch(() => {
+      /* autoplay-tiltás esetén marad a poszter + a lejátszás gomb */
+    });
+  }, [shouldMountVideo]);
+
   return (
     <div className={`mx-auto ${maxWidthClass}`}>
       <div
@@ -104,14 +117,21 @@ export function HeroMedia({
             decoding="sync"
           />
         </picture>
-        {shouldMountVideo && videoSrc && (
+        {videoSrc && (
+          /* A <video> MINDIG benne van a kiszolgált HTML-ben, `preload="none"`-nal.
+             SEO: a Google csak akkor tudja indexelni a videót, ha talál lejátszót
+             az oldalon — korábban az elem csak desktopon, JS-ből mountolt, a
+             Googlebot Smartphone (mobil viewport) tehát SOHA nem látta, hiába volt
+             VideoObject séma. Perf: a `preload="none"` miatt ez 0 byte hálózati
+             forgalom, amíg a lenti logika (desktop + viewport + idle) vagy a
+             lejátszás gomb el nem indítja — a mobil LCP-t nem érinti. */
           <video
+            ref={videoRef}
             src={videoSrc}
-            autoPlay
             muted
             loop
             playsInline
-            preload="metadata"
+            preload={shouldMountVideo ? 'metadata' : 'none'}
             aria-hidden
             onCanPlay={() => setVideoReady(true)}
             className={`absolute inset-0 w-full h-[112%] -top-[6%] object-cover transition-opacity duration-700 ease-out ${

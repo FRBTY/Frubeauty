@@ -9,8 +9,8 @@ cover: "/img/szemoldok-laminalas-budapest-egressy-ut-frubeauty-munka.webp"
 coverWidth: 1200
 coverHeight: 1800
 coverAlt: "Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló"
-metaTitle: "Szemöldök laminálás ára 2026: 11.000 Ft | FRUBEAUTY Budapest"
-metaDescription: "Mennyibe kerül a szemöldök laminálás 2026-ban? Budapesten nálam 11.000 Ft formázással és festéssel. Tételes árlista 5.000 Ft-tól, plusz a 18.000 Ft-os csomag."
+metaTitle: "Szemöldök laminálás ára 2026: 7–13 ezer Ft Budapesten"
+metaDescription: "Mennyibe kerül a szemöldök laminálás 2026-ban? Budapesten jellemzően 7 000–13 000 Ft, nálam Zuglóban 11 000 Ft formázással és festéssel együtt."
 ---
 
 A szemöldök laminálás a FRUBEAUTY-nál Zuglóban 2026-ban **11 000 Ft**, és ebben a formázás és a festés is benne van. A kezelés tű nélkül, koreai technikával ad dúsabb, rendezett szemöldököt; az eredmény körülbelül 6 hétig tart, az alkalom nagyjából 60 perc.

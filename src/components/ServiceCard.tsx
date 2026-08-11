@@ -30,7 +30,20 @@ export function ServiceCard({ service: s }: { service: ServiceCardData }) {
       </div>
       <div className="p-6 sm:p-7 flex flex-col flex-1">
         <p className="text-[11px] uppercase tracking-caps text-creamMute mb-2">{s.subtitle}</p>
-        <h3 className="font-display text-2xl font-medium leading-tight text-cream">{s.title}</h3>
+        {/* SEO — kannibalizáció: a kezdőlap fogja el a money page-ek fej-kulcsszavait
+            (GSC, 2026-08-09: „szemöldök laminálás" 277 megjelenítés a kezdőlapon, a
+            dedikált oldalon NULLA). A kezdőlap H1-je viszont „Kozmetikus Zuglóban" —
+            vagyis nem on-page relevanciával nyer, hanem TEKINTÉLLYEL. Ezért nem
+            gyengítjük a kezdőlapot (az csak megjelenítést vinne el), hanem terelünk:
+            a pontos kulcsszót tartalmazó H3 maga is linkké válik a money page-re.
+            A címsor-link egzakt horgonyszöveggel a legerősebb belső jelzés arra, hogy
+            „a téma kanonikus oldala amott van" — és közben semmi nem vész el az
+            oldalról. UX-ban is nyerő: a címsorra amúgy is kattintanak. */}
+        <h3 className="font-display text-2xl font-medium leading-tight text-cream">
+          <a href={s.href} className="hover:text-gold transition-colors duration-200">
+            {s.title}
+          </a>
+        </h3>
         <p className="mt-3 text-creamSoft leading-relaxed flex-1">{s.body}</p>
         <div className="mt-5 pt-5 border-t border-whisper flex flex-col gap-4">
           <div className="flex items-end justify-between gap-3">

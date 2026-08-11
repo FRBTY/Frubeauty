@@ -86,12 +86,44 @@ for (const file of htmlFiles) {
   const expectedCanonical = `https://frubeauty.com${route}`;
   if (indexable && canonical !== expectedCanonical) fail(route, `canonical eltérés: ${canonical ?? 'hiányzik'} ≠ ${expectedCanonical}`);
 
+  const schemas = [];
   for (const match of html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)) {
     try {
-      JSON.parse(match[1]);
+      schemas.push(JSON.parse(match[1]));
     } catch (error) {
       fail(route, `hibás JSON-LD: ${error.message}`);
     }
+  }
+
+  // VideoObject-őr. A GSC 2026-08-06-án „Missing field uploadDate"-et jelzett a
+  // /szempilla-lifting-zuglo/-ra: a kötelező mező egyszerűen kimaradt a kézzel
+  // bemásolt sémából. Ez a check nem engedi vissza a hibát a buildbe.
+  const videoSchemas = schemas.filter((s) => s?.['@type'] === 'VideoObject');
+  for (const video of videoSchemas) {
+    for (const field of ['name', 'description', 'thumbnailUrl', 'uploadDate', 'duration', 'contentUrl']) {
+      if (!video[field]) fail(route, `VideoObject hiányzó mező: ${field}`);
+    }
+    // A Google thumbnail-formátumai közt NINCS AVIF (BMP/GIF/JPEG/PNG/WebP/SVG).
+    if (video.thumbnailUrl && /\.avif$/i.test(video.thumbnailUrl)) {
+      fail(route, 'VideoObject thumbnailUrl AVIF — a Google nem támogatja thumbnailként');
+    }
+    if (video.uploadDate && !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}$/.test(video.uploadDate)) {
+      fail(route, `VideoObject uploadDate nem ISO 8601 időzónával: ${video.uploadDate}`);
+    }
+    if (video.duration && !/^PT(?:\d+M)?\d+S$/.test(video.duration)) {
+      fail(route, `VideoObject duration nem ISO 8601 időtartam: ${video.duration}`);
+    }
+    for (const field of ['contentUrl', 'thumbnailUrl']) {
+      const url = video[field] ?? '';
+      if (url.startsWith('https://frubeauty.com/') && !localTargetExists(url.replace('https://frubeauty.com', ''))) {
+        fail(route, `VideoObject ${field} nem létező fájlra mutat: ${url}`);
+      }
+    }
+  }
+  // A Google csak akkor indexeli a videót, ha talál lejátszót az oldalon —
+  // séma önmagában nem elég (és a <video> nem jöhet csak kliensoldali JS-ből).
+  if (videoSchemas.length > count(html, /<video\b/gi)) {
+    fail(route, `${videoSchemas.length} VideoObject séma, de csak ${count(html, /<video\b/gi)} <video> elem a kiszolgált HTML-ben`);
   }
 
   for (const match of html.matchAll(/(?:href|src|poster)="(\/[^"]+)"/gi)) {
@@ -116,12 +148,21 @@ for (const route of ['/', '/arckezeles-zuglo/', '/szempilla-lifting-zuglo/', '/s
   if (!/<details\b/i.test(html) || !/<summary\b/i.test(html)) fail(route, 'a FAQ nem natív details/summary markup');
 }
 
-for (const required of ['robots.txt', 'sitemap-index.xml']) {
+for (const required of ['robots.txt', 'sitemap-index.xml', 'video-sitemap.xml']) {
   if (!existsSync(join(dist, required))) fail('/', `hiányzó ${required}`);
 }
 if (existsSync(join(dist, 'robots.txt'))) {
   const robots = readFileSync(join(dist, 'robots.txt'), 'utf8');
   if (!/Sitemap:\s*https:\/\/frubeauty\.com\/sitemap-index\.xml/i.test(robots)) fail('/robots.txt', 'hibás vagy hiányzó sitemap hivatkozás');
+  if (!/Sitemap:\s*https:\/\/frubeauty\.com\/video-sitemap\.xml/i.test(robots)) fail('/robots.txt', 'hiányzó videó-sitemap hivatkozás');
+}
+// Videó-sitemap: minden hivatkozott mp4/poszter tényleg létezik-e a buildben.
+if (existsSync(join(dist, 'video-sitemap.xml'))) {
+  const xml = readFileSync(join(dist, 'video-sitemap.xml'), 'utf8');
+  for (const match of xml.matchAll(/<video:(?:content_loc|thumbnail_loc)>([^<]+)</g)) {
+    const target = match[1].replace('https://frubeauty.com', '');
+    if (!localTargetExists(target)) fail('/video-sitemap.xml', `nem létező médiafájl: ${match[1]}`);
+  }
 }
 for (const sitemap of walk(dist, '.xml')) {
   const xml = readFileSync(sitemap, 'utf8');

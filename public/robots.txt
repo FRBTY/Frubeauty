@@ -21,3 +21,4 @@ User-agent: anthropic-ai
 Allow: /
 
 Sitemap: https://frubeauty.com/sitemap-index.xml
+Sitemap: https://frubeauty.com/video-sitemap.xml

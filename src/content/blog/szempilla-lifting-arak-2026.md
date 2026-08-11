@@ -9,7 +9,7 @@ cover: "/img/szempilla-lifting-budapest-egressy-ut-munka.webp"
 coverWidth: 1200
 coverHeight: 1600
 coverAlt: "Szempilla lifting eredménye — FRUBEAUTY zuglói szalon, Egressy út"
-metaTitle: "Szempilla lifting árak 2026 | FRUBEAUTY Zugló"
+metaTitle: "Szempilla lifting árak 2026: 12 000 Ft, festéssel együtt"
 metaDescription: "Szempilla lifting árak 2026-ban Zuglóban: 12 000 Ft festéssel együtt, rejtett felár nélkül. Tételes árlista — mit tartalmaz az ár, és mitől függ."
 ---
 

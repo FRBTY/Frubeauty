@@ -217,6 +217,12 @@ const primaryGtagId = hasGoogleTag
     )}
     {ogType === 'article' && <meta property="article:author" content="Pecze-Kovács Fruzsina" />}
     <meta property="og:locale" content="hu_HU" />
+    {/* SEO: a SERP-ben a Google a saját cím helyett gyakran a H1-et mutatja + a
+        SAJÁT MAGA kikövetkeztetett oldalnevet fűzi hozzá. Élő SERP-ellenőrzés
+        (2026-08-09): „… - frubeauty" — kisbetűs, a domainből származtatva. Az
+        og:site_name a Google dokumentált oldalnév-jelzése, eddig hiányzott.
+        Ezzel a márkanév helyes írásmóddal jelenik meg a találatokban. */}
+    <meta property="og:site_name" content="FRUBEAUTY" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={absoluteOgImage} />

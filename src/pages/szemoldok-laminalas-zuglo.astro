@@ -19,6 +19,7 @@ import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
 import { PriceList } from '../components/PriceList';
 import { siteConfig, relFor } from '../config/site';
+import { videoObjectSchema } from '../config/videos';
 
 const services = [
   {
@@ -301,29 +302,11 @@ const howToSchema = {
 };
 
 // ── SEO: VideoObject schemák ─────────────────────────────────────────────────
+// A mezők a központi videó-katalógusból jönnek (src/config/videos.ts) — így az
+// `uploadDate`/`duration` egy helyen él, nem oldalanként bemásolva.
 const videoSchemas = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'VideoObject',
-    name: 'Szemöldök laminálás munka közben — FRUBEAUTY Zugló, Egressy út',
-    description:
-      'Szemöldök laminálás koreai technikával a zuglói szalonban. Pecze-Kovács Fruzsina kozmetikus, Zugló XIV. kerület.',
-    thumbnailUrl:
-      'https://frubeauty.com/media/szemoldok-laminalas-munkakozben-budapest-egressy-ut-poster.webp',
-    contentUrl:
-      'https://frubeauty.com/media/szemoldok-laminalas-munkakozben-budapest-egressy-ut.mp4',
-    publisher: { '@id': 'https://frubeauty.com/#business' },
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'VideoObject',
-    name: 'Szemöldök laminálás Zuglóban — FRUBEAUTY Pecze-Kovács Fruzsina',
-    description:
-      'Szemöldök laminálás természetes dúsítással a zuglói szalonban. Tű nélkül, koreai technikával, ~6 hétig tartós eredmény.',
-    thumbnailUrl: 'https://frubeauty.com/media/szemoldok-laminalas-poster.webp',
-    contentUrl: 'https://frubeauty.com/media/szemoldok-laminalas.mp4',
-    publisher: { '@id': 'https://frubeauty.com/#business' },
-  },
+  videoObjectSchema('szemoldok-laminalas-munkakozben'),
+  videoObjectSchema('szemoldok-laminalas'),
 ];
 
 // SEO: a self-serving Review schema eltávolítva (mint a többi oldalon) — a saját
