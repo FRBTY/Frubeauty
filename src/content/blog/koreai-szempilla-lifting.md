@@ -9,8 +9,8 @@ cover: "/img/szempillalifting-budapest-egressy-ut-munka-szempilla-oldal-2-kep.we
 coverWidth: 1200
 coverHeight: 1800
 coverAlt: "Koreai technikájú szempilla lifting natúr íve — FRUBEAUTY Zugló"
-metaTitle: "Koreai szempilla lifting: miben más, mint a hagyományos?"
-metaDescription: "A koreai szempilla lifting kíméletesebb hatóanyaggal és pontosabb ívvel dolgozik: ragasztó nélkül, kisebb szálterheléssel, 6–8 hétig tartó eredménnyel."
+metaTitle: "Koreai szempilla lifting Budapest — miben más? 12 000 Ft"
+metaDescription: "Kíméletesebb hatóanyag, pontosabb ív, ragasztó nélkül — 6–8 hétig tartó eredmény. Zuglóban, az Egressy úton, festéssel együtt 12 000 Ft. Foglalj online!"
 ---
 
 A koreai szempilla lifting célja ugyanaz, mint a hagyományosé — a saját pillák megemelése —, de **kíméletesebb hatóanyagokkal és pontosabb ívkialakítással** dolgozik. Kevésbé terheli a szálakat, természetesebb hatást ad, és mivel a pillák nem sérülnek, az eredmény jellemzően a teljes 6–8 hetes ciklust kitartja.
