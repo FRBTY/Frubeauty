@@ -1,0 +1,5314 @@
+{
+  "generatedAt": "2026-08-12T16:37:24.410Z",
+  "site": "sc-domain:frubeauty.com",
+  "domain": "frubeauty.com",
+  "periods": {
+    "cur": {
+      "start": "2026-07-13",
+      "end": "2026-08-09"
+    },
+    "prev": {
+      "start": "2026-06-15",
+      "end": "2026-07-12"
+    },
+    "yoy": {
+      "start": "2025-07-14",
+      "end": "2025-08-10"
+    }
+  },
+  "totals": {
+    "cur": {
+      "clicks": 92,
+      "impressions": 2937,
+      "ctr": 0.03132448076268301,
+      "position": 6.347974123255022
+    },
+    "prev": {
+      "clicks": 73,
+      "impressions": 1799,
+      "ctr": 0.0405780989438577,
+      "position": 7.302946081156198
+    },
+    "yoy": {
+      "clicks": 0,
+      "impressions": 0,
+      "ctr": 0,
+      "position": 0
+    }
+  },
+  "daily": [
+    {
+      "clicks": 2,
+      "impressions": 9,
+      "ctr": 0.2222222222222222,
+      "position": 1.6666666666666665,
+      "date": "2026-05-18"
+    },
+    {
+      "clicks": 1,
+      "impressions": 39,
+      "ctr": 0.02564102564102564,
+      "position": 5.333333333333333,
+      "date": "2026-05-19"
+    },
+    {
+      "clicks": 2,
+      "impressions": 77,
+      "ctr": 0.025974025974025976,
+      "position": 5.8441558441558445,
+      "date": "2026-05-20"
+    },
+    {
+      "clicks": 4,
+      "impressions": 79,
+      "ctr": 0.05063291139240506,
+      "position": 5.468354430379747,
+      "date": "2026-05-21"
+    },
+    {
+      "clicks": 0,
+      "impressions": 45,
+      "ctr": 0,
+      "position": 6.977777777777778,
+      "date": "2026-05-22"
+    },
+    {
+      "clicks": 4,
+      "impressions": 49,
+      "ctr": 0.08163265306122448,
+      "position": 3.5918367346938775,
+      "date": "2026-05-23"
+    },
+    {
+      "clicks": 0,
+      "impressions": 37,
+      "ctr": 0,
+      "position": 5.864864864864865,
+      "date": "2026-05-24"
+    },
+    {
+      "clicks": 3,
+      "impressions": 73,
+      "ctr": 0.0410958904109589,
+      "position": 5.068493150684931,
+      "date": "2026-05-25"
+    },
+    {
+      "clicks": 1,
+      "impressions": 74,
+      "ctr": 0.013513513513513514,
+      "position": 4.891891891891892,
+      "date": "2026-05-26"
+    },
+    {
+      "clicks": 0,
+      "impressions": 78,
+      "ctr": 0,
+      "position": 4.948717948717949,
+      "date": "2026-05-27"
+    },
+    {
+      "clicks": 2,
+      "impressions": 74,
+      "ctr": 0.02702702702702703,
+      "position": 4.972972972972973,
+      "date": "2026-05-28"
+    },
+    {
+      "clicks": 1,
+      "impressions": 69,
+      "ctr": 0.014492753623188406,
+      "position": 3.8840579710144927,
+      "date": "2026-05-29"
+    },
+    {
+      "clicks": 1,
+      "impressions": 63,
+      "ctr": 0.015873015873015872,
+      "position": 4.746031746031746,
+      "date": "2026-05-30"
+    },
+    {
+      "clicks": 1,
+      "impressions": 68,
+      "ctr": 0.014705882352941176,
+      "position": 4.985294117647059,
+      "date": "2026-05-31"
+    },
+    {
+      "clicks": 5,
+      "impressions": 95,
+      "ctr": 0.05263157894736842,
+      "position": 6.757894736842105,
+      "date": "2026-06-01"
+    },
+    {
+      "clicks": 2,
+      "impressions": 66,
+      "ctr": 0.030303030303030304,
+      "position": 5.075757575757576,
+      "date": "2026-06-02"
+    },
+    {
+      "clicks": 2,
+      "impressions": 92,
+      "ctr": 0.021739130434782608,
+      "position": 4.706521739130435,
+      "date": "2026-06-03"
+    },
+    {
+      "clicks": 1,
+      "impressions": 76,
+      "ctr": 0.013157894736842105,
+      "position": 5.131578947368421,
+      "date": "2026-06-04"
+    },
+    {
+      "clicks": 2,
+      "impressions": 90,
+      "ctr": 0.022222222222222223,
+      "position": 6.266666666666667,
+      "date": "2026-06-05"
+    },
+    {
+      "clicks": 3,
+      "impressions": 75,
+      "ctr": 0.04,
+      "position": 4.333333333333334,
+      "date": "2026-06-06"
+    },
+    {
+      "clicks": 1,
+      "impressions": 71,
+      "ctr": 0.014084507042253521,
+      "position": 6.126760563380282,
+      "date": "2026-06-07"
+    },
+    {
+      "clicks": 7,
+      "impressions": 111,
+      "ctr": 0.06306306306306306,
+      "position": 4.351351351351351,
+      "date": "2026-06-08"
+    },
+    {
+      "clicks": 5,
+      "impressions": 85,
+      "ctr": 0.058823529411764705,
+      "position": 5.411764705882353,
+      "date": "2026-06-09"
+    },
+    {
+      "clicks": 3,
+      "impressions": 63,
+      "ctr": 0.047619047619047616,
+      "position": 5.571428571428571,
+      "date": "2026-06-10"
+    },
+    {
+      "clicks": 2,
+      "impressions": 87,
+      "ctr": 0.022988505747126436,
+      "position": 5.413793103448276,
+      "date": "2026-06-11"
+    },
+    {
+      "clicks": 2,
+      "impressions": 85,
+      "ctr": 0.023529411764705882,
+      "position": 5,
+      "date": "2026-06-12"
+    },
+    {
+      "clicks": 2,
+      "impressions": 53,
+      "ctr": 0.03773584905660377,
+      "position": 6.90566037735849,
+      "date": "2026-06-13"
+    },
+    {
+      "clicks": 0,
+      "impressions": 44,
+      "ctr": 0,
+      "position": 6.204545454545454,
+      "date": "2026-06-14"
+    },
+    {
+      "clicks": 1,
+      "impressions": 50,
+      "ctr": 0.02,
+      "position": 7.1,
+      "date": "2026-06-15"
+    },
+    {
+      "clicks": 4,
+      "impressions": 89,
+      "ctr": 0.0449438202247191,
+      "position": 7.247191011235955,
+      "date": "2026-06-16"
+    },
+    {
+      "clicks": 3,
+      "impressions": 58,
+      "ctr": 0.05172413793103448,
+      "position": 11.051724137931034,
+      "date": "2026-06-17"
+    },
+    {
+      "clicks": 1,
+      "impressions": 62,
+      "ctr": 0.016129032258064516,
+      "position": 8.661290322580644,
+      "date": "2026-06-18"
+    },
+    {
+      "clicks": 1,
+      "impressions": 45,
+      "ctr": 0.022222222222222223,
+      "position": 6.977777777777778,
+      "date": "2026-06-19"
+    },
+    {
+      "clicks": 0,
+      "impressions": 40,
+      "ctr": 0,
+      "position": 6.825,
+      "date": "2026-06-20"
+    },
+    {
+      "clicks": 4,
+      "impressions": 50,
+      "ctr": 0.08,
+      "position": 6.58,
+      "date": "2026-06-21"
+    },
+    {
+      "clicks": 5,
+      "impressions": 74,
+      "ctr": 0.06756756756756757,
+      "position": 7.216216216216216,
+      "date": "2026-06-22"
+    },
+    {
+      "clicks": 4,
+      "impressions": 44,
+      "ctr": 0.09090909090909091,
+      "position": 7.045454545454546,
+      "date": "2026-06-23"
+    },
+    {
+      "clicks": 0,
+      "impressions": 51,
+      "ctr": 0,
+      "position": 12.019607843137255,
+      "date": "2026-06-24"
+    },
+    {
+      "clicks": 4,
+      "impressions": 49,
+      "ctr": 0.08163265306122448,
+      "position": 8.489795918367346,
+      "date": "2026-06-25"
+    },
+    {
+      "clicks": 0,
+      "impressions": 48,
+      "ctr": 0,
+      "position": 9.979166666666666,
+      "date": "2026-06-26"
+    },
+    {
+      "clicks": 1,
+      "impressions": 30,
+      "ctr": 0.03333333333333333,
+      "position": 7.766666666666667,
+      "date": "2026-06-27"
+    },
+    {
+      "clicks": 0,
+      "impressions": 39,
+      "ctr": 0,
+      "position": 5,
+      "date": "2026-06-28"
+    },
+    {
+      "clicks": 2,
+      "impressions": 56,
+      "ctr": 0.03571428571428571,
+      "position": 5.375,
+      "date": "2026-06-29"
+    },
+    {
+      "clicks": 5,
+      "impressions": 63,
+      "ctr": 0.07936507936507936,
+      "position": 7.174603174603175,
+      "date": "2026-06-30"
+    },
+    {
+      "clicks": 3,
+      "impressions": 87,
+      "ctr": 0.034482758620689655,
+      "position": 12.425287356321839,
+      "date": "2026-07-01"
+    },
+    {
+      "clicks": 5,
+      "impressions": 76,
+      "ctr": 0.06578947368421052,
+      "position": 7.092105263157895,
+      "date": "2026-07-02"
+    },
+    {
+      "clicks": 1,
+      "impressions": 60,
+      "ctr": 0.016666666666666666,
+      "position": 7.45,
+      "date": "2026-07-03"
+    },
+    {
+      "clicks": 2,
+      "impressions": 53,
+      "ctr": 0.03773584905660377,
+      "position": 6.377358490566038,
+      "date": "2026-07-04"
+    },
+    {
+      "clicks": 3,
+      "impressions": 65,
+      "ctr": 0.046153846153846156,
+      "position": 6.1692307692307695,
+      "date": "2026-07-05"
+    },
+    {
+      "clicks": 7,
+      "impressions": 104,
+      "ctr": 0.0673076923076923,
+      "position": 4.673076923076923,
+      "date": "2026-07-06"
+    },
+    {
+      "clicks": 4,
+      "impressions": 69,
+      "ctr": 0.057971014492753624,
+      "position": 6.246376811594203,
+      "date": "2026-07-07"
+    },
+    {
+      "clicks": 2,
+      "impressions": 115,
+      "ctr": 0.017391304347826087,
+      "position": 5.234782608695652,
+      "date": "2026-07-08"
+    },
+    {
+      "clicks": 1,
+      "impressions": 107,
+      "ctr": 0.009345794392523364,
+      "position": 5.616822429906542,
+      "date": "2026-07-09"
+    },
+    {
+      "clicks": 6,
+      "impressions": 69,
+      "ctr": 0.08695652173913043,
+      "position": 6.36231884057971,
+      "date": "2026-07-10"
+    },
+    {
+      "clicks": 3,
+      "impressions": 80,
+      "ctr": 0.0375,
+      "position": 6.925,
+      "date": "2026-07-11"
+    },
+    {
+      "clicks": 1,
+      "impressions": 66,
+      "ctr": 0.015151515151515152,
+      "position": 8.969696969696969,
+      "date": "2026-07-12"
+    },
+    {
+      "clicks": 1,
+      "impressions": 128,
+      "ctr": 0.0078125,
+      "position": 7.6484375,
+      "date": "2026-07-13"
+    },
+    {
+      "clicks": 1,
+      "impressions": 96,
+      "ctr": 0.010416666666666666,
+      "position": 6.041666666666667,
+      "date": "2026-07-14"
+    },
+    {
+      "clicks": 2,
+      "impressions": 93,
+      "ctr": 0.021505376344086023,
+      "position": 7,
+      "date": "2026-07-15"
+    },
+    {
+      "clicks": 0,
+      "impressions": 75,
+      "ctr": 0,
+      "position": 5.04,
+      "date": "2026-07-16"
+    },
+    {
+      "clicks": 3,
+      "impressions": 69,
+      "ctr": 0.043478260869565216,
+      "position": 6.072463768115942,
+      "date": "2026-07-17"
+    },
+    {
+      "clicks": 2,
+      "impressions": 63,
+      "ctr": 0.031746031746031744,
+      "position": 5.492063492063492,
+      "date": "2026-07-18"
+    },
+    {
+      "clicks": 4,
+      "impressions": 71,
+      "ctr": 0.056338028169014086,
+      "position": 5.830985915492958,
+      "date": "2026-07-19"
+    },
+    {
+      "clicks": 4,
+      "impressions": 119,
+      "ctr": 0.03361344537815126,
+      "position": 5.7899159663865545,
+      "date": "2026-07-20"
+    },
+    {
+      "clicks": 3,
+      "impressions": 70,
+      "ctr": 0.04285714285714286,
+      "position": 6.457142857142857,
+      "date": "2026-07-21"
+    },
+    {
+      "clicks": 2,
+      "impressions": 76,
+      "ctr": 0.02631578947368421,
+      "position": 5.473684210526316,
+      "date": "2026-07-22"
+    },
+    {
+      "clicks": 1,
+      "impressions": 111,
+      "ctr": 0.009009009009009009,
+      "position": 4.963963963963964,
+      "date": "2026-07-23"
+    },
+    {
+      "clicks": 3,
+      "impressions": 74,
+      "ctr": 0.04054054054054054,
+      "position": 6.662162162162162,
+      "date": "2026-07-24"
+    },
+    {
+      "clicks": 0,
+      "impressions": 69,
+      "ctr": 0,
+      "position": 6.159420289855072,
+      "date": "2026-07-25"
+    },
+    {
+      "clicks": 4,
+      "impressions": 98,
+      "ctr": 0.04081632653061224,
+      "position": 5.479591836734694,
+      "date": "2026-07-26"
+    },
+    {
+      "clicks": 3,
+      "impressions": 126,
+      "ctr": 0.023809523809523808,
+      "position": 6.666666666666667,
+      "date": "2026-07-27"
+    },
+    {
+      "clicks": 6,
+      "impressions": 98,
+      "ctr": 0.061224489795918366,
+      "position": 6.285714285714286,
+      "date": "2026-07-28"
+    },
+    {
+      "clicks": 4,
+      "impressions": 103,
+      "ctr": 0.038834951456310676,
+      "position": 8.514563106796118,
+      "date": "2026-07-29"
+    },
+    {
+      "clicks": 1,
+      "impressions": 90,
+      "ctr": 0.011111111111111112,
+      "position": 6.4,
+      "date": "2026-07-30"
+    },
+    {
+      "clicks": 4,
+      "impressions": 117,
+      "ctr": 0.03418803418803419,
+      "position": 8.538461538461538,
+      "date": "2026-07-31"
+    },
+    {
+      "clicks": 4,
+      "impressions": 91,
+      "ctr": 0.04395604395604396,
+      "position": 5.725274725274725,
+      "date": "2026-08-01"
+    },
+    {
+      "clicks": 2,
+      "impressions": 109,
+      "ctr": 0.01834862385321101,
+      "position": 8.302752293577981,
+      "date": "2026-08-02"
+    },
+    {
+      "clicks": 4,
+      "impressions": 151,
+      "ctr": 0.026490066225165563,
+      "position": 5.7218543046357615,
+      "date": "2026-08-03"
+    },
+    {
+      "clicks": 3,
+      "impressions": 132,
+      "ctr": 0.022727272727272728,
+      "position": 5.8106060606060606,
+      "date": "2026-08-04"
+    },
+    {
+      "clicks": 9,
+      "impressions": 160,
+      "ctr": 0.05625,
+      "position": 5.7625,
+      "date": "2026-08-05"
+    },
+    {
+      "clicks": 4,
+      "impressions": 129,
+      "ctr": 0.031007751937984496,
+      "position": 6.449612403100775,
+      "date": "2026-08-06"
+    },
+    {
+      "clicks": 7,
+      "impressions": 153,
+      "ctr": 0.0457516339869281,
+      "position": 5.823529411764706,
+      "date": "2026-08-07"
+    },
+    {
+      "clicks": 3,
+      "impressions": 117,
+      "ctr": 0.02564102564102564,
+      "position": 5.829059829059829,
+      "date": "2026-08-08"
+    },
+    {
+      "clicks": 8,
+      "impressions": 149,
+      "ctr": 0.053691275167785234,
+      "position": 6.859060402684563,
+      "date": "2026-08-09"
+    }
+  ],
+  "queries": {
+    "cur": [
+      {
+        "clicks": 5,
+        "impressions": 31,
+        "ctr": 0.16129032258064516,
+        "position": 8.516129032258064,
+        "query": "szemöldök laminálás budapest"
+      },
+      {
+        "clicks": 2,
+        "impressions": 80,
+        "ctr": 0.025,
+        "position": 9.0375,
+        "query": "esküvői smink árak"
+      },
+      {
+        "clicks": 2,
+        "impressions": 5,
+        "ctr": 0.4,
+        "position": 1.4,
+        "query": "lash extensions budapest"
+      },
+      {
+        "clicks": 2,
+        "impressions": 30,
+        "ctr": 0.06666666666666667,
+        "position": 8.166666666666668,
+        "query": "menyasszonyi smink árak"
+      },
+      {
+        "clicks": 2,
+        "impressions": 33,
+        "ctr": 0.06060606060606061,
+        "position": 5.484848484848484,
+        "query": "szempilla lifting zugló"
+      },
+      {
+        "clicks": 1,
+        "impressions": 56,
+        "ctr": 0.017857142857142856,
+        "position": 6.142857142857143,
+        "query": "alkalmi smink árak"
+      },
+      {
+        "clicks": 1,
+        "impressions": 1,
+        "ctr": 1,
+        "position": 1,
+        "query": "brow styling"
+      },
+      {
+        "clicks": 1,
+        "impressions": 5,
+        "ctr": 0.2,
+        "position": 3.2,
+        "query": "feskin beauty"
+      },
+      {
+        "clicks": 1,
+        "impressions": 2,
+        "ctr": 0.5,
+        "position": 26.5,
+        "query": "koreai szempilla lifting budapest"
+      },
+      {
+        "clicks": 1,
+        "impressions": 42,
+        "ctr": 0.023809523809523808,
+        "position": 2.7857142857142856,
+        "query": "kozmetikus"
+      },
+      {
+        "clicks": 1,
+        "impressions": 6,
+        "ctr": 0.16666666666666666,
+        "position": 18.166666666666668,
+        "query": "szempilla lifting"
+      },
+      {
+        "clicks": 1,
+        "impressions": 8,
+        "ctr": 0.125,
+        "position": 9.125,
+        "query": "szempilla lifting budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 12,
+        "ctr": 0,
+        "position": 5.25,
+        "query": "acne treatment"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5,
+        "query": "acne treatments"
+      },
+      {
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0,
+        "position": 8,
+        "query": "alkalmi smink budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 9,
+        "ctr": 0,
+        "position": 2.4444444444444446,
+        "query": "beauty"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 10,
+        "query": "beauty bar"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 2,
+        "query": "beauty brow"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 1,
+        "query": "beauty budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 12,
+        "query": "beauty coaching"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "beauty effect"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "beauty expert"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2,
+        "query": "beauty full szépségszalon"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "beauty kozmetika"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 16,
+        "query": "beauty parlour salon"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 1,
+        "query": "beauty salon budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 6,
+        "query": "beauty salon reception"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "beauty salon shelf"
+      },
+      {
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 5.4,
+        "query": "beauty szalon budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 6,
+        "query": "beauty szépségszalon"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3,
+        "query": "beautyfuru"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5,
+        "query": "beuty"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 5.666666666666667,
+        "query": "brow"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 11,
+        "query": "brow bar"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 7,
+        "query": "brow bar and beauty"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 4.333333333333334,
+        "query": "brow lamination"
+      },
+      {
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 8,
+        "query": "brow lift"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5,
+        "query": "budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 12,
+        "query": "esküvői smink budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 8,
+        "ctr": 0,
+        "position": 12.5,
+        "query": "eyebrow"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 8,
+        "query": "eyebrow and tint"
+      },
+      {
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 9.8,
+        "query": "eyebrow lamination"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 41,
+        "query": "eyebrow lift"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 5,
+        "query": "eyebrow lifting"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 4,
+        "query": "eyebrow near me"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 1.6666666666666665,
+        "query": "eyebrow shaping"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5,
+        "query": "eyebrow shaping near me"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "eyebrow stylist"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 10.333333333333334,
+        "query": "eyebrow threading"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 5,
+        "query": "eyebrows"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 7,
+        "query": "eyebrows lifting"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 21,
+        "query": "eyebrows threading"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5,
+        "query": "eyelash"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5,
+        "query": "eyelash lamination"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "eyelash lift"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "eyelash lifting"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 2,
+        "query": "eyelash tint"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2,
+        "query": "ez milyen árban van"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 12,
+        "query": "face wax"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "fb beauty"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 10,
+        "query": "fru"
+      },
+      {
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0,
+        "position": 8.333333333333332,
+        "query": "fru fru"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3,
+        "query": "fruu"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 14,
+        "query": "fruzsi"
+      },
+      {
+        "clicks": 0,
+        "impressions": 15,
+        "ctr": 0,
+        "position": 7.6,
+        "query": "fruzsina"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 10,
+        "query": "fu fru"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "időpont"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2,
+        "query": "igen"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 9.5,
+        "query": "janssen árlista"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 18,
+        "query": "karaszek fruzsina"
+      },
+      {
+        "clicks": 0,
+        "impressions": 17,
+        "ctr": 0,
+        "position": 7.588235294117647,
+        "query": "koreai lifting"
+      },
+      {
+        "clicks": 0,
+        "impressions": 112,
+        "ctr": 0,
+        "position": 7.580357142857143,
+        "query": "koreai szempilla lifting"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 4,
+        "query": "kovács"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "kozmetika"
+      },
+      {
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 6,
+        "query": "kozmetika zugló egressy út"
+      },
+      {
+        "clicks": 0,
+        "impressions": 9,
+        "ctr": 0,
+        "position": 2.666666666666667,
+        "query": "kozmetikus budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0,
+        "position": 15.142857142857142,
+        "query": "kozmetikus zugló"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 6,
+        "query": "lamination"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5,
+        "query": "lash lift"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5,
+        "query": "lash lift budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "lash lifting"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2,
+        "query": "lash tint"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "luxy beauty salon"
+      },
+      {
+        "clicks": 0,
+        "impressions": 10,
+        "ctr": 0,
+        "position": 5.9,
+        "query": "make up"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 6,
+        "query": "makeup"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "megeri az arat?"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 4.5,
+        "query": "mennyibe kerul"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2,
+        "query": "mennyibe kerul?"
+      },
+      {
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 8.25,
+        "query": "mennyibe kerül"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 4,
+        "query": "mennyibe kerül ?"
+      },
+      {
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0,
+        "position": 9.333333333333334,
+        "query": "mennyibe kerül egy szempilla lifting"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2,
+        "query": "mennyibe kerül átlagosan"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "mennyibe kerül?"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2,
+        "query": "mennyit lehet keresni ezzel?"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 38,
+        "query": "microblading"
+      },
+      {
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 37,
+        "query": "microblading szemöldök"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "milyen árban van"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5,
+        "query": "műszempilla 1d"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 21,
+        "query": "professzionális kozmetika"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3,
+        "query": "profi szemöldök formázás"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3,
+        "query": "salon pro lash glue"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 12,
+        "query": "salon professional hairspray"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5,
+        "query": "semi permanent eye lashes"
+      },
+      {
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0,
+        "position": 8.666666666666668,
+        "query": "smink"
+      },
+      {
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 28.25,
+        "query": "smink 14 kerület"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 22,
+        "query": "smink budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 9,
+        "ctr": 0,
+        "position": 7.555555555555555,
+        "query": "smink árak"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "szemoldok laminalas"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 9.333333333333334,
+        "query": "szemoldok laminalas budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 7,
+        "query": "szemoldok laminálás"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "szempilla"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "szempilla epites"
+      },
+      {
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0,
+        "position": 3.2857142857142856,
+        "query": "szempilla laminálás árak"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 4,
+        "query": "szempilla lifting arak"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 35,
+        "query": "szempilla lifting debrecen"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 10,
+        "query": "szempilla lifting festéssel"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 25,
+        "query": "szempilla lifting meddig tart"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 22,
+        "query": "szempilla lifting vélemények"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 5,
+        "query": "szempilla lifting és festés"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 4,
+        "query": "szempillalifting"
+      },
+      {
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 4.25,
+        "query": "szemöldök"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 27,
+        "query": "szemöldök 10 kerület"
+      },
+      {
+        "clicks": 0,
+        "impressions": 8,
+        "ctr": 0,
+        "position": 7.5,
+        "query": "szemöldök 14 kerület"
+      },
+      {
+        "clicks": 0,
+        "impressions": 9,
+        "ctr": 0,
+        "position": 10.222222222222221,
+        "query": "szemöldök 20 kerület"
+      },
+      {
+        "clicks": 0,
+        "impressions": 8,
+        "ctr": 0,
+        "position": 1,
+        "query": "szemöldök formázás"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 16,
+        "query": "szemöldök hosszabbítás"
+      },
+      {
+        "clicks": 0,
+        "impressions": 97,
+        "ctr": 0,
+        "position": 10.123711340206185,
+        "query": "szemöldök laminálás"
+      },
+      {
+        "clicks": 0,
+        "impressions": 77,
+        "ctr": 0,
+        "position": 7.922077922077922,
+        "query": "szemöldök laminálás meddig tart"
+      },
+      {
+        "clicks": 0,
+        "impressions": 11,
+        "ctr": 0,
+        "position": 10.272727272727273,
+        "query": "szemöldök laminálás tartóssága"
+      },
+      {
+        "clicks": 0,
+        "impressions": 13,
+        "ctr": 0,
+        "position": 15.23076923076923,
+        "query": "szemöldök laminálás ár"
+      },
+      {
+        "clicks": 0,
+        "impressions": 87,
+        "ctr": 0,
+        "position": 10.402298850574713,
+        "query": "szemöldök laminálás árak"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 7,
+        "query": "szemöldök lifting"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2,
+        "query": "szemöldök styling"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "szemöldök stylist"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "tetovált szemöldök"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "the beauty salon"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 21,
+        "query": "venus legacy testkezelés"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 12,
+        "query": "vin salon"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "zugló"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "ára"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2,
+        "query": "árak"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3,
+        "query": "árban?"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 9,
+        "query": "örömanya smink esküvőre"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 13,
+        "query": "ресницы наращивание"
+      }
+    ],
+    "prev": [
+      {
+        "clicks": 3,
+        "impressions": 26,
+        "ctr": 0.11538461538461539,
+        "position": 5.384615384615385,
+        "query": "szempilla lifting zugló"
+      },
+      {
+        "clicks": 2,
+        "impressions": 37,
+        "ctr": 0.05405405405405406,
+        "position": 2.7837837837837838,
+        "query": "kozmetikus"
+      },
+      {
+        "clicks": 2,
+        "impressions": 71,
+        "ctr": 0.028169014084507043,
+        "position": 7.352112676056338,
+        "query": "szemöldök laminálás meddig tart"
+      },
+      {
+        "clicks": 1,
+        "impressions": 7,
+        "ctr": 0.14285714285714285,
+        "position": 7.857142857142857,
+        "query": "esküvői smink árak"
+      },
+      {
+        "clicks": 1,
+        "impressions": 2,
+        "ctr": 0.5,
+        "position": 1.5,
+        "query": "szempilla"
+      },
+      {
+        "clicks": 1,
+        "impressions": 7,
+        "ctr": 0.14285714285714285,
+        "position": 8.857142857142858,
+        "query": "szempilla lifting vagy műszempilla"
+      },
+      {
+        "clicks": 1,
+        "impressions": 3,
+        "ctr": 0.3333333333333333,
+        "position": 1,
+        "query": "szemöldök formázás"
+      },
+      {
+        "clicks": 1,
+        "impressions": 83,
+        "ctr": 0.012048192771084338,
+        "position": 21.97590361445783,
+        "query": "szemöldök laminálás"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 6,
+        "query": "1d szempilla"
+      },
+      {
+        "clicks": 0,
+        "impressions": 18,
+        "ctr": 0,
+        "position": 8.944444444444445,
+        "query": "acne treatment"
+      },
+      {
+        "clicks": 0,
+        "impressions": 14,
+        "ctr": 0,
+        "position": 5.5,
+        "query": "alkalmi smink árak"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "augenbrauen zupfen"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2,
+        "query": "beauty bar budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 5.5,
+        "query": "beauty expert"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3,
+        "query": "beauty professional"
+      },
+      {
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 3,
+        "query": "beauty salon budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 3,
+        "query": "beauty szalon budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 8,
+        "query": "beuity"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 4,
+        "query": "boostific szempilla"
+      },
+      {
+        "clicks": 0,
+        "impressions": 9,
+        "ctr": 0,
+        "position": 3.4444444444444446,
+        "query": "brow"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 3.5,
+        "query": "brow bar budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 9,
+        "query": "brow lamination"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 12,
+        "query": "brow lift"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "brow."
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 3,
+        "query": "budapest kozmetikus"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 16.5,
+        "query": "esküvői smink budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 12,
+        "query": "eye makeup"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5,
+        "query": "eyebrow"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 21,
+        "query": "eyebrow lamination"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3,
+        "query": "eyebrow lifting"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2,
+        "query": "eyebrow threading"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 21,
+        "query": "eyebrows lifting"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 31,
+        "query": "eyebrows threading"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 11,
+        "query": "eyeleash"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 7,
+        "query": "fit & beauty"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 14,
+        "query": "fru"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 8,
+        "query": "fru fru"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 11,
+        "query": "frudia kozmetika"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3,
+        "query": "fruu"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 31,
+        "query": "fruzsi"
+      },
+      {
+        "clicks": 0,
+        "impressions": 20,
+        "ctr": 0,
+        "position": 10.85,
+        "query": "fruzsina"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 25.5,
+        "query": "hidratáló arckezelés"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5,
+        "query": "igen"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 1,
+        "query": "kozmetika"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "kozmetikai arckezelések"
+      },
+      {
+        "clicks": 0,
+        "impressions": 12,
+        "ctr": 0,
+        "position": 2.166666666666667,
+        "query": "kozmetikus budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "kozmetikus szemöldök szedés"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 53,
+        "query": "laminalt szemoldok"
+      },
+      {
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 42.2,
+        "query": "laminált szemöldök"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "lash lift snd tint"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 6,
+        "query": "lash lifting"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5,
+        "query": "lashlift"
+      },
+      {
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 5.2,
+        "query": "make up"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "mennyi az ára?"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 3,
+        "query": "mennyibe kerül"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "mennyibe kerül egy ilyen kezelés?"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 1,
+        "query": "mennyibe kerül?"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2,
+        "query": "mennyibe kerülnek?"
+      },
+      {
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0,
+        "position": 8,
+        "query": "menyasszonyi smink árak"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 23,
+        "query": "mi a szempilla lifting"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 10,
+        "query": "mi a szemöldök laminálás"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 32,
+        "query": "mi az a szemöldök laminálás"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 39,
+        "query": "microblading"
+      },
+      {
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 28.4,
+        "query": "microblading szemöldök"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2,
+        "query": "mindkettő"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 6,
+        "query": "miss princess szepsegkucko"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 11,
+        "query": "mit jelent a szemöldök laminálás"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 13,
+        "query": "near me eyebrow threading"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 21,
+        "query": "professzionális kozmetika"
+      },
+      {
+        "clicks": 0,
+        "impressions": 9,
+        "ctr": 0,
+        "position": 9.88888888888889,
+        "query": "smink"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 5,
+        "query": "szemoldok laminalas"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 6.666666666666667,
+        "query": "szemoldok laminálás"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3,
+        "query": "szempilla laminalas"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 43,
+        "query": "szempilla laminálás"
+      },
+      {
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0,
+        "position": 1.7142857142857144,
+        "query": "szempilla laminálás árak"
+      },
+      {
+        "clicks": 0,
+        "impressions": 10,
+        "ctr": 0,
+        "position": 13.8,
+        "query": "szempilla lifting"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 7.666666666666667,
+        "query": "szempilla lifting budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 40,
+        "query": "szempilla lifting debrecen"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 22,
+        "query": "szempilla lifting előtte utána"
+      },
+      {
+        "clicks": 0,
+        "impressions": 14,
+        "ctr": 0,
+        "position": 13.642857142857142,
+        "query": "szempilla lifting festéssel"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 28,
+        "query": "szempilla lifting káros hatásai"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 24,
+        "query": "szempilla lifting meddig tart"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 28.5,
+        "query": "szempilla lifting vélemények"
+      },
+      {
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0,
+        "position": 10.166666666666666,
+        "query": "szempilla lifting és festés"
+      },
+      {
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 7,
+        "query": "szemöldök"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 16,
+        "query": "szemöldök 14 kerület"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 12,
+        "query": "szemöldök formázás budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 8.75,
+        "query": "szemöldök hosszabbítás"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 3.3333333333333335,
+        "query": "szemöldök laminalas"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "query": "szemöldök laminálás budapest"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 34,
+        "query": "szemöldök laminálás debrecen"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 7,
+        "query": "szemöldök laminálás festéssel"
+      },
+      {
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 10.6,
+        "query": "szemöldök laminálás jelentése"
+      },
+      {
+        "clicks": 0,
+        "impressions": 8,
+        "ctr": 0,
+        "position": 9.875,
+        "query": "szemöldök laminálás mit jelent"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 19.5,
+        "query": "szemöldök laminálás pécs"
+      },
+      {
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0,
+        "position": 9.666666666666666,
+        "query": "szemöldök laminálás tartóssága"
+      },
+      {
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 23.25,
+        "query": "szemöldök laminálás vélemények"
+      },
+      {
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 6.8,
+        "query": "szemöldök laminálás ár"
+      },
+      {
+        "clicks": 0,
+        "impressions": 40,
+        "ctr": 0,
+        "position": 9.8,
+        "query": "szemöldök laminálás árak"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3,
+        "query": "szemöldök lifting"
+      },
+      {
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 7.5,
+        "query": "szemöldöklaminálás"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 13,
+        "query": "tartós műszempilla"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 63,
+        "query": "tengerszem kozmetika"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5,
+        "query": "árak"
+      }
+    ]
+  },
+  "pages": {
+    "cur": [
+      {
+        "clicks": 45,
+        "impressions": 1333,
+        "ctr": 0.03375843960990248,
+        "position": 5.116279069767442,
+        "page": "https://frubeauty.com/"
+      },
+      {
+        "clicks": 14,
+        "impressions": 371,
+        "ctr": 0.03773584905660377,
+        "position": 6.690026954177897,
+        "page": "https://frubeauty.com/sminkes-zuglo/"
+      },
+      {
+        "clicks": 11,
+        "impressions": 105,
+        "ctr": 0.10476190476190476,
+        "position": 8.142857142857142,
+        "page": "https://frubeauty.com/szempilla-lifting-zuglo/"
+      },
+      {
+        "clicks": 8,
+        "impressions": 222,
+        "ctr": 0.036036036036036036,
+        "position": 9.756756756756756,
+        "page": "https://frubeauty.com/szemoldok-laminalas-zuglo/"
+      },
+      {
+        "clicks": 5,
+        "impressions": 253,
+        "ctr": 0.019762845849802372,
+        "position": 6.92094861660079,
+        "page": "https://frubeauty.com/blog/koreai-szempilla-lifting/"
+      },
+      {
+        "clicks": 3,
+        "impressions": 114,
+        "ctr": 0.02631578947368421,
+        "position": 7.254385964912281,
+        "page": "https://frubeauty.com/blog/eskuvoi-smink-arak-budapest/"
+      },
+      {
+        "clicks": 3,
+        "impressions": 119,
+        "ctr": 0.025210084033613446,
+        "position": 4.084033613445378,
+        "page": "https://frubeauty.com/rolam/"
+      },
+      {
+        "clicks": 1,
+        "impressions": 28,
+        "ctr": 0.03571428571428571,
+        "position": 4.964285714285714,
+        "page": "https://frubeauty.com/blog/arckezeles-arak-2026/"
+      },
+      {
+        "clicks": 1,
+        "impressions": 195,
+        "ctr": 0.005128205128205128,
+        "position": 7.661538461538462,
+        "page": "https://frubeauty.com/blog/szemoldok-laminalas-arak-2026/"
+      },
+      {
+        "clicks": 1,
+        "impressions": 95,
+        "ctr": 0.010526315789473684,
+        "position": 7.421052631578948,
+        "page": "https://frubeauty.com/blog/szempilla-lifting-arak-2026/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 38,
+        "ctr": 0,
+        "position": 9.552631578947368,
+        "page": "https://frubeauty.com/arckezeles-zuglo/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 23,
+        "ctr": 0,
+        "position": 8.08695652173913,
+        "page": "https://frubeauty.com/blog/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 10,
+        "page": "https://frubeauty.com/blog/eskuvoi-smink-felkesziules/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 11,
+        "ctr": 0,
+        "position": 8.727272727272727,
+        "page": "https://frubeauty.com/blog/janssen-arckezeles-bortipusok/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 339,
+        "ctr": 0,
+        "position": 6.935103244837758,
+        "page": "https://frubeauty.com/blog/szemoldok-laminalas-meddig-tart/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 32,
+        "ctr": 0,
+        "position": 6.6875,
+        "page": "https://frubeauty.com/blog/szemoldok-laminalas-mit-jelent/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 38,
+        "ctr": 0,
+        "position": 13.263157894736842,
+        "page": "https://frubeauty.com/blog/szemoldok-laminalas-vs-microblading/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 4,
+        "page": "https://frubeauty.com/blog/szempilla-lifting-utoapolas/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 26,
+        "ctr": 0,
+        "position": 7.923076923076923,
+        "page": "https://frubeauty.com/blog/szempilla-lifting-vagy-festes/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 20,
+        "ctr": 0,
+        "position": 14.1,
+        "page": "https://frubeauty.com/blog/szempilla-lifting-vagy-muszempilla/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3,
+        "page": "https://www.frubeauty.com/book-online"
+      }
+    ],
+    "prev": [
+      {
+        "clicks": 44,
+        "impressions": 1001,
+        "ctr": 0.04395604395604396,
+        "position": 5.01998001998002,
+        "page": "https://frubeauty.com/"
+      },
+      {
+        "clicks": 9,
+        "impressions": 99,
+        "ctr": 0.09090909090909091,
+        "position": 8.05050505050505,
+        "page": "https://frubeauty.com/sminkes-zuglo/"
+      },
+      {
+        "clicks": 4,
+        "impressions": 169,
+        "ctr": 0.023668639053254437,
+        "position": 6.816568047337278,
+        "page": "https://frubeauty.com/blog/szemoldok-laminalas-arak-2026/"
+      },
+      {
+        "clicks": 3,
+        "impressions": 58,
+        "ctr": 0.05172413793103448,
+        "position": 7.689655172413793,
+        "page": "https://frubeauty.com/blog/koreai-szempilla-lifting/"
+      },
+      {
+        "clicks": 3,
+        "impressions": 55,
+        "ctr": 0.05454545454545454,
+        "position": 9.981818181818182,
+        "page": "https://frubeauty.com/blog/szempilla-lifting-utoapolas/"
+      },
+      {
+        "clicks": 3,
+        "impressions": 35,
+        "ctr": 0.08571428571428572,
+        "position": 16.6,
+        "page": "https://frubeauty.com/blog/szempilla-lifting-vagy-muszempilla/"
+      },
+      {
+        "clicks": 2,
+        "impressions": 8,
+        "ctr": 0.25,
+        "position": 5.625,
+        "page": "https://frubeauty.com/blog/janssen-arckezeles-bortipusok/"
+      },
+      {
+        "clicks": 2,
+        "impressions": 225,
+        "ctr": 0.008888888888888889,
+        "position": 7.071111111111111,
+        "page": "https://frubeauty.com/blog/szemoldok-laminalas-meddig-tart/"
+      },
+      {
+        "clicks": 1,
+        "impressions": 29,
+        "ctr": 0.034482758620689655,
+        "position": 7.172413793103448,
+        "page": "https://frubeauty.com/blog/eskuvoi-smink-felkesziules/"
+      },
+      {
+        "clicks": 1,
+        "impressions": 21,
+        "ctr": 0.047619047619047616,
+        "position": 7.0476190476190474,
+        "page": "https://frubeauty.com/blog/szempilla-lifting-arak-2026/"
+      },
+      {
+        "clicks": 1,
+        "impressions": 86,
+        "ctr": 0.011627906976744186,
+        "position": 4.627906976744185,
+        "page": "https://frubeauty.com/rolam/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 6.666666666666667,
+        "page": "https://frubeauty.com/arckezeles-zuglo/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 8,
+        "ctr": 0,
+        "position": 4.625,
+        "page": "https://frubeauty.com/blog/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 14,
+        "ctr": 0,
+        "position": 6.714285714285714,
+        "page": "https://frubeauty.com/blog/arckezeles-arak-2026/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 22,
+        "ctr": 0,
+        "position": 6.363636363636363,
+        "page": "https://frubeauty.com/blog/eskuvoi-smink-arak-budapest/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 14.6,
+        "page": "https://frubeauty.com/blog/hidratalo-vagy-antiaging-arckezeles/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 95,
+        "ctr": 0,
+        "position": 26.726315789473684,
+        "page": "https://frubeauty.com/blog/szemoldok-laminalas-mit-jelent/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 36,
+        "ctr": 0,
+        "position": 15.666666666666666,
+        "page": "https://frubeauty.com/blog/szemoldok-laminalas-vs-microblading/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 58,
+        "ctr": 0,
+        "position": 8.89655172413793,
+        "page": "https://frubeauty.com/blog/szempilla-lifting-vagy-festes/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 30,
+        "ctr": 0,
+        "position": 9.9,
+        "page": "https://frubeauty.com/szemoldok-laminalas-zuglo/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 34,
+        "ctr": 0,
+        "position": 9,
+        "page": "https://frubeauty.com/szempilla-lifting-zuglo/"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 10,
+        "page": "https://www.frubeauty.com/book-online"
+      }
+    ]
+  },
+  "devices": {
+    "cur": [
+      {
+        "clicks": 67,
+        "impressions": 2264,
+        "ctr": 0.02959363957597173,
+        "position": 5.82464664310954,
+        "device": "MOBILE"
+      },
+      {
+        "clicks": 24,
+        "impressions": 660,
+        "ctr": 0.03636363636363636,
+        "position": 8.162121212121212,
+        "device": "DESKTOP"
+      },
+      {
+        "clicks": 1,
+        "impressions": 13,
+        "ctr": 0.07692307692307693,
+        "position": 5.384615384615385,
+        "device": "TABLET"
+      }
+    ],
+    "prev": [
+      {
+        "clicks": 55,
+        "impressions": 1326,
+        "ctr": 0.04147812971342383,
+        "position": 5.591251885369532,
+        "device": "MOBILE"
+      },
+      {
+        "clicks": 18,
+        "impressions": 454,
+        "ctr": 0.039647577092511016,
+        "position": 12.466960352422907,
+        "device": "DESKTOP"
+      },
+      {
+        "clicks": 0,
+        "impressions": 19,
+        "ctr": 0,
+        "position": 3.3684210526315788,
+        "device": "TABLET"
+      }
+    ]
+  },
+  "countries": {
+    "cur": [
+      {
+        "clicks": 88,
+        "impressions": 2648,
+        "ctr": 0.03323262839879154,
+        "position": 6.376510574018127,
+        "country": "hun"
+      },
+      {
+        "clicks": 1,
+        "impressions": 3,
+        "ctr": 0.3333333333333333,
+        "position": 3,
+        "country": "cze"
+      },
+      {
+        "clicks": 1,
+        "impressions": 3,
+        "ctr": 0.3333333333333333,
+        "position": 8.333333333333332,
+        "country": "grc"
+      },
+      {
+        "clicks": 1,
+        "impressions": 2,
+        "ctr": 0.5,
+        "position": 4,
+        "country": "nor"
+      },
+      {
+        "clicks": 1,
+        "impressions": 2,
+        "ctr": 0.5,
+        "position": 9.5,
+        "country": "swe"
+      },
+      {
+        "clicks": 0,
+        "impressions": 21,
+        "ctr": 0,
+        "position": 6.190476190476191,
+        "country": "aut"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 7,
+        "country": "bel"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2,
+        "country": "bgr"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 15,
+        "country": "bol"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "country": "can"
+      },
+      {
+        "clicks": 0,
+        "impressions": 11,
+        "ctr": 0,
+        "position": 6.545454545454546,
+        "country": "che"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 12,
+        "country": "chn"
+      },
+      {
+        "clicks": 0,
+        "impressions": 33,
+        "ctr": 0,
+        "position": 6.424242424242424,
+        "country": "deu"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "country": "dnk"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 3,
+        "country": "esp"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 22,
+        "country": "fra"
+      },
+      {
+        "clicks": 0,
+        "impressions": 41,
+        "ctr": 0,
+        "position": 5.414634146341464,
+        "country": "gbr"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 18,
+        "country": "gha"
+      },
+      {
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0,
+        "position": 11.166666666666666,
+        "country": "hrv"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 2.5,
+        "country": "idn"
+      },
+      {
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 17.8,
+        "country": "ind"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 11,
+        "country": "irl"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 10,
+        "country": "isr"
+      },
+      {
+        "clicks": 0,
+        "impressions": 10,
+        "ctr": 0,
+        "position": 3,
+        "country": "ita"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1,
+        "country": "jpn"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 10,
+        "country": "mex"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 5,
+        "country": "mne"
+      },
+      {
+        "clicks": 0,
+        "impressions": 21,
+        "ctr": 0,
+        "position": 4.0476190476190474,
+        "country": "nld"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 41,
+        "country": "pol"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 11,
+        "country": "prt"
+      },
+      {
+        "clicks": 0,
+        "impressions": 34,
+        "ctr": 0,
+        "position": 5.294117647058823,
+        "country": "rou"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 3.6666666666666665,
+        "country": "srb"
+      },
+      {
+        "clicks": 0,
+        "impressions": 30,
+        "ctr": 0,
+        "position": 4.966666666666667,
+        "country": "svk"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 22,
+        "country": "svn"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 10,
+        "country": "tha"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 10,
+        "country": "tjk"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 4,
+        "country": "tur"
+      },
+      {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 5,
+        "country": "twn"
+      },
+      {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 7.5,
+        "country": "ukr"
+      },
+      {
+        "clicks": 0,
+        "impressions": 34,
+        "ctr": 0,
+        "position": 5.5,
+        "country": "usa"
+      }
+    ]
+  },
+  "queryPage": [
+    {
+      "clicks": 5,
+      "impressions": 27,
+      "ctr": 0.18518518518518517,
+      "position": 9.518518518518519,
+      "query": "szemöldök laminálás budapest",
+      "page": "https://frubeauty.com/szemoldok-laminalas-zuglo/"
+    },
+    {
+      "clicks": 2,
+      "impressions": 61,
+      "ctr": 0.03278688524590164,
+      "position": 7.065573770491803,
+      "query": "esküvői smink árak",
+      "page": "https://frubeauty.com/sminkes-zuglo/"
+    },
+    {
+      "clicks": 2,
+      "impressions": 5,
+      "ctr": 0.4,
+      "position": 1.4,
+      "query": "lash extensions budapest",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 1,
+      "impressions": 56,
+      "ctr": 0.017857142857142856,
+      "position": 6.142857142857143,
+      "query": "alkalmi smink árak",
+      "page": "https://frubeauty.com/sminkes-zuglo/"
+    },
+    {
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 1,
+      "query": "brow styling",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 1,
+      "impressions": 5,
+      "ctr": 0.2,
+      "position": 3.2,
+      "query": "feskin beauty",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 8,
+      "query": "koreai szempilla lifting budapest",
+      "page": "https://frubeauty.com/blog/koreai-szempilla-lifting/"
+    },
+    {
+      "clicks": 1,
+      "impressions": 42,
+      "ctr": 0.023809523809523808,
+      "position": 2.7857142857142856,
+      "query": "kozmetikus",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 1,
+      "impressions": 6,
+      "ctr": 0.16666666666666666,
+      "position": 12.5,
+      "query": "menyasszonyi smink árak",
+      "page": "https://frubeauty.com/blog/eskuvoi-smink-arak-budapest/"
+    },
+    {
+      "clicks": 1,
+      "impressions": 24,
+      "ctr": 0.041666666666666664,
+      "position": 7.083333333333333,
+      "query": "menyasszonyi smink árak",
+      "page": "https://frubeauty.com/sminkes-zuglo/"
+    },
+    {
+      "clicks": 1,
+      "impressions": 3,
+      "ctr": 0.3333333333333333,
+      "position": 1.6666666666666665,
+      "query": "szempilla lifting",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 1,
+      "impressions": 8,
+      "ctr": 0.125,
+      "position": 9.125,
+      "query": "szempilla lifting budapest",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 1,
+      "impressions": 5,
+      "ctr": 0.2,
+      "position": 6.6,
+      "query": "szempilla lifting zugló",
+      "page": "https://frubeauty.com/blog/koreai-szempilla-lifting/"
+    },
+    {
+      "clicks": 1,
+      "impressions": 17,
+      "ctr": 0.058823529411764705,
+      "position": 9.470588235294118,
+      "query": "szempilla lifting zugló",
+      "page": "https://frubeauty.com/szempilla-lifting-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 12,
+      "ctr": 0,
+      "position": 5.25,
+      "query": "acne treatment",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 5,
+      "query": "acne treatments",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 6.75,
+      "query": "alkalmi smink budapest",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 14.333333333333334,
+      "query": "alkalmi smink budapest",
+      "page": "https://frubeauty.com/sminkes-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 9,
+      "ctr": 0,
+      "position": 2.4444444444444446,
+      "query": "beauty",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10,
+      "query": "beauty bar",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 2,
+      "query": "beauty brow",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 1,
+      "query": "beauty budapest",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 12,
+      "query": "beauty coaching",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "beauty effect",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "beauty expert",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2,
+      "query": "beauty full szépségszalon",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "beauty kozmetika",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 16,
+      "query": "beauty parlour salon",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 1,
+      "query": "beauty salon budapest",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 6,
+      "query": "beauty salon reception",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "beauty salon shelf",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 5.4,
+      "query": "beauty szalon budapest",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 6,
+      "query": "beauty szépségszalon",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 3,
+      "query": "beautyfuru",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 5,
+      "query": "beuty",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 5.666666666666667,
+      "query": "brow",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 11,
+      "query": "brow bar",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 7,
+      "query": "brow bar and beauty",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 4.333333333333334,
+      "query": "brow lamination",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 8,
+      "query": "brow lift",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 5,
+      "query": "budapest",
+      "page": "https://frubeauty.com/sminkes-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 12,
+      "query": "esküvői smink budapest",
+      "page": "https://frubeauty.com/sminkes-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 19,
+      "ctr": 0,
+      "position": 15.368421052631579,
+      "query": "esküvői smink árak",
+      "page": "https://frubeauty.com/blog/eskuvoi-smink-arak-budapest/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 12.5,
+      "query": "eyebrow",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 8,
+      "query": "eyebrow and tint",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 9.8,
+      "query": "eyebrow lamination",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 41,
+      "query": "eyebrow lift",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 5,
+      "query": "eyebrow lifting",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 4,
+      "query": "eyebrow near me",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 1.6666666666666665,
+      "query": "eyebrow shaping",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 5,
+      "query": "eyebrow shaping near me",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "eyebrow stylist",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 10.333333333333334,
+      "query": "eyebrow threading",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 5,
+      "query": "eyebrows",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 7,
+      "query": "eyebrows lifting",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 21,
+      "query": "eyebrows threading",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 5,
+      "query": "eyelash",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 5,
+      "query": "eyelash lamination",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "eyelash lift",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "eyelash lifting",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 2,
+      "query": "eyelash tint",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2,
+      "query": "ez milyen árban van",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 12,
+      "query": "face wax",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "fb beauty",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 10,
+      "query": "fru",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 8.333333333333332,
+      "query": "fru fru",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 3,
+      "query": "fruu",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 14,
+      "query": "fruzsi",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 15,
+      "ctr": 0,
+      "position": 7.6,
+      "query": "fruzsina",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10,
+      "query": "fu fru",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "időpont",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2,
+      "query": "igen",
+      "page": "https://frubeauty.com/szempilla-lifting-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 9.5,
+      "query": "janssen árlista",
+      "page": "https://frubeauty.com/blog/arckezeles-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 18,
+      "query": "karaszek fruzsina",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 17,
+      "ctr": 0,
+      "position": 7.588235294117647,
+      "query": "koreai lifting",
+      "page": "https://frubeauty.com/blog/koreai-szempilla-lifting/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 112,
+      "ctr": 0,
+      "position": 7.580357142857143,
+      "query": "koreai szempilla lifting",
+      "page": "https://frubeauty.com/blog/koreai-szempilla-lifting/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 45,
+      "query": "koreai szempilla lifting budapest",
+      "page": "https://frubeauty.com/szempilla-lifting-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 4,
+      "query": "kovács",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "kozmetika",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 6,
+      "query": "kozmetika zugló egressy út",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "kozmetikus",
+      "page": "https://frubeauty.com/rolam/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 9,
+      "ctr": 0,
+      "position": 2.666666666666667,
+      "query": "kozmetikus budapest",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "kozmetikus budapest",
+      "page": "https://frubeauty.com/rolam/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 16.75,
+      "query": "kozmetikus zugló",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 13,
+      "query": "kozmetikus zugló",
+      "page": "https://frubeauty.com/rolam/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 6,
+      "query": "lamination",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 1,
+      "query": "lash extensions budapest",
+      "page": "https://frubeauty.com/rolam/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 5,
+      "query": "lash lift",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 5,
+      "query": "lash lift budapest",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "lash lifting",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2,
+      "query": "lash tint",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "luxy beauty salon",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 10,
+      "ctr": 0,
+      "position": 5.9,
+      "query": "make up",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 6,
+      "query": "makeup",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "megeri az arat?",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 7,
+      "query": "mennyibe kerul",
+      "page": "https://frubeauty.com/blog/eskuvoi-smink-arak-budapest/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2,
+      "query": "mennyibe kerul",
+      "page": "https://frubeauty.com/blog/szempilla-lifting-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2,
+      "query": "mennyibe kerul?",
+      "page": "https://frubeauty.com/blog/szempilla-lifting-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 12,
+      "query": "mennyibe kerül",
+      "page": "https://frubeauty.com/blog/arckezeles-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 7,
+      "query": "mennyibe kerül",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 4,
+      "query": "mennyibe kerül ?",
+      "page": "https://frubeauty.com/blog/szempilla-lifting-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 9,
+      "query": "mennyibe kerül egy szempilla lifting",
+      "page": "https://frubeauty.com/blog/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 11,
+      "query": "mennyibe kerül egy szempilla lifting",
+      "page": "https://frubeauty.com/blog/szempilla-lifting-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2,
+      "query": "mennyibe kerül átlagosan",
+      "page": "https://frubeauty.com/blog/szempilla-lifting-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "mennyibe kerül?",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2,
+      "query": "mennyit lehet keresni ezzel?",
+      "page": "https://frubeauty.com/blog/szempilla-lifting-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 38,
+      "query": "microblading",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-vs-microblading/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 37,
+      "query": "microblading szemöldök",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-vs-microblading/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "milyen árban van",
+      "page": "https://frubeauty.com/blog/szempilla-lifting-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 5,
+      "query": "műszempilla 1d",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 21,
+      "query": "professzionális kozmetika",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 3,
+      "query": "profi szemöldök formázás",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 3,
+      "query": "salon pro lash glue",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 12,
+      "query": "salon professional hairspray",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 5,
+      "query": "semi permanent eye lashes",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 8.666666666666668,
+      "query": "smink",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 28.25,
+      "query": "smink 14 kerület",
+      "page": "https://frubeauty.com/sminkes-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 22,
+      "query": "smink budapest",
+      "page": "https://frubeauty.com/sminkes-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9,
+      "query": "smink árak",
+      "page": "https://frubeauty.com/blog/eskuvoi-smink-arak-budapest/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 7.375,
+      "query": "smink árak",
+      "page": "https://frubeauty.com/sminkes-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "szemoldok laminalas",
+      "page": "https://frubeauty.com/szemoldok-laminalas-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 9.333333333333334,
+      "query": "szemoldok laminalas budapest",
+      "page": "https://frubeauty.com/szemoldok-laminalas-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 7,
+      "query": "szemoldok laminálás",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "szempilla",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "szempilla epites",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 2,
+      "query": "szempilla laminálás árak",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 11,
+      "query": "szempilla laminálás árak",
+      "page": "https://frubeauty.com/szemoldok-laminalas-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 34.666666666666664,
+      "query": "szempilla lifting",
+      "page": "https://frubeauty.com/blog/szempilla-lifting-vagy-muszempilla/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2,
+      "query": "szempilla lifting",
+      "page": "https://frubeauty.com/rolam/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 4,
+      "query": "szempilla lifting arak",
+      "page": "https://frubeauty.com/blog/szempilla-lifting-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 3,
+      "query": "szempilla lifting budapest",
+      "page": "https://frubeauty.com/rolam/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 35,
+      "query": "szempilla lifting debrecen",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 10,
+      "query": "szempilla lifting festéssel",
+      "page": "https://frubeauty.com/blog/szempilla-lifting-vagy-festes/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 25,
+      "query": "szempilla lifting meddig tart",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-meddig-tart/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 22,
+      "query": "szempilla lifting vélemények",
+      "page": "https://frubeauty.com/blog/szempilla-lifting-vagy-festes/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 48,
+      "query": "szempilla lifting vélemények",
+      "page": "https://frubeauty.com/blog/szempilla-lifting-vagy-muszempilla/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 21,
+      "ctr": 0,
+      "position": 5,
+      "query": "szempilla lifting zugló",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 25,
+      "ctr": 0,
+      "position": 12.52,
+      "query": "szempilla lifting zugló",
+      "page": "https://frubeauty.com/blog/szempilla-lifting-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 11,
+      "query": "szempilla lifting zugló",
+      "page": "https://frubeauty.com/blog/szempilla-lifting-vagy-festes/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 1,
+      "query": "szempilla lifting zugló",
+      "page": "https://frubeauty.com/rolam/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 17,
+      "query": "szempilla lifting zugló",
+      "page": "https://frubeauty.com/szemoldok-laminalas-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 5,
+      "query": "szempilla lifting és festés",
+      "page": "https://frubeauty.com/blog/szempilla-lifting-vagy-festes/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 4,
+      "query": "szempillalifting",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 4.25,
+      "query": "szemöldök",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 27,
+      "query": "szemöldök 10 kerület",
+      "page": "https://frubeauty.com/szemoldok-laminalas-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 1,
+      "query": "szemöldök 14 kerület",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 11.5,
+      "query": "szemöldök 14 kerület",
+      "page": "https://frubeauty.com/szemoldok-laminalas-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 9,
+      "ctr": 0,
+      "position": 10.222222222222221,
+      "query": "szemöldök 20 kerület",
+      "page": "https://frubeauty.com/szemoldok-laminalas-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 1,
+      "query": "szemöldök formázás",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "szemöldök formázás",
+      "page": "https://frubeauty.com/rolam/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 16,
+      "query": "szemöldök hosszabbítás",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-meddig-tart/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 90,
+      "ctr": 0,
+      "position": 9.922222222222222,
+      "query": "szemöldök laminálás",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 18,
+      "query": "szemöldök laminálás",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 25,
+      "query": "szemöldök laminálás",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-meddig-tart/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 11.833333333333334,
+      "query": "szemöldök laminálás",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-vs-microblading/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 1.75,
+      "query": "szemöldök laminálás budapest",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 77,
+      "ctr": 0,
+      "position": 7.922077922077922,
+      "query": "szemöldök laminálás meddig tart",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-meddig-tart/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 11,
+      "ctr": 0,
+      "position": 10.272727272727273,
+      "query": "szemöldök laminálás tartóssága",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-meddig-tart/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 22.625,
+      "query": "szemöldök laminálás ár",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 10,
+      "ctr": 0,
+      "position": 21.9,
+      "query": "szemöldök laminálás ár",
+      "page": "https://frubeauty.com/szemoldok-laminalas-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 4,
+      "query": "szemöldök laminálás árak",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 43,
+      "ctr": 0,
+      "position": 12.046511627906977,
+      "query": "szemöldök laminálás árak",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 51,
+      "ctr": 0,
+      "position": 12.176470588235293,
+      "query": "szemöldök laminálás árak",
+      "page": "https://frubeauty.com/szemoldok-laminalas-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 7,
+      "query": "szemöldök lifting",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2,
+      "query": "szemöldök styling",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "szemöldök stylist",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "tetovált szemöldök",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-vs-microblading/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "the beauty salon",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 21,
+      "query": "venus legacy testkezelés",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 12,
+      "query": "vin salon",
+      "page": "https://frubeauty.com/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "zugló",
+      "page": "https://frubeauty.com/szemoldok-laminalas-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1,
+      "query": "ára",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2,
+      "query": "árak",
+      "page": "https://frubeauty.com/blog/szemoldok-laminalas-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 3,
+      "query": "árban?",
+      "page": "https://frubeauty.com/blog/szempilla-lifting-arak-2026/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 9,
+      "query": "örömanya smink esküvőre",
+      "page": "https://frubeauty.com/sminkes-zuglo/"
+    },
+    {
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 13,
+      "query": "ресницы наращивание",
+      "page": "https://frubeauty.com/"
+    }
+  ],
+  "analysis": {
+    "trend": {
+      "slopePerDay": 0.027761466032196012,
+      "slopePerWeek": 0.19433026222537209,
+      "meanClicksPerDay": 2.6666666666666665,
+      "last28Clicks": 92,
+      "prev28Clicks": 73,
+      "deltaPct": 0.2602739726027397,
+      "yoyDeltaPct": null,
+      "historyDays": 84,
+      "direction": "up",
+      "relSlopePerWeek": 0.07287384833451453
+    },
+    "strikingDistance": [
+      {
+        "query": "koreai szempilla lifting",
+        "position": 7.6,
+        "positionDelta": null,
+        "impressions": 112,
+        "clicks": 0,
+        "ctr": 0,
+        "potentialClicks": 15,
+        "topPage": "https://frubeauty.com/blog/koreai-szempilla-lifting/"
+      },
+      {
+        "query": "szemöldök laminálás meddig tart",
+        "position": 7.9,
+        "positionDelta": -0.6,
+        "impressions": 77,
+        "clicks": 0,
+        "ctr": 0,
+        "potentialClicks": 10,
+        "topPage": "https://frubeauty.com/blog/szemoldok-laminalas-meddig-tart/"
+      },
+      {
+        "query": "esküvői smink árak",
+        "position": 9,
+        "positionDelta": -1.2,
+        "impressions": 80,
+        "clicks": 2,
+        "ctr": 0.025,
+        "potentialClicks": 8,
+        "topPage": "https://frubeauty.com/sminkes-zuglo/"
+      },
+      {
+        "query": "alkalmi smink árak",
+        "position": 6.1,
+        "positionDelta": -0.6,
+        "impressions": 56,
+        "clicks": 1,
+        "ctr": 0.017857142857142856,
+        "potentialClicks": 6,
+        "topPage": "https://frubeauty.com/sminkes-zuglo/"
+      },
+      {
+        "query": "szemöldök laminálás",
+        "position": 10.1,
+        "positionDelta": 11.9,
+        "impressions": 97,
+        "clicks": 0,
+        "ctr": 0,
+        "potentialClicks": 5,
+        "topPage": "https://frubeauty.com/"
+      },
+      {
+        "query": "szemöldök laminálás árak",
+        "position": 10.4,
+        "positionDelta": -0.6,
+        "impressions": 87,
+        "clicks": 0,
+        "ctr": 0,
+        "potentialClicks": 4,
+        "topPage": "https://frubeauty.com/szemoldok-laminalas-zuglo/"
+      },
+      {
+        "query": "menyasszonyi smink árak",
+        "position": 8.2,
+        "positionDelta": -0.2,
+        "impressions": 30,
+        "clicks": 2,
+        "ctr": 0.06666666666666667,
+        "potentialClicks": 2,
+        "topPage": "https://frubeauty.com/sminkes-zuglo/"
+      },
+      {
+        "query": "szempilla lifting zugló",
+        "position": 5.5,
+        "positionDelta": -0.1,
+        "impressions": 33,
+        "clicks": 2,
+        "ctr": 0.06060606060606061,
+        "potentialClicks": 2,
+        "topPage": "https://frubeauty.com/blog/szempilla-lifting-arak-2026/"
+      },
+      {
+        "query": "fruzsina",
+        "position": 7.6,
+        "positionDelta": 3.3,
+        "impressions": 15,
+        "clicks": 0,
+        "ctr": 0,
+        "potentialClicks": 2,
+        "topPage": "https://frubeauty.com/"
+      },
+      {
+        "query": "koreai lifting",
+        "position": 7.6,
+        "positionDelta": null,
+        "impressions": 17,
+        "clicks": 0,
+        "ctr": 0,
+        "potentialClicks": 2,
+        "topPage": "https://frubeauty.com/blog/koreai-szempilla-lifting/"
+      }
+    ],
+    "ctrGaps": [
+      {
+        "query": "kozmetikus",
+        "position": 2.8,
+        "impressions": 42,
+        "clicks": 1,
+        "ctr": 0.023809523809523808,
+        "expectedCtr": 0.119,
+        "ratio": 0.2000800320128051,
+        "missedClicks": 4,
+        "topPage": "https://frubeauty.com/"
+      },
+      {
+        "query": "koreai szempilla lifting",
+        "position": 7.6,
+        "impressions": 112,
+        "clicks": 0,
+        "ctr": 0,
+        "expectedCtr": 0.034937499999999996,
+        "ratio": 0,
+        "missedClicks": 4,
+        "topPage": "https://frubeauty.com/blog/koreai-szempilla-lifting/"
+      },
+      {
+        "query": "szemöldök laminálás meddig tart",
+        "position": 7.9,
+        "impressions": 77,
+        "clicks": 0,
+        "ctr": 0,
+        "expectedCtr": 0.032545454545454544,
+        "ratio": 0,
+        "missedClicks": 3,
+        "topPage": "https://frubeauty.com/blog/szemoldok-laminalas-meddig-tart/"
+      },
+      {
+        "query": "alkalmi smink árak",
+        "position": 6.1,
+        "impressions": 56,
+        "clicks": 1,
+        "ctr": 0.017857142857142856,
+        "expectedCtr": 0.046714285714285715,
+        "ratio": 0.38226299694189597,
+        "missedClicks": 2,
+        "topPage": "https://frubeauty.com/sminkes-zuglo/"
+      },
+      {
+        "query": "szemöldök laminálás",
+        "position": 10.1,
+        "impressions": 97,
+        "clicks": 0,
+        "ctr": 0,
+        "expectedCtr": 0.019863917525773198,
+        "ratio": 0,
+        "missedClicks": 2,
+        "topPage": "https://frubeauty.com/"
+      },
+      {
+        "query": "szemöldök laminálás árak",
+        "position": 10.4,
+        "impressions": 87,
+        "clicks": 0,
+        "ctr": 0,
+        "expectedCtr": 0.019557471264367816,
+        "ratio": 0,
+        "missedClicks": 2,
+        "topPage": "https://frubeauty.com/szemoldok-laminalas-zuglo/"
+      }
+    ],
+    "cannibalization": [
+      {
+        "query": "szemöldök laminálás árak",
+        "totalImpressions": 94,
+        "dominantShare": 0.54,
+        "urls": [
+          {
+            "page": "https://frubeauty.com/szemoldok-laminalas-zuglo/",
+            "impressions": 51,
+            "clicks": 0,
+            "position": 12.2
+          },
+          {
+            "page": "https://frubeauty.com/blog/szemoldok-laminalas-arak-2026/",
+            "impressions": 43,
+            "clicks": 0,
+            "position": 12
+          }
+        ]
+      },
+      {
+        "query": "esküvői smink árak",
+        "totalImpressions": 80,
+        "dominantShare": 0.76,
+        "urls": [
+          {
+            "page": "https://frubeauty.com/sminkes-zuglo/",
+            "impressions": 61,
+            "clicks": 2,
+            "position": 7.1
+          },
+          {
+            "page": "https://frubeauty.com/blog/eskuvoi-smink-arak-budapest/",
+            "impressions": 19,
+            "clicks": 0,
+            "position": 15.4
+          }
+        ]
+      },
+      {
+        "query": "szempilla lifting zugló",
+        "totalImpressions": 68,
+        "dominantShare": 0.37,
+        "urls": [
+          {
+            "page": "https://frubeauty.com/blog/szempilla-lifting-arak-2026/",
+            "impressions": 25,
+            "clicks": 0,
+            "position": 12.5
+          },
+          {
+            "page": "https://frubeauty.com/",
+            "impressions": 21,
+            "clicks": 0,
+            "position": 5
+          },
+          {
+            "page": "https://frubeauty.com/szempilla-lifting-zuglo/",
+            "impressions": 17,
+            "clicks": 1,
+            "position": 9.5
+          },
+          {
+            "page": "https://frubeauty.com/blog/koreai-szempilla-lifting/",
+            "impressions": 5,
+            "clicks": 1,
+            "position": 6.6
+          }
+        ]
+      },
+      {
+        "query": "menyasszonyi smink árak",
+        "totalImpressions": 30,
+        "dominantShare": 0.8,
+        "urls": [
+          {
+            "page": "https://frubeauty.com/sminkes-zuglo/",
+            "impressions": 24,
+            "clicks": 1,
+            "position": 7.1
+          },
+          {
+            "page": "https://frubeauty.com/blog/eskuvoi-smink-arak-budapest/",
+            "impressions": 6,
+            "clicks": 1,
+            "position": 12.5
+          }
+        ]
+      }
+    ],
+    "risers": [
+      {
+        "query": "szemöldök laminálás budapest",
+        "clicks": 5,
+        "clicksPrev": 0,
+        "clicksDelta": 5,
+        "impressions": 31,
+        "impressionsDelta": 30,
+        "position": 8.5,
+        "positionDelta": -7.5,
+        "isNew": false
+      },
+      {
+        "query": "lash extensions budapest",
+        "clicks": 2,
+        "clicksPrev": 0,
+        "clicksDelta": 2,
+        "impressions": 5,
+        "impressionsDelta": 5,
+        "position": 1.4,
+        "positionDelta": null,
+        "isNew": true
+      },
+      {
+        "query": "menyasszonyi smink árak",
+        "clicks": 2,
+        "clicksPrev": 0,
+        "clicksDelta": 2,
+        "impressions": 30,
+        "impressionsDelta": 23,
+        "position": 8.2,
+        "positionDelta": -0.2,
+        "isNew": false
+      },
+      {
+        "query": "esküvői smink árak",
+        "clicks": 2,
+        "clicksPrev": 1,
+        "clicksDelta": 1,
+        "impressions": 80,
+        "impressionsDelta": 73,
+        "position": 9,
+        "positionDelta": -1.2,
+        "isNew": false
+      },
+      {
+        "query": "alkalmi smink árak",
+        "clicks": 1,
+        "clicksPrev": 0,
+        "clicksDelta": 1,
+        "impressions": 56,
+        "impressionsDelta": 42,
+        "position": 6.1,
+        "positionDelta": -0.6,
+        "isNew": false
+      },
+      {
+        "query": "brow styling",
+        "clicks": 1,
+        "clicksPrev": 0,
+        "clicksDelta": 1,
+        "impressions": 1,
+        "impressionsDelta": 1,
+        "position": 1,
+        "positionDelta": null,
+        "isNew": true
+      },
+      {
+        "query": "feskin beauty",
+        "clicks": 1,
+        "clicksPrev": 0,
+        "clicksDelta": 1,
+        "impressions": 5,
+        "impressionsDelta": 5,
+        "position": 3.2,
+        "positionDelta": null,
+        "isNew": true
+      },
+      {
+        "query": "koreai szempilla lifting budapest",
+        "clicks": 1,
+        "clicksPrev": 0,
+        "clicksDelta": 1,
+        "impressions": 2,
+        "impressionsDelta": 2,
+        "position": 26.5,
+        "positionDelta": null,
+        "isNew": true
+      },
+      {
+        "query": "szempilla lifting",
+        "clicks": 1,
+        "clicksPrev": 0,
+        "clicksDelta": 1,
+        "impressions": 6,
+        "impressionsDelta": -4,
+        "position": 18.2,
+        "positionDelta": -4.4,
+        "isNew": false
+      },
+      {
+        "query": "szempilla lifting budapest",
+        "clicks": 1,
+        "clicksPrev": 0,
+        "clicksDelta": 1,
+        "impressions": 8,
+        "impressionsDelta": 5,
+        "position": 9.1,
+        "positionDelta": -1.5,
+        "isNew": false
+      }
+    ],
+    "decliners": [
+      {
+        "query": "szemöldök laminálás meddig tart",
+        "clicks": 0,
+        "clicksPrev": 2,
+        "clicksDelta": -2,
+        "impressions": 77,
+        "impressionsDelta": 6,
+        "position": 7.9,
+        "positionDelta": -0.6,
+        "isNew": false
+      },
+      {
+        "query": "szempilla lifting zugló",
+        "clicks": 2,
+        "clicksPrev": 3,
+        "clicksDelta": -1,
+        "impressions": 33,
+        "impressionsDelta": 7,
+        "position": 5.5,
+        "positionDelta": -0.1,
+        "isNew": false
+      },
+      {
+        "query": "kozmetikus",
+        "clicks": 1,
+        "clicksPrev": 2,
+        "clicksDelta": -1,
+        "impressions": 42,
+        "impressionsDelta": 5,
+        "position": 2.8,
+        "positionDelta": 0,
+        "isNew": false
+      },
+      {
+        "query": "szempilla",
+        "clicks": 0,
+        "clicksPrev": 1,
+        "clicksDelta": -1,
+        "impressions": 1,
+        "impressionsDelta": -1,
+        "position": 1,
+        "positionDelta": 0.5,
+        "isNew": false
+      },
+      {
+        "query": "szemöldök formázás",
+        "clicks": 0,
+        "clicksPrev": 1,
+        "clicksDelta": -1,
+        "impressions": 8,
+        "impressionsDelta": 5,
+        "position": 1,
+        "positionDelta": 0,
+        "isNew": false
+      },
+      {
+        "query": "szemöldök laminálás",
+        "clicks": 0,
+        "clicksPrev": 1,
+        "clicksDelta": -1,
+        "impressions": 97,
+        "impressionsDelta": 14,
+        "position": 10.1,
+        "positionDelta": 11.9,
+        "isNew": false
+      }
+    ],
+    "newQueries": [
+      {
+        "query": "koreai szempilla lifting",
+        "clicks": 0,
+        "clicksPrev": 0,
+        "clicksDelta": 0,
+        "impressions": 112,
+        "impressionsDelta": 112,
+        "position": 7.6,
+        "positionDelta": null,
+        "isNew": true
+      },
+      {
+        "query": "koreai lifting",
+        "clicks": 0,
+        "clicksPrev": 0,
+        "clicksDelta": 0,
+        "impressions": 17,
+        "impressionsDelta": 17,
+        "position": 7.6,
+        "positionDelta": null,
+        "isNew": true
+      }
+    ],
+    "lostQueries": [],
+    "pageMovers": [
+      {
+        "page": "https://frubeauty.com/",
+        "clicks": 45,
+        "clicksDelta": 1,
+        "impressions": 1333,
+        "impressionsDelta": 332,
+        "ctr": 0.03375843960990248,
+        "position": 5.1,
+        "positionDelta": -0.1
+      },
+      {
+        "page": "https://frubeauty.com/sminkes-zuglo/",
+        "clicks": 14,
+        "clicksDelta": 5,
+        "impressions": 371,
+        "impressionsDelta": 272,
+        "ctr": 0.03773584905660377,
+        "position": 6.7,
+        "positionDelta": 1.4
+      },
+      {
+        "page": "https://frubeauty.com/szempilla-lifting-zuglo/",
+        "clicks": 11,
+        "clicksDelta": 11,
+        "impressions": 105,
+        "impressionsDelta": 71,
+        "ctr": 0.10476190476190476,
+        "position": 8.1,
+        "positionDelta": 0.9
+      },
+      {
+        "page": "https://frubeauty.com/szemoldok-laminalas-zuglo/",
+        "clicks": 8,
+        "clicksDelta": 8,
+        "impressions": 222,
+        "impressionsDelta": 192,
+        "ctr": 0.036036036036036036,
+        "position": 9.8,
+        "positionDelta": 0.1
+      },
+      {
+        "page": "https://frubeauty.com/blog/koreai-szempilla-lifting/",
+        "clicks": 5,
+        "clicksDelta": 2,
+        "impressions": 253,
+        "impressionsDelta": 195,
+        "ctr": 0.019762845849802372,
+        "position": 6.9,
+        "positionDelta": 0.8
+      },
+      {
+        "page": "https://frubeauty.com/blog/eskuvoi-smink-arak-budapest/",
+        "clicks": 3,
+        "clicksDelta": 3,
+        "impressions": 114,
+        "impressionsDelta": 92,
+        "ctr": 0.02631578947368421,
+        "position": 7.3,
+        "positionDelta": -0.9
+      },
+      {
+        "page": "https://frubeauty.com/rolam/",
+        "clicks": 3,
+        "clicksDelta": 2,
+        "impressions": 119,
+        "impressionsDelta": 33,
+        "ctr": 0.025210084033613446,
+        "position": 4.1,
+        "positionDelta": 0.5
+      },
+      {
+        "page": "https://frubeauty.com/blog/arckezeles-arak-2026/",
+        "clicks": 1,
+        "clicksDelta": 1,
+        "impressions": 28,
+        "impressionsDelta": 14,
+        "ctr": 0.03571428571428571,
+        "position": 5,
+        "positionDelta": 1.8
+      },
+      {
+        "page": "https://frubeauty.com/blog/szemoldok-laminalas-arak-2026/",
+        "clicks": 1,
+        "clicksDelta": -3,
+        "impressions": 195,
+        "impressionsDelta": 26,
+        "ctr": 0.005128205128205128,
+        "position": 7.7,
+        "positionDelta": -0.8
+      },
+      {
+        "page": "https://frubeauty.com/blog/szempilla-lifting-arak-2026/",
+        "clicks": 1,
+        "clicksDelta": 0,
+        "impressions": 95,
+        "impressionsDelta": 74,
+        "ctr": 0.010526315789473684,
+        "position": 7.4,
+        "positionDelta": -0.4
+      },
+      {
+        "page": "https://frubeauty.com/arckezeles-zuglo/",
+        "clicks": 0,
+        "clicksDelta": 0,
+        "impressions": 38,
+        "impressionsDelta": 35,
+        "ctr": 0,
+        "position": 9.6,
+        "positionDelta": -2.9
+      },
+      {
+        "page": "https://frubeauty.com/blog/",
+        "clicks": 0,
+        "clicksDelta": 0,
+        "impressions": 23,
+        "impressionsDelta": 15,
+        "ctr": 0,
+        "position": 8.1,
+        "positionDelta": -3.5
+      },
+      {
+        "page": "https://frubeauty.com/blog/eskuvoi-smink-felkesziules/",
+        "clicks": 0,
+        "clicksDelta": -1,
+        "impressions": 1,
+        "impressionsDelta": -28,
+        "ctr": 0,
+        "position": 10,
+        "positionDelta": -2.8
+      },
+      {
+        "page": "https://frubeauty.com/blog/janssen-arckezeles-bortipusok/",
+        "clicks": 0,
+        "clicksDelta": -2,
+        "impressions": 11,
+        "impressionsDelta": 3,
+        "ctr": 0,
+        "position": 8.7,
+        "positionDelta": -3.1
+      },
+      {
+        "page": "https://frubeauty.com/blog/szemoldok-laminalas-meddig-tart/",
+        "clicks": 0,
+        "clicksDelta": -2,
+        "impressions": 339,
+        "impressionsDelta": 114,
+        "ctr": 0,
+        "position": 6.9,
+        "positionDelta": 0.1
+      },
+      {
+        "page": "https://frubeauty.com/blog/szemoldok-laminalas-mit-jelent/",
+        "clicks": 0,
+        "clicksDelta": 0,
+        "impressions": 32,
+        "impressionsDelta": -63,
+        "ctr": 0,
+        "position": 6.7,
+        "positionDelta": 20
+      },
+      {
+        "page": "https://frubeauty.com/blog/szemoldok-laminalas-vs-microblading/",
+        "clicks": 0,
+        "clicksDelta": 0,
+        "impressions": 38,
+        "impressionsDelta": 2,
+        "ctr": 0,
+        "position": 13.3,
+        "positionDelta": 2.4
+      },
+      {
+        "page": "https://frubeauty.com/blog/szempilla-lifting-utoapolas/",
+        "clicks": 0,
+        "clicksDelta": -3,
+        "impressions": 2,
+        "impressionsDelta": -53,
+        "ctr": 0,
+        "position": 4,
+        "positionDelta": 6
+      },
+      {
+        "page": "https://frubeauty.com/blog/szempilla-lifting-vagy-festes/",
+        "clicks": 0,
+        "clicksDelta": 0,
+        "impressions": 26,
+        "impressionsDelta": -32,
+        "ctr": 0,
+        "position": 7.9,
+        "positionDelta": 1
+      },
+      {
+        "page": "https://frubeauty.com/blog/szempilla-lifting-vagy-muszempilla/",
+        "clicks": 0,
+        "clicksDelta": -3,
+        "impressions": 20,
+        "impressionsDelta": -15,
+        "ctr": 0,
+        "position": 14.1,
+        "positionDelta": 2.5
+      },
+      {
+        "page": "https://www.frubeauty.com/book-online",
+        "clicks": 0,
+        "clicksDelta": 0,
+        "impressions": 1,
+        "impressionsDelta": -1,
+        "ctr": 0,
+        "position": 3,
+        "positionDelta": 7
+      }
+    ],
+    "pageDecline": [
+      {
+        "page": "https://frubeauty.com/blog/szemoldok-laminalas-arak-2026/",
+        "clicks": 1,
+        "clicksDelta": -3,
+        "impressions": 195,
+        "impressionsDelta": 26,
+        "ctr": 0.005128205128205128,
+        "position": 7.7,
+        "positionDelta": -0.8
+      },
+      {
+        "page": "https://frubeauty.com/blog/szempilla-lifting-utoapolas/",
+        "clicks": 0,
+        "clicksDelta": -3,
+        "impressions": 2,
+        "impressionsDelta": -53,
+        "ctr": 0,
+        "position": 4,
+        "positionDelta": 6
+      },
+      {
+        "page": "https://frubeauty.com/blog/szempilla-lifting-vagy-muszempilla/",
+        "clicks": 0,
+        "clicksDelta": -3,
+        "impressions": 20,
+        "impressionsDelta": -15,
+        "ctr": 0,
+        "position": 14.1,
+        "positionDelta": 2.5
+      },
+      {
+        "page": "https://frubeauty.com/blog/janssen-arckezeles-bortipusok/",
+        "clicks": 0,
+        "clicksDelta": -2,
+        "impressions": 11,
+        "impressionsDelta": 3,
+        "ctr": 0,
+        "position": 8.7,
+        "positionDelta": -3.1
+      },
+      {
+        "page": "https://frubeauty.com/blog/szemoldok-laminalas-meddig-tart/",
+        "clicks": 0,
+        "clicksDelta": -2,
+        "impressions": 339,
+        "impressionsDelta": 114,
+        "ctr": 0,
+        "position": 6.9,
+        "positionDelta": 0.1
+      },
+      {
+        "page": "https://frubeauty.com/blog/eskuvoi-smink-felkesziules/",
+        "clicks": 0,
+        "clicksDelta": -1,
+        "impressions": 1,
+        "impressionsDelta": -28,
+        "ctr": 0,
+        "position": 10,
+        "positionDelta": -2.8
+      }
+    ],
+    "zeroClickPages": [
+      {
+        "page": "https://frubeauty.com/blog/szemoldok-laminalas-meddig-tart/",
+        "impressions": 339,
+        "position": 6.9
+      }
+    ],
+    "targets": [
+      {
+        "keyword": "szempilla lifting budapest",
+        "tracked": true,
+        "position": 9.1,
+        "positionDelta": -1.5,
+        "clicks": 1,
+        "impressions": 8,
+        "variantImpressions": 10,
+        "variantCount": 2,
+        "topPage": "https://frubeauty.com/"
+      },
+      {
+        "keyword": "szempilla lifting zugló",
+        "tracked": true,
+        "position": 5.5,
+        "positionDelta": -0.1,
+        "clicks": 2,
+        "impressions": 33,
+        "variantImpressions": 33,
+        "variantCount": 1,
+        "topPage": "https://frubeauty.com/blog/szempilla-lifting-arak-2026/"
+      },
+      {
+        "keyword": "koreai szempilla lifting",
+        "tracked": true,
+        "position": 7.6,
+        "positionDelta": null,
+        "clicks": 0,
+        "impressions": 112,
+        "variantImpressions": 114,
+        "variantCount": 2,
+        "topPage": "https://frubeauty.com/blog/koreai-szempilla-lifting/"
+      },
+      {
+        "keyword": "szemöldök laminálás",
+        "tracked": true,
+        "position": 10.1,
+        "positionDelta": 11.9,
+        "clicks": 0,
+        "impressions": 97,
+        "variantImpressions": 316,
+        "variantCount": 6,
+        "topPage": "https://frubeauty.com/"
+      },
+      {
+        "keyword": "szemöldök laminálás budapest",
+        "tracked": true,
+        "position": 8.5,
+        "positionDelta": -7.5,
+        "clicks": 5,
+        "impressions": 31,
+        "variantImpressions": 31,
+        "variantCount": 1,
+        "topPage": "https://frubeauty.com/szemoldok-laminalas-zuglo/"
+      },
+      {
+        "keyword": "szemöldök laminálás zugló",
+        "tracked": false,
+        "position": null,
+        "positionDelta": null,
+        "clicks": 0,
+        "impressions": 0,
+        "variantImpressions": 0,
+        "variantCount": 0,
+        "topPage": null
+      },
+      {
+        "keyword": "szemöldök laminálás árak",
+        "tracked": true,
+        "position": 10.4,
+        "positionDelta": -0.6,
+        "clicks": 0,
+        "impressions": 87,
+        "variantImpressions": 87,
+        "variantCount": 1,
+        "topPage": "https://frubeauty.com/szemoldok-laminalas-zuglo/"
+      },
+      {
+        "keyword": "esküvői smink árak",
+        "tracked": true,
+        "position": 9,
+        "positionDelta": -1.2,
+        "clicks": 2,
+        "impressions": 80,
+        "variantImpressions": 80,
+        "variantCount": 1,
+        "topPage": "https://frubeauty.com/sminkes-zuglo/"
+      },
+      {
+        "keyword": "menyasszonyi smink budapest",
+        "tracked": false,
+        "position": null,
+        "positionDelta": null,
+        "clicks": 0,
+        "impressions": 0,
+        "variantImpressions": 0,
+        "variantCount": 0,
+        "topPage": null
+      },
+      {
+        "keyword": "alkalmi smink árak",
+        "tracked": true,
+        "position": 6.1,
+        "positionDelta": -0.6,
+        "clicks": 1,
+        "impressions": 56,
+        "variantImpressions": 56,
+        "variantCount": 1,
+        "topPage": "https://frubeauty.com/sminkes-zuglo/"
+      },
+      {
+        "keyword": "kozmetikus zugló",
+        "tracked": true,
+        "position": 15.1,
+        "positionDelta": null,
+        "clicks": 0,
+        "impressions": 7,
+        "variantImpressions": 7,
+        "variantCount": 1,
+        "topPage": "https://frubeauty.com/"
+      },
+      {
+        "keyword": "arckezelés zugló",
+        "tracked": false,
+        "position": null,
+        "positionDelta": null,
+        "clicks": 0,
+        "impressions": 0,
+        "variantImpressions": 0,
+        "variantCount": 0,
+        "topPage": null
+      }
+    ]
+  }
+}

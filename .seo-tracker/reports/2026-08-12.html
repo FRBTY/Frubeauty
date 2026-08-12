@@ -1,0 +1,445 @@
+<title>frubeauty.com — organikus teljesítmény</title>
+<style>
+:root{
+  color-scheme: light;
+  --surface-1:#fcfcfb; --page:#f9f9f7;
+  --text-primary:#0b0b0b; --text-secondary:#52514e; --muted:#898781;
+  --grid:#e1e0d9; --baseline:#c3c2b7; --border:rgba(11,11,11,.10);
+  --series-1:#2a78d6; --series-2:#eb6834;
+  --good:#006300; --bad:#d03b3b; --warn:#fab219;
+  --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --surface-1:#1a1a19; --page:#0d0d0d;
+    --text-primary:#ffffff; --text-secondary:#c3c2b7; --muted:#898781;
+    --grid:#2c2c2a; --baseline:#383835; --border:rgba(255,255,255,.10);
+    --series-1:#3987e5; --series-2:#d95926;
+    --good:#0ca30c; --bad:#e66767; --warn:#fab219;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --surface-1:#1a1a19; --page:#0d0d0d;
+  --text-primary:#ffffff; --text-secondary:#c3c2b7; --muted:#898781;
+  --grid:#2c2c2a; --baseline:#383835; --border:rgba(255,255,255,.10);
+  --series-1:#3987e5; --series-2:#d95926;
+  --good:#0ca30c; --bad:#e66767; --warn:#fab219;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--text-primary);
+  font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:40px 20px 72px}
+header.top{margin-bottom:28px}
+.eyebrow{font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+h1{font-size:clamp(26px,4vw,38px);line-height:1.18;margin:0 0 6px;letter-spacing:-.02em}
+.sub{color:var(--text-secondary);margin:0}
+section{background:var(--surface-1);border:1px solid var(--border);border-radius:var(--radius);
+  padding:24px;margin:20px 0}
+h2{font-size:19px;margin:0 0 6px;letter-spacing:-.01em}
+h3{font-size:15px;margin:22px 0 8px;color:var(--text-secondary)}
+.lede{color:var(--text-secondary);margin:0 0 16px;max-width:70ch}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:0 0 22px}
+.kpi{background:var(--surface-1);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px}
+.kpi .l{font-size:12px;color:var(--muted);margin:0 0 8px;line-height:1.35}
+.kpi .v{font-size:30px;font-weight:650;letter-spacing:-.02em;line-height:1}
+.kpi .s{font-size:12px;color:var(--muted);margin-top:7px}
+.d{font-size:13px;font-weight:600;white-space:nowrap}
+.d.up{color:var(--good)} .d.down{color:var(--bad)} .d.flat{color:var(--muted)}
+.kpi .d{display:inline-block;margin-left:8px;font-size:14px;vertical-align:6px}
+.chartbox{margin:0;position:relative}
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.grid{stroke:var(--grid);stroke-width:1;vector-effect:non-scaling-stroke}
+.axis{stroke:var(--baseline);stroke-width:1;vector-effect:non-scaling-stroke}
+.tick{fill:var(--muted);font-size:11px;font-variant-numeric:tabular-nums}
+.ty{text-anchor:end} .tx{text-anchor:middle}
+.cross{stroke:var(--baseline);stroke-width:1;stroke-dasharray:3 3;vector-effect:non-scaling-stroke}
+.dot{fill:var(--series-1);stroke:var(--surface-1);stroke-width:2}
+.hit{cursor:crosshair}
+.tip{position:absolute;pointer-events:none;background:var(--surface-1);color:var(--text-primary);
+  border:1px solid var(--border);border-radius:9px;padding:9px 11px;font-size:12.5px;line-height:1.5;
+  box-shadow:0 6px 20px rgba(0,0,0,.14);white-space:nowrap;z-index:5}
+.tip b{font-variant-numeric:tabular-nums}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;font-size:12.5px;color:var(--text-secondary)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.sw{display:inline-block;border-radius:2px}
+.sw.bold{width:14px;height:3px} .sw.thin{width:14px;height:1px;opacity:.45}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:560px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;white-space:nowrap}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:color-mix(in oklab,var(--series-1) 6%,transparent)}
+.q{font-weight:550}
+.u{color:var(--muted);font-size:12px;display:block;margin-top:2px;word-break:break-word}
+.empty{color:var(--muted);font-style:italic;margin:8px 0 0}
+details.tbl{margin-top:12px;border-top:1px solid var(--border);padding-top:10px}
+details.tbl summary{cursor:pointer;font-size:12.5px;color:var(--muted);list-style:none}
+details.tbl summary::-webkit-details-marker{display:none}
+details.tbl summary::before{content:'▸ ';font-size:10px}
+details.tbl[open] summary::before{content:'▾ '}
+details.tbl table{margin-top:10px;min-width:auto}
+.pill{display:inline-block;padding:2px 9px;border-radius:99px;font-size:11.5px;font-weight:600;
+  border:1px solid var(--border)}
+.pill.win{color:var(--good)} .pill.risk{color:var(--bad)} .pill.watch{color:var(--text-secondary)}
+ol.acts{margin:0;padding-left:20px} ol.acts li{margin-bottom:12px}
+ol.acts .t{font-weight:600} ol.acts .m{color:var(--text-secondary);font-size:13.5px}
+.tags{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap}
+.tag{font-size:11px;color:var(--muted);border:1px solid var(--border);border-radius:99px;padding:1px 8px}
+footer{color:var(--muted);font-size:12.5px;margin-top:26px;text-align:center}
+.banner{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.banner .big{font-size:clamp(40px,7vw,60px);font-weight:680;letter-spacing:-.03em;line-height:1}
+.banner .lbl{color:var(--text-secondary);font-size:14px}
+@media (max-width:640px){ section{padding:18px 14px} .wrap{padding:24px 12px 48px} }
+</style>
+
+<div class="wrap">
+<header class="top">
+  <p class="eyebrow">Heti organikus riport · frubeauty.com</p>
+  <h1>frubeauty.com a Google-ben</h1>
+  <p class="sub">Search Console adat · 2026.07.13. – 2026.08.09. · készült 2026.08.12.</p>
+</header>
+
+<div class="kpis">
+<div class="kpi"><p class="l">Kattintás · 2026.07.13. – 2026.08.09.</p><div class="v">92<span class="d up">▲ 26,0%</span></div><div class="s">előző időszak: 73</div></div><div class="kpi"><p class="l">Megjelenés</p><div class="v">2937<span class="d up">▲ 63,3%</span></div><div class="s">előző időszak: 1799</div></div><div class="kpi"><p class="l">Átkattintási arány</p><div class="v">3,13%<span class="d down">▼ 0,93%</span></div><div class="s">előző: 4,06%</div></div><div class="kpi"><p class="l">Átlagos pozíció</p><div class="v">6,3<span class="d up">▼ 1,0</span></div><div class="s">előző: 7,3</div></div>
+</div>
+
+
+<section id="kattintas">
+  <h2>Kattintások alakulása</h2>
+  <p class="lede">
+  A vastag vonal a <b>7 napos mozgóátlag</b> — ez mutatja a valódi szintet a hétvégi hullámzás nélkül.
+  Jelenlegi szint: <b>5,4 kattintás/nap</b>.
+  A 90 napos trend hetente <b>+0,19</b> kattintással
+  emelkedik (a jelenlegi szinthez mérten <b>+7,3%</b> hetente).
+  Csúcs: <b>5,4</b> kattintás/nap
+  (2026.08.09.).
+  <br><span style="color:var(--muted)">A property 84 napnyi adatot tartalmaz — ennél korábbra a Search Console nem lát vissza.</span></p>
+  
+<figure class="chartbox">
+  <svg viewBox="0 0 1000 320" class="chart" id="svg-clicks" role="img"
+       aria-label="Napi Google-kattintások 2026-05-18 és 2026-08-09 között." preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="g-clicks" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"  stop-color="var(--series-1)" stop-opacity="0.28"/>
+        <stop offset="100%" stop-color="var(--series-1)" stop-opacity="0.02"/>
+      </linearGradient>
+    </defs>
+    
+    <line x1="52" x2="984" y1="286.0" y2="286.0" class="grid"/>
+    <text x="42" y="290.0" class="tick ty">0</text>
+    <line x1="52" x2="984" y1="219.0" y2="219.0" class="grid"/>
+    <text x="42" y="223.0" class="tick ty">3</text>
+    <line x1="52" x2="984" y1="152.0" y2="152.0" class="grid"/>
+    <text x="42" y="156.0" class="tick ty">5</text>
+    <line x1="52" x2="984" y1="85.0" y2="85.0" class="grid"/>
+    <text x="42" y="89.0" class="tick ty">8</text>
+    <line x1="52" x2="984" y1="18.0" y2="18.0" class="grid"/>
+    <text x="42" y="22.0" class="tick ty">10</text>
+    <line x1="52" x2="984" y1="286" y2="286" class="axis"/>
+    
+    <line x1="52.0" x2="52.0" y1="286" y2="291" class="axis"/>
+    <text x="52.0" y="308" class="tick tx">26.05</text>
+    <line x1="209.2" x2="209.2" y1="286" y2="291" class="axis"/>
+    <text x="209.2" y="308" class="tick tx">26.06</text>
+    <line x1="546.1" x2="546.1" y1="286" y2="291" class="axis"/>
+    <text x="546.1" y="308" class="tick tx">26.07</text>
+    <line x1="894.2" x2="894.2" y1="286" y2="291" class="axis"/>
+    <text x="894.2" y="308" class="tick tx">26.08</text>
+    <path d="M119.4 236.2 L130.6 232.4 L141.8 232.4 L153.1 240.1 L164.3 247.7 L175.5 243.9 L186.7 255.4 L198.0 251.5 L209.2 243.9 L220.4 240.1 L231.7 232.4 L242.9 236.2 L254.1 232.4 L265.3 224.7 L276.6 224.7 L287.8 217.1 L299.0 205.6 L310.3 201.8 L321.5 197.9 L332.7 197.9 L344.0 201.8 L355.2 205.6 L366.4 228.6 L377.6 232.4 L388.9 232.4 L400.1 236.2 L411.3 240.1 L422.6 247.7 L433.8 232.4 L445.0 217.1 L456.2 217.1 L467.5 228.6 L478.7 217.1 L489.9 220.9 L501.2 217.1 L512.4 232.4 L523.6 243.9 L534.8 240.1 L546.1 228.6 L557.3 224.7 L568.5 220.9 L579.8 217.1 L591.0 205.6 L602.2 186.5 L613.4 190.3 L624.7 194.1 L635.9 209.4 L647.1 190.3 L658.4 186.5 L669.6 194.1 L680.8 217.1 L692.0 228.6 L703.3 228.6 L714.5 232.4 L725.7 243.9 L737.0 247.7 L748.2 236.2 L759.4 224.7 L770.7 217.1 L781.9 217.1 L793.1 213.3 L804.3 213.3 L815.6 220.9 L826.8 220.9 L838.0 224.7 L849.3 213.3 L860.5 205.6 L871.7 205.6 L882.9 201.8 L894.2 186.5 L905.4 194.1 L916.6 190.3 L927.9 201.8 L939.1 182.6 L950.3 171.1 L961.5 159.7 L972.8 163.5 L984.0 140.5 L 984.0 286.0 L 119.4 286.0 Z" fill="url(#g-clicks)"/>
+    <path d="M52.0 232.4 L63.2 259.2 L74.5 232.4 L85.7 178.8 L96.9 286.0 L108.1 178.8 L119.4 286.0 L130.6 205.6 L141.8 259.2 L153.1 286.0 L164.3 232.4 L175.5 259.2 L186.7 259.2 L198.0 259.2 L209.2 152.0 L220.4 232.4 L231.7 232.4 L242.9 259.2 L254.1 232.4 L265.3 205.6 L276.6 259.2 L287.8 98.4 L299.0 152.0 L310.3 205.6 L321.5 232.4 L332.7 232.4 L344.0 232.4 L355.2 286.0 L366.4 259.2 L377.6 178.8 L388.9 205.6 L400.1 259.2 L411.3 259.2 L422.6 286.0 L433.8 178.8 L445.0 152.0 L456.2 178.8 L467.5 286.0 L478.7 178.8 L489.9 286.0 L501.2 259.2 L512.4 286.0 L523.6 232.4 L534.8 152.0 L546.1 205.6 L557.3 152.0 L568.5 259.2 L579.8 232.4 L591.0 205.6 L602.2 98.4 L613.4 178.8 L624.7 232.4 L635.9 259.2 L647.1 125.2 L658.4 205.6 L669.6 259.2 L680.8 259.2 L692.0 259.2 L703.3 232.4 L714.5 286.0 L725.7 205.6 L737.0 232.4 L748.2 178.8 L759.4 178.8 L770.7 205.6 L781.9 232.4 L793.1 259.2 L804.3 205.6 L815.6 286.0 L826.8 178.8 L838.0 205.6 L849.3 125.2 L860.5 178.8 L871.7 259.2 L882.9 178.8 L894.2 178.8 L905.4 232.4 L916.6 178.8 L927.9 205.6 L939.1 44.8 L950.3 178.8 L961.5 98.4 L972.8 205.6 L984.0 71.6" fill="none" stroke="var(--series-1)" stroke-opacity="0.22" stroke-width="1" vector-effect="non-scaling-stroke"/>
+    <path d="M119.4 236.2 L130.6 232.4 L141.8 232.4 L153.1 240.1 L164.3 247.7 L175.5 243.9 L186.7 255.4 L198.0 251.5 L209.2 243.9 L220.4 240.1 L231.7 232.4 L242.9 236.2 L254.1 232.4 L265.3 224.7 L276.6 224.7 L287.8 217.1 L299.0 205.6 L310.3 201.8 L321.5 197.9 L332.7 197.9 L344.0 201.8 L355.2 205.6 L366.4 228.6 L377.6 232.4 L388.9 232.4 L400.1 236.2 L411.3 240.1 L422.6 247.7 L433.8 232.4 L445.0 217.1 L456.2 217.1 L467.5 228.6 L478.7 217.1 L489.9 220.9 L501.2 217.1 L512.4 232.4 L523.6 243.9 L534.8 240.1 L546.1 228.6 L557.3 224.7 L568.5 220.9 L579.8 217.1 L591.0 205.6 L602.2 186.5 L613.4 190.3 L624.7 194.1 L635.9 209.4 L647.1 190.3 L658.4 186.5 L669.6 194.1 L680.8 217.1 L692.0 228.6 L703.3 228.6 L714.5 232.4 L725.7 243.9 L737.0 247.7 L748.2 236.2 L759.4 224.7 L770.7 217.1 L781.9 217.1 L793.1 213.3 L804.3 213.3 L815.6 220.9 L826.8 220.9 L838.0 224.7 L849.3 213.3 L860.5 205.6 L871.7 205.6 L882.9 201.8 L894.2 186.5 L905.4 194.1 L916.6 190.3 L927.9 201.8 L939.1 182.6 L950.3 171.1 L961.5 159.7 L972.8 163.5 L984.0 140.5" fill="none" stroke="var(--series-1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+    <g class="hov" id="hov-clicks" style="display:none">
+      <line class="cross" y1="18" y2="286"/>
+      <circle class="dot" r="4.5"/>
+    </g>
+    <rect x="52" y="18" width="932" height="268" fill="transparent"
+          class="hit" data-id="clicks"/>
+  </svg>
+  <div class="tip" id="tip-clicks" hidden></div>
+</figure>
+<div class="legend">
+  <span><i class="sw bold" style="background:var(--series-1)"></i>Kattintás — 7 napos átlag</span>
+  <span><i class="sw thin" style="background:var(--series-1)"></i>napi kattintás</span>
+</div>
+<details class="tbl">
+<summary>Táblázatos nézet — havi bontás</summary>
+<div class="tw"><table>
+<thead><tr><th>Hónap</th><th class="num">Összesen</th><th class="num">Napi átlag</th><th class="num">Nap</th></tr></thead>
+<tbody><tr><td>2026. 05.</td><td class="num">22</td><td class="num">1,6</td><td class="num">14</td></tr><tr><td>2026. 06.</td><td class="num">72</td><td class="num">2,4</td><td class="num">30</td></tr><tr><td>2026. 07.</td><td class="num">86</td><td class="num">2,8</td><td class="num">31</td></tr><tr><td>2026. 08.</td><td class="num">44</td><td class="num">4,9</td><td class="num">9</td></tr></tbody>
+</table></div></details>
+</section>
+
+
+<section id="megjelenes">
+  <h2>Megjelenések (a láthatóság mennyisége)</h2>
+  <p class="lede">
+  A megjelenés a mennyiségi plafon: kattintás csak abból lehet, ami egyáltalán megjelenik.
+  Ha ez nő, de a kattintás nem, akkor a title/meta a szűk keresztmetszet — lásd a CTR-rés szekciót.</p>
+  
+<figure class="chartbox">
+  <svg viewBox="0 0 1000 320" class="chart" id="svg-imprs" role="img"
+       aria-label="Napi Google-megjelenések idősora." preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="g-imprs" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"  stop-color="var(--series-2)" stop-opacity="0.28"/>
+        <stop offset="100%" stop-color="var(--series-2)" stop-opacity="0.02"/>
+      </linearGradient>
+    </defs>
+    
+    <line x1="52" x2="984" y1="286.0" y2="286.0" class="grid"/>
+    <text x="42" y="290.0" class="tick ty">0</text>
+    <line x1="52" x2="984" y1="219.0" y2="219.0" class="grid"/>
+    <text x="42" y="223.0" class="tick ty">50</text>
+    <line x1="52" x2="984" y1="152.0" y2="152.0" class="grid"/>
+    <text x="42" y="156.0" class="tick ty">100</text>
+    <line x1="52" x2="984" y1="85.0" y2="85.0" class="grid"/>
+    <text x="42" y="89.0" class="tick ty">150</text>
+    <line x1="52" x2="984" y1="18.0" y2="18.0" class="grid"/>
+    <text x="42" y="22.0" class="tick ty">200</text>
+    <line x1="52" x2="984" y1="286" y2="286" class="axis"/>
+    
+    <line x1="52.0" x2="52.0" y1="286" y2="291" class="axis"/>
+    <text x="52.0" y="308" class="tick tx">26.05</text>
+    <line x1="209.2" x2="209.2" y1="286" y2="291" class="axis"/>
+    <text x="209.2" y="308" class="tick tx">26.06</text>
+    <line x1="546.1" x2="546.1" y1="286" y2="291" class="axis"/>
+    <text x="546.1" y="308" class="tick tx">26.07</text>
+    <line x1="894.2" x2="894.2" y1="286" y2="291" class="axis"/>
+    <text x="894.2" y="308" class="tick tx">26.08</text>
+    <path d="M119.4 221.9 L130.6 209.6 L141.8 202.9 L153.1 202.7 L164.3 203.7 L175.5 199.1 L186.7 196.4 L198.0 190.5 L209.2 186.3 L220.4 187.8 L231.7 185.1 L242.9 184.7 L254.1 180.7 L265.3 178.4 L276.6 177.8 L287.8 174.8 L299.0 171.1 L310.3 176.7 L321.5 174.6 L332.7 175.5 L344.0 179.8 L355.2 184.9 L366.4 196.6 L377.6 195.8 L388.9 196.8 L400.1 201.6 L411.3 209.2 L422.6 211.7 L433.8 210.6 L445.0 206.0 L456.2 214.6 L467.5 215.9 L478.7 218.4 L489.9 217.9 L501.2 219.8 L512.4 221.9 L523.6 225.3 L534.8 221.7 L546.1 214.8 L557.3 209.6 L568.5 207.3 L579.8 202.9 L591.0 197.9 L602.2 188.8 L613.4 187.6 L624.7 182.2 L635.9 176.3 L647.1 174.6 L658.4 169.4 L669.6 169.2 L680.8 164.6 L692.0 159.5 L703.3 163.7 L714.5 169.8 L725.7 169.8 L737.0 173.1 L748.2 172.1 L759.4 173.8 L770.7 178.8 L781.9 182.1 L793.1 175.2 L804.3 174.2 L815.6 173.1 L826.8 167.9 L838.0 166.5 L849.3 161.2 L860.5 156.0 L871.7 160.0 L882.9 151.8 L894.2 147.6 L905.4 145.5 L916.6 140.7 L927.9 134.2 L939.1 123.3 L950.3 115.8 L961.5 108.9 L972.8 104.0 L984.0 96.3 L 984.0 286.0 L 119.4 286.0 Z" fill="url(#g-imprs)"/>
+    <path d="M52.0 273.9 L63.2 233.7 L74.5 182.8 L85.7 180.1 L96.9 225.7 L108.1 220.3 L119.4 236.4 L130.6 188.2 L141.8 186.8 L153.1 181.5 L164.3 186.8 L175.5 193.5 L186.7 201.6 L198.0 194.9 L209.2 158.7 L220.4 197.6 L231.7 162.7 L242.9 184.2 L254.1 165.4 L265.3 185.5 L276.6 190.9 L287.8 137.3 L299.0 172.1 L310.3 201.6 L321.5 169.4 L332.7 172.1 L344.0 215.0 L355.2 227.0 L366.4 219.0 L377.6 166.7 L388.9 208.3 L400.1 202.9 L411.3 225.7 L422.6 232.4 L433.8 219.0 L445.0 186.8 L456.2 227.0 L467.5 217.7 L478.7 220.3 L489.9 221.7 L501.2 245.8 L512.4 233.7 L523.6 211.0 L534.8 201.6 L546.1 169.4 L557.3 184.2 L568.5 205.6 L579.8 215.0 L591.0 198.9 L602.2 146.6 L613.4 193.5 L624.7 131.9 L635.9 142.6 L647.1 193.5 L658.4 178.8 L669.6 197.6 L680.8 114.5 L692.0 157.4 L703.3 161.4 L714.5 185.5 L725.7 193.5 L737.0 201.6 L748.2 190.9 L759.4 126.5 L770.7 192.2 L781.9 184.2 L793.1 137.3 L804.3 186.8 L815.6 193.5 L826.8 154.7 L838.0 117.2 L849.3 154.7 L860.5 148.0 L871.7 165.4 L882.9 129.2 L894.2 164.1 L905.4 139.9 L916.6 83.7 L927.9 109.1 L939.1 71.6 L950.3 113.1 L961.5 81.0 L972.8 129.2 L984.0 86.3" fill="none" stroke="var(--series-2)" stroke-opacity="0.22" stroke-width="1" vector-effect="non-scaling-stroke"/>
+    <path d="M119.4 221.9 L130.6 209.6 L141.8 202.9 L153.1 202.7 L164.3 203.7 L175.5 199.1 L186.7 196.4 L198.0 190.5 L209.2 186.3 L220.4 187.8 L231.7 185.1 L242.9 184.7 L254.1 180.7 L265.3 178.4 L276.6 177.8 L287.8 174.8 L299.0 171.1 L310.3 176.7 L321.5 174.6 L332.7 175.5 L344.0 179.8 L355.2 184.9 L366.4 196.6 L377.6 195.8 L388.9 196.8 L400.1 201.6 L411.3 209.2 L422.6 211.7 L433.8 210.6 L445.0 206.0 L456.2 214.6 L467.5 215.9 L478.7 218.4 L489.9 217.9 L501.2 219.8 L512.4 221.9 L523.6 225.3 L534.8 221.7 L546.1 214.8 L557.3 209.6 L568.5 207.3 L579.8 202.9 L591.0 197.9 L602.2 188.8 L613.4 187.6 L624.7 182.2 L635.9 176.3 L647.1 174.6 L658.4 169.4 L669.6 169.2 L680.8 164.6 L692.0 159.5 L703.3 163.7 L714.5 169.8 L725.7 169.8 L737.0 173.1 L748.2 172.1 L759.4 173.8 L770.7 178.8 L781.9 182.1 L793.1 175.2 L804.3 174.2 L815.6 173.1 L826.8 167.9 L838.0 166.5 L849.3 161.2 L860.5 156.0 L871.7 160.0 L882.9 151.8 L894.2 147.6 L905.4 145.5 L916.6 140.7 L927.9 134.2 L939.1 123.3 L950.3 115.8 L961.5 108.9 L972.8 104.0 L984.0 96.3" fill="none" stroke="var(--series-2)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+    <g class="hov" id="hov-imprs" style="display:none">
+      <line class="cross" y1="18" y2="286"/>
+      <circle class="dot" r="4.5"/>
+    </g>
+    <rect x="52" y="18" width="932" height="268" fill="transparent"
+          class="hit" data-id="imprs"/>
+  </svg>
+  <div class="tip" id="tip-imprs" hidden></div>
+</figure>
+<div class="legend">
+  <span><i class="sw bold" style="background:var(--series-2)"></i>Megjelenés — 7 napos átlag</span>
+  <span><i class="sw thin" style="background:var(--series-2)"></i>napi megjelenés</span>
+</div>
+<details class="tbl">
+<summary>Táblázatos nézet — havi bontás</summary>
+<div class="tw"><table>
+<thead><tr><th>Hónap</th><th class="num">Összesen</th><th class="num">Napi átlag</th><th class="num">Nap</th></tr></thead>
+<tbody><tr><td>2026. 05.</td><td class="num">834</td><td class="num">59,6</td><td class="num">14</td></tr><tr><td>2026. 06.</td><td class="num">1941</td><td class="num">64,7</td><td class="num">30</td></tr><tr><td>2026. 07.</td><td class="num">2697</td><td class="num">87,0</td><td class="num">31</td></tr><tr><td>2026. 08.</td><td class="num">1191</td><td class="num">132,3</td><td class="num">9</td></tr></tbody>
+</table></div></details>
+</section>
+
+
+<section id="pozicio">
+  <h2>Átlagos pozíció</h2>
+  <p class="lede">
+  <b>Lefelé rossz, felfelé jó</b> — a tengely megfordítva, hogy az 1. hely legyen felül.
+  Ez a szám az összes kulcsszó megjelenéssel súlyozott átlaga, ezért lassan mozdul;
+  az egyedi kulcsszavak mozgása alább látszik.</p>
+  
+<figure class="chartbox">
+  <svg viewBox="0 0 1000 320" class="chart" id="svg-pos" role="img"
+       aria-label="Átlagos Google-pozíció idősora, fordított tengellyel." preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="g-pos" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"  stop-color="var(--series-1)" stop-opacity="0.28"/>
+        <stop offset="100%" stop-color="var(--series-1)" stop-opacity="0.02"/>
+      </linearGradient>
+    </defs>
+    
+    <line x1="52" x2="984" y1="18.0" y2="18.0" class="grid"/>
+    <text x="42" y="22.0" class="tick ty">1</text>
+    <line x1="52" x2="984" y1="94.6" y2="94.6" class="grid"/>
+    <text x="42" y="98.6" class="tick ty">5</text>
+    <line x1="52" x2="984" y1="190.3" y2="190.3" class="grid"/>
+    <text x="42" y="194.3" class="tick ty">10</text>
+    <line x1="52" x2="984" y1="286.0" y2="286.0" class="grid"/>
+    <text x="42" y="290.0" class="tick ty">15</text>
+    <line x1="52" x2="984" y1="286" y2="286" class="axis"/>
+    
+    <line x1="52.0" x2="52.0" y1="286" y2="291" class="axis"/>
+    <text x="52.0" y="308" class="tick tx">26.05</text>
+    <line x1="209.2" x2="209.2" y1="286" y2="291" class="axis"/>
+    <text x="209.2" y="308" class="tick tx">26.06</text>
+    <line x1="546.1" x2="546.1" y1="286" y2="291" class="axis"/>
+    <text x="546.1" y="308" class="tick tx">26.07</text>
+    <line x1="894.2" x2="894.2" y1="286" y2="291" class="axis"/>
+    <text x="894.2" y="308" class="tick tx">26.08</text>
+    
+    <path d="M52.0 30.8 L63.2 101.0 L74.5 110.7 L85.7 103.5 L96.9 132.4 L108.1 67.6 L119.4 111.1 L130.6 95.9 L141.8 92.5 L153.1 93.6 L164.3 94.1 L175.5 73.2 L186.7 89.7 L198.0 94.3 L209.2 128.2 L220.4 96.0 L231.7 89.0 L242.9 97.1 L254.1 118.8 L265.3 81.8 L276.6 116.1 L287.8 82.2 L299.0 102.5 L310.3 105.5 L321.5 102.5 L332.7 94.6 L344.0 131.1 L355.2 117.6 L366.4 134.8 L377.6 137.6 L388.9 210.4 L400.1 164.7 L411.3 132.4 L422.6 129.5 L433.8 124.8 L445.0 137.0 L456.2 133.7 L467.5 228.9 L478.7 161.4 L489.9 189.9 L501.2 147.5 L512.4 94.6 L523.6 101.8 L534.8 136.2 L546.1 236.7 L557.3 134.6 L568.5 141.5 L579.8 120.9 L591.0 117.0 L602.2 88.3 L613.4 118.4 L624.7 99.1 L635.9 106.4 L647.1 120.7 L658.4 131.4 L669.6 170.6 L680.8 145.3 L692.0 114.5 L703.3 132.9 L714.5 95.3 L725.7 115.1 L737.0 104.0 L748.2 110.5 L759.4 109.7 L770.7 122.5 L781.9 103.6 L793.1 93.9 L804.3 126.4 L815.6 116.8 L826.8 103.8 L838.0 126.5 L849.3 119.2 L860.5 161.9 L871.7 121.4 L882.9 162.3 L894.2 108.5 L905.4 157.8 L916.6 108.4 L927.9 110.1 L939.1 109.2 L950.3 122.3 L961.5 110.3 L972.8 110.4 L984.0 130.2" fill="none" stroke="var(--series-1)" stroke-opacity="0.22" stroke-width="1" vector-effect="non-scaling-stroke"/>
+    <path d="M119.4 93.9 L130.6 103.2 L141.8 102.0 L153.1 99.5 L164.3 98.2 L175.5 89.7 L186.7 92.9 L198.0 90.5 L209.2 95.1 L220.4 95.6 L231.7 94.9 L242.9 95.4 L254.1 101.9 L265.3 100.7 L276.6 103.9 L287.8 97.3 L299.0 98.2 L310.3 100.6 L321.5 101.3 L332.7 97.9 L344.0 104.9 L355.2 105.1 L366.4 112.6 L377.6 117.7 L388.9 132.6 L400.1 141.5 L411.3 146.9 L422.6 146.7 L433.8 147.7 L445.0 148.1 L456.2 147.5 L467.5 150.2 L478.7 149.7 L489.9 157.9 L501.2 160.5 L512.4 156.1 L523.6 151.1 L534.8 151.5 L546.1 152.6 L557.3 148.8 L568.5 141.8 L579.8 138.0 L591.0 141.2 L602.2 139.3 L613.4 136.8 L624.7 117.1 L635.9 113.1 L647.1 110.1 L658.4 111.6 L669.6 119.3 L680.8 127.4 L692.0 126.8 L703.3 131.7 L714.5 130.1 L725.7 129.3 L737.0 125.4 L748.2 116.8 L759.4 111.7 L770.7 112.8 L781.9 108.7 L793.1 108.5 L804.3 110.1 L815.6 111.9 L826.8 110.9 L838.0 113.3 L849.3 112.9 L860.5 121.2 L871.7 125.1 L882.9 130.2 L894.2 129.1 L905.4 136.8 L916.6 134.2 L927.9 132.9 L939.1 125.4 L950.3 125.5 L961.5 118.1 L972.8 118.4 L984.0 114.4" fill="none" stroke="var(--series-1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+    <g class="hov" id="hov-pos" style="display:none">
+      <line class="cross" y1="18" y2="286"/>
+      <circle class="dot" r="4.5"/>
+    </g>
+    <rect x="52" y="18" width="932" height="268" fill="transparent"
+          class="hit" data-id="pos"/>
+  </svg>
+  <div class="tip" id="tip-pos" hidden></div>
+</figure>
+<div class="legend">
+  <span><i class="sw bold" style="background:var(--series-1)"></i>Pozíció — 7 napos átlag</span>
+  <span><i class="sw thin" style="background:var(--series-1)"></i>napi pozíció</span>
+</div>
+<details class="tbl">
+<summary>Táblázatos nézet — havi bontás</summary>
+<div class="tw"><table>
+<thead><tr><th>Hónap</th><th class="num">Átlagos pozíció</th><th class="num">Napi átlag</th><th class="num">Nap</th></tr></thead>
+<tbody><tr><td>2026. 05.</td><td class="num">4,9</td><td class="num">4,9</td><td class="num">14</td></tr><tr><td>2026. 06.</td><td class="num">6,7</td><td class="num">6,7</td><td class="num">30</td></tr><tr><td>2026. 07.</td><td class="num">6,6</td><td class="num">6,6</td><td class="num">31</td></tr><tr><td>2026. 08.</td><td class="num">6,3</td><td class="num">6,3</td><td class="num">9</td></tr></tbody>
+</table></div></details>
+</section>
+
+
+<section id="lehetoseg">
+  <h2>Hol van a következő 73 kattintás</h2>
+  <p class="lede">
+  Ez a riport lényege. A becslés a pozíciónkénti átlagos organikus CTR-görbéből jön —
+  nagyságrendet mutat, nem garanciát: azt rangsorolja, <b>hol a legolcsóbb a következő kattintás</b>.</p>
+  
+
+  <h3>1. Karnyújtásnyira (4–20. pozíció) — a legolcsóbb nyereség</h3>
+  <p class="lede">Ezek a kulcsszavak már rangsorolnak, csak nem elég elöl. Nem új tartalom kell, hanem
+  a meglévő oldal megerősítése: pontosabb title, mélyebb tartalmi lefedettség, belső linkek.</p>
+  <div class="tw"><table>
+<thead><tr><th>Kulcsszó</th><th class="num">Poz.</th><th class="num">Megj.</th><th class="num">Katt.</th><th class="num">CTR</th><th class="num">+ kattintás</th></tr></thead>
+<tbody><tr><td><span class="q">koreai szempilla lifting</span><span class="u">/blog/koreai-szempilla-lifting/</span></td><td class="num">7,6 </td><td class="num">112</td><td class="num">0</td><td class="num">0,0%</td><td class="num"><b>+15</b></td></tr><tr><td><span class="q">szemöldök laminálás meddig tart</span><span class="u">/blog/szemoldok-laminalas-meddig-tart/</span></td><td class="num">7,9 <span class="d down">▼ 0,6</span></td><td class="num">77</td><td class="num">0</td><td class="num">0,0%</td><td class="num"><b>+10</b></td></tr><tr><td><span class="q">esküvői smink árak</span><span class="u">/sminkes-zuglo/</span></td><td class="num">9,0 <span class="d down">▼ 1,2</span></td><td class="num">80</td><td class="num">2</td><td class="num">2,5%</td><td class="num"><b>+8</b></td></tr><tr><td><span class="q">alkalmi smink árak</span><span class="u">/sminkes-zuglo/</span></td><td class="num">6,1 <span class="d down">▼ 0,6</span></td><td class="num">56</td><td class="num">1</td><td class="num">1,8%</td><td class="num"><b>+6</b></td></tr><tr><td><span class="q">szemöldök laminálás</span><span class="u">/ (kezdőlap)</span></td><td class="num">10,1 <span class="d up">▲ 11,9</span></td><td class="num">97</td><td class="num">0</td><td class="num">0,0%</td><td class="num"><b>+5</b></td></tr><tr><td><span class="q">szemöldök laminálás árak</span><span class="u">/szemoldok-laminalas-zuglo/</span></td><td class="num">10,4 <span class="d down">▼ 0,6</span></td><td class="num">87</td><td class="num">0</td><td class="num">0,0%</td><td class="num"><b>+4</b></td></tr><tr><td><span class="q">menyasszonyi smink árak</span><span class="u">/sminkes-zuglo/</span></td><td class="num">8,2 <span class="d down">▼ 0,2</span></td><td class="num">30</td><td class="num">2</td><td class="num">6,7%</td><td class="num"><b>+2</b></td></tr><tr><td><span class="q">szempilla lifting zugló</span><span class="u">/blog/szempilla-lifting-arak-2026/</span></td><td class="num">5,5 <span class="d down">▼ 0,1</span></td><td class="num">33</td><td class="num">2</td><td class="num">6,1%</td><td class="num"><b>+2</b></td></tr><tr><td><span class="q">fruzsina</span><span class="u">/ (kezdőlap)</span></td><td class="num">7,6 <span class="d up">▲ 3,3</span></td><td class="num">15</td><td class="num">0</td><td class="num">0,0%</td><td class="num"><b>+2</b></td></tr><tr><td><span class="q">koreai lifting</span><span class="u">/blog/koreai-szempilla-lifting/</span></td><td class="num">7,6 </td><td class="num">17</td><td class="num">0</td><td class="num">0,0%</td><td class="num"><b>+2</b></td></tr></tbody>
+</table></div>
+
+  <h3>2. CTR-rés — jó a helyezés, mégsem kattintanak</h3>
+  <p class="lede">Itt a pozíció rendben van, de a találat szövege nem visz kattintást.
+  Ez a leggyorsabban javítható hiba: <b>title tag és meta description átírása</b>, deploy után 3–14 nap alatt mérhető.</p>
+  <div class="tw"><table>
+<thead><tr><th>Kulcsszó</th><th class="num">Poz.</th><th class="num">Megj.</th><th class="num">Tény CTR</th><th class="num">Várható</th><th class="num">Elmaradt</th></tr></thead>
+<tbody><tr><td><span class="q">kozmetikus</span><span class="u">/ (kezdőlap)</span></td><td class="num">2,8</td><td class="num">42</td><td class="num">2,4%</td><td class="num">11,9%</td><td class="num"><b>4</b></td></tr><tr><td><span class="q">koreai szempilla lifting</span><span class="u">/blog/koreai-szempilla-lifting/</span></td><td class="num">7,6</td><td class="num">112</td><td class="num">0,0%</td><td class="num">3,5%</td><td class="num"><b>4</b></td></tr><tr><td><span class="q">szemöldök laminálás meddig tart</span><span class="u">/blog/szemoldok-laminalas-meddig-tart/</span></td><td class="num">7,9</td><td class="num">77</td><td class="num">0,0%</td><td class="num">3,3%</td><td class="num"><b>3</b></td></tr><tr><td><span class="q">alkalmi smink árak</span><span class="u">/sminkes-zuglo/</span></td><td class="num">6,1</td><td class="num">56</td><td class="num">1,8%</td><td class="num">4,7%</td><td class="num"><b>2</b></td></tr><tr><td><span class="q">szemöldök laminálás</span><span class="u">/ (kezdőlap)</span></td><td class="num">10,1</td><td class="num">97</td><td class="num">0,0%</td><td class="num">2,0%</td><td class="num"><b>2</b></td></tr><tr><td><span class="q">szemöldök laminálás árak</span><span class="u">/szemoldok-laminalas-zuglo/</span></td><td class="num">10,4</td><td class="num">87</td><td class="num">0,0%</td><td class="num">2,0%</td><td class="num"><b>2</b></td></tr></tbody>
+</table></div>
+
+  <h3>3. Kannibalizáció — a saját oldalaid versenyeznek egymással</h3>
+  <p class="lede">Egy kulcsszóra több saját URL jelenik meg, így a linkerő és a relevancia-jelek megoszlanak.
+  Megoldás: egy oldal legyen a cél (belső linkek rá), a többi támogató szerepben.</p>
+  <div class="tw"><table>
+<thead><tr><th>Kulcsszó</th><th class="num">Megj.</th><th>Versengő URL-ek</th></tr></thead>
+<tbody><tr><td><span class="q">szemöldök laminálás árak</span></td><td class="num">94</td><td><span class="u">/szemoldok-laminalas-zuglo/ — 51 megj., poz. 12,2</span><span class="u">/blog/szemoldok-laminalas-arak-2026/ — 43 megj., poz. 12,0</span></td></tr><tr><td><span class="q">esküvői smink árak</span></td><td class="num">80</td><td><span class="u">/sminkes-zuglo/ — 61 megj., poz. 7,1</span><span class="u">/blog/eskuvoi-smink-arak-budapest/ — 19 megj., poz. 15,4</span></td></tr><tr><td><span class="q">szempilla lifting zugló</span></td><td class="num">68</td><td><span class="u">/blog/szempilla-lifting-arak-2026/ — 25 megj., poz. 12,5</span><span class="u">/ (kezdőlap) — 21 megj., poz. 5,0</span><span class="u">/szempilla-lifting-zuglo/ — 17 megj., poz. 9,5</span><span class="u">/blog/koreai-szempilla-lifting/ — 5 megj., poz. 6,6</span></td></tr><tr><td><span class="q">menyasszonyi smink árak</span></td><td class="num">30</td><td><span class="u">/sminkes-zuglo/ — 24 megj., poz. 7,1</span><span class="u">/blog/eskuvoi-smink-arak-budapest/ — 6 megj., poz. 12,5</span></td></tr></tbody>
+</table></div>
+
+</section>
+
+
+<section id="celok">
+  <h2>Cél-kulcsszavak</h2>
+  <p class="lede">A <code>.seo-tracker/config.json</code> <code>targetKeywords</code> listája. Ami nincs a listán, azt nem követi a riport — bővítsd, ha új célod van.</p>
+  <div class="tw"><table>
+<thead><tr><th>Kulcsszó</th><th class="num">Pozíció</th><th class="num">Megj.</th><th class="num">Katt.</th><th class="num">Variánsok</th></tr></thead>
+<tbody><tr><td><span class="q">szempilla lifting budapest</span><span class="u">/ (kezdőlap)</span></td><td class="num">9,1 <span class="d down">▼ 1,5</span></td><td class="num">8</td><td class="num">1</td><td class="num">10 megj. / 2 változat</td></tr><tr><td><span class="q">szempilla lifting zugló</span><span class="u">/blog/szempilla-lifting-arak-2026/</span></td><td class="num">5,5 <span class="d down">▼ 0,1</span></td><td class="num">33</td><td class="num">2</td><td class="num">33 megj. / 1 változat</td></tr><tr><td><span class="q">koreai szempilla lifting</span><span class="u">/blog/koreai-szempilla-lifting/</span></td><td class="num">7,6 </td><td class="num">112</td><td class="num">0</td><td class="num">114 megj. / 2 változat</td></tr><tr><td><span class="q">szemöldök laminálás</span><span class="u">/ (kezdőlap)</span></td><td class="num">10,1 <span class="d up">▲ 11,9</span></td><td class="num">97</td><td class="num">0</td><td class="num">316 megj. / 6 változat</td></tr><tr><td><span class="q">szemöldök laminálás budapest</span><span class="u">/szemoldok-laminalas-zuglo/</span></td><td class="num">8,5 <span class="d down">▼ 7,5</span></td><td class="num">31</td><td class="num">5</td><td class="num">31 megj. / 1 változat</td></tr><tr><td><span class="q">szemöldök laminálás zugló</span></td><td class="num"><span class="pill watch">nincs megjelenés</span></td><td class="num">0</td><td class="num">0</td><td class="num">0 megj. / 0 változat</td></tr><tr><td><span class="q">szemöldök laminálás árak</span><span class="u">/szemoldok-laminalas-zuglo/</span></td><td class="num">10,4 <span class="d down">▼ 0,6</span></td><td class="num">87</td><td class="num">0</td><td class="num">87 megj. / 1 változat</td></tr><tr><td><span class="q">esküvői smink árak</span><span class="u">/sminkes-zuglo/</span></td><td class="num">9,0 <span class="d down">▼ 1,2</span></td><td class="num">80</td><td class="num">2</td><td class="num">80 megj. / 1 változat</td></tr><tr><td><span class="q">menyasszonyi smink budapest</span></td><td class="num"><span class="pill watch">nincs megjelenés</span></td><td class="num">0</td><td class="num">0</td><td class="num">0 megj. / 0 változat</td></tr><tr><td><span class="q">alkalmi smink árak</span><span class="u">/sminkes-zuglo/</span></td><td class="num">6,1 <span class="d down">▼ 0,6</span></td><td class="num">56</td><td class="num">1</td><td class="num">56 megj. / 1 változat</td></tr><tr><td><span class="q">kozmetikus zugló</span><span class="u">/ (kezdőlap)</span></td><td class="num">15,1 </td><td class="num">7</td><td class="num">0</td><td class="num">7 megj. / 1 változat</td></tr><tr><td><span class="q">arckezelés zugló</span></td><td class="num"><span class="pill watch">nincs megjelenés</span></td><td class="num">0</td><td class="num">0</td><td class="num">0 megj. / 0 változat</td></tr></tbody>
+</table></div>
+</section>
+
+
+<section id="mozgas">
+  <h2>Mi mozdult a múlt héthez képest</h2>
+  
+  
+  <h3>Nyertesek</h3>
+  <div class="tw"><table>
+<thead><tr><th>Kulcsszó</th><th class="num">Katt.</th><th class="num">Változás</th><th class="num">Poz.</th></tr></thead>
+<tbody><tr><td><span class="q">szemöldök laminálás budapest</span></td><td class="num">5</td><td class="num"><span class="d up">▲ 5</span></td><td class="num">8,5 <span class="d down">▼ 7,5</span></td></tr><tr><td><span class="q">lash extensions budapest</span> <span class="pill win">új</span></td><td class="num">2</td><td class="num"><span class="d up">▲ 2</span></td><td class="num">1,4 </td></tr><tr><td><span class="q">menyasszonyi smink árak</span></td><td class="num">2</td><td class="num"><span class="d up">▲ 2</span></td><td class="num">8,2 <span class="d down">▼ 0,2</span></td></tr><tr><td><span class="q">esküvői smink árak</span></td><td class="num">2</td><td class="num"><span class="d up">▲ 1</span></td><td class="num">9,0 <span class="d down">▼ 1,2</span></td></tr><tr><td><span class="q">alkalmi smink árak</span></td><td class="num">1</td><td class="num"><span class="d up">▲ 1</span></td><td class="num">6,1 <span class="d down">▼ 0,6</span></td></tr><tr><td><span class="q">brow styling</span> <span class="pill win">új</span></td><td class="num">1</td><td class="num"><span class="d up">▲ 1</span></td><td class="num">1,0 </td></tr><tr><td><span class="q">feskin beauty</span> <span class="pill win">új</span></td><td class="num">1</td><td class="num"><span class="d up">▲ 1</span></td><td class="num">3,2 </td></tr><tr><td><span class="q">koreai szempilla lifting budapest</span> <span class="pill win">új</span></td><td class="num">1</td><td class="num"><span class="d up">▲ 1</span></td><td class="num">26,5 </td></tr><tr><td><span class="q">szempilla lifting</span></td><td class="num">1</td><td class="num"><span class="d up">▲ 1</span></td><td class="num">18,2 <span class="d down">▼ 4,4</span></td></tr><tr><td><span class="q">szempilla lifting budapest</span></td><td class="num">1</td><td class="num"><span class="d up">▲ 1</span></td><td class="num">9,1 <span class="d down">▼ 1,5</span></td></tr></tbody>
+</table></div>
+
+  <h3>Vesztesek</h3>
+  <div class="tw"><table>
+<thead><tr><th>Kulcsszó</th><th class="num">Katt.</th><th class="num">Változás</th><th class="num">Poz.</th></tr></thead>
+<tbody><tr><td><span class="q">szemöldök laminálás meddig tart</span></td><td class="num">0</td><td class="num"><span class="d down">▼ 2</span></td><td class="num">7,9 <span class="d down">▼ 0,6</span></td></tr><tr><td><span class="q">szempilla lifting zugló</span></td><td class="num">2</td><td class="num"><span class="d down">▼ 1</span></td><td class="num">5,5 <span class="d down">▼ 0,1</span></td></tr><tr><td><span class="q">kozmetikus</span></td><td class="num">1</td><td class="num"><span class="d down">▼ 1</span></td><td class="num">2,8 <span class="d flat">→ 0,0</span></td></tr><tr><td><span class="q">szempilla</span></td><td class="num">0</td><td class="num"><span class="d down">▼ 1</span></td><td class="num">1,0 <span class="d up">▲ 0,5</span></td></tr><tr><td><span class="q">szemöldök formázás</span></td><td class="num">0</td><td class="num"><span class="d down">▼ 1</span></td><td class="num">1,0 <span class="d flat">→ 0,0</span></td></tr><tr><td><span class="q">szemöldök laminálás</span></td><td class="num">0</td><td class="num"><span class="d down">▼ 1</span></td><td class="num">10,1 <span class="d up">▲ 11,9</span></td></tr></tbody>
+</table></div>
+
+  <h3>Sok megjelenés, nulla kattintás</h3>
+  <p class="lede">Ezek az oldalak láthatóak, de nem hoznak forgalmat — vagy túl hátul vannak, vagy a találat szövege nem működik.</p>
+  <div class="tw"><table>
+<thead><tr><th>Oldal</th><th class="num">Megj.</th><th class="num">Poz.</th></tr></thead>
+<tbody><tr><td><span class="q">/blog/szemoldok-laminalas-meddig-tart/</span></td><td class="num">339</td><td class="num">6,9</td></tr></tbody>
+</table></div>
+
+</section>
+
+
+<section id="akciok">
+  <h2>Elvégzett és következő lépések</h2>
+  
+  
+  <h3>Ezen a futáson elvégezve</h3><ol class="acts"><li><span class="t">Title + meta átírva: /blog/szemoldok-laminalas-meddig-tart/</span><div class="m">28 napon át 339 megjelenés az 5–9. pozícióról, és NULLA kattintás — egyetlen napon sem, még a 4,3-as pozíción sem. A cím nem rossz volt, hanem túl jó: a „6 hét” választ a találatban megadta, így a keresőnek nem volt miért kattintania. Az új cím megtartja a számot (ez kell a relevanciához), de a hasznot a kattintás mögé teszi: „6 hét — ha ezt betartod”. RÉGI ÉRTÉK a visszaállításhoz: metaTitle „Szemöldök laminálás meddig tart? 6 hét — és mitől függ”, metaDescription „A szemöldök laminálás eredménye átlagosan 6 hétig tart. A szőrnövekedési ciklus, az első 24 óra utóápolása és az olajozás dönti el, hogy 4 vagy 8 hét lesz.”</div><div class="tags"><span class="tag">frubeauty-final/src/content/blog/szemoldok-laminalas-meddig-tart.md</span></div></li><li><span class="t">Title + meta átírva: /blog/koreai-szempilla-lifting/</span><div class="m">A „koreai szempilla lifting” lekérdezés 112 megjelenésből 0 kattintást hozott a 7,6. pozícióról — DE a „koreai szempilla lifting budapest” 1 megjelenésből 1 kattintást. Ahol helyi szándék volt a lekérdezésben, ott megtörtént a kattintás. A régi cím tisztán összehasonlító volt („miben más, mint a hagyományos?”), helyi és kereskedelmi jelzés nélkül. Az új címben benne a Budapest és a 12 000 Ft-os ár. RÉGI ÉRTÉK: metaTitle „Koreai szempilla lifting: miben más, mint a hagyományos?”, metaDescription „A koreai szempilla lifting kíméletesebb hatóanyaggal és pontosabb ívvel dolgozik: ragasztó nélkül, kisebb szálterheléssel, 6–8 hétig tartó eredménnyel.”</div><div class="tags"><span class="tag">frubeauty-final/src/content/blog/koreai-szempilla-lifting.md</span></div></li><li><span class="t">Ellenőrizve: a belső linkelés és a money page-ek már rendben vannak</span><div class="m">Végignéztem, mielőtt bármit átírtam volna: mind a 14 blogcikk linkel befelé egzakt anchorral, a kezdőlap 4. kártyája a /szemoldok-laminalas-zuglo/ oldalra mutat, a money page title-ökben benne az ár és az értékelés. Itt nem volt mit javítani — nem csináltam felesleges munkát. Build és SEO smoke teszt lefutott, mindkettő zöld.</div></li></ol>
+  <h3>Következő lépések (hatás szerint)</h3><ol class="acts"><li><span class="t">9 blogcikk nincs git alatt — kockázat, nem SEO-kérdés</span><div class="m">A 14 blogcikkből csak 5 van verziókövetve; a többi kizárólag a working tree-ben él, és onnan megy élesbe. Ha ez a mappa elvész vagy felülíródik, nincs miből visszaállítani. Egy `git add` a src/content/blog/ mappára megoldja. A mostani két módosítás régi értékeit ezért írtam bele fentebb szó szerint.</div><div class="tags"><span class="tag">hatás: magas</span><span class="tag">ráfordítás: alacsony</span></div></li><li><span class="t">Jövő héten: mérd a két címváltoztatás hatását, ne nyúlj hozzájuk</span><div class="m">Szándékosan csak két címet írtam át, hogy a következő futásnál tisztán attribútálható legyen a hatás. Ha a /meddig-tart/ oldal 0-ról elmozdul, a hipotézis („a túl teljes cím megeszi a kattintást”) igazolódott, és ugyanez a minta alkalmazható a /blog/szemoldok-laminalas-arak-2026/ címére is (195 megjelenés, 0,5% CTR). Ha nem mozdul, akkor AI Overview eszi a lekérdezést, és ezt a forgalmat el kell engedni.</div><div class="tags"><span class="tag">hatás: közepes</span><span class="tag">ráfordítás: alacsony</span></div></li><li><span class="t">0 rich result az egész domainen</span><div class="m">A searchAppearance lekérdezés üresen jött vissza: a site egyetlen megjelenése sem rich resultként fut, pedig FAQ és HowTo schema is ki van téve. Érdemes a Rich Results Testtel megnézni, miért nem jogosult — ez ingyen CTR-nyereség lenne minden érintett oldalon.</div><div class="tags"><span class="tag">hatás: közepes</span><span class="tag">ráfordítás: közepes</span></div></li><li><span class="t">Kannibalizáció: „szempilla lifting zugló” — 4 URL verseng</span><div class="m">A domináns URL is csak 37%-ot visz: a /blog/szempilla-lifting-arak-2026/ 25 megjelenéssel a 12,5. pozícióról, a /szempilla-lifting-zuglo/ money page 17 megjelenéssel a 9,5-ről, a kezdőlap 21-gyel az 5.-ről. A belső linkek már megvannak, tehát ez nem linkelési, hanem szándék-tisztázási kérdés: a blogcikkeknek egyértelműbben informatívnak, a money page-nek kereskedelminek kell lennie.</div><div class="tags"><span class="tag">hatás: közepes</span><span class="tag">ráfordítás: magas</span></div></li><li><span class="t">Off-page: a 0 dofollow backlink a valódi plafon</span><div class="m">A megjelenés 63%-kal nőtt, a kattintás 26%-kal, az átlagos pozíció 7,3-ról 6,3-ra javult — az on-page dolgozik. De a fej-kulcsszavak top 3-ba lépéséhez linkerő kell, és a domain 0 dofollow backlinkkel áll. A citációk (Aranyoldalak, Firmania, Nyitva.hu, mindhárom dofollow) a legolcsóbb első lépés. Ezt nem oldja meg több on-page csiszolás.</div><div class="tags"><span class="tag">hatás: magas</span><span class="tag">ráfordítás: közepes</span></div></li></ol>
+
+</section>
+
+<footer>
+  Forrás: Google Search Console · sc-domain:frubeauty.com · snapshot: 2026-08-12.json<br>
+  A GSC adatai 2–3 nap késésben vannak; az utolsó napok még változhatnak.
+</footer>
+</div>
+
+<script>
+(function(){
+  var DATA = {"clicks":{"dates":["2026-05-18","2026-05-19","2026-05-20","2026-05-21","2026-05-22","2026-05-23","2026-05-24","2026-05-25","2026-05-26","2026-05-27","2026-05-28","2026-05-29","2026-05-30","2026-05-31","2026-06-01","2026-06-02","2026-06-03","2026-06-04","2026-06-05","2026-06-06","2026-06-07","2026-06-08","2026-06-09","2026-06-10","2026-06-11","2026-06-12","2026-06-13","2026-06-14","2026-06-15","2026-06-16","2026-06-17","2026-06-18","2026-06-19","2026-06-20","2026-06-21","2026-06-22","2026-06-23","2026-06-24","2026-06-25","2026-06-26","2026-06-27","2026-06-28","2026-06-29","2026-06-30","2026-07-01","2026-07-02","2026-07-03","2026-07-04","2026-07-05","2026-07-06","2026-07-07","2026-07-08","2026-07-09","2026-07-10","2026-07-11","2026-07-12","2026-07-13","2026-07-14","2026-07-15","2026-07-16","2026-07-17","2026-07-18","2026-07-19","2026-07-20","2026-07-21","2026-07-22","2026-07-23","2026-07-24","2026-07-25","2026-07-26","2026-07-27","2026-07-28","2026-07-29","2026-07-30","2026-07-31","2026-08-01","2026-08-02","2026-08-03","2026-08-04","2026-08-05","2026-08-06","2026-08-07","2026-08-08","2026-08-09"],"raw":[2,1,2,4,0,4,0,3,1,0,2,1,1,1,5,2,2,1,2,3,1,7,5,3,2,2,2,0,1,4,3,1,1,0,4,5,4,0,4,0,1,0,2,5,3,5,1,2,3,7,4,2,1,6,3,1,1,1,2,0,3,2,4,4,3,2,1,3,0,4,3,6,4,1,4,4,2,4,3,9,4,7,3,8],"avg":[null,null,null,null,null,null,1.8571428571428572,2,2,1.7142857142857142,1.4285714285714286,1.5714285714285714,1.1428571428571428,1.2857142857142858,1.5714285714285714,1.7142857142857142,2,1.8571428571428572,2,2.2857142857142856,2.2857142857142856,2.5714285714285716,3,3.142857142857143,3.2857142857142856,3.2857142857142856,3.142857142857143,3,2.142857142857143,2,2,1.8571428571428572,1.7142857142857142,1.4285714285714286,2,2.5714285714285716,2.5714285714285716,2.142857142857143,2.5714285714285716,2.4285714285714284,2.5714285714285716,2,1.5714285714285714,1.7142857142857142,2.142857142857143,2.2857142857142856,2.4285714285714284,2.5714285714285716,3,3.7142857142857144,3.5714285714285716,3.4285714285714284,2.857142857142857,3.5714285714285716,3.7142857142857144,3.4285714285714284,2.5714285714285716,2.142857142857143,2.142857142857143,2,1.5714285714285714,1.4285714285714286,1.8571428571428572,2.2857142857142856,2.5714285714285716,2.5714285714285716,2.7142857142857144,2.7142857142857144,2.4285714285714284,2.4285714285714284,2.2857142857142856,2.7142857142857144,3,3,3.142857142857143,3.7142857142857144,3.4285714285714284,3.5714285714285716,3.142857142857143,3.857142857142857,4.285714285714286,4.714285714285714,4.571428571428571,5.428571428571429],"label":"kattintás"},"imprs":{"dates":["2026-05-18","2026-05-19","2026-05-20","2026-05-21","2026-05-22","2026-05-23","2026-05-24","2026-05-25","2026-05-26","2026-05-27","2026-05-28","2026-05-29","2026-05-30","2026-05-31","2026-06-01","2026-06-02","2026-06-03","2026-06-04","2026-06-05","2026-06-06","2026-06-07","2026-06-08","2026-06-09","2026-06-10","2026-06-11","2026-06-12","2026-06-13","2026-06-14","2026-06-15","2026-06-16","2026-06-17","2026-06-18","2026-06-19","2026-06-20","2026-06-21","2026-06-22","2026-06-23","2026-06-24","2026-06-25","2026-06-26","2026-06-27","2026-06-28","2026-06-29","2026-06-30","2026-07-01","2026-07-02","2026-07-03","2026-07-04","2026-07-05","2026-07-06","2026-07-07","2026-07-08","2026-07-09","2026-07-10","2026-07-11","2026-07-12","2026-07-13","2026-07-14","2026-07-15","2026-07-16","2026-07-17","2026-07-18","2026-07-19","2026-07-20","2026-07-21","2026-07-22","2026-07-23","2026-07-24","2026-07-25","2026-07-26","2026-07-27","2026-07-28","2026-07-29","2026-07-30","2026-07-31","2026-08-01","2026-08-02","2026-08-03","2026-08-04","2026-08-05","2026-08-06","2026-08-07","2026-08-08","2026-08-09"],"raw":[9,39,77,79,45,49,37,73,74,78,74,69,63,68,95,66,92,76,90,75,71,111,85,63,87,85,53,44,50,89,58,62,45,40,50,74,44,51,49,48,30,39,56,63,87,76,60,53,65,104,69,115,107,69,80,66,128,96,93,75,69,63,71,119,70,76,111,74,69,98,126,98,103,90,117,91,109,151,132,160,129,153,117,149],"avg":[null,null,null,null,null,null,47.857142857142854,57,62,62.142857142857146,61.42857142857143,64.85714285714286,66.85714285714286,71.28571428571429,74.42857142857143,73.28571428571429,75.28571428571429,75.57142857142857,78.57142857142857,80.28571428571429,80.71428571428571,83,85.71428571428571,81.57142857142857,83.14285714285714,82.42857142857143,79.28571428571429,75.42857142857143,66.71428571428571,67.28571428571429,66.57142857142857,63,57.285714285714285,55.42857142857143,56.285714285714285,59.714285714285715,53.285714285714285,52.285714285714285,50.42857142857143,50.857142857142854,49.42857142857143,47.857142857142854,45.285714285714285,48,53.142857142857146,57,58.714285714285715,62,65.71428571428571,72.57142857142857,73.42857142857143,77.42857142857143,81.85714285714286,83.14285714285714,87,87.14285714285714,90.57142857142857,94.42857142857143,91.28571428571429,86.71428571428571,86.71428571428571,84.28571428571429,85,83.71428571428571,80,77.57142857142857,82.71428571428571,83.42857142857143,84.28571428571429,88.14285714285714,89.14285714285714,93.14285714285714,97,94,100.14285714285714,103.28571428571429,104.85714285714286,108.42857142857143,113.28571428571429,121.42857142857143,127,132.14285714285714,135.85714285714286,141.57142857142858],"label":"megjelenés"},"pos":{"dates":["2026-05-18","2026-05-19","2026-05-20","2026-05-21","2026-05-22","2026-05-23","2026-05-24","2026-05-25","2026-05-26","2026-05-27","2026-05-28","2026-05-29","2026-05-30","2026-05-31","2026-06-01","2026-06-02","2026-06-03","2026-06-04","2026-06-05","2026-06-06","2026-06-07","2026-06-08","2026-06-09","2026-06-10","2026-06-11","2026-06-12","2026-06-13","2026-06-14","2026-06-15","2026-06-16","2026-06-17","2026-06-18","2026-06-19","2026-06-20","2026-06-21","2026-06-22","2026-06-23","2026-06-24","2026-06-25","2026-06-26","2026-06-27","2026-06-28","2026-06-29","2026-06-30","2026-07-01","2026-07-02","2026-07-03","2026-07-04","2026-07-05","2026-07-06","2026-07-07","2026-07-08","2026-07-09","2026-07-10","2026-07-11","2026-07-12","2026-07-13","2026-07-14","2026-07-15","2026-07-16","2026-07-17","2026-07-18","2026-07-19","2026-07-20","2026-07-21","2026-07-22","2026-07-23","2026-07-24","2026-07-25","2026-07-26","2026-07-27","2026-07-28","2026-07-29","2026-07-30","2026-07-31","2026-08-01","2026-08-02","2026-08-03","2026-08-04","2026-08-05","2026-08-06","2026-08-07","2026-08-08","2026-08-09"],"raw":[1.6666666666666665,5.333333333333333,5.8441558441558445,5.468354430379747,6.977777777777778,3.5918367346938775,5.864864864864865,5.068493150684931,4.891891891891892,4.948717948717949,4.972972972972973,3.8840579710144927,4.746031746031746,4.985294117647059,6.757894736842105,5.075757575757576,4.706521739130435,5.131578947368421,6.266666666666667,4.333333333333334,6.126760563380282,4.351351351351351,5.411764705882353,5.571428571428571,5.413793103448276,5,6.90566037735849,6.204545454545454,7.1,7.247191011235955,11.051724137931034,8.661290322580644,6.977777777777778,6.825,6.58,7.216216216216216,7.045454545454546,12.019607843137255,8.489795918367346,9.979166666666666,7.766666666666667,5,5.375,7.174603174603175,12.425287356321839,7.092105263157895,7.45,6.377358490566038,6.1692307692307695,4.673076923076923,6.246376811594203,5.234782608695652,5.616822429906542,6.36231884057971,6.925,8.969696969696969,7.6484375,6.041666666666667,7,5.04,6.072463768115942,5.492063492063492,5.830985915492958,5.7899159663865545,6.457142857142857,5.473684210526316,4.963963963963964,6.662162162162162,6.159420289855072,5.479591836734694,6.666666666666667,6.285714285714286,8.514563106796118,6.4,8.538461538461538,5.725274725274725,8.302752293577981,5.7218543046357615,5.8106060606060606,5.7625,6.449612403100775,5.823529411764706,5.829059829059829,6.859060402684563],"avg":[null,null,null,null,null,null,4.963855664553159,5.449830876555768,5.386767813492705,5.258848114144435,5.188079334514896,4.74611936212014,4.911004363739836,4.785351399851578,5.026694483588317,5.052961009854843,5.018361551342342,5.041019547684549,5.381392218492002,5.322435302392229,5.485501937496975,5.141710025284011,5.189711043873265,5.313269162772998,5.353585470784405,5.172633089832025,5.540108381835617,5.551220509144928,5.943884601809022,6.206088359716679,6.988987726359888,7.4529159005216545,7.735455583061338,7.723932672010126,7.777569035646489,7.794171352248806,7.765351857137176,7.903620957880922,7.879121757279023,8.307891598548865,8.442415408072675,8.216701122358389,7.953670234327501,7.972120038491591,8.030074254660818,7.830404161059469,7.469094637249945,7.270622040664142,7.437655007697109,7.337380282422383,7.204776516278244,6.177561552331646,5.966806861867167,5.811423839092839,5.889658340440548,6.289724940507147,6.714776451496157,6.6855321450779375,6.937706058121416,6.855302853849053,6.813894986354229,6.609189770934728,6.160802477477013,5.89529940124652,5.954653142743119,5.736608029961164,5.7257457390988735,5.809988366819761,5.905325052218558,5.855125898110233,5.98037599815025,5.955886202231882,6.390297473127569,6.595445478275574,6.863488246318342,6.801467451378293,7.204776088070191,7.069802893494348,7.001930289907459,6.608778417508014,6.615865903665267,6.228018456994291,6.242844900392163,6.0366032016931035],"label":"pozíció"}};
+  var GEO = {"M":{"t":18,"r":16,"b":34,"l":52},"PW":932,"PH":268,"W":1000,"H":320};
+  var SCALES = {"clicks":{"lo":0,"hi":10,"invert":false},"imprs":{"lo":0,"hi":200,"invert":false},"pos":{"lo":1,"hi":15,"invert":true}};
+
+  function huDate(d){ var p = d.split('-'); return p[0]+'.'+p[1]+'.'+p[2]+'.'; }
+  function fmt(v, isPos){
+    if (v == null || !isFinite(v)) return '–';
+    return isPos ? v.toFixed(1).replace('.', ',') : new Intl.NumberFormat('hu-HU').format(Math.round(v));
+  }
+
+  Object.keys(DATA).forEach(function(id){
+    var svg = document.getElementById('svg-' + id);
+    var hit = svg && svg.querySelector('.hit');
+    var hov = document.getElementById('hov-' + id);
+    var tip = document.getElementById('tip-' + id);
+    if (!svg || !hit) return;
+    var D = DATA[id], isPos = (id === 'pos');
+    var sc = SCALES[id];
+    if (!sc) return;
+    var lo = sc.lo, hi = sc.hi;
+    function xOf(i){ return GEO.M.l + (D.dates.length <= 1 ? GEO.PW/2 : (i/(D.dates.length-1))*GEO.PW); }
+    function yOf(v){ var fr = (v - lo)/(hi - lo); return isPos ? GEO.M.t + fr*GEO.PH : GEO.M.t + GEO.PH - fr*GEO.PH; }
+
+    function show(ev){
+      var r = svg.getBoundingClientRect();
+      var cx = ev.touches ? ev.touches[0].clientX : ev.clientX;
+      var cy = ev.touches ? ev.touches[0].clientY : ev.clientY;
+      var vx = (cx - r.left) / r.width * GEO.W;
+      var t = (vx - GEO.M.l) / GEO.PW;
+      var i = Math.round(t * (D.dates.length - 1));
+      if (i < 0) i = 0; if (i > D.dates.length - 1) i = D.dates.length - 1;
+      var vAvg = D.avg[i], vRaw = D.raw[i];
+      var vy = (vAvg != null && isFinite(vAvg)) ? vAvg : vRaw;
+      if (vy == null || !isFinite(vy)) { hide(); return; }
+
+      hov.style.display = '';
+      hov.querySelector('.cross').setAttribute('x1', xOf(i));
+      hov.querySelector('.cross').setAttribute('x2', xOf(i));
+      hov.querySelector('.dot').setAttribute('cx', xOf(i));
+      hov.querySelector('.dot').setAttribute('cy', yOf(vy));
+
+      tip.hidden = false;
+      tip.innerHTML = '<div>' + huDate(D.dates[i]) + '</div>'
+        + '<div>napi: <b>' + fmt(vRaw, isPos) + '</b> ' + D.label + '</div>'
+        + '<div>7 napos átlag: <b>' + fmt(vAvg, isPos) + '</b></div>';
+      var box = tip.getBoundingClientRect();
+      var px = cx - r.left + 14;
+      if (px + box.width > r.width) px = cx - r.left - box.width - 14;
+      tip.style.left = Math.max(0, px) + 'px';
+      tip.style.top = Math.max(0, cy - r.top - box.height - 12) + 'px';
+    }
+    function hide(){ hov.style.display = 'none'; tip.hidden = true; }
+
+    hit.addEventListener('mousemove', show);
+    hit.addEventListener('mouseleave', hide);
+    hit.addEventListener('touchstart', show, { passive: true });
+    hit.addEventListener('touchmove', show, { passive: true });
+    hit.addEventListener('touchend', hide);
+  });
+})();
+</script>

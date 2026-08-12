@@ -1,0 +1,52 @@
+{
+  "generatedAt": "2026-08-12",
+  "done": [
+    {
+      "title": "Title + meta átírva: /blog/szemoldok-laminalas-meddig-tart/",
+      "detail": "28 napon át 339 megjelenés az 5–9. pozícióról, és NULLA kattintás — egyetlen napon sem, még a 4,3-as pozíción sem. A cím nem rossz volt, hanem túl jó: a „6 hét” választ a találatban megadta, így a keresőnek nem volt miért kattintania. Az új cím megtartja a számot (ez kell a relevanciához), de a hasznot a kattintás mögé teszi: „6 hét — ha ezt betartod”. RÉGI ÉRTÉK a visszaállításhoz: metaTitle „Szemöldök laminálás meddig tart? 6 hét — és mitől függ”, metaDescription „A szemöldök laminálás eredménye átlagosan 6 hétig tart. A szőrnövekedési ciklus, az első 24 óra utóápolása és az olajozás dönti el, hogy 4 vagy 8 hét lesz.”",
+      "files": ["frubeauty-final/src/content/blog/szemoldok-laminalas-meddig-tart.md"]
+    },
+    {
+      "title": "Title + meta átírva: /blog/koreai-szempilla-lifting/",
+      "detail": "A „koreai szempilla lifting” lekérdezés 112 megjelenésből 0 kattintást hozott a 7,6. pozícióról — DE a „koreai szempilla lifting budapest” 1 megjelenésből 1 kattintást. Ahol helyi szándék volt a lekérdezésben, ott megtörtént a kattintás. A régi cím tisztán összehasonlító volt („miben más, mint a hagyományos?”), helyi és kereskedelmi jelzés nélkül. Az új címben benne a Budapest és a 12 000 Ft-os ár. RÉGI ÉRTÉK: metaTitle „Koreai szempilla lifting: miben más, mint a hagyományos?”, metaDescription „A koreai szempilla lifting kíméletesebb hatóanyaggal és pontosabb ívvel dolgozik: ragasztó nélkül, kisebb szálterheléssel, 6–8 hétig tartó eredménnyel.”",
+      "files": ["frubeauty-final/src/content/blog/koreai-szempilla-lifting.md"]
+    },
+    {
+      "title": "Ellenőrizve: a belső linkelés és a money page-ek már rendben vannak",
+      "detail": "Végignéztem, mielőtt bármit átírtam volna: mind a 14 blogcikk linkel befelé egzakt anchorral, a kezdőlap 4. kártyája a /szemoldok-laminalas-zuglo/ oldalra mutat, a money page title-ökben benne az ár és az értékelés. Itt nem volt mit javítani — nem csináltam felesleges munkát. Build és SEO smoke teszt lefutott, mindkettő zöld.",
+      "files": []
+    }
+  ],
+  "next": [
+    {
+      "title": "9 blogcikk nincs git alatt — kockázat, nem SEO-kérdés",
+      "detail": "A 14 blogcikkből csak 5 van verziókövetve; a többi kizárólag a working tree-ben él, és onnan megy élesbe. Ha ez a mappa elvész vagy felülíródik, nincs miből visszaállítani. Egy `git add` a src/content/blog/ mappára megoldja. A mostani két módosítás régi értékeit ezért írtam bele fentebb szó szerint.",
+      "impact": "magas",
+      "effort": "alacsony"
+    },
+    {
+      "title": "Jövő héten: mérd a két címváltoztatás hatását, ne nyúlj hozzájuk",
+      "detail": "Szándékosan csak két címet írtam át, hogy a következő futásnál tisztán attribútálható legyen a hatás. Ha a /meddig-tart/ oldal 0-ról elmozdul, a hipotézis („a túl teljes cím megeszi a kattintást”) igazolódott, és ugyanez a minta alkalmazható a /blog/szemoldok-laminalas-arak-2026/ címére is (195 megjelenés, 0,5% CTR). Ha nem mozdul, akkor AI Overview eszi a lekérdezést, és ezt a forgalmat el kell engedni.",
+      "impact": "közepes",
+      "effort": "alacsony"
+    },
+    {
+      "title": "0 rich result az egész domainen",
+      "detail": "A searchAppearance lekérdezés üresen jött vissza: a site egyetlen megjelenése sem rich resultként fut, pedig FAQ és HowTo schema is ki van téve. Érdemes a Rich Results Testtel megnézni, miért nem jogosult — ez ingyen CTR-nyereség lenne minden érintett oldalon.",
+      "impact": "közepes",
+      "effort": "közepes"
+    },
+    {
+      "title": "Kannibalizáció: „szempilla lifting zugló” — 4 URL verseng",
+      "detail": "A domináns URL is csak 37%-ot visz: a /blog/szempilla-lifting-arak-2026/ 25 megjelenéssel a 12,5. pozícióról, a /szempilla-lifting-zuglo/ money page 17 megjelenéssel a 9,5-ről, a kezdőlap 21-gyel az 5.-ről. A belső linkek már megvannak, tehát ez nem linkelési, hanem szándék-tisztázási kérdés: a blogcikkeknek egyértelműbben informatívnak, a money page-nek kereskedelminek kell lennie.",
+      "impact": "közepes",
+      "effort": "magas"
+    },
+    {
+      "title": "Off-page: a 0 dofollow backlink a valódi plafon",
+      "detail": "A megjelenés 63%-kal nőtt, a kattintás 26%-kal, az átlagos pozíció 7,3-ról 6,3-ra javult — az on-page dolgozik. De a fej-kulcsszavak top 3-ba lépéséhez linkerő kell, és a domain 0 dofollow backlinkkel áll. A citációk (Aranyoldalak, Firmania, Nyitva.hu, mindhárom dofollow) a legolcsóbb első lépés. Ezt nem oldja meg több on-page csiszolás.",
+      "impact": "magas",
+      "effort": "közepes"
+    }
+  ]
+}
