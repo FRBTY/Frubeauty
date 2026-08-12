@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { relFor } from '../config/site';
 
 interface NavBarProps {
   bookingUrl: string;
@@ -8,11 +9,11 @@ interface NavBarProps {
 
 const navLinks = [
   { href: '/',                            label: 'Főoldal' },
-  { href: '/arckezeles-zuglo',            label: 'Arckezelés' },
-  { href: '/sminkes-zuglo',               label: 'Smink' },
-  { href: '/szempilla-lifting-zuglo',     label: 'Szempilla' },
-  { href: '/szemoldok-laminalas-zuglo',   label: 'Szemöldök' },
-  { href: '/blog',                        label: 'Blog' },
+  { href: '/arckezeles-zuglo/',            label: 'Arckezelés' },
+  { href: '/sminkes-zuglo/',               label: 'Smink' },
+  { href: '/szempilla-lifting-zuglo/',     label: 'Szempilla' },
+  { href: '/szemoldok-laminalas-zuglo/',   label: 'Szemöldök' },
+  { href: '/blog/',                        label: 'Blog' },
   { href: '/#velemenyek',                 label: 'Vélemények' },
 ];
 
@@ -131,7 +132,7 @@ export function NavBar({ bookingUrl, instagram, facebook }: NavBarProps) {
             <a
               href={bookingUrl}
               target="_blank"
-              rel="noopener"
+              rel={relFor(bookingUrl)}
               className="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink rounded-full hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-150"
             >
               Foglalás
@@ -164,12 +165,15 @@ export function NavBar({ bookingUrl, instagram, facebook }: NavBarProps) {
         </nav>
       </header>
 
+      {/* Mobil menü — záráskor `inert`: kiveszi a subtree-t a tab-sorrendből ÉS az
+          a11y-fából egyben, így NEM kell aria-hidden (a fókuszálható linkek aria-hidden
+          alatt WCAG-hibát adnának). Nyitva: se inert, se aria-hidden → interaktív. */}
       <div
         id="mobile-nav"
         role="dialog"
         aria-modal="true"
         aria-label="Mobil menü"
-        aria-hidden={!menuOpen}
+        {...(!menuOpen ? ({ inert: '' } as any) : {})}
         className={`lg:hidden fixed inset-x-0 top-16 z-40 bg-ink/95 backdrop-blur-md border-b border-whisper transition-[opacity,transform] duration-300 ease-strong-out motion-reduce:transition-opacity ${
           menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5 pointer-events-none'
         }`}
@@ -189,7 +193,7 @@ export function NavBar({ bookingUrl, instagram, facebook }: NavBarProps) {
           <a
             href={bookingUrl}
             target="_blank"
-            rel="noopener"
+            rel={relFor(bookingUrl)}
             tabIndex={menuOpen ? 0 : -1}
             onClick={() => setMenuOpen(false)}
             className="mt-4 inline-flex items-center justify-center px-6 py-3.5 text-[13px] uppercase tracking-caps font-medium bg-gold text-ink rounded-full hover:bg-goldSoft transition-colors"

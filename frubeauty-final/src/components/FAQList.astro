@@ -1,0 +1,36 @@
+---
+interface FAQItem {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  items: FAQItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="divide-y divide-[rgba(245,232,211,0.08)] border-y border-whisper">
+  {items.map((item) => (
+    <details class="group py-2">
+      <summary class="w-full py-5 flex cursor-pointer list-none items-center justify-between gap-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-4 focus-visible:ring-offset-ink rounded-md [&::-webkit-details-marker]:hidden">
+        <span class="font-display text-lg sm:text-xl font-medium pr-4 text-cream">
+          {item.q}
+        </span>
+        <span
+          class="flex-shrink-0 w-9 h-9 rounded-full border border-whisperStrong text-cream flex items-center justify-center transition-[transform,color,background-color,border-color] duration-200 group-open:rotate-45 group-open:bg-gold group-open:text-ink group-open:border-gold motion-reduce:transition-none"
+          aria-hidden="true"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </span>
+      </summary>
+      <p class="pb-6 pr-12 text-creamSoft leading-[1.7] max-w-[65ch]">
+        {item.a}
+      </p>
+    </details>
+  ))}
+</div>

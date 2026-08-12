@@ -31,16 +31,49 @@ const dateFormatter = new Intl.DateTimeFormat('hu-HU', {
 
 const featured = posts[0];
 const rest = posts.slice(1);
+
+// ── SEO: Blog (CollectionPage) schema — a listaoldal entitása + a posztok listája,
+//    a kiadó a kanonikus #business node. Segíti a Google-t a blog mint koherens
+//    tartalmi hub megértésében.
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  '@id': 'https://frubeauty.com/blog/#blog',
+  name: 'FRUBEAUTY Blog',
+  description:
+    'Cikkek bőrápolásról, sminkről, szempilla- és szemöldök-kezelésekről egy zuglói kozmetikus szemszögéből.',
+  url: 'https://frubeauty.com/blog/',
+  inLanguage: 'hu-HU',
+  publisher: { '@id': 'https://frubeauty.com/#business' },
+  blogPost: posts.map((p) => ({
+    '@type': 'BlogPosting',
+    headline: p.data.title,
+    url: `https://frubeauty.com/blog/${p.data.slug ?? p.id}/`,
+    datePublished: p.data.publishedAt.toISOString(),
+    ...(p.data.updatedAt && { dateModified: p.data.updatedAt.toISOString() }),
+  })),
+};
+
+// ── SEO: BreadcrumbList — Főoldal › Blog ─────────────────────────────────────
+const blogBreadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Főoldal', item: 'https://frubeauty.com' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://frubeauty.com/blog/' },
+  ],
+};
 ---
 
 <Layout
   title="Blog — szépségápolás, smink és arckezelés | FRUBEAUTY"
   description="Cikkek bőrápolásról, sminkről és szempilla-kezelésekről egy kozmetikus és sminkes szemszögéből. Konkrét tippek a Zuglói szalonom mindennapjaiból."
+  additionalSchemas={[blogSchema, blogBreadcrumbSchema]}
 >
   <SiteHeader />
 
   {/* ============ HERO ============ */}
-  <section class="pt-32 sm:pt-40 pb-12 sm:pb-16">
+  <section class="pt-[calc(var(--header-h)+4rem)] sm:pt-[calc(var(--header-h)+6rem)] pb-12 sm:pb-16">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:load as="div" className="max-w-3xl">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-6">FRUBEAUTY · Blog</p>
@@ -71,7 +104,7 @@ const rest = posts.slice(1);
           <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
             <Reveal client:visible as="article">
               <a
-                href={`/blog/${featured.data.slug ?? featured.id}`}
+                href={`/blog/${featured.data.slug ?? featured.id}/`}
                 class="group grid lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-inkSoft border border-whisper rounded-3xl overflow-hidden md:hover:border-whisperStrong transition-colors duration-500"
               >
                 <div class="lg:col-span-7 aspect-[16/10] lg:aspect-auto lg:h-full overflow-hidden bg-inkRise">
@@ -131,7 +164,7 @@ const rest = posts.slice(1);
                 <StaggerItem>
                   <article class="group flex flex-col h-full bg-inkSoft border border-whisper rounded-3xl overflow-hidden md:hover:-translate-y-0.5 md:hover:border-whisperStrong transition-[transform,border-color] duration-500 ease-out">
                     <a
-                      href={`/blog/${post.data.slug ?? post.id}`}
+                      href={`/blog/${post.data.slug ?? post.id}/`}
                       class="flex flex-col h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"
                     >
                       <div class="aspect-[16/10] overflow-hidden bg-inkRise">

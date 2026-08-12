@@ -7,11 +7,12 @@ import { Reveal } from '../components/Reveal';
 import { MagneticCTA } from '../components/MagneticCTA';
 import { ProcessSteps } from '../components/ProcessSteps';
 import { TestimonialsGrid } from '../components/TestimonialsGrid';
-import { FAQ } from '../components/FAQ';
+import FAQList from '../components/FAQList.astro';
+import RelatedArticles from '../components/RelatedArticles.astro';
 import { PriceList } from '../components/PriceList';
 import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
-import { siteConfig } from '../config/site';
+import { siteConfig, relFor } from '../config/site';
 
 const priceCategories = [
   { eyebrow: 'Anti-aging · signature', title: 'A legkomplexebb kezelés.', items: [
@@ -90,7 +91,8 @@ const arcServiceSchema = {
     'Professzionális Janssen Cosmetics arckezelés Zuglóban, XIV. kerületben. Anti-aging, mélytisztító, hidratáló és érzékeny bőrre szabott protokollok.',
   provider: {
     '@type': 'BeautySalon',
-    name: 'FRUBEAUTY – Pecze-Kovács Fruzsina',
+    '@id': 'https://frubeauty.com/#business',
+    name: 'FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus',
     url: 'https://frubeauty.com',
   },
   areaServed: [
@@ -103,19 +105,35 @@ const arcServiceSchema = {
     highPrice: '21500',
     priceCurrency: 'HUF',
     availability: 'https://schema.org/InStock',
+    priceValidUntil: '2026-12-31',
   },
+};
+
+// ── SEO: BreadcrumbList schema ────────────────────────────────────────────
+const arcBreadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Főoldal', item: 'https://frubeauty.com' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Arckezelés Zugló',
+      item: 'https://frubeauty.com/arckezeles-zuglo/',
+    },
+  ],
 };
 ---
 
 <Layout
-  title="Arckezelés Zugló – 16.900 Ft-tól | ★5,0 · 40 Vélemény | FRUBEAUTY"
-  description="★5,0 · 40+ Google-értékelés · Janssen arckezelés Zuglóban, XIV. kerület. Anti-aging, mélytisztító, hidratáló protokollok bőrtípusra szabva. 16.900 Ft-tól → Foglalj most!"
-  additionalSchemas={[arcFaqSchema, arcServiceSchema]}
-  preloadImage="/media/arckezeles-zuglo-poster.webp"
+  title="Arckezelés Budapest, Zugló – Janssen, 16 900 Ft-tól"
+  description="Arckezelés Budapesten, Zuglóban: bőranalízissel induló Janssen protokoll — mélytisztító, hidratáló, anti-aging kezelés 16.900 Ft-tól. ★5,0 · 50+ értékelés."
+  additionalSchemas={[arcFaqSchema, arcServiceSchema, arcBreadcrumbSchema]}
+  preloadImage="/media/arckezeles-zuglo-poster.avif"
 >
   <SiteHeader />
 
-  <section class="relative overflow-hidden pt-32 sm:pt-40 pb-16 sm:pb-24">
+  <section class="relative overflow-hidden pt-[calc(var(--header-h)+4rem)] sm:pt-[calc(var(--header-h)+6rem)] pb-16 sm:pb-24">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end">
         {/* Hero STATIKUS (a főoldal/szempilla mintára): nincs Reveal/framer-motion és
@@ -123,10 +141,10 @@ const arcServiceSchema = {
             látszik; a videó client:visible-re hidratál. LCP-poszter: Layout preloadImage. */}
         <div class="hero-reveal lg:col-span-7">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Arckezelés · 1143 Budapest · XIV. kerület</p>
-          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Janssen <em class="display">arckezelés</em> Zugló szívében — bőrtípusra szabva.</h1>
-          <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">Személyre szabott bőrápolás prémium Janssen kozmetikumokkal az Egressy úton. Add vissza bőröd egészséges ragyogását szakértő kezek között.</p>
+          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Arckezelés <em class="display">Budapesten</em>, Zugló szívében — bőrtípusra szabva.</h1>
+          <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">Minden arckezelés bőranalízissel indul: megnézzük, mire van szüksége a bőrödnek — mélytisztításra, hidratálásra vagy anti-aging kezelésre. Budapesten, a XIV. kerületi Egressy úton, Janssen hatóanyagokkal. Ár: <strong class="font-medium text-cream">16.000 Ft</strong>-tól, egy kezelés 60–120 perc.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
-            <a href={config.booking} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+            <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
             <a href="#arak" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Árak</a>
           </div>
           <p class="mt-6 text-[12px] uppercase tracking-caps text-creamMute">Online foglalás · Egressy út 16. · XIV. kerület</p>
@@ -141,9 +159,9 @@ const arcServiceSchema = {
   <section class="border-y border-whisper bg-inkSoft">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
       <Reveal client:visible as="div" className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">40+ Google értékelés →</a></span></div>
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Janssen</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">Cosmetics partner</span></div>
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">7 protokoll</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">minden bőrtípusra</span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">Google</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">Értékelések megnyitása →</a></span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Janssen</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">Cosmetics termékek</span></div>
+        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">7 protokoll</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">az árlistán</span></div>
         <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Egressy út 16.</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.mapsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">1143 Budapest →</a></span></div>
       </Reveal>
     </div>
@@ -191,7 +209,7 @@ const arcServiceSchema = {
               <h3 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.5rem, 2.4vw, 1.875rem);">{p.title}{' '}<em class="display">{p.titleAccent}</em></h3>
               <p class="mt-2 text-sm text-creamMute leading-snug max-w-[28ch]">{p.subtitle}</p>
               <div class="mt-6">{p.priceOld && (<p class="text-sm text-creamMute mb-1">Külön: <span class="line-through">{p.priceOld}</span></p>)}<p class="font-display text-3xl sm:text-4xl font-medium tracking-tight text-cream">{p.price}</p><p class="text-xs text-creamMute mt-2">{p.priceMeta}</p></div>
-              {p.savings && (<div class="mt-4"><span class="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-caps font-medium bg-gold/15 text-gold border border-gold/30 px-3 py-1.5 rounded-full"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden><polyline points="20 6 9 17 4 12" /></svg>{p.savings}</span></div>)}
+              {p.savings && (<div class="mt-4"><span class="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-caps font-medium bg-gold/15 text-goldSoft border border-goldSoft/30 px-3 py-1.5 rounded-full"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden><polyline points="20 6 9 17 4 12" /></svg>{p.savings}</span></div>)}
               <p class="mt-4 text-[12px] italic text-creamSoft/70 leading-snug">{p.dailyEquivalent}</p>
               <div class={`my-7 border-t ${p.highlight ? 'border-whisperStrong' : 'border-whisper'}`}></div>
               <p class="text-[11px] uppercase tracking-caps text-creamMute mb-4">{p.duration}</p>
@@ -262,7 +280,7 @@ const arcServiceSchema = {
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Gyakori kérdések</p>
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Amit az arckezelésről <em class="display">kérdezni szoktak</em>.</h2>
       </Reveal>
-      <FAQ client:visible items={faqs} />
+      <FAQList items={faqs} />
     </div>
   </section>
 
@@ -272,8 +290,8 @@ const arcServiceSchema = {
         <div class="lg:col-span-6 order-2 lg:order-1">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Esemény közeledik?</p>
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Az arckezelés után <em class="display">smink</em>?</h2>
-          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">Sok vendégem az arckezelést egy esküvő, ballagás vagy fotózás előtt időzíti — és a két szolgáltatást egyben kérik. Az arckezelés 5–10 nappal az esemény előtt a legjobb: a bőr addigra teljesen letisztul.</p>
-          <a href="/sminkes-zuglo" class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Alkalmi és esküvői smink<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
+          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">Sok vendégem az arckezelést egy esküvő, ballagás vagy fotózás előtt időzíti — és a két szolgáltatást egyben kérik. Az arckezelés 5–10 nappal az esemény előtt a legjobb: a bőr addigra teljesen letisztul. A teljes megjelenéshez sokan a tekintetükre is figyelnek — egy <a href="/szempilla-lifting-zuglo/" class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors">szempilla lifting</a> tus nélkül is nyitottá és kifejezővé teszi.</p>
+          <a href="/sminkes-zuglo/" class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Alkalmi és esküvői smink<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
         </div>
         <div class="lg:col-span-6 order-1 lg:order-2">
           <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-black">
@@ -284,13 +302,15 @@ const arcServiceSchema = {
     </div>
   </section>
 
+  <RelatedArticles
+    heading={'Arckezelés — <em class="display">kapcsolódó cikkek</em>.'}
+    slugs={['arckezeles-arak-2026', 'janssen-arckezeles-bortipusok', 'hidratalo-vagy-antiaging-arckezeles']}
+  />
+
   <SiteContact eyebrow="Foglalás" heading={'Tisztábban, <em class="display">fényesebben</em>.'} intro="Online foglalás 0–24 órában, válasz munkanapokon pár órán belül. Az első időpont előtt nyugodtan írj emailt, ha bizonytalan vagy melyik protokoll a tiéd — pár sorban segítek dönteni." />
 
   <SiteFooter />
 
-  <div class="py-10 text-center border-t border-whisper">
-    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="inline-flex items-center gap-2 text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors duration-200">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
-      Vissza az oldal tetejére
-    </button>
-  </div>
+  <CookieBanner client:idle />
+
+  <div class="py-10 text-center border-t borde

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<audit version="0.0.44">
+<site url="https://frubeauty.com" crawled="13" date="2026-06-12T19:28:04.263Z"/>
+<score overall="80" grade="B">
+ <cat name="Accessibility" score="95"/>
+ <cat name="Performance" score="82"/>
+ <cat name="Crawlability" score="98"/>
+ <cat name="Content" score="98"/>
+ <cat name="E-E-A-T" score="73"/>
+ <cat name="Links" score="95"/>
+ <cat name="Legal Compliance" score="68"/>
+ <cat name="Security" score="97"/>
+ <cat name="Core SEO" score="99"/>
+ <cat name="Analytics" score="100"/>
+ <cat name="Internationalization" score="100"/>
+ <cat name="Images" score="100"/>
+ <cat name="Mobile" score="100"/>
+ <cat name="Structured Data" score="100"/>
+ <cat name="Social Media" score="100"/>
+ <cat name="URL Structure" score="100"/>
+</score>
+<summary passed="1498" warnings="83" failed="17"/>
+<issues>
+ <category name="Crawlability" errors="0" warnings="12">
+  <rule id="crawl/canonical-chain" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/crawl/canonical-chain">
+   Page redirects before content is served
+   Pages (5/12): /adatvedelem, /arckezeles-zuglo, /aszf, /blog, /sminkes-zuglo
+   Items (5/12):
+    - /blog/ (https://frubeauty.com/blog (301) → https://frubeauty.com/blog/ (200)) [finalUrl: https://frubeauty.com/blog/, chain: {&quot;sourceUrl&quot;:&quot;https://frubeauty.com/blog&quot;,&quot;finalUrl&quot;:&quot;https://frubeauty.com/blog/&quot;,&quot;hops&quot;:[{&quot;url&quot;:&quot;https://frubeauty.com/blog&quot;,&quot;statusCode&quot;:301,&quot;type&quot;:&quot;http&quot;},{&quot;url&quot;:&quot;https://frubeauty.com/blog/&quot;,&quot;st…]
+    - /adatvedelem/ (https://frubeauty.com/adatvedelem (301) → https://frubeauty.com/adatvedelem/ (200)) [finalUrl: https://frubeauty.com/adatvedelem/, chain: {&quot;sourceUrl&quot;:&quot;https://frubeauty.com/adatvedelem&quot;,&quot;finalUrl&quot;:&quot;https://frubeauty.com/adatvedelem/&quot;,&quot;hops&quot;:[{&quot;url&quot;:&quot;https://frubeauty.com/adatvedelem&quot;,&quot;statusCode&quot;:301,&quot;type&quot;:&quot;http&quot;},{&quot;url&quot;:&quot;https://fru…]
+    - /arckezeles-zuglo/ (https://frubeauty.com/arckezeles-zuglo (301) → https://frubeauty.com/arckezeles-zuglo/ (200)) [finalUrl: https://frubeauty.com/arckezeles-zuglo/, chain: {&quot;sourceUrl&quot;:&quot;https://frubeauty.com/arckezeles-zuglo&quot;,&quot;finalUrl&quot;:&quot;https://frubeauty.com/arckezeles-zuglo/&quot;,&quot;hops&quot;:[{&quot;url&quot;:&quot;https://frubeauty.com/arckezeles-zuglo&quot;,&quot;statusCode&quot;:301,&quot;type&quot;:&quot;http&quot;},{&quot;ur…]
+    - /aszf/ (https://frubeauty.com/aszf (301) → https://frubeauty.com/aszf/ (200)) [finalUrl: https://frubeauty.com/aszf/, chain: {&quot;sourceUrl&quot;:&quot;https://frubeauty.com/aszf&quot;,&quot;finalUrl&quot;:&quot;https://frubeauty.com/aszf/&quot;,&quot;hops&quot;:[{&quot;url&quot;:&quot;https://frubeauty.com/aszf&quot;,&quot;statusCode&quot;:301,&quot;type&quot;:&quot;http&quot;},{&quot;url&quot;:&quot;https://frubeauty.com/aszf/&quot;,&quot;st…]
+    - /sminkes-zuglo/ (https://frubeauty.com/sminkes-zuglo (301) → https://frubeauty.com/sminkes-zuglo/ (200)) [finalUrl: https://frubeauty.com/sminkes-zuglo/, chain: {&quot;sourceUrl&quot;:&quot;https://frubeauty.com/sminkes-zuglo&quot;,&quot;finalUrl&quot;:&quot;https://frubeauty.com/sminkes-zuglo/&quot;,&quot;hops&quot;:[{&quot;url&quot;:&quot;https://frubeauty.com/sminkes-zuglo&quot;,&quot;statusCode&quot;:301,&quot;type&quot;:&quot;http&quot;},{&quot;url&quot;:&quot;https…]
+  </rule>
+ </category>
+ <category name="Core SEO" errors="0" warnings="1">
+  <rule id="core/meta-title" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/core/meta-title">
+   Title too long
+   Pages (1): /
+   Items (1):
+    - / (Kozmetika Zugló – Szempilla Lifting, Arckezelés ★5 (64 chars))
+  </rule>
+ </category>
+ <category name="Security" errors="0" warnings="1">
+  <rule id="security/csp" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/security/csp">
+   CSP allows &apos;unsafe-inline&apos;
+  </rule>
+ </category>
+ <category name="Links" errors="0" warnings="2">
+  <rule id="links/redirect-chains" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/links/redirect-chains">
+   12 page(s) redirect to another URL; 12 link target(s) point to redirecting URLs
+   Items (5/24):
+    - /blog (https://frubeauty.com/blog (301) → https://frubeauty.com/blog/ (200)) [targetUrl: https://frubeauty.com/blog/, chain: {&quot;sourceUrl&quot;:&quot;https://frubeauty.com/blog&quot;,&quot;finalUrl&quot;:&quot;https://frubeauty.com/blog/&quot;,&quot;hops&quot;:[{&quot;url&quot;:&quot;https://frubeauty.com/blog&quot;,&quot;statusCode&quot;:301,&quot;type&quot;:&quot;http&quot;},{&quot;url&quot;:&quot;https://frubeauty.com/blog/&quot;,&quot;st…]
+    - /adatvedelem (https://frubeauty.com/adatvedelem (301) → https://frubeauty.com/adatvedelem/ (200)) [targetUrl: https://frubeauty.com/adatvedelem/, chain: {&quot;sourceUrl&quot;:&quot;https://frubeauty.com/adatvedelem&quot;,&quot;finalUrl&quot;:&quot;https://frubeauty.com/adatvedelem/&quot;,&quot;hops&quot;:[{&quot;url&quot;:&quot;https://frubeauty.com/adatvedelem&quot;,&quot;statusCode&quot;:301,&quot;type&quot;:&quot;http&quot;},{&quot;url&quot;:&quot;https://fru…]
+    - /arckezeles-zuglo (https://frubeauty.com/arckezeles-zuglo (301) → https://frubeauty.com/arckezeles-zuglo/ (200)) [targetUrl: https://frubeauty.com/arckezeles-zuglo/, chain: {&quot;sourceUrl&quot;:&quot;https://frubeauty.com/arckezeles-zuglo&quot;,&quot;finalUrl&quot;:&quot;https://frubeauty.com/arckezeles-zuglo/&quot;,&quot;hops&quot;:[{&quot;url&quot;:&quot;https://frubeauty.com/arckezeles-zuglo&quot;,&quot;statusCode&quot;:301,&quot;type&quot;:&quot;http&quot;},{&quot;ur…]
+    - /aszf (https://frubeauty.com/aszf (301) → https://frubeauty.com/aszf/ (200)) [targetUrl: https://frubeauty.com/aszf/, chain: {&quot;sourceUrl&quot;:&quot;https://frubeauty.com/aszf&quot;,&quot;finalUrl&quot;:&quot;https://frubeauty.com/aszf/&quot;,&quot;hops&quot;:[{&quot;url&quot;:&quot;https://frubeauty.com/aszf&quot;,&quot;statusCode&quot;:301,&quot;type&quot;:&quot;http&quot;},{&quot;url&quot;:&quot;https://frubeauty.com/aszf/&quot;,&quot;st…]
+    - /sminkes-zuglo (https://frubeauty.com/sminkes-zuglo (301) → https://frubeauty.com/sminkes-zuglo/ (200)) [targetUrl: https://frubeauty.com/sminkes-zuglo/, chain: {&quot;sourceUrl&quot;:&quot;https://frubeauty.com/sminkes-zuglo&quot;,&quot;finalUrl&quot;:&quot;https://frubeauty.com/sminkes-zuglo/&quot;,&quot;hops&quot;:[{&quot;url&quot;:&quot;https://frubeauty.com/sminkes-zuglo&quot;,&quot;statusCode&quot;:301,&quot;type&quot;:&quot;http&quot;},{&quot;url&quot;:&quot;https…]
+  </rule>
+ </category>
+ <category name="Content" errors="0" warnings="4">
+  <rule id="content/keyword-stuffing" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/content/keyword-stuffing">
+   N word(s) may be overused
+   Pages (4): /aszf, /sminkes-zuglo, /szemoldok-laminalas-zuglo, /blog/eskuvoi-smink-arak-budapest
+   Items (5):
+    - ltat (&quot;ltat&quot; (4.4%)) [count: 43, density: 4.43298969072165]
+    - szolg (&quot;szolg&quot; (4.0%)) [count: 39, density: 4.020618556701031]
+    - smink (&quot;smink&quot; (3.2%)) [count: 33, density: 3.1914893617021276]
+    - szem (&quot;szem&quot; (5.0%)) [count: 55, density: 5.018248175182482]
+    - lamin (&quot;lamin&quot; (3.1%)) [count: 34, density: 3.102189781021898]
+  </rule>
+ </category>
+ <category name="Performance" errors="1" warnings="46">
+  <rule id="perf/lcp-hints" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/perf/lcp-hints">
+   N potential LCP image(s) without preload
+   Pages (5/10): /arckezeles-zuglo, /blog, /sminkes-zuglo, /szemoldok-laminalas-zuglo, /szempilla-lifting-zuglo
+   Items (5/12):
+    - /img/menyasszonyi-probasmink-zuglo-budapest-egressy-ut.webp
+    - /media/arckezeles-zuglo-poster.webp
+    - /media/smink-oldal-video-frubeauty-budapest-zuglo-poster.webp
+    - /media/podcast-smink-poster.webp
+    - /media/szemoldok-laminalas-munkakozben-budapest-egressy-ut-poster.webp
+  </rule>
+  <rule id="perf/total-byte-weight" severity="warning" status="fail" docs="https://docs.squirrelscan.com/rules/perf/total-byte-weight">
+   Total tracked resources: 5595KB (very heavy)
+  </rule>
+  <rule id="perf/font-loading" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/perf/font-loading">
+   2 font(s) without font-display: swap
+   Pages (5/13): /, /adatvedelem, /arckezeles-zuglo, /aszf, /blog
+   Items (2):
+    - Fraunces Fallback
+    - Geist Fallback
+  </rule>
+  <rule id="perf/lazy-above-fold" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/perf/lazy-above-fold">
+   N above-fold image(s) with lazy loading
+   Pages (5/10): /, /arckezeles-zuglo, /blog, /sminkes-zuglo, /szemoldok-laminalas-zuglo
+   Items (5/10):
+    - /img/service-arckezeles.webp
+    - /img/szempilla-szemoldok-hero.webp
+    - /img/szempilla-lifting-3.webp
+    - /img/BLOG_Szempilla_lifting_budapest-egressy_ut_zuglo.webp
+    - /img/smink-keszul-munkakozben-budapest-egressy-ut.webp
+  </rule>
+  <rule id="perf/unminified-js" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/perf/unminified-js">
+   1 JavaScript file(s) appear unminified
+   Pages (5/13): /, /adatvedelem, /arckezeles-zuglo, /aszf, /blog
+   Items (1):
+    - inline script (3.6KB, ~2.5KB savings) [reason: high newlines (1.93%), 25 comments, formatted code, excessive whitespace]
+  </rule>
+ </category>
+ <category name="Accessibility" errors="16" warnings="13">
+  <rule id="a11y/button-name" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/a11y/button-name">
+   Buttons without accessible names
+   Pages (1): /arckezeles-zuglo
+   Items (1):
+    - button.inline-flex
+  </rule>
+  <rule id="a11y/aria-command-name" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/a11y/aria-command-name">
+   1 command element(s) without accessible names
+   Pages (1): /arckezeles-zuglo
+   Items (1):
+    - button[type=&quot;submit&quot;]
+  </rule>
+  <rule id="a11y/aria-hidden-focus" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/a11y/aria-hidden-focus">
+   10 focusable element(s) inside aria-hidden
+   Pages (5/13): /, /adatvedelem, /arckezeles-zuglo, /aszf, /blog
+   Items (5/10):
+    - a
+    - a
+    - a
+    - a
+    - a
+  </rule>
+  <rule id="a11y/aria-labels" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/a11y/aria-labels">
+   1 button(s) without accessible names
+   Pages (1): /arckezeles-zuglo
+   Items (1):
+    - inline-flex items-center gap-2
+  </rule>
+  <rule id="a11y/color-contrast" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/a11y/color-contrast">
+   2 potential color contrast issue(s)
+   Pages (5/13): /, /adatvedelem, /arckezeles-zuglo, /aszf, /blog
+   Items (4):
+    - White text (verify background): 3 instance(s)
+    - Very light text color: 3 instance(s)
+    - White text (verify background): 6 instance(s)
+    - Very light text color: 6 instance(s)
+  </rule>
+ </category>
+ <category name="E-E-A-T" errors="0" warnings="3">
+  <rule id="eeat/about-page" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/eeat/about-page">
+   No About page found
+  </rule>
+  <rule id="eeat/contact-page" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/eeat/contact-page">
+   No Contact page found
+  </rule>
+  <rule id="eeat/privacy-policy" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/eeat/privacy-policy">
+   No Privacy Policy page found
+  </rule>
+ </category>
+ <category name="Legal Compliance" errors="0" warnings="1">
+  <rule id="legal/privacy-policy" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/legal/privacy-policy">
+   No privacy policy link found across site
+  </rule>
+ </category>
+</issues>
+</audit>

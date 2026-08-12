@@ -14,13 +14,25 @@ export default {
         cream:    '#F5E8D3',
         creamSoft:'#E4D6C2',
         creamMute:'#A89685',
-        creamDim: '#6F6358',
+        // Egy hajszállal világosabb a korábbi #6F6358-nál: az AudienceList
+        // 01/02/03 sorszámai (30 px) inkSoft kártyán 2,89:1-et adtak, ami a nagy
+        // szövegre előírt 3:1 alatt van. #786B5F → 3,29:1, a "halvány" jelleg marad.
+        creamDim: '#786B5F',
 
         // Gold accent
         gold:     '#B8884A',
         goldSoft: '#C9A36C',
         goldDeep: '#8E6730',
         goldGlow: '#D9B27D',  // NEW: for lamp light beam highlight
+
+        // ===== FÁTYOL-RÉTEGEK =====
+        // Eddig CSAK borderColor-ként léteztek, ezért a forrásban 5 helyen használt
+        // `bg-whisper` / `bg-whisperOnDark` NEM generálódott le — a pro/kontra lista
+        // "kontra" chipjei háttér nélkül, a fejléc ikongombjai és a másodlagos CTA-k
+        // pedig hover-visszajelzés nélkül renderelődtek. Itt colors-ként is felvéve.
+        whisper:       'rgba(245, 232, 211, 0.08)',
+        whisperStrong: 'rgba(245, 232, 211, 0.16)',
+        whisperOnDark: 'rgba(245, 232, 211, 0.06)',
 
         // Legacy light
         linen:    '#F9F2E8',

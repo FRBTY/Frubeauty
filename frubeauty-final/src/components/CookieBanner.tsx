@@ -17,9 +17,12 @@ const CONSENT_KEY = 'frubeauty_cookie_consent_v1';
  *    so it sits below viewport content and cannot overlap hero CTA buttons.
  *  - Desktop (sm+): compact card, bottom-right corner.
  *
- * NOTE: This component only displays the banner and records the choice.
- * If you add analytics (GA4, Hotjar, etc.) later, gate them behind:
- *   window.localStorage.getItem('frubeauty_cookie_consent_v1') === 'all'
+ * Consent wiring: on every decision this dispatches a `cookie-consent`
+ * CustomEvent (detail: 'all' | 'essential'). The inline gtag script in
+ * Layout.astro listens for it and fires Google Consent Mode V2
+ * `gtag('consent', 'update', …)`. Returning visitors who already chose 'all'
+ * are re-granted on load by that same inline script (it reads this localStorage
+ * key), so all gtag calls stay centralised next to the gtag stub.
  */
 type Consent = 'all' | 'essential' | null;
 
@@ -41,7 +44,8 @@ export function CookieBanner() {
   function decide(choice: 'all' | 'essential') {
     try { window.localStorage.setItem(CONSENT_KEY, choice); } catch {}
     setConsent(choice);
-    // Dispatch a custom event so analytics code can hook in later.
+    // Drives Google Consent Mode V2: the inline gtag listener in Layout.astro
+    // turns this into gtag('consent', 'update', …).
     window.dispatchEvent(new CustomEvent('cookie-consent', { detail: choice }));
   }
 
@@ -56,7 +60,7 @@ export function CookieBanner() {
           exit={reduced ? { opacity: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.4, ease: easeOutStrong }}
           role="dialog"
-          aria-labelledby="cookie-banner-title"
+          aria-label="Sütibeállítások"
           aria-describedby="cookie-banner-body"
           /* Mobile: full-width bottom bar, flush to screen edge — cannot overlap content above.
              Desktop (sm+): compact card anchored bottom-right, away from page CTAs. */
@@ -64,7 +68,7 @@ export function CookieBanner() {
         >
           <p id="cookie-banner-body" className="text-sm leading-relaxed text-creamSoft/90">
             Weboldalunk működéséhez elengedhetetlen, valamint a látogatottság elemzéséhez és a hirdetéseink optimalizálásához statisztikai és marketing sütiket használunk. Az „Összes elfogadása” gombbal hozzájárulsz az adatok feldolgozásához. A beállításaidat bármikor módosíthatod.{' '}
-            <a href="/adatvedelem" className="underline underline-offset-2 hover:text-gold transition-colors">
+            <a href="/adatvedelem/" className="underline underline-offset-2 hover:text-gold transition-colors">
               Részletek
             </a>
           </p>

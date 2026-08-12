@@ -26,7 +26,9 @@ export function StaggerGroup({
   return (
     <MotionTag
       ref={ref}
-      initial="hidden"
+      // SSR-ben minden gyermek látható. A kliens csak progresszív animációt ad;
+      // JavaScript nélkül a szolgáltatás-, cikk- és véleménykártyák sem tűnnek el.
+      initial="visible"
       animate={inView ? 'visible' : 'hidden'}
       variants={{
         hidden: {},

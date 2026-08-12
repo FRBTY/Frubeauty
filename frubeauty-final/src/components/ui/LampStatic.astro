@@ -37,8 +37,12 @@ const rootClass = `lamp-root relative flex flex-col items-center justify-center 
     <!-- Blur mask behind the beam -->
     <div class="absolute top-1/2 h-48 w-full translate-y-12 scale-x-150 bg-ink blur-2xl"></div>
 
-    <!-- Gold glow bulb -->
-    <div class="absolute inset-auto z-50 h-36 w-[28rem] -translate-y-1/2 rounded-full bg-gold opacity-40 blur-3xl"></div>
+    <!-- Gold glow bulb — az opacity 0,4-ről 0,3-ra csökkent: a 64 px-re elmosott
+         arany folt pont a H1 első sora alatt ült, és rgb(89,66,39)-re emelte a
+         hátteret. Az arany <em> ("Zuglóban") így csak 3,2:1 kontrasztot adott,
+         azaz optikailag beleolvadt a fénybe. 0,3-nál rgb(73,55,33) a háttér —
+         a lámpa hangulata megmarad, a címsor viszont elválik tőle. -->
+    <div class="absolute inset-auto z-50 h-36 w-[28rem] -translate-y-1/2 rounded-full bg-gold opacity-30 blur-3xl"></div>
 
     <!-- Inner bright bulb -->
     <div class="lamp-bulb absolute inset-auto z-30 h-36 w-64 -translate-y-[6rem] rounded-full bg-goldGlow blur-2xl"></div>

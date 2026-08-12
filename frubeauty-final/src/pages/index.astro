@@ -10,11 +10,11 @@ import { AudienceList } from '../components/AudienceList';
 import { ProcessSteps } from '../components/ProcessSteps';
 import { TestimonialsGrid } from '../components/TestimonialsGrid';
 import { GalleryGrid } from '../components/GalleryGrid';
-import { FAQ } from '../components/FAQ';
+import FAQList from '../components/FAQList.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { BlogSection } from '../components/BlogSection';
 import { getCollection } from 'astro:content';
-import { siteConfig, openingHours, recencyProof } from '../config/site';
+import { siteConfig, openingHours, recencyProof, relFor } from '../config/site';
 import SiteFooter from '../components/SiteFooter.astro';
 
 // Pull the 3 most recent published posts so the homepage stays in sync with
@@ -32,6 +32,7 @@ const homepagePosts = allBlogPosts
     readingMinutes: p.data.readingMinutes,
     publishedAt: p.data.publishedAt.toISOString().slice(0, 10),
     cover: p.data.cover,
+    coverAlt: p.data.coverAlt,
   }));
 
 // Single source of truth — minden contact/booking adatot a siteConfig kezel.
@@ -39,18 +40,23 @@ const homepagePosts = allBlogPosts
 // (Astro 5 + esbuild strict mode nem kezeli jól a literal string types-t JSX href-ekben.)
 const config = { ...siteConfig };
 
+// A „Szempilla & szemöldök" korábban egy bundle-kártya volt, ami csak a lash-oldalra
+// linkelt — emiatt a dedikált /szemoldok-laminalas-zuglo oldal árva volt a kezdőlapról,
+// és a „szemöldök laminálás" (112 megjelenés/hó, GSC) a kezdőlapra rangsorolt helyette.
+// Szétbontva: minden fő szolgáltatás saját, kulcsszó-anchoros belső linket kap.
 const services = [
-  { title: 'Arckezelés', subtitle: 'Janssen Cosmetics hatóanyagokkal', body: 'Bőrtípusra szabott kezelés: regeneráló, hidratáló vagy mélytisztító. Az első alkalommal bőranalízissel kezdünk.', priceFrom: '11 000 Ft-tól', duration: '60–90 perc', href: '/arckezeles-zuglo', image: '/img/service-arckezeles.webp', alt: 'Arckezelés Janssen Cosmetics termékekkel a FRUBEAUTY szalonban' },
-  { title: 'Szempilla & szemöldök', subtitle: 'Lifting, festés, laminálás', body: 'Természetes, 6–8 hétig tartó eredmény. Reggel nincs többé szempillaspirál és szemöldökceruza.', priceFrom: '11 000 Ft-tól', duration: '60–120 perc', href: '/szempilla-lifting-zuglo', image: '/img/szempilla-szemoldok-hero.webp', alt: 'Szempilla lifting és szemöldök laminálás előtte-utána' },
-  { title: 'Smink', subtitle: 'Esküvő, ballagás, fotózás', body: 'Próbasmink, helyszíni igazítás, hosszan tartó eredmény. A stílust együtt találjuk ki.', priceFrom: '13 000 Ft-tól', duration: '60–90 perc', href: '/sminkes-zuglo', image: '/img/smink-menyasszony-munka.webp', alt: 'Alkalmi esküvői smink a FRUBEAUTY szalonban' },
+  { title: 'Arckezelés', subtitle: 'Janssen Cosmetics hatóanyagokkal', body: 'Bőrtípusra szabott kezelés: regeneráló, hidratáló vagy mélytisztító. Az első alkalommal bőranalízissel kezdünk.', priceFrom: '16 900 Ft-tól', duration: '60–120 perc', href: '/arckezeles-zuglo/', image: '/img/service-arckezeles.webp', alt: 'Arckezelés Janssen Cosmetics termékekkel a FRUBEAUTY szalonban' },
+  { title: 'Szempilla lifting', subtitle: 'Lifting + festés', body: 'Természetes íveltség, 6–8 hétig tartó eredmény. Reggel nincs többé szempillaspirál — felkelsz és kész vagy.', priceFrom: '12 000 Ft-tól', duration: '~ 90 perc', href: '/szempilla-lifting-zuglo/', image: '/img/szempilla-szemoldok-hero.webp', alt: 'Szempilla lifting előtte-utána a FRUBEAUTY szalonban' },
+  { title: 'Szemöldök laminálás', subtitle: 'Formázás + festés', body: 'Dúsabb, rendezett szemöldök tű nélkül, koreai technikával — ~6 hétig tartós, ápolt tekintet.', priceFrom: '11 000 Ft-tól', duration: '~ 60 perc', href: '/szemoldok-laminalas-zuglo/', image: '/img/szemoldok-laminalas-zuglo-munka-uj.webp', alt: 'Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló' },
+  { title: 'Smink', subtitle: 'Esküvő, ballagás, fotózás', body: 'Próbasmink, helyszíni igazítás, hosszan tartó eredmény. A stílust együtt találjuk ki.', priceFrom: '13 000 Ft-tól', duration: '60–90 perc', href: '/sminkes-zuglo/', image: '/img/smink-menyasszony-munka.webp', alt: 'Alkalmi esküvői smink a FRUBEAUTY szalonban' },
 ];
 
 // Aspirational / future-self framing (#audit #3) — pain-first helyett identitás-építés.
 // Daniel Kahneman: people approach gains more strongly when self-image is positive.
 const audienceProfiles = [
-  { headline: 'Egy nyugodt 90 perc — és a tükörből a kipihent éned néz vissza', body: 'A Janssen mélyregeneráló kezelés visszahozza a bőr természetes ragyogását. Tedd magad a hét legfontosabb találkozójává.', cta: 'Arckezelések', href: '/arckezeles-zuglo' },
-  { headline: 'Esküvő, ballagás vagy egy fontos esemény közeledik', body: 'Próbasmink, alkalmi smink és tartós szempilla-lift egy csomagban. Reggel mehetsz nyugodtan, a smink ott lesz este is.', cta: 'Alkalmi smink', href: '/sminkes-zuglo' },
-  { headline: 'Képzeld el a reggelt smink nélkül — és mégis úgy érzed, készen állsz', body: 'A szempilla-lifting és szemöldök-laminálás 6–8 hétig megspórolja a reggeli sminket. Felkelsz, és kész vagy.', cta: 'Szempilla & szemöldök', href: '/szempilla-lifting-zuglo' },
+  { headline: 'Egy nyugodt 90 perc — és a tükörből a kipihent éned néz vissza', body: 'A Janssen mélyregeneráló kezelés visszahozza a bőr természetes ragyogását. Tedd magad a hét legfontosabb találkozójává.', cta: 'Arckezelések', href: '/arckezeles-zuglo/' },
+  { headline: 'Esküvő, ballagás vagy egy fontos esemény közeledik', body: 'Próbasmink, alkalmi smink és tartós szempilla-lift egy csomagban. Reggel mehetsz nyugodtan, a smink ott lesz este is.', cta: 'Alkalmi smink', href: '/sminkes-zuglo/' },
+  { headline: 'Képzeld el a reggelt smink nélkül — és mégis úgy érzed, készen állsz', body: 'A szempilla-lifting és szemöldök-laminálás 6–8 hétig megspórolja a reggeli sminket. Felkelsz, és kész vagy.', cta: 'Szempilla & szemöldök', href: '/szempilla-lifting-zuglo/' },
 ];
 
 const processSteps = [
@@ -71,11 +77,21 @@ const testimonials = [
   { name: 'Gabriella Hendrik', rating: 5, text: 'Már az első pillanattól kezdve kedvesen és figyelmesen fogadott, végig érezhető volt a profizmus és a hozzáértés. A végeredmény magáért beszél: gyönyörű lett a pillám. Biztosan visszatérek még, és szívből ajánlom mindenkinek!', service: 'Szempilla lifting' },
 ];
 
+// A kezdőlapi FAQ SZÁNDÉKOSAN szalon-szintű, nem szolgáltatás-szintű.
+// Korábban négy kérdés a money page-ek fej-kulcsszavaira vonatkozott, és a
+// „Fáj a szempilla lifting?” SZÓ SZERINT duplikálódott a /szempilla-lifting-zuglo/
+// FAQPage sémájával — vagyis a kezdőlap strukturált adatban is bejelentette
+// ugyanazt a témát, amiért a money page verseng. A szolgáltatás-kérdések maradnak
+// ott, ahol relevánsak (money page FAQ), itt pedig az kerül, amire a kezdőlap
+// LEGITIMEN rangsorol: „kozmetikus” (98 megj., poz 2,8) és „kozmetikus budapest”
+// (22 megj., poz 2,0) — vagyis hol vagy, mikor, hogyan foglalok.
+// Minden adat a siteConfig/openingHours-ból ellenőrizve. Kerüli a money page-ek
+// pontos fej-kulcsszavait („szempilla lifting”, „szemöldök laminálás”).
 const faqs = [
-  { q: 'Fáj a szempilla lifting?', a: 'Egyáltalán nem. Csukott szemmel fekszel, és semmiféle szúrást vagy húzást nem érzel. A legtöbb vendég kifejezetten pihentetőnek tartja a 45 percet.' },
-  { q: 'Mennyi idő egy első arckezelés?', a: 'Az első alkalommal 90 percre számolj — ebből 15 perc bőranalízis és beszélgetés. A visszatérő kezelések általában 60 percesek.' },
-  { q: 'Mit hozzak magammal alkalmi sminkre?', a: 'Egy fényképet a ruhádról és a hajadról (ha tudod, hogyan lesz aznap). Próbasminkre érdemes smink nélkül érkezni, hogy tisztán induljunk.' },
-  { q: 'Mikor látszik a végső eredmény a szemöldök-laminálásnál?', a: 'A formát rögtön a kezelés után látod, de a teljes „letisztult” eredményhez 24 óra kell, mert a szőrszálak akkor veszik fel a végleges állást.' },
+  { q: 'Hogyan tudok időpontot foglalni?', a: 'Online, a Notino felületén, a nap bármely szakában — a szabad időpontok valós időben látszanak. Ha bizonytalan vagy, melyik kezelés való neked, írj Instagramon vagy e-mailben, és segítek választani.' },
+  { q: 'Hol talállak meg, és mikor vagy nyitva?', a: '1143 Budapest, Egressy út 16. — Zuglóban, a XIV. kerületben. Hétfőtől péntekig 8:30–19:30, szombaton 8:00–13:00, vasárnap zárva.' },
+  { q: 'Mi történik az első alkalommal?', a: 'A kezelés előtt körülbelül 10 percet beszélgetünk arról, mit szeretnél és mire van szüksége a bőrödnek. Csak utána kezdünk — nem sablonnal dolgozom.' },
+  { q: 'Egyszerre több kezelést is kérhetek?', a: 'Igen. A leggyakoribb kombináció a pilla- és szemöldökkezelés együtt: Teljes Tekintet csomagban 18 000 Ft a külön 23 000 Ft helyett, nagyjából 120 perc alatt.' },
   { q: 'Le lehet mondani az időpontot?', a: 'Igen, 24 órával az időpont előtt bármikor díjmentesen.' },
 ];
 
@@ -110,10 +126,10 @@ const homepageFaqSchema = {
 ---
 
 <Layout
-  title="Kozmetika Zugló – Szempilla Lifting, Arckezelés ★5,0 | FRUBEAUTY"
-  description="★5,0 · 40+ Google-értékelés · Janssen arckezelés, szempilla lifting, szemöldök laminálás Zuglóban. 11.000 Ft-tól → Foglalj most!"
+  title="Kozmetikus Zugló · Szempilla Stylist ★5,0 | FRUBEAUTY"
+  description="★5,0 · 50+ értékelés · Kozmetikus, szempilla- és szemöldök-stylist Zuglóban (Budapest, XIV.). Janssen arckezelés is. 11.000 Ft-tól → Foglalj online!"
   additionalSchemas={[homepageFaqSchema]}
-  preloadImage="/media/hero-poster.webp"
+  preloadImage="/media/hero-poster.avif"
 >
   {/* AnnouncementBar + NavBar share a fixed top container so they stack visually
       and dismiss-collapse happens in the same flow (no z-index fight). */}
@@ -130,20 +146,39 @@ const homepageFaqSchema = {
       critical request chain. MagneticCTA replaced with static <a> tags — eliminates
       MagneticCTA.js + use-transform.js (2212ms chain). HeroMedia client:idle so
       the poster <img> is pure SSR HTML with no hydration dependency for LCP. */}
-  <section class="relative overflow-hidden pt-44 sm:pt-52">
+  <section class="relative overflow-hidden pt-[calc(var(--header-h)+7rem)] sm:pt-[calc(var(--header-h)+9rem)]">
     <LampStatic>
       <div class="hero-reveal text-center max-w-[920px] mx-auto">
-        <p class="text-[11px] sm:text-xs uppercase tracking-caps text-black mb-5 sm:mb-7">
-          FRUBEAUTY · Zugló, XIV. kerület
+        {/* A kicker korábban text-gold volt, csupasz szövegként a lámpa fényében:
+            arany az aranyon = 1,0–2,9:1 kontraszt, optikailag eltűnt.
+            Puszta fekete szöveg viszont nem megoldás, mert a lámpanyaláb függőleges
+            helyzete a viewport MAGASSÁGÁVAL vándorol (a nyaláb a flex-1 sávban
+            középre igazodik, a tartalom alatta ül): alacsony ablaknál a kicker a
+            fényben van, magasnál a fény fölé csúszik és sötétbe kerül. Bármelyik
+            fix szövegszín az egyik esetben elveszik.
+            Ezért a kicker saját, tömör világos chipet kap — a hátterét így nem a
+            lámpa adja, hanem önmaga: fekete szöveg krém alapon, minden ablakméretben
+            ~15:1. A chip-forma amúgy is a site nyelve (lásd a landing oldalak
+            eyebrow-badge-eit), csak itt kitöltött, mert itt kontrasztot kell vinnie.
+            w-fit + mx-auto és NEM inline-block: az inline-block baseline-leadinget
+            adna, ami ~30 px-el feljebb tolná az egész hero-tartalmat. */}
+        <p class="w-fit mx-auto mb-5 sm:mb-7 rounded-full bg-cream px-5 py-2 text-[11px] sm:text-xs uppercase tracking-caps text-inkDeep font-medium">
+          FRUBEAUTY · Budapest XIV. · Zugló, Egressy út
         </p>
+        {/* Message match a Title-lel ("Kozmetikus Zugló · Szempilla Stylist"): a korábbi
+            H1 ("Ébredj minden nap tökéletes bőrrel…") nulla kulcsszót vitt, így aki
+            "kozmetikus"-ra keresve érkezett (85 megj./poz. 2,9, GSC), egy versre landolt.
+            Az aspirációs ígéret megmarad, csak elé kerül az entitás + geo.
+            SZÁNDÉKOSAN nincs benne szolgáltatás-fej-kulcsszó (szemöldök laminálás /
+            szempilla lifting) — az a kezdőlap money-page-kannibalizációját erősítené. */}
         <h1
-          class="font-display font-light text-cream leading-[1.06] tracking-tightest-"
+          class="font-display font-light text-cream leading-[1.12] tracking-tightest-"
           style="font-size: clamp(2rem, 5.5vw, 4.5rem);"
         >
-          Ébredj minden nap tökéletes <em class="display">bőrrel</em> és kész tekintettel.
+          Kozmetikus <em class="display">Zuglóban</em>.
         </h1>
         <p class="mt-6 sm:mt-8 text-base sm:text-lg text-creamSoft max-w-[58ch] mx-auto leading-[1.65] sm:leading-[1.7]">
-          Személyre szabott arckezelések, tartós szempilla- és szemöldökformázás, valamint alkalmi sminkek, amelyek kiemelik a természetes szépséged.
+          Kozmetikus és sminkes Zuglóban, a XIV. kerületi Egressy úton — személyre szabott arckezelés, tartós szempilla- és szemöldökkezelés, alkalmi smink. Egyszerre egy vendéggel, teljes figyelemmel.
         </p>
 
         {/* Static CTAs — no JS, no hydration. */}
@@ -151,7 +186,7 @@ const homepageFaqSchema = {
           <a
             href={config.booking}
             target="_blank"
-            rel="noopener"
+            rel={relFor(config.booking)}
             class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200"
           >
             Időpontot foglalok
@@ -199,25 +234,25 @@ const homepageFaqSchema = {
   {/* ============ TRUST BAR (zero-JS, #audit #7) ============
        A trust signal az első impressziónál a legfontosabb — ezért NEM React-szigetbe
        csomagolva, hanem CSS-only fade-in-nel. Lassú 3G / JS-nélküli pathon is
-       azonnal látható az 5,0 értékelés és a Janssen brand. */}
+       azonnal látható, ellenőrizhető üzleti tényeket mutat. */}
   <section class="border-y border-whisper bg-inkSoft">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
       <div class="zero-js-fade grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
         <div class="flex flex-col items-center md:items-start">
-          <span class="text-2xl font-display font-medium tracking-tight text-gold">★ 5,0</span>
+          <span class="text-2xl font-display font-medium tracking-tight text-gold">Google</span>
           <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">
             <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">
-              40+ Google értékelés →
+              Értékelések megnyitása →
             </a>
           </span>
         </div>
         <div class="flex flex-col items-center md:items-start">
           <span class="text-2xl font-display font-medium tracking-tight text-cream">Janssen</span>
-          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">Cosmetics partner</span>
+          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">Cosmetics termékek</span>
         </div>
         <div class="flex flex-col items-center md:items-start">
-          <span class="text-2xl font-display font-medium tracking-tight text-cream">5+ év</span>
-          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">szakmai tapasztalat</span>
+          <span class="text-2xl font-display font-medium tracking-tight text-cream">1 vendég</span>
+          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">egy időpontban</span>
         </div>
         <div class="flex flex-col items-center md:items-start">
           <span class="text-2xl font-display font-medium tracking-tight text-cream">Egressy út 16.</span>
@@ -237,7 +272,7 @@ const homepageFaqSchema = {
       <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl mx-auto text-center">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Szolgáltatások</p>
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">
-          Három <em class="display">személyre szabott</em> kezelés.
+          Négy <em class="display">személyre szabott</em> kezelés.
         </h2>
       </Reveal>
       <ServicesGrid client:visible services={services} />
@@ -364,7 +399,7 @@ const homepageFaqSchema = {
           </h2>
         </div>
         <a
-          href="/blog"
+          href="/blog/"
           class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors"
         >
           Összes cikk →
@@ -383,7 +418,7 @@ const homepageFaqSchema = {
           Amit a legtöbben <em class="display">kérdeznek</em>.
         </h2>
       </Reveal>
-      <FAQ client:visible items={faqs} />
+      <FAQList items={faqs} />
     </div>
   </section>
 
@@ -400,7 +435,7 @@ const homepageFaqSchema = {
             Online foglalási rendszer 0–24 órában, válaszadás munkanapokon pár órán belül.
           </p>
           <div class="mt-9 flex flex-wrap gap-3">
-            <a href={config.booking} target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">
+            <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">
               Időpontot foglalok
             </a>
             <a
@@ -497,6 +532,8 @@ const homepageFaqSchema = {
 
   <SiteFooter />
 
+  <CookieBanner client:idle />
+
   <div class="py-10 text-center border-t border-whisper">
     <a href="#" id="scroll-top-btn" class="inline-flex items-center gap-2 text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors duration-200">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
@@ -504,4 +541,9 @@ const homepageFaqSchema = {
     </a>
   </div>
   <script is:inline>
-    document.getElementById('scroll-top-btn').addEv
+    document.getElementById('scroll-top-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</Layout>

@@ -1,0 +1,17 @@
+21:59:24 [content] Syncing content
+21:59:24 [content] Astro config changed
+21:59:24 [content] Clearing content store
+[InvalidContentEntryDataError] blog → szempilla-lifting-vagy-muszempilla data does not match collection schema.
+
+  excerpt**: **excerpt: String must contain at most 200 character(s)
+
+  Hint:
+    See https://docs.astro.build/en/guides/content-collections/ for more information on content schemas.
+  Error reference:
+    https://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/
+  Location:
+    /sessions/clever-pensive-cannon/mnt/frubeauty-final/src/content/blog/szempilla-lifting-vagy-muszempilla.md:0:0
+  Stack trace:
+    at getEntryDataAndImages (file:///sessions/clever-pensive-cannon/mnt/frubeauty-final/node_modules/astro/dist/content/utils.js:168:26)
+    at async syncData (/sessions/clever-pensive-cannon/mnt/frubeauty-final/node_modules/astro/dist/content/loaders/glob.js:97:28)
+EXIT:1

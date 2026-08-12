@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { relFor } from '../config/site';
 
 interface MagneticCTAProps {
   href: string;
@@ -52,7 +53,7 @@ export function MagneticCTA({
     <a
       href={href}
       target={external ? '_blank' : undefined}
-      rel={external ? 'noopener' : undefined}
+      rel={external ? relFor(href) : undefined}
       aria-label={ariaLabel}
       className={`${base} ${variants[variant]} ${className}`}
     >

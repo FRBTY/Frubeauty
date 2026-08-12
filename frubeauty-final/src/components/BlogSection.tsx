@@ -8,6 +8,7 @@ export interface BlogPost {
   readingMinutes: number;
   publishedAt: string;
   cover: string;
+  coverAlt: string;
 }
 
 interface BlogSectionProps {
@@ -23,6 +24,7 @@ const defaultPosts: BlogPost[] = [
     readingMinutes: 5,
     publishedAt: '2026-04-12',
     cover: '/img/szempilla-lifting-vagy-festes-blog-cover.webp',
+    coverAlt: 'Szempilla lifting eredménye festés után a FRUBEAUTY szalonban',
   },
   {
     slug: 'janssen-arckezeles-bortipusok',
@@ -32,6 +34,7 @@ const defaultPosts: BlogPost[] = [
     readingMinutes: 8,
     publishedAt: '2026-03-28',
     cover: '/img/janssen-arckezeles-bortipusok-blog-cover.webp',
+    coverAlt: 'Janssen Cosmetics arckezelés a FRUBEAUTY zuglói szalonjában',
   },
   {
     slug: 'eskuvoi-smink-felkesziules',
@@ -41,6 +44,7 @@ const defaultPosts: BlogPost[] = [
     readingMinutes: 7,
     publishedAt: '2026-02-15',
     cover: '/img/eskuvoi-smink-felkesziules-blog-cover.webp',
+    coverAlt: 'Menyasszonyi próbasmink készítése Budapesten',
   },
 ];
 
@@ -53,11 +57,11 @@ export function BlogSection({ posts = defaultPosts }: BlogSectionProps) {
       {posts.map((p) => (
         <StaggerItem key={p.slug}>
           <article className="group flex flex-col h-full bg-inkSoft border border-whisper rounded-3xl overflow-hidden md:hover:-translate-y-0.5 md:hover:border-whisperStrong transition-[transform,border-color] duration-500 ease-out">
-            <a href={`/blog/${p.slug}`} className="flex flex-col h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60">
+            <a href={`/blog/${p.slug}/`} className="flex flex-col h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60">
               <div className="aspect-[4/5] overflow-hidden bg-inkRise">
                 <img
                   src={p.cover}
-                  alt={p.title}
+                  alt={p.coverAlt}
                   width={800}
                   height={1000}
                   loading="lazy"
@@ -70,9 +74,18 @@ export function BlogSection({ posts = defaultPosts }: BlogSectionProps) {
                   <span aria-hidden>·</span>
                   <span>{p.readingMinutes} perc olvasás</span>
                 </div>
-                <h3 className="mt-3 font-display text-xl sm:text-2xl font-medium leading-snug text-cream">
+                {/* SZÁNDÉKOSAN <p> és NEM <h3>. A cikk-kártyák címei maguk a money
+                    kulcsszavak („Szemöldök laminálás ára 2026…"), így H3-ként a kezdőlap
+                    pontos egyezésű fejlécet hordozott a saját money page-ei fej-kulcsszavaira.
+                    GSC-mérés (2026-07-31): a „szemöldök laminálás" 304 megjelenéséből a
+                    kezdőlap vitte a 250-et, a /szemoldok-laminalas-zuglo/ meg sem jelent;
+                    a „szempilla lifting"-nél 65-ből 57. Az egyetlen fej-kulcsszó, ahol a
+                    money page nyer („esküvői smink árak"), pont az, amire a kezdőlapon
+                    NINCS fejléc. A kártya link és anchor-szövege változatlan — csak a
+                    fejléc-szemantika szűnik meg, a megjelenés nem változik. */}
+                <p className="mt-3 font-display text-xl sm:text-2xl font-medium leading-snug text-cream">
                   {p.title}
-                </h3>
+                </p>
                 <p className="mt-3 text-creamSoft leading-relaxed flex-1">
                   {p.excerpt}
                 </p>

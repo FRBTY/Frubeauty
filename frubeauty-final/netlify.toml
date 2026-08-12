@@ -5,26 +5,96 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# ---------------------------------------------------------------------------
+# Hoszt-kanonizálás: www → csupasz domain (apex), 301-gyel, force=true.
+# A GSC-ben a www.frubeauty.com külön oldalként jelent meg → megosztott
+# entitás-/link-jelek. Ez a szabály a kanonikus apex-re tereli a www-t (a path
+# megmarad: :splat). ELSŐ a redirect-listában (first match wins), így a www-s
+# kérés egy hoppal a végleges, slashes apex-URL-re ér.
+# Megjegyzés: ha a Netlify "primary domain" beállítás már apex-re terel, ez
+# redundáns, de ártalmatlan biztosíték — és verzióban követhető (IaC).
+[[redirects]]
+  from = "http://www.frubeauty.com/*"
+  to = "https://frubeauty.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.frubeauty.com/*"
+  to = "https://frubeauty.com/:splat"
+  status = 301
+  force = true
+
+# ---------------------------------------------------------------------------
+# 301 átirányítások: a RÉGI Wix-oldal még indexelt URL-jei → az új megfelelő oldalak.
+# A GSC-ben ezek a Wix-URL-ek MÉG INDEXELTEK (www.frubeauty.com/service-page/...),
+# így a rangsor/authority-jük a megfelelő money page-re terelendő.
+#
+# FONTOS (2026-06-24 audit): a Googlebot a kérést PERCENT-KÓDOLVA küldi
+# (szempillafest%C3%A9s), a Netlify pedig a kódolt útra illeszt. Ezért az ékezetes
+# LITERÁL `from` szabályok SOHA nem tüzeltek → minden /service-page a gyűjtővel a
+# főoldalra esett (curl-lel verifikálva). Megoldás: az ENCODED `from` az elsődleges
+# (ez egyezik a bejövő úttal); a literál alatta marad ártalmatlan fallbacknek.
+# A konkrét szabályok ELŐBB, a /service-page gyűjtő (*) UTOLJÁRA (first match wins).
+# Deploy után KÖTELEZŐ curl-ellenőrzés, hogy a money page-re visz, nem a főoldalra.
+# ---------------------------------------------------------------------------
+[[redirects]]
+  from = "/book-online"
+  to = "/"
+  status = 301
+
+# A statikus index.html változatok közvetlenül a végleges, záró perjeles URL-re mennek.
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/blog/:slug/index.html"
+  to = "/blog/:slug/"
+  status = 301
+[[redirects]]
+  from = "/:path/index.html"
+  to = "/:path/"
+  status = 301
+
+# --- Szempilla festés (Wix) → szempilla lifting money page ---
+[[redirects]]
+  from = "/service-page/szempillafest%C3%A9s"
+  to = "/szempilla-lifting-zuglo/"
+  status = 301
+[[redirects]]
+  from = "/service-page/szempillafestés"
+  to = "/szempilla-lifting-zuglo/"
+  status = 301
+
+# --- Szemöldök formázás+festés+laminálás (Wix) → szemöldök laminálás money page ---
+[[redirects]]
+  from = "/service-page/szem%C3%B6ld%C3%B6kform%C3%A1z%C3%A1s-fest%C3%A9ssel-lamin%C3%A1l%C3%A1ssal"
+  to = "/szemoldok-laminalas-zuglo/"
+  status = 301
+[[redirects]]
+  from = "/service-page/szemöldökformázás-festéssel-laminálással"
+  to = "/szemoldok-laminalas-zuglo/"
+  status = 301
+
+# --- Szemöldök formázás és festés (Wix, külön indexelt slug) → szemöldök laminálás money page ---
+[[redirects]]
+  from = "/service-page/szem%C3%B6ld%C3%B6k-form%C3%A1z%C3%A1s-%C3%A9s-fest%C3%A9s"
+  to = "/szemoldok-laminalas-zuglo/"
+  status = 301
+[[redirects]]
+  from = "/service-page/szemöldök-formázás-és-festés"
+  to = "/szemoldok-laminalas-zuglo/"
+  status = 301
+
+# Nincs /service-page/* catch-all: csak a fenti, bizonyított legacy URL-ek
+# irányítódnak át. Az ismeretlen régi slugok valódi 404-et kapnak.
+
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; media-src 'self'; frame-src https:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/img/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/media/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"

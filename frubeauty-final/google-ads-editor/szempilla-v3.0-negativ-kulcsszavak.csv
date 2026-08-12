@@ -1,0 +1,16 @@
+Campaign,Keyword,Match Type
+szempilla_V3.0,műszempilla,Broad
+szempilla_V3.0,szempilla hosszabbítás,Phrase
+szempilla_V3.0,volume,Broad
+szempilla_V3.0,3d,Broad
+szempilla_V3.0,6d,Broad
+szempilla_V3.0,tanfolyam,Broad
+szempilla_V3.0,képzés,Broad
+szempilla_V3.0,oktatás,Broad
+szempilla_V3.0,állás,Broad
+szempilla_V3.0,házilag,Broad
+szempilla_V3.0,otthon,Broad
+szempilla_V3.0,diy,Broad
+szempilla_V3.0,kit,Broad
+szempilla_V3.0,eltávolítás,Phrase
+szempilla_V3.0,ingyen,Broad

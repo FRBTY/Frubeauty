@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteContact from '../components/SiteContact.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { CookieBanner } from '../components/CookieBanner';
+import { siteConfig, relFor } from '../config/site';
+
+const config = { ...siteConfig };
+
+// ProfilePage + Person — a Person ugyanarra az @id-ra hivatkozik, mint a Layout
+// globális @graph Person node-ja (#fruzsina), így a Google és az AI-keresők ezt az
+// oldalt látják a Fruzsina-entitás "otthonának" (mainEntityOfPage).
+const profileSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  '@id': 'https://frubeauty.com/rolam/#profilepage',
+  url: 'https://frubeauty.com/rolam/',
+  name: 'Pecze-Kovács Fruzsina – kozmetikus, szempilla- és szemöldök-stylist',
+  mainEntity: { '@id': 'https://frubeauty.com/#fruzsina' },
+  about: { '@id': 'https://frubeauty.com/#fruzsina' },
+  isPartOf: { '@id': 'https://frubeauty.com/#website' },
+};
+---
+
+<Layout
+  title="Pecze-Kovács Fruzsina – Kozmetikus Zuglóban | FRUBEAUTY"
+  description="Pecze-Kovács Fruzsina, a FRUBEAUTY kozmetikusa Zuglóban (Egressy út). Janssen arckezelés, szempilla lifting és szemöldök laminálás — egy vendég egyszerre."
+  canonical="https://frubeauty.com/rolam/"
+  image="/img/pecze-kovacs-fruzsina-zuglo-kozmetikus.webp"
+  preloadImage="/img/pecze-kovacs-fruzsina-zuglo-kozmetikus.webp"
+  additionalSchemas={[profileSchema]}
+>
+  <SiteHeader />
+
+  {/* ── Hero ─────────────────────────────────────────────────────────────── */}
+  <section class="relative overflow-hidden pt-[calc(var(--header-h)+4rem)] sm:pt-[calc(var(--header-h)+6rem)] pb-16 sm:pb-24">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        <div class="hero-reveal lg:col-span-7">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Rólam · Pecze-Kovács Fruzsina · Zugló</p>
+          <h1 class="font-display font-light text-cream leading-[1.05] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.25rem);">Egy <em class="display">kozmetikus</em>, aki egyszerre csak rád figyel.</h1>
+          <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">Pecze-Kovács Fruzsina vagyok, a FRUBEAUTY tulajdonosa és kozmetikusa a zuglói Egressy úton. Arckezeléssel, szempilla liftinggel és szemöldök laminálással foglalkozom — mindig egyetlen vendéggel egy időben, hogy a kezelés rólad szóljon, ne a sorszámodról.</p>
+          <div class="mt-7 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] tracking-caps">
+            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="text-gold hover:text-cream transition-colors">★ 5,0 · 50+ Google értékelés</a>
+            <span class="text-creamMute/50" aria-hidden="true">·</span>
+            <span class="text-creamMute">Egressy út 16. · XIV. kerület</span>
+          </div>
+          <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
+            <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+            <a href="/arckezeles-zuglo/" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Szolgáltatások</a>
+          </div>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="relative overflow-hidden rounded-3xl bg-inkRise ring-1 ring-black shadow-[0_30px_80px_-30px_rgba(0,0,0,0.6)]" style="aspect-ratio: 4 / 5;">
+            <img src="/img/pecze-kovacs-fruzsina-zuglo-kozmetikus.webp" alt="Pecze-Kovács Fruzsina kozmetikus a FRUBEAUTY zuglói szalonjában" width="800" height="1000" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" decoding="sync" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Filozófia: egy vendég egyszerre ──────────────────────────────────── */}
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div class="lg:col-span-5">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">A munkamódszerem</p>
+          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Miért csak <em class="display">egy vendég</em> egyszerre?</h2>
+        </div>
+        <div class="lg:col-span-7 space-y-5 text-creamSoft leading-[1.7] text-[16px] sm:text-[17px]">
+          <p>Sok szalonban párhuzamosan három-négy vendég ül — közben a kozmetikus rohan egyikről a másikra. Én tudatosan másképp dolgozom: <span class="text-cream">egyszerre csak egyetlen időpontot veszek fel</span>. Amíg nálam vagy, a teljes figyelmem a tiéd.</p>
+          <p>Ez nem luxus, hanem szakmai döntés. A bőröd állapota, a pillaíved, a szemöldököd vonala mind egyedi — ezeket nem lehet futószalagon kezelni. A nyugodt tempó pontosabb munkát, tartósabb eredményt és egy valódi feltöltődést jelent, nem csak egy elintézett feladatot.</p>
+          <p>Ezért nálam nincs várakozás idegenek között, nincs kapkodás, és minden kezelés egy rövid konzultációval indul: megnézzük, mire van valójában szükséged — még akkor is, ha a végén az derül ki, hogy egy másik kezelés szolgálná jobban a céljaidat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Szakértelem ──────────────────────────────────────────────────────── */}
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        <div class="lg:col-span-5 order-2 lg:order-1">
+          <div class="relative overflow-hidden rounded-3xl bg-inkRise ring-1 ring-black" style="aspect-ratio: 4 / 5;">
+            <img src="/img/szempilla_lifting_szemoldok_laminalas_zuglo_budapest_munka_.webp" alt="Szempilla lifting és szemöldök laminálás munka közben — FRUBEAUTY Zugló" width="800" height="1000" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+          </div>
+        </div>
+        <div class="lg:col-span-7 order-1 lg:order-2">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Amivel dolgozom</p>
+          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream mb-6" style="font-size: clamp(1.875rem, 4vw, 3rem);">Prémium hatóanyagok, <em class="display">koreai technika</em>.</h2>
+          <div class="space-y-5 text-creamSoft leading-[1.7] text-[16px] sm:text-[17px]">
+            <p>Az arckezeléseimet kizárólag <span class="text-cream">Janssen Cosmetics</span> professzionális hatóanyagaival végzem. Ez a német „cosmeceutical" márka azt jelenti, hogy a hatóanyagok a felszínnél mélyebbre is eljutnak — minden bőrtípusra van célzott protokollom.</p>
+            <p>A szempilla liftinget és a szemöldök laminálást <span class="text-cream">koreai technikával</span> dolgozom — ez adja a természetes, mégis látványos ívet és a tartós, 6–8 hetes eredményt, a saját szőrszálaid megőrzése mellett.</p>
+            <p>A részletes árakat és a kezelések menetét a szolgáltatás-oldalakon találod:
+              <a href="/arckezeles-zuglo/" class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors">arckezelés</a>,
+              <a href="/szempilla-lifting-zuglo/" class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors">szempilla lifting</a>,
+              <a href="/szemoldok-laminalas-zuglo/" class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors">szemöldök laminálás</a> és
+              <a href="/sminkes-zuglo/" class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors">alkalmi smink</a>.</p>
+            {/* TODO (opcionális, E-E-A-T erősítés — csak valós adattal töltsd ki):
+                konkrét szakképesítés (intézmény + év), a koreai lash lift képzés neve+éve,
+                hány éve dolgozol a szakmában, Janssen-partner státusz igazolása. */}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <SiteContact
+    heading='Foglalj időpontot <em class="display">nálam</em>.'
+    eyebrow="Kapcsolat"
+    intro="Ha bizonytalan vagy, melyik kezelés való neked, írj pár sort foglalás előtt — segítek dönteni."
+  />
+
+  <SiteFooter />
+  <CookieBanner client:idle />
+</Layout>

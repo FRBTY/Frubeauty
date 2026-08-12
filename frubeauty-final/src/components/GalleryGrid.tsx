@@ -56,7 +56,6 @@ export function GalleryGrid({
             <button
               type="button"
               onClick={() => setOpenIndex(i)}
-              aria-label={`Kép nagyítása: ${alts[i]}`}
               className={`group block w-full ${tileAspect} bg-inkSoft rounded-2xl overflow-hidden border border-whisper focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink`}
             >
               <img

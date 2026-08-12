@@ -1,26 +1,52 @@
 ---
-import { siteConfig, openingHoursSchema, analytics } from '../config/site';
+import {
+  siteConfig,
+  openingHoursSchema,
+  analytics,
+  businessIdentity,
+  sameAsProfiles,
+} from '../config/site';
 
 export interface Props {
   title?: string;
   description?: string;
   image?: string;
-  canonical?: string;
+  imageAlt?: string;
+  /** null removes canonical entirely (for example on the 404 page). */
+  canonical?: string | null;
+  robots?: string;
+  /** False on utility/error pages that should not emit the global entity graph. */
+  includeBusinessSchema?: boolean;
   /** Above-the-fold LCP image to preload. Pass undefined on text-led pages so
       we don't waste mobile bandwidth preloading an image that isn't the LCP. */
   preloadImage?: string;
   /** Extra JSON-LD schema objects (FAQPage, Service stb.) az adott aloldalhoz.
       A Layout a <head>-ben rendereli őket a globális businessSchema után. */
   additionalSchemas?: object[];
+  /** OG-tartalomtípus. Blogcikken 'article' (publikálási/módosítási dátummal),
+      minden más oldalon marad a 'website'. Az Ahrefs-audit (2026-07-31) mind a
+      23 oldalon 'website'-ot talált — a cikkeken ez rossz típusjelzést ad a
+      közösségi előnézeteknek és az AI-crawlereknek. */
+  ogType?: 'website' | 'article';
+  /** ISO dátum az article:published_time-hoz (csak ogType='article' esetén). */
+  publishedTime?: string;
+  /** ISO dátum az article:modified_time-hoz (csak ogType='article' esetén). */
+  modifiedTime?: string;
 }
 
 const {
   title = 'Kozmetika és smink Zuglóban — FRUBEAUTY | Pecze-Kovács',
   description = `Arckezelés Janssen hatóanyagokkal, szempilla-lift, szemöldök-laminálás és személyre szabott smink Zuglóban. Online foglalás — ${siteConfig.postalCode} Budapest, ${siteConfig.streetAddress}`,
   image = '/og-image.jpg',
+  imageAlt = title,
   canonical = Astro.url.href,
+  robots = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+  includeBusinessSchema = true,
   preloadImage,
   additionalSchemas = [],
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
 } = Astro.props;
 
 // OG/Twitter image-nek abszolút URL kell — Facebook és Twitter nem követi a
@@ -38,12 +64,18 @@ const businessSchema = {
     {
       '@type': 'BeautySalon',
       '@id': 'https://frubeauty.com/#business',
-      name: 'FRUBEAUTY – Pecze-Kovács Fruzsina',
+      name: businessIdentity.name,
+      legalName: businessIdentity.legalName,
+      // A katalógus-űrlapok és az AI-összefoglalók ezt a mezőt olvassák először,
+      // ha „mivel foglalkozik a vállalkozás" a kérdés. Ugyanaz a szöveg megy a
+      // citációkba is (site.ts) — a NAP-egyezés a leírásra is vonatkozik.
+      description: businessIdentity.descriptionMedium,
       url: 'https://frubeauty.com',
       image: ['https://frubeauty.com/og-image.jpg'],
       telephone: siteConfig.phone,
       email: siteConfig.email,
-      priceRange: '4000–26000 Ft',
+      knowsLanguage: 'hu',
+      priceRange: '4000–49500 Ft',
       currenciesAccepted: 'HUF',
       paymentAccepted: 'Készpénz, Bankkártya',
       address: {
@@ -79,31 +111,48 @@ const businessSchema = {
       ],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'Szempilla és szemöldök kezelések',
+        name: 'FRUBEAUTY szépségszalon szolgáltatások',
         itemListElement: [
           {
             '@type': 'Offer',
-            itemOffered: { '@type': 'Service', name: 'Szempilla lifting + festés', url: 'https://frubeauty.com/szempilla-lifting-zuglo' },
+            itemOffered: { '@type': 'Service', name: 'Szempilla lifting + festés', url: 'https://frubeauty.com/szempilla-lifting-zuglo/' },
             price: '12000',
             priceCurrency: 'HUF',
           },
           {
             '@type': 'Offer',
-            itemOffered: { '@type': 'Service', name: 'Szemöldök laminálás + formázás', url: 'https://frubeauty.com/szemoldok-laminalas-zuglo' },
+            itemOffered: { '@type': 'Service', name: 'Szemöldök laminálás + formázás', url: 'https://frubeauty.com/szemoldok-laminalas-zuglo/' },
             price: '11000',
+            priceCurrency: 'HUF',
+          },
+          {
+            // Ár = a money-page-en marketingelt „-tól" arckezelés-ár (SOS Sensitive),
+            // NEM a 11 000 Ft-os Relax & Glow masszázs add-on, hogy ne adjunk
+            // félrevezetően alacsony „arckezelés-tól" jelet az entitás-gráfban.
+            '@type': 'Offer',
+            itemOffered: { '@type': 'Service', name: 'Janssen arckezelés', url: 'https://frubeauty.com/arckezeles-zuglo/' },
+            price: '16900',
+            priceCurrency: 'HUF',
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: { '@type': 'Service', name: 'Alkalmi és esküvői smink', url: 'https://frubeauty.com/sminkes-zuglo/' },
+            price: '13000',
             priceCurrency: 'HUF',
           },
         ],
       },
-      sameAs: [
-        siteConfig.instagram,
-        siteConfig.facebook,
-        'https://www.notino.hu/szalonok/pecze-kovacs-fruzsina-sminkes,-szemoldok-es-szempilla-stylist',
-      ],
+      // A GBP-találat (mapsUrl) is bekerült: a `hasMap` csak annyit mond, hogy
+      // „itt a térkép", a `sameAs` viszont azt állítja, hogy a Maps-profil és ez
+      // az oldal UGYANAZ az entitás — ez a kapcsolat köti össze a webes és a
+      // lokális jelenlétet a Knowledge Graphban.
+      sameAs: [...sameAsProfiles],
     },
     {
       '@type': 'Person',
       '@id': 'https://frubeauty.com/#fruzsina',
+      url: 'https://frubeauty.com/rolam/',
+      mainEntityOfPage: 'https://frubeauty.com/rolam/',
       name: 'Pecze-Kovács Fruzsina',
       jobTitle: 'Kozmetikus, szempilla- és szemöldök-stylist',
       image: 'https://frubeauty.com/img/fruzsina-portrait.jpg',
@@ -115,12 +164,10 @@ const businessSchema = {
         'Janssen arckezelés',
         'alkalmi smink',
       ],
-      hasCredential: {
-        '@type': 'EducationalOccupationalCredential',
-        credentialCategory: 'Kozmetikus szakképesítés',
-        name: 'Koreai lash lift technika',
-      },
-      sameAs: [siteConfig.instagram, siteConfig.facebook],
+      // A Notino-oldal címe szó szerint „Pecze-Kovács Fruzsina Kozmetikus,
+      // Sminkes, Szemöldök és szempilla stylist" — vagyis SZEMÉLY-profil, nem
+      // szalonlistázás, ezért a Person node-ra is illik.
+      sameAs: [siteConfig.instagram, siteConfig.facebook, siteConfig.booking],
     },
     {
       '@type': 'WebSite',
@@ -134,11 +181,16 @@ const businessSchema = {
 };
 
 const hasGA4 = analytics.ga4Id && analytics.ga4Id.length > 0;
+const hasGoogleTag = analytics.googleTagId && analytics.googleTagId.length > 0;
 const hasPixel = analytics.metaPixelId && analytics.metaPixelId.length > 0;
 const hasGoogleAds = analytics.googleAdsId && analytics.googleAdsId.length > 0;
-// Az elsődleges gtag script forrása: ha GA4 van, azt töltjük be (és aztán config-oljuk az Ads-t is);
-// ha csak Ads van, akkor az Ads ID-t használjuk loader ID-ként.
-const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googleAdsId : '');
+// A gtag.js LOADER ID-je. FONTOS: az egyesített Google-tagnél (GT-…) a GA4 (G-)
+// és az Ads (AW-) is csak DESTINATION — a 'G-…' ID-ra a googletagmanager.com
+// 404-et ad, ami némán megöli a teljes mérést. Ezért a loader a GT- ID-t kapja,
+// és külön config-oljuk a GA4 + Ads destinationöket. Sorrend: GT- > AW- > G-.
+const primaryGtagId = hasGoogleTag
+  ? analytics.googleTagId
+  : (hasGoogleAds ? analytics.googleAdsId : (hasGA4 ? analytics.ga4Id : ''));
 ---
 
 <!doctype html>
@@ -148,25 +200,42 @@ const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googl
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#1A1410" />
-    <link rel="canonical" href={canonical} />
+    {canonical && <link rel="canonical" href={canonical} />}
     {preloadImage && (
-      <link rel="preload" as="image" href={preloadImage} type="image/webp" fetchpriority="high" />
+      <link rel="preload" as="image" href={preloadImage} type={preloadImage.endsWith('.avif') ? 'image/avif' : 'image/webp'} fetchpriority="high" />
     )}
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={robots} />
     <meta name="author" content="Pecze-Kovács Fruzsina" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    {ogType === 'article' && publishedTime && (
+      <meta property="article:published_time" content={publishedTime} />
+    )}
+    {ogType === 'article' && modifiedTime && (
+      <meta property="article:modified_time" content={modifiedTime} />
+    )}
+    {ogType === 'article' && <meta property="article:author" content="Pecze-Kovács Fruzsina" />}
     <meta property="og:locale" content="hu_HU" />
+    {/* SEO: a SERP-ben a Google a saját cím helyett gyakran a H1-et mutatja + a
+        SAJÁT MAGA kikövetkeztetett oldalnevet fűzi hozzá. Élő SERP-ellenőrzés
+        (2026-08-09): „… - frubeauty" — kisbetűs, a domainből származtatva. Az
+        og:site_name a Google dokumentált oldalnév-jelzése, eddig hiányzott.
+        Ezzel a márkanév helyes írásmóddal jelenik meg a találatokban. */}
+    <meta property="og:site_name" content="FRUBEAUTY" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={absoluteOgImage} />
-    <meta property="og:url" content={canonical} />
+    <meta property="og:image:alt" content={imageAlt} />
+    {canonical && <meta property="og:url" content={canonical} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={absoluteOgImage} />
-    <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+    {includeBusinessSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
+    )}
     {additionalSchemas.map((schema) => (
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
@@ -184,40 +253,65 @@ const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googl
         window.dataLayer = window.dataLayer || [];
         function gtag(){ window.dataLayer.push(arguments); }
         window.gtag = gtag;
+
+        // --- Google Consent Mode V2 ---
+        // GDPR opt-in: alapból MINDEN hirdetési és analitikai tárolás TILTOTT, amíg a
+        // látogató a cookie bannerben rá nem bólint. Consent-jelzés nélkül a Google Tag
+        // EU-ban visszatartja az adatküldést → 0 mért forgalom és konverzió. A 'default'
+        // parancsnak a gtag config / gtag.js letöltése ELŐTT kell lefutnia, ezért áll itt.
+        gtag('consent', 'default', {
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          analytics_storage: 'denied',
+          wait_for_update: 500
+        });
+        // Visszatérő látogató, aki KORÁBBAN elfogadta: a banner nem jelenik meg újra,
+        // ezért a tárolt döntést betöltéskor itt azonnal érvényesítjük (különben
+        // 'denied'-en ragadna). Az élő bannerre-kattintás a lenti listeneren át jön.
+        try {
+          if (window.localStorage.getItem('frubeauty_cookie_consent_v1') === 'all') {
+            gtag('consent', 'update', {
+              ad_storage: 'granted',
+              ad_user_data: 'granted',
+              ad_personalization: 'granted',
+              analytics_storage: 'granted'
+            });
+          }
+        } catch (e) {}
+        // A CookieBanner (React) a döntéskor 'cookie-consent' eseményt szór ('all' |
+        // 'essential'); itt kötjük rá a Consent Mode update-et, így minden gtag-hívás
+        // egy helyen, a stub mellett marad. 'essential' → marad a denied.
+        window.addEventListener('cookie-consent', function (ev) {
+          var granted = ev && ev.detail === 'all';
+          gtag('consent', 'update', {
+            ad_storage: granted ? 'granted' : 'denied',
+            ad_user_data: granted ? 'granted' : 'denied',
+            ad_personalization: granted ? 'granted' : 'denied',
+            analytics_storage: granted ? 'granted' : 'denied'
+          });
+        });
+
         gtag('js', new Date());
         if (hasGA4)       gtag('config', ga4Id, { send_page_view: true });
         if (hasGoogleAds) gtag('config', googleAdsId);
 
-        // A nehéz gtag.js letöltést az első valódi felhasználói interakcióhoz
-        // kötjük (scroll/tap/billentyű) — így a kód NEM kerül a kritikus betöltési
-        // ablakba (mobil PSI: nincs third-party parse a mért TBT-ben). Valódi
-        // látogató mindig interaktál (legalább görget) → követés és konverzió-
-        // mérés továbbra is működik (a stub queue-olja a parancsokat addig is).
-        var gtagLoaded = false;
-        var opts = { once: true, passive: true, capture: true };
-        var events = ['pointerdown', 'mousemove', 'touchstart', 'keydown', 'scroll', 'wheel'];
-        function loadGtag() {
-          if (gtagLoaded) return;
-          gtagLoaded = true;
-          events.forEach(function (e) { window.removeEventListener(e, loadGtag, opts); });
+        // gtag.js EAGER (azonnali) async betöltése. A korábbi "csak az első
+        // interakcióra töltünk" lazy hack ELRONTOTTA az Ads-konverziókat: a
+        // látogató első interakciója gyakran MAGA a CTA-kattintás. Ekkor a
+        // window.gtag még csak a stub → a 'conversion' event a dataLayer queue-ba
+        // kerül, a böngésző AZONNAL elnavigál a Notino-ra, a gtag.js pedig egy már
+        // elhagyott oldalon töltene be → a konverzió sosem megy ki. Az async
+        // betöltés nem blokkolja a renderelést (nincs érdemi LCP/TBT-hatás egy
+        // statikus oldalon), viszont a kattintásig a gtag.js szinte biztosan kész,
+        // és a konverzió sendBeacon-nel, navigáció ELŐTT kimegy. A konverziómérés
+        // megbízhatósága fontosabb, mint pár ms szintetikus PSI-pont.
+        (function () {
           var s = document.createElement('script');
           s.async = true;
           s.src = 'https://www.googletagmanager.com/gtag/js?id=' + primaryGtagId;
           document.head.appendChild(s);
-        }
-        events.forEach(function (e) { window.addEventListener(e, loadGtag, opts); });
-
-        // Fallback a GA4-hez: interakció NÉLKÜLI látogatónál (no-interaction bounce)
-        // is rögzüljön a session. A load esemény UTÁN, idle-ben töltünk — a kritikus
-        // betöltési ablakon kívül, hogy a mobil PSI-t minimálisan érintse. Idempotens
-        // (a gtagLoaded guard miatt sosem tölt kétszer; az interakció továbbra is
-        // azonnal triggereli, ez csak biztonsági háló a némán távozókra).
-        function idleLoadGtag() {
-          if (window.requestIdleCallback) window.requestIdleCallback(loadGtag, { timeout: 4000 });
-          else window.setTimeout(loadGtag, 3000);
-        }
-        if (document.readyState === 'complete') idleLoadGtag();
-        else window.addEventListener('load', idleLoadGtag, { once: true });
+        })();
       </script>
     )}
     {hasPixel && (
@@ -325,30 +419,141 @@ const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googl
       })();
     </script>
 
+    <script is:inline>
+      /* --- Fejlécmagasság FESTÉS ELŐTT ---------------------------------------
+         Az AnnouncementBar futásidőben jelenik meg (client:idle/​load sziget) és
+         ~54 px-et ad a fix fejléchez. A hero padding-ja eddig beégetett érték
+         volt (pt-44/pt-52), ezért a fejléc alatti optikai rés 143 px-ről 89-re
+         ugrott, amint a sáv megjelent — ez volt az elcsúszás.
+
+         A sáv megjelenésének feltétele tisztán localStorage-ból eldönthető
+         (mai Notino-kattintás száma ≥ 1 ÉS nincs elvetve), amit itt, a <head>-ben
+         SZINKRONBAN kiolvasunk. Így a hero már az ELSŐ layoutnál a helyes
+         paddinget kapja → a sáv utólagos beanimálása NEM okoz layout shiftet
+         (0 CLS), a fejléc alatti rés pedig mindkét állapotban ugyanaz.
+         A kulcsoknak egyezniük kell az AnnouncementBar.tsx-beliekkel. */
+      (function () {
+        try {
+          var d = new Date();
+          var key = 'frubeauty_booking_clicks_' + d.getFullYear() + '-' +
+            String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+          var clicks = parseInt(window.localStorage.getItem(key) || '0', 10);
+          var dismissed = window.localStorage.getItem('frubeauty_promo_dismissed_v5');
+          if (clicks >= 1 && !dismissed) document.documentElement.dataset.announcement = 'on';
+        } catch (e) {}
+      })();
+
+      /* Utólagos korrekció: ha a fejléc a becsülttől eltérő magasságú lesz
+         (pl. a sáv szövege két sorba tördel, vagy a user elveti a sávot), a
+         valós magasság kerül a változóba. Debounce-olva, hogy a sáv 400 ms-os
+         nyitó animációjának KÖZTES értékei ne kerüljenek bele — különben a hero
+         együtt csúszna az animációval. */
+      (function () {
+        var root = document.documentElement, t;
+        function init() {
+          var el = document.querySelector('.fixed.top-0');
+          if (!el || !window.ResizeObserver) return;
+          new ResizeObserver(function () {
+            clearTimeout(t);
+            t = setTimeout(function () {
+              var h = el.getBoundingClientRect().height;
+              if (h > 0) root.style.setProperty('--header-h', h + 'px');
+            }, 150);
+          }).observe(el);
+        }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+        else init();
+      })();
+
+      /* --- Betűk EGY hullámban ------------------------------------------------
+         Mérve a betűfájlok két hullámban érkeztek, ~900 ms különbséggel:
+           1. hullám  634–713 ms: geist-400/500, fraunces-latin(+italic), latin-ext-italic
+           2. hullám 1524–1550 ms: geist-600 ÉS fraunces-latin-ext-normal
+         A második hullámban van a NORMÁL súlyú ő/ű (fraunces-latin-ext) — ezért
+         villant fel másodszor is a szöveg, jóval az első csere után.
+
+         A késés oka, hogy ezek a glyphek csak lejjebb, a content-visibility:auto
+         szekciókban fordulnak elő, így a böngésző csak ott fedezi fel őket.
+         A Font Loading API-val előre kérjük őket, de CSAK az LCP megfestése UTÁN,
+         tehát a kritikus útból semmit nem veszünk el — a preload-mentes stratégia
+         és az LCP-kép sávszélessége érintetlen marad. A szöveg-hint (őűŐŰ) miatt
+         csak a tényleg szükséges unicode-range subsetek töltenek. */
+      (function () {
+        if (!document.fonts || !document.fonts.load) return;
+        var done = false;
+        var HU = 'őűŐŰ';
+        function warm() {
+          if (done) return;
+          done = true;
+          var specs = [
+            ['300 1rem Fraunces', HU], ['400 1rem Fraunces', HU], ['500 1rem Fraunces', HU],
+            ['italic 300 1rem Fraunces', HU],
+            ['400 1rem Geist', HU], ['500 1rem Geist', HU], ['600 1rem Geist', 'a' + HU]
+          ];
+          for (var i = 0; i < specs.length; i++) {
+            try { document.fonts.load(specs[i][0], specs[i][1]); } catch (e) {}
+          }
+        }
+        if (window.PerformanceObserver) {
+          try {
+            var po = new PerformanceObserver(function () { warm(); po.disconnect(); });
+            po.observe({ type: 'largest-contentful-paint', buffered: true });
+          } catch (e) {}
+        }
+        window.addEventListener('load', warm, { once: true });
+      })();
+    </script>
+
     <style is:global>
-      /* Metric-matched fallback for Fraunces (computed from Georgia via capsize):
-         the headline is laid out in this fallback at the exact same box size, so
-         when the real Fraunces swaps in there is no reflow → no CLS. This lets us
-         drop the render-competing font preloads and give the LCP image full
-         bandwidth on mobile. */
+      /* ===== Metrika-illesztett tartalék fontok =====================
+         A korábbi kalibráció capsize-zal készült, ami a FÜGGŐLEGES metrikákat
+         (ascent/descent/cap height) illeszti — a betűSZÉLESSÉGET nem. Mérve
+         viszont pont a szélesség tért el drasztikusan, és a látható „felvillanás"
+         is ebből jött:
+
+           Fraunces opsz 144, 72 px, ugyanaz a hero-sor
+             valódi Fraunces ............ 1378,6 px
+             régi tartalék (Georgia) .... 2006,0 px   → +45,5%
+
+         Ezért a tartalékokat mostantól SZÉLESSÉGRE kalibráljuk, a függőleges
+         dobozt pedig az ascent/descent-override skálázásával tartjuk változatlanul
+         (effektív ascent = override × size-adjust — a szorzat ugyanaz maradt,
+         tehát a sormagasság és a CLS-viselkedés nem változik).
+
+         Két tartalék kell, mert a két optikai regiszter metrikája gyökeresen más:
+           • display (h1/h2, opsz 144): erősen sűrített, kontrasztos vágat →
+             a Times New Roman áll hozzá a legközelebb (1,131× a Georgia 1,252×
+             helyett), és vékonyabb is, tehát a „vastag felvillanás" is megszűnik.
+           • text (minden más .font-display, opsz auto): itt a Georgia a legjobb
+             (0,938×).
+         Mért arányok stabilak a méretskálán (display 1,4549–1,4551 32→72 px
+         között), tehát egyetlen size-adjust minden fokozatra jó. */
+      @font-face {
+        font-family: 'Fraunces Display Fallback';
+        src: local('Times New Roman'), local('Georgia');
+        size-adjust: 88.4%;
+        ascent-override: 110.64%;
+        descent-override: 28.85%;
+        line-gap-override: 0%;
+      }
       @font-face {
         font-family: 'Fraunces Fallback';
         src: local('Georgia'), local('Times New Roman');
-        size-adjust: 116.2%;
-        ascent-override: 84.17%;
-        descent-override: 21.95%;
+        size-adjust: 106.6%;
+        ascent-override: 91.75%;
+        descent-override: 23.93%;
         line-gap-override: 0%;
       }
-      /* Metrika-illesztett tartalék a Geist body fonthoz (Arial-ra kalibrálva,
-         @capsizecss/unpack-kal számolva). A doboz mérete azonos a Geist-tel, így
-         a font-swap NEM okoz reflow-t / CLS-t — fontos, mert a hero LCP bekezdés
-         a body fontot használja és azonnal (opacity 1) festődik. */
+      /* Metrika-illesztett tartalék a Geist body fonthoz (Arial). Ugyanaz a
+         korrekció: a régi 105,8% mellett az Arial 3,05%-kal szélesebb volt a
+         Geist-nél (536,8 px → 553,2 px egy hero-bekezdés-soron), ezért a
+         size-adjust 102,7%-ra csökken, a függőleges doboz változatlan. */
       @font-face {
         font-family: 'Geist Fallback';
         src: local('Arial');
-        size-adjust: 105.8%;
-        ascent-override: 94.99%;
-        descent-override: 27.88%;
+        size-adjust: 102.7%;
+        ascent-override: 97.86%;
+        descent-override: 28.72%;
         line-gap-override: 0%;
       }
       /* Fraunces latin-ext subset — a hosszú magyar ékezetek (ő U+0151, ű U+0171,
@@ -376,12 +581,32 @@ const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googl
         src: url('/fonts/fraunces-latin-normal.woff2') format('woff2');
         unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
       }
-      /* Fraunces italic @font-face SZÁNDÉKOSAN eltávolítva: a két italic fájl
-         ~152 KiB volt, VeryHigh prioritással töltött a kritikus ablakban, csak a
-         display headingek <em> kiemeléséhez (pl. a hero "bőrrel" szó). Helyette a
-         böngésző szintetikus dőltet rajzol a már betöltött normal Fraunces-ből
-         (font-synthesis: style, alapból engedélyezett) — a kinézet gyakorlatilag
-         azonos, de 152 KiB-tal kevesebb tölt a mobil kritikus útban. */
+      /* Fraunces VALÓDI italic @font-face-ek (latin + latin-ext) visszakötve.
+         Korábban el voltak távolítva (perf), és a böngésző szintetikus dőltet
+         rajzolt a normal Fraunces-ből (font-synthesis). A szintetikus ferdítés
+         viszont eltorzítja a magyar kettős éles ékezetet (ő U+0151, ű U+0171,
+         Ő U+0150, Ű U+0170) — a két éles vonás összemosódik / breve-szerűvé
+         válik (jól látható a hero "bőrrel" <em> szóban). A valódi italic glyph
+         helyesen rajzolt kettős éles ékezetet ad.
+         PERF: font-display: swap + NINCS preload → a két fájl lazy-n, a kritikus
+         úton kívül tölt (nem blokkolja az LCP-t). A latin-ext külön, kis fájl,
+         csak akkor tölt, ha tényleg van ilyen karakter (unicode-range). */
+      @font-face {
+        font-family: 'Fraunces';
+        font-style: italic;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url('/fonts/fraunces-latin-ext-italic.woff2') format('woff2');
+        unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+      }
+      @font-face {
+        font-family: 'Fraunces';
+        font-style: italic;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url('/fonts/fraunces-latin-italic.woff2') format('woff2');
+        unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+      }
       @font-face {
         font-family: 'Geist';
         font-style: normal;
@@ -448,6 +673,17 @@ const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googl
         --ease-out-strong:    cubic-bezier(0.23, 1, 0.32, 1);
         --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
         --ease-drawer:        cubic-bezier(0.32, 0.72, 0, 1);
+        /* A fix fejléc magassága (AnnouncementBar + NavBar). A hero padding-ja
+           ebből számol, így a fejléc alatti optikai rés akkor is ugyanaz marad,
+           ha a bejelentő sáv megjelenik vagy eltűnik. A default a sáv nélküli
+           NavBar magassága (h-16), hogy JS nélkül is helyes legyen. */
+        --header-h: 4rem;
+        /* Az AnnouncementBar egysoros magassága (py-2.5 + 13px/leading-snug),
+           mérve: 54 px. Ha a sáv paddingje változik, EZT is állítsd. */
+        --announcement-h: 3.375rem;
+      }
+      :root[data-announcement='on'] {
+        --header-h: calc(4rem + var(--announcement-h));
       }
 
       /* A hosszú landing oldalon a böngésző alapból az ÖSSZES szekciót
@@ -462,16 +698,65 @@ const primaryGtagId = hasGA4 ? analytics.ga4Id : (hasGoogleAds ? analytics.googl
         contain-intrinsic-size: auto 700px;
       }
 
+      /* A subsetelt Fraunces fvar táblájában CSAK két tengely van:
+         opsz 9–144 (default 9) és wght 100–900. SOFT és WONK NINCS benne, tehát
+         a korábbi 'SOFT' 30 / 'SOFT' 50 néma no-op volt — a címsor és a benne lévő
+         arany <em> között szánt "lágyság"-különbség sosem renderelődött.
+
+         Az opsz fix 144-re kötése viszont valódi hiba volt: az a ~144 px-es
+         plakátméret rajza, kis fokozaton hajszálvékony és össze van húzva.
+         Mérve (Fraunces 500, „Szemöldök laminálás"): 20 px-en 165,0 px az opsz 144
+         szóhossza a helyes 201,4 px helyett → 22%-kal keskenyebb betűkép a
+         navigációs logón, a szolgáltatás-H3-akon és az áraknál.
+
+         Megoldás: a display MÉRETŰ címsorok (h1/h2, 30–72 px) megtartják a 144-et
+         — erre van kalibrálva a metrika-illesztett 'Fraunces Fallback' is, így az
+         LCP-elem swap-CLS-e nem változik —, minden más display szöveg optikai
+         mérete a tényleges betűmérethez igazodik (font-optical-sizing: auto).
+         FONTOS: az opsz default 9, ezért az 'auto' kiírása nem elhagyható. */
       .font-display {
         font-feature-settings: 'ss01', 'ss02';
-        font-variation-settings: 'SOFT' 30, 'opsz' 144;
+        font-optical-sizing: auto;
       }
 
+      /* A display regiszterhez a rá kalibrált tartalék tartozik (lásd a
+         @font-face blokkot fent) — enélkül a h1/h2 a text-tartalékon renderelne,
+         ami itt 45%-kal szélesebb lenne a valódi Fraunces-nél. */
+      h1.font-display, h2.font-display {
+        font-variation-settings: 'opsz' 144;
+        font-family: 'Fraunces', 'Fraunces Display Fallback', ui-serif, Georgia, serif;
+      }
+
+      /* A font-variation-settings öröklődik, ezért az <em> a szülő címsor optikai
+         méretét kapja meg — nem írjuk felül, különben a kis H3-akban lévő em
+         visszaesne a 144-es rajzra. */
       .font-display em, em.display {
         font-style: italic;
-        font-variation-settings: 'SOFT' 50, 'opsz' 144;
         color: var(--gold, #B8884A);
       }
+
+      /* A hero címsorában lévő arany <em> a lámpa fénykúpja ELŐTT áll, nem sima
+         ink háttéren: ott a #B8884A csak ~3,2:1-et adott (a többi címsoron 6,2:1).
+         Ezért a hero kiemelése a világosabb goldGlow tónust kapja → 5,7:1, úgy,
+         hogy a hue és a "meleg arany" karakter változatlan.
+
+         A letter-spacing visszaállítása normálra szintén szándékos: a h1 örökölt
+         -0,022em-je egy dőlt, talpas betűn a szomszédos szavakba tolta a szót
+         ("Kozmetikus|Zuglóban|—"), a záró inline padding pedig a dőlés miatti
+         jobb oldali túllógásnak ad helyet. */
+      .lamp-root h1 em.display {
+        color: #D9B27D;
+        letter-spacing: normal;
+        padding-inline-end: 0.06em;
+      }
+
+      /* Sortörés. A display címsorok eddig „mohó" tördelést kaptak, ezért az
+         utolsó soron egyetlen szó maradhatott árván (a hero-ban a „tekintettel."),
+         ami optikailag elcsúszott, aszimmetrikus tömböt ad. A balance a sorokat
+         egyenlő hosszúságúra osztja; bekezdéseknél a pretty csak a fattyú-szót
+         előzi meg, sortörés-költség nélkül. */
+      h1, h2, h3 { text-wrap: balance; }
+      p, li { text-wrap: pretty; }
 
       body {
         font-size: 16px;
