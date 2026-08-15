@@ -16,6 +16,11 @@ interface HeroMediaProps {
  * Automatikus videó csak desktopon, viewport-közelben és idle időben indul.
  * Mobilon, Save-Data/2G vagy reduced-motion mellett a poszter marad, amíg a
  * látogató kifejezetten meg nem nyomja a lejátszás gombot.
+ *
+ * Az elindult videó kigörgetéskor MEGÁLL és visszagörgetéskor folytatódik —
+ * kivéve, ha a látogató állította meg. Enélkül a hero videó egyszer elindulva
+ * a lap aljáig a háttérben futott (fölösleges CPU és akku). A pause/resume
+ * NEM nyúl a fenti kapukhoz: amit nem indítottunk el, azt nem is indítja.
  */
 export function HeroMedia({
   videoSrc,
@@ -28,6 +33,11 @@ export function HeroMedia({
   const [shouldMountVideo, setShouldMountVideo] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  // Kigörgetéskor MI állítjuk meg a videót — ezt meg kell tudni különböztetni
+  // attól, amikor a látogató állítja meg (natív médiavezérlő, jobbklikk-menü,
+  // OS-szintű média-gomb). Csak az utóbbit szabad véglegesnek tekinteni.
+  const selfPausedRef = useRef(false);
+  const userPausedRef = useRef(false);
 
   // AVIF poszter (~50%-kal kisebb, mint a WebP) — minden -poster.webp mellé
   // generálva van .avif. A <picture> AVIF-source-t ad, az <img> WebP-fallbacket
@@ -95,6 +105,46 @@ export function HeroMedia({
     });
   }, [shouldMountVideo]);
 
+  // Kigörgetéskor állj, visszagörgetéskor indulj újra.
+  //
+  // Miért külön observer: a fenti mount-observer SZÁNDÉKOSAN egyszer lövő
+  // (`disconnect()` az első metszéskor), mert az csak a „mikor mountoljunk"
+  // kaput őrzi. A pause/resume ezzel szemben az oldal teljes életciklusán át
+  // kell hogy figyeljen.
+  //
+  // Csak akkor él, ha a videó MÁR elindult (`shouldMountVideo`) — így a
+  // desktop-only kapu és a Save-Data/reduced-motion tiltás érintetlen marad:
+  // visszagörgetés soha nem indíthat el olyan videót, ami el sem indult.
+  useEffect(() => {
+    if (!shouldMountVideo || !videoSrc) return;
+    const el = containerRef.current;
+    if (!el || !('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const video = videoRef.current;
+        if (!video) return;
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            if (userPausedRef.current || !video.paused) continue;
+            void video.play().catch(() => {});
+          } else if (!video.paused) {
+            // A jelzőt a pause() ELŐTT kell beállítani: a `pause` esemény
+            // utána, külön taskban tüzel, és az onPause ebből tudja, hogy nem
+            // a látogató volt.
+            selfPausedRef.current = true;
+            video.pause();
+          }
+        }
+      },
+      // threshold 0 = csak akkor áll meg, ha teljesen kigörögtek belőle. A hero
+      // a lap tetején van; félig látható állapotban megállítani zavaró lenne.
+      { threshold: 0 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [shouldMountVideo, videoSrc]);
+
   return (
     <div className={`mx-auto ${maxWidthClass}`}>
       <div
@@ -134,6 +184,16 @@ export function HeroMedia({
             preload={shouldMountVideo ? 'metadata' : 'none'}
             aria-hidden
             onCanPlay={() => setVideoReady(true)}
+            onPlay={() => {
+              userPausedRef.current = false;
+            }}
+            onPause={() => {
+              // Ha mi állítottuk meg (kigörgetés), csak nyugtázzuk. Ha nem mi,
+              // akkor a látogató volt → a visszagörgetés NEM indíthatja újra
+              // (WCAG 2.2.2: a szándékos „állj" nem vonható vissza némán).
+              if (selfPausedRef.current) selfPausedRef.current = false;
+              else userPausedRef.current = true;
+            }}
             className={`absolute inset-0 w-full h-[112%] -top-[6%] object-cover transition-opacity duration-700 ease-out ${
               videoReady ? 'opacity-100' : 'opacity-0'
             }`}

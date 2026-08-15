@@ -12,7 +12,9 @@ import FAQList from '../components/FAQList.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
+import { ScrollVideo } from '../components/ScrollVideo';
 import { siteConfig, relFor } from '../config/site';
+import { videoObjectSchema } from '../config/videos';
 
 const priceCategories = [
   { eyebrow: 'A nagy nap', title: 'Menyasszonyi csomag.', items: [
@@ -157,6 +159,14 @@ const sminkServiceSchema = {
   },
 };
 
+// ── SEO: VideoObject schemák a két menyasszonyi referencia-videóhoz ───────
+// A mezők a központi videó-katalógusból jönnek (src/config/videos.ts), így a
+// JSON-LD és a /video-sitemap.xml nem tud szétcsúszni.
+const sminkVideoSchemas = [
+  videoObjectSchema('menyasszonyi-smink-kesz-look'),
+  videoObjectSchema('eskuvoi-smink-menyasszonyi-look'),
+];
+
 // ── SEO: BreadcrumbList schema ────────────────────────────────────────────
 const sminkBreadcrumbSchema = {
   '@context': 'https://schema.org',
@@ -178,7 +188,7 @@ const config = { ...siteConfig };
 <Layout
   title="Sminkes Budapest – esküvői és alkalmi smink | FRUBEAUTY"
   description="Esküvői smink árak Budapesten 2026: menyasszonyi smink 25.000 Ft, próbasminkkel csomagban 35.000 Ft, alkalmi smink 15.000 Ft — rejtett díj nélkül."
-  additionalSchemas={[sminkFaqSchema, sminkServiceSchema, sminkBreadcrumbSchema]}
+  additionalSchemas={[sminkFaqSchema, sminkServiceSchema, ...sminkVideoSchemas, sminkBreadcrumbSchema]}
   preloadImage="/media/smink-oldal-video-frubeauty-budapest-zuglo-poster.avif"
 >
   <SiteHeader />
@@ -231,6 +241,63 @@ const config = { ...siteConfig };
           <p>Ha természetes, mégis megbízható sminket szeretnél, várlak szeretettel.</p>
         </Reveal>
       </div>
+    </div>
+  </section>
+
+  {/* Menyasszonyi referencia-videók. Helye SZÁNDÉKOS: az „érték az ár előtt"
+      sorrend miatt közvetlenül az ártáblázat elé kerül — a látogató előbb látja,
+      mit kap, és csak utána a 25 000 Ft-ot. Perf: mélyen a hajtás alatt van,
+      a ScrollVideo pedig 0 byte-ot tölt, amíg oda nem görögnek. */}
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Menyasszonyi smink · videó</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Nem fotó. <em class="display">Videó</em> — minden szögből.</h2>
+        <p class="mt-5 text-creamSoft leading-[1.7]">Egy jól megvilágított, retusált fotó bármit el tud adni — egy videó sokkal kevesebbet bocsát meg. Ez a két felvétel két kész menyasszonyi smink, ahogy elfordul a fej és ahogy ráesik a fény: pontosan az a nézet, amit az esküvődön a vendégek és a fotós is látni fog.</p>
+      </Reveal>
+
+      <div class="grid sm:grid-cols-2 gap-10 sm:gap-8 lg:gap-12 max-w-[860px] mx-auto">
+        <Reveal client:visible as="div">
+          <ScrollVideo
+            client:visible
+            videoSrc="/media/menyasszonyi-smink-budapest-zuglo-egressy-ut.mp4"
+            posterSrc="/media/menyasszonyi-smink-budapest-zuglo-egressy-ut-poster.webp"
+            alt="Kész menyasszonyi smink közelről — puha szemhéjárnyalás és tartós alapozás, FRUBEAUTY Zugló, Egressy út"
+            caption="Klasszikus menyasszonyi smink a nagy nap reggelén. Puha, meleg szemhéjárnyalás, tiszta tekintet — a bőr fénylik, de nem csillog. Pont ez az, ami vakuval is jól viselkedik."
+          />
+        </Reveal>
+        <Reveal client:visible as="div" delay={0.1}>
+          <ScrollVideo
+            client:visible
+            videoSrc="/media/eskuvoi-smink-menyasszonyi-look-zuglo-14-kerulet.mp4"
+            posterSrc="/media/eskuvoi-smink-menyasszonyi-look-zuglo-14-kerulet-poster.webp"
+            alt="Esküvői smink menyasszonyon — aranyló szemhéj, bronzos bőr és telt ajak, FRUBEAUTY Budapest XIV. kerület"
+            caption="Meleg, aranyló szemhéj, bronzos bőr, telt ajak — esti esküvőre és fotózásra. Figyeld meg, mi történik, amikor elfordul a fej: a kontúr nem törik meg."
+          />
+        </Reveal>
+      </div>
+
+      <Reveal client:visible as="div" className="mt-14 sm:mt-20 max-w-[860px] mx-auto" delay={0.15}>
+        <div class="grid sm:grid-cols-3 gap-5">
+          <div class="bg-inkSoft border border-whisper rounded-3xl p-6">
+            <p class="text-[11px] uppercase tracking-caps text-gold mb-3">Előre látod</p>
+            <p class="text-sm text-creamSoft leading-[1.7]">A próbasminken pontosan ezt a végeredményt állítjuk be, és fotóval rögzítjük. A nagy napon már nincs tippelgetés.</p>
+          </div>
+          <div class="bg-inkSoft border border-whisper rounded-3xl p-6">
+            <p class="text-[11px] uppercase tracking-caps text-gold mb-3">Kibírja a napot</p>
+            <p class="text-sm text-creamSoft leading-[1.7]">Ölelés, könny, tánc, nyári meleg. A fixálást az eseményhez és a bőrtípusodhoz igazítom — touch-upra csak az ajkon lesz szükség.</p>
+          </div>
+          <div class="bg-inkSoft border border-whisper rounded-3xl p-6">
+            <p class="text-[11px] uppercase tracking-caps text-gold mb-3">Odamegyek</p>
+            <p class="text-sm text-creamSoft leading-[1.7]">Ha a készülődés a helyszínen van, kiszállok. A díj a távolságtól és az indulási időtől függ, előre megadom.</p>
+          </div>
+        </div>
+        <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+          <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Menyasszonyi időpontot foglalok</a>
+          <a href="#csomagok" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Megnézem a csomagokat</a>
+        </div>
+        <p class="mt-5 text-[12px] uppercase tracking-caps text-creamMute">Próbasmink + nagy napi smink csomagban 35 000 Ft · Szezonban a szombatok gyorsan betelnek</p>
+      </Reveal>
     </div>
   </section>
 
