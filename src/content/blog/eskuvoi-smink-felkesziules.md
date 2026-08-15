@@ -4,7 +4,7 @@ excerpt: "Az esküvői próbasmink a nagy nap főpróbája: 90 perc alatt végle
 category: "Alkalmi smink"
 readingMinutes: 7
 publishedAt: 2026-02-15
-updatedAt: 2026-06-12
+updatedAt: 2026-08-15
 cover: "/img/smink-menyasszonyi-zuglo-14-kerulet-egressy-ut.webp"
 coverWidth: 1400
 coverHeight: 2100
@@ -62,7 +62,7 @@ Az esküvői smink nem egy szimpla alkalmi smink: olyan fixálási technikákkal
 
 **Próbasmink (90–120 perc, 15 000 Ft):** teljes körű stílustervezés, professzionális anyaghasználat, fotódokumentáció és receptúra — a használt termékek és árnyalatok pontos jegyzéke.
 
-**Menyasszonyi smink a nagy napon (25 000 Ft):** a jóváhagyott protokoll tiszta, stresszmentes kivitelezése. A kettő együtt a [menyasszonyi csomagban](/sminkes-zuglo/) 35 000 Ft — a részletes árakról az [esküvői smink árak](/blog/eskuvoi-smink-arak-budapest/) cikkben írok.
+**Menyasszonyi smink a nagy napon (30 000 Ft):** a jóváhagyott protokoll tiszta, stresszmentes kivitelezése. A kettő együtt a [menyasszonyi csomagban](/sminkes-zuglo/) 39 000 Ft — a részletes árakról az [esküvői smink árak](/blog/eskuvoi-smink-arak-budapest/) cikkben írok.
 
 Ha nem akarsz kompromisszumot kötni az életed legtöbbet nézett fotóin, válaszd a tudatos felkészülést. Várlak Zuglóban, az Egressy úti stúdiómban.
 
