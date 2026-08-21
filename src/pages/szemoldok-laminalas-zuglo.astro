@@ -327,10 +327,15 @@ const breadcrumbSchema = {
     },
   ],
 };
+
+// 2026-08-21 Ahrefs-audit — a ★ NE kerüljön vissza a title-be: a Google kidobja
+// (a SERP-ben "Szemöldök laminálás Budapest 5,0 – 11.000 Ft - frubeauty" jelenik meg),
+// vagyis elpazarolt karakterhely volt. Helyette a második földrajzi kulcsszó (Zugló)
+// áll ott. Az értékelés a meta description-ben és a schemában marad.
 ---
 
 <Layout
-  title="Szemöldök laminálás Budapest ★5,0 – 11.000 Ft | FRUBEAUTY"
+  title="Szemöldök laminálás Budapest, Zugló – 11.000 Ft | FRUBEAUTY"
   description="Szemöldök laminálás Budapesten, a XIV. kerületben: formázással és festéssel együtt 11.000 Ft, ~60 perc, 6 hétig tartós. ★5,0 · 50+ értékelés. Foglalj online!"
   additionalSchemas={[faqSchema, serviceSchema, howToSchema, ...videoSchemas, breadcrumbSchema]}
   preloadImage="/media/szemoldok-laminalas-munkakozben-budapest-egressy-ut-poster.avif"

@@ -185,10 +185,17 @@ const sminkBreadcrumbSchema = {
 };
 
 const config = { ...siteConfig };
+
+// 2026-08-21 Ahrefs-audit — a title NE menjen vissza "Sminkes Budapest…"-re:
+// a Google felülírta azt, és a SERP-ben a régi, ár-vezetett változatot írta ki
+// ("Esküvői smink árak Budapest 2026 – 25.000 Ft"), vagyis az illeszkedett jobban
+// a lekérdezéshez. Az oldal az "esküvői smink árak"-ra áll #5-ön (90/hó), ezért a
+// kulcsszó visszakerült a címbe. Az ár a 08-15-i emelés utáni 30.000 Ft — a Google
+// által kiírt 25.000 elavult. A "Sminkes Budapest" a H1-ben és a leírásban él tovább.
 ---
 
 <Layout
-  title="Sminkes Budapest – esküvői és alkalmi smink | FRUBEAUTY"
+  title="Esküvői smink árak Budapest 2026 – 30.000 Ft | FRUBEAUTY"
   description="Esküvői smink árak Budapesten 2026: menyasszonyi smink 30.000 Ft, próbasminkkel csomagban 39.000 Ft, alkalmi smink 15.000 Ft — rejtett díj nélkül."
   additionalSchemas={[sminkFaqSchema, sminkServiceSchema, ...sminkVideoSchemas, sminkBreadcrumbSchema]}
   preloadImage="/media/smink-oldal-video-frubeauty-budapest-zuglo-poster.avif"
