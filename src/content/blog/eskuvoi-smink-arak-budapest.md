@@ -1,6 +1,6 @@
 ---
 title: "Mennyibe kerül az esküvői smink Budapesten? Árak 2026-ban"
-excerpt: "Az esküvői smink árak Budapesten 25–60 ezer Ft, a próbasmink 12–25 ezer. A szám mégis félrevezető — az számít, mi van benne. Tételes árak, előleg és a kérdések, amiket foglalás előtt tegyél fel."
+excerpt: "Az esküvői smink árak Budapesten 25–60 ezer Ft, a próbasmink 12–25 ezer. A szám mégis félrevezető — az számít, mi van benne. Tételes árak és a kérdések, amiket foglalás előtt tegyél fel."
 category: "Alkalmi smink"
 readingMinutes: 6
 publishedAt: 2026-05-28
@@ -15,7 +15,7 @@ metaDescription: "Mennyibe kerül az esküvői smink Budapesten 2026-ban? Menyas
 
 A menyasszonyi smink Budapesten 2026-ban jellemzően **25 000–60 000 Ft** a nagy napon, a próbasmink 12 000–25 000 Ft. Nálam, Zuglóban a kettő csomagban **39 000 Ft**. A puszta szám mégis félrevezető: egy 25 és egy 50 ezer forintos smink között ritkán a minőség a különbség — sokkal inkább az, **mi van az árban**: próbasmink, bőrelőkészítés, tartós fixálás, és hogy mennyi idő jut rád.
 
-Nézzük tételesen, mi mennyibe kerül, mi mozgatja az árakat, és mit kérdezz meg, mielőtt bárhová előleget fizetsz.
+Nézzük tételesen, mi mennyibe kerül, mi mozgatja az árakat, és mit kérdezz meg, mielőtt bárhová bejelentkezel.
 
 ## Mennyibe kerül az alkalmi és esküvői smink Budapesten?
 
@@ -65,8 +65,6 @@ A jó hír: a minőséghez nem a legdrágábbat kell választani — elég egy s
 - **Alkalmi smink** — 15 000 Ft
 - **Menyasszonyi csomag** (próbasmink + nagy napi smink) — 39 000 Ft *(6 000 Ft megtakarítás)*
 - **Teljes esküvő** (próbasmink + menyasszonyi smink + örömanya smink, egy reggelen) — 51 000 Ft *(9 000 Ft megtakarítás)*
-
-A foglalást 10 000 Ft előleggel tudom jóváhagyni, amit átutalással kérek. Ez nem plusz költség: teljes egészében beleszámít a smink árába, és ez rögzíti a dátumot. Ha az esküvő elmarad vagy időpontot változtatsz, az előleg egy éven belül bármely másik időpontra átvihető — nem vész el.
 
 A részletes árlistát és a foglalás menetét a [sminkes oldalamon](/sminkes-zuglo/) találod, a próbasminkre való felkészülést pedig a [próbasmink-útmutatóban](/blog/eskuvoi-smink-felkesziules/) írtam le lépésről lépésre.
 

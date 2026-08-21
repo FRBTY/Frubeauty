@@ -6,3 +6,6 @@ dist/
 _unused-assets-backup/
 # feltöltött eredeti (nagy méretű) fotók — a webre a /public/img webp-változat megy
 uj kepek/
+
+# Local Netlify folder
+.netlify

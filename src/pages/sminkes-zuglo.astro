@@ -47,7 +47,7 @@ const includedPoints = [
 ];
 
 const processSteps = [
-  { step: '01', title: 'Foglalás, előleg, rövid egyeztetés', body: 'Foglalj időpontot a Notino felületén. A foglalásodat akkor tudom jóváhagyni, ha a 10 000 Ft előleg átutalással megérkezett — az utaláshoz szükséges adatokat a foglalás után küldöm. Ez az előleg rögzíti a dátumot, teljes egészében beleszámít a smink árába, és ha időpontot kell változtatnod, egy éven belül átvihető. Utána küldj át Instagramon vagy e-mailben 1–2 referenciaképet — ennyi elég ahhoz, hogy teljesen felkészülten várjalak.' },
+  { step: '01', title: 'Foglalás és rövid egyeztetés', body: 'Foglalj időpontot a Notino felületén — a visszaigazolás után küldj át Instagramon vagy e-mailben 1–2 referenciaképet. Ennyi elég ahhoz, hogy teljesen felkészülten várjalak: tudjam, milyen hatást szeretnél, és milyen színvilágban gondolkodsz.' },
   { step: '02', title: 'Próbasmink (csak menyasszonyoknak)', body: 'A próbasmink ideális időpontja az esküvő előtt 4–8 héttel van. Itt kísérletezzük ki és véglegesítjük a stílust, az ott készült fotó pedig a nagy napon a közös, tűpontos tervrajzunk lesz. Így az esküvő reggelén már nincs tippelgetés, csak magabiztos kivitelezés.' },
   { step: '03', title: 'A smink napja', body: 'Bőrelőkészítés, alapozás, kontúrozás, szem, ajak, majd a fixálás. A folyamat minden lépését elmondom közben, és mivel együtt dolgozunk, menet közben is teljesen rugalmasan finomítunk ott, ahol szeretnéd. A cél, hogy a tükörbe nézve százszázalékosan elégedett légy.' },
 ];
@@ -68,8 +68,7 @@ const faqs = [
   { q: 'Bírja-e a smink a tánc + meleg + könnyek kombinációt?', a: 'Igen — a fixálás erre épül. Egész estés esküvőkön rendszeresen tesztelve, profi fixálókkal és technikákkal. Külön touch-up termékre csak az ajakra van szükség.' },
   { q: 'Érzékeny a bőröm, ez gondot jelent?', a: 'A próbasmink pont azért van, hogy élesben teszteljük, hogyan reagál a bőröd az anyagokra. Így a nagy napon már semmilyen meglepetés nem érhet, csak a tökéletes, tartós végeredmény.' },
   { q: 'Kiszállás a helyszínre megoldható?', a: 'Igen, a díj a távolságtól és az érkezési időtől függ. Írj egy SMS-t a részletekkel, és megadom a pontos összeget 24 órán belül.' },
-  { q: 'Kell előleget fizetni a foglaláshoz?', a: 'Igen, 10 000 Ft-ot. A Notino rendszerében leadott foglalásodat akkor tudom jóváhagyni, ha ez az összeg átutalással megérkezett — az utaláshoz szükséges adatokat a foglalás után küldöm el. Fontos: az előleg nem plusz költség, teljes egészében beleszámít a smink árába. Ez az, ami ténylegesen rögzíti a dátumot: amíg nem érkezik meg, az időpont szabad marad, és a szezonban a szombat reggeleket gyorsan elviszik.' },
-  { q: 'Mi történik az előleggel, ha az esküvő elmarad vagy csúszik?', a: 'Nem vész el. Ha az esküvő elmarad, vagy időpontot kell változtatnod, az előleg az eredeti időponttól számított egy éven belül bármely másik szabad időpontra átvihető — próbasminkre és a nagy napra egyaránt. Csak szólj időben, és megkeressük az új dátumot.' },
+  { q: 'Mi történik, ha az esküvő elmarad vagy csúszik?', a: 'Szólj, amint tudod, és megkeressük az új dátumot — próbasminkre és a nagy napra egyaránt. Minél korábban jelzed, annál nagyobb az esély, hogy a kívánt reggeli időpont még szabad.' },
 ];
 
 const galleryImages = [
@@ -354,33 +353,6 @@ const config = { ...siteConfig };
         <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
         <p class="text-[12px] uppercase tracking-caps text-creamMute">Az árak tájékoztató jellegűek · Kiszállás egyedi egyeztetés alapján</p>
       </div>
-
-      {/* Az előleg feltételei korábban egy sorban, apró betűben futottak — pont a
-          legnagyobb súrlódási pont volt a legkevésbé olvasható helyen. Saját
-          dobozban, a három félelemre (plusz költség? mit ad? elveszik?) tagolva. */}
-      <Reveal client:visible as="div" className="mt-10">
-        <div class="rounded-3xl border border-gold/25 bg-gold/[0.05] p-6 sm:p-8">
-          <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-gold/15 text-gold inline-flex items-center justify-center" aria-hidden>
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4" /></svg>
-            </span>
-            <div>
-              <p class="text-[11px] uppercase tracking-caps text-gold mb-2">Figyelem!</p>
-              <p class="max-w-[62ch] text-[13px] sm:text-sm text-creamSoft leading-[1.7]">Menyasszonyi sminkre való foglalást csak <strong class="font-medium text-cream">10 000 forint előleg</strong> megfizetése után tudok jóváhagyni. Ennek az oka, hogy bebiztosítsam a pontos dátumot a nagy napra.</p>
-            </div>
-          </div>
-          <ul class="mt-6 grid sm:grid-cols-2 gap-x-8 gap-y-4 sm:pl-14">
-            <li class="flex items-start gap-2.5">
-              <span class="flex-shrink-0 w-4 h-4 rounded-full bg-gold/15 text-gold inline-flex items-center justify-center mt-0.5" aria-hidden><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span>
-              <span class="text-[13px] sm:text-sm text-creamSoft leading-[1.6]"><strong class="font-medium text-cream">A számlaszámot e-mailben küldöm</strong> a foglalás után. Az összeg beérkezésével az időpont automatikusan elfogadásra kerül.</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <span class="flex-shrink-0 w-4 h-4 rounded-full bg-gold/15 text-gold inline-flex items-center justify-center mt-0.5" aria-hidden><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span>
-              <span class="text-[13px] sm:text-sm text-creamSoft leading-[1.6]"><strong class="font-medium text-cream">Nem vész el.</strong> Ha az esküvő elmarad vagy időpontot változtatsz, egy éven belül bármely másik időpontra átvihető.</span>
-            </li>
-          </ul>
-        </div>
-      </Reveal>
     </div>
   </section>
 
@@ -417,20 +389,7 @@ const config = { ...siteConfig };
             <span class="flex-shrink-0 w-7 h-7 rounded-full bg-gold/15 text-gold inline-flex items-center justify-center" aria-hidden><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4" /></svg></span>
             <span class="text-[12px] sm:text-[13px] uppercase tracking-caps font-medium text-cream">Elégedettségi garancia</span>
           </div>
-          {/* Az előleg átvihetősége a foglalás legnagyobb félelmére válaszol
-              („és ha közbejön valami, elveszik a pénzem?"). Ezért pill-szinten,
-              a döntés mellett van — nem apró betűben, mert a garancia csak akkor
-              old súrlódást, ha az is látja, aki csak átfutja az oldalt. */}
-          <div class="inline-flex items-center gap-3 rounded-full border border-gold/30 bg-gold/[0.06] px-5 py-3">
-            <span class="flex-shrink-0 w-7 h-7 rounded-full bg-gold/15 text-gold inline-flex items-center justify-center" aria-hidden><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7" /><polyline points="21 3 21 9 15 9" /></svg></span>
-            <span class="text-[12px] sm:text-[13px] uppercase tracking-caps font-medium text-cream">Az előleg átvihető</span>
-          </div>
         </div>
-        {/* A foglaló a foglalási út legnagyobb súrlódási pontja. Itt, a döntés
-            pillanatában mondjuk ki — nem a foglalás után, meglepetésként —, és
-            a vendég oldaláról keretezve: nem plusz költség, hanem ez rögzíti a
-            dátumot. Az elhallgatott feltétel a foglalás UTÁN sokkal drágább. */}
-        <p class="mt-6 max-w-[54ch] text-center text-[13px] sm:text-sm text-creamSoft leading-[1.7]">A foglalást <strong class="font-medium text-cream">10 000 Ft előleggel</strong> tudom jóváhagyni. Erre azért van szükség, hogy pontosan rögzítsük a dátumot, mindkettőnk számára. Ez <strong class="font-medium text-cream">nem plusz költség</strong>, teljes egészében beleszámít a smink árába.</p>
       </Reveal>
     </div>
   </section>
