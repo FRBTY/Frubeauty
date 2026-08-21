@@ -90,6 +90,167 @@
 # Nincs /service-page/* catch-all: csak a fenti, bizonyított legacy URL-ek
 # irányítódnak át. Az ismeretlen régi slugok valódi 404-et kapnak.
 
+
+# ---------------------------------------------------------------------------
+# 2026-08-21 Ahrefs-audit: a Wix-kori URL-ek MÉG MINDIG 404-eznek (20 db a
+# Site Explorer "Crawled pages" listáján, a legfrissebb crawl 2 napos). A
+# korábbi javítás csak a /service-page/* mintát fedte le; a /post/*,
+# /booking-calendar/*, /portfolio-collections/*, /my-portfolio/* és a
+# Wix-placeholderek kimaradtak.
+#
+# Linkerő nem vész el (mind UR 0), a tét a régi Google-találatból érkező
+# vendég és a crawl-zaj.
+#
+# Az ENCODED `from` az elsődleges (a Googlebot percent-kódolva kér, és a
+# Netlify a kódolt útra illeszt) — a literál ékezetes változat alatta marad
+# ártalmatlan fallbacknek. A slug-szintű szabályok ELŐBB, a mappa-szintű
+# gyűjtő (*) UTOLJÁRA: first match wins.
+# ---------------------------------------------------------------------------
+
+# --- Wix blogposztok (/post/...) → a megfelelő money page ---
+[[redirects]]
+  from = "/post/alak%C3%ADtsa-%C3%A1t-megjelen%C3%A9s%C3%A9t-fot%C3%B3z%C3%A1shoz-k%C3%A9sz%C3%BClt-profi-smink-seg%C3%ADts%C3%A9g%C3%A9vel"
+  to = "/sminkes-zuglo/"
+  status = 301
+[[redirects]]
+  from = "/post/alakítsa-át-megjelenését-fotózáshoz-készült-profi-smink-segítségével"
+  to = "/sminkes-zuglo/"
+  status = 301
+
+[[redirects]]
+  from = "/post/esk%C3%BCv%C5%91i-smink-budapesten-tal%C3%A1lja-meg-a-t%C3%B6k%C3%A9letes-budapesti-esk%C3%BCv%C5%91i-smink-szakembert"
+  to = "/sminkes-zuglo/"
+  status = 301
+[[redirects]]
+  from = "/post/esküvői-smink-budapesten-találja-meg-a-tökéletes-budapesti-esküvői-smink-szakembert"
+  to = "/sminkes-zuglo/"
+  status = 301
+
+# Ismeretlen Wix-blogposzt → a blog főoldala (ne a kezdőlap: a szándék olvasás).
+[[redirects]]
+  from = "/post/*"
+  to = "/blog/"
+  status = 301
+
+# --- Wix foglalási naptár (/booking-calendar/...) → a szolgáltatás money page-e ---
+[[redirects]]
+  from = "/booking-calendar/szempillafest%C3%A9s"
+  to = "/szempilla-lifting-zuglo/"
+  status = 301
+[[redirects]]
+  from = "/booking-calendar/szempillafestés"
+  to = "/szempilla-lifting-zuglo/"
+  status = 301
+
+[[redirects]]
+  from = "/booking-calendar/szempilla-lifting-szempillafest%C3%A9s"
+  to = "/szempilla-lifting-zuglo/"
+  status = 301
+[[redirects]]
+  from = "/booking-calendar/szempilla-lifting-szempillafestés"
+  to = "/szempilla-lifting-zuglo/"
+  status = 301
+
+[[redirects]]
+  from = "/booking-calendar/szem%C3%B6ld%C3%B6k-form%C3%A1z%C3%A1s-%C3%A9s-fest%C3%A9s"
+  to = "/szemoldok-laminalas-zuglo/"
+  status = 301
+[[redirects]]
+  from = "/booking-calendar/szemöldök-formázás-és-festés"
+  to = "/szemoldok-laminalas-zuglo/"
+  status = 301
+
+[[redirects]]
+  from = "/booking-calendar/szem%C3%B6ld%C3%B6k-lamin%C3%A1l%C3%A1s-szempilla-lifting"
+  to = "/szemoldok-laminalas-zuglo/"
+  status = 301
+[[redirects]]
+  from = "/booking-calendar/szemöldök-laminálás-szempilla-lifting"
+  to = "/szemoldok-laminalas-zuglo/"
+  status = 301
+
+[[redirects]]
+  from = "/booking-calendar/szem%C3%B6ld%C3%B6klamin%C3%A1l%C3%A1s-form%C3%A1z%C3%A1ssal"
+  to = "/szemoldok-laminalas-zuglo/"
+  status = 301
+[[redirects]]
+  from = "/booking-calendar/szemöldöklaminálás-formázással"
+  to = "/szemoldok-laminalas-zuglo/"
+  status = 301
+
+[[redirects]]
+  from = "/booking-calendar/szem%C3%B6ld%C3%B6kform%C3%A1z%C3%A1s-fest%C3%A9ssel-lamin%C3%A1l%C3%A1ssal"
+  to = "/szemoldok-laminalas-zuglo/"
+  status = 301
+[[redirects]]
+  from = "/booking-calendar/szemöldökformázás-festéssel-laminálással"
+  to = "/szemoldok-laminalas-zuglo/"
+  status = 301
+
+[[redirects]]
+  from = "/booking-calendar/esk%C3%BCv%C5%91i-pr%C3%B3basmink"
+  to = "/sminkes-zuglo/"
+  status = 301
+[[redirects]]
+  from = "/booking-calendar/esküvői-próbasmink"
+  to = "/sminkes-zuglo/"
+  status = 301
+
+[[redirects]]
+  from = "/booking-calendar/esk%C3%BCv%C5%91i-smink"
+  to = "/sminkes-zuglo/"
+  status = 301
+[[redirects]]
+  from = "/booking-calendar/esküvői-smink"
+  to = "/sminkes-zuglo/"
+  status = 301
+
+# Ismeretlen Wix-időpontfoglalás → kezdőlap (ott van a foglalás CTA).
+[[redirects]]
+  from = "/booking-calendar/*"
+  to = "/"
+  status = 301
+
+# --- Wix portfólió (/portfolio-collections/..., /my-portfolio/...) → smink money page ---
+[[redirects]]
+  from = "/portfolio-collections/*"
+  to = "/sminkes-zuglo/"
+  status = 301
+[[redirects]]
+  from = "/my-portfolio/*"
+  to = "/sminkes-zuglo/"
+  status = 301
+[[redirects]]
+  from = "/my-portfolio"
+  to = "/sminkes-zuglo/"
+  status = 301
+
+# --- Wix placeholder/teszt oldalak és a régi RSS → kezdőlap, illetve blog ---
+[[redirects]]
+  from = "/blank"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/blank-1"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/blank-2"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/blank-3"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/testpage"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/blog-feed.xml"
+  to = "/blog/"
+  status = 301
+
 [[headers]]
   for = "/*"
   [headers.values]
