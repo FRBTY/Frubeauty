@@ -1,6 +1,6 @@
 ---
-title: "Szemöldök laminálás ára 2026 — ennyibe kerül Budapesten"
-excerpt: "A szemöldök laminálás Zuglóban 11 000 Ft, formázással és festéssel együtt. Tételes árlista 2026-ra: az olcsóbb alternatívák, a 18 000 Ft-os kombinált csomag, és hogy mi mennyit ér."
+title: "Szemöldök laminálás ára 2026 — mitől függ, hogy mennyi?"
+excerpt: "Budapesten 7 000 és 13 000 Ft között bármi lehet, és a különbség majdnem mindig ugyanabból jön: mit számolnak külön. Négy tétel, ami benne van az árban vagy nincs — és mire kérdezz rá."
 category: "Szemöldök"
 readingMinutes: 5
 publishedAt: 2026-06-08
@@ -9,11 +9,11 @@ cover: "/img/szemoldok-laminalas-budapest-egressy-ut-frubeauty-munka.webp"
 coverWidth: 1200
 coverHeight: 1800
 coverAlt: "Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló"
-metaTitle: "Szemöldök laminálás ára 2026: 7–13 ezer Ft Budapesten"
-metaDescription: "Mennyibe kerül a szemöldök laminálás 2026-ban? Budapesten jellemzően 7 000–13 000 Ft, nálam Zuglóban 11 000 Ft formázással és festéssel együtt."
+metaTitle: "Szemöldök laminálás ár 2026: mitől 7 000 és mitől 13 000?"
+metaDescription: "Miért kerül az egyik helyen 7 000, a másikon 13 000 Ft a szemöldök laminálás? Négy tétel, ami benne van az árban vagy nincs — és mit kérdezz, mielőtt foglalsz."
 ---
 
-A szemöldök laminálás a FRUBEAUTY-nál Zuglóban 2026-ban **11 000 Ft**, és ebben a formázás és a festés is benne van. A kezelés tű nélkül, koreai technikával ad dúsabb, rendezett szemöldököt; az eredmény körülbelül 6 hétig tart, az alkalom nagyjából 60 perc.
+Budapesten a szemöldök laminálás **7 000 és 13 000 Ft** között mozog, és a különbség majdnem mindig ugyanabból jön: **mit számolnak külön.** A meghirdetett ár sok helyen csak maga a laminálás — a formázás és a festés külön tétel, így a végösszeg csak a székben derül ki. Nálam Zuglóban **11 000 Ft** a teljes kezelés, és mind a három benne van. Lent tételesen: mi tartozik az árba, mire kérdezz rá, ha valahol feltűnően olcsó, és mikor elég az 5 000 Ft-os változat.
 
 ## Szemöldök-árak egy táblázatban
 
@@ -35,7 +35,7 @@ Ha a szálaid maguktól is jól állnak, és csak színt meg tiszta vonalat szer
 | Szemöldökfestés | ✅ |
 | Konzultáció + utóápolási tanácsok | ✅ |
 
-Sok szalon külön számolja a formázást, a festést és a laminálást, így a végösszeg csak a székben derül ki. Nálam a 11 000 Ft a teljes kezelés: egy vendég, egy ár, meglepetés nélkül.
+Sok szalon külön számolja a formázást, a festést és a laminálást, így a végösszeg csak a székben derül ki. Nálam a 11 000 Ft a teljes kezelés: egy vendég, egy ár, meglepetés nélkül — a csomagok és az időpontok a [szemöldök laminálás Budapesten](/szemoldok-laminalas-zuglo/) oldalon.
 
 ## Megéri az ár? Számoljunk
 
@@ -73,6 +73,6 @@ Körülbelül 6 hétig, attól függően, milyen gyorsan nő vissza a szemöldö
 **Olcsóbb a szemöldök laminálás, mint a microblading?**
 Igen, és kíméletesebb is: a microblading féltartós tetoválás, 1–2 évig a bőrben marad, és jellemzően a laminálás árának többszöröse. A laminálás tű nélküli, és pár hét alatt kinő, ha változtatnál.
 
-A teljes szolgáltatás, a csomagok és a foglalás a [szemöldök laminálás Budapesten](/szemoldok-laminalas-zuglo/) oldalon érhető el.
+A teljes szolgáltatás, a csomagok és a foglalás az [árak és foglalás](/szemoldok-laminalas-zuglo/) oldalon érhető el.
 
 *Frissítve: 2026. július. Az árak tájékoztató jellegűek — az aktuális árlistát a foglalási oldalon találod.*
