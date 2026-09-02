@@ -336,7 +336,7 @@ const breadcrumbSchema = {
 
 <Layout
   title="Szemöldök laminálás Budapest, Zugló – 11.000 Ft | FRUBEAUTY"
-  description="Szemöldök laminálás Budapesten, a XIV. kerületben: formázással és festéssel együtt 11.000 Ft, ~60 perc, 6 hétig tartós. ★5,0 · 50+ értékelés. Foglalj online!"
+  description="Szemöldök laminálás Budapesten, a XIV. kerületben: formázással és festéssel együtt 11.000 Ft, ~60 perc, 6 hétig tartós. ★5,0 · 60+ értékelés. Foglalj online!"
   additionalSchemas={[faqSchema, serviceSchema, howToSchema, ...videoSchemas, breadcrumbSchema]}
   preloadImage="/media/szemoldok-laminalas-munkakozben-budapest-egressy-ut-poster.avif"
 >
@@ -357,7 +357,7 @@ const breadcrumbSchema = {
           <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] tracking-caps">
             <span class="text-gold font-medium">★ 5,0</span>
             <span class="text-creamMute/50" aria-hidden="true">·</span>
-            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="uppercase text-creamMute hover:text-cream transition-colors">50+ Google-értékelés →</a>
+            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="uppercase text-creamMute hover:text-cream transition-colors">60+ Google-értékelés →</a>
           </div>
           <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">A szemöldök laminálás tűmentes kezelés: a saját szálaidat rögzíti a kívánt irányba, így rendezettebbnek és dúsabbnak látszanak. Budapesten, a XIV. kerületi Egressy úton, koreai technikával. Ár: <strong class="font-medium text-cream">11.000 Ft</strong> — a szemöldök formázás és a festés is benne van. ~60 perc, 6 hétig tart.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
@@ -473,6 +473,26 @@ const breadcrumbSchema = {
           </Reveal>
         ))}
       </div>
+    </div>
+  </section>
+
+  {/* ── Ár-szekció ────────────────────────────────────────────────────────────
+       A H2 SZÁNDÉKOSAN tartalmazza az "ár"/"mennyibe kerül" kifejezést: az oldal
+       megjelenéseinek egy jelentős része ár-lekérdezésekből jön, de korábban
+       egyetlen H2 sem tartalmazta a szót — az ár csak a hero-bekezdésben volt.
+       A H2-sort a Google a szakasz-egyezéshez olvassa. (Rank Pro audit, 08-28) */}
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Az ár</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Mennyibe kerül a szemöldök laminálás Budapesten? — <em class="display">11 000 Ft</em>, tételesen.</h2>
+        <p class="mt-6 text-creamSoft text-base sm:text-lg leading-[1.75] max-w-[58ch]">
+          Egy ár van, felár nincs. A <strong class="text-cream">11 000 Ft</strong>-ban benne van a konzultáció, a formázás, a laminálás és a festés — összesen körülbelül 60 perc. Ami nincs benne: semmi.
+        </p>
+        <p class="mt-4 text-creamSoft text-base sm:text-lg leading-[1.75] max-w-[58ch]">
+          Ha festés nélkül kéred, az <strong class="text-cream">9 000 Ft</strong>. Ha a szempillát is csináltatnád ugyanabban az időpontban, a Teljes Tekintet csomag <strong class="text-cream">18 000 Ft</strong> a külön 23 000 helyett. Bármelyikről is legyen szó, azt még azelőtt megbeszéljük, hogy hozzákezdenék — nem a végén derül ki.
+        </p>
+      </Reveal>
     </div>
   </section>
 
