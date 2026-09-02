@@ -1,0 +1,235 @@
+---
+/**
+ * /eskuvoi-szepsegnaptar — eszköz-oldal, nem szolgáltatás-oldal.
+ *
+ * A menyasszony beírja az esküvő dátumát, és visszakapja a saját, dátumozott
+ * ütemtervét. Nincs email-fal és nincs regisztráció: az eszköz azért van, hogy
+ * hivatkozni lehessen rá (esküvői csoportok, fórumok, Pinterest), és hogy a
+ * tervezés a mi oldalunkon történjen, ne egy általános esküvői checklistán.
+ *
+ * A dátumok forrása a saját, publikált szabályaink — lásd WeddingPlanner.tsx.
+ */
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteContact from '../components/SiteContact.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { Reveal } from '../components/Reveal';
+import { WeddingPlanner } from '../components/WeddingPlanner';
+import FAQList from '../components/FAQList.astro';
+import RelatedArticles from '../components/RelatedArticles.astro';
+import { CookieBanner } from '../components/CookieBanner';
+
+const faqs = [
+  {
+    q: 'Mikor kezdjek el foglalni az esküvőmre?',
+    a: 'A sminkes időpontot a szezonban (május–szeptember) érdemes 4–6 hónappal előre lefoglalni, mert a szombat reggelek fogynak el elsőként. Maga a kezelés-sorozat viszont csak az esküvő előtti 10 héten belül indul — előbb nincs értelme, mert a hatások nem tartanak addig.',
+  },
+  {
+    q: 'Miért nem az esküvő előtti napra teszed a szempilla liftinget?',
+    a: 'Mert a kezelés utáni első 24 óra dönti el, hogyan áll az ív — ezalatt nem érheti víz, gőz vagy pára. Az esküvő előtti nap tele van készülődéssel, zuhannyal, párával. 5–10 nappal korábban a lifting beáll, és a 6–8 hetes ciklusból a nászútra is bőven kitart.',
+  },
+  {
+    q: 'Muszáj próbasmink?',
+    a: 'Nem kötelező, de erősen ajánlom. A próbasminken kikísérletezzük a végleges stílust, és fotó készül róla — a nagy napon ez a tervrajz. Így az esküvő reggelén már nincs tippelgetés, ami a legnagyobb stresszforrást veszi ki a napból. Az ideális időpontja az esküvő előtti 4–8 hét.',
+  },
+  {
+    q: 'Mi van, ha közelebb van az esküvőm, mint amit a naptár javasol?',
+    a: 'Akkor is van terv. A naptár megmutatja, melyik lépés ideje múlt el, de a maradékból is összerakható egy jó sorrend — írj rám, és megbeszéljük. Egy hét is elég ahhoz, hogy a tekintet és a smink a helyén legyen.',
+  },
+  {
+    q: 'Elvégezhetők a kezelések várandósan?',
+    a: 'A szempilla lifting és a szemöldök laminálás várandósság alatt nem ajánlott — a hormonális változás miatt az eredmény kiszámíthatatlan. A smink természetesen nem érintett. Ha várandós vagy vagy szoptatsz, foglalás előtt egyeztessünk, és összerakjuk azt a tervet, ami neked működik.',
+  },
+  {
+    q: 'Kiszállással is dolgozol?',
+    a: 'Igen, a menyasszonyi smink kiszállással is kérhető. A kiszállás díját a pontos távolság és az indulási időpont alapján egyedileg számolom, és az a csomagáron felül értendő.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Főoldal', item: 'https://frubeauty.com' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Esküvői szépségnaptár',
+      item: 'https://frubeauty.com/eskuvoi-szepsegnaptar/',
+    },
+  ],
+};
+
+// WebApplication: ez egy eszköz, nem cikk. A díjmentesség explicit — a Google
+// a free-tool jelleget külön kezeli, és a felhasználónak is ez az első kérdése.
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Esküvői szépségnaptár',
+  url: 'https://frubeauty.com/eskuvoi-szepsegnaptar/',
+  applicationCategory: 'LifestyleApplication',
+  operatingSystem: 'Web',
+  inLanguage: 'hu-HU',
+  description:
+    'Írd be az esküvőd dátumát, és megkapod a személyre szabott, dátumozott szépség-ütemtervedet: mikor legyen az arckezelés-kúra, a próbasmink, a szemöldök laminálás, a szempilla lifting és a menyasszonyi smink.',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'HUF' },
+  provider: { '@type': 'BeautySalon', name: 'FRUBEAUTY', url: 'https://frubeauty.com' },
+};
+---
+
+<Layout
+  title="Esküvői szépségnaptár — mikor mit csinálj a nagy nap előtt | FRUBEAUTY"
+  description="Írd be az esküvőd dátumát, és megkapod a saját ütemtervedet: mikor legyen az arckezelés, a próbasmink, a szemöldök laminálás, a szempilla lifting és a smink. Ingyenes, regisztráció nélkül."
+  additionalSchemas={[faqSchema, appSchema, breadcrumbSchema]}
+>
+  <SiteHeader />
+
+  {/* ── Hero ──────────────────────────────────────────────────────────────── */}
+  <section class="pt-[calc(var(--header-h)+4rem)] sm:pt-[calc(var(--header-h)+6rem)] pb-12 sm:pb-16">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="max-w-[62ch]">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Ingyenes eszköz</p>
+        <h1
+          class="font-display font-light text-cream leading-[1.06] tracking-tightest-"
+          style="font-size: clamp(2.25rem, 5.5vw, 4rem);"
+        >
+          Esküvői <em class="display">szépségnaptár</em>.
+        </h1>
+        <p class="mt-7 text-creamSoft text-base sm:text-lg leading-[1.75]">
+          A menyasszonyaimtól messze a leggyakrabban ezt kérdezik: <em
+            >„mikor csináltassam?"</em
+          > Írd be az esküvőd dátumát, és megkapod a válaszod dátumra pontosan —
+          azzal együtt, hogy melyik kezelést <strong class="text-cream">miért</strong> pont
+          akkor érdemes. Nincs regisztráció, nincs email-kérés.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Az eszköz ─────────────────────────────────────────────────────────── */}
+  <section class="pb-20 sm:pb-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <WeddingPlanner client:visible />
+    </div>
+  </section>
+
+  {/* ── Miért ezek a dátumok ──────────────────────────────────────────────── */}
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">A logika mögötte</p>
+        <h2
+          class="font-display font-light leading-[1.1] tracking-tight text-cream"
+          style="font-size: clamp(1.875rem, 4vw, 3rem);"
+        >
+          Miért <em class="display">pont ezek</em> a dátumok?
+        </h2>
+      </Reveal>
+
+      <Reveal client:visible as="div" className="space-y-8" delay={0.08}>
+        <div class="border-t border-whisper pt-6">
+          <h3 class="font-medium text-lg text-cream mb-2">Az arckezelés a bőr ciklusához igazodik</h3>
+          <p class="text-creamSoft leading-[1.7] text-[15px]">
+            A bőr megújulási ciklusa nagyjából 28 nap, ezért a kúra havi ütemben dolgozik
+            — egyetlen kezeléstől nem lesz más a bőröd, három alkalomtól viszont igen. Az
+            utolsó kezelést 5–10 nappal a nagy nap elé teszem: addigra minden letisztul,
+            és nyugodt, egyenletes felszínre dolgozhatok. Részletek az <a
+              href="/arckezeles-zuglo/"
+              class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors"
+              >arckezelés oldalon</a
+            >.
+          </p>
+        </div>
+
+        <div class="border-t border-whisper pt-6">
+          <h3 class="font-medium text-lg text-cream mb-2">
+            A próbasmink 4–8 héttel korábban a legjobb
+          </h3>
+          <p class="text-creamSoft leading-[1.7] text-[15px]">
+            Elég közel ahhoz, hogy a próbasmink a valós állapotodat mutassa, és elég
+            távol ahhoz, hogy legyen idő változtatni, ha valami nem tetszik. A próbán
+            fotó készül — a nagy napon ez a tervrajzunk, így reggel nincs tippelgetés. A
+            részletekről az <a
+              href="/blog/eskuvoi-smink-felkesziules/"
+              class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors"
+              >esküvői felkészülés</a
+            > cikkben írok.
+          </p>
+        </div>
+
+        <div class="border-t border-whisper pt-6">
+          <h3 class="font-medium text-lg text-cream mb-2">
+            A tekintet 5–10 nappal a nagy nap előtt áll be
+          </h3>
+          <p class="text-creamSoft leading-[1.7] text-[15px]">
+            A szempilla lifting utáni <strong class="text-cream">első 24 órában</strong> nem
+            érheti víz, gőz vagy pára a pillákat — az esküvő előtti nap viszont tele van
+            készülődéssel és zuhannyal. Ezért nem az utolsó pillanatra tesszük. Nyolc
+            nappal korábban az ív beáll, és a 6–8 hetes ciklusból a nászútra is kitart. A
+            szemöldök laminálás ugyanezt az ütemet bírja, ezért a kettőt egy időpontban
+            csinálom meg. Lásd a <a
+              href="/szempilla-lifting-zuglo/"
+              class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors"
+              >szempilla lifting</a
+            > és a <a
+              href="/szemoldok-laminalas-zuglo/"
+              class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors"
+              >szemöldök laminálás</a
+            > oldalt.
+          </p>
+        </div>
+
+        <div class="border-t border-whisper pt-6">
+          <h3 class="font-medium text-lg text-cream mb-2">Amit a naptár nem tud eldönteni</h3>
+          <p class="text-creamSoft leading-[1.7] text-[15px]">
+            Ez egy javaslat, nem szabály. Nem ismeri a bőrödet, a munkarendedet és azt,
+            hogy mikor érkezik a vendégsereg. Ha valami csúszik, szólj — átrendezzük. És
+            ha várandós vagy, a szempilla lifting és a szemöldök laminálás nem ajánlott;
+            ilyenkor a smink köré építünk tervet.
+          </p>
+        </div>
+      </Reveal>
+    </div>
+  </section>
+
+  {/* ── GYIK ──────────────────────────────────────────────────────────────── */}
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 text-center">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Gyakori kérdések</p>
+        <h2
+          class="font-display font-light leading-[1.1] tracking-tight text-cream"
+          style="font-size: clamp(1.875rem, 4vw, 3rem);"
+        >
+          Amit az esküvő előtt <em class="display">kérdezni szoktak</em>.
+        </h2>
+      </Reveal>
+      <FAQList items={faqs} />
+    </div>
+  </section>
+
+  <RelatedArticles
+    heading={'Esküvő — <em class="display">amit érdemes elolvasni</em>.'}
+    slugs={['eskuvoi-smink-felkesziules', 'eskuvoi-smink-arak-budapest', 'koreai-szempilla-lifting']}
+  />
+
+  <SiteContact
+    eyebrow="Foglalás"
+    heading={'Megvan a dátum. <em class="display">Kezdjünk hozzá</em>.'}
+    intro="Online foglalás 0–24 órában, válasz munkanapokon pár órán belül. Ha a naptár alapján bizonytalan vagy a sorrendben, írj — átnézem a dátumaidat, és megírom, mit mikorra tegyél."
+  />
+
+  <SiteFooter />
+
+  <CookieBanner client:idle />
+</Layout>

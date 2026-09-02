@@ -64,6 +64,8 @@ Az esküvői smink nem egy szimpla alkalmi smink: olyan fixálási technikákkal
 
 **Menyasszonyi smink a nagy napon (30 000 Ft):** a jóváhagyott protokoll tiszta, stresszmentes kivitelezése. A kettő együtt a [menyasszonyi csomagban](/sminkes-zuglo/) 39 000 Ft — a részletes árakról az [esküvői smink árak](/blog/eskuvoi-smink-arak-budapest/) cikkben írok.
 
+Ha a saját dátumaidra kíváncsi vagy, az [esküvői szépségnaptárban](/eskuvoi-szepsegnaptar/) beírod az esküvőd napját, és megkapod az egész ütemtervet — melyik kezelés hányadikára kerüljön, és miért pont akkor.
+
 Ha nem akarsz kompromisszumot kötni az életed legtöbbet nézett fotóin, válaszd a tudatos felkészülést. Várlak Zuglóban, az Egressy úti stúdiómban.
 
 [Válaszd ki a menyasszonyi csomagot, és foglald le a dátumod a Notino felületén →](https://www.notino.hu/szalonok/pecze-kovacs-fruzsina-sminkes,-szemoldok-es-szempilla-stylist/)

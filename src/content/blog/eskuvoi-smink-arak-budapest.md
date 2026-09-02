@@ -70,6 +70,8 @@ A részletes árlistát és a foglalás menetét a [sminkes oldalamon](/sminkes-
 
 Ha közeledik a nagy nap — vagy csak egy fontos esemény —, írj bátran, és segítek eldönteni, melyik smink a tiéd.
 
+Nem az ár a kérdés, hanem az időzítés? Az [esküvői szépségnaptárban](/eskuvoi-szepsegnaptar/) beírod az esküvőd dátumát, és megkapod, mikor melyik kezelés van soron — a próbasminktől a nagy napi sminkig.
+
 [Foglalj próbasmink-időpontot a Notino felületén →](https://www.notino.hu/szalonok/pecze-kovacs-fruzsina-sminkes,-szemoldok-es-szempilla-stylist/)
 
 *Frissítve: 2026. augusztus. Az árak tájékoztató jellegűek — az aktuális árlistát a foglalási oldalon találod.*
