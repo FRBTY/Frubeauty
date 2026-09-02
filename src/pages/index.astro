@@ -483,6 +483,19 @@ const homepageFaqSchema = {
             </a>
           </div>
 
+          {/* IKERPÁR: ugyanez a blokk a SiteContact.astro-ban is megvan, mert a
+              főoldalnak saját kapcsolat-szekciója van, nem a komponenst használja.
+              Ha itt módosítod, a SiteContact.astro-ban is módosítsd. */}
+          <div class="border-t border-whisper pt-6 sm:col-span-2">
+            <p class="text-[11px] uppercase tracking-caps text-creamMute mb-3">Megközelítés</p>
+            <p class="text-[15px] text-creamSoft leading-[1.7] max-w-[62ch]">
+              Örs vezér tere felől az <strong class="text-cream">M2</strong>-vel és a <strong class="text-cream">77-es</strong> trolival 18 perc, a <strong class="text-cream">32-es</strong> busszal és ugyanazzal a trolival 21. Jár erre az <strong class="text-cream">1-es villamos</strong> és a <strong class="text-cream">75-ös</strong> troli is, tehát a Hungária körút és a Kerepesi út felől is egyszerű. Parkolás a helyszínen fizetős.
+            </p>
+            <p class="mt-3 text-[15px] text-creamSoft leading-[1.7] max-w-[62ch]">
+              Ha nem ismered a környéket, foglaláskor írd meg, honnan indulsz — megírom a legrövidebb utat.
+            </p>
+          </div>
+
           <div class="border-t border-whisper pt-6 sm:col-span-2">
             <p class="text-[11px] uppercase tracking-caps text-creamMute mb-4">Nyitvatartás</p>
             <dl class="grid grid-cols-2 gap-y-2 gap-x-6 text-[15px] text-creamSoft">
