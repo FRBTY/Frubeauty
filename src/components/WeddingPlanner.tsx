@@ -383,6 +383,13 @@ export function WeddingPlanner() {
     return { total, list, saving: list - total, droppedPast: weddingDate ? pastCount : 0 };
   }, [active, plan, weddingDate, pastCount]);
 
+  /**
+   * Kiszállási kedvezmény: ha a menyasszony a naptár MIND A NÉGY szolgáltatását
+   * kéri, a helyszíni kiszállás díjmentes. Ez valódi ajánlat, ezért dinamikusan
+   * jelenik meg — és ha még nincs meg mind a négy, kiírjuk, mi hiányzik hozzá.
+   */
+  const allSelected = GROUPS.every((g) => active[g.id]);
+
   const planAsText = useMemo(() => {
     if (!weddingDate || plan.length === 0) return '';
     const lines = [
@@ -630,10 +637,20 @@ export function WeddingPlanner() {
                 Azokat az alkalmakat, amelyeknek az ideje már elmúlt, kivettem az összegből.
               </p>
             )}
-            <p className="mt-3 text-[13px] text-creamMute leading-relaxed">
-              2026-os árak, végösszeg. A helyszíni kiszállás díja nincs benne: írd meg a
-              helyszínt és a reggeli időzítést, és 24 órán belül megírom a pontos összeget.
-            </p>
+            <p className="mt-3 text-[13px] text-creamMute leading-relaxed">2026-os árak, végösszeg.</p>
+            {allSelected ? (
+              <p className="mt-2 text-[13px] text-gold leading-relaxed">
+                A helyszíni kiszállás díjmentes — mind a négy szolgáltatást kéred.
+              </p>
+            ) : (
+              <p className="mt-2 text-[13px] text-creamMute leading-relaxed">
+                A helyszíni kiszállás díja nincs benne: írd meg a helyszínt és a reggeli
+                időzítést, és 24 órán belül megírom a pontos összeget.{' '}
+                <span className="text-creamSoft">
+                  Ha mind a négy szolgáltatást kéred, a kiszállás díjmentes.
+                </span>
+              </p>
+            )}
             <p className="mt-3 text-[13px] text-creamMute leading-relaxed">
               A foglalás legkésőbb 24 órával az időpont előtt díjmentesen lemondható vagy
               áttehető — az esküvői dátumod nem ragad be.

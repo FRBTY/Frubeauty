@@ -92,7 +92,7 @@ const risks = [
   },
   {
     title: 'Ha nem Budapesten készülődsz',
-    body: 'A menyasszonyi smink kiszállással is kérhető. A díját a pontos távolság és az indulási időpont alapján számolom: írd meg a helyszínt és a reggeli időzítést, és 24 órán belül megkapod a pontos összeget.',
+    body: 'A menyasszonyi smink kiszállással is kérhető. A díját a pontos távolság és az indulási időpont alapján számolom: írd meg a helyszínt és a reggeli időzítést, és 24 órán belül megkapod a pontos összeget. Ha a szépségnaptár mind a négy szolgáltatását kéred, a kiszállás díjmentes.',
   },
   {
     title: 'Ha várandós vagy',
@@ -135,7 +135,7 @@ const faqs = [
   },
   {
     q: 'Kiszállással is dolgozol?',
-    a: 'Igen, a menyasszonyi smink kiszállással is kérhető. A kiszállás díját a pontos távolság és az indulási időpont alapján egyedileg számolom, és az a csomagáron felül értendő.',
+    a: 'Igen, a menyasszonyi smink kiszállással is kérhető. A kiszállás díját a pontos távolság és az indulási időpont alapján egyedileg számolom, és az a csomagáron felül értendő. Egy kivétel van: ha a szépségnaptár mind a négy szolgáltatását kéred — a sminkcsomagot, a tekintetet, az arckezelés-kúrát és az örömanya sminket —, akkor a kiszállás díjmentes.',
   },
 ];
 
@@ -256,8 +256,9 @@ const appSchema = {
           />
         </div>
         <p class="mt-5 text-creamSoft leading-[1.7] text-[15px] max-w-[38ch]">
-          Én vagyok Fruzsi. Egyszerre egy vendéggel dolgozom, ezért nincs kapkodás — és ezért
-          fogynak el elsőként a szombat reggelek a szezonban.
+          Pecze-Kovács Fruzsina vagyok, én foglak felkészíteni a nagy napodra. Bármelyik
+          szolgáltatásomat választod, a legjobb tudásom szerint dolgozom azon, hogy az
+          esküvői megjelenésed emlékezetes maradjon.
         </p>
       </Reveal>
 
@@ -336,17 +337,6 @@ const appSchema = {
             hogy mikor érkezik a vendégsereg. Ha valami csúszik, szólj — átrendezzük. És
             ha várandós vagy, a szempilla lifting és a szemöldök laminálás nem ajánlott;
             ilyenkor a smink köré építünk tervet.
-          </p>
-        </div>
-
-        <div class="border-t border-whisper pt-6">
-          <p class="text-creamSoft leading-[1.7] text-[15px]">
-            Ha bizonytalan vagy a sorrendben, ne találgass: <a
-              href={`mailto:${config.email}?subject=${encodeURIComponent('Esküvői szépségnaptár — átnéznéd a dátumaimat?')}`}
-              class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors"
-              >írd meg a dátumod</a
-            >, és 24 órán belül visszaírom, mit mikorra tennék. Ez ingyen van, és nem jár
-            kötelezettséggel.
           </p>
         </div>
       </Reveal>
