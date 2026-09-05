@@ -184,6 +184,8 @@ const huDate = new Intl.DateTimeFormat('hu-HU', {
   day: 'numeric',
 });
 const huShort = new Intl.DateTimeFormat('hu-HU', { month: 'short', day: 'numeric' });
+/** „05. 15.” — a datum tipografiai elemkent, nem meta-sorkent. */
+const huDayMonth = new Intl.DateTimeFormat('hu-HU', { month: '2-digit', day: '2-digit' });
 const huWeekday = new Intl.DateTimeFormat('hu-HU', { weekday: 'long' });
 
 function addDays(base: Date, days: number): Date {
@@ -828,36 +830,43 @@ export function WeddingPlanner() {
                         s.past ? 'bg-whisperStrong' : 'bg-gold'
                       }`}
                     />
-                    <p
-                      className={`text-[11px] uppercase tracking-caps mb-1.5 tabular-nums ${
-                        s.past ? 'text-creamMute' : 'text-gold'
-                      }`}
-                    >
-                      {huDate.format(s.when)} · {huWeekday.format(s.when)}
-                      {s.daysBefore === 0 && ' · a nagy nap'}
-                      {s.past && ' · elmúlt'}
-                    </p>
-                    <h3
-                      className={`font-medium text-lg leading-snug mb-1 ${
-                        s.past ? 'text-creamMute' : 'text-cream'
-                      }`}
-                    >
-                      {s.title}
-                    </h3>
-                    <p className="text-[13px] text-creamMute mb-2">{s.duration}</p>
-                    <p className="text-creamSoft leading-[1.7] text-[15px] max-w-[52ch]">{s.why}</p>
-                    {/* Másodlagos súly: a konverziós pillanatban a foglalás-gomb
-                        legyen az egyetlen hangsúlyos elem, ne ez a 3–7 kifelé
-                        mutató link. */}
-                    <a
-                      href={s.href}
-                      className="mt-3 inline-flex items-center text-[11px] uppercase tracking-caps text-creamMute hover:text-gold transition-colors"
-                    >
-                      Részletek és árak
-                      <span aria-hidden className="ml-2">
-                        →
-                      </span>
-                    </a>
+                    {/* A dátum tipográfiai elem, nem középpontokkal fűzött
+                        meta-sor: így a szem végig tudja pásztázni az idővonalat
+                        anélkül, hogy elolvasná. A „nagy nap” jelölés kikerült —
+                        a lépés címe már tartalmazza. */}
+                    <div className="grid grid-cols-[auto_1fr] gap-x-5 sm:gap-x-7 gap-y-1.5">
+                      <p
+                        className={`font-display font-light text-[1.6rem] sm:text-[1.85rem] leading-none tabular-nums ${
+                          s.past ? 'text-creamMute' : 'text-cream'
+                        }`}
+                      >
+                        {huDayMonth.format(s.when)}
+                      </p>
+                      <h3
+                        className={`font-medium text-lg leading-snug ${
+                          s.past ? 'text-creamMute' : 'text-cream'
+                        }`}
+                      >
+                        {s.title}
+                      </h3>
+                      <p className="text-[12px] text-creamMute leading-none tabular-nums">
+                        {s.when.getFullYear()}, {huWeekday.format(s.when)}
+                        {s.past && ', elmúlt'}
+                      </p>
+                      <p className="text-[13px] text-creamMute leading-none">{s.duration}</p>
+                      <div className="col-start-1 col-span-2 sm:col-start-2 sm:col-span-1 mt-2.5">
+                        <p className="text-creamSoft leading-[1.7] text-[15px] max-w-[52ch]">{s.why}</p>
+                        {/* Másodlagos súly: a konverziós pillanatban a foglalás-gomb
+                            legyen az egyetlen hangsúlyos elem, ne ez a 3–7 kifelé
+                            mutató link. */}
+                        <a
+                          href={s.href}
+                          className="mt-3 inline-flex items-center text-[11px] uppercase tracking-caps text-creamMute hover:text-gold transition-colors"
+                        >
+                          Részletek és árak
+                        </a>
+                      </div>
+                    </div>
                   </li>
                 ))}
               </ol>
