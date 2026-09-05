@@ -8,6 +8,12 @@
  * tervezés a mi oldalunkon történjen, ne egy általános esküvői checklistán.
  *
  * A dátumok forrása a saját, publikált szabályaink — lásd WeddingPlanner.tsx.
+ *
+ * Konverziós felépítés (2026-09): az eszköz a HŐS, ezért a hero szándékosan
+ * rövid és kép nélküli — a naptár a lehető legmagasabban kezdődjön. A hero után
+ * a sorrend a menyasszony kérdéseit követi: megkapom a tervet (eszköz) → miért
+ * hihetek ezeknek a dátumoknak (logika) → kivel lesz dolgom (vélemények) → mi
+ * van, ha közbejön valami (kockázat) → apró kérdések (GYIK) → foglalás.
  */
 import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
@@ -15,11 +21,94 @@ import SiteContact from '../components/SiteContact.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { Reveal } from '../components/Reveal';
 import { WeddingPlanner } from '../components/WeddingPlanner';
+import { TestimonialsGrid } from '../components/TestimonialsGrid';
 import FAQList from '../components/FAQList.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import { CookieBanner } from '../components/CookieBanner';
+import { siteConfig } from '../config/site';
+
+const config = { ...siteConfig };
+
+/**
+ * Valós Google-vélemények — ugyanazok, mint a /sminkes-zuglo/ oldalon, az
+ * esküvői relevancia szerint válogatva (eredmény, tartósság, rugalmasság).
+ * Az `outcome` szó szerint a vendég saját mondatából jön, nem hozzátoldás.
+ */
+const testimonials = [
+  {
+    name: 'Dóri',
+    rating: 5,
+    text: 'Csodaszép esküvői sminket varázsolt rám Fruzsi, kétszer is. Emellett nagyon kedves, rugalmas is, ajánlom mindenkinek!',
+    service: 'Menyasszonyi smink',
+    outcome: 'Két esküvő, ugyanaz a sminkes',
+  },
+  {
+    name: 'Emese Simon',
+    rating: 5,
+    text: 'Csodaszép sminket kaptam, annyira tudta Fruzsina, hogy mi áll jól, könnyen ment a választás, és jól is éreztem magam benne egész nap egy esküvőn — tartósnak bizonyult.',
+    service: 'Alkalmi smink',
+    outcome: 'Egész napos esküvő, végig kitartott',
+  },
+  {
+    // Gréti Sápi véleménye szándékosan NEM itt van, hanem a naptár-eszközben,
+    // közvetlenül az ár mellett — ott ér a legtöbbet. Egy oldalon ne szerepeljen
+    // ugyanaz az idézet kétszer.
+    name: 'Klaudia Vörös',
+    rating: 5,
+    text: 'Már többször vettem igénybe Fruzsi szolgáltatásait. Legutóbb egy csodaszép sminket készített a kismama fotózásomra. Maximálisan elégedett vagyok vele. Mindenkinek tiszta szívvel ajánlom!',
+    service: 'Smink fotózásra',
+    outcome: 'Visszatérő vendég',
+  },
+  {
+    name: 'Orosz-Adamcsek Zsuzsanna',
+    rating: 5,
+    text: 'Szinte azonnal kaptam időpontot, nagyon rugalmas volt Fruzsi. Minden kérésemet figyelembe vette és egy csodás sminket készített nekem. Visszatérek még hozzá a közeljövőben is.',
+    service: 'Alkalmi smink',
+    outcome: 'Időpont szinte azonnal',
+  },
+];
+
+/**
+ * „Mi van, ha…” — a menyasszony félelmei, előre megválaszolva. Minden válasz a
+ * saját, máshol is publikált szabályunk (ÁSZF lemondási pont, sminkes GYIK,
+ * kiszállás-elszámolás), nem itt kitalált ígéret.
+ */
+const risks = [
+  {
+    title: 'Ha csúszik vagy elmarad az esküvő',
+    body: 'Szólj, amint tudod, és megkeressük az új dátumot — a próbasminkre és a nagy napra egyaránt. Minél korábban jelzed, annál nagyobb az esély, hogy a kívánt reggeli időpont még szabad.',
+  },
+  {
+    title: 'Ha a próbasmink nem lesz az igazi',
+    body: 'Pont ezért van. A próbán még bármit átírunk: színt, intenzitást, fixálást. A nagy napra csak az kerül be, amit a tükörbe nézve jóváhagytál — a fotó erről készül.',
+  },
+  {
+    title: 'Ha érzékeny a bőröd',
+    body: 'A próbasmink élesben teszteli, hogyan reagál a bőröd az anyagokra. Ha bármi nem tetszik neki, arra még bőven van idő reagálni, és a nagy napon már nem érhet meglepetés.',
+  },
+  {
+    title: 'Ha le kell mondanod egy időpontot',
+    body: 'Az időpont legkésőbb 24 órával korábban díjmentesen lemondható vagy átütemezhető. Ennél közelebb elég egy rövid hívás vagy SMS — betegség és váratlan esemény esetén nincs lemondási díj.',
+  },
+  {
+    title: 'Ha nem Budapesten készülődsz',
+    body: 'A menyasszonyi smink kiszállással is kérhető. A díját a pontos távolság és az indulási időpont alapján számolom: írd meg a helyszínt és a reggeli időzítést, és 24 órán belül megkapod a pontos összeget.',
+  },
+  {
+    title: 'Ha várandós vagy',
+    body: 'A szempilla lifting és a szemöldök laminálás ilyenkor nem ajánlott — a hormonális változás miatt az eredmény kiszámíthatatlan. A smink nem érintett, úgyhogy a tervet a smink köré rakjuk össze.',
+  },
+];
 
 const faqs = [
+  {
+    q: 'Tényleg ingyenes ez a naptár? Mit kérsz cserébe?',
+    a: 'Semmit. Nincs regisztráció, és nem kérem el az e-mail-címedet — az ütemterv azonnal megjelenik a képernyőn. Azért készítettem, mert ezt a kérdést kapom a leggyakrabban, és jobb egyszer rendesen leírni, mint minden alkalommal újra elmagyarázni.',
+  },
+  {
+    q: 'Nem nálad csináltatnám mindet. Így is használhatom?',
+    a: 'Nyugodtan. A dátumok akkor is működnek, ha máshol csináltatod — a bőr 28 napos ciklusa és a lifting 24 órás szabálya nem tőlem függ. Épp ezért nincs mögötte se regisztráció, se e-mail-fal.',
+  },
   {
     q: 'Mikor kezdjek el foglalni az esküvőmre?',
     a: 'A sminkes időpontot a szezonban (május–szeptember) érdemes 4–6 hónappal előre lefoglalni, mert a szombat reggelek fogynak el elsőként. Maga a kezelés-sorozat viszont csak az esküvő előtti 10 héten belül indul — előbb nincs értelme, mert a hatások nem tartanak addig.',
@@ -34,11 +123,15 @@ const faqs = [
   },
   {
     q: 'Mi van, ha közelebb van az esküvőm, mint amit a naptár javasol?',
-    a: 'Akkor is van terv. A naptár megmutatja, melyik lépés ideje múlt el, de a maradékból is összerakható egy jó sorrend — írj rám, és megbeszéljük. Egy hét is elég ahhoz, hogy a tekintet és a smink a helyén legyen.',
+    a: 'Akkor is van terv. A naptár megmutatja, melyik lépés ideje múlt el, de a maradékból is összerakható egy jó sorrend — hívj vagy írj, és megbeszéljük. Egy hét is elég ahhoz, hogy a tekintet és a smink a helyén legyen.',
+  },
+  {
+    q: 'Be tudom tenni ezeket a dátumokat a naptáramba?',
+    a: 'Igen, egy kattintással. A „Naptárba teszem” gomb letölt egy naptárfájlt az összes hátralévő lépéssel — mindegyikhez egy hetes emlékeztetővel, a kezelés időtartamával és a szalon címével együtt. Google Naptár, Apple Naptár és Outlook is megnyitja.',
   },
   {
     q: 'Elvégezhetők a kezelések várandósan?',
-    a: 'A szempilla lifting és a szemöldök laminálás várandósság alatt nem ajánlott — a hormonális változás miatt az eredmény kiszámíthatatlan. A smink természetesen nem érintett. Ha várandós vagy vagy szoptatsz, foglalás előtt egyeztessünk, és összerakjuk azt a tervet, ami neked működik.',
+    a: 'A szempilla lifting és a szemöldök laminálás várandósság alatt nem ajánlott — a hormonális változás miatt az eredmény kiszámíthatatlan. A smink természetesen nem érintett. Ha várandós vagy, vagy szoptatsz, foglalás előtt egyeztessünk, és összerakjuk azt a tervet, ami neked működik.',
   },
   {
     q: 'Kiszállással is dolgozol?',
@@ -94,38 +187,81 @@ const appSchema = {
 >
   <SiteHeader />
 
-  {/* ── Hero ──────────────────────────────────────────────────────────────── */}
-  <section class="pt-[calc(var(--header-h)+4rem)] sm:pt-[calc(var(--header-h)+6rem)] pb-12 sm:pb-16">
+  {/* ── Hero ──────────────────────────────────────────────────────────────
+      Szándékosan rövid és kép nélkül: ezen az oldalon az eszköz a hős, tehát a
+      naptárnak a lehető legmagasabban kell kezdődnie. A vizuális bizonyíték
+      lentebb, a vélemények mellett jön — ott, ahol már számít. */}
+  <section class="pt-[calc(var(--header-h)+2rem)] sm:pt-[calc(var(--header-h)+5rem)] pb-8 sm:pb-14">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
-      <div class="max-w-[62ch]">
-        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Ingyenes eszköz</p>
+      <div class="max-w-[64ch]">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-4 sm:mb-5">
+          Esküvői szépségnaptár · ingyenes
+        </p>
         <h1
           class="font-display font-light text-cream leading-[1.06] tracking-tightest-"
-          style="font-size: clamp(2.25rem, 5.5vw, 4rem);"
+          style="font-size: clamp(2.125rem, 5.5vw, 4rem);"
         >
-          Esküvői <em class="display">szépségnaptár</em>.
+          Mikor csináltassam az <em class="display">esküvőm</em> előtt?
         </h1>
-        <p class="mt-7 text-creamSoft text-base sm:text-lg leading-[1.75]">
-          A menyasszonyaimtól messze a leggyakrabban ezt kérdezik: <em
-            >„mikor csináltassam?"</em
-          > Írd be az esküvőd dátumát, és megkapod a válaszod dátumra pontosan —
-          azzal együtt, hogy melyik kezelést <strong class="text-cream">miért</strong> pont
-          akkor érdemes. Nincs regisztráció, nincs email-kérés.
+        <p class="mt-5 sm:mt-7 text-creamSoft text-base sm:text-lg leading-[1.7]">
+          Ezt kérdezik tőlem a leggyakrabban a menyasszonyaim. Írd be az esküvőd dátumát, és
+          megkapod a saját ütemterved — dátumra pontosan, azzal együtt, hogy melyik kezelés
+          <strong class="text-cream">miért</strong> pont akkor van soron.
         </p>
+        <p class="mt-4 text-creamSoft text-[15px] leading-[1.7]">
+          Nincs regisztráció és nincs e-mail-kérés. Pecze-Kovács Fruzsina vagyok, kozmetikus a
+          zuglói Egressy úton — ugyanezekkel a dátumokkal dolgozom a saját menyasszonyaimmal.
+        </p>
+        <div class="mt-5 sm:mt-7 flex flex-wrap items-center gap-x-6 gap-y-2">
+          <a
+            href={config.googleReviewsUrl}
+            target="_blank"
+            rel="noopener nofollow"
+            class="text-[12px] uppercase tracking-caps text-creamMute hover:text-gold transition-colors"
+            >Google-értékelések →</a
+          >
+          <a
+            href="/rolam/"
+            class="text-[12px] uppercase tracking-caps text-creamMute hover:text-gold transition-colors"
+            >Rólam →</a
+          >
+        </div>
       </div>
     </div>
   </section>
 
-  {/* ── Az eszköz ─────────────────────────────────────────────────────────── */}
-  <section class="pb-20 sm:pb-28">
+  {/* ── Az eszköz ─────────────────────────────────────────────────────────
+      rootMargin: mobilon a naptár épp a hajtás alatt van, így a hidratálás már
+      azelőtt elindul, hogy a menyasszony a dátummezőhöz érne. */}
+  <section id="naptar" class="pb-20 sm:pb-28 scroll-mt-28">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
-      <WeddingPlanner client:visible />
+      <WeddingPlanner client:visible={{ rootMargin: '400px' }} />
     </div>
   </section>
 
   {/* ── Miért ezek a dátumok ──────────────────────────────────────────────── */}
   <section class="py-20 sm:py-28 bg-inkSoft">
-    <div class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+      <Reveal client:visible as="div" className="lg:col-span-4 lg:sticky lg:top-28">
+        <div class="relative rounded-3xl overflow-hidden max-w-[320px] lg:max-w-none" style="aspect-ratio: 4 / 5;">
+          <img
+            src="/img/pecze-kovacs-fruzsina-zuglo-kozmetikus.webp"
+            alt="Pecze-Kovács Fruzsina kozmetikus és sminkes a FRUBEAUTY zuglói szalonjában"
+            width="1200"
+            height="1864"
+            loading="lazy"
+            decoding="async"
+            class="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+        <p class="mt-5 text-creamSoft leading-[1.7] text-[15px] max-w-[38ch]">
+          Én vagyok Fruzsi. Egyszerre egy vendéggel dolgozom, ezért nincs kapkodás — és ezért
+          fogynak el elsőként a szombat reggelek a szezonban.
+        </p>
+      </Reveal>
+
+      <div class="lg:col-span-8">
       <Reveal client:visible as="div" className="mb-12">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">A logika mögötte</p>
         <h2
@@ -134,6 +270,10 @@ const appSchema = {
         >
           Miért <em class="display">pont ezek</em> a dátumok?
         </h2>
+        <p class="mt-6 text-creamSoft leading-[1.7] text-[15px] sm:text-base max-w-[62ch]">
+          Egyik dátum sem kerekítés. Mindegyik mögött van egy konkrét ok — és ha tudod, mi az,
+          te is el tudod dönteni, min lehet csúsztatni, és min nem.
+        </p>
       </Reveal>
 
       <Reveal client:visible as="div" className="space-y-8" delay={0.08}>
@@ -198,6 +338,102 @@ const appSchema = {
             ilyenkor a smink köré építünk tervet.
           </p>
         </div>
+
+        <div class="border-t border-whisper pt-6">
+          <p class="text-creamSoft leading-[1.7] text-[15px]">
+            Ha bizonytalan vagy a sorrendben, ne találgass: <a
+              href={`mailto:${config.email}?subject=${encodeURIComponent('Esküvői szépségnaptár — átnéznéd a dátumaimat?')}`}
+              class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors"
+              >írd meg a dátumod</a
+            >, és 24 órán belül visszaírom, mit mikorra tennék. Ez ingyen van, és nem jár
+            kötelezettséggel.
+          </p>
+        </div>
+      </Reveal>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Menyasszonyok ─────────────────────────────────────────────────────── */}
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center mb-14 sm:mb-16">
+        <Reveal client:visible as="div" className="lg:col-span-5">
+          <div class="relative rounded-3xl overflow-hidden" style="aspect-ratio: 4 / 5;">
+            <img
+              src="/img/menyasszonyi-probasmink-zuglo-budapest-egressy-ut.webp"
+              alt="Menyasszonyi próbasmink Zuglóban — a nagy napi smink tervrajza, FRUBEAUTY Egressy út"
+              width="1200"
+              height="1494"
+              loading="lazy"
+              decoding="async"
+              class="absolute inset-0 w-full h-full object-cover"
+            />
+          </div>
+        </Reveal>
+        <Reveal client:visible as="div" className="lg:col-span-7" delay={0.08}>
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Menyasszonyok</p>
+          <h2
+            class="font-display font-light leading-[1.1] tracking-tight text-cream"
+            style="font-size: clamp(1.875rem, 4vw, 3rem);"
+          >
+            Nem elmélet. <em class="display">Valódi</em> esküvők.
+          </h2>
+          <p class="mt-6 text-creamSoft leading-[1.7] text-[15px] sm:text-base max-w-[58ch]">
+            A naptár dátumai onnan jönnek, hogy ugyanezt a sorrendet viszem végig minden
+            menyasszonyommal: a próbasminken készült fotó a nagy napi tervrajz, a tekintet
+            5–10 nappal korábban áll be, a bőr pedig a saját ciklusához igazodik. Egyszerre
+            egy vendéggel dolgozom, így az esküvő reggelén nincs kapkodás.
+          </p>
+          <p class="mt-4 text-creamSoft leading-[1.7] text-[15px] sm:text-base max-w-[58ch]">
+            Az alábbi véleményeket nem ide írták — mindegyik megnyitható a Google-on.
+          </p>
+          <a
+            href={config.googleReviewsUrl}
+            target="_blank"
+            rel="noopener nofollow"
+            class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors"
+            >Összes értékelés a Google-on <span aria-hidden="true" class="ml-2">→</span></a
+          >
+        </Reveal>
+      </div>
+
+      <TestimonialsGrid client:visible items={testimonials} />
+    </div>
+  </section>
+
+  {/* ── Kockázat ──────────────────────────────────────────────────────────── */}
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-[62ch]">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Ha közbejön valami</p>
+        <h2
+          class="font-display font-light leading-[1.1] tracking-tight text-cream"
+          style="font-size: clamp(1.875rem, 4vw, 3rem);"
+        >
+          Egy esküvőn <em class="display">minden</em> csúszik egy kicsit.
+        </h2>
+        <p class="mt-6 text-creamSoft leading-[1.7] text-[15px] sm:text-base">
+          Nem az a kérdés, hogy a terv szerint megy-e minden, hanem hogy mi történik, amikor
+          nem. Ezért itt előre leírom — hogy ne foglalás után derüljön ki.
+        </p>
+      </Reveal>
+
+      <Reveal
+        client:visible
+        as="div"
+        className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10"
+        delay={0.08}
+      >
+        {
+          risks.map((r) => (
+            <div class="border-t border-whisper pt-6">
+              <h3 class="font-medium text-lg text-cream mb-2 leading-snug">{r.title}</h3>
+              <p class="text-creamSoft leading-[1.7] text-[15px]">{r.body}</p>
+            </div>
+          ))
+        }
       </Reveal>
     </div>
   </section>
@@ -226,7 +462,7 @@ const appSchema = {
   <SiteContact
     eyebrow="Foglalás"
     heading={'Megvan a dátum. <em class="display">Kezdjünk hozzá</em>.'}
-    intro="Online foglalás 0–24 órában, válasz munkanapokon pár órán belül. Ha a naptár alapján bizonytalan vagy a sorrendben, írj — átnézem a dátumaidat, és megírom, mit mikorra tegyél."
+    intro="Online foglalás 0–24 órában, válasz munkanapokon pár órán belül. Ha a naptár alapján bizonytalan vagy a sorrendben, hívj vagy írj — átnézem a dátumaidat, és megírom, mit mikorra tegyél."
   />
 
   <SiteFooter />

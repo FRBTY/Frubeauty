@@ -8,6 +8,7 @@ import { MagneticCTA } from '../components/MagneticCTA';
 import { ProcessSteps } from '../components/ProcessSteps';
 import { TestimonialsGrid } from '../components/TestimonialsGrid';
 import FAQList from '../components/FAQList.astro';
+import WeddingCalendarCTA from '../components/WeddingCalendarCTA.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import { PriceList } from '../components/PriceList';
 import { CookieBanner } from '../components/CookieBanner';
@@ -258,6 +259,13 @@ const arcBreadcrumbSchema = {
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Foglalástól az utógondozásig — <em class="display">négy lépés</em>.</h2>
       </Reveal>
       <ProcessSteps client:visible steps={processSteps} />
+
+      {/* Belépő az esküvői szépségnaptárra — lásd WeddingCalendarCTA.astro. */}
+      <WeddingCalendarCTA
+        class="mt-14 sm:mt-16"
+        cta="Esküvő előtti ütemterv"
+        body="A kúra havi ütemben dolgozik, ezért az esküvő előtt nagyjából tíz héttel érdemes kezdeni. Írd be az esküvőd dátumát, és a naptár kiszámolja mind a három alkalom időpontját — a sminkkel és a tekintettel együtt."
+      />
     </div>
   </section>
 

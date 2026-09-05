@@ -14,6 +14,7 @@ import { ProcessSteps } from '../components/ProcessSteps';
 import { TestimonialsGrid } from '../components/TestimonialsGrid';
 import { GalleryGrid } from '../components/GalleryGrid';
 import FAQList from '../components/FAQList.astro';
+import WeddingCalendarCTA from '../components/WeddingCalendarCTA.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
@@ -628,6 +629,13 @@ const breadcrumbSchema = {
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Átláthatóan — <em class="display">négy lépés</em>.</h2>
       </Reveal>
       <ProcessSteps client:visible steps={processSteps} />
+
+      {/* Belépő az esküvői szépségnaptárra — lásd WeddingCalendarCTA.astro. */}
+      <WeddingCalendarCTA
+        class="mt-14 sm:mt-16"
+        cta="Mikor csináltassam? — naptár"
+        body="A laminálás 5–10 nappal a nagy nap előtt a legszebb, és a szempilla liftinggel egy időpontba fér. Írd be az esküvőd dátumát, és megkapod a pontos napot — a többi kezeléssel együtt."
+      />
     </div>
   </section>
 

@@ -11,6 +11,7 @@ import { ProcessSteps } from '../components/ProcessSteps';
 import { TestimonialsGrid } from '../components/TestimonialsGrid';
 import { GalleryGrid } from '../components/GalleryGrid';
 import FAQList from '../components/FAQList.astro';
+import WeddingCalendarCTA from '../components/WeddingCalendarCTA.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { BlogSection } from '../components/BlogSection';
 import { getCollection } from 'astro:content';
@@ -276,6 +277,13 @@ const homepageFaqSchema = {
         </h2>
       </Reveal>
       <ServicesGrid client:visible services={services} />
+
+      {/* Belépő az esküvői szépségnaptárra — lásd WeddingCalendarCTA.astro. */}
+      <WeddingCalendarCTA
+        class="mt-14 sm:mt-16"
+        cta="Megnyitom az esküvői szépségnaptárt"
+        body="Írd be az esküvőd dátumát, és megkapod a saját ütemterved: mikor legyen az arckezelés-kúra, a próbasmink, a szemöldök laminálás, a szempilla lifting és a menyasszonyi smink. Regisztráció nélkül, azonnal."
+      />
     </div>
   </section>
 

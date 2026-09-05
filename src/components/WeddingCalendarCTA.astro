@@ -1,0 +1,62 @@
+---
+/**
+ * Belépő az /eskuvoi-szepsegnaptar/ eszközre a szolgáltatás-oldalakról és a
+ * kezdőlapról.
+ *
+ * Miért van rá szükség: 2026-09-04-én összesen HÁROM belső link mutatott az
+ * eszközre (két blogcikk + a sminkes oldal egy bekezdése), és sem a navigáció,
+ * sem a footer, sem a kezdőlap nem hivatkozott rá. Egy konverziós eszköznek
+ * viszont előbb forgalom kell.
+ *
+ * Két szándékos döntés:
+ *  1. A kártya NEM egyetlen nagy <a>. A link szövege így tiszta, leíró horgony
+ *     marad, nem az egész bekezdés.
+ *  2. A háttér `bg-whisperOnDark`, nem `bg-inkSoft` — így bármelyik szekció
+ *     hátterén (ink, inkSoft, inkDeep) látszik a kiemelés.
+ */
+interface Props {
+  /** Az oldal saját kontextusa — miért pont ott érdekes a naptár. */
+  body: string;
+  /** A link szövege. Oldalanként más, hogy a horgonyszöveg ne legyen sablonos. */
+  cta: string;
+  /** Extra osztályok a külső kerethez (pl. felső margó). */
+  class?: string;
+}
+
+const { body, cta, class: className = '' } = Astro.props;
+---
+
+<div
+  class={`rounded-3xl border border-whisperStrong bg-whisperOnDark p-7 sm:p-10 ${className}`}
+>
+  <div class="grid lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+    <div class="lg:col-span-8">
+      <p class="text-[11px] uppercase tracking-caps text-gold mb-4">
+        Ingyenes eszköz esküvőre
+      </p>
+      <p
+        class="font-display font-light text-cream leading-[1.15]"
+        style="font-size: clamp(1.5rem, 3vw, 2.125rem);"
+      >
+        Mikor csináltassam az <em class="display">esküvőm</em> előtt?
+      </p>
+      <p class="mt-4 text-creamSoft leading-[1.7] text-[15px] max-w-[58ch]">
+        {body}
+      </p>
+    </div>
+    <div class="lg:col-span-4 lg:text-right">
+      <a
+        href="/eskuvoi-szepsegnaptar/"
+        class="group inline-flex items-center gap-2 text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors"
+      >
+        {cta}
+        <span
+          aria-hidden="true"
+          class="transition-transform duration-300 ease-out group-hover:translate-x-1"
+        >
+          →
+        </span>
+      </a>
+    </div>
+  </div>
+</div>

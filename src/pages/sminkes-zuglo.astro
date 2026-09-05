@@ -9,6 +9,7 @@ import { ProcessSteps } from '../components/ProcessSteps';
 import { TestimonialsGrid } from '../components/TestimonialsGrid';
 import { GalleryGrid } from '../components/GalleryGrid';
 import FAQList from '../components/FAQList.astro';
+import WeddingCalendarCTA from '../components/WeddingCalendarCTA.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
@@ -440,6 +441,13 @@ const config = { ...siteConfig };
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Foglalástól a táncos órákig — <em class="display">három lépés</em>.</h2>
       </Reveal>
       <ProcessSteps client:visible steps={processSteps} />
+
+      {/* Belépő az esküvői szépségnaptárra — lásd WeddingCalendarCTA.astro. */}
+      <WeddingCalendarCTA
+        class="mt-14 sm:mt-16"
+        cta="Kiszámolom a dátumaimat"
+        body="A próbasmink 4–8 héttel a nagy nap előtt a legjobb — de mikor van az pontosan? Írd be az esküvőd dátumát, és a naptár kiszámolja az összes időpontot, a próbasminktől a nagy napi sminkig."
+      />
     </div>
   </section>
 
