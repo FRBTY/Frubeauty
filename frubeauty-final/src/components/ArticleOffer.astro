@@ -44,6 +44,15 @@ interface Offer {
   /** A pillér-oldal, ahova a „részletek" visz — leíró anchorral. */
   href: string;
   anchor: string;
+  /**
+   * Mit keressen a látogató a Notinón. A Notino „Foglalás" gombjai <button>-ök,
+   * nem linkek, ezért egyetlen szolgáltatásra NEM adható közvetlen hivatkozás — a
+   * honlapról érkező a szalon-oldal tetején landol, és 25 tétel közül kell
+   * kiválasztania a sajátját. Ez a mondat teszi a listát felismeréssé keresés
+   * helyett. A nevek betű szerint a Notino szolgáltatás-listájából valók: ha ott
+   * átnevezel egy szolgáltatást, ezt is át kell írni.
+   */
+  notinoHint: string;
 }
 
 const OFFERS = {
@@ -56,6 +65,7 @@ const OFFERS = {
       'Koreai technikával, a saját pilláidból — Zuglóban, az Egressy úton. Egyszerre egy vendég, így nincs kapkodás.',
     href: '/szempilla-lifting-zuglo/',
     anchor: 'szempilla lifting Zuglóban',
+    notinoHint: 'Szempilla lifting + szempillafestés',
   },
   Szemöldök: {
     service: 'Szemöldök laminálás formázással és festéssel',
@@ -66,6 +76,7 @@ const OFFERS = {
       'Formázás és festés is benne van — nem külön tétel. Zuglóban, az Egressy úton, egyszerre egy vendéggel.',
     href: '/szemoldok-laminalas-zuglo/',
     anchor: 'szemöldök laminálás Zuglóban',
+    notinoHint: 'Szemöldök laminálás Festéssel Formázással',
   },
   Arckezelés: {
     service: 'Janssen arckezelés bőranalízissel',
@@ -76,6 +87,7 @@ const OFFERS = {
       'Minden alkalom bőranalízissel kezdődik, és arra épül a protokoll — nem fordítva. Zuglóban, az Egressy úton.',
     href: '/arckezeles-zuglo/',
     anchor: 'arckezelés Zuglóban',
+    notinoHint: 'Kozmetikai kezelés',
   },
   Bőrápolás: {
     service: 'Janssen arckezelés bőranalízissel',
@@ -86,6 +98,7 @@ const OFFERS = {
       'Az otthoni rutin fele siker — a másik fele az, hogy tudd, milyen a bőröd. Ezzel kezdünk, Zuglóban.',
     href: '/arckezeles-zuglo/',
     anchor: 'arckezelés Zuglóban',
+    notinoHint: 'Kozmetikai kezelés',
   },
   'Alkalmi smink': {
     service: 'Esküvői és alkalmi smink',
@@ -96,6 +109,7 @@ const OFFERS = {
       'Alkalmi smink 15 000 Ft-tól, menyasszonyi smink próbasminkkel csomagban. Rejtett díj nincs — az árat előre tudod.',
     href: '/sminkes-zuglo/',
     anchor: 'esküvői és alkalmi smink Budapesten',
+    notinoHint: 'Alkalmi smink',
   },
 } satisfies Record<Category, Offer>;
 
@@ -165,6 +179,13 @@ const bookRel = relFor(siteConfig.booking);
         <span aria-hidden="true">→</span>
       </a>
     </div>
+
+    {/* A foglalás a Notino szalon-oldalán folytatódik, ahol 25 szolgáltatás közül
+        kell választani, és közvetlen link egyetlen tételre nem adható. Ez a sor
+        teszi a listát felismeréssé keresés helyett — a mért kiesés pont itt van. */}
+    <p class="mt-4 text-[13px] leading-relaxed text-creamMute">
+      A foglalási oldalon ezt keresd: <span class="text-cream font-medium">{offer.notinoHint}</span>
+    </p>
 
     <p class="mt-6 pt-5 border-t border-whisper text-[13px] text-creamMute">
       1143 Budapest, Egressy út 16. · Telefonon is:
