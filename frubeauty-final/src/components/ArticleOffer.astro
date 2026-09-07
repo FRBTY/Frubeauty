@@ -1,0 +1,176 @@
+---
+/**
+ * ArticleOffer — a blogcikkhez tartozó KONKRÉT szolgáltatás-ajánlat.
+ *
+ * Miért van: a 2026-09-07-i GSC+GA4 audit mérése szerint az organikus
+ * blog-forgalom 12%-on konvertál (25 látogatóból 3 jut el a foglalásig),
+ * miközben a szolgáltatás-oldalak 80%-on. A cikkek végén álló SiteContact
+ * általános („személyes konzultáció"), nincs benne se ár, se a cikk témájához
+ * tartozó konkrét szolgáltatás — ez a doboz pótolja azt.
+ *
+ * A kategóriából vezeti le az ajánlatot, ezért MINDEN cikkre működik
+ * frontmatter-módosítás és séma-bővítés nélkül. Ha új kategória kerül a
+ * content.config.ts enumba, ide is fel kell venni — a `satisfies` fordításkor
+ * elhasal, ha kimarad.
+ *
+ * Mérés: a Notino-linkre a Layout.astro globális szkriptje köti rá az UTM-et
+ * és a `book_click` eseményt (minden `a[href*="notino.hu"]`), tehát itt
+ * SEMMILYEN tracking kód nem kell — és nem is szabad.
+ *
+ * Használat:
+ *   <ArticleOffer category={post.data.category} variant="slim" />   ← cikk eleje
+ *   <ArticleOffer category={post.data.category} />                  ← cikk vége
+ */
+import { siteConfig, relFor } from '../config/site';
+
+type Category = 'Szempilla' | 'Szemöldök' | 'Arckezelés' | 'Alkalmi smink' | 'Bőrápolás';
+
+interface Props {
+  category: Category;
+  variant?: 'slim' | 'full';
+}
+const { category, variant = 'full' } = Astro.props;
+
+interface Offer {
+  /** A szolgáltatás neve — ez a doboz címe. */
+  service: string;
+  /** Rövid név a slim sávhoz. */
+  short: string;
+  price: string;
+  /** Három tény: időtartam, tartósság, megkülönböztető. */
+  facts: string[];
+  /** Egy mondat, ami a cikkből a kezelésbe vezet. */
+  body: string;
+  /** A pillér-oldal, ahova a „részletek" visz — leíró anchorral. */
+  href: string;
+  anchor: string;
+}
+
+const OFFERS = {
+  Szempilla: {
+    service: 'Szempilla lifting festéssel',
+    short: 'Szempilla lifting festéssel',
+    price: '12 000 Ft',
+    facts: ['~90 perc', '6–8 hétig tartós', 'ragasztó és műszempilla nélkül'],
+    body:
+      'Koreai technikával, a saját pilláidból — Zuglóban, az Egressy úton. Egyszerre egy vendég, így nincs kapkodás.',
+    href: '/szempilla-lifting-zuglo/',
+    anchor: 'szempilla lifting Zuglóban',
+  },
+  Szemöldök: {
+    service: 'Szemöldök laminálás formázással és festéssel',
+    short: 'Szemöldök laminálás',
+    price: '11 000 Ft',
+    facts: ['~60 perc', '6 hétig tartós', 'tű és tetoválás nélkül'],
+    body:
+      'Formázás és festés is benne van — nem külön tétel. Zuglóban, az Egressy úton, egyszerre egy vendéggel.',
+    href: '/szemoldok-laminalas-zuglo/',
+    anchor: 'szemöldök laminálás Zuglóban',
+  },
+  Arckezelés: {
+    service: 'Janssen arckezelés bőranalízissel',
+    short: 'Janssen arckezelés',
+    price: '16 900 Ft-tól',
+    facts: ['bőranalízissel indul', 'Janssen Cosmetics hatóanyagok', 'mélytisztító, hidratáló, anti-aging'],
+    body:
+      'Minden alkalom bőranalízissel kezdődik, és arra épül a protokoll — nem fordítva. Zuglóban, az Egressy úton.',
+    href: '/arckezeles-zuglo/',
+    anchor: 'arckezelés Zuglóban',
+  },
+  Bőrápolás: {
+    service: 'Janssen arckezelés bőranalízissel',
+    short: 'Janssen arckezelés',
+    price: '16 900 Ft-tól',
+    facts: ['bőranalízissel indul', 'Janssen Cosmetics hatóanyagok', 'mélytisztító, hidratáló, anti-aging'],
+    body:
+      'Az otthoni rutin fele siker — a másik fele az, hogy tudd, milyen a bőröd. Ezzel kezdünk, Zuglóban.',
+    href: '/arckezeles-zuglo/',
+    anchor: 'arckezelés Zuglóban',
+  },
+  'Alkalmi smink': {
+    service: 'Esküvői és alkalmi smink',
+    short: 'Esküvői és alkalmi smink',
+    price: '15 000 Ft-tól',
+    facts: ['menyasszonyi 30 000 Ft', 'próbasminkkel csomagban 39 000 Ft', 'kiszállással is'],
+    body:
+      'Alkalmi smink 15 000 Ft-tól, menyasszonyi smink próbasminkkel csomagban. Rejtett díj nincs — az árat előre tudod.',
+    href: '/sminkes-zuglo/',
+    anchor: 'esküvői és alkalmi smink Budapesten',
+  },
+} satisfies Record<Category, Offer>;
+
+const offer = OFFERS[category];
+const bookRel = relFor(siteConfig.booking);
+---
+
+{variant === 'slim' ? (
+  <aside
+    class="not-prose mb-10 sm:mb-12 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-whisper bg-inkSoft px-5 py-4"
+    aria-label="A cikkhez tartozó szolgáltatás"
+  >
+    <span class="text-[11px] uppercase tracking-caps text-gold">A cikk témája nálam</span>
+    <span class="text-cream text-[15px] leading-snug">
+      {offer.short} — <span class="text-gold font-medium">{offer.price}</span>
+    </span>
+    <a
+      href={siteConfig.booking}
+      target="_blank"
+      rel={bookRel}
+      class="w-full sm:w-auto sm:ml-auto inline-flex items-center min-h-[44px] sm:min-h-0 text-[12px] uppercase tracking-caps font-medium text-cream underline underline-offset-4 decoration-whisperStrong hover:text-gold hover:decoration-gold transition-colors duration-200"
+    >
+      Időpont foglalása →
+    </a>
+  </aside>
+) : (
+  <aside
+    class="not-prose mt-14 sm:mt-16 rounded-3xl border border-whisper bg-inkSoft p-7 sm:p-9"
+    aria-label="Foglalás erre a kezelésre"
+  >
+    <p class="text-[11px] uppercase tracking-caps text-gold mb-4">Ha ez a kezelés kell</p>
+
+    <h2 class="font-display font-light leading-[1.15] tracking-tight text-cream mb-3" style="font-size: clamp(1.5rem, 3vw, 2rem);">
+      {offer.service}
+    </h2>
+
+    <p class="text-[17px] leading-relaxed text-creamSoft mb-6 max-w-[52ch]">{offer.body}</p>
+
+    <div class="flex flex-wrap items-baseline gap-x-4 gap-y-2 mb-6">
+      <span class="font-display text-3xl sm:text-4xl font-light text-gold tabular-nums">{offer.price}</span>
+      {/* Mobilon egymás alatt, pont nélkül — a felsorolásjel a sor elejére csúszna.
+          sm-től egy sorban, középpont-elválasztóval. */}
+      <ul class="flex flex-col sm:flex-row sm:flex-wrap gap-x-3 gap-y-1 text-[13px] text-creamMute">
+        {offer.facts.map((f, i) => (
+          <li class="flex items-center gap-3">
+            {i > 0 && <span aria-hidden="true" class="hidden sm:inline text-whisperStrong">·</span>}
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+      <a
+        href={siteConfig.booking}
+        target="_blank"
+        rel={bookRel}
+        class="inline-flex items-center justify-center rounded-full bg-cream px-7 py-3.5 text-[13px] uppercase tracking-caps font-medium text-ink hover:bg-gold transition-colors duration-300"
+      >
+        Időpont foglalása
+      </a>
+      <a
+        href={offer.href}
+        class="inline-flex items-center gap-2 text-[13px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors duration-200"
+      >
+        {offer.anchor}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <p class="mt-6 pt-5 border-t border-whisper text-[13px] text-creamMute">
+      1143 Budapest, Egressy út 16. · Telefonon is:
+      <a href={`tel:${siteConfig.phone}`} class="text-cream hover:text-gold transition-colors duration-200 whitespace-nowrap">
+        {siteConfig.phoneDisplay}
+      </a>
+    </p>
+  </aside>
+)}

@@ -1,0 +1,7 @@
+# A GSC service account kulcs titkos — soha ne kerüljön verziókövetésbe.
+credentials.json
+*.credentials.json
+
+# A snapshotok és riportok viszont maradjanak — ezekből épül a trend.
+!snapshots/
+!reports/

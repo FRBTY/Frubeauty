@@ -15,6 +15,7 @@ import Layout from '../../layouts/Layout.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import SiteContact from '../../components/SiteContact.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
+import ArticleOffer from '../../components/ArticleOffer.astro';
 import { Reveal } from '../../components/Reveal';
 import { CookieBanner } from '../../components/CookieBanner';
 
@@ -208,9 +209,14 @@ const faqSchema =
 
     {/* ============ BODY ============ */}
     <div class="max-w-[900px] mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-24">
+      {/* A cikk témájához tartozó szolgáltatás + ár, mielőtt olvasni kezd.
+          A mért probléma: a blogról érkező organikus látogatók 12%-a jut el a
+          foglalásig, a szolgáltatás-oldalakról 80% (GA4, 2026-08). */}
+      <ArticleOffer category={post.data.category} variant="slim" />
       <div class="prose-frubeauty">
         <Content />
       </div>
+      <ArticleOffer category={post.data.category} />
     </div>
   </article>
 
@@ -303,7 +309,7 @@ const faqSchema =
   <SiteContact
     eyebrow="Foglalás"
     heading={'Készen állsz a <em class="display">személyes</em> változásra?'}
-    intro="A cikkek a kezdet. A személyes konzultáció a pontos folytatás — gyere be Egressy útra, és ülünk neki, hogy a te helyzetedre szabjuk a tervet."
+    intro="A cikkek a kezdet. A személyes konzultáció a pontos folytatás — gyere be Egressy útra, és üljünk neki, hogy a te helyzetedre szabjuk a tervet."
   />
 
   <div class="py-10 text-center border-t border-whisper">
