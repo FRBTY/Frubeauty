@@ -2,9 +2,9 @@
 title: "Szemöldök laminálás ára 2026 — mitől függ, hogy mennyi?"
 excerpt: "Budapesten 7 000 és 13 000 Ft között bármi lehet, és a különbség majdnem mindig ugyanabból jön: mit számolnak külön. Négy tétel, ami benne van az árban vagy nincs — és mire kérdezz rá."
 category: "Szemöldök"
-readingMinutes: 5
+readingMinutes: 7
 publishedAt: 2026-06-08
-updatedAt: 2026-07-26
+updatedAt: 2026-09-07
 cover: "/img/szemoldok-laminalas-budapest-egressy-ut-frubeauty-munka.webp"
 coverWidth: 1200
 coverHeight: 1800
@@ -13,7 +13,7 @@ metaTitle: "Szemöldök laminálás ára 2026: 7–13 000 Ft Budapesten"
 metaDescription: "Miért kerül az egyik helyen 7 000, a másikon 13 000 Ft a szemöldök laminálás? Négy tétel, ami benne van az árban vagy nincs — és mit kérdezz, mielőtt foglalsz."
 ---
 
-Budapesten a szemöldök laminálás **7 000 és 13 000 Ft** között mozog, és a különbség majdnem mindig ugyanabból jön: **mit számolnak külön.** A meghirdetett ár sok helyen csak maga a laminálás — a formázás és a festés külön tétel, így a végösszeg csak a székben derül ki. Nálam Zuglóban **11 000 Ft** a teljes kezelés, és mind a három benne van. Lent tételesen: mi tartozik az árba, mire kérdezz rá, ha valahol feltűnően olcsó, és mikor elég az 5 000 Ft-os változat.
+Budapesten a szemöldök laminálás listaára jellemzően **7 000 és 13 000 Ft** között mozog — a végösszeg viszont ennél feljebb is mehet, és a különbség majdnem mindig ugyanabból jön: **mit számolnak külön.** A meghirdetett ár sok helyen csak maga a laminálás — a formázás és a festés külön tétel, így a végösszeg csak a székben derül ki. Nálam Zuglóban **11 000 Ft** a teljes kezelés, és mind a három benne van. Lent tételesen: mi tartozik az árba, mire kérdezz rá, ha valahol feltűnően olcsó, és mikor elég az 5 000 Ft-os változat.
 
 ## Szemöldök-árak egy táblázatban
 
@@ -36,6 +36,26 @@ Ha a szálaid maguktól is jól állnak, és csak színt meg tiszta vonalat szer
 | Konzultáció + utóápolási tanácsok | ✅ |
 
 Sok szalon külön számolja a formázást, a festést és a laminálást, így a végösszeg csak a székben derül ki. Nálam a 11 000 Ft a teljes kezelés: egy vendég, egy ár, meglepetés nélkül — a csomagok és az időpontok a [szemöldök laminálás Budapesten](/szemoldok-laminalas-zuglo/) oldalon.
+
+## Mennyibe kerül kerületenként Budapesten?
+
+Az „átlagár" félrevezető, mert a kerületek között több mint kétszeres a szórás — és mert a legtöbb helyen nem az szerepel a listán, amit a végén fizetsz. Öt budapesti szalon nyilvános árlistáját néztem meg, és mindenhol ugyanazt kerestem: **mennyi a laminálás önmagában, és mennyi úgy, hogy a formázás meg a festés is benne van.**
+
+| Kerület | Ami a listán szerepel | Listaár | Amit ténylegesen fizetsz |
+|---|---|---|---|
+| XIII. (Váci út) | laminálás + festés | 6 800 Ft | **8 600 Ft** — a formázás külön 1 800 Ft |
+| III. (Zápor utca) | csak laminálás | 7 500 Ft | **10 500 Ft** — csomagban a szedés és a festés |
+| **XIV. (Zugló) — nálam** | **minden benne** | **11 000 Ft** | **11 000 Ft** |
+| IX. (Ferenc tér) | laminálás + szedés | 12 000 Ft | **14 000 Ft** — festéssel együtt |
+| XI. (Sasad) | csak laminálás | 15 000 Ft | **20 000 Ft** — komplett kezelés |
+
+Két dolog látszik ebből.
+
+**A listaár és a végösszeg között 1 800 és 5 000 Ft a különbség** — kivéve ott, ahol egyetlen ár van. A XIII. kerületi 6 800 Ft-os ajánlatból a végén 8 600 lesz, a XI. kerületi 15 000-ből 20 000. Ha árat hasonlítasz össze, mindig a jobb szélső oszlopot nézd, ne a bal középsőt.
+
+**A földrajz többet számít, mint gondolnád.** A budai oldalon egy komplett kezelés 20 000 Ft, a pesti külső kerületekben 8 600–10 500 Ft. Zugló a kettő között helyezkedik el, a mezőny alsó-középső harmadában — azzal a különbséggel, hogy nálam a 11 000 Ft a **végösszeg**, nem a kiindulópont.
+
+*Az árak 2026 szeptemberében, az adott szalonok nyilvános árlistájáról. Az árak bármikor változhatnak — foglalás előtt mindig nézd meg az aktuálisat.*
 
 ## Megéri az ár? Számoljunk
 
@@ -75,4 +95,4 @@ Igen, és kíméletesebb is: a microblading féltartós tetoválás, 1–2 évig
 
 A teljes szolgáltatás, a csomagok és a foglalás az [árak és foglalás](/szemoldok-laminalas-zuglo/) oldalon érhető el.
 
-*Frissítve: 2026. július. Az árak tájékoztató jellegűek — az aktuális árlistát a foglalási oldalon találod.*
+*Frissítve: 2026. szeptember. Az árak tájékoztató jellegűek — az aktuális árlistát a foglalási oldalon találod.*
