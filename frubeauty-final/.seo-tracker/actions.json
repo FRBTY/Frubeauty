@@ -1,0 +1,68 @@
+{
+  "runDate": "2026-09-07",
+  "window": "2026-08-08 – 2026-09-04 (28 nap)",
+  "headline": "159 katt vs elozo 85 (+87%), de a vendegszam 70 -> 72. A korlat atkerult a keresesrol a konverziora.",
+  "done": [
+    {
+      "title": "13 celkulcsszo bekerult a tracker configba",
+      "detail": "Eddig ures volt, ezert a tracker nem tudta jelezni, ha egy kituzott kulcsszorol eltunik a lathatosag. A lista money-fokuszu: a ket 'SOHA' verdiktu kifejezes (szemoldok laminalas, szemoldok laminalas meddig tart) szandekosan KIMARADT — orszagos szandek, illetve az AI-osszefoglalo elviszi a valaszt.",
+      "files": [".seo-tracker/config.json"]
+    },
+    {
+      "title": "Szolgaltatas-specifikus ajanlat-doboz minden blogcikkre",
+      "detail": "A mert problema: az organikus blog-forgalom 12%-on konvertal (25 latogatobol 3 jut el a foglalasig), a szolgaltatas-oldalak 80%-on. Az uj ArticleOffer.astro a blog `category` mezojebol vezeti le az ajanlatot (ar, idotartam, tartossag, piller-oldal link), igy mind a 14 cikkre mukodik. Ket helyen: slim sav a cikk elejen, teljes doboz a vegen. A book_click meres a Layout globalis szkriptjebol jon — elesben ellenorizve: data-book-cta=1, utm_campaign=blog.",
+      "files": ["src/components/ArticleOffer.astro", "src/pages/blog/[...slug].astro"]
+    },
+    {
+      "title": "Kannibalizacio-feloldas a szemoldok-ar kulcsszon",
+      "detail": "Elo SERP-en igazolva (2026-09-07): a /blog/szemoldok-laminalas-arak-2026/ all #11-en, de a GSC 3 honapos atlaga a /szemoldok-laminalas-zuglo/ penzoldalt adja rangsorolonak — a ket URL valtakozik. A penzoldal H2-je 'Mennyibe kerul a szemoldok laminalas Budapesten?'-rol 'Az ar nalam: 11 000 Ft'-ra szukult (sajat ar), a piaci ar-kerdes a blogcikke marad. A blogcikk metaTitle-je arra valt, amire a Google amugy is atirja a SERP-en, plusz foldrajzi ellel: 'Szemoldok laminalas ara 2026: 7-13 000 Ft Budapesten'.",
+      "files": ["src/pages/szemoldok-laminalas-zuglo.astro", "src/content/blog/szemoldok-laminalas-arak-2026.md"]
+    },
+    {
+      "title": "A .seo-tracker/ verziokovetesbe kerult",
+      "detail": "A mappa sajat .gitignore-ja eleve igy volt megirva (csak a credentials.json kizarva), de sosem lett hozzaadva. Innentol a snapshotokbol epul a tobbheti trend.",
+      "files": [".seo-tracker/snapshots/2026-08-28.json", ".seo-tracker/snapshots/2026-09-07.json"]
+    }
+  ],
+  "next": [
+    {
+      "title": "Merd meg, mi tortenik a foglalas gomb utan",
+      "detail": "Ez a legnagyobb vak folt: 2026-08-ban 77 kulonbozo ember kattintott a foglalasra, 72 vendeg lett — de a ketto kozott nincs adat. A book_click csak a Notino fele torteno atkattintas. Ket olcso ut, fejlesztes nelkul: a foglalorendszer sajat statisztikaja ugyanerre a ket honapra, es egy honapig minden uj vendegtol egy mondattal megkerdezni, hol talalt meg. A TULAJDONOS feladata, nem kodolando.",
+      "impact": "magas",
+      "effort": "1 ora + 1 honap kezi jegyzet"
+    },
+    {
+      "title": "Merd meg az ajanlat-doboz hatasat, mielott tovabb nyulsz a bloghoz",
+      "detail": "A kiindulasi ertek: organikus blog landing page -> book_click = 12% (2026-08, GA4: 25 user / 3 esemeny). 3-4 het mulva ugyanez a lekerdezes megmondja, hatott-e. Ha 30% fole megy, a kovetkezo lepes a koreai cikk melyitese; ha nem mozdul, a doboz szovege a hibas, nem a helye — akkor az ajanlatot kell atirni, nem ujabb CTA-t rakni be.",
+      "impact": "magas",
+      "effort": "10 perc, 3-4 het mulva"
+    },
+    {
+      "title": "Melyitsd a /blog/koreai-szempilla-lifting/ cikket",
+      "detail": "Elo SERP: #8, nincs AI-osszefoglalo, a 9 kek linkbol 3 kilog (webshop, tanfolyam) — valodi versenytars ketto: browandmakeup.hu es pastelbeautique.com, egyikuk sem ir arat es egyikuk sem ad utoapolast. Hianyzo H2-k: meddig tart (onallo szekcio), logo szemhejra miert ez a technika, utoapolas az elso 24 oraban, ellenjavallatok, lifting+festes egyutt. FELTETEL: kell hozza sajat elotte-utana felvetel ES valos utankovetes (hany hettel kesobb jott vissza a vendeg) — enelkul a bovites nem ad information gaint, es nem erdemes megcsinalni.",
+      "impact": "magas",
+      "effort": "2-4 honap a #4-5-ig",
+      "blockedBy": "sajat meresi adat a tulajdonostol"
+    },
+    {
+      "title": "Kulso linkek — ez a plafon",
+      "detail": "A GSC szerint a teljes kulso linkprofil KET domain (infobel.com, notino.hu), mindketto a kezdolapra, horgonyszoveg nelkul. A tartalmi melyites a koreai kulcsszon a #8-rol nagyjabol a #4-5-ig visz; a top 3-hoz kulso hivatkozas kell. Lassu kar, ezert kell most elkezdeni. Reszletek: FRUBEAUTY-BACKLINK-CITACIO-CSOMAG-2026-07-26.md.",
+      "impact": "ez a plafon",
+      "effort": "folyamatos"
+    }
+  ],
+  "untouched": [
+    {
+      "title": "A 'szemoldok laminalas' es 'szemoldok laminalas meddig tart' organikus hajszolasa",
+      "why": "Elo SERP-en ellenorizve: az elso orszagos, tajekozodo szandek es a top 26-ban sem vagyunk bent; a masodik folott az AI-osszefoglalo teljesen megvalaszolja a kerdest (0,9% CTR a 8,2-es pozicion pontosan ez). A cikkek maradnak a topikus lefedettsegert, de kulon befektetest nem kapnak."
+    },
+    {
+      "title": "A ket 'Redirect error' hibajelzes",
+      "why": "Alriasztas: a /szemoldok-laminalas-zuglo es /szempilla-lifting-zuglo slash nelkuli alakja, utolso bejaras 2026-06-08. 2026-09-07-en curl-lel ujra ellenorizve: egyetlen 301 -> 200. A validacio fut."
+    },
+    {
+      "title": "A kezdolap ar-vezetett cime es a belso linkek",
+      "why": "A kezdolap hozza a kattintasok 56%-at es 71%-on konvertal — nem nyulunk hozza. A belso linkek szama (197) rendben van; az eloszlas lapos, de a link-hozzaadas itt mar nem hoz merheto tobbletet."
+    }
+  ]
+}
