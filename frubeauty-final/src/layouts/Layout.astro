@@ -126,12 +126,15 @@ const businessSchema = {
             priceCurrency: 'HUF',
           },
           {
-            // Ár = a money-page-en marketingelt „-tól" arckezelés-ár (SOS Sensitive),
-            // NEM a 11 000 Ft-os Relax & Glow masszázs add-on, hogy ne adjunk
-            // félrevezetően alacsony „arckezelés-tól" jelet az entitás-gráfban.
+            // Ár = a money-page-en marketingelt „-tól" arckezelés-ár (SOS Sensitive
+            // és Young Skin, egyaránt 16 000 Ft), NEM a 11 000 Ft-os Relax & Glow
+            // masszázs add-on, hogy ne adjunk félrevezetően alacsony
+            // „arckezelés-tól" jelet az entitás-gráfban.
+            // 2026-09-07: 16 900 -> 16 000, mert a Notino foglalási felületén
+            // (ahol ténylegesen fizetnek) 16 000 Ft szerepel — a honlap volt elavult.
             '@type': 'Offer',
             itemOffered: { '@type': 'Service', name: 'Janssen arckezelés', url: 'https://frubeauty.com/arckezeles-zuglo/' },
-            price: '16900',
+            price: '16000',
             priceCurrency: 'HUF',
           },
           {

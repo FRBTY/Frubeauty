@@ -41,7 +41,7 @@ A zsíros bőr nem egyenlő a koszos bőrrel — a túltisztítás és az alkoho
 
 Ha a bőröd mindenre vörösséggel, feszüléssel vagy irritációval reagál, a klasszikus kezelések többet ártanak, mint használnak.
 
-**A protokoll:** SOS Sensitive (60 perc, 16 900 Ft) — gyulladáscsökkentés gőz és nyomás nélkül.
+**A protokoll:** SOS Sensitive (45 perc, 16 000 Ft) — gyulladáscsökkentés gőz és nyomás nélkül.
 
 **Hogyan működik?** Nincs mechanikus nyomkodás és nincs forró pakolás. Kizárólag érfalerősítő, bőrnyugtató hatóanyagok, hideg maszk és nyirokáramlást serkentő, simító masszázs dolgozik.
 
@@ -79,7 +79,7 @@ A tinédzser bőr védőrétege még sérülékeny — a felnőtteknek szánt, e
 |---|---|---|---|---|
 | Kombinált, T-zónás | Clear Balance / Deep Clean Expert | 70–90 perc | 18 000–19 500 Ft | pórustisztítás + szelektív hidratálás |
 | Pattanásos, gyulladt | Deep Clean Expert + RESET kúra | 90 perc | 19 500 Ft | faggyúkontroll + fertőtlenítés |
-| Rozáceás, érzékeny | SOS Sensitive | 60 perc | 16 900 Ft | érfalerősítés + nyugtatás |
+| Rozáceás, érzékeny | SOS Sensitive | 45 perc | 16 000 Ft | érfalerősítés + nyugtatás |
 | Érett, megereszkedett | Timeless Lift | 120 perc | 21 500 Ft | sejtmegújítás + manuális és gépi lifting |
 | Fakó, vízhiányos | Hydro Radiance | 90 perc | 19 500 Ft | mélyrétegi hialuronsavas feltöltés |
 | Tini, pattanásra hajlamos | Young Skin | 60 perc | 16 000 Ft | kíméletes tisztítás + otthoni rutin |

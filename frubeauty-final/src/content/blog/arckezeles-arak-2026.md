@@ -21,7 +21,7 @@ A professzionális arckezelés Zuglóban, a FRUBEAUTY-nál 2026-ban **11 000 és
 |---|---|---|---|
 | Relax & Glow arcmasszázs | 30 perc | pihenés, azonnali frissesség | 11 000 Ft |
 | Young Skin tini arckezelés | 60 perc | pattanásra hajlamos, fiatal bőr | 16 000 Ft |
-| SOS Sensitive | 60 perc | érzékeny, rozáceára hajlamos bőr | 16 900 Ft |
+| SOS Sensitive | 45 perc | érzékeny, rozáceára hajlamos bőr | 16 000 Ft |
 | Clear Balance arctisztító | 70 perc | minden bőrtípus, alapos tisztítás | 18 000 Ft |
 | Deep Clean Expert mélytisztító | 90 perc | zsíros, vastagabb bőr | 19 500 Ft |
 | Hydro Radiance mélyhidratáló | 90 perc | vízhiányos, fakó bőr | 19 500 Ft |
