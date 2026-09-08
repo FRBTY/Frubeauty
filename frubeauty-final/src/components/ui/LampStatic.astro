@@ -9,12 +9,25 @@ interface Props {
   className?: string;
 }
 const { className = '' } = Astro.props;
-const rootClass = `lamp-root relative flex flex-col items-center justify-center overflow-hidden bg-ink w-full z-0 min-h-[88vh] sm:min-h-[92vh] ${className}`.trim();
+const rootClass = `lamp-root relative flex flex-col items-center justify-center bg-ink w-full z-0 min-h-[88vh] sm:min-h-[92vh] ${className}`.trim();
 ---
 
 <div class={rootClass}>
   <!-- beam + glow layer -->
-  <div class="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0">
+  <!-- A `min-h-[14rem]` NEM díszítés. A réteg `flex-1`, tehát azt a helyet kapja,
+       ami a tartalom alatt marad — alacsony viewporton (mérve 390×660-on) ez
+       mindössze 75 px volt, miközben a fénykúpok 224 px magasak, a felső lágyító
+       tintamaszk pedig 220 px. Vagyis a teljes lámpa-apparátus kilógott a
+       rétegből, és a nyaláb teteje kemény vízszintes vonalként vágódott el.
+       A garantált magassággal a lámpa geometriája FÜGGETLEN a viewport
+       magasságától — ez egyben azt a régi problémát is megszünteti, hogy a
+       fénynyaláb a képernyőmérettel vándorolt a címsorhoz képest.
+       Az `overflow-hidden` IDE került (korábban a gyökéren volt): a kúpok
+       30rem szélesek, azokat vízszintesen le kell vágni — de a gyökéren a
+       függőleges vágás levágta a fölé emelt tartalmat is (a chip eltűnt, a H1
+       teteje elvágódott, mérve 390×660-on). Itt a kúpok clippelése megmarad,
+       a tartalom viszont sosem vágódhat el. -->
+  <div class="relative flex w-full flex-1 min-h-[14rem] scale-y-125 items-center justify-center isolate z-0 overflow-hidden">
 
     <!-- Left cone -->
     <div
@@ -50,13 +63,15 @@ const rootClass = `lamp-root relative flex flex-col items-center justify-center 
     <!-- Hair-thin gold rail -->
     <div class="lamp-rail absolute inset-auto z-50 h-px w-[30rem] -translate-y-[7rem] bg-goldSoft"></div>
 
-    <!-- Top ink mask — lágy alsó él: a maszk alja kifut (mask-image fade), így a
-         fénynyaláb teteje nem kemény vízszintes vonalként vágódik el ("doboz"),
-         hanem a homályos izzó finoman átolvad a sötétbe. -->
-    <div
-      class="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-ink"
-      style="-webkit-mask-image: linear-gradient(to bottom, white 45%, transparent); mask-image: linear-gradient(to bottom, white 45%, transparent);"
-    ></div>
+    <!-- Felső elsötétítés. Ez korábban egy fix -12,5rem-mel eltolt tintasáv volt,
+         maszkolt alsó éllel. A gond: az eltolás a réteg KÖZEPÉHEZ képest mért, így
+         alacsony rétegben (mérve 390×660-on a réteg 75 px volt) a sáv teljesen
+         kicsúszott, és a nyaláb teteje kemény vízszintes vonalként vágódott el —
+         pontosan az a "dobozos" hatás, amit meg akart előzni.
+         Itt a sáv a réteg TETEJÉHEZ van kötve (top-0) és arányos magasságú (h-1/2),
+         ezért minden képernyőméreten ugyanúgy viselkedik: a fény mindig sötétből
+         bukkan elő, sosem a képernyő tetejéről indul. -->
+    <div class="absolute inset-x-0 top-0 h-1/2 z-40 bg-gradient-to-b from-ink via-ink/70 to-transparent"></div>
   </div>
 
   <!-- Content slot -->

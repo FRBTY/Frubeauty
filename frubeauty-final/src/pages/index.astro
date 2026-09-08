@@ -150,7 +150,12 @@ const homepageFaqSchema = {
       critical request chain. MagneticCTA replaced with static <a> tags — eliminates
       MagneticCTA.js + use-transform.js (2212ms chain). HeroMedia client:idle so
       the poster <img> is pure SSR HTML with no hydration dependency for LCP. */}
-  <section class="relative overflow-hidden pt-[calc(var(--header-h)+7rem)] sm:pt-[calc(var(--header-h)+9rem)]">
+  {/* A mobil felső padding 7rem-ről 0,5rem-re csökkent. A 7rem egy olyan
+      fekete ürességet hozott létre a fejléc alatt, amit a lámpa tartalmának
+      -9rem-es felfelé tolása próbált kioltani — a kettő gyakorlatilag kioltotta
+      egymást, cserébe a tartalom kilógott a lámpa vágott dobozából. A `sm:`
+      érték változatlan: az a szélességre vonatkozik, telefonon sosem aktív. */}
+  <section class="relative overflow-hidden pt-[calc(var(--header-h)+0.5rem)] sm:pt-[calc(var(--header-h)+9rem)]">
     <LampStatic>
       <div class="hero-reveal text-center max-w-[920px] mx-auto">
         {/* A kicker korábban text-gold volt, csupasz szövegként a lámpa fényében:
