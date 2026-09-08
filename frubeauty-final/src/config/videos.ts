@@ -12,8 +12,9 @@
  * Adat-hitelesség (fontos: ezek NEM kitalált értékek):
  *  - `uploadDate` = a videófájl első publikálása (git add: 2026-05-20).
  *    Sosem a build dátuma — a hamis frissesség-jelzés policy-kockázat.
- *  - `durationSeconds` = az MP4 `mvhd` boxából mérve (nincs ffprobe a gépen,
- *    a mérés a moov/mvhd timescale+duration párosból jött).
+ *  - `durationSeconds` = a kész MP4-ből mérve (a régi tételeknél a moov/mvhd
+ *    timescale+duration párosból, az újabbaknál ffprobe-bal), egészre lefelé
+ *    kerekítve. Sosem becslés.
  *  - `thumbnailUrl` szándékosan CSAK .webp: a Google támogatott thumbnail-
  *    formátumai BMP/GIF/JPEG/PNG/WebP/SVG — az AVIF poszter NEM jó ide,
  *    hiába az a kisebb (az AVIF marad a <picture>-ben, LCP-re).
@@ -61,6 +62,24 @@ export const siteVideos = {
     uploadDate: '2026-05-20T10:00:00+02:00',
     durationSeconds: 15,
     pageUrl: `${SITE}/szemoldok-laminalas-zuglo/`,
+  },
+  'menyasszonyi-smink-kesz-look': {
+    slug: 'menyasszonyi-smink-budapest-zuglo-egressy-ut',
+    name: 'Menyasszonyi smink — kész look minden szögből, FRUBEAUTY Zugló',
+    description:
+      'Kész menyasszonyi smink a nagy nap reggelén: puha szemhéjárnyalás, tiszta tekintet, hosszan tartó fixálás. Pecze-Kovács Fruzsina sminkes, Budapest XIV. kerület, Egressy út.',
+    uploadDate: '2026-08-15T10:00:00+02:00',
+    durationSeconds: 13,
+    pageUrl: `${SITE}/sminkes-zuglo/`,
+  },
+  'eskuvoi-smink-menyasszonyi-look': {
+    slug: 'eskuvoi-smink-menyasszonyi-look-zuglo-14-kerulet',
+    name: 'Esküvői smink — meleg, aranyló menyasszonyi look, FRUBEAUTY Zugló',
+    description:
+      'Esküvői smink közelről: meleg, aranyló szemhéj, bronzos bőr és telt ajak — fotózásra és egész estés esküvőre. FRUBEAUTY, Budapest Zugló XIV. kerület.',
+    uploadDate: '2026-08-15T10:00:00+02:00',
+    durationSeconds: 21,
+    pageUrl: `${SITE}/sminkes-zuglo/`,
   },
 } as const satisfies Record<string, SiteVideo>;
 

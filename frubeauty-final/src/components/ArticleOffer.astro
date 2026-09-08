@@ -9,9 +9,11 @@
  * tartozó konkrét szolgáltatás — ez a doboz pótolja azt.
  *
  * A kategóriából vezeti le az ajánlatot, ezért MINDEN cikkre működik
- * frontmatter-módosítás és séma-bővítés nélkül. Ha új kategória kerül a
- * content.config.ts enumba, ide is fel kell venni — a `satisfies` fordításkor
- * elhasal, ha kimarad.
+ * frontmatter-módosítás és séma-bővítés nélkül. Az ajánlat-tábla 2026-09-07 óta
+ * a `src/config/offers.ts`-ben él, mert a `notinoHint` nem csak a blogé: minden
+ * foglalás-gomb ugyanoda, a 25 tételes Notino-listára visz. Ha új kategória
+ * kerül a content.config.ts enumba, OTT is fel kell venni — a `satisfies`
+ * fordításkor elhasal, ha kimarad.
  *
  * Mérés: a Notino-linkre a Layout.astro globális szkriptje köti rá az UTM-et
  * és a `book_click` eseményt (minden `a[href*="notino.hu"]`), tehát itt
@@ -22,96 +24,15 @@
  *   <ArticleOffer category={post.data.category} />                  ← cikk vége
  */
 import { siteConfig, relFor } from '../config/site';
+import { OFFERS, type OfferCategory } from '../config/offers';
 
-type Category = 'Szempilla' | 'Szemöldök' | 'Arckezelés' | 'Alkalmi smink' | 'Bőrápolás';
+type Category = OfferCategory;
 
 interface Props {
   category: Category;
   variant?: 'slim' | 'full';
 }
 const { category, variant = 'full' } = Astro.props;
-
-interface Offer {
-  /** A szolgáltatás neve — ez a doboz címe. */
-  service: string;
-  /** Rövid név a slim sávhoz. */
-  short: string;
-  price: string;
-  /** Három tény: időtartam, tartósság, megkülönböztető. */
-  facts: string[];
-  /** Egy mondat, ami a cikkből a kezelésbe vezet. */
-  body: string;
-  /** A pillér-oldal, ahova a „részletek" visz — leíró anchorral. */
-  href: string;
-  anchor: string;
-  /**
-   * Mit keressen a látogató a Notinón. A Notino „Foglalás" gombjai <button>-ök,
-   * nem linkek, ezért egyetlen szolgáltatásra NEM adható közvetlen hivatkozás — a
-   * honlapról érkező a szalon-oldal tetején landol, és 25 tétel közül kell
-   * kiválasztania a sajátját. Ez a mondat teszi a listát felismeréssé keresés
-   * helyett. A nevek betű szerint a Notino szolgáltatás-listájából valók: ha ott
-   * átnevezel egy szolgáltatást, ezt is át kell írni.
-   */
-  notinoHint: string;
-}
-
-const OFFERS = {
-  Szempilla: {
-    service: 'Szempilla lifting festéssel',
-    short: 'Szempilla lifting festéssel',
-    price: '12 000 Ft',
-    facts: ['~90 perc', '6–8 hétig tartós', 'ragasztó és műszempilla nélkül'],
-    body:
-      'Koreai technikával, a saját pilláidból — Zuglóban, az Egressy úton. Egyszerre egy vendég, így nincs kapkodás.',
-    href: '/szempilla-lifting-zuglo/',
-    anchor: 'szempilla lifting Zuglóban',
-    notinoHint: 'Szempilla lifting + szempillafestés',
-  },
-  Szemöldök: {
-    service: 'Szemöldök laminálás formázással és festéssel',
-    short: 'Szemöldök laminálás',
-    price: '11 000 Ft',
-    facts: ['~60 perc', '6 hétig tartós', 'tű és tetoválás nélkül'],
-    body:
-      'Formázás és festés is benne van — nem külön tétel. Zuglóban, az Egressy úton, egyszerre egy vendéggel.',
-    href: '/szemoldok-laminalas-zuglo/',
-    anchor: 'szemöldök laminálás Zuglóban',
-    notinoHint: 'Szemöldök laminálás Festéssel Formázással',
-  },
-  Arckezelés: {
-    service: 'Janssen arckezelés bőranalízissel',
-    short: 'Janssen arckezelés',
-    price: '16 000 Ft-tól',
-    facts: ['bőranalízissel indul', 'Janssen Cosmetics hatóanyagok', 'mélytisztító, hidratáló, anti-aging'],
-    body:
-      'Minden alkalom bőranalízissel kezdődik, és arra épül a protokoll — nem fordítva. Zuglóban, az Egressy úton.',
-    href: '/arckezeles-zuglo/',
-    anchor: 'arckezelés Zuglóban',
-    notinoHint: 'Kozmetikai kezelés',
-  },
-  Bőrápolás: {
-    service: 'Janssen arckezelés bőranalízissel',
-    short: 'Janssen arckezelés',
-    price: '16 000 Ft-tól',
-    facts: ['bőranalízissel indul', 'Janssen Cosmetics hatóanyagok', 'mélytisztító, hidratáló, anti-aging'],
-    body:
-      'Az otthoni rutin fele siker — a másik fele az, hogy tudd, milyen a bőröd. Ezzel kezdünk, Zuglóban.',
-    href: '/arckezeles-zuglo/',
-    anchor: 'arckezelés Zuglóban',
-    notinoHint: 'Kozmetikai kezelés',
-  },
-  'Alkalmi smink': {
-    service: 'Esküvői és alkalmi smink',
-    short: 'Esküvői és alkalmi smink',
-    price: '15 000 Ft-tól',
-    facts: ['menyasszonyi 30 000 Ft', 'próbasminkkel csomagban 39 000 Ft', 'kiszállással is'],
-    body:
-      'Alkalmi smink 15 000 Ft-tól, menyasszonyi smink próbasminkkel csomagban. Rejtett díj nincs — az árat előre tudod.',
-    href: '/sminkes-zuglo/',
-    anchor: 'esküvői és alkalmi smink Budapesten',
-    notinoHint: 'Alkalmi smink',
-  },
-} satisfies Record<Category, Offer>;
 
 const offer = OFFERS[category];
 const bookRel = relFor(siteConfig.booking);

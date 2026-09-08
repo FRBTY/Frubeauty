@@ -11,6 +11,10 @@ import FAQList from '../components/FAQList.astro';
 import WeddingCalendarCTA from '../components/WeddingCalendarCTA.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import { PriceList } from '../components/PriceList';
+import TrustBar from '../components/TrustBar.astro';
+import BookingAssurance from '../components/BookingAssurance.astro';
+import RiskReversal from '../components/RiskReversal.astro';
+import StickyBookBar from '../components/StickyBookBar.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
 import { siteConfig, relFor } from '../config/site';
@@ -34,9 +38,9 @@ const priceCategories = [
 ];
 
 const packages = [
-  { tier: 'Alap', title: 'Egyszeri', titleAccent: 'Kezelés', subtitle: 'Bemutatkozó alkalom Janssen termékekkel', priceOld: null as string | null, price: '18 000 Ft', priceMeta: 'egyedi kezelés · ~70 perc', dailyEquivalent: '≈ napi 600 Ft, 30 napig', savings: null as string | null, duration: '~ 70 perc', features: ['Bőranalízis és személyre szabott protokoll','Clear Balance arctisztító kezelés','Janssen befejező krém fényvédővel','Otthoni rutin ajánlás'], highlight: false, ribbon: null as string | null },
-  { tier: 'Ajánlott', title: '3 alkalmas', titleAccent: 'Signature RESET', subtitle: 'Strukturális változás — havonta egy alkalom', priceOld: '58 500 Ft', price: '49 500 Ft', priceMeta: '3× Deep Clean Expert · ~90 perc/alkalom', dailyEquivalent: '≈ napi 550 Ft — kevesebb egy kávénál', savings: '9 000 Ft megtakarítás', duration: '~ 270 perc összesen', features: ['Deep Clean Expert protokoll, 3 alkalom','Ultrahangos hatóanyag-bevitel','Janssen ampulla és szérum kúra','Bőrnapló — fotódokumentáció'], highlight: true, ribbon: 'Legnagyobb hatás' },
-  { tier: 'Prémium', title: 'Signature', titleAccent: 'Glow', subtitle: 'Anti-aging Timeless Lift + Relax masszázs · 2 alkalom', priceOld: '32 500 Ft', price: '28 500 Ft', priceMeta: 'prémium csomag · 120 perc + 30 perc', dailyEquivalent: '≈ napi 950 Ft — teljes feltöltődés', savings: '4 000 Ft megtakarítás', duration: '120 perc + 30 perc · 2 alkalom', features: ['Timeless Lift anti-aging kezelés','Relax & Glow arcmasszázs','Szemkörnyék-ápolás külön','Prioritásos időpontfoglalás'], highlight: false, ribbon: null },
+  { tier: 'Alap', bestFor: 'még nem jártál nálam, és előbb kipróbálnád.', title: 'Egyszeri', titleAccent: 'Kezelés', subtitle: 'Bemutatkozó alkalom Janssen termékekkel', priceOld: null as string | null, price: '18 000 Ft', priceMeta: 'egyedi kezelés · ~70 perc', dailyEquivalent: '≈ napi 600 Ft, 30 napig', savings: null as string | null, duration: '~ 70 perc', features: ['Bőranalízis és személyre szabott protokoll','Clear Balance arctisztító kezelés','Janssen befejező krém fényvédővel','Otthoni rutin ajánlás'], highlight: false, ribbon: null as string | null },
+  { tier: 'Ajánlott', bestFor: 'nem tüneti kezelést szeretnél, hanem tartós változást.', title: '3 alkalmas', titleAccent: 'Signature RESET', subtitle: 'Strukturális változás — havonta egy alkalom', priceOld: '58 500 Ft', price: '49 500 Ft', priceMeta: '3× Deep Clean Expert · ~90 perc/alkalom', dailyEquivalent: '≈ napi 550 Ft — kevesebb egy kávénál', savings: '9 000 Ft megtakarítás', duration: '~ 270 perc összesen', features: ['Deep Clean Expert protokoll, 3 alkalom','Ultrahangos hatóanyag-bevitel','Janssen ampulla és szérum kúra','Bőrnapló — fotódokumentáció'], highlight: true, ribbon: 'Legnagyobb hatás' },
+  { tier: 'Prémium', bestFor: 'a bőröd feszesebb lenne, és közben pihennél is egyet.', title: 'Signature', titleAccent: 'Glow', subtitle: 'Anti-aging Timeless Lift + Relax masszázs · 2 alkalom', priceOld: '32 500 Ft', price: '28 500 Ft', priceMeta: 'prémium csomag · 120 perc + 30 perc', dailyEquivalent: '≈ napi 950 Ft — teljes feltöltődés', savings: '4 000 Ft megtakarítás', duration: '120 perc + 30 perc · 2 alkalom', features: ['Timeless Lift anti-aging kezelés','Relax & Glow arcmasszázs','Szemkörnyék-ápolás külön','Prioritásos időpontfoglalás'], highlight: false, ribbon: null },
 ];
 
 const processSteps = [
@@ -49,13 +53,20 @@ const processSteps = [
 const testimonials = [
   { name: 'Eszter Laknerfy', rating: 5, text: 'Fruzsi nagyon kedves és szuper ügyes :)', service: 'Pattanások – kezelés' },
   { name: 'Bianka Ajtai', rating: 5, text: 'Nagyon boldog vagyok, hogy rátaláltam Fruzsira! Csodálatos szakember és ember is! Elképesztő igényes, precíz és lelkiismeretes!', service: 'Arckezelés' },
-  { name: 'Renata Marko', rating: 5, text: 'Fruzsi nagyon precíz, szép munkát adott ki a kezei közül, biztosan visszajáró vendége leszek. Ajánlom.', service: 'Arckezelés' },
+  // Ez a sor futott bele elsőként a build-lánc NUL-bájt hibájába: két korábbi
+  // megfogalmazásnál is `Visszajár\0ó` került a legenerált HTML-be. NEM a
+  // szöveggel volt baj — a hiba bájt-eltolás függő, és a szöveg hosszának
+  // változtatásával csak átugrott egy másik oldalra. 2026-09-08 óta a
+  // `scripts/fix-nul-bytes.mjs` build után determinisztikusan kijavítja, tehát
+  // ez a mondat MOSTMÁR szabadon átírható.
+  { name: 'Renata Marko', rating: 5, text: 'Fruzsi nagyon precíz, szép munkát adott ki a kezei közül, biztosan visszajáró vendége leszek. Ajánlom.', outcome: 'Azóta visszajáró vendég', service: 'Arckezelés' },
   { name: 'Eszter Kiss', rating: 5, text: 'Fruzsina tökéletes munkát végez, kellemesen telik nála az idő, nagyon elégedett vagyok.', service: 'Arckezelés' },
 ];
 
 const faqs = [
   { q: 'Milyen márkájú termékekkel dolgozol?', a: 'Kizárólag Janssen Cosmetics professzionális hatóanyagaival. A német márka „cosmeceutical” szemlélete azt jelenti, hogy a hatóanyagok mélyebbre is eljutnak — nem csak a felszínt érinti a kezelés. Minden bőrtípusra van célzott megoldás.' },
   { q: 'Mennyire lesz piros az arcom egy mélytisztítás után?', a: 'A tisztítás utáni pír teljesen természetes, de a nyugtató pakolásokkal és professzionális utóápolással általában 1–3 órán belül elhalványul. A legtöbb vendég délután bátran visszamegy dolgozni vagy találkozóra.' },
+  { q: 'Érzékeny a bőröm — mi van, ha rosszul reagál a kezelésre?', a: 'Ezért kezdünk bőranalízissel, még az első kezelés előtt: megnézem, mit bír el a bőröd, és ahhoz választom a protokollt. Érzékeny, rozáceára hajlamos bőrre külön kezelés van (SOS Sensitive) — mechanikus tisztítás nélkül, csak nyugtató hatóanyagokkal. Ha a bőröd az adott napon nincs olyan állapotban, hogy a tervezett kezelést megkapja, szólok, és mást csinálunk helyette.' },
   { q: 'Milyen gyakran érdemes járni kozmetikushoz?', a: 'A bőr megújulási ciklusa nagyjából 28 nap, így a fenntartó kezelést havonta egyszer ajánlom. Anti-aging vagy mélytisztító kúra esetén ezt az ütemet kicsit lerövidíthetjük az első három alkalom erejéig — de ezt mindig az aktuális bőrállapot dönti el.' },
   { q: 'Sminkben is jöhetek a kezelésre?', a: 'Igen. Minden arckezelést alapos, kíméletes letisztítással kezdek — nem probléma, ha smink van rajtad.' },
   { q: 'Az első alkalom hosszabb?', a: 'Igen, az első kezelésnél +15 percet számolj — ennyi a bőranalízis és a beszélgetés. A visszatérő vendégeknek ez már nem kell, csak finomhangolunk.' },
@@ -143,12 +154,23 @@ const arcBreadcrumbSchema = {
         <div class="hero-reveal lg:col-span-7">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Arckezelés · 1143 Budapest · XIV. kerület</p>
           <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Arckezelés <em class="display">Budapesten</em>, Zugló szívében — bőrtípusra szabva.</h1>
+          {/* Above-the-fold trust-sor: a ★5,0 a hero ELSŐ képernyőjén (mobilon is).
+              A /szempilla-lifting-zuglo és a /szemoldok-laminalas-zuglo oldalon ez
+              már megvolt, itt hiányzott — pedig ugyanaz a hideg forgalom érkezik. */}
+          <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] tracking-caps">
+            <span class="text-gold font-medium">★ 5,0</span>
+            <span class="text-creamMute/50" aria-hidden="true">·</span>
+            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="uppercase text-creamMute hover:text-cream transition-colors">60+ Google-értékelés →</a>
+          </div>
           <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">Minden arckezelés bőranalízissel indul: megnézzük, mire van szüksége a bőrödnek — mélytisztításra, hidratálásra vagy anti-aging kezelésre. Budapesten, a XIV. kerületi Egressy úton, Janssen hatóanyagokkal. Ár: <strong class="font-medium text-cream">16.000 Ft</strong>-tól, egy kezelés 60–120 perc.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
             <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
             <a href="#arak" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Árak</a>
           </div>
-          <p class="mt-6 text-[12px] uppercase tracking-caps text-creamMute">Online foglalás · Egressy út 16. · XIV. kerület</p>
+          {/* A korábbi „Online foglalás · Egressy út 16. · XIV. kerület" sor
+              megismételte a fölötte lévő eyebrow-t. Helyette a három valódi
+              utolsó kifogás — lásd BookingAssurance.astro. */}
+          <BookingAssurance class="mt-6" offer="Arckezelés" />
         </div>
         <div class="lg:col-span-5">
           <HeroMedia client:visible videoSrc="/media/arckezeles-zuglo.mp4" posterSrc="/media/arckezeles-zuglo-poster.webp" alt="Janssen Cosmetics arckezelés a FRUBEAUTY zuglói szalonban — Pecze-Kovács Fruzsina" aspect="4 / 5" maxWidthClass="max-w-full" />
@@ -157,16 +179,13 @@ const arcBreadcrumbSchema = {
     </div>
   </section>
 
-  <section class="border-y border-whisper bg-inkSoft">
-    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
-      <Reveal client:visible as="div" className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">Google</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">Értékelések megnyitása →</a></span></div>
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Janssen</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">Cosmetics termékek</span></div>
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">7 protokoll</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">az árlistán</span></div>
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Egressy út 16.</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.mapsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">1143 Budapest →</a></span></div>
-      </Reveal>
-    </div>
-  </section>
+  <TrustBar
+    items={[
+      { value: 'Janssen', label: 'Cosmetics termékek' },
+      { value: '7 protokoll', label: 'az árlistán' },
+      { value: 'Egressy út 16.', label: '1143 Budapest →', href: config.mapsUrl },
+    ]}
+  />
 
   <section class="py-20 sm:py-28">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
@@ -185,7 +204,7 @@ const arcBreadcrumbSchema = {
   <section id="arak" class="py-20 sm:py-28 bg-inkSoft">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div" className="mb-16 sm:mb-20 max-w-2xl">
-        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Három <em class="display">irány</em>, hét protokoll.</h2>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Mire van most szüksége a <em class="display">bőrödnek</em>?</h2>
         <p class="mt-5 text-creamSoft leading-[1.7]">Az árak a teljes kezelést tartalmazzák — minden hatóanyag, eszköz és a befejező fényvédő. Nincs külön „belépő” vagy felár.</p>
       </Reveal>
       <PriceList client:visible categories={priceCategories} />
@@ -207,6 +226,10 @@ const arcBreadcrumbSchema = {
               <p class={`text-[11px] uppercase tracking-caps mb-4 ${p.highlight ? 'text-gold' : 'text-creamMute'}`}>{p.tier}</p>
               <h3 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.5rem, 2.4vw, 1.875rem);">{p.title}{' '}<em class="display">{p.titleAccent}</em></h3>
               <p class="mt-2 text-sm text-creamMute leading-snug max-w-[28ch]">{p.subtitle}</p>
+              {/* Döntési vezetés. Három egyforma súlyú kártya között a látogató
+                  eddig csak az árakat tudta összehasonlítani, a „melyik az enyém?"
+                  kérdésre semmi nem válaszolt — a döntési bénulás pedig kilépés. */}
+              <p class="mt-4 text-[12px] leading-snug text-creamSoft max-w-[30ch]"><span class="text-gold">Neked való, ha</span> {p.bestFor}</p>
               <div class="mt-6">{p.priceOld && (<p class="text-sm text-creamMute mb-1">Külön: <span class="line-through">{p.priceOld}</span></p>)}<p class="font-display text-3xl sm:text-4xl font-medium tracking-tight text-cream">{p.price}</p><p class="text-xs text-creamMute mt-2">{p.priceMeta}</p></div>
               {p.savings && (<div class="mt-4"><span class="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-caps font-medium bg-gold/15 text-goldSoft border border-goldSoft/30 px-3 py-1.5 rounded-full"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden><polyline points="20 6 9 17 4 12" /></svg>{p.savings}</span></div>)}
               <p class="mt-4 text-[12px] italic text-creamSoft/70 leading-snug">{p.dailyEquivalent}</p>
@@ -218,12 +241,7 @@ const arcBreadcrumbSchema = {
           </Reveal>
         ))}
       </div>
-      <Reveal client:visible as="div" className="mt-12 sm:mt-16 max-w-max mx-auto">
-        <div class="inline-flex items-center gap-3 rounded-full border border-gold/30 bg-gold/[0.06] px-5 py-3">
-          <span class="flex-shrink-0 w-7 h-7 rounded-full bg-gold/15 text-gold inline-flex items-center justify-center" aria-hidden><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4" /></svg></span>
-          <span class="text-[12px] sm:text-[13px] uppercase tracking-caps font-medium text-cream">Elégedettségi garancia</span>
-        </div>
-      </Reveal>
+      <RiskReversal class="mt-12 sm:mt-16" first="Minden alkalom bőranalízissel indul" />
     </div>
   </section>
 
@@ -309,9 +327,13 @@ const arcBreadcrumbSchema = {
     slugs={['arckezeles-arak-2026', 'janssen-arckezeles-bortipusok', 'hidratalo-vagy-antiaging-arckezeles']}
   />
 
-  <SiteContact eyebrow="Foglalás" heading={'Tisztábban, <em class="display">fényesebben</em>.'} intro="Online foglalás 0–24 órában, válasz munkanapokon pár órán belül. Az első időpont előtt nyugodtan írj emailt, ha bizonytalan vagy melyik protokoll a tiéd — pár sorban segítek dönteni." />
+  <SiteContact offer="Arckezelés" eyebrow="Foglalás" heading={'Tisztábban, <em class="display">fényesebben</em>.'} intro="Online foglalás 0–24 órában, válasz munkanapokon pár órán belül. Az első időpont előtt nyugodtan írj emailt, ha bizonytalan vagy melyik protokoll a tiéd — pár sorban segítek dönteni." />
 
   <SiteFooter />
+
+  {/* Telefonon a fejléc foglalás gombja nem renderel (NavBar.tsx:147), és a
+      fejléc lefelé görgetéskor eltűnik — lásd StickyBookBar.astro. */}
+  <StickyBookBar eyebrow="Janssen arckezelés" price="16 000 Ft-tól" />
 
   <CookieBanner client:idle />
 

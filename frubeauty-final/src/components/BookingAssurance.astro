@@ -1,0 +1,87 @@
+---
+/**
+ * Kockázat-oldó mikroszöveg az elsődleges foglalás-gombok ALÁ.
+ *
+ * MIÉRT: minden CTA egy külső rendszerbe (Notino) dob át, új fülre. A látogató
+ * fejében ilyenkor három kérdés fut le — „mennyit kell most fizetnem?",
+ * „megadjam a kártyámat?", „mi van, ha közbejön valami?" —, és ezek eddig
+ * kizárólag a lehajtható GYIK-ben voltak megválaszolva, vagyis a döntés
+ * pillanatában sehol. A félelem ott keletkezik, ahol a gomb van, tehát a választ
+ * is oda kell tenni.
+ *
+ * MINDHÁROM ÁLLÍTÁS TÉNY, a szalon visszaigazolása alapján (2026-09-07):
+ *  - a Notino foglaláshoz nem kell fizetni és kártyaadat sem,
+ *  - a kezelés a helyszínen fizetendő,
+ *  - a lemondás 24 órával az időpont előtt díjmentes (ez az oldal négy helyén
+ *    korábban is szerepelt, csak a GYIK-be zárva).
+ * Ha bármelyik megváltozik, ITT kell átírni — a komponens minden oldalon fut.
+ *
+ * SZÁNDÉKOSAN halk: creamMute, 11 px, vékony pipa-ikon. Nem versenyezhet a
+ * gombbal, csak elveszi az útból az utolsó három kifogást.
+ */
+import { OFFERS, type OfferCategory } from '../config/offers';
+
+interface Props {
+  /** 'row' — vízszintes, gomb alá. 'stack' — egymás alatt, szűk oszlopba. */
+  layout?: 'row' | 'stack';
+  /**
+   * Ha meg van adva, kiírjuk, hogy a Notino listájában MELYIK tételt keresse.
+   * A Notino „Foglalás" gombjai <button>-ök, nem linkek, ezért egyetlen
+   * szolgáltatásra nem lehet közvetlenül hivatkozni: mindenki a szalon-oldal
+   * tetején landol, és 25 tétel közül kell kiválasztania a sajátját. Ez a sor
+   * teszi a listát felismeréssé keresés helyett. A tételnevek betű szerint a
+   * Notino felületéről valók — lásd `src/config/offers.ts`.
+   */
+  offer?: OfferCategory;
+  /** Középre igazítás (a kezdőlap hero-ja középre zárt). */
+  align?: 'start' | 'center';
+  /** Extra osztályok a kerethez (pl. felső margó). */
+  class?: string;
+}
+
+const { layout = 'row', offer, align = 'start', class: className = '' } = Astro.props;
+
+const points = [
+  'Kártyaadat nélkül foglalsz',
+  'Fizetés a helyszínen',
+  '24 órával előtte díjmentesen lemondható',
+];
+
+const hint = offer ? OFFERS[offer].notinoHint : null;
+---
+
+<div class:list={[className]}>
+  <ul
+    class:list={[
+      'flex gap-x-5 gap-y-2 text-[11px] leading-snug text-creamMute',
+      layout === 'row' ? 'flex-wrap items-center' : 'flex-col',
+      align === 'center' && 'justify-center',
+    ]}
+  >
+    {points.map((point) => (
+      <li class="inline-flex items-center gap-1.5">
+        <svg
+          width="11"
+          height="11"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="flex-shrink-0 text-gold"
+          aria-hidden="true"
+        >
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+        {point}
+      </li>
+    ))}
+  </ul>
+
+  {hint && (
+    <p class:list={['mt-3 text-[12px] leading-snug text-creamMute', align === 'center' && 'text-center']}>
+      A foglalási oldalon ezt keresd: <span class="text-cream font-medium">{hint}</span>
+    </p>
+  )}
+</div>

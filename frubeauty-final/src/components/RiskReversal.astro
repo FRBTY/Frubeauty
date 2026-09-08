@@ -1,0 +1,70 @@
+---
+/**
+ * Kockázatoldó blokk közvetlenül a csomagárak ALÁ — oda, ahol az ár okozta
+ * feszültség a legnagyobb.
+ *
+ * MIT VÁLTOTT LE: itt korábban egyetlen chip állt, „Elégedettségi garancia"
+ * felirattal, mögötte semmilyen feltétellel vagy magyarázattal. A szalon
+ * visszaigazolása szerint (2026-09-07) formális elégedettségi garancia
+ * NINCS — vagyis a chip nem alulkommunikált ígéret volt, hanem nem létező.
+ * Egy meg nem magyarázott garancia amúgy sem konvertál: a látogató vagy
+ * átugorja, vagy megkérdezi magától, hogy „és ez mit jelent pontosan?", és
+ * ettől pont a bizalom csökken.
+ *
+ * HELYETTE: három konkrét, ELLENŐRIZHETŐ tény, ami tényleg leveszi a
+ * kockázatot a vendégről. Mindhárom az oldal máshol is szereplő valóságából
+ * jön (foglalási folyamat, GYIK), csak eddig nem a döntés pillanatában volt.
+ * Ha bármelyik feltétel változik, itt és a BookingAssurance.astro-ban kell
+ * átírni — máshol nincs beégetve.
+ */
+interface Props {
+  /**
+   * Az első pont oldalanként más, mert a „mit kapok, mielőtt elköteleznék
+   * magam" kérdésre minden szolgáltatásnál más a valódi válasz
+   * (bőranalízis / konzultáció / próbasmink).
+   */
+  first: string;
+  /** Extra osztályok a kerethez (pl. felső margó). */
+  class?: string;
+}
+
+const { first, class: className = '' } = Astro.props;
+
+const points = [
+  first,
+  'Kártyaadat nélkül foglalsz — a helyszínen fizetsz',
+  '24 órával előtte díjmentesen lemondható',
+];
+---
+
+<div class:list={['max-w-max mx-auto', className]}>
+  <div class="rounded-3xl border border-gold/25 bg-gold/[0.06] px-6 py-5 sm:px-8 sm:py-6">
+    <p class="text-[11px] uppercase tracking-caps text-gold mb-4 text-center">
+      Nem kockáztatsz semmit
+    </p>
+    <ul class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-x-7 text-[13px] sm:text-sm text-creamSoft">
+      {points.map((point) => (
+        <li class="flex items-start gap-2.5 sm:max-w-[24ch]">
+          <span
+            class="flex-shrink-0 w-5 h-5 rounded-full bg-gold/15 text-gold inline-flex items-center justify-center mt-px"
+            aria-hidden="true"
+          >
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </span>
+          <span class="leading-snug">{point}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>

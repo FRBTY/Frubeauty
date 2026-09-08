@@ -14,7 +14,12 @@ import { ProcessSteps } from '../components/ProcessSteps';
 import { TestimonialsGrid } from '../components/TestimonialsGrid';
 import { GalleryGrid } from '../components/GalleryGrid';
 import FAQList from '../components/FAQList.astro';
+import WeddingCalendarCTA from '../components/WeddingCalendarCTA.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
+import TrustBar from '../components/TrustBar.astro';
+import BookingAssurance from '../components/BookingAssurance.astro';
+import RiskReversal from '../components/RiskReversal.astro';
+import StickyBookBar from '../components/StickyBookBar.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
 import { PriceList } from '../components/PriceList';
@@ -71,9 +76,9 @@ const services = [
 ];
 
 const packages = [
-  { tier: 'Alap', title: 'Szempilla Lifting', titleAccent: '+ Festés', subtitle: 'Természetes íveltség + tartós festés', priceOld: null as string | null, price: '12 000 Ft', priceMeta: 'egyedi kezelés · ~90 perc', dailyEquivalent: '≈ napi 285 Ft, 6 héten át', savings: null as string | null, duration: '~ 90 perc', features: ['Szempilla lifting koreai technikával','Szempilla festés','6–8 hétig tartós eredmény','Reggel tus nélkül is tökéletes'], highlight: false, ribbon: null as string | null },
-  { tier: 'Ajánlott', title: 'Teljes', titleAccent: 'Tekintet', subtitle: 'Lifting + laminálás egyszerre', priceOld: '23 000 Ft', price: '18 000 Ft', priceMeta: 'kombinált csomag · ~120 perc', dailyEquivalent: '≈ napi 430 Ft — kevesebb egy kávénál', savings: '5 000 Ft megtakarítás', duration: '~ 120 perc', features: ['Szempilla lifting koreai technikával','Szemöldök laminálás + formázás','Szempilla és szemöldök festés','Csupán 2 óra alatt'], highlight: true, ribbon: 'Kombinált csomag' },
-  { tier: 'Prémium', title: 'Teljes', titleAccent: 'Megújulás', subtitle: 'Relax Glow arcmasszázs + teljes tekintet', priceOld: '29 000 Ft', price: '26 000 Ft', priceMeta: 'prémium csomag · ~160 perc', dailyEquivalent: '≈ napi 620 Ft — teljes élmény', savings: '3 000 Ft megtakarítás', duration: '~ 160 perc', features: ['Minden, ami a Teljes Tekintet csomagban','Relax Glow arcmasszázs','Személyes bőrápolási tanácsadás','Prioritásos időpontfoglalás'], highlight: false, ribbon: null },
+  { tier: 'Alap', bestFor: 'most először próbálnád ki, és csak a pillákra vagy kíváncsi.', title: 'Szempilla Lifting', titleAccent: '+ Festés', subtitle: 'Természetes íveltség + tartós festés', priceOld: null as string | null, price: '12 000 Ft', priceMeta: 'egyedi kezelés · ~90 perc', dailyEquivalent: '≈ napi 285 Ft, 6 héten át', savings: null as string | null, duration: '~ 90 perc', features: ['Szempilla lifting koreai technikával','Szempilla festés','6–8 hétig tartós eredmény','Reggel tus nélkül is tökéletes'], highlight: false, ribbon: null as string | null },
+  { tier: 'Ajánlott', bestFor: 'a szemöldököd is elkelne — egy alkalommal, két külön időpont helyett.', title: 'Teljes', titleAccent: 'Tekintet', subtitle: 'Lifting + laminálás egyszerre', priceOld: '23 000 Ft', price: '18 000 Ft', priceMeta: 'kombinált csomag · ~120 perc', dailyEquivalent: '≈ napi 430 Ft — kevesebb egy kávénál', savings: '5 000 Ft megtakarítás', duration: '~ 120 perc', features: ['Szempilla lifting koreai technikával','Szemöldök laminálás + formázás','Szempilla és szemöldök festés','Csupán 2 óra alatt'], highlight: true, ribbon: 'Kombinált csomag' },
+  { tier: 'Prémium', bestFor: 'nem csak eredményt szeretnél, hanem közben ki is kapcsolnál.', title: 'Teljes', titleAccent: 'Megújulás', subtitle: 'Relax Glow arcmasszázs + teljes tekintet', priceOld: '29 000 Ft', price: '26 000 Ft', priceMeta: 'prémium csomag · ~160 perc', dailyEquivalent: '≈ napi 620 Ft — teljes élmény', savings: '3 000 Ft megtakarítás', duration: '~ 160 perc', features: ['Minden, ami a Teljes Tekintet csomagban','Relax Glow arcmasszázs','Személyes bőrápolási tanácsadás','Prioritásos időpontfoglalás'], highlight: false, ribbon: null },
 ];
 
 const otherServices = [
@@ -100,15 +105,17 @@ const processSteps = [
 ];
 
 const testimonials = [
-  { name: 'Kitti Varga-Tóth', rating: 5, text: 'Szempilla lifting a kedvencem, többször is voltam már és biztosan megyek még. Profi szakember, szívből ajánlom mindenkinek.', service: 'Szempilla lifting' },
-  { name: 'Marietta Kurja', rating: 5, text: 'Először jártam szempilla liftingen, így nagy bizalommal fordultam Fruzsinához, aki csodás munkát végzett, miközben jó hangulatban telt a kezelés!', service: 'Szempilla lifting' },
-  { name: 'Gabriella Hendrik', rating: 5, text: 'Már az első pillanattól kezdve kedvesen és figyelmesen fogadott, végig érezhető volt a profizmus és a hozzáértés. A végeredmény magáért beszél: gyönyörű lett a pillám. Biztosan visszatérek még, és szívből ajánlom mindenkinek!', service: 'Szempilla lifting' },
+  { name: 'Kitti Varga-Tóth', rating: 5, text: 'Szempilla lifting a kedvencem, többször is voltam már és biztosan megyek még. Profi szakember, szívből ajánlom mindenkinek.', outcome: 'Többször is visszatért', service: 'Szempilla lifting' },
+  { name: 'Marietta Kurja', rating: 5, text: 'Először jártam szempilla liftingen, így nagy bizalommal fordultam Fruzsinához, aki csodás munkát végzett, miközben jó hangulatban telt a kezelés!', outcome: 'Az első szempilla liftingje volt', service: 'Szempilla lifting' },
+  { name: 'Gabriella Hendrik', rating: 5, text: 'Már az első pillanattól kezdve kedvesen és figyelmesen fogadott, végig érezhető volt a profizmus és a hozzáértés. A végeredmény magáért beszél: gyönyörű lett a pillám. Biztosan visszatérek még, és szívből ajánlom mindenkinek!', outcome: 'Visszatérő vendég', service: 'Szempilla lifting' },
   { name: 'Anita Kolozs', rating: 5, text: 'Nagyon kedvesen, barátságosan fogadott. Nagyon jó hangulatban telt a pillázás. És a végeredmény is gyönyörű lett! Köszönöm szépen.', service: 'Szempilla lifting' },
-  { name: 'Hajni Kiss', rating: 5, text: 'Szempilla liftingen és szemöldöklamináláson voltam Fruzsinál, és nagyon megvoltam elégedve az eredménnyel!', service: 'Szempilla lifting + szemöldök laminálás' },
+  { name: 'Hajni Kiss', rating: 5, text: 'Szempilla liftingen és szemöldöklamináláson voltam Fruzsinál, és nagyon megvoltam elégedve az eredménnyel!', outcome: 'Lifting és laminálás egy alkalommal', service: 'Szempilla lifting + szemöldök laminálás' },
 ];
 
 const faqs = [
   { q: 'Fáj a szempilla lifting?', a: 'Egyáltalán nem. Csukott szemmel fekszel, és semmiféle szúrást vagy húzást nem érzel. A legtöbb vendég kifejezetten pihentetőnek tartja a 90 percet.' },
+  { q: 'Tönkremegy tőle a saját szempillám?', a: 'Nem épül rá idegen szál, és nincs ragasztó — a saját pilládat formázzuk, tehát nincs mit lehúzni róla utána. A hatóanyag rövid ideig lágyítja a szálat, hogy fel tudja venni az új ívet; ezért nézzük át a kezelés előtt a pilláid állapotát, és ha nagyon szárazak vagy töredezettek, inkább elhalasztjuk. Az eredmény 6–8 hét alatt magától kinő, semmi nem marad rajta véglegesen.' },
+  { q: 'Mi van, ha nem tetszik az ív?', a: 'Az ív erősségét a kezelés előtt együtt választjuk ki: megnézzük, milyen hosszú és milyen állású a pillád, és mi az, ami az arcodhoz illik — ezért kezdünk konzultációval, nem rögtön a munkával. És mivel a saját pilládról van szó, semmi nem végleges: ha legközelebb visszafogottabb vagy határozottabb ívet szeretnél, a következő alkalommal máshogy csináljuk.' },
   { q: 'Meddig tart a szempilla lifting eredménye?', a: 'A lifting és a festés együtt 6–8 hétig tart, attól függően, milyen gyorsan újul meg a pilládon a természetes ciklus. A szemöldök laminálás kb. 6 hetes tartósságra számíthat.' },
   // Itt korábban egy SZEMÖLDÖK-laminálás kérdés állt — rossz oldalon volt, hígította
   // a pilla-oldal témáját, és duplikálta a /szemoldok-laminalas-zuglo/ FAQ-ját.
@@ -224,7 +231,7 @@ const serviceSchemas = [
 
 <Layout
   title="Szempilla lifting Budapest, Zugló – 12.000 Ft | FRUBEAUTY"
-  description="Szempilla lifting festéssel Budapesten, Zuglóban: 12.000 Ft, ~90 perc, 6–8 hétig ívelt pillák. Ragasztómentes koreai technika. ★5,0 · 50+ értékelés. Foglalj!"
+  description="Szempilla lifting festéssel Budapesten, Zuglóban: 12.000 Ft, ~90 perc, 6–8 hétig ívelt pillák. Ragasztómentes koreai technika. ★5,0 · 60+ értékelés. Foglalj!"
   additionalSchemas={[faqSchema, howToSchema, videoSchema, breadcrumbSchema, ...serviceSchemas]}
   preloadImage="/img/szempilla-szemoldok-szolgaltatas-budapest-egressy-ut-szempillaoldal1kep.avif"
 >
@@ -246,14 +253,17 @@ const serviceSchemas = [
           <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] tracking-caps">
             <span class="text-gold font-medium">★ 5,0</span>
             <span class="text-creamMute/50" aria-hidden="true">·</span>
-            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="uppercase text-creamMute hover:text-cream transition-colors">50+ Google-értékelés →</a>
+            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="uppercase text-creamMute hover:text-cream transition-colors">60+ Google-értékelés →</a>
           </div>
           <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">A szempilla lifting — más néven szempilla laminálás — a saját pilláid tövét emeli meg ívelt formába, így tus és műszempilla nélkül is hosszabbnak látszanak. Budapesten, Zuglóban (Egressy út 16.), ragasztómentes koreai technikával, szempilla festéssel: <strong class="font-medium text-cream">12.000 Ft</strong>, ~90 perc, 6–8 hétig tart.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
             <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
             <a href="#csomagok" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Árak</a>
           </div>
-          <p class="mt-6 text-[12px] uppercase tracking-caps text-creamMute">Online foglalás · Egressy út 16. · XIV. kerület</p>
+          {/* A korábbi „Online foglalás · Egressy út 16. · XIV. kerület" sor
+              megismételte a fölötte lévő eyebrow-t. Helyette a három valódi
+              utolsó kifogás — lásd BookingAssurance.astro. */}
+          <BookingAssurance class="mt-6" offer="Szempilla" />
         </div>
         <div class="lg:col-span-5">
           <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-black">
@@ -267,22 +277,18 @@ const serviceSchemas = [
     </div>
   </section>
 
-  <section class="border-y border-whisper bg-inkSoft">
-    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
-      <Reveal client:visible as="div" className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-gold">Google</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left"><a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">Értékelések megnyitása →</a></span></div>
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">12 000 Ft</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">festéssel együtt</span></div>
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">6–8 hét</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">tartós eredmény</span></div>
-        <div class="flex flex-col items-center md:items-start"><span class="text-2xl font-display font-medium tracking-tight text-cream">Koreai</span><span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">lash lift technika</span></div>
-      </Reveal>
-    </div>
-  </section>
+  <TrustBar
+    items={[
+      { value: '12 000 Ft', label: 'festéssel együtt' },
+      { value: '6–8 hét', label: 'tartós eredmény' },
+      { value: 'Koreai', label: 'lash lift technika' },
+    ]}
+  />
 
   <section class="py-20 sm:py-28">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
         <Reveal client:visible as="div" className="lg:col-span-5">
-          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">A megközelítés</p>
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">A szemek szépségére <em class="display">specializálódtam</em>.</h2>
         </Reveal>
         <Reveal client:visible as="div" className="lg:col-span-7 space-y-5 text-creamSoft leading-[1.7] text-[16px] sm:text-[17px]" delay={0.1}>
@@ -296,8 +302,7 @@ const serviceSchemas = [
   <section id="csomagok" class="py-20 sm:py-28 bg-inkSoft">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div" className="mb-16 sm:mb-20 max-w-2xl">
-        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Kezelések</p>
-        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Két <em class="display">alapkezelés</em>, három csomag.</h2>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">A pillád, a szemöldököd — vagy <em class="display">mindkettő</em>.</h2>
         <p class="mt-5 text-creamSoft leading-[1.7]">A Teljes Tekintet csomag a szempilla liftinget és a szemöldök laminálást egy időpontban, kedvezőbb együttes áron tartalmazza.</p>
       </Reveal>
       <div>
@@ -360,6 +365,10 @@ const serviceSchemas = [
               <p class={`text-[11px] uppercase tracking-caps mb-4 ${p.highlight ? 'text-gold' : 'text-creamMute'}`}>{p.tier}</p>
               <h3 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.5rem, 2.4vw, 1.875rem);">{p.title}{' '}<em class="display">{p.titleAccent}</em></h3>
               <p class="mt-2 text-sm text-creamMute leading-snug max-w-[28ch]">{p.subtitle}</p>
+              {/* Döntési vezetés. Három egyforma súlyú kártya között a látogató
+                  eddig csak az árakat tudta összehasonlítani, a „melyik az enyém?"
+                  kérdésre semmi nem válaszolt — a döntési bénulás pedig kilépés. */}
+              <p class="mt-4 text-[12px] leading-snug text-creamSoft max-w-[30ch]"><span class="text-gold">Neked való, ha</span> {p.bestFor}</p>
               <div class="mt-6">{p.priceOld && (<p class="text-sm text-creamMute mb-1">Külön: <span class="line-through">{p.priceOld}</span></p>)}<p class="font-display text-3xl sm:text-4xl font-medium tracking-tight text-cream">{p.price}</p><p class="text-xs text-creamMute mt-2">{p.priceMeta}</p></div>
               {p.savings && (<div class="mt-4"><span class="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-caps font-medium bg-gold/15 text-goldSoft border border-goldSoft/30 px-3 py-1.5 rounded-full"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden><polyline points="20 6 9 17 4 12" /></svg>{p.savings}</span></div>)}
               <p class="mt-4 text-[12px] italic text-creamSoft/70 leading-snug">{p.dailyEquivalent}</p>
@@ -371,12 +380,7 @@ const serviceSchemas = [
           </Reveal>
         ))}
       </div>
-      <Reveal client:visible as="div" className="mt-12 sm:mt-16 max-w-max mx-auto">
-        <div class="inline-flex items-center gap-3 rounded-full border border-gold/30 bg-gold/[0.06] px-5 py-3">
-          <span class="flex-shrink-0 w-7 h-7 rounded-full bg-gold/15 text-gold inline-flex items-center justify-center" aria-hidden><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4" /></svg></span>
-          <span class="text-[12px] sm:text-[13px] uppercase tracking-caps font-medium text-cream">Elégedettségi garancia</span>
-        </div>
-      </Reveal>
+      <RiskReversal class="mt-12 sm:mt-16" first="Konzultációval kezdünk, csak utána a kezelés" />
     </div>
   </section>
 
@@ -418,7 +422,6 @@ const serviceSchemas = [
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <Reveal client:visible as="div" className="lg:col-span-6">
-          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Munka közben</p>
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Szempilla lifting <em class="display">élesben</em>.</h2>
           <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">Betekintés az előkészületekbe — pontosan ugyanaz a precíz technika, amit te is megkapsz Zuglóban az Egressy úton. Bőrbarát anyagok, koreai megközelítés, csukott szem, pihentető atmoszféra.</p>
           <a href={config.instagram} target="_blank" rel="noopener" class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Több munkám Instán<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
@@ -433,10 +436,16 @@ const serviceSchemas = [
   <section class="py-20 sm:py-28">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl mx-auto text-center">
-        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">A kezelés menete</p>
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Átláthatóan — <em class="display">négy lépés</em>.</h2>
       </Reveal>
       <ProcessSteps client:visible steps={processSteps} />
+
+      {/* Belépő az esküvői szépségnaptárra — lásd WeddingCalendarCTA.astro. */}
+      <WeddingCalendarCTA
+        class="mt-14 sm:mt-16"
+        cta="Esküvői szépségnaptár"
+        body="A lifting 5–10 nappal a nagy nap előtt áll be a legszebben, mert az első 24 órában nem érheti víz. Írd be az esküvőd dátumát, és megkapod a pontos napot — a többi kezeléssel együtt."
+      />
     </div>
   </section>
 
@@ -458,7 +467,6 @@ const serviceSchemas = [
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div" className="mb-12 sm:mb-16 flex flex-wrap items-end justify-between gap-6">
         <div class="max-w-2xl">
-          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Akik már voltak nálam</p>
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Visszajelzés <em class="display">a kezelésekről</em>.</h2>
         </div>
         <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors">Összes Google-on →</a>
@@ -470,7 +478,6 @@ const serviceSchemas = [
   <section class="py-20 sm:py-28 bg-inkSoft">
     <div class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div" className="mb-12 sm:mb-16 text-center">
-        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Gyakori kérdések</p>
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Amit a kezelésekről <em class="display">kérdezni szoktak</em>.</h2>
       </Reveal>
       <FAQList items={faqs} />
@@ -559,9 +566,13 @@ const serviceSchemas = [
     slugs={['szempilla-lifting-arak-2026', 'koreai-szempilla-lifting', 'szempilla-lifting-vagy-festes', 'szempilla-lifting-vagy-muszempilla', 'szempilla-lifting-utoapolas']}
   />
 
-  <SiteContact eyebrow="Foglalás" heading={'Holnap reggel tus nélkül is <em class="display">tökéletes</em> a tekintet.'} intro="Online foglalási rendszer 0–24 órában. Az első alkalomra a Teljes Tekintet csomagot ajánlom — egyszerre spórolsz időt és pénzt." />
+  <SiteContact offer="Szempilla" eyebrow="Foglalás" heading={'Holnap reggel tus nélkül is <em class="display">tökéletes</em> a tekintet.'} intro="Online foglalási rendszer 0–24 órában. Az első alkalomra a Teljes Tekintet csomagot ajánlom — egyszerre spórolsz időt és pénzt." />
 
   <SiteFooter />
+
+  {/* Telefonon a fejléc foglalás gombja nem renderel (NavBar.tsx:147), és a
+      fejléc lefelé görgetéskor eltűnik — lásd StickyBookBar.astro. */}
+  <StickyBookBar eyebrow="Szempilla lifting · 90 perc" price="12 000 Ft" />
 
   <CookieBanner client:idle />
 

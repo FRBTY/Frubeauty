@@ -12,6 +12,9 @@ import { TestimonialsGrid } from '../components/TestimonialsGrid';
 import { GalleryGrid } from '../components/GalleryGrid';
 import FAQList from '../components/FAQList.astro';
 import WeddingCalendarCTA from '../components/WeddingCalendarCTA.astro';
+import TrustBar from '../components/TrustBar.astro';
+import BookingAssurance from '../components/BookingAssurance.astro';
+import StickyBookBar from '../components/StickyBookBar.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { BlogSection } from '../components/BlogSection';
 import { getCollection } from 'astro:content';
@@ -46,7 +49,7 @@ const config = { ...siteConfig };
 // és a „szemöldök laminálás" (112 megjelenés/hó, GSC) a kezdőlapra rangsorolt helyette.
 // Szétbontva: minden fő szolgáltatás saját, kulcsszó-anchoros belső linket kap.
 const services = [
-  { title: 'Arckezelés', subtitle: 'Janssen Cosmetics hatóanyagokkal', body: 'Bőrtípusra szabott kezelés: regeneráló, hidratáló vagy mélytisztító. Az első alkalommal bőranalízissel kezdünk.', priceFrom: '16 000 Ft-tól', duration: '60–120 perc', href: '/arckezeles-zuglo/', image: '/img/service-arckezeles.webp', alt: 'Arckezelés Janssen Cosmetics termékekkel a FRUBEAUTY szalonban' },
+  { title: 'Arckezelés', subtitle: 'Janssen Cosmetics hatóanyagokkal', body: 'Bőranalízissel kezdünk, és az alapján választunk protokollt — mélytisztító, hidratáló vagy anti-aging. Nem a bőröd igazodik a kezeléshez, hanem fordítva.', priceFrom: '16 000 Ft-tól', duration: '60–120 perc', href: '/arckezeles-zuglo/', image: '/img/service-arckezeles.webp', alt: 'Arckezelés Janssen Cosmetics termékekkel a FRUBEAUTY szalonban' },
   { title: 'Szempilla lifting', subtitle: 'Lifting + festés', body: 'Természetes íveltség, 6–8 hétig tartó eredmény. Reggel nincs többé szempillaspirál — felkelsz és kész vagy.', priceFrom: '12 000 Ft-tól', duration: '~ 90 perc', href: '/szempilla-lifting-zuglo/', image: '/img/szempilla-szemoldok-hero.webp', alt: 'Szempilla lifting előtte-utána a FRUBEAUTY szalonban' },
   { title: 'Szemöldök laminálás', subtitle: 'Formázás + festés', body: 'Dúsabb, rendezett szemöldök tű nélkül, koreai technikával — ~6 hétig tartós, ápolt tekintet.', priceFrom: '11 000 Ft-tól', duration: '~ 60 perc', href: '/szemoldok-laminalas-zuglo/', image: '/img/szemoldok-laminalas-zuglo-munka-uj.webp', alt: 'Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló' },
   { title: 'Smink', subtitle: 'Esküvő, ballagás, fotózás', body: 'Próbasmink, helyszíni igazítás, hosszan tartó eredmény. A stílust együtt találjuk ki.', priceFrom: '13 000 Ft-tól', duration: '60–90 perc', href: '/sminkes-zuglo/', image: '/img/smink-menyasszony-munka.webp', alt: 'Alkalmi esküvői smink a FRUBEAUTY szalonban' },
@@ -72,10 +75,10 @@ const processSteps = [
 // link is rendelkezésre áll, az a `googleUrl` mezőbe kerül — addig fallbackként
 // a `googleReviewsUrl` szolgál (TestimonialsGrid kezeli).
 const testimonials = [
-  { name: 'Emese Simon', rating: 5, text: 'Csodaszép sminket kaptam, annyira tudta Fruzsina, hogy mi áll jól, könnyen ment a választás, és jól is éreztem magam benne egész nap egy esküvőn — tartósnak bizonyult.', service: 'Alkalmi smink' },
-  { name: 'Orosz-Adamcsek Zsuzsanna', rating: 5, text: 'Szinte azonnal kaptam időpontot, nagyon rugalmas volt Fruzsi. Minden kérésemet figyelembe vette és egy csodás sminket készített nekem. Visszatérek még hozzá a közeljövőben is.', service: 'Alkalmi smink' },
+  { name: 'Emese Simon', rating: 5, text: 'Csodaszép sminket kaptam, annyira tudta Fruzsina, hogy mi áll jól, könnyen ment a választás, és jól is éreztem magam benne egész nap egy esküvőn — tartósnak bizonyult.', outcome: 'Egy egész esküvőt kibírt', service: 'Alkalmi smink' },
+  { name: 'Orosz-Adamcsek Zsuzsanna', rating: 5, text: 'Szinte azonnal kaptam időpontot, nagyon rugalmas volt Fruzsi. Minden kérésemet figyelembe vette és egy csodás sminket készített nekem. Visszatérek még hozzá a közeljövőben is.', outcome: 'Szinte azonnal kapott időpontot', service: 'Alkalmi smink' },
   { name: 'Anita Kolozs', rating: 5, text: 'Nagyon kedvesen, barátságosan fogadott. Nagyon jó hangulatban telt a pillázás. És a végeredmény is gyönyörű lett! Köszönöm szépen.', service: 'Szempilla lifting' },
-  { name: 'Gabriella Hendrik', rating: 5, text: 'Már az első pillanattól kezdve kedvesen és figyelmesen fogadott, végig érezhető volt a profizmus és a hozzáértés. A végeredmény magáért beszél: gyönyörű lett a pillám. Biztosan visszatérek még, és szívből ajánlom mindenkinek!', service: 'Szempilla lifting' },
+  { name: 'Gabriella Hendrik', rating: 5, text: 'Már az első pillanattól kezdve kedvesen és figyelmesen fogadott, végig érezhető volt a profizmus és a hozzáértés. A végeredmény magáért beszél: gyönyörű lett a pillám. Biztosan visszatérek még, és szívből ajánlom mindenkinek!', outcome: 'Visszatérő vendég', service: 'Szempilla lifting' },
 ];
 
 // A kezdőlapi FAQ SZÁNDÉKOSAN szalon-szintű, nem szolgáltatás-szintű.
@@ -163,8 +166,24 @@ const homepageFaqSchema = {
             eyebrow-badge-eit), csak itt kitöltött, mert itt kontrasztot kell vinnie.
             w-fit + mx-auto és NEM inline-block: az inline-block baseline-leadinget
             adna, ami ~30 px-el feljebb tolná az egész hero-tartalmat. */}
+        {/* A chip TARTALMA 2026-09-07-én cserélődött. Korábban „FRUBEAUTY ·
+            Budapest XIV. · Zugló, Egressy út" állt itt: csupa cím-adat, nulla
+            bizonyíték — miközben ez az oldal legnagyobb kontrasztú (~15:1),
+            legelőrébb olvasott eleme. A márkanév a fejléc logójában amúgy is ott
+            van fölötte, a pontos cím pedig a hero bekezdésében és a lap alján is.
+            Ide az kerül, amiért a látogató marad: az értékelés. A „60+"
+            szándékosan kerekített lefelé — a pontos szám hetente nő, egy beégetett
+            érték hónapok múlva alulmérné a szalont.
+            NEM link: a hero tetejéről nem küldünk el senkit. Az ellenőrizhető,
+            kattintható Google-hivatkozás egy képernyővel lejjebb, a bizalom-sávban
+            van — előbb állítunk, közvetlenül utána bizonyítunk. */}
         <p class="w-fit mx-auto mb-5 sm:mb-7 rounded-full bg-cream px-5 py-2 text-[11px] sm:text-xs uppercase tracking-caps text-inkDeep font-medium">
-          FRUBEAUTY · Budapest XIV. · Zugló, Egressy út
+          {/* A csillag SZÁNDÉKOSAN inline-block, nem flex-elem: a chip szövege
+              mobilon két sorba tördel, és flex-konténerben az ikon ilyenkor a
+              teljes blokk függőleges közepére, külön „sorba" került volna. */}
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="inline-block align-[-1px] mr-1.5" aria-hidden="true">
+            <path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.5 5.79 22l2.39-8.15L2 9.36h7.61z" />
+          </svg>5,0 · 60+ Google-értékelés · Budapest, Zugló
         </p>
         {/* Message match a Title-lel ("Kozmetikus Zugló · Szempilla Stylist"): a korábbi
             H1 ("Ébredj minden nap tökéletes bőrrel…") nulla kulcsszót vitt, így aki
@@ -199,6 +218,10 @@ const homepageFaqSchema = {
             Megnézem az árakat
           </a>
         </div>
+
+        {/* A három leggyakoribb utolsó kifogás közvetlenül a gomb alatt, nem a
+            lehajtható GYIK-ben — lásd BookingAssurance.astro. */}
+        <BookingAssurance class="mt-6" align="center" />
 
         <div class="mt-8 sm:mt-9 flex items-center justify-center gap-5 text-[12px] uppercase tracking-caps text-creamMute">
           <a href={config.instagram} target="_blank" rel="noopener" class="inline-flex items-center gap-2 hover:text-gold transition-colors duration-200" aria-label="Instagram">
@@ -235,44 +258,23 @@ const homepageFaqSchema = {
   {/* ============ TRUST BAR (zero-JS, #audit #7) ============
        A trust signal az első impressziónál a legfontosabb — ezért NEM React-szigetbe
        csomagolva, hanem CSS-only fade-in-nel. Lassú 3G / JS-nélküli pathon is
-       azonnal látható, ellenőrizhető üzleti tényeket mutat. */}
-  <section class="border-y border-whisper bg-inkSoft">
-    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
-      <div class="zero-js-fade grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
-        <div class="flex flex-col items-center md:items-start">
-          <span class="text-2xl font-display font-medium tracking-tight text-gold">Google</span>
-          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">
-            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">
-              Értékelések megnyitása →
-            </a>
-          </span>
-        </div>
-        <div class="flex flex-col items-center md:items-start">
-          <span class="text-2xl font-display font-medium tracking-tight text-cream">Janssen</span>
-          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">Cosmetics termékek</span>
-        </div>
-        <div class="flex flex-col items-center md:items-start">
-          <span class="text-2xl font-display font-medium tracking-tight text-cream">1 vendég</span>
-          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">egy időpontban</span>
-        </div>
-        <div class="flex flex-col items-center md:items-start">
-          <span class="text-2xl font-display font-medium tracking-tight text-cream">Egressy út 16.</span>
-          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">
-            <a href={config.mapsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">
-              1143 Budapest →
-            </a>
-          </span>
-        </div>
-      </div>
-    </div>
-  </section>
+       azonnal látható, ellenőrizhető üzleti tényeket mutat.
+       2026-09-07: közös TrustBar komponensbe költözött (négy oldalon volt bemásolva),
+       és az első cella „Google" helyett a tényleges értékelést mutatja. */}
+  <TrustBar
+    items={[
+      { value: 'Janssen', label: 'Cosmetics termékek' },
+      { value: '1 vendég', label: 'egy időpontban' },
+      { value: 'Egressy út 16.', label: '1143 Budapest →', href: config.mapsUrl },
+    ]}
+  />
 
   {/* ============ SZOLGÁLTATÁSOK ============ */}
   <section id="szolgaltatasok" class="py-20 sm:py-28">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl mx-auto text-center">
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">
-          Négy <em class="display">személyre szabott</em> kezelés.
+          Mit szeretnél <em class="display">látni</em> a tükörben?
         </h2>
       </Reveal>
       <ServicesGrid client:visible services={services} />
@@ -331,12 +333,25 @@ const homepageFaqSchema = {
             Pecze-Kovács <em class="display">Fruzsina</em> vagyok.
           </h2>
           <div class="mt-7 space-y-5 text-creamSoft leading-[1.7] text-[16px] sm:text-[17px] max-w-[60ch]">
+            {/* ÁTÍRVA 2026-09-08. A korábbi két bekezdés volt az oldal egyetlen
+                töltelékkel teli szövege: „Szenvedélyem a bőrápolás és a precíz
+                esztétika", „ahol a modern technológia találkozik a személyre
+                szabott figyelemmel", „ragyogva és magabiztosan lépjen ki az
+                ajtómon". Ezek a mondatok bármelyik szalon oldalán állhatnának,
+                tehát nem mondanak semmit — miközben a szalon valódi
+                megkülönböztetője (egyszerre EGY vendég) egyáltalán nem szerepelt.
+                A Janssen és a koreai technika mint entitás bent maradt, mert
+                azokra a money page-ek is építenek. Szándékosan RÖVIDEBB és más
+                nyitányú, mint a /rolam/ oldal ugyanerről szóló szakasza — nem
+                akarunk két oldalon szinte azonos szövegtömböt. */}
             <p>
-              A FRUBEAUTY alapítója és kozmetikusa. Szenvedélyem a bőrápolás és a precíz esztétika.
-              Zuglói szalonomat azért hoztam létre, hogy egy olyan helyet teremtsek neked, ahol a modern technológia találkozik a személyre szabott figyelemmel.
+              Kozmetikus, szempilla- és szemöldök-stylist Zuglóban. A legfontosabb döntésem a szalonnal kapcsolatban az, hogy <span class="text-cream">egyszerre csak egyetlen vendéget fogadok</span>: amíg nálam vagy, nem szól közbe senki, és nem néz rád egy idegen a szomszéd székből.
             </p>
             <p>
-              Kozmetikusként nemcsak a felszínt kezelem: a <span class="text-cream">Janssen Cosmetics</span> professzionális hatóanyagaival és a legújabb szempilla lifting technikákkal azon dolgozom, hogy minden vendégem ragyogva és magabiztosan lépjen ki az ajtómon. Legyen szó egy pihentető arckezelésről vagy egy fontos eseményre készülő alkalmi sminkről, nálam <em class="display">te</em> vagy a középpontban.
+              Arckezelést <span class="text-cream">Janssen Cosmetics</span> hatóanyagokkal végzek, szempilla liftinget és szemöldök laminálást koreai technikával. Minden alkalom egy rövid beszélgetéssel indul — mert amit <em class="display">te</em> szeretnél, és amire a bőrödnek éppen szüksége van, nem mindig ugyanaz. Munka közben végig elmondom, mit csinálok és miért.
+            </p>
+            <p>
+              <a href="/rolam/" class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors">Miért dolgozom így — a teljes történet</a>
             </p>
           </div>
         </Reveal>
@@ -434,21 +449,32 @@ const homepageFaqSchema = {
           <p class="mt-6 text-creamSoft text-base sm:text-lg max-w-[50ch] leading-[1.7]">
             Online foglalási rendszer 0–24 órában, válaszadás munkanapokon pár órán belül.
           </p>
-          <div class="mt-9 flex flex-wrap gap-3">
+          {/* CSATORNA-HIERARCHIA. A telefongomb korábban tömör krém alapon,
+              „HÍVJ MOST!" felirattal állt itt — vagyis vizuálisan ERŐSEBB volt a
+              foglalásnál (a krém világosabb, mint az arany), és a hangneme is
+              sürgetőbb. Ez szembemegy a saját mért adattal: az online foglaló
+              jobb vendég, a telefonáló problémásabb, és a mért konverzió maga a
+              Notino-kattintás. A hívás megmarad — mert aki tényleg kérdezni akar,
+              annak kell —, de másodlagos, körvonalas gombként, semleges
+              felirattal. Nem vesszük el a lehetőséget, csak nem toljuk előre. */}
+          <div class="mt-9 flex flex-wrap items-center gap-3">
             <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">
               Időpontot foglalok
             </a>
             <a
               href={`tel:${config.phone}`}
-              class="inline-flex items-center justify-center px-6 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-cream text-ink rounded-full hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-150 gap-2"
-              aria-label={`Hívj most! ${config.phoneDisplay}`}
+              class="inline-flex items-center justify-center px-6 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-creamSoft rounded-full hover:text-cream hover:bg-whisperOnDark active:scale-[0.97] transition-colors duration-150 gap-2"
+              aria-label={`Telefonos érdeklődés: ${config.phoneDisplay}`}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden>
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
               </svg>
-              HÍVJ MOST!
+              Inkább telefonálok
             </a>
           </div>
+
+          {/* Kockázat-oldó sor a foglalás gomb alatt — lásd BookingAssurance.astro. */}
+          <BookingAssurance class="mt-5" />
         </Reveal>
 
         <Reveal client:visible as="div" className="lg:col-span-6 grid sm:grid-cols-2 gap-6 lg:gap-8" delay={0.1}>
@@ -541,6 +567,11 @@ const homepageFaqSchema = {
 
 
   <SiteFooter />
+
+  {/* Telefonon a fejléc foglalás gombja nem renderel (NavBar.tsx:147), és a
+      fejléc lefelé görgetéskor el is tűnik — a hero és a kapcsolat-szekció
+      között eddig nem volt látható CTA. Lásd StickyBookBar.astro. */}
+  <StickyBookBar eyebrow="★ 5,0 · 60+ értékelés" price="Szabad időpontok" cta="Megnézem" />
 
   <CookieBanner client:idle />
 

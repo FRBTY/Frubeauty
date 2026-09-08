@@ -16,6 +16,7 @@ import SiteContact from '../../components/SiteContact.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import { Reveal } from '../../components/Reveal';
 import { StaggerGroup, StaggerItem } from '../../components/StaggerGroup';
+import StickyBookBar from '../../components/StickyBookBar.astro';
 import { CookieBanner } from '../../components/CookieBanner';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
@@ -225,6 +226,10 @@ const blogBreadcrumbSchema = {
   </div>
 
   <SiteFooter />
+
+  {/* Telefonon a fejléc foglalás gombja nem renderel (NavBar.tsx:147), és a
+      fejléc lefelé görgetéskor eltűnik — lásd StickyBookBar.astro. */}
+  <StickyBookBar eyebrow="★ 5,0 · 60+ értékelés" price="Szabad időpontok" cta="Megnézem" />
 
   <CookieBanner client:load />
 </Layout>

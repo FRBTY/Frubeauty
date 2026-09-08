@@ -16,6 +16,8 @@ import SiteHeader from '../../components/SiteHeader.astro';
 import SiteContact from '../../components/SiteContact.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import ArticleOffer from '../../components/ArticleOffer.astro';
+import StickyBookBar from '../../components/StickyBookBar.astro';
+import { OFFERS } from '../../config/offers';
 import { Reveal } from '../../components/Reveal';
 import { CookieBanner } from '../../components/CookieBanner';
 
@@ -307,6 +309,7 @@ const faqSchema =
 
   {/* ============ KAPCSOLAT / FOGLALÁS ============ */}
   <SiteContact
+    offer={post.data.category}
     eyebrow="Foglalás"
     heading={'Készen állsz a <em class="display">személyes</em> változásra?'}
     intro="A cikkek a kezdet. A személyes konzultáció a pontos folytatás — gyere be Egressy útra, és üljünk neki, hogy a te helyzetedre szabjuk a tervet."
@@ -320,6 +323,16 @@ const faqSchema =
   </div>
 
   <SiteFooter />
+
+  {/* A cikk kategóriájához tartozó KONKRÉT ajánlat ragadós sávban. A mért
+      12%-os blog-konverzió (szolgáltatás-oldal: 80%) fő oka, hogy egy hosszú
+      cikk olvasása közben semmilyen látható CTA nincs a képernyőn: a fejléc
+      gombja mobilon nem renderel, az ajánlat-doboz pedig a cikk végén ül.
+      Lásd StickyBookBar.astro és src/config/offers.ts. */}
+  <StickyBookBar
+    eyebrow={OFFERS[post.data.category].short}
+    price={OFFERS[post.data.category].price}
+  />
 
   <CookieBanner client:load />
 </Layout>

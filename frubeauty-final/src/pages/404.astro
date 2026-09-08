@@ -10,6 +10,7 @@
 import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import StickyBookBar from '../components/StickyBookBar.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { siteConfig, relFor } from '../config/site';
 
@@ -75,5 +76,9 @@ const links = [
   </section>
 
   <SiteFooter />
+  {/* Telefonon a fejléc foglalás gombja nem renderel (NavBar.tsx:147), és a
+      fejléc lefelé görgetéskor eltűnik — lásd StickyBookBar.astro. */}
+  <StickyBookBar eyebrow="★ 5,0 · Kozmetikus Zuglóban" price="Szabad időpontok" cta="Megnézem" />
+
   <CookieBanner client:idle />
 </Layout>

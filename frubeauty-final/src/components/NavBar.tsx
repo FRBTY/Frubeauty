@@ -7,6 +7,14 @@ interface NavBarProps {
   facebook: string;
 }
 
+/**
+ * `mobileOnly`: a desktop sorban NEM fér el több elem. Mérve 2026-09-04-én,
+ * 1027 px-es viewporton (közvetlenül az `lg` töréspont fölött): a hét meglévő
+ * link + a logó + az ikonok/gomb pontosan 1012 px-t foglal az 1012 px-es
+ * belmagasságból — nulla tartalék. Egy nyolcadik elem 1024–1150 px között
+ * törné a fejlécet. A mobil menü viszont függőleges lista, ott bőven van hely,
+ * és a forgalom nagyobb része is onnan jön.
+ */
 const navLinks = [
   { href: '/',                            label: 'Főoldal' },
   { href: '/arckezeles-zuglo/',            label: 'Arckezelés' },
@@ -15,7 +23,10 @@ const navLinks = [
   { href: '/szemoldok-laminalas-zuglo/',   label: 'Szemöldök' },
   { href: '/blog/',                        label: 'Blog' },
   { href: '/#velemenyek',                 label: 'Vélemények' },
+  { href: '/eskuvoi-szepsegnaptar/',       label: 'Esküvői naptár', mobileOnly: true },
 ];
+
+const desktopLinks = navLinks.filter((l) => !l.mobileOnly);
 
 /**
  * NavBar — tiszta CSS + React state, NINCS framer-motion.
@@ -96,7 +107,7 @@ export function NavBar({ bookingUrl, instagram, facebook }: NavBarProps) {
           </a>
 
           <div className="hidden lg:flex items-center gap-6 text-[12px] uppercase tracking-caps text-creamSoft">
-            {navLinks.map((l) => (
+            {desktopLinks.map((l) => (
               <a key={l.label} href={l.href} className="hover:text-gold transition-colors duration-200">
                 {l.label}
               </a>
@@ -174,7 +185,19 @@ export function NavBar({ bookingUrl, instagram, facebook }: NavBarProps) {
         aria-modal="true"
         aria-label="Mobil menü"
         {...(!menuOpen ? ({ inert: '' } as any) : {})}
-        className={`lg:hidden fixed inset-x-0 top-16 z-40 bg-ink/95 backdrop-blur-md border-b border-whisper transition-[opacity,transform] duration-300 ease-strong-out motion-reduce:transition-opacity ${
+        /* A nyolcadik menüponttal a lista alja kis kijelzőn (pl. 667 px magas
+           telefon) a képernyő alá csúszna, és a közösségi ikonsor levágódna.
+           A max-height szándékosan INLINE STÍLUS, nem Tailwind-osztály: a
+           `max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain`
+           osztálysor pontosan 61 karakterrel tolta el a kimenetet, és a buildben
+           NUL-bájt keletkezett a mobil menü első „Főoldal" feliratában
+           (`F\0őoldal`). Mérve 2026-09-04-én: bármelyik 61 karakteres kitöltő
+           ugyanígy viselkedett, 60 és 62 karakteres nem — tehát bájt-eltolás
+           függő kódolási hiba a build-láncban, nem ettől az osztálytól függ.
+           A `npm run seo:smoke` elkapja; ha valaha visszatér, ne a szöveget
+           keresd, hanem told el a kimenetet egy karakterrel. */
+        style={{ maxHeight: 'calc(100dvh - 4rem)' }}
+        className={`lg:hidden fixed inset-x-0 top-16 z-40 overflow-y-auto overscroll-contain bg-ink/95 backdrop-blur-md border-b border-whisper transition-[opacity,transform] duration-300 ease-strong-out motion-reduce:transition-opacity ${
           menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5 pointer-events-none'
         }`}
       >

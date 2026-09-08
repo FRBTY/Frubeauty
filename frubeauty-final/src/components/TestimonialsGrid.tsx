@@ -32,9 +32,23 @@ export function TestimonialsGrid({ items }: { items: Testimonial[] }) {
               <blockquote className="font-display text-xl sm:text-2xl font-light leading-snug text-cream flex-1">
                 „{t.text}”
               </blockquote>
+              {/* A jelölő SZÁNDÉKOSAN inline SVG, nem „↳" (U+21B3) karakter.
+                  A glyph megvan a tartalék fontban — mérve nem tofu —, de 11 px-es
+                  méretben egyetlen hajszálvékony függőleges vonal apró kampóval:
+                  élesben vesszőnek vagy „ı"-nek olvasódik, nem nyílnak. Az SVG
+                  2,4-es vonalvastagsággal ugyanezt a jelentést adja olvashatóan.
+                  Ez eddig nem derült ki, mert az `outcome` mező 2026-09-08-ig
+                  egyetlen oldalon sem volt kitöltve.
+                  A szín goldSoft, nem gold/90: 11 px-es szövegre 4,5:1 kontraszt
+                  kell, és a gold/90 inkSoft kártyán 4,6:1-gyel épphogy súrolta a
+                  határt — ugyanaz a korrekció, mint a PriceList badge-én. */}
               {t.outcome && (
-                <p className="mt-5 text-[11px] uppercase tracking-caps text-gold/90">
-                  ↳ {t.outcome}
+                <p className="mt-5 flex items-center gap-2 text-[11px] uppercase tracking-caps text-goldSoft">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0" aria-hidden>
+                    <polyline points="9 10 4 15 9 20" />
+                    <path d="M20 4v7a4 4 0 0 1-4 4H4" />
+                  </svg>
+                  {t.outcome}
                 </p>
               )}
               <figcaption className="mt-6 pt-5 border-t border-whisper flex items-center justify-between">

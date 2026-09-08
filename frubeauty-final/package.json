@@ -4,7 +4,7 @@
   "version": "1.4.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/fix-nul-bytes.mjs",
     "typecheck": "tsc --noEmit",
     "seo:smoke": "node scripts/seo-smoke.mjs",
     "validate": "npm run typecheck && npm run build && npm run seo:smoke",

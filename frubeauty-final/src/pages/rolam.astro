@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteContact from '../components/SiteContact.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import BookingAssurance from '../components/BookingAssurance.astro';
+import StickyBookBar from '../components/StickyBookBar.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { siteConfig, relFor } from '../config/site';
 
@@ -42,7 +44,7 @@ const profileSchema = {
           <h1 class="font-display font-light text-cream leading-[1.05] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.25rem);">Egy <em class="display">kozmetikus</em>, aki egyszerre csak rád figyel.</h1>
           <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">Pecze-Kovács Fruzsina vagyok, a FRUBEAUTY tulajdonosa és kozmetikusa a zuglói Egressy úton. Arckezeléssel, szempilla liftinggel és szemöldök laminálással foglalkozom — mindig egyetlen vendéggel egy időben, hogy a kezelés rólad szóljon, ne a sorszámodról.</p>
           <div class="mt-7 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] tracking-caps">
-            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="text-gold hover:text-cream transition-colors">★ 5,0 · 50+ Google értékelés</a>
+            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="text-gold hover:text-cream transition-colors">★ 5,0 · 60+ Google értékelés</a>
             <span class="text-creamMute/50" aria-hidden="true">·</span>
             <span class="text-creamMute">Egressy út 16. · XIV. kerület</span>
           </div>
@@ -50,6 +52,8 @@ const profileSchema = {
             <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
             <a href="/arckezeles-zuglo/" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Szolgáltatások</a>
           </div>
+          {/* A három valódi utolsó kifogás — lásd BookingAssurance.astro. */}
+          <BookingAssurance class="mt-6" />
         </div>
         <div class="lg:col-span-5">
           <div class="relative overflow-hidden rounded-3xl bg-inkRise ring-1 ring-black shadow-[0_30px_80px_-30px_rgba(0,0,0,0.6)]" style="aspect-ratio: 4 / 5;">
@@ -65,7 +69,6 @@ const profileSchema = {
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
         <div class="lg:col-span-5">
-          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">A munkamódszerem</p>
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Miért csak <em class="display">egy vendég</em> egyszerre?</h2>
         </div>
         <div class="lg:col-span-7 space-y-5 text-creamSoft leading-[1.7] text-[16px] sm:text-[17px]">
@@ -87,7 +90,6 @@ const profileSchema = {
           </div>
         </div>
         <div class="lg:col-span-7 order-1 lg:order-2">
-          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Amivel dolgozom</p>
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream mb-6" style="font-size: clamp(1.875rem, 4vw, 3rem);">Prémium hatóanyagok, <em class="display">koreai technika</em>.</h2>
           <div class="space-y-5 text-creamSoft leading-[1.7] text-[16px] sm:text-[17px]">
             <p>Az arckezeléseimet kizárólag <span class="text-cream">Janssen Cosmetics</span> professzionális hatóanyagaival végzem. Ez a német „cosmeceutical" márka azt jelenti, hogy a hatóanyagok a felszínnél mélyebbre is eljutnak — minden bőrtípusra van célzott protokollom.</p>
@@ -113,5 +115,9 @@ const profileSchema = {
   />
 
   <SiteFooter />
+  {/* Telefonon a fejléc foglalás gombja nem renderel (NavBar.tsx:147), és a
+      fejléc lefelé görgetéskor eltűnik — lásd StickyBookBar.astro. */}
+  <StickyBookBar eyebrow="★ 5,0 · 60+ értékelés" price="Szabad időpontok" cta="Megnézem" />
+
   <CookieBanner client:idle />
 </Layout>

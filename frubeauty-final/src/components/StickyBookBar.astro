@@ -1,0 +1,125 @@
+---
+/**
+ * Ragadós foglalás-sáv — mobil és tablet (< lg).
+ *
+ * MIÉRT KELL: a fejléc foglalás gombja `hidden sm:inline-flex` (NavBar.tsx:147),
+ * vagyis 640 px alatt egyáltalán NEM renderel; ráadásul a fejléc lefelé
+ * görgetéskor el is tűnik (translate3d(0,-100px,0)). Így telefonon a hero és a
+ * lap alji kapcsolat-szekció KÖZÖTT — vagyis a teljes oldal 80%-án — nulla
+ * látható foglalás-gomb volt. A látogatónak vissza kellett görgetnie a tetejére,
+ * vagy a hamburgermenüt megnyitnia. Ez a sáv szünteti meg ezt a rést.
+ *
+ * SZÁNDÉKOSAN .astro, NEM React sziget:
+ *  1. A Layout `decorate()` függvénye a Notino-linkekre UTM-et tesz és
+ *     `data-book-cta`-t jelöl. Statikus SSR-markupként a link már az ELSŐ
+ *     decorate() futáskor a DOM-ban van, tehát a kampány-attribúció garantált —
+ *     egy client:idle szigetnél ez versenyhelyzet lenne.
+ *  2. Nulla JS-sziget-költség; a megjelenítés ~20 sor inline script.
+ *
+ * MEGJELENÉSI SZABÁLYOK:
+ *  - Csak 480 px görgetés után jelenik meg (a hero saját CTA-ja addig látszik,
+ *    két egyidejű elsődleges CTA optikai zaj lenne).
+ *  - Elrejtőzik, amíg a #kapcsolat szekció a képernyőn van — ott már úgyis ott
+ *    a nagy foglalás-gomb, a sáv csak takarná.
+ *  - Elrejtőzik, amíg a süti-banner döntésre vár (az z-[60], teljes szélességű
+ *    alsó sáv mobilon — egymásra csúsznának).
+ *  - `env(safe-area-inset-bottom)`: iPhone home-indikátor alatt nem lóg be.
+ */
+import { siteConfig, relFor } from '../config/site';
+
+interface Props {
+  /** Kisbetűs felső sor — a konkrét kezelés és az időtartam. */
+  eyebrow: string;
+  /** Nagy, hangsúlyos ár. A CTA melletti ár az egyik legerősebb konverziós jel. */
+  price: string;
+  /** A gomb felirata. Alap: „Foglalok”. */
+  cta?: string;
+}
+
+const { eyebrow, price, cta = 'Foglalok' } = Astro.props;
+const config = { ...siteConfig };
+---
+
+<div
+  id="sticky-book"
+  data-visible="false"
+  class="lg:hidden fixed inset-x-0 bottom-0 z-40 translate-y-full opacity-0 transition-[transform,opacity] duration-300 ease-strong-out motion-reduce:transition-opacity data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100"
+>
+  <div
+    class="border-t border-gold/25 bg-ink/95 backdrop-blur-md shadow-[0_-12px_40px_-12px_rgba(0,0,0,0.7)]"
+  >
+    <div
+      class="max-w-[640px] mx-auto px-4 pt-3 flex items-center gap-4"
+      style="padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));"
+    >
+      <div class="min-w-0 flex-1">
+        <p class="text-[10px] uppercase tracking-caps text-creamMute truncate">
+          {eyebrow}
+        </p>
+        <p class="font-display text-lg font-medium tracking-tight text-cream leading-tight truncate">
+          {price}
+        </p>
+      </div>
+      <a
+        href={config.booking}
+        target="_blank"
+        rel={relFor(config.booking)}
+        class="flex-shrink-0 inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-[12px] uppercase tracking-caps font-semibold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-150"
+      >
+        {cta}
+        <span aria-hidden="true">&#8594;</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var bar = document.getElementById('sticky-book');
+    if (!bar) return;
+
+    var SHOW_AFTER = 480;
+    var contactVisible = false;
+    var consentPending = false;
+
+    try {
+      consentPending = !window.localStorage.getItem('frubeauty_cookie_consent_v1');
+    } catch (e) {}
+
+    window.addEventListener('cookie-consent', function () {
+      consentPending = false;
+      evaluate();
+    });
+
+    function evaluate() {
+      var show = window.scrollY > SHOW_AFTER && !contactVisible && !consentPending;
+      bar.dataset.visible = show ? 'true' : 'false';
+    }
+
+    // A kapcsolat-szekciónak saját, nagy foglalás-gombja van — amíg az látszik,
+    // a sáv csak takarná a tartalmat.
+    var contact = document.getElementById('kapcsolat');
+    if (contact && window.IntersectionObserver) {
+      new IntersectionObserver(function (entries) {
+        contactVisible = entries[0].isIntersecting;
+        evaluate();
+      }).observe(contact);
+    }
+
+    var ticking = false;
+    window.addEventListener(
+      'scroll',
+      function () {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function () {
+          ticking = false;
+          evaluate();
+        });
+      },
+      { passive: true }
+    );
+
+    evaluate();
+  })();
+</script>

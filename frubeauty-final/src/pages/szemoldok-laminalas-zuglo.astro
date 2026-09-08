@@ -16,6 +16,10 @@ import { GalleryGrid } from '../components/GalleryGrid';
 import FAQList from '../components/FAQList.astro';
 import WeddingCalendarCTA from '../components/WeddingCalendarCTA.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
+import TrustBar from '../components/TrustBar.astro';
+import BookingAssurance from '../components/BookingAssurance.astro';
+import RiskReversal from '../components/RiskReversal.astro';
+import StickyBookBar from '../components/StickyBookBar.astro';
 import { CookieBanner } from '../components/CookieBanner';
 import { HeroMedia } from '../components/HeroMedia';
 import { PriceList } from '../components/PriceList';
@@ -74,7 +78,7 @@ const services = [
 
 const packages = [
   {
-    tier: 'Alap',
+    tier: 'Alap', bestFor: 'a szemöldököd rakoncátlan, de a pilláiddal elégedett vagy.',
     title: 'Szemöldök Laminálás',
     titleAccent: '+ Formázás',
     subtitle: 'Természetes dúsítás + festés',
@@ -94,7 +98,7 @@ const packages = [
     ribbon: null as string | null,
   },
   {
-    tier: 'Ajánlott',
+    tier: 'Ajánlott', bestFor: 'egyszerre rendeznéd a szemöldököd és a pilláid — egy időpontban.',
     title: 'Teljes',
     titleAccent: 'Tekintet',
     subtitle: 'Szemöldök laminálás + szempilla lifting',
@@ -114,7 +118,7 @@ const packages = [
     ribbon: 'Kombinált csomag',
   },
   {
-    tier: 'Prémium',
+    tier: 'Prémium', bestFor: 'a tekinteted mellé egy kis pihenés is jólesne.',
     title: 'Teljes',
     titleAccent: 'Megújulás',
     subtitle: 'Relax Glow arcmasszázs + teljes tekintet',
@@ -227,6 +231,7 @@ const testimonials = [
 
 const faqs = [
   { q: 'Fáj a szemöldök laminálás?', a: 'Egyáltalán nem. A laminálás teljesen fájdalommentes — a szőrszálakat kíméletes anyagokkal kezeljük, a bőrt nem érintjük tűvel. A legtöbb vendég 60 percen át pihentető kezelésként éli meg.' },
+  { q: 'Mi van, ha túl sötét vagy túl vastag lesz a szemöldököm?', a: 'A festék árnyalatát és a forma vastagságát a kezelés előtt beszéljük meg, a hajszíned és az arckaraktered alapján. A laminálás a saját szálaidat rendezi és fixálja, nem rajzol új vonalat — ezért nem tud „kifestett" hatást adni. Tű és tetoválás nincs benne, tehát semmi nem marad véglegesen: a hatás nagyjából 6 hét alatt lecseng.' },
   { q: 'Meddig tart a szemöldök laminálás eredménye?', a: 'A laminálás és a festés együtt kb. 6 hétig tart, attól függően, milyen gyorsan nő vissza a szemöldöked. Az otthoni ápolással (első 24 óra vízmentes, kerüld az olajt a szemöldök területén) az eredmény a teljes időszakot kitölti.' },
   { q: 'Mennyi idő után látszik a végső forma?', a: 'A formát rögtön a kezelés után látod, de a teljes „letisztult” eredményhez 24 óra kell — ekkor veszik fel a szőrszálak a végleges állást. Az első 24 órában érdemes elkerülni a vizes-gőzös környezetet.' },
   { q: 'Mit hozzak magammal a kezelésre?', a: 'Semmit. Smink nélkül érkezz (a szemöldök területére nézve), ennyi elég. A kezeléshez szükséges szakmai eszközöket és professzionális termékeket én biztosítom.' },
@@ -365,7 +370,10 @@ const breadcrumbSchema = {
             <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
             <a href="#csomagok" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Árak</a>
           </div>
-          <p class="mt-6 text-[12px] uppercase tracking-caps text-creamMute">Online foglalás · Egressy út 16. · XIV. kerület</p>
+          {/* A korábbi „Online foglalás · Egressy út 16. · XIV. kerület" sor
+              megismételte a fölötte lévő eyebrow-t. Helyette a három valódi
+              utolsó kifogás — lásd BookingAssurance.astro. */}
+          <BookingAssurance class="mt-6" offer="Szemöldök" />
         </div>
         <div class="lg:col-span-5">
           <HeroMedia
@@ -382,30 +390,13 @@ const breadcrumbSchema = {
   </section>
 
   {/* ── Stats bar ─────────────────────────────────────────────────────────── */}
-  <section class="border-y border-whisper bg-inkSoft">
-    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10">
-      <Reveal client:visible as="div" className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
-        <div class="flex flex-col items-center md:items-start">
-          <span class="text-2xl font-display font-medium tracking-tight text-gold">Google</span>
-          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">
-            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="hover:text-cream transition-colors">Értékelések megnyitása →</a>
-          </span>
-        </div>
-        <div class="flex flex-col items-center md:items-start">
-          <span class="text-2xl font-display font-medium tracking-tight text-cream">11 000 Ft</span>
-          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">festéssel és formázással</span>
-        </div>
-        <div class="flex flex-col items-center md:items-start">
-          <span class="text-2xl font-display font-medium tracking-tight text-cream">~6 hét</span>
-          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">tartós eredmény</span>
-        </div>
-        <div class="flex flex-col items-center md:items-start">
-          <span class="text-2xl font-display font-medium tracking-tight text-cream">Koreai</span>
-          <span class="text-[11px] uppercase tracking-caps text-creamMute mt-2 text-center md:text-left">laminálás technika</span>
-        </div>
-      </Reveal>
-    </div>
-  </section>
+  <TrustBar
+    items={[
+      { value: '11 000 Ft', label: 'festéssel és formázással' },
+      { value: '~6 hét', label: 'tartós eredmény' },
+      { value: 'Koreai', label: 'laminálás technika' },
+    ]}
+  />
 
   {/* ── A megközelítés ────────────────────────────────────────────────────── */}
   <section class="py-20 sm:py-28">
@@ -514,6 +505,10 @@ const breadcrumbSchema = {
               <p class={`text-[11px] uppercase tracking-caps mb-4 ${p.highlight ? 'text-gold' : 'text-creamMute'}`}>{p.tier}</p>
               <h3 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.5rem, 2.4vw, 1.875rem);">{p.title}{' '}<em class="display">{p.titleAccent}</em></h3>
               <p class="mt-2 text-sm text-creamMute leading-snug max-w-[28ch]">{p.subtitle}</p>
+              {/* Döntési vezetés. Három egyforma súlyú kártya között a látogató
+                  eddig csak az árakat tudta összehasonlítani, a „melyik az enyém?"
+                  kérdésre semmi nem válaszolt — a döntési bénulás pedig kilépés. */}
+              <p class="mt-4 text-[12px] leading-snug text-creamSoft max-w-[30ch]"><span class="text-gold">Neked való, ha</span> {p.bestFor}</p>
               <div class="mt-6">
                 {p.priceOld && <p class="text-sm text-creamMute mb-1">Külön: <span class="line-through">{p.priceOld}</span></p>}
                 <p class="font-display text-3xl sm:text-4xl font-medium tracking-tight text-cream">{p.price}</p>
@@ -547,14 +542,7 @@ const breadcrumbSchema = {
           </Reveal>
         ))}
       </div>
-      <Reveal client:visible as="div" className="mt-12 sm:mt-16 max-w-max mx-auto">
-        <div class="inline-flex items-center gap-3 rounded-full border border-gold/30 bg-gold/[0.06] px-5 py-3">
-          <span class="flex-shrink-0 w-7 h-7 rounded-full bg-gold/15 text-gold inline-flex items-center justify-center" aria-hidden>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4" /></svg>
-          </span>
-          <span class="text-[12px] sm:text-[13px] uppercase tracking-caps font-medium text-cream">Elégedettségi garancia</span>
-        </div>
-      </Reveal>
+      <RiskReversal class="mt-12 sm:mt-16" first="Konzultációval kezdünk, csak utána a kezelés" />
     </div>
   </section>
 
@@ -779,11 +767,16 @@ const breadcrumbSchema = {
   />
 
   <SiteContact
+    offer="Szemöldök"
     eyebrow="Foglalás"
     heading={'Nézz tükörbe — <em class="display">rendezett</em> szemöldökkel.'}
     intro="Online foglalási rendszer 0–24 órában. A szemöldök laminálás önállóan vagy szempilla liftinggel kombinált csomagban is foglalható."
   />
 
   <SiteFooter />
+  {/* Telefonon a fejléc foglalás gombja nem renderel (NavBar.tsx:147), és a
+      fejléc lefelé görgetéskor eltűnik — lásd StickyBookBar.astro. */}
+  <StickyBookBar eyebrow="Szemöldök laminálás · 60 perc" price="11 000 Ft" />
+
   <CookieBanner client:visible />
 </Layout>

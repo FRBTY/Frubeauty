@@ -57,7 +57,6 @@ export function ServiceCard({ service: s }: { service: ServiceCardData }) {
             className="inline-flex items-center justify-center w-full px-5 py-3 text-[12px] uppercase tracking-caps font-semibold bg-gold text-ink rounded-full hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-150"
           >
             {s.title} — árak és foglalás
-            <span aria-hidden className="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-0.5">→</span>
           </a>
         </div>
       </div>
