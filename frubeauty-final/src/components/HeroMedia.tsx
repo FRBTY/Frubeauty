@@ -104,10 +104,18 @@ export function HeroMedia({
       observer.observe(el);
     };
 
-    // Desktop: azonnal figyelünk. Mobil: csak az első görgetés után — lásd a
-    // komponens fejlécében a perf-indoklást.
+    // Desktopon azonnal figyelünk. Mobilon a görgetés-kapu CSAK akkor kell, ha a
+    // lap még érintetlen (`scrollY === 0`) — ilyenkor nem tudjuk, hogy nem épp egy
+    // mérőrobot néz-e minket, és a hero a hajtás fölött van.
+    //
+    // Ha a látogató MÁR görgetett, a kapunak nincs értelme, sőt árt: a money
+    // page-eken a HeroMedia `client:visible` sziget, tehát csak akkor hidratál,
+    // amikor a képernyőre ér — a scroll-figyelő így AZUTÁN kapcsolódna be, hogy a
+    // látogató odagörgetett, és ha ott megáll, soha nem jönne több esemény.
+    // A videó némán állva maradna. A `scrollY > 0` feltétel ezt kizárja, a
+    // PSI-garanciát viszont nem gyengíti: a Lighthouse végig 0-n áll.
     let onFirstScroll: (() => void) | undefined;
-    if (desktop) {
+    if (desktop || window.scrollY > 0) {
       startObserving();
     } else {
       onFirstScroll = () => {
