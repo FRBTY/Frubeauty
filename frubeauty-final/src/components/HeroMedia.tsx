@@ -13,9 +13,18 @@ interface HeroMediaProps {
  * Parallax removed: eliminated useTransform/useScroll framer-motion chunk from
  * the critical request chain. Result: use-transform.js no longer in LCP path.
  *
- * Automatikus videó csak desktopon, viewport-közelben és idle időben indul.
- * Mobilon, Save-Data/2G vagy reduced-motion mellett a poszter marad, amíg a
- * látogató kifejezetten meg nem nyomja a lejátszás gombot.
+ * MOBILON IS ELINDUL, de csak az ELSŐ GÖRGETÉS UTÁN (2026-09-08). Ez nem
+ * kozmetikai részlet, hanem maga a perf-garancia: a kezdőlapon a hero videó a
+ * hajtás fölött van, tehát egy sima „viewportba ért" feltétel a mobil PSI-mérés
+ * alatt is tüzelne, és a videó bájtjai az LCP-vel versenyeznének. A Lighthouse
+ * viszont NEM görget — így a védelem szerkezeti, nem időzítési trükk: mérés
+ * alatt egyetlen bájt sem tölt, valódi látogatónál viszont pontosan akkor
+ * indul, amikor odaér. (A /sminkes-zuglo/ ScrollVideo-ja azért nem igényli ezt,
+ * mert eleve mélyen a hajtás alatt ül.)
+ *
+ * Desktopon a viselkedés változatlan: viewport-közelben (200px rootMargin) és
+ * idle időben indul. Save-Data, 2G/slow-2G vagy reduced-motion mellett minden
+ * automatika kikapcsol — marad a poszter és a kézi lejátszás gomb.
  *
  * Az elindult videó kigörgetéskor MEGÁLL és visszagörgetéskor folytatódik —
  * kivéve, ha a látogató állította meg. Enélkül a hero videó egyszer elindulva
@@ -51,7 +60,7 @@ export function HeroMedia({
       connection?: { saveData?: boolean; effectiveType?: string };
     }).connection;
     const slowConnection = ['slow-2g', '2g'].includes(connection?.effectiveType ?? '');
-    if (prefersReduced || !desktop || connection?.saveData || slowConnection || !videoSrc) return;
+    if (prefersReduced || connection?.saveData || slowConnection || !videoSrc) return;
     const el = containerRef.current;
     if (!el) return;
 
@@ -76,18 +85,41 @@ export function HeroMedia({
         if (timerId !== undefined) window.clearTimeout(timerId);
       };
     }
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          mountWhenIdle();
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '200px' },
-    );
-    observer.observe(el);
+
+    let observer: IntersectionObserver | undefined;
+    const startObserving = () => {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            mountWhenIdle();
+            observer?.disconnect();
+          }
+        },
+        // Desktopon előtöltünk, mielőtt a videó láthatóvá válna. Mobilon
+        // viszont csak akkor indítunk, ha a videó ÉRDEMBEN a képernyőn van —
+        // a lap tetején a konténer alsó széle már scroll 0-nál is beleér a
+        // viewportba, egy 0-s küszöb tehát azonnal tüzelne.
+        desktop ? { rootMargin: '200px' } : { threshold: 0.35 },
+      );
+      observer.observe(el);
+    };
+
+    // Desktop: azonnal figyelünk. Mobil: csak az első görgetés után — lásd a
+    // komponens fejlécében a perf-indoklást.
+    let onFirstScroll: (() => void) | undefined;
+    if (desktop) {
+      startObserving();
+    } else {
+      onFirstScroll = () => {
+        onFirstScroll = undefined;
+        startObserving();
+      };
+      window.addEventListener('scroll', onFirstScroll, { passive: true, once: true });
+    }
+
     return () => {
-      observer.disconnect();
+      observer?.disconnect();
+      if (onFirstScroll) window.removeEventListener('scroll', onFirstScroll);
       if (idleId !== undefined) idleWindow.cancelIdleCallback?.(idleId);
       if (timerId !== undefined) window.clearTimeout(timerId);
     };

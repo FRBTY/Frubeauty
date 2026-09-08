@@ -12,6 +12,7 @@ import { TestimonialsGrid } from '../components/TestimonialsGrid';
 import { GalleryGrid } from '../components/GalleryGrid';
 import FAQList from '../components/FAQList.astro';
 import WeddingCalendarCTA from '../components/WeddingCalendarCTA.astro';
+import PartnerBadge from '../components/PartnerBadge.astro';
 import TrustBar from '../components/TrustBar.astro';
 import BookingAssurance from '../components/BookingAssurance.astro';
 import StickyBookBar from '../components/StickyBookBar.astro';
@@ -171,6 +172,11 @@ const homepageFaqSchema = {
             eyebrow-badge-eit), csak itt kitöltött, mert itt kontrasztot kell vinnie.
             w-fit + mx-auto és NEM inline-block: az inline-block baseline-leadinget
             adna, ami ~30 px-el feljebb tolná az egész hero-tartalmat. */}
+        {/* Notino partner-jelvény — lásd PartnerBadge.astro. Fölötte áll az
+            értékelés-chipnek, de halkabb nála: az értékelés a fő bizonyíték,
+            a partnerség a hitelesítés. */}
+        <PartnerBadge class="mb-3 sm:mb-4" />
+
         {/* A chip TARTALMA 2026-09-07-én cserélődött. Korábban „FRUBEAUTY ·
             Budapest XIV. · Zugló, Egressy út" állt itt: csupa cím-adat, nulla
             bizonyíték — miközben ez az oldal legnagyobb kontrasztú (~15:1),

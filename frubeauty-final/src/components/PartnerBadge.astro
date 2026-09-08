@@ -1,0 +1,54 @@
+---
+/**
+ * Notino partner-jelvény a hero tetején.
+ *
+ * MIÉRT TIPOGRÁFIAI ÉS NEM LOGÓ. A projektben nincs hivatalos Notino
+ * márkaeszköz, és egy „hasonló" logó megrajzolása idegen védjegy utánzata
+ * lenne — ezt nem csináljuk. A partneri viszony puszta megnevezése viszont
+ * jogszerű és igaz állítás. Ha a szalon megkapja a hivatalos Notino
+ * partner-badge-et, ez a komponens az egyetlen hely, ahol cserélni kell.
+ *
+ * MIÉRT NEM LINK. A Layout globális szkriptje MINDEN `notino.hu` linkre
+ * ráköti a `book_click` eseményt és az Ads-konverziót. Ha ez a jelvény
+ * hivatkozás lenne, a „mi ez?" jellegű kíváncsi kattintás is konverziónak
+ * számítana — pont most, amikor a 2026-09-08-i átalakítás hatását mérjük.
+ * A jelvény állít, a CTA cselekedtet.
+ *
+ * MIÉRT SÖTÉT, KÖRVONALAS PIRULA. A hero lámpafénye a viewport-tól függően
+ * eltérő fényerejű, ezért ide semmilyen csupasz szövegszín nem megbízható
+ * (ugyanez az ok, amiért az alatta lévő értékelés-chip tömör krém). A tömör,
+ * sötét háttér a saját kontrasztját hozza magával, és szándékosan HALKABB,
+ * mint a krém chip: a rangsor az, hogy az értékelés a fő bizonyíték, a
+ * partnerség a hitelesítés.
+ */
+interface Props {
+  /** Extra osztályok a kerethez (pl. alsó margó). */
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<p
+  class:list={[
+    'w-fit mx-auto inline-flex items-center gap-2 rounded-full border border-gold/30 bg-inkDeep/70 px-4 py-1.5 text-[10px] sm:text-[11px] uppercase tracking-caps backdrop-blur-[2px]',
+    className,
+  ]}
+>
+  <svg
+    width="13"
+    height="13"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="flex-shrink-0 text-gold"
+    aria-hidden="true"
+  >
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    <path d="M9 12l2 2 4-4" />
+  </svg>
+  <span class="text-cream font-medium">Notino</span>
+  <span class="text-creamMute">partner</span>
+</p>

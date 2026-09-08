@@ -14,11 +14,10 @@ interface ScrollVideoProps {
  * Görgetésre induló tartalmi videó (menyasszonyi smink referenciák).
  *
  * Miben más, mint a HeroMedia:
- *  - A HeroMedia SZÁNDÉKOSAN csak desktopon indít (a hero a kritikus úton van,
- *    ott a mobil LCP a főszempont). Ez a komponens viszont mélyen a hajtás
- *    alatt ül, tehát MOBILON IS elindulhat: a Lighthouse nem görget, így a
- *    PSI-pontszámot nem érinti, a valódi látogató viszont pont azt a mozgást
- *    kapja meg, ami elad.
+ *  - Ez a komponens mélyen a hajtás alatt ül, ezért mobilon FELTÉTEL NÉLKÜL
+ *    indulhat: a Lighthouse nem görget, így a PSI-pontszámot nem érinti. A
+ *    HeroMedia ugyanezt csak az első görgetés után teheti meg, mert a hero a
+ *    kritikus úton van (2026-09-08 óta ott is van mobil-indítás).
  *  - Kigörgetéskor PAUSE. Enélkül négy videó pörögne egyszerre a háttérben
  *    (a hero + a podcast + ez a kettő) — fölösleges CPU és akku.
  *
