@@ -126,9 +126,9 @@ export function AnnouncementBar({ enabled = true }: AnnouncementBarProps) {
             {/* Igazmondó felirat: a bar a SAJÁT, mai Notino-CTA kattintásod után jelenik
                 meg, ezért nem állítunk idegenek foglalásairól semmit — befejezésre
                 ösztönző (cart-reminder) üzenet, nem hamis social proof. */}
-            <span className="font-medium">Elkezdted az online foglalást.</span>
+            <span className="font-medium">Félbemaradt egy foglalásod.</span>
             <span className="hidden sm:inline mx-2 opacity-60">·</span>
-            <span className="block sm:inline font-semibold mt-0.5 sm:mt-0">Fejezd be a Notino felületén →</span>
+            <span className="block sm:inline font-semibold mt-0.5 sm:mt-0">Folytatom a Notinón →</span>
           </p>
           <button
             type="button"

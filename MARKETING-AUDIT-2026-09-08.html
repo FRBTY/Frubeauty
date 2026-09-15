@@ -1,0 +1,1724 @@
+<title>A nem kattintható gomb</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+/* ============================================================
+   TOKENEK — a teljes világos paletta a csupasz :root-on.
+   A sötét változat CSAK a tokeneket írja felül.
+   Hűvös porcelán alap + karmin jelzőszín. A MELEG pergamen
+   szándékosan EGYETLEN dologra van fenntartva: a bemásolható
+   szövegre. Hideg = elemzés, meleg = anyag, amit használsz.
+   ============================================================ */
+:root{
+  --ground:#EDEFF3;
+  --surface:#FAFBFC;
+  --surface-2:#E3E7ED;
+  --ink:#131820;
+  --ink-soft:#39434F;
+  --ink-mute:#69real;
+  --ink-mute:#69737F;
+  --rule:#D3D9E1;
+  --rule-2:#B9C2CD;
+  --crit:#A81F38;
+  --crit-bg:#F7E4E8;
+  --ok:#0E6A5E;
+  --ok-bg:#DEEDE9;
+  --warn:#87590F;
+  --warn-bg:#F4E8D4;
+  --paste:#F6EFE1;
+  --paste-ink:#2B2318;
+  --paste-rule:#DFD2B8;
+  --f-display:"Instrument Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-body:"Literata",Georgia,"Times New Roman",serif;
+  --f-mono:"IBM Plex Mono","Cascadia Mono",Consolas,monospace;
+  --w:1120px;
+  --w-prose:66ch;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#12151A;
+    --surface:#191D24;
+    --surface-2:#232932;
+    --ink:#E7EAEF;
+    --ink-soft:#BFC6D1;
+    --ink-mute:#8A93A1;
+    --rule:#2A313A;
+    --rule-2:#3B434E;
+    --crit:#F08292;
+    --crit-bg:#2E181D;
+    --ok:#5FC5B0;
+    --ok-bg:#132420;
+    --warn:#D9A94E;
+    --warn-bg:#2A2114;
+    --paste:#221D14;
+    --paste-ink:#EFE3CC;
+    --paste-rule:#3D3423;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#12151A;
+  --surface:#191D24;
+  --surface-2:#232932;
+  --ink:#E7EAEF;
+  --ink-soft:#BFC6D1;
+  --ink-mute:#8A93A1;
+  --rule:#2A313A;
+  --rule-2:#3B434E;
+  --crit:#F08292;
+  --crit-bg:#2E181D;
+  --ok:#5FC5B0;
+  --ok-bg:#132420;
+  --warn:#D9A94E;
+  --warn-bg:#2A2114;
+  --paste:#221D14;
+  --paste-ink:#EFE3CC;
+  --paste-rule:#3D3423;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink-soft);
+  font-family:var(--f-body);
+  font-size:16.5px;
+  line-height:1.68;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--w);margin:0 auto;padding:0 22px}
+p{margin:0 0 1em}
+p:last-child{margin-bottom:0}
+strong{font-weight:600;color:var(--ink)}
+em{font-style:italic}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:3px}
+a:hover{text-decoration-color:currentColor}
+a:focus-visible,button:focus-visible{outline:2px solid var(--crit);outline-offset:3px;border-radius:2px}
+code,.mono{font-family:var(--f-mono);font-size:.85em}
+.num{font-variant-numeric:tabular-nums}
+h1,h2,h3,h4{font-family:var(--f-display);margin:0;color:var(--ink);text-wrap:balance;letter-spacing:-.02em;line-height:1.14}
+h2{font-size:clamp(1.5rem,3.2vw,2.05rem);font-weight:700}
+h3{font-size:clamp(1.06rem,2vw,1.24rem);font-weight:600;letter-spacing:-.012em}
+h4{font-size:.98rem;font-weight:600;letter-spacing:-.004em}
+.eyebrow{font-family:var(--f-mono);font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-mute)}
+
+/* ---------- fejléc ---------- */
+.mast{padding:44px 0 0}
+.mast-top{display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:space-between;align-items:baseline;padding-bottom:14px;border-bottom:1px solid var(--rule-2)}
+.mast-title{
+  font-family:var(--f-display);font-weight:700;
+  font-size:clamp(2.5rem,8vw,4.7rem);line-height:.97;letter-spacing:-.042em;
+  margin:30px 0 14px;max-width:15ch;color:var(--ink);
+}
+.mast-sub{font-size:1.08rem;color:var(--ink-soft);max-width:60ch;margin-bottom:32px}
+.mast-grid{display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.mast-cell{padding:15px 18px 17px 0;border-right:1px solid var(--rule)}
+.mast-cell:last-child{border-right:0}
+.mast-cell .k{display:block;font-family:var(--f-mono);font-size:10px;text-transform:uppercase;letter-spacing:.13em;color:var(--ink-mute);margin-bottom:6px}
+.mast-cell .v{font-family:var(--f-display);font-weight:600;font-size:1.02rem;letter-spacing:-.01em;line-height:1.28;color:var(--ink)}
+.score{font-size:1.9rem;line-height:1;font-variant-numeric:tabular-nums}
+.delta{font-family:var(--f-mono);font-size:11.5px;color:var(--ok);margin-left:6px}
+
+/* ---------- szekciók ---------- */
+section{padding:52px 0;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:0}
+.sec-head{display:grid;grid-template-columns:52px 1fr;gap:0 14px;align-items:baseline;margin-bottom:24px}
+.sec-n{font-family:var(--f-mono);font-size:11.5px;font-weight:600;color:var(--crit);letter-spacing:.06em;padding-top:.5em}
+.sec-head p{grid-column:2;margin:10px 0 0;color:var(--ink-mute);font-size:.95rem;max-width:var(--w-prose)}
+.prose{max-width:var(--w-prose)}
+.lede{font-size:1.19rem;line-height:1.55;color:var(--ink)}
+
+/* ---------- panelek ---------- */
+.panel{background:var(--surface);border:1px solid var(--rule);padding:22px 24px}
+.panel.crit{border-left:3px solid var(--crit)}
+.panel.ok{border-left:3px solid var(--ok)}
+.panel.warn{border-left:3px solid var(--warn)}
+.stack{display:flex;flex-direction:column;gap:16px}
+.stack-lg{display:flex;flex-direction:column;gap:26px}
+.cols2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.cols3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+
+/* ---------- címkék ---------- */
+.tag{display:inline-block;font-family:var(--f-mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;padding:3px 7px;border:1px solid var(--rule-2);color:var(--ink-mute);white-space:nowrap}
+.tag.crit{color:var(--crit);border-color:var(--crit);background:var(--crit-bg)}
+.tag.ok{color:var(--ok);border-color:var(--ok);background:var(--ok-bg)}
+.tag.warn{color:var(--warn);border-color:var(--warn);background:var(--warn-bg)}
+.tagrow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+
+/* ---------- bemásolható szöveg ---------- */
+.paste{background:var(--paste);color:var(--paste-ink);border:1px solid var(--paste-rule);padding:15px 17px;margin:12px 0}
+.paste-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:9px}
+.paste-lab{font-family:var(--f-mono);font-size:10px;text-transform:uppercase;letter-spacing:.12em;opacity:.68}
+.paste-txt{font-family:var(--f-body);font-size:15.5px;line-height:1.6;white-space:pre-wrap;margin:0}
+.paste button{font-family:var(--f-mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;background:transparent;border:1px solid var(--paste-rule);color:inherit;padding:3px 9px;cursor:pointer}
+.paste button:hover{background:var(--paste-rule)}
+
+/* ---------- találat-rekord ---------- */
+.find{border-top:1px solid var(--rule);padding:18px 0}
+.find:last-child{border-bottom:1px solid var(--rule)}
+.find-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;margin-bottom:10px}
+.find-id{font-family:var(--f-mono);font-size:11px;font-weight:600;color:var(--crit);letter-spacing:.05em}
+.find-t{font-family:var(--f-display);font-weight:600;font-size:1.02rem;color:var(--ink);letter-spacing:-.01em;flex:1 1 260px;line-height:1.3}
+.rec{display:grid;grid-template-columns:118px 1fr;gap:4px 14px;font-size:.95rem}
+.rec dt{font-family:var(--f-mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-mute);padding-top:.35em}
+.rec dd{margin:0}
+
+/* ---------- táblázatok ---------- */
+.tw{overflow-x:auto;border:1px solid var(--rule);background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:.9rem;font-family:var(--f-display);font-weight:500}
+th,td{padding:9px 13px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{font-family:var(--f-mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-mute);font-weight:500;background:var(--surface-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.yes{color:var(--ok);font-weight:600}
+.no{color:var(--crit);font-weight:600}
+.dash{color:var(--ink-mute)}
+
+/* ---------- CTA-vonalzó ---------- */
+.ruler{display:grid;grid-template-columns:150px 1fr 84px;gap:8px 14px;align-items:center;margin:5px 0;font-size:.86rem}
+.ruler .lab{font-family:var(--f-display);font-weight:600;color:var(--ink);font-size:.88rem;line-height:1.25}
+.ruler .lab small{display:block;font-family:var(--f-mono);font-weight:400;font-size:10px;color:var(--ink-mute);letter-spacing:.04em}
+.bar{position:relative;height:26px;background:var(--surface-2);border:1px solid var(--rule)}
+.gap{position:absolute;top:0;bottom:0;background:var(--crit-bg);border-left:1px dashed var(--crit);border-right:1px dashed var(--crit)}
+.tick{position:absolute;top:3px;bottom:3px;width:3px;background:var(--ok);border-radius:1px}
+.ruler .val{font-family:var(--f-mono);font-size:11px;color:var(--ink-mute);text-align:right;font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:14px;font-family:var(--f-mono);font-size:10.5px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.08em}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:10px;display:inline-block;border:1px solid var(--rule-2)}
+
+/* ---------- első képernyő anatómia ---------- */
+.anat{display:flex;flex-direction:column;border:1px solid var(--rule-2);max-width:330px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.03em}
+.anat div{padding:5px 9px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;gap:10px;align-items:center}
+.anat div:last-child{border-bottom:0}
+.anat .empty{background:var(--surface-2);color:var(--ink-mute)}
+.anat .content{background:var(--surface);color:var(--ink)}
+.anat .blocked{background:var(--crit-bg);color:var(--crit);font-weight:600}
+
+/* ---------- lista ---------- */
+ul.tight{margin:0;padding-left:1.15em}
+ul.tight li{margin:.3em 0}
+ol.steps{margin:0;padding-left:0;list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:30px 1fr;gap:12px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:.95rem}
+ol.steps li:last-child{border-bottom:0}
+ol.steps li::before{content:counter(s);font-family:var(--f-mono);font-size:11px;color:var(--crit);font-weight:600;padding-top:.25em}
+
+/* ---------- pontozás ---------- */
+.meter{position:relative;height:7px;background:var(--surface-2);border:1px solid var(--rule);min-width:88px}
+.meter i{position:absolute;left:0;top:0;bottom:0;background:var(--ink-soft);display:block}
+.meter i.low{background:var(--crit)}
+.meter i.mid{background:var(--warn)}
+.meter i.high{background:var(--ok)}
+
+.foot{padding:34px 0 60px;font-family:var(--f-mono);font-size:11px;color:var(--ink-mute);letter-spacing:.04em;line-height:1.7}
+@media (max-width:640px){
+  .rec{grid-template-columns:1fr;gap:1px}
+  .rec dt{padding-top:.6em}
+  .ruler{grid-template-columns:1fr;gap:4px}
+  .ruler .val{text-align:left}
+  .sec-head{grid-template-columns:1fr}
+  .sec-n{padding-top:0;margin-bottom:4px}
+  .sec-head p{grid-column:1}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="mast-top">
+    <span class="eyebrow">Vbro marketing-audit · direct response</span>
+    <span class="eyebrow">2026-09-08</span>
+  </div>
+
+  <h1 class="mast-title">A nem kattintható gomb</h1>
+
+  <p class="mast-sub">
+    FRUBEAUTY · frubeauty.com — teljes konverzió-audit mind a kilenc oldalra és a
+    konverziót érintő tizenhárom komponensre. Élő mérés valódi Chrome-mal,
+    375&times;812&nbsp;px mobil nézetben, plusz a Notino foglalórendszer
+    végigjárása. Az oldal jól van megírva; ez a jelentés arról szól, hol
+    veszik el a pénz mégis.
+  </p>
+
+  <div class="mast-grid">
+    <div class="mast-cell"><span class="k">Célpont</span><span class="v">frubeauty.com</span></div>
+    <div class="mast-cell"><span class="k">Mérve</span><span class="v">9 oldal + foglalórendszer</span></div>
+    <div class="mast-cell"><span class="k">Nézet</span><span class="v">mobil 375&times;812 + desktop</span></div>
+    <div class="mast-cell"><span class="k">Pontszám</span><span class="v score">59<span class="delta">+1</span></span></div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="sec-head"><span class="sec-n">01</span><h2>A diagnózis</h2></div>
+
+  <div class="prose stack">
+    <p class="lede">
+      A kezdőlapon telefonon <strong>egyetlen foglalás-gombra sem lehet rákattintani</strong>:
+      a süti-sáv 258&nbsp;pixel magas, és pontosan a két hero-gombra ül rá. Nem
+      „takarja” — a böngésző szerint a gomb helyén a sütisáv van. Utána 13,9
+      képernyőn át nincs másik gomb. A legnagyobb belépőoldalad telefonon
+      gyakorlatilag gomb nélkül működik.
+    </p>
+
+    <div class="panel crit">
+      <p class="eyebrow" style="margin-bottom:8px">A bizonyíték, ma mérve</p>
+      <p style="margin-bottom:10px">
+        375&times;812&nbsp;px-en, friss látogatóként (nincs mentett süti-döntés):
+      </p>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Elem</th><th class="n">Felső él</th><th class="n">Alsó él</th><th>Állapot</th></tr></thead>
+          <tbody>
+            <tr><td>Süti-sáv</td><td class="n">554</td><td class="n">812</td><td>a képernyő alsó 32%-a</td></tr>
+            <tr><td>„Időpontot foglalok”</td><td class="n">586</td><td class="n">634</td><td class="no">teljesen a sáv alatt · nem kattintható</td></tr>
+            <tr><td>„Megnézem az árakat”</td><td class="n">646</td><td class="n">696</td><td class="no">teljesen a sáv alatt · nem kattintható</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:12px;font-size:.93rem">
+        A <code>document.elementFromPoint()</code> mindkét gomb közepén a süti-sáv
+        elemét adja vissza, nem a linket. A látogatónak <em>előbb</em> el kell
+        intéznie a sütikérdést, csak utána tud foglalni — vagyis a legelső
+        interakciód a saját oldaladdal egy jogi formanyomtatvány.
+      </p>
+    </div>
+
+    <p>
+      Ez a hiba a 2026-08-15-i és a 2026-08-28-i auditban is szerepelt. Amit
+      akkor javasoltunk — a hero felső margóját 7&nbsp;rem-ről 3,5-re —,
+      <strong>ma már kevés lenne</strong>: 56&nbsp;px-et adna, és 153 kell.
+      Lásd a 03-as pontot, ott ki van számolva.
+    </p>
+
+    <div class="panel ok">
+      <p class="eyebrow" style="margin-bottom:8px">És ami jó — egy bekezdésben, aztán megyünk tovább</p>
+      <p style="margin:0">
+        A money page-ek szövege jobb, mint a magyar szépészeti piac 95%-áé:
+        tételes árlisták, számmal kiírt csomag-megtakarítás, korrekt
+        „Külön: 23&nbsp;000&nbsp;Ft” áthúzás (Omnibus-tiszta), névvel ellátott
+        valódi Google-vélemények, saját munkafotók, tiszta GYIK, működő
+        belső linkháló. Az esküvői szépségnaptár egy kifejezetten okos eszköz.
+        A pénz nem a meggyőzésnél vész el.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="sec-head"><span class="sec-n">02</span><h2>Amit ma mértem</h2>
+  <p>Minden szám valódi Chrome-ból, 375&times;812&nbsp;px-en, teljes görgetés után. A rejtett mobilmenüben lévő gombokat kiszűrtem — azokat a vendég nem látja.</p></div>
+
+  <h3 style="margin-bottom:6px">Hol van foglalás-gomb, és hol nincs</h3>
+  <p class="prose" style="margin-bottom:18px;font-size:.95rem">
+    Minden zöld vonás egy látható, kattintható Notino-gomb. A piros mező a
+    <em>leghosszabb</em> szakasz, ahol egy sincs.
+  </p>
+
+  <div class="stack" style="gap:6px">
+    <div class="ruler">
+      <span class="lab">Kezdőlap<small>2 gomb</small></span>
+      <span class="bar">
+        <i class="gap" style="left:4.2%;width:84.3%"></i>
+        <i class="tick" style="left:4.2%"></i><i class="tick" style="left:88.5%"></i>
+      </span>
+      <span class="val">16,5 kép.</span>
+    </div>
+    <div class="ruler">
+      <span class="lab">/szempilla-lifting-zuglo/<small>11 gomb</small></span>
+      <span class="bar">
+        <i class="gap" style="left:45.7%;width:33.6%"></i>
+        <i class="tick" style="left:3.8%"></i><i class="tick" style="left:27.7%"></i><i class="tick" style="left:29.9%"></i><i class="tick" style="left:34.2%"></i><i class="tick" style="left:38.6%"></i><i class="tick" style="left:40.8%"></i><i class="tick" style="left:42.4%"></i><i class="tick" style="left:44%"></i><i class="tick" style="left:45.7%"></i><i class="tick" style="left:79.3%"></i><i class="tick" style="left:90.2%"></i>
+      </span>
+      <span class="val">18,4 kép.</span>
+    </div>
+    <div class="ruler">
+      <span class="lab">/szemoldok-laminalas-zuglo/<small>11 gomb</small></span>
+      <span class="bar">
+        <i class="gap" style="left:49%;width:33.5%"></i>
+        <i class="tick" style="left:3.6%"></i><i class="tick" style="left:27.3%"></i><i class="tick" style="left:34.5%"></i><i class="tick" style="left:38.7%"></i><i class="tick" style="left:42.8%"></i><i class="tick" style="left:44.3%"></i><i class="tick" style="left:45.9%"></i><i class="tick" style="left:47.4%"></i><i class="tick" style="left:49%"></i><i class="tick" style="left:82.5%"></i><i class="tick" style="left:91.2%"></i>
+      </span>
+      <span class="val">19,4 kép.</span>
+    </div>
+    <div class="ruler">
+      <span class="lab">/arckezeles-zuglo/<small>12 gomb</small></span>
+      <span class="bar">
+        <i class="gap" style="left:51.1%;width:36.1%"></i>
+        <i class="tick" style="left:4.3%"></i><i class="tick" style="left:29.8%"></i><i class="tick" style="left:34%"></i><i class="tick" style="left:36.2%"></i><i class="tick" style="left:39%"></i><i class="tick" style="left:39.7%"></i><i class="tick" style="left:42.6%"></i><i class="tick" style="left:44.7%"></i><i class="tick" style="left:48.9%"></i><i class="tick" style="left:51.1%"></i><i class="tick" style="left:87.2%"></i>
+      </span>
+      <span class="val">14,1 kép.</span>
+    </div>
+    <div class="ruler">
+      <span class="lab">/sminkes-zuglo/<small>7 gomb · fizetett landing</small></span>
+      <span class="bar">
+        <i class="gap" style="left:51.2%;width:37.7%"></i>
+        <i class="tick" style="left:4.3%"></i><i class="tick" style="left:36.4%"></i><i class="tick" style="left:40.7%"></i><i class="tick" style="left:45.7%"></i><i class="tick" style="left:48.1%"></i><i class="tick" style="left:51.2%"></i><i class="tick" style="left:88.9%"></i>
+      </span>
+      <span class="val">16,2 kép.</span>
+    </div>
+    <div class="ruler">
+      <span class="lab">/eskuvoi-szepsegnaptar/<small>1 gomb</small></span>
+      <span class="bar">
+        <i class="gap" style="left:0%;width:82.2%"></i>
+        <i class="tick" style="left:82.2%"></i>
+      </span>
+      <span class="val">9,0 kép.</span>
+    </div>
+    <div class="ruler">
+      <span class="lab">Blogcikk<small>3 gomb · szemöldök-ár</small></span>
+      <span class="bar">
+        <i class="gap" style="left:12.6%;width:52.1%"></i>
+        <i class="tick" style="left:12.6%"></i><i class="tick" style="left:64.7%"></i><i class="tick" style="left:84.9%"></i>
+      </span>
+      <span class="val">11,9 kép.</span>
+    </div>
+    <div class="ruler">
+      <span class="lab">/rolam/<small>2 gomb</small></span>
+      <span class="bar">
+        <i class="gap" style="left:12.3%;width:57.9%"></i>
+        <i class="tick" style="left:12.3%"></i><i class="tick" style="left:70.2%"></i>
+      </span>
+      <span class="val">5,7 kép.</span>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><i class="sw" style="background:var(--ok);border-color:var(--ok)"></i> látható foglalás-gomb</span>
+    <span><i class="sw" style="background:var(--crit-bg);border-color:var(--crit)"></i> leghosszabb szakasz gomb nélkül</span>
+    <span>1 képernyő = 812&nbsp;px</span>
+  </div>
+
+  <div style="height:34px"></div>
+
+  <h3 style="margin-bottom:14px">A kezdőlap első képernyője, pixelre</h3>
+  <div class="cols2">
+    <div>
+      <div class="anat">
+        <div class="content"><span>Fejléc</span><span>0–65 · 8%</span></div>
+        <div class="empty"><span>Üres sötét sáv</span><span>65–300 · 29%</span></div>
+        <div class="content"><span>Kicker chip (2 sor, nagybetű)</span><span>300–353 · 7%</span></div>
+        <div class="content"><span>H1 „Kozmetikus Zuglóban.”</span><span>373–409 · 4%</span></div>
+        <div class="content"><span>Alcím (5 sor)</span><span>433–565 · 16%</span></div>
+        <div class="blocked"><span>Két gomb — takarva</span><span>597–707</span></div>
+        <div class="blocked"><span>Süti-sáv</span><span>554–812 · 32%</span></div>
+      </div>
+    </div>
+    <div class="prose" style="font-size:.95rem">
+      <p>
+        A telefonképernyő <strong>61%-án</strong> nincs semmi, ami elad: 29% üres
+        sötét sáv, 32% jogi szöveg. Ami marad: egy márkanevet ismétlő chip, egy
+        kategórianév H1-ként, és öt sor felsorolás.
+      </p>
+      <p>
+        A gombok fizikailag ott vannak, de a kattintás a süti-sávra megy.
+        A látogató nem tudja, hogy „nem működik” — azt éli meg, hogy megnyomta
+        és nem történt semmi. Ez rosszabb, mint ha ott sem lenne gomb.
+      </p>
+      <p style="margin:0">
+        A négy money page-en <strong>ez a hiba nincs meg</strong>: ott a hero-gomb
+        531–579&nbsp;px-en van, a sáv 593-tól. Ez kizárólag a kezdőlap baja — és a
+        kezdőlap viszi a megjelenéseid nagyjából 70%-át.
+      </p>
+    </div>
+  </div>
+
+  <div style="height:34px"></div>
+
+  <h3 style="margin-bottom:6px">Ami kész a gépeden, de nincs élesben</h3>
+  <p class="prose" style="margin-bottom:16px;font-size:.95rem">
+    A working tree ma hajnalban is változott (00:06). Három új komponens készen
+    áll — <code>TrustBar</code>, <code>BookingAssurance</code>,
+    <code>StickyBookBar</code> —, de az utolsó deploy 09-07 20:55-kor ment ki,
+    és ezek utána születtek. A táblázat a <em>valóban élő</em> HTML-ből készült.
+  </p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Jel</th><th>Kezdő</th><th>Szempilla</th><th>Szemöldök</th><th>Arckez.</th><th>Smink</th><th>Rólam</th><th>Naptár</th><th>Blog</th></tr></thead>
+      <tbody>
+        <tr><td>„HÍVJ MOST!” (a régi, hangos telefongomb)</td><td class="no">él</td><td class="no">él</td><td class="no">él</td><td class="no">él</td><td class="no">él</td><td class="no">él</td><td class="no">él</td><td class="no">él</td></tr>
+        <tr><td>„Inkább telefonálok” (a javított)</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        <tr><td>Kockázat-oldó sor a gomb alatt</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        <tr><td>★ 5,0 a bizalom-sávban</td><td class="dash">—</td><td class="yes">él</td><td class="yes">él</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        <tr><td>Régi, szám nélküli „Google” cella</td><td class="no">él</td><td class="no">él</td><td class="no">él</td><td class="no">él</td><td class="no">él</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        <tr><td>Ragadós foglalás-sáv mobilon</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        <tr><td>Üres „Elégedettségi garancia” jelvény</td><td class="dash">—</td><td class="no">él</td><td class="no">él</td><td class="no">él</td><td class="no">él</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        <tr><td>Cikkhez kötött ajánlat-doboz</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="yes">él</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="prose" style="margin-top:16px">
+    <strong>Az egész auditban ez a legolcsóbb tétel:</strong> egy deploy. A
+    telefongomb-lefokozás, a bizonyíték a chipben, a kockázat-oldó sor — mind
+    megvan, csak nem látja senki. Előtte futtasd le a <code>npm run validate</code>-et:
+    a <code>deploy</code> a working tree-t viszi ki, nem a commitot, tehát egy
+    félbehagyott szerkesztés is kimenne vele.
+  </p>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="sec-head"><span class="sec-n">03</span><h2>Három beavatkozás, ma</h2>
+  <p>Sorrendben: amelyik a legtöbb pénzt hozza vissza a legkevesebb munkából.</p></div>
+
+  <div class="stack-lg">
+
+    <!-- 1 -->
+    <div>
+      <div class="tagrow">
+        <span class="tag crit">1 · ma, 40 perc</span>
+        <span class="tag">nagy hatás</span>
+        <span class="tag">mechanikai</span>
+        <span class="tag">L29 · L33</span>
+      </div>
+      <h3 style="margin-bottom:12px">Szabadítsd fel a kezdőlap gombját — és deployolj</h3>
+      <p class="prose">
+        153&nbsp;px-et kell nyerni, hogy a gombsor alsó éle a sütisáv fölé kerüljön.
+        A hero felső margója ebből 112-t tud adni, tehát önmagában nem elég.
+        Három lépés, együtt 188&nbsp;px:
+      </p>
+      <ol class="steps" style="max-width:var(--w-prose);margin:14px 0 4px">
+        <li><span><strong>−80&nbsp;px</strong> — a hero mobil felső margója: <code>pt-[calc(var(--header-h)+7rem)]</code> → <code>pt-[calc(var(--header-h)+2rem)]</code>. Az <code>sm:</code> érték marad. Ezzel a 29%-os üres sötét sávból is lejön a fele.</span></li>
+        <li><span><strong>−53&nbsp;px</strong> — az alcím 5 sorról 3-ra rövidül (kész szöveg lent).</span></li>
+        <li><span><strong>−55&nbsp;px</strong> — a második gomb szöveges linkké alakul, így a gombsor egy sor lesz, nem kettő. Ez a <code>DESIGN.md</code> saját szabályát is helyreteszi: „több mint egy primary CTA per szekció” tiltott, most viszont két azonos méretű pill áll egymás mellett.</span></li>
+      </ol>
+
+      <div class="paste">
+        <div class="paste-head"><span class="paste-lab">A · eredmény-első · ezt teszteld először</span><button type="button" data-copy>Másol</button></div>
+        <p class="paste-txt">Felkelsz, és hat-nyolc hétig nem nyúlsz a szempillaspirálhoz. Szempilla lifting 12 000 Ft, szemöldök laminálás 11 000 Ft, Janssen arckezelés 16 000 Ft-tól — Zuglóban, az Egressy úton.</p>
+      </div>
+      <div class="paste">
+        <div class="paste-head"><span class="paste-lab">B · a figyelem az ígéret</span><button type="button" data-copy>Másol</button></div>
+        <p class="paste-txt">Egyszerre egy vendéget fogadok az Egressy úton, ezért az időpontod végig a tiéd. Szempilla lifting 12 000 Ft, szemöldök laminálás 11 000 Ft, arckezelés 16 000 Ft-tól.</p>
+      </div>
+      <div class="paste">
+        <div class="paste-head"><span class="paste-lab">C · a legrövidebb, ha 2 sor kell</span><button type="button" data-copy>Másol</button></div>
+        <p class="paste-txt">Szempilla lifting, szemöldök laminálás és Janssen arckezelés 11 000 Ft-tól — Zuglóban, az Egressy úton.</p>
+      </div>
+
+      <p class="prose" style="margin-top:14px">
+        A második gomb helyett: ugyanaz a szöveg, de sima aláhúzott link a gomb alatt.
+      </p>
+      <div class="paste">
+        <div class="paste-head"><span class="paste-lab">Másodlagos — szöveges link, nem gomb</span><button type="button" data-copy>Másol</button></div>
+        <p class="paste-txt">Előbb az árakat nézném →</p>
+      </div>
+
+      <div class="panel warn" style="margin-top:16px">
+        <p style="margin:0;font-size:.94rem">
+          <strong>Ha még ennyi sem elég:</strong> a süti-sáv azért 258&nbsp;px, mert
+          hat sor jogi szöveget visz. A tájékoztatási kötelezettség három sorból is
+          teljesíthető, a részletek a „Részletek” linken. <strong>A consent-logikához
+          ne nyúlj</strong> — a gombokhoz, a tárolt döntéshez, a
+          <code>gtag consent update</code>-hez semmiképp. Csak a bekezdés hossza a kérdés,
+          és az is a te döntésed, nem az enyém.
+        </p>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div>
+      <div class="tagrow">
+        <span class="tag crit">2 · ma, 30 perc</span>
+        <span class="tag">nagy hatás</span>
+        <span class="tag">bizalmi + gazdasági</span>
+        <span class="tag">L3 · L9 · üzenet-egyezés</span>
+        <span class="tag crit">új találat</span>
+      </div>
+      <h3 style="margin-bottom:12px">A foglalórendszer három szolgáltatásra többet kér, mint amit az oldal ígér</h3>
+      <p class="prose">
+        Végigolvastam a Notino-profilod mind a 25 tételét, és összevetettem az
+        oldal árlistáival. A vendég a weboldalon lát egy árat, átkattint, és
+        <strong>drágábbat talál</strong> — pontosan abban a másodpercben, amikor
+        a legkevésbé bírja el.
+      </p>
+      <div class="tw" style="margin:14px 0">
+        <table>
+          <thead><tr><th>Szolgáltatás</th><th class="n">Weboldalon</th><th class="n">Notinón</th><th class="n">Eltérés</th><th>Hol él a rossz szám</th></tr></thead>
+          <tbody>
+            <tr><td>Sminktanácsadás / <em>Sminkoktatás</em></td><td class="n">15 000 Ft</td><td class="n">20 000 Ft</td><td class="n no">+5 000 · +33%</td><td>sminkes-zuglo.astro:32</td></tr>
+            <tr><td>Szemöldök formázás és festés</td><td class="n">5 000 Ft</td><td class="n">6 000 Ft</td><td class="n no">+1 000 · +20%</td><td>két money page árlistája</td></tr>
+            <tr><td>Szemöldök- és szempillafestés</td><td class="n">7 000 Ft</td><td class="n">8 000 Ft</td><td class="n no">+1 000 · +14%</td><td>két money page árlistája</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="prose">
+        Ez nem árkifogás, hanem bizalmi törés: „ha ebben nem stimmel, mi másban nem?”
+        Jogilag is kockázat — a meghirdetett, de meg nem tartott ár az Fttv. szerint
+        megtévesztő kereskedelmi gyakorlat lehet. <strong>Döntsd el, melyik szám az
+        igaz, és vidd át mindenhova.</strong>
+      </p>
+
+      <h4 style="margin:20px 0 8px">És négy szolgáltatásod két néven fut</h4>
+      <div class="tw">
+        <table>
+          <thead><tr><th>A weboldalon ez a neve</th><th>A foglalórendszerben ez</th><th>Mi történik</th></tr></thead>
+          <tbody>
+            <tr><td>Menyasszonyi smink — a nagy napon</td><td><strong>Esküvői smink</strong></td><td class="no">a 30 000-es tételt nem „menyasszonyinak” hívják</td></tr>
+            <tr><td>Menyasszonyi próbasmink</td><td>Menyasszonyi sminkpróba</td><td>felismerhető, de nem azonos</td></tr>
+            <tr><td>Nappali smink</td><td>Mindennapi smink</td><td>felismerhető</td></tr>
+            <tr><td>Sminktanácsadás</td><td>Sminkoktatás</td><td class="no">más név <em>és</em> más ár</td></tr>
+            <tr><td>Örömanya smink (önálló tétel, 15 000 Ft)</td><td class="dash">nincs ilyen tétel</td><td class="no">az „Alkalmi smink” alá tartozik — a vendég nem tudja</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="prose" style="margin-top:14px">
+        A megoldás olcsóbb, mint gondolnád, és a blogcikkeken már működik nálad:
+        <strong>hídszöveg minden foglalás-gomb alá.</strong> A Notino „Foglalás”
+        gombjai <code>&lt;button&gt;</code>-ök, nem linkek — egyetlen szolgáltatásra
+        <em>nem lehet</em> közvetlen hivatkozást adni —, tehát a listát felismeréssé
+        kell tenni keresés helyett.
+      </p>
+
+      <div class="paste">
+        <div class="paste-head"><span class="paste-lab">Híd — /szempilla-lifting-zuglo/</span><button type="button" data-copy>Másol</button></div>
+        <p class="paste-txt">A gomb a Notino foglalási oldalára visz, új ablakban. Nyisd le a „Kozmetika” kategóriát, és ezt keresd: Szempilla lifting + szempillafestés — 12 000 Ft, 1 óra 15 perc. Kártyaadatot nem kérek, fizetni nálam fogsz.</p>
+      </div>
+      <div class="paste">
+        <div class="paste-head"><span class="paste-lab">Híd — /szemoldok-laminalas-zuglo/</span><button type="button" data-copy>Másol</button></div>
+        <p class="paste-txt">A gomb a Notino foglalási oldalára visz, új ablakban. Nyisd le a „Kozmetika” kategóriát, és ezt keresd: Szemöldök laminálás Festéssel Formázással — 11 000 Ft, 1 óra. Kártyaadatot nem kérek, fizetni nálam fogsz.</p>
+      </div>
+      <div class="paste">
+        <div class="paste-head"><span class="paste-lab">Híd — /sminkes-zuglo/, a menyasszonyi blokknál</span><button type="button" data-copy>Másol</button></div>
+        <p class="paste-txt">A foglalási oldalon a nagy napi smink „Esküvői smink” néven fut (30 000 Ft), a próba pedig „Menyasszonyi sminkpróba” (15 000 Ft). Ha mindkettőt kéred, a „Menyasszonyi csomag” a tiéd: 39 000 Ft. Örömanya sminket az „Alkalmi smink” alatt találsz — írd meg üzenetben, hogy örömanyáról van szó, és összehangolom a két időpontot.</p>
+      </div>
+      <div class="paste">
+        <div class="paste-head"><span class="paste-lab">Híd — /arckezeles-zuglo/</span><button type="button" data-copy>Másol</button></div>
+        <p class="paste-txt">A gomb a Notino foglalási oldalára visz, új ablakban. Nyisd le a „Kozmetika” kategóriát, azon belül a „Kozmetikai kezelés” csoportot — a protokollok pontosan azon a néven szerepelnek, ahogy itt olvastad. Ha nem tudsz választani, írj egy sort, és megmondom, melyik a tiéd.</p>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div>
+      <div class="tagrow">
+        <span class="tag crit">3 · ma, 45 perc</span>
+        <span class="tag">nagy hatás</span>
+        <span class="tag">kockázati</span>
+        <span class="tag">L28</span>
+      </div>
+      <h3 style="margin-bottom:12px">Töltsd fel a garancia-jelvényt — vagy vedd le</h3>
+      <p class="prose">
+        Mind a négy money page-en ott van egy arany jelvény pajzs ikonnal,
+        „Elégedettségi garancia” felirattal, és mögötte a forráskódban sincs
+        egyetlen szó sem. Ez a lap legdrágább üres helye. Szépészetben a domináns
+        súrlódás nem az, hogy „nem leszek elég szép”, hanem hogy
+        <strong>elrontják</strong> — és pont ez a hely áll üresen. Jogilag pedig
+        rosszabb, mint a semmi: nem old kockázatot, de vitában rád olvasható.
+      </p>
+
+      <div class="paste">
+        <div class="paste-head"><span class="paste-lab">A · korrekciós garancia — ezt javaslom</span><button type="button" data-copy>Másol</button></div>
+        <p class="paste-txt">Ha a kezelés után három napon belül szólsz, hogy nem az lett, amiben megegyeztünk, díjmentesen korrigálom. Nem kérdezek vissza, és nem kell indokolnod.</p>
+      </div>
+      <div class="paste">
+        <div class="paste-head"><span class="paste-lab">B · forma-garancia — pilla és szemöldök</span><button type="button" data-copy>Másol</button></div>
+        <p class="paste-txt">Ha az ív nem ül, hét napon belül ingyen igazítok rajta. Ez nem jóindulat, hanem szabály — ezért merem leírni.</p>
+      </div>
+      <div class="paste">
+        <div class="paste-head"><span class="paste-lab">C · a legszűkebb, ha az újracsinálás nem megy</span><button type="button" data-copy>Másol</button></div>
+        <p class="paste-txt">Ha valami nem stimmel, hívj a kezelés után három napon belül. Amit korrigálni lehet, ingyen korrigálom — amit nem, azt a következő alkalom árából levonom.</p>
+      </div>
+
+      <p class="prose" style="margin-top:14px">
+        <strong>Jogi szűrő.</strong> Csak azt írd ki, amit be is tartasz: a
+        meghirdetett garancia fogyasztói ígéret, amin a vendég jogot szerez.
+        Ha egyik változatot sem tudod vállalni, a helyes lépés a
+        <strong>jelvény levétele</strong>, nem a tartalom nélküli felirat meghagyása.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="sec-head"><span class="sec-n">04</span><h2>A vásárlási út — megérkezem → lefoglaltam</h2>
+  <p>Mobilon, kezdőlapról indulva. A lépéseket ma jártam végig; a naptár utáni három lépést a foglalás megkezdése nélkül nem tudtam újra megnézni, azok a 2026-08-28-i bejárásból származnak.</p></div>
+
+  <div class="cols2">
+    <div>
+      <ol class="steps">
+        <li><span><strong>Süti-sáv elintézése</strong> — kötelező, mert takarja a gombot</span></li>
+        <li><span>„Időpontot foglalok” → <strong>új fül, notino.hu</strong></span></li>
+        <li><span>A <strong>Notino saját süti-modálja</strong> — teljes képernyős, és a „csak szükséges” egy apró link a tetején, nem gomb</span></li>
+        <li><span>„Kozmetika” kategória lenyitása</span></li>
+        <li><span>Görgetés <strong>25 szolgáltatáson</strong> át a helyesig (három alcsoportban)</span></li>
+        <li><span>A tétel „Foglalás” gombja</span></li>
+        <li><span>Nap választása</span></li>
+        <li><span>Idősáv választása</span></li>
+        <li><span>Megerősítés</span></li>
+        <li><span>Név, e-mail, telefonszám — <strong>+3 mező</strong></span></li>
+      </ol>
+    </div>
+    <div class="prose" style="font-size:.95rem">
+      <p><strong>Minimum 9 érintés és 3 mező</strong> annak, aki már <em>tudja</em>, melyik kezelést akarja. Két domain, két süti-fal, és két teljesen különböző márkahang.</p>
+      <p><strong>A hangnem-váltás.</strong> Te tegezel: „Foglalj időpontot”, „a te bőröd”. A Notino magáz: „Foglaljon most”, „Hívjon”, „Az Ön személyes adatait”. A „Menyasszonyi sminkpróba” leírása ott ráadásul a Notino sablonszövege — harmadik személyben: „A próba során <em>kiválasztja</em> a stílusához illő sminket.” Ez nem te vagy.</p>
+      <p><strong>A tiltás, ami elsőként fogadja.</strong> A Notinón mind az öt pilla- és szemöldök-kezelés leírásának <em>első mondata</em> ez: „Figyelem ez a szolgáltatás várandósság és szoptatás alatt nem javasolt!” Ez az utolsó dolog, amit a vendég a Foglalás gomb megnyomása előtt olvas. A haszon utána jön — ha egyáltalán eljut odáig.</p>
+      <p style="margin:0"><strong>Három elgépelés is él ott:</strong> „vá<em>rn</em>adósság”, „ter<em>mè</em>kekkel”, „több héten <em>àt</em>”. Két perc mind a három.</p>
+    </div>
+  </div>
+
+  <div class="paste" style="margin-top:20px">
+    <div class="paste-head"><span class="paste-lab">A figyelmeztetés áthelyezve — a leírás VÉGÉRE, egységes szöveggel</span><button type="button" data-copy>Másol</button></div>
+    <p class="paste-txt">Fontos: várandósság és szoptatás alatt ezt a kezelést nem vállalom. Nem azért, mert veszélyes lenne, hanem mert a hormonális változás miatt az eredmény kiszámíthatatlan — kár lenne kifizetned valamit, ami nem áll be.</p>
+  </div>
+  <div class="paste">
+    <div class="paste-head"><span class="paste-lab">A szempilla lifting leírásának ELSŐ mondata helyette</span><button type="button" data-copy>Másol</button></div>
+    <p class="paste-txt">Reggel felkelsz, és hat-nyolc hétig nem nyúlsz a spirálhoz. A saját pilláidat emelem meg a tövüknél, koreai technikával — ragasztó és idegen szál nélkül, festéssel együtt.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="sec-head"><span class="sec-n">05</span><h2>A nyolc hajtóerő — melyikre ütsz, és melyikre nem</h2>
+  <p>A Life Force 8 nem kelthető, csak becsatornázható. A kérdés nem az, hogy melyik szimpatikus, hanem hogy melyik dolgozik ebben az iparágban.</p></div>
+
+  <div class="tw" style="margin-bottom:22px">
+    <table>
+      <thead><tr><th>Hajtóerő</th><th>Erő itt</th><th>Mennyire szólítod meg ma</th></tr></thead>
+      <tbody>
+        <tr><td><strong>3. Mentesség a félelemtől, fájdalomtól, veszélytől</strong></td><td class="no">domináns</td><td class="no">alig — ez a legnagyobb kihasználatlan tartalék</td></tr>
+        <tr><td><strong>5. Kényelmes életkörülmények</strong></td><td>erős</td><td class="yes">jól — „Felkelsz, és kész vagy”. De nincs kiszámolva.</td></tr>
+        <tr><td>7. A szeretteink gondozása és védelme</td><td>erős (esküvői ág)</td><td class="no">sehol</td></tr>
+        <tr><td>8. Társadalmi elfogadottság</td><td>közepes</td><td>részben — fotók, esemény, „mindenki dicsérte”</td></tr>
+        <tr><td>4. Szexuális társ / vonzerő</td><td>közepes</td><td>részben — „nyitottabb tekintet”</td></tr>
+        <tr><td>1. Túlélés, az élet élvezete</td><td>gyenge</td><td class="dash">nem releváns</td></tr>
+        <tr><td>2. Étel és ital</td><td>nincs</td><td class="dash">—</td></tr>
+        <tr><td>6. Felülmúlni másokat</td><td>gyenge</td><td class="dash">nem is kell — a márkahangoddal ütközne</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="prose stack">
+    <h3>A 3-as: nem attól fél, hogy nem lesz szép. Attól fél, hogy elrontod.</h3>
+    <p>
+      Ez a szépészet alapszabálya, és az egész oldalad a másik irányba ír. Végigolvasva
+      a négy money page-t: egyetlen mondat sincs, ami kimondaná és feloldaná azt a
+      félelmet, ami minden új vendégben ott van. Nem félelemkeltésről beszélek — a vendég
+      <em>már fél</em>. Az a dolgod, hogy előbb mondd ki nála, mint ő.
+    </p>
+    <p>
+      Ez a legerősebb szövegtípus, ami hiányzik az oldalról: egy blokk, ami a vendég
+      félelmét idézi, és a te eljárásoddal oldja fel. Így nézne ki a pilla-oldalon:
+    </p>
+
+    <div class="paste">
+      <div class="paste-head"><span class="paste-lab">Új szekció a szempilla-oldalra, a csomagok ELÉ · H2 + törzs</span><button type="button" data-copy>Másol</button></div>
+      <p class="paste-txt">Amitől a legtöbben félnek — és amiért nem kell.
+
+„Tönkremegy a saját pillám.”
+A lifting nem tesz rá semmit és nem is vesz el belőle. A saját szálat emelem meg a tövénél, ragasztó és idegen szál nélkül. Amikor a hatás kifut, a pillád pontosan olyan lesz, amilyen most — csak egyenesebb. Nincs mit kinőni, és nincs visszatöltés sem.
+
+„Csodálkozó arcom lesz.”
+A hajlítás erősségét te választod meg, mielőtt bármihez hozzányúlnék. A legtöbben a legszelídebbet kérik, mert azt a kollégák nem tudják beazonosítani — csak annyit mondanak, hogy kipihentnek tűnsz.
+
+„Az én pillám túl rövid ehhez.”
+A lifting nem hosszabbít, hanem irányt ad. Rövid pillán ezért látszik gyakran a legnagyobb a különbség: ami eddig lefelé állt, most előre néz.
+
+„Mi van, ha nem tetszik?”
+Ha a kezelés után három napon belül szólsz, hogy nem az lett, amiben megegyeztünk, díjmentesen korrigálom.</p>
+    </div>
+
+    <h3 style="margin-top:12px">Az 5-ös: a legjobb mondatod, számok nélkül</h3>
+    <p>
+      „Reggel nincs többé szempillaspirál — felkelsz és kész vagy.” Ez a site
+      legjobb mondata, és a kezdőlapi szolgáltatás-kártyán ül. De nincs mögötte
+      egyetlen szám sem, pedig a számítás magától adódik, és igaz.
+    </p>
+    <div class="paste">
+      <div class="paste-head"><span class="paste-lab">Ár-indoklás a 12 000 Ft mellé · L9 boríték-teszt</span><button type="button" data-copy>Másol</button></div>
+      <p class="paste-txt">Hat-nyolc hét. Ez körülbelül 45 reggel, amikor nem kell tust és spirált felvinned — napi 285 Ft. Öt-tíz percet kapsz vissza minden reggel, és a fürdőszobapolcodról is elmarad egy tétel: egy jó szempillaspirál 6–9 ezer forint, és két hónap alatt el is fogy.</p>
+    </div>
+
+    <h3 style="margin-top:12px">A 7-es: az esküvői ág teljes vakfoltja</h3>
+    <p>
+      A menyasszony nem magának csinálja. Az anyja is ott lesz, a fotókat a
+      gyerekei fogják nézni, és a legmélyebb félelme nem az, hogy nem lesz szép —
+      hanem hogy <em>a fotókon</em> nem lesz az, örökre. Az esküvői oldalon és a
+      naptárban erről egyetlen mondat sem szól. Az örömanya-smink ráadásul ott van
+      az árlistádon, csak sosem mondod el, kinek szól.
+    </p>
+    <div class="paste">
+      <div class="paste-head"><span class="paste-lab">Bekezdés a /sminkes-zuglo/ menyasszonyi blokkjába</span><button type="button" data-copy>Másol</button></div>
+      <p class="paste-txt">Az esküvői smink nem egy napra készül, hanem a fotókra, amiket húsz év múlva is elővesztek. Ezért fixálok úgy, ahogy fixálok, és ezért készítek a próbasminkről fotót természetes fényben és vakuval is: hogy előre lásd, milyen leszel a képeken. És ezért van külön ár az örömanya sminkre — mert azon a reggelen az anyukád is szeretne úgy kinézni, ahogy a képekre emlékezni fog.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="sec-head"><span class="sec-n">06</span><h2>Headline-audit</h2>
+  <p>Minden H1 és a döntést vivő H2-k, 10-es skálán. A pontszám azt méri, hogy a cím megmondja-e, <em>kinek szól</em> és <em>mit nyer</em> — nem azt, hogy szép-e.</p></div>
+
+  <div class="stack-lg">
+
+    <div>
+      <div class="find-h"><span class="find-id">H1 · KEZDŐLAP</span><span class="find-t">„Kozmetikus Zuglóban.”</span><span class="tag crit">4 / 10</span></div>
+      <p class="prose" style="font-size:.95rem">Kategória plusz helynév. Semmit nem nyerek tőle, és ráillik minden zuglói kozmetikusra. <strong>Ütközés:</strong> az <code>index.astro</code> kommentje rögzíti, hogy ez tudatos SEO-döntés — a „kozmetikus” kulcsszóra a 2,9. pozíción állsz. Ezt nem írom felül. Mind a három alternatíva megtartja a kulcsszót az elején.</p>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">A · a legkisebb változtatás</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Kozmetikus Zuglóban, egy vendéggel egy időben.</p></div>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">B · bizonyítékkal</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Kozmetikus Zuglóban — 5,0 a Google-on, 60+ értékelésből.</p></div>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">C · eredménnyel · ezt teszteld, ha mered</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Kozmetikus Zuglóban. Reggelente hat héttel kevesebb tennivaló.</p></div>
+    </div>
+
+    <div>
+      <div class="find-h"><span class="find-id">H1 · SZEMPILLA</span><span class="find-t">„Szempilla lifting Budapesten, Zuglóban.”</span><span class="tag warn">6 / 10</span></div>
+      <p class="prose" style="font-size:.95rem">Kulcsszó és geo rendben, haszon nulla. Az alcím alatta viszont kitűnő (ár, idő, tartósság) — a headline nem tartja a tempót vele.</p>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">A · ezt teszteld először</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Szempilla lifting Budapesten — hat-nyolc hétig nem nyúlsz a spirálhoz.</p></div>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">B · ár-horgony</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Szempilla lifting Zuglóban, 12 000 Ft — a festés benne van.</p></div>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">C · a fő kifogásra</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Szempilla lifting Budapesten, ragasztó és műszempilla nélkül.</p></div>
+    </div>
+
+    <div>
+      <div class="find-h"><span class="find-id">H1 · SZEMÖLDÖK</span><span class="find-t">„Szemöldök laminálás Budapesten — dúsabb, rendezett ív tű nélkül.”</span><span class="tag ok">8 / 10</span></div>
+      <p class="prose" style="font-size:.95rem">A site legjobb H1-e: kulcsszó, haszon és a fő kifogás feloldása egy sorban. Csak azért nem 10, mert az USP-d — hogy a formázás és a festés benne van az árban — nem itt van, hanem egy blogcikkben.</p>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">A · az USP előre · ezt javaslom</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Szemöldök laminálás Budapesten — a formázás és a festés az árban van, nem külön tétel.</p></div>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">B · árral</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Szemöldök laminálás Budapesten — dúsabb ív tű nélkül, 11 000 Ft-ért.</p></div>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">C · tartóssággal</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Szemöldök laminálás Budapesten — hat hétig magától áll a formája.</p></div>
+    </div>
+
+    <div>
+      <div class="find-h"><span class="find-id">H1 · ARCKEZELÉS</span><span class="find-t">„Arckezelés Budapesten, Zugló szívében — bőrtípusra szabva.”</span><span class="tag warn">6 / 10</span></div>
+      <p class="prose" style="font-size:.95rem">A „Zugló szívében” töltelék, a „bőrtípusra szabva” pedig ráillik minden kozmetikusra. Az igazi megkülönböztetőd az, hogy <em>bőranalízissel kezdesz, és a protokoll abból következik</em> — ez a mondat a H1-be való.</p>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">A · a mechanizmus · ezt javaslom</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Arckezelés Budapesten — bőranalízissel kezdünk, nem protokollal.</p></div>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">B · konkrétsággal</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Arckezelés Zuglóban: hét Janssen protokoll, 16 000 Ft-tól.</p></div>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">C · a sorrend kimondva</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Arckezelés Budapesten — előbb megnézzük a bőröd, aztán döntünk.</p></div>
+    </div>
+
+    <div>
+      <div class="find-h"><span class="find-id">H1 · SMINK</span><span class="find-t">„Esküvői és alkalmi smink Budapesten.”</span><span class="tag crit">5 / 10</span></div>
+      <p class="prose" style="font-size:.95rem">Kategórianév — és ez a <strong>fizetett landing</strong>, ide veszel kattintást. Aki 30 ezer forintos döntést mérlegel, annak az első sorban kell megkapnia azt, amitől fél.</p>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">A · a fő félelemre · ezt teszteld először</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Esküvői smink Budapesten, 30 000 Ft — kibírja az ölelést, a könnyet és a táncot.</p></div>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">B · a mechanizmus</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Esküvői smink Budapesten — a próbasmink fotója a nagy napi tervrajz.</p></div>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">C · az identitásra</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Esküvői smink Budapesten — a fotókon is magadat látod, nem egy idegent.</p></div>
+    </div>
+
+    <div>
+      <div class="find-h"><span class="find-id">H1 · RÓLAM</span><span class="find-t">„Egy kozmetikus, aki egyszerre csak rád figyel.”</span><span class="tag ok">8 / 10</span></div>
+      <p class="prose" style="font-size:.95rem">Jó. Maradjon. A baj alatta van: a <code>rolam.astro:101</code>-ben a saját TODO-d áll a képesítéseidről — miközben a Notino-profilodon ott a kész szöveg. Lásd a social proof szekciót.</p>
+    </div>
+
+    <div>
+      <div class="find-h"><span class="find-id">H1 · NAPTÁR</span><span class="find-t">„Mikor csináltassam az esküvőm előtt?”</span><span class="tag ok">9 / 10</span></div>
+      <p class="prose" style="font-size:.95rem">A legjobb headline az egész oldalon. Kérdés, amire a menyasszony válasza fájdalmas felismerés: „nem tudom.” Nyitott hurok, azonnal záródik az eszközzel. Ne nyúlj hozzá.</p>
+    </div>
+
+    <div>
+      <div class="find-h"><span class="find-id">H1 · BLOG + 404</span><span class="find-t">„Amit a szalonban elmondanék — most leírva.” / „Ez az oldal nincs meg — de a kezelés igen.”</span><span class="tag ok">7 és 8 / 10</span></div>
+      <p class="prose" style="font-size:.95rem">Mindkettő emberi hangú és működik. Maradjanak.</p>
+    </div>
+
+    <hr style="border:0;border-top:1px solid var(--rule);margin:6px 0">
+
+    <h3>A döntést vivő H2-k</h3>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>H2 · hol</th><th class="n">Pont</th><th>Baj</th></tr></thead>
+        <tbody>
+          <tr><td>„Az ár nálam: 11 000 Ft — és mi van benne tételesen.” · szemöldök</td><td class="n yes">9</td><td>semmi. Ez a minta, amit a többi oldalra vinni kell.</td></tr>
+          <tr><td>„Nem csak a festéket.” · szempilla, smink</td><td class="n yes">8</td><td>jó — kifogást old, kíváncsiságot nyit</td></tr>
+          <tr><td>„Nem fotó. Videó — minden szögből.” · smink</td><td class="n yes">8</td><td>jó</td></tr>
+          <tr><td>„Foglalástól az eredményig — négy lépés.” · kezdőlap</td><td class="n">7</td><td>a második kérdésre válaszol, ez helyes</td></tr>
+          <tr><td>„Te maradsz te. Csak ragyogóbban.” · smink</td><td class="n">7</td><td>szép, de nem konkrét</td></tr>
+          <tr><td>„Akik már voltak nálam.” · kezdőlap</td><td class="n">6</td><td>a szám hiányzik belőle</td></tr>
+          <tr><td>„Amit a legtöbben kérdeznek.” · kezdőlap</td><td class="n">6</td><td>„a legtöbben” homályos</td></tr>
+          <tr><td>„Talán pont egy ilyen időszakot élsz meg…” · kezdőlap</td><td class="n warn">5</td><td>„talán” + három pont = bizonytalanság</td></tr>
+          <tr><td>„Eredmények a vendégeimmel.” · kezdőlap</td><td class="n warn">5</td><td>elvont; a galéria konkrét</td></tr>
+          <tr><td>„Válaszd azt, ami Neked szól.” · <strong>négy oldalon</strong></td><td class="n no">4</td><td>sablon — <em>és</em> nyelvi hiba: tegező szövegben a „Neked” nagybetűvel hibás</td></tr>
+          <tr><td>„Négy személyre szabott kezelés.” · kezdőlap</td><td class="n no">3</td><td>szekciócímke, nulla ok a továbbolvasásra</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cols2" style="margin-top:16px">
+      <div>
+        <div class="paste"><div class="paste-head"><span class="paste-lab">„Négy személyre szabott kezelés.” helyett</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Négy kezelés, 11 000 Ft-tól.</p></div>
+        <div class="paste"><div class="paste-head"><span class="paste-lab">„Talán pont egy ilyen időszakot…” helyett</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Három helyzet, amiben a legtöbben hozzám jönnek.</p></div>
+        <div class="paste"><div class="paste-head"><span class="paste-lab">„Akik már voltak nálam.” helyett</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">60+ értékelés a Google-on, 5,0 átlaggal. Négy közülük.</p></div>
+      </div>
+      <div>
+        <div class="paste"><div class="paste-head"><span class="paste-lab">„Válaszd azt, ami Neked szól.” helyett · szempilla és szemöldök</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Külön 23 000, együtt 18 000.</p></div>
+        <div class="paste"><div class="paste-head"><span class="paste-lab">Ugyanez · smink</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Külön 45 000, csomagban 39 000.</p></div>
+        <div class="paste"><div class="paste-head"><span class="paste-lab">„Amit a legtöbben kérdeznek.” helyett</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Amit foglalás előtt kérdezni szoktak.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="sec-head"><span class="sec-n">07</span><h2>Ajánlat-audit</h2>
+  <p>Árazás, garancia, kockázat-átvállalás, sürgetés. Ez az a szint, ahol a legnagyobb egyszeri ugrás van benne — és az egyetlen szint, ahol nem szövegezni kell, hanem dönteni.</p></div>
+
+  <div class="stack-lg">
+
+    <div>
+      <h3 style="margin-bottom:10px">Árazás — ez a szinted a legerősebb, ne rontsd el</h3>
+      <div class="cols2">
+        <div class="panel ok">
+          <p class="eyebrow" style="margin-bottom:8px">Amihez ne nyúlj</p>
+          <ul class="tight" style="font-size:.94rem">
+            <li>Kerek ezresek végig (12 000 / 18 000 / 39 000 / 51 000). Prémium pozícióban ez a helyes forma — a <span class="mono">.990</span> mérhetően rontja az észlelt minőséget.</li>
+            <li>A csomag-horgonyok: „Külön: 23 000 Ft” áthúzva, mellette a 18 000. Ez nem hamis „eredeti ár”, hanem valós összeadás — Omnibus-tiszta.</li>
+            <li>A napi lebontás („≈ napi 430 Ft — kevesebb egy kávénál”). Ez a legjobb ár-fájdalomcsökkentőd.</li>
+            <li>Tételes árlisták, „mi van benne” blokkok, rejtett díj nélkül.</li>
+          </ul>
+        </div>
+        <div class="panel crit">
+          <p class="eyebrow" style="margin-bottom:8px">Amit ma javíts</p>
+          <ul class="tight" style="font-size:.94rem">
+            <li>A három ár, ami a foglalórendszerben magasabb (lásd 03/2).</li>
+            <li><strong>„Az árak tájékoztató jellegűek”</strong> — a smink oldal ártáblája alatt, <em>negyven pixellel</em> a saját „Átlátható, fix árak” mondatod után. Ez a mondat magától lerombolja az oldal legnagyobb erősségét.</li>
+            <li>A belépő ár két számmal fut: a kezdőlap meta-leírása „11.000 Ft-tól”, az arckezelés-oldal címe „16 000 Ft-tól”. Mindkettő igaz, de a keresési találatban egymás mellett zavart kelt.</li>
+            <li>A fizetési módok <strong>sehol nem szerepelnek</strong> az oldalon. Az ÁSZF szerint készpénz és átutalás; a Notino-profilod szerint készpénz, kártya és Revolut. A kettő ellentmond, és a kártya-elfogadás egy erős, ingyen kimondható előny.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="paste">
+        <div class="paste-head"><span class="paste-lab">„Az árak tájékoztató jellegűek” helyett</span><button type="button" data-copy>Másol</button></div>
+        <p class="paste-txt">Ezek a végleges árak. Egyetlen tétel jöhet hozzájuk: ha a helyszínre kérsz kiszállást, annak a díját a távolság és az indulási idő alapján előre kiszámolom és megírom.</p>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom:10px">Kockázat-átvállalás — ma nulla van az eladó oldalán</h3>
+      <p class="prose">
+        Garancia nincs (üres jelvény), előleg nincs, korrekció nincs kiírva.
+        A teljes kockázat a vendégen ül. A <code>BookingAssurance</code> komponens
+        ezt oldaná meg, kész van, három igaz állítással — de csak a kezdőlapon fut,
+        és élesben ott sincs. A négy money page-re és a cikksablonba is bele kell.
+      </p>
+      <div class="paste">
+        <div class="paste-head"><span class="paste-lab">Negyedik pont a kockázat-oldó sorba — miután eldöntötted, melyik igaz</span><button type="button" data-copy>Másol</button></div>
+        <p class="paste-txt">Kártyával is fizethetsz</p>
+      </div>
+      <p class="prose" style="font-size:.94rem;margin-top:8px">
+        Ha viszont az ÁSZF a mérvadó (készpénz és átutalás), akkor ezt írd ki, és
+        a Notino-profilon vedd ki a kártyát és a Revolutot. Két saját felület, két
+        állítás — bármelyik igaz, a kettő együtt nem lehet az.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom:10px">Sürgetés — az egész oldalon egyetlen mondat van, és az is mélyen lent</h3>
+      <p class="prose">
+        „Szezonban a szombatok gyorsan betelnek” — a smink oldal ártáblája alatt,
+        apró szürke sorban. Ez minden. Semmi nem különbözteti meg a mai döntést a
+        jövő havitól. Négy <em>valódi</em> korlátod van; nem kell kitalálni egyet sem.
+      </p>
+
+      <div class="paste"><div class="paste-head"><span class="paste-lab">1 · Kapacitás — a legerősebb, mert ellenőrizhető</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Egyszerre egy vendéget fogadok, ezért egy napra négy-öt időpont fér be. Ha a hétvégét szeretnéd, arra általában két-három hetet előre kell tervezned.</p></div>
+      <p class="prose" style="font-size:.9rem;margin:-4px 0 12px;color:var(--ink-mute)">
+        Csak akkor írd ki, ha tényleg így van — nyisd meg a naptárad, és nézd meg a
+        legkorábbi szabad szombatot. Ha két hét, írd azt. Ha három nap, ne írj semmit.
+      </p>
+
+      <div class="paste"><div class="paste-head"><span class="paste-lab">2 · Biológiai határidő — pilla és szemöldök, esemény előtt</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">A lifting az első 24 órában áll be, ezért az esemény előtti napra nem tudom betenni: az a nap tele van zuhannyal és párával. Számolj 5–10 nappal előre — akkor a legszebb, és a hat-nyolc hetes ciklusból a nászútra is bőven kitart.</p></div>
+
+      <div class="paste"><div class="paste-head"><span class="paste-lab">3 · Kúra-határidő — az esküvői naptár már kiszámolja, csak nem mondja ki</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Az arckezelés-kúra három alkalom, havonta egy — vagyis tíz hét. Ha [dátum]-ig nem kezdted el, a nagy napra már csak két alkalom fér bele.</p></div>
+
+      <div class="paste"><div class="paste-head"><span class="paste-lab">4 · Szezon — vidd fel a lap tetejére, ne az árlista alatt lakjon</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Májustól szeptemberig a szombat reggelek fogynak el elsőként — az esküvői időpontokat jellemzően 4–6 hónappal előre kérik.</p></div>
+
+      <div class="panel warn" style="margin-top:14px">
+        <p style="margin:0;font-size:.94rem">
+          <strong>Amit ne csinálj.</strong> Visszaszámláló, „utolsó 3 hely”,
+          újrainduló határidő, „csak ma”. Egyszer működik, aztán visszafordíthatatlan,
+          és az Fttv. szerint megtévesztő kereskedelmi gyakorlat lehet. Szolgáltatásnál
+          a tiszta szűkösség nem kitalált, hanem <em>látható</em>: a valós szabad időpont.
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom:10px">A hiányzó ajánlat: a belépő</h3>
+      <p class="prose">
+        Egyetlen ajánlat-variánst futtatsz minden szolgáltatásra: a teljes árat.
+        Aki még sosem járt nálad, annak a legolcsóbb belépője 11 000 Ft — vagyis
+        egy teljes kezelés kockázata. Nincs alacsony belépési küszöbű első lépés.
+        Ez a legolcsóbb kar, amit még nem húztál meg, és <em>nem</em> kedvezményt
+        jelent, mert az a marzsot viszi.
+      </p>
+      <div class="paste">
+        <div class="paste-head"><span class="paste-lab">Belépő-ajánlat · nem árengedmény, hanem kockázat-nullázás</span><button type="button" data-copy>Másol</button></div>
+        <p class="paste-txt">Nem tudod, melyik kezelés a tiéd? Küldj egy fotót Instagramon vagy e-mailben — szemből és oldalról, smink nélkül —, és 24 órán belül megírom, mire számíthatsz, mennyi ideig tart és mibe kerül. Ez ingyen van, és nem kötelez semmire.</p>
+      </div>
+      <p class="prose" style="font-size:.94rem;margin-top:8px">
+        Ez a klasszikus „ingyenes vizsgálat” tiszta, magyar, szépészeti változata.
+        Nulla kockázat a vendégnek, neked pár perc, és megkapod a legdrágább adatot,
+        amid lehet: <strong>mitől félnek, mielőtt foglalnak.</strong>
+        Fontos: ha bevezeted, mérd az <em>utólagos</em> értékét (hányan foglalnak
+        belőle), ne a darabszámot.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="sec-head"><span class="sec-n">08</span><h2>Social proof audit</h2>
+  <p>60+ valódi Google-értékelés 5,0-s átlaggal a legerősebb eszközöd — és a legrosszabbul kihasznált.</p></div>
+
+  <div class="stack-lg">
+    <div>
+      <h3 style="margin-bottom:10px">Hol van vélemény, és hol hiányzik</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Oldal</th><th class="n">Vélemény</th><th>Hol áll</th><th>A döntési pontnál?</th></tr></thead>
+          <tbody>
+            <tr><td>Kezdőlap</td><td class="n">4</td><td>a 9. képernyő körül</td><td class="no">nem</td></tr>
+            <tr><td>/szempilla-lifting-zuglo/</td><td class="n">5</td><td>a gomb-sivatag közepén</td><td class="no">nem</td></tr>
+            <tr><td>/szemoldok-laminalas-zuglo/</td><td class="n">5</td><td>a gomb-sivatag közepén</td><td class="no">nem</td></tr>
+            <tr><td>/arckezeles-zuglo/</td><td class="n">4</td><td>a gomb-sivatag közepén</td><td class="no">nem</td></tr>
+            <tr><td>/sminkes-zuglo/</td><td class="n">6</td><td>a gomb-sivatag közepén</td><td class="no">nem</td></tr>
+            <tr><td>/eskuvoi-szepsegnaptar/</td><td class="n">4 + 1</td><td class="yes">egy az ár mellett, a naptárban</td><td class="yes">részben — ez a jó minta</td></tr>
+            <tr><td>/rolam/</td><td class="n no">0</td><td class="dash">—</td><td class="no">nem</td></tr>
+            <tr><td>Blogcikkek (14 db)</td><td class="n no">0</td><td class="dash">—</td><td class="no">nem</td></tr>
+            <tr><td>Árkártyák, csomagok, gombok mellett</td><td class="n no">0</td><td class="dash">—</td><td class="no">nem</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="prose" style="margin-top:14px">
+        Minden vélemény pontosan abban a szakaszban áll, ahol nincs foglalás-gomb.
+        Meggyőzöd őket ott, ahol nem tudnak lépni. A naptár-oldalon van egyetlen
+        jó megoldás: egy vélemény közvetlenül az ár mellett. Ezt kell átvinni.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom:10px">Három szám, egy tölcsérben</h3>
+      <div class="cols3">
+        <div class="panel"><p class="eyebrow">Weboldal</p><p style="margin:6px 0 0"><strong>60+</strong> értékelés · ★ 5,0</p></div>
+        <div class="panel"><p class="eyebrow">Notino, ma mérve</p><p style="margin:6px 0 0"><strong>5 (26)</strong></p></div>
+        <div class="panel"><p class="eyebrow">Hirdetésekben</p><p style="margin:6px 0 0"><strong>40+</strong> vélemény</p></div>
+      </div>
+      <p class="prose" style="margin-top:14px">
+        A vendég mindhármat látja, néhány percen belül. Nem hazugság — három platform,
+        három száma —, de a fejében ellentmondás lesz belőle, és <strong>a legkisebb szám
+        marad meg</strong>. A megoldás nem az, hogy egyformák legyenek, hanem hogy
+        mindegyik mellett ott legyen a forrás.
+      </p>
+      <div class="paste">
+        <div class="paste-head"><span class="paste-lab">Mindenhol, ahol értékelést írsz ki</span><button type="button" data-copy>Másol</button></div>
+        <p class="paste-txt">★ 5,0 a Google-on, 60+ értékelésből</p>
+      </div>
+      <p class="prose" style="font-size:.94rem">
+        A hirdetésekben a „40+” elavult — javítsd 60+-ra. Így a Notino 26-os száma
+        nem cáfolat lesz, hanem másik forrás.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom:10px">A vélemények dicsérnek. Nem oldanak kifogást.</h3>
+      <p class="prose">
+        „Nagyon kedvesen fogadott”, „gyönyörű lett”, „végig érezhető volt a
+        profizmus”. Mind valódi, mind pozitív, és egyik sem old fel semmit. Két
+        kivétel dolgozik ténylegesen: <em>„tartósnak bizonyult”</em> és
+        <em>„szinte azonnal kaptam időpontot”</em>. Ezek azok, amikből több kell —
+        és ez nem szövegezés kérdése, hanem <strong>kérdezés</strong> kérdése.
+      </p>
+      <div class="paste">
+        <div class="paste-head"><span class="paste-lab">Vélemény-kérő üzenet · 3 nappal a kezelés után</span><button type="button" data-copy>Másol</button></div>
+        <p class="paste-txt">Szia [Név]! Köszönöm, hogy nálam voltál. Ha van rá két perced, sokat segítenél egy Google-értékeléssel — de nem az általánosat kérem. Ezt a hármat írd meg, ha tudod:
+
+1. Mi volt az, ami majdnem visszatartott a foglalástól?
+2. Mit vártál, és mi lett belőle?
+3. Meddig tartott ki?
+
+Itt tudod megírni: [link]
+Köszönöm — Fruzsi</p>
+      </div>
+      <p class="prose" style="font-size:.94rem">
+        Az első kérdés az aranybánya. Az arra kapott mondatok — „féltem, hogy
+        tönkremegy a saját pillám”, „azt hittem, túl feltűnő lesz” — pontosan azok,
+        amiket a gombok mellé kell tenni. <strong>A véleményeket kifogások szerint
+        rendezd, ne időrendben.</strong>
+      </p>
+      <p class="prose" style="font-size:.94rem">
+        A meglévő 60 értékelésedet is bányászd ki: olvasd végig, és keresd azokat,
+        amelyekben egy <em>félelem</em> szerepel. Azokat emeld a döntési pontokra.
+        Új véleményt nem kell hozzá gyűjteni, csak átrendezni, ami már megvan.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom:10px">A hitelesség, ami megvan, csak nem a te oldaladon</h3>
+      <p class="prose">
+        A Notino-profilod „Rólunk” fülén ott a teljes képesítésed. A saját Rólam
+        oldaladon ehelyett egy TODO-komment áll a forráskódban. Ez kölcsönzött
+        hitelesség, ami már a tiéd — csak nincs kimondva ott, ahol a döntés születik.
+      </p>
+      <div class="paste">
+        <div class="paste-head"><span class="paste-lab">Bekezdés a /rolam/ „Prémium hatóanyagok” szekciójába — a TODO helyére</span><button type="button" data-copy>Másol</button></div>
+        <p class="paste-txt">2021-ben végeztem kozmetikusként, 2025-ben pedig a Berki Mia Makeup Academyn szereztem sminkes és szempillaépítő képesítést. Az arckezeléseket Janssen Cosmetics hatóanyagokkal végzem, a pilla- és szemöldökkezeléseket koreai technikával — és évente több továbbképzésre járok, mert ebben a szakmában két év alatt megváltozik, mi számít jó munkának.</p>
+      </div>
+      <p class="prose" style="font-size:.94rem">
+        Ha van fotód a bizonyítványról vagy a képzésről, tedd mellé. Egy közepes
+        minőségű saját fotó veri a tökéletes stockot.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="sec-head"><span class="sec-n">09</span><h2>Kifogás-leltár</h2>
+  <p>Amit egy magyar nő végiggondol, mielőtt lefoglal egy szempilla liftinget vagy szemöldök laminálást egy új helyen. Húsz kifogás, sorrendben az erősségük szerint. A pipa azt jelenti: az oldalon ma is meg van válaszolva.</p></div>
+
+  <div class="tw" style="margin-bottom:26px">
+    <table>
+      <thead><tr><th>#</th><th>Amit gondol</th><th>Válaszolva?</th><th>Hol</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td><strong>„Tönkremegy tőle a saját pillám?”</strong></td><td class="no">nem</td><td class="dash">sehol</td></tr>
+        <tr><td class="n">2</td><td><strong>„Mi van, ha elrontja? Le lehet szedni?”</strong></td><td class="no">nem</td><td class="dash">sehol</td></tr>
+        <tr><td class="n">3</td><td><strong>„Nem lesz túl feltűnő? Csodálkozó arcom lesz?”</strong></td><td class="no">nem</td><td class="dash">sehol</td></tr>
+        <tr><td class="n">4</td><td><strong>„Az én pillám túl rövid / ritka ehhez.”</strong></td><td class="no">nem</td><td class="dash">sehol</td></tr>
+        <tr><td class="n">5</td><td>„Fáj? Csíp? Ég a szemem?”</td><td class="yes">igen</td><td>szempilla GYIK</td></tr>
+        <tr><td class="n">6</td><td><strong>„Mi van, ha allergiás vagyok?”</strong></td><td class="warn">félig</td><td>egy felsorolás-pont, GYIK-ben nincs</td></tr>
+        <tr><td class="n">7</td><td><strong>„Kontaktlencsés / szemüveges vagyok.”</strong></td><td class="no">nem</td><td class="dash">sehol</td></tr>
+        <tr><td class="n">8</td><td><strong>„Mennyi ideig tart valójában?”</strong></td><td class="no">ellentmondás</td><td>oldal: ~90 perc · foglaló: 1 óra 15</td></tr>
+        <tr><td class="n">9</td><td>„Utána mit nem csinálhatok?”</td><td class="yes">igen</td><td>szempilla GYIK</td></tr>
+        <tr><td class="n">10</td><td><strong>„Megéri 12 000 Ft-ot?”</strong></td><td class="warn">félig</td><td>napi lebontás van, összevetés nincs</td></tr>
+        <tr><td class="n">11</td><td>„Sminkelhetek utána? Használhatok spirált?”</td><td class="warn">félig</td><td>az utóápolásból következtethető</td></tr>
+        <tr><td class="n">12</td><td>„Terhes vagyok / szoptatok.”</td><td class="yes">igen</td><td>lábjegyzet — de a foglalóban ez az első mondat</td></tr>
+        <tr><td class="n">13</td><td><strong>„Kell előre fizetnem? Kártyaadatot kér?”</strong></td><td class="no">nem élesben</td><td>kész, de nincs deployolva</td></tr>
+        <tr><td class="n">14</td><td>„Mi van, ha közbejön valami?”</td><td class="warn">félig</td><td>GYIK-be zárva, a gomb mellett nincs</td></tr>
+        <tr><td class="n">15</td><td><strong>„Miért drágább, mint a 7 000 Ft-os hirdetés?”</strong></td><td class="warn">félig</td><td>egy blogcikkben — a money page-en nincs</td></tr>
+        <tr><td class="n">16</td><td><strong>„Ki csinálja? Mennyi tapasztalata van?”</strong></td><td class="no">nem</td><td>a Notinón igen, az oldaladon nem</td></tr>
+        <tr><td class="n">17</td><td>„Hova megyek? Van parkolás?”</td><td class="yes">igen</td><td>megközelítés-blokk, jó</td></tr>
+        <tr><td class="n">18</td><td>„Mit vigyek magammal?”</td><td class="yes">igen</td><td>szempilla és smink GYIK</td></tr>
+        <tr><td class="n">19</td><td><strong>„Mennyi idő múlva lehet újra?”</strong></td><td class="no">nem</td><td class="dash">sehol</td></tr>
+        <tr><td class="n">20</td><td>„A festék bemegy a szemembe?”</td><td class="no">nem</td><td class="dash">sehol</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin-bottom:12px">Kész válaszok — a GYIK-be és a gombok mellé</h3>
+
+  <div class="stack">
+    <div class="paste"><div class="paste-head"><span class="paste-lab">1 · „Tönkremegy tőle a saját pillám?”</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Nem. A lifting nem tesz rá semmit és nem is vesz el belőle: a saját szálat emelem meg a tövénél, ragasztó és idegen szál nélkül. Amikor a hatás kifut, a pillád pontosan olyan lesz, amilyen most — csak egyenesebb. Ezért nem kell kinőni semmit, és ezért nincs visszatöltés sem.</p></div>
+
+    <div class="paste"><div class="paste-head"><span class="paste-lab">2 · „Mi van, ha nem tetszik? Le lehet szedni?”</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">A liftinget nem lehet leszedni, de nem is kell kinőni: a hatás fokozatosan halványul, ahogy a pillád természetes ciklusa megújul. Épp ezért beszéljük meg az elején a hajlítás erősségét — és ezért van az, hogy ha nem az lett, amiben megegyeztünk, három napon belül szólsz, és ingyen korrigálom.</p></div>
+
+    <div class="paste"><div class="paste-head"><span class="paste-lab">3 · „Nem lesz túl feltűnő?”</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">A hajlítás erősségét te választod meg, mielőtt bármihez hozzányúlnék — és ha bizonytalan vagy, az elsőnél mindig a szelídebbet javaslom. Azt a kollégák nem tudják beazonosítani: csak annyit mondanak, hogy kipihentnek tűnsz.</p></div>
+
+    <div class="paste"><div class="paste-head"><span class="paste-lab">4 · „Az én pillám túl rövid ehhez.”</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">A lifting nem hosszabbít, hanem irányt ad. Rövid pillán ezért látszik gyakran a legnagyobb a különbség: ami eddig lefelé állt, most előre néz, és a szemed magasabbnak látszik. Ha bizonytalan vagy, küldj egy oldalról készült fotót, és megírom, mire számíthatsz.</p></div>
+
+    <div class="paste"><div class="paste-head"><span class="paste-lab">6 · „Mi van, ha allergiás vagyok?”</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">A kezelés előtt átbeszéljük, mire vagy érzékeny, és milyen szemkörnyéki panaszod volt eddig. Ha bármi bizonytalan marad, inkább elhalasztjuk — ezt is ki fogom mondani, nem fogom „belevágni”.</p></div>
+
+    <div class="paste"><div class="paste-head"><span class="paste-lab">7 · „Kontaktlencsés / szemüveges vagyok.”</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Kontaktlencsét a kezelés idejére kiveszünk, utána visszateheted — hozz tokot és folyadékot. Szemüveggel nincs teendő: a lifting a saját szálat emeli, nem hosszabbítja, tehát nem kezd el az üveghez érni úgy, mint egy műszempilla.</p></div>
+
+    <div class="paste"><div class="paste-head"><span class="paste-lab">8 · „Mennyi ideig tart valójában?” — ez oldja fel az ellentmondást is</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">A foglalási rendszerben 1 óra 15 percet fogsz látni — ennyi maga a kezelés. Ha most jársz nálam először, számolj mellé 10 percet az elején a beszélgetésre.</p></div>
+
+    <div class="paste"><div class="paste-head"><span class="paste-lab">10 · „Megéri?” — a boríték-teszt</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Hat-nyolc hét. Ez körülbelül 45 reggel, amikor nem kell tust és spirált felvinned — napi 285 Ft. Öt-tíz percet kapsz vissza minden reggel, és egy tétel elmarad a fürdőszobapolcodról is: egy jó szempillaspirál 6–9 ezer forint, és két hónap alatt el is fogy.</p></div>
+
+    <div class="paste"><div class="paste-head"><span class="paste-lab">11 · „Sminkelhetek utána?”</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Az első 24 óra után bármit: sminkelhetsz, úszhatsz, szaunázhatsz. Spirált is használhatsz, csak nem lesz rá szükséged. Egyetlen dolgot kerülj: az olajos sminklemosót a szemkörnyéken, mert az oldja a hatást.</p></div>
+
+    <div class="paste"><div class="paste-head"><span class="paste-lab">13 · „Kell előre fizetnem?” — a gomb ALÁ, nem a GYIK-be</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Kártyaadat nélkül foglalsz · Fizetés a helyszínen · 24 órával előtte díjmentesen lemondható</p></div>
+
+    <div class="paste"><div class="paste-head"><span class="paste-lab">15 · „Miért drágább?” — versenytárs-összevetés, megnevezés nélkül</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Sok helyen a meghirdetett ár csak a laminálás. A formázás és a festés külön tétel, és a végén 13–15 ezernél jársz. Nálam a 11 000 Ft-ban mind a három benne van — ezért nincs meglepetés a pultnál.</p></div>
+
+    <div class="paste"><div class="paste-head"><span class="paste-lab">19 · „Mennyi idő múlva lehet újra?”</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Hat hét a legkorábbi, amikor újra érdemes — addigra a szálak természetes ciklusa megújul. Előbb nem tanácsolom, és nem is vállalom: a túl sűrűn ismételt kezelés az, amitől a pilla tényleg szárazzá válik.</p></div>
+
+    <div class="paste"><div class="paste-head"><span class="paste-lab">20 · „A festék bemegy a szemembe?”</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Nem. Végig csukott szemmel fekszel, az alsó pillák alá védőpárna kerül, és minden anyag a pillaszálra megy, nem a szembe. Ha bármikor csípést éreznél, szólsz, és azonnal megállunk.</p></div>
+  </div>
+
+  <p class="prose" style="margin-top:20px;font-size:.94rem">
+    <strong>Fontos.</strong> A 6-os, 7-es és 20-as választ csak akkor tedd ki, ha
+    tényleg így dolgozol. Ezek szakmai állítások — az érvényességüket te tudod,
+    nem én. Ha bármelyik nem stimmel, írd át a saját eljárásodra, de a
+    <em>szerkezetet</em> tartsd meg: kimondom a félelmet → megnevezem a
+    mechanizmust → megmondom, mi történik helyette.
+  </p>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="sec-head"><span class="sec-n">10</span><h2>CTA-audit</h2>
+  <p>Minden gombfelirat, a helye, a kontrasztja és az ismétlődése — plusz a Notino-átlépés kezelése.</p></div>
+
+  <div class="tw" style="margin-bottom:20px">
+    <table>
+      <thead><tr><th>Felirat</th><th>Hol</th><th>Ítélet</th></tr></thead>
+      <tbody>
+        <tr><td><strong>„Időpontot foglalok”</strong></td><td>hero, csomagkártyák, kapcsolat — mindenütt</td><td class="yes">jó. Első személyű elköteleződés, egységes az egész siteon. Ne cseréld.</td></tr>
+        <tr><td>„Foglalás”</td><td>fejléc</td><td class="no">640&nbsp;px alatt egyáltalán nem renderel — telefonon nincs fejléc-gomb</td></tr>
+        <tr><td>„Megnézem az árakat” / „Árak”</td><td>hero, másodlagos</td><td class="no">azonos méretű pill az elsődleges mellett — két primary CTA egy szekcióban, amit a <code>DESIGN.md</code> tilt</td></tr>
+        <tr><td>„Ezt szeretném →”</td><td>árlista-sorok</td><td class="yes">jó — a kontextusból tudni, mit</td></tr>
+        <tr><td>„[Kezelés] — árak és foglalás”</td><td>kezdőlapi szolgáltatás-kártyák</td><td class="yes">jó, leíró horgony, SEO-ban is hasznos</td></tr>
+        <tr><td>„Időpont foglalása”</td><td>blogcikk ajánlat-doboz</td><td class="warn">rendben, de miért más, mint a többi? Egységesítsd.</td></tr>
+        <tr><td><strong>„HÍVJ MOST!”</strong></td><td>minden oldal alján, élesben</td><td class="no">csupa nagybetű + felkiáltójel, tömör krém alapon = <em>világosabb</em> és sürgetőbb, mint az arany foglalás-gomb mellette. Vizuálisan a hívás a főgomb — pont a mért adattal szemben.</td></tr>
+        <tr><td>„Inkább telefonálok”</td><td>a javított változat, a gépeden</td><td class="yes">helyes. Deployolni kell.</td></tr>
+        <tr><td>„Foglalok →”</td><td>ragadós sáv, a gépeden</td><td class="yes">jó, és mellette ár is van</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="stack-lg">
+    <div>
+      <h3 style="margin-bottom:10px">Amit egyetlen CTA sem mond meg</h3>
+      <p class="prose">
+        Egyik gomb sem mondja meg, <em>mi történik a megnyomása után</em>. Márpedig
+        a megnyomása után új fül nyílik egy idegen domainen, egy magázó felülettel,
+        és rögtön egy süti-modállal. Ez a legdurvább pillanata a tölcsérednek, és
+        semmi nem készíti fel rá.
+      </p>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">Mikroszöveg minden elsődleges gomb alá · 11–12 px</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">A foglalás a Notino felületén nyílik meg, új ablakban. Kártyaadatot nem kérek, fizetni nálam fogsz. 24 órával előtte díjmentesen lemondható.</p></div>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom:10px">A gomb-sivatag: ahol meggyőzöd, ott nem tud lépni</h3>
+      <p class="prose">
+        Mind az öt hosszú oldalon ugyanaz a minta: az utolsó foglalás-gomb az
+        árblokk után van, aztán jön 5–7 képernyőnyi galéria, vélemény, GYIK és
+        összehasonlító tábla — <strong>egyetlen gomb nélkül</strong> —, és csak a
+        lap alján van a következő. Ez pont az a szakasz, ahol a vendég
+        meggyőződik. Mire gombhoz ér, elment a lendület.
+      </p>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">CTA-blokk közvetlenül a vélemény-szekció UTÁN, mind az öt oldalra</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Cím: Én is szeretnék ilyet.
+Szöveg: A szabad időpontjaim valós időben látszanak — nézd meg, mikor tudsz jönni.
+Gomb: Megnézem a szabad időpontokat
+Mikroszöveg: Kártyaadat nélkül foglalsz · Fizetés a helyszínen · 24 órával előtte díjmentesen lemondható</p></div>
+      <p class="prose" style="font-size:.94rem;margin-top:8px">
+        A <code>StickyBookBar</code> ezt strukturálisan is megoldja, csak a
+        kezdőlapon fut. Vidd át mind a négy money page-re, oldalanként a saját
+        árával:
+      </p>
+      <div class="cols2">
+        <div class="paste"><div class="paste-head"><span class="paste-lab">Ragadós sáv · szempilla</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Szempilla lifting + festés · 1 ó 15 p
+12 000 Ft
+Foglalok →</p></div>
+        <div class="paste"><div class="paste-head"><span class="paste-lab">Ragadós sáv · szemöldök</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Szemöldök laminálás · formázás és festés az árban
+11 000 Ft
+Foglalok →</p></div>
+        <div class="paste"><div class="paste-head"><span class="paste-lab">Ragadós sáv · arckezelés</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Janssen arckezelés · bőranalízissel
+16 000 Ft-tól
+Foglalok →</p></div>
+        <div class="paste"><div class="paste-head"><span class="paste-lab">Ragadós sáv · smink</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Menyasszonyi smink · próbasminkkel 39 000
+30 000 Ft
+Foglalok →</p></div>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom:10px">Az esküvői naptár: 7,4 képernyő, nulla gomb</h3>
+      <p class="prose">
+        A legokosabb eszközöd a legrosszabbul zárja a kört. Amíg a menyasszony nem
+        ír be dátumot, egyetlen foglalás-gomb sincs az oldalon — és az első csak a
+        7,4. képernyőn jelenik meg. Az eszköz működése miatt ez részben szándékos,
+        de aki csak olvasgat, annak nincs kijárata.
+      </p>
+      <p class="prose">
+        Az .ics-letöltés kiváló ötlet — az az egyetlen mechanizmusod, ami a
+        <em>kilépés utáni életre</em> dolgozik. Nevezd meg jobban, hogy tudja, mit kap.
+      </p>
+      <div class="paste"><div class="paste-head"><span class="paste-lab">Az .ics-gomb felirata és mikroszövege</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Beteszem a naptáramba
+Öt esemény kerül a telefonod naptárába, dátummal és emlékeztetővel. Nem kérek e-mail-címet.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="sec-head"><span class="sec-n">11</span><h2>Mobil-first: mi törik meg telefonon</h2>
+  <p>A látogatóid zöme mobilon jön. Kilenc pont, ahol a telefon más élményt ad, mint amit a desktopon látsz.</p></div>
+
+  <ol class="steps" style="max-width:none">
+    <li><span><strong>A süti-sáv leüti a kezdőlap gombjait.</strong> Mérve, bizonyítva. Desktopon a sáv jobb alsó kártya, ott nincs baj — ezért nem látszik, ha a saját gépeden nézed.</span></li>
+    <li><span><strong>235 px üres sötét sáv a fejléc alatt</strong> — a telefonképernyő 29%-a. A látogató a hüvelykujjával görget át egy fekete téglalapon, mielőtt bármit megtudna.</span></li>
+    <li><span><strong>A fejléc foglalás gombja 640 px alatt nem létezik</strong> (<code>hidden sm:inline-flex</code>). Telefonon a foglalás a hamburgermenü mögött van. A fejléc ráadásul lefelé görgetéskor elrejtőzik.</span></li>
+    <li><span><strong>A kicker chip két sorba tördelődik, csupa nagybetűvel.</strong> A csupa nagybetűs szöveg mérhetően ~11,8%-kal lassítja az olvasást, mert a szavak elveszítik a saját alakjukat. A legelső, legnagyobb kontrasztú elemeden.</span></li>
+    <li><span><strong>Az alcím öt sor.</strong> Telefonon egy ötsoros felsorolást nem olvasnak el, átugranak rajta — és épp alatta van a gomb, amit amúgy sem lehet megnyomni.</span></li>
+    <li><span><strong>A csomagkártyák anchorja mobilon nem működik.</strong> A „Külön: 23 000 Ft — most 18 000” akkor hat, ha a három kártyát <em>egymás mellett</em> látod. Mobilon egymás alatt vannak, kártyánként közel egy képernyő: mire a másodikhoz érsz, elfelejtetted az elsőt. A <code>md:scale</code> kiemelés is csak desktopon él.</span></li>
+    <li><span><strong>A GYIK zárva nyílik.</strong> Mobilon a vendég csak kérdéseket lát. A kockázatot oldó válaszok — a lemondás, a fájdalom, az utóápolás — egy koppintás mögött vannak, pont akkor, amikor a legkevésbé hajlandó dolgozni érte.</span></li>
+    <li><span><strong>A smink oldalon 12 kép, hét képernyőnyi galéria</strong>, képaláírás nélkül és foglalás-gomb nélkül. Ez a legerősebb bizonyítékfajtád — eredmény-kép —, és pont ott áll, ahol nincs mit tenni vele.</span></li>
+    <li><span><strong>Az első kattintható telefonszám a 14,7. képernyőn van</strong> a kezdőlapon. Aki telefonálna, annak 14 képernyőt kell görgetnie a számért.</span></li>
+  </ol>
+
+  <div class="paste" style="margin-top:20px">
+    <div class="paste-head"><span class="paste-lab">Képaláírás-séma a galériákhoz · mit + mennyi idő + mennyiért</span><button type="button" data-copy>Másol</button></div>
+    <p class="paste-txt">Menyasszonyi smink · 1,5 óra · 30 000 Ft
+Alkalmi smink · 1 óra 20 perc · 15 000 Ft
+Smink fotózáshoz · 1 óra 40 perc · 17 000 Ft
+Szempilla lifting + festés · 1 óra 15 perc · 12 000 Ft
+Szemöldök laminálás · 1 óra · 11 000 Ft
+Teljes Tekintet csomag · 2 óra · 18 000 Ft</p>
+  </div>
+  <p class="prose" style="font-size:.94rem">
+    Az időtartamok a foglalórendszeredből valók, nem az oldalról — mert az a szám
+    az igaz, amit a vendég a naptárban lát. Ezzel a galéria egy csapásra
+    árlistává és bizonyítékká válik egyszerre.
+  </p>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="sec-head"><span class="sec-n">12</span><h2>Súrlódás-leltár</h2>
+  <p>Minden találat típusba sorolva — a típus mondja meg, hogyan kell javítani. Besorolás nélküli találat vélemény, nem audit.</p></div>
+
+  <h3 style="margin-bottom:12px">Oldalanként, egy pillantásra</h3>
+  <div class="tw" style="margin-bottom:30px">
+    <table>
+      <thead><tr><th>Oldal</th><th class="n">Képernyő</th><th class="n">Gomb</th><th class="n">Leghosszabb rés</th><th>A legdrágább tétel</th></tr></thead>
+      <tbody>
+        <tr><td>Kezdőlap</td><td class="n">16,5</td><td class="n no">2</td><td class="n no">13,9</td><td class="no">a gomb nem kattintható</td></tr>
+        <tr><td>/szempilla-lifting-zuglo/</td><td class="n">18,4</td><td class="n">11</td><td class="n">6,2</td><td>üres garancia-jelvény · 90 vs 75 perc</td></tr>
+        <tr><td>/szemoldok-laminalas-zuglo/</td><td class="n">19,4</td><td class="n">11</td><td class="n">6,5</td><td>az USP egy blogcikkben lakik</td></tr>
+        <tr><td>/arckezeles-zuglo/</td><td class="n">14,1</td><td class="n">12</td><td class="n">5,1</td><td>nincs ★5,0 a hero-ban · 4 időtartam-eltérés</td></tr>
+        <tr><td>/sminkes-zuglo/ <span class="tag crit">fizetett</span></td><td class="n">16,2</td><td class="n">7</td><td class="n">6,1</td><td class="no">„az árak tájékoztató jellegűek” · nincs bizonyíték a heróban</td></tr>
+        <tr><td>/eskuvoi-szepsegnaptar/</td><td class="n">9,0</td><td class="n no">1</td><td class="n no">7,4</td><td>nulla kijárat az eszköz előtt</td></tr>
+        <tr><td>/rolam/</td><td class="n">5,7</td><td class="n">2</td><td class="n">3,3</td><td>a képesítés TODO-ban maradt</td></tr>
+        <tr><td>/blog/ (lista)</td><td class="n">4,7</td><td class="n">1</td><td class="dash">—</td><td>nincs ajánlat a listán</td></tr>
+        <tr><td>Blogcikk (14 db)</td><td class="n">11,9</td><td class="n">3</td><td class="n">6,2</td><td>a „Hasonló cikkek” kijárata a kassza ELŐTT van</td></tr>
+        <tr><td>/404/</td><td class="dash">—</td><td class="n">1</td><td class="dash">—</td><td class="yes">jól van megcsinálva, ne nyúlj hozzá</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin-bottom:6px">Mechanikai — „Nem tudom megcsinálni.”</h3>
+  <div class="find">
+    <div class="find-h"><span class="find-id">MEC-1</span><span class="find-t">A kezdőlap két hero-gombja mobilon nem kattintható</span><span class="tag crit">nagy / 40 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>Két gomb, félig-egészen a süti-sáv alatt. Rákoppint, nem történik semmi.</dd>
+      <dt>Miért áll meg</dt><dd>A böngésző szerint a gomb helyén a sütisáv van. A látogató nem hibát lát, hanem halott oldalt.</dd>
+      <dt>Lecke</dt><dd>L29 · L33</dd>
+      <dt>Javítás</dt><dd>03/1 — kész számokkal és szöveggel.</dd>
+    </dl>
+  </div>
+  <div class="find">
+    <div class="find-h"><span class="find-id">MEC-2</span><span class="find-t">Fejléc-gomb 640 px alatt nem renderel</span><span class="tag warn">nagy / 1 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>Telefonon a fejlécben csak a logó és a hamburger.</dd>
+      <dt>Miért áll meg</dt><dd>Aki visszagörget a tetejére — vagyis akiben megszületett a szándék —, nem talál gombot.</dd>
+      <dt>Lecke</dt><dd>L29</dd>
+      <dt>Javítás</dt><dd><code>NavBar.tsx:147</code> — <code>hidden sm:inline-flex</code> → <code>inline-flex</code>. Egy szó. Harmadszor szerepel auditban.</dd>
+    </dl>
+  </div>
+  <div class="find">
+    <div class="find-h"><span class="find-id">MEC-3</span><span class="find-t">Három kész komponens nincs élesben</span><span class="tag crit">nagy / 10 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>A régi „HÍVJ MOST!”, a szám nélküli „Google” cella, semmi kockázat-oldás.</dd>
+      <dt>Miért áll meg</dt><dd>A megírt javítások nem érnek el hozzá. A munka megvan, a hozam nincs.</dd>
+      <dt>Lecke</dt><dd>—</dd>
+      <dt>Javítás</dt><dd><code>npm run validate</code>, aztán deploy. Vigyázz: a deploy a working tree-t viszi, nem a commitot.</dd>
+    </dl>
+  </div>
+
+  <h3 style="margin:26px 0 6px">Bizalmi — „Nem hiszem el, amit állítasz.”</h3>
+  <div class="find">
+    <div class="find-h"><span class="find-id">BIZ-1</span><span class="find-t">A foglalórendszer három szolgáltatásra drágább</span><span class="tag crit">nagy / 30 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>15 000 az oldalon → 20 000 a foglalóban. 5 000 → 6 000. 7 000 → 8 000.</dd>
+      <dt>Miért áll meg</dt><dd>Nem az árat utasítja el, hanem téged. „Ha ebben nem stimmel, mi másban nem?”</dd>
+      <dt>Lecke</dt><dd>L3 · L9 · üzenet-egyezés</dd>
+      <dt>Javítás</dt><dd>03/2 — döntsd el, melyik igaz, és vidd át mindkét felületre.</dd>
+    </dl>
+  </div>
+  <div class="find">
+    <div class="find-h"><span class="find-id">BIZ-2</span><span class="find-t">A szempilla lifting időtartama az oldalon 90 perc, a foglalóban 75</span><span class="tag warn">közepes / 20 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>Az oldalon hatszor: „~90 perc”, „a 90 perc a tiéd”, „pihentetőnek tartják a 90 percet”. A naptárban: 1 óra 15 perc.</dd>
+      <dt>Miért áll meg</dt><dd>Nem áll meg — de az érzés az, hogy „kevesebbet kapok”. Összesen <strong>11 szolgáltatásnál</strong> tér el az időtartam a két felületen; a legnagyobb a „Smink fotózásra”: az oldalon 60 perc, a naptárban 100.</dd>
+      <dt>Lecke</dt><dd>L8 · L9</dd>
+      <dt>Javítás</dt><dd>A foglalórendszer száma legyen a mérvadó mindenhol — az az, amit a vendég ténylegesen megkap.</dd>
+    </dl>
+  </div>
+  <div class="find">
+    <div class="find-h"><span class="find-id">BIZ-3</span><span class="find-t">A bizalom-sáv első cellája szám nélküli „Google”</span><span class="tag warn">nagy / kész</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>Egy márkanév és egy „Értékelések megnyitása →” link, ami elviszi az oldalról.</dd>
+      <dt>Miért áll meg</dt><dd>A legerősebb bizonyítékod nem az, hogy létezik Google-profil, hanem hogy mi áll rajta.</dd>
+      <dt>Lecke</dt><dd>L9 · L16</dd>
+      <dt>Javítás</dt><dd>Kész: a <code>TrustBar</code> komponens. Négy oldalra kell átvinni és deployolni.</dd>
+    </dl>
+  </div>
+  <div class="find">
+    <div class="find-h"><span class="find-id">BIZ-4</span><span class="find-t">A képesítéseid csak a Notinón vannak</span><span class="tag warn">nagy / 15 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>A Rólam oldalon nincs egyetlen évszám, intézménynév vagy szakképesítés sem. A forráskódban a <code>rolam.astro:101</code> a saját TODO-d.</dd>
+      <dt>Miért áll meg</dt><dd>Kölcsönzött hitelesség, ami már megvan — csak nincs kimondva ott, ahol a döntés születik.</dd>
+      <dt>Lecke</dt><dd>L13 · L19</dd>
+      <dt>Javítás</dt><dd>Kész bekezdés: 08-as szekció.</dd>
+    </dl>
+  </div>
+  <div class="find">
+    <div class="find-h"><span class="find-id">BIZ-5</span><span class="find-t">Három értékelésszám egy tölcsérben</span><span class="tag warn">közepes / 20 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>Weboldal: 60+. Notino: 5 (26). Hirdetés: 40+.</dd>
+      <dt>Miért áll meg</dt><dd>A legkisebb szám marad meg.</dd>
+      <dt>Lecke</dt><dd>L9 · L16</dd>
+      <dt>Javítás</dt><dd>Forrás minden szám mellé: „★ 5,0 a Google-on, 60+ értékelésből”. A hirdetésben a 40+ elavult.</dd>
+    </dl>
+  </div>
+  <div class="find">
+    <div class="find-h"><span class="find-id">BIZ-6</span><span class="find-t">A vélemények dicsérnek, nem oldanak kifogást</span><span class="tag">nagy / kérdezés</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>„Nagyon kedvesen fogadott”, „gyönyörű lett”, „végig érezhető volt a profizmus”.</dd>
+      <dt>Miért áll meg</dt><dd>A vélemény akkor működik, ha a vevő <em>félelmére</em> válaszol, nem ha dicsér.</dd>
+      <dt>Lecke</dt><dd>L16 · L22</dd>
+      <dt>Javítás</dt><dd>Kész kérdéssor és üzenet: 08-as szekció. A meglévő 60-at is bányászd ki.</dd>
+    </dl>
+  </div>
+
+  <h3 style="margin:26px 0 6px">Kockázati — „Mi van, ha rossz lesz?”</h3>
+  <div class="find">
+    <div class="find-h"><span class="find-id">KOC-1</span><span class="find-t">Az „Elégedettségi garancia” jelvény mögött nincs semmi</span><span class="tag crit">nagy / 45 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>Arany pill, pajzs ikon, felirat — négy money page-en. Magyarázat sehol, a forrásban sem.</dd>
+      <dt>Miért áll meg</dt><dd>Ez az iparág domináns súrlódása, és pont ez a hely üres. A címke nélküli garancia nem old kockázatot, viszont ígéretként rád olvasható.</dd>
+      <dt>Lecke</dt><dd>L28</dd>
+      <dt>Javítás</dt><dd>Három kész változat: 03/3.</dd>
+    </dl>
+  </div>
+  <div class="find">
+    <div class="find-h"><span class="find-id">KOC-2</span><span class="find-t">A domináns félelem — „elrontja” — sehol nincs kimondva</span><span class="tag crit">nagy / 1 óra</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>Kizárólag pozitív oldal: szép lesz, tartós lesz, természetes lesz.</dd>
+      <dt>Miért áll meg</dt><dd>Nem attól fél, hogy nem lesz szép. Attól fél, hogy tönkremegy a saját pillája, hogy röhejes lesz, hogy nem lehet visszacsinálni. Ezt a te szövegednek kell kimondania, mielőtt ő kimondja magának.</dd>
+      <dt>Lecke</dt><dd>L10/3 · L11 · L28</dd>
+      <dt>Javítás</dt><dd>Kész szekció: 05-ös szekció, „Amitől a legtöbben félnek”.</dd>
+    </dl>
+  </div>
+  <div class="find">
+    <div class="find-h"><span class="find-id">KOC-3</span><span class="find-t">A díjmentes lemondás a GYIK-be van zárva</span><span class="tag warn">közepes / kész</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>„Le lehet mondani? Igen, 24 órával előtte díjmentesen” — a lap alján, egy lenyitó mögött.</dd>
+      <dt>Miért áll meg</dt><dd>A legjobb kockázat-oldó mondatod tizenhat képernyővel a döntési pont után van.</dd>
+      <dt>Lecke</dt><dd>L28 · L29</dd>
+      <dt>Javítás</dt><dd>Kész: <code>BookingAssurance</code>. Minden elsődleges gomb alá, mind a kilenc oldalon.</dd>
+    </dl>
+  </div>
+
+  <h3 style="margin:26px 0 6px">Motivációs — „Értem, de nem elég nekem.”</h3>
+  <div class="find">
+    <div class="find-h"><span class="find-id">MOT-1</span><span class="find-t">A legerősebb érved egy blogcikkben van eltemetve</span><span class="tag crit">nagy / 15 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>A szemöldök-ár cikkben: „Sok helyen a meghirdetett ár csak a laminálás… Nálam mind a három egy árban van.” A money page-en csak annyi áll: „benne van”.</dd>
+      <dt>Miért áll meg</dt><dd>Ez az egyetlen mondatod, ami <em>összehasonlítási szempontot ad</em>: te mondod meg, mire figyeljen, és a vevő a te szűrődön keresztül nézi a piacot. A pénzoldalon nincs sehol.</dd>
+      <dt>Lecke</dt><dd>L12 · L23 · L8</dd>
+      <dt>Javítás</dt><dd>Kész szöveg: 09-es szekció, 15-ös kifogás. A H1-be is beleférne — lásd a headline-auditot.</dd>
+    </dl>
+  </div>
+  <div class="find">
+    <div class="find-h"><span class="find-id">MOT-2</span><span class="find-t">Hét képernyő galéria, egyetlen kattintható elem nélkül</span><span class="tag warn">közepes / 20 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>Tizenkét munkafotó a smink oldalon, aláírás és gomb nélkül.</dd>
+      <dt>Miért áll meg</dt><dd>A legerősebb bizonyítékfajtád ott áll, ahol nincs mit tenni vele.</dd>
+      <dt>Lecke</dt><dd>L18 · L29</dd>
+      <dt>Javítás</dt><dd>Képaláírás-séma: 11-es szekció. Plusz egy CTA a galéria után.</dd>
+    </dl>
+  </div>
+  <div class="find">
+    <div class="find-h"><span class="find-id">MOT-3</span><span class="find-t">51 unproven szuperlatívusz öt oldalon</span><span class="tag">közepes / 1 óra</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>Smink oldal: 24 (ebből „egyedi” 6×, „professzionális” 5×). Szempilla: 14. Szemöldök: 12. Arckezelés: 9.</dd>
+      <dt>Miért áll meg</dt><dd>Ezek nulla képet adnak, és mindegyik ráillik a versenytársra. Érdekes: a blogcikkben, ami rangsorol, <strong>nulla</strong> szuperlatívusz van és 34 szám. A cikkeid jobban írnak, mint a pénzoldalaid.</dd>
+      <dt>Lecke</dt><dd>L8 · L20</dd>
+      <dt>Javítás</dt><dd>Minden „professzionális” helyére márkanév vagy eljárás; minden „egyedi” helyére az, ami valóban csak nálad van. Kezdd a smink oldallal — az a fizetett landing.</dd>
+    </dl>
+  </div>
+
+  <h3 style="margin:26px 0 6px">Kognitív — „Nem értem, mit kapok.”</h3>
+  <div class="find">
+    <div class="find-h"><span class="find-id">KOG-1</span><span class="find-t">Négy szolgáltatás két néven fut</span><span class="tag crit">nagy / 20 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>„Menyasszonyi smink” az oldalon → „Esküvői smink” a foglalóban. „Sminktanácsadás” → „Sminkoktatás”. „Nappali” → „Mindennapi”. „Örömanya smink” → nincs ilyen tétel.</dd>
+      <dt>Miért áll meg</dt><dd>Azt a szót keresi, amit nálad olvasott, és nem találja. Vagy rossz tételt foglal, vagy ír egy üzenetet, vagy elmegy.</dd>
+      <dt>Lecke</dt><dd>L21 · L25 · L29</dd>
+      <dt>Javítás</dt><dd>Kész hídszövegek: 03/2. A tartós megoldás az átnevezés a Notinón.</dd>
+    </dl>
+  </div>
+  <div class="find">
+    <div class="find-h"><span class="find-id">KOG-2</span><span class="find-t">Minden szemkezelés leírása tiltással kezdődik a foglalóban</span><span class="tag warn">közepes / 20 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>„Figyelem ez a szolgáltatás várandósság és szoptatás alatt nem javasolt!” — öt tételnél, első mondatként, a Foglalás gomb mellett. Egy helyen elgépelve („várnadósság”), és keveredik a „nem ajánlott”/„nem javasolt”.</dd>
+      <dt>Miért áll meg</dt><dd>A döntés pillanatában az első dolog, amit olvas, egy tiltás.</dd>
+      <dt>Lecke</dt><dd>L11 · L21</dd>
+      <dt>Javítás</dt><dd>Kész szöveg: 04-es szekció.</dd>
+    </dl>
+  </div>
+  <div class="find">
+    <div class="find-h"><span class="find-id">KOG-3</span><span class="find-t">A kezdőlap H1-je kategórianév</span><span class="tag">közepes / 20 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>„Kozmetikus Zuglóban.” + öt sor szolgáltatás-felsorolás.</dd>
+      <dt>Miért áll meg</dt><dd>Megtudja, <em>mi</em> és <em>hol</em>, de nem azt, <em>mit nyer</em> és <em>miért téged</em>.</dd>
+      <dt>Lecke</dt><dd>L2 · L6 · L21</dd>
+      <dt>Javítás</dt><dd>Az SEO-döntést tiszteletben tartva: 06-os szekció, három alternatíva a kulcsszó megtartásával.</dd>
+    </dl>
+  </div>
+
+  <h3 style="margin:26px 0 6px">Relevancia · Gazdasági · Időzítési</h3>
+  <div class="find">
+    <div class="find-h"><span class="find-id">REL-1</span><span class="find-t">A fizetett landing hero-jában nincs egyetlen bizonyíték sem</span><span class="tag crit">nagy / 10 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>Kicker, H1, ár, két gomb. Se csillag, se értékelésszám, se arc — miközben a pilla- és szemöldök-oldalon ott a ★5,0 sor.</dd>
+      <dt>Miért áll meg</dt><dd>30–51 ezer forintos, visszafordíthatatlan döntést mérlegel, hideg fejjel, nulla külső megerősítéssel — és ezért a kattintásért fizettél.</dd>
+      <dt>Lecke</dt><dd>L9 · L16</dd>
+      <dt>Javítás</dt><dd>Másold át a meglévő blokkot a <code>szempilla-lifting-zuglo.astro:247–251</code>-ből a smink és az arckezelés oldal H1-je alá.</dd>
+    </dl>
+  </div>
+  <div class="find">
+    <div class="find-h"><span class="find-id">GAZ-1</span><span class="find-t">„Az árak tájékoztató jellegűek” — 40 pixellel az „Átlátható, fix árak” alatt</span><span class="tag crit">nagy / 2 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>Ugyanazon a képernyőn két egymásnak ellentmondó saját mondat.</dd>
+      <dt>Miért áll meg</dt><dd>Az oldal legnagyobb erőssége az ártranszparencia, és a saját mikroszöveged mondja, hogy nem az.</dd>
+      <dt>Lecke</dt><dd>L3 · L9</dd>
+      <dt>Javítás</dt><dd>Kész szöveg: 07-es szekció.</dd>
+    </dl>
+  </div>
+  <div class="find">
+    <div class="find-h"><span class="find-id">GAZ-2</span><span class="find-t">A fizetési módok sehol nem szerepelnek — és két saját felületed mást mond</span><span class="tag warn">közepes / 15 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>ÁSZF: készpénz és átutalás. Notino-profil: készpénz, kártya, Revolut. A weboldalon: semmi.</dd>
+      <dt>Miért áll meg</dt><dd>„Kell nálam lennie 12 ezer forint készpénznek?” — ez egy olyan kérdés, amit nem kérdez meg, csak halogat.</dd>
+      <dt>Lecke</dt><dd>L29</dd>
+      <dt>Javítás</dt><dd>Döntsd el, melyik igaz, és tedd a gomb alá.</dd>
+    </dl>
+  </div>
+  <div class="find">
+    <div class="find-h"><span class="find-id">IDO-1</span><span class="find-t">Egyetlen sürgetés-mondat az egész siteon, és az is mélyen lent</span><span class="tag warn">nagy / 20 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>„Szezonban a szombatok gyorsan betelnek” — a smink oldal árblokkja alatt, apró szürke sorban.</dd>
+      <dt>Miért áll meg</dt><dd>Semmi nem különbözteti meg a mai döntést a jövő havitól. A „majd később” soha nem jön el.</dd>
+      <dt>Lecke</dt><dd>L15</dd>
+      <dt>Javítás</dt><dd>Négy valós mechanizmus kész szöveggel: 07-es szekció.</dd>
+    </dl>
+  </div>
+  <div class="find">
+    <div class="find-h"><span class="find-id">IDO-2</span><span class="find-t">A cikk végén a kijárat előbb jön, mint a kassza</span><span class="tag warn">közepes / 15 perc</span></div>
+    <dl class="rec">
+      <dt>Mit lát</dt><dd>Cikk → előző/következő cikk → „Hasonló cikkek” rács → és csak azután a foglalás-blokk.</dd>
+      <dt>Miért áll meg</dt><dd>Aki „szemöldök laminálás ára”-ra keres, vásárlási szándékkal jön. A cikk megválaszolja a kérdését, aztán négy ajtót nyit kifelé, és csak utána mutatja meg a kasszát.</dd>
+      <dt>Lecke</dt><dd>L27 · L29</dd>
+      <dt>Javítás</dt><dd>A „Hasonló cikkek” és a prev/next kerüljön a <code>SiteContact</code> blokk <em>alá</em>. A cikk törzsében lévő ajánlat-doboz már jó helyen van.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="sec-head"><span class="sec-n">13</span><h2>Magyar nyelvi és konzisztencia-hibák</h2>
+  <p>Nem stílus, hanem hitelesség. Mind a nyolc javítható tíz perc alatt.</p></div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Ami ott van</th><th>Hol</th><th>Mi a baj / mi legyen</th></tr></thead>
+      <tbody>
+        <tr><td>„Válaszd azt, ami <strong>Neked</strong> szól.”</td><td>négy money page H2</td><td>Tegező szövegben a nagy kezdőbetűs „Neked” nyelvi hiba — az udvariassági nagybetű a magázó formához tartozik. <strong>„neked”</strong>, vagy inkább a 06-os szekció cseréje.</td></tr>
+        <tr><td>„nem sablonos, mindenkinek ugyanolyan eredményt kapsz, hanem rád szabottat”</td><td>szempilla, „Személyre szabott forma”</td><td>A mondat megbicsaklik. <strong>„Nem egy sablon, amit mindenki ugyanúgy kap meg, hanem a te arckarakteredre szabott forma.”</strong></td></tr>
+        <tr><td>„HÍVJ MOST!”</td><td>minden oldal alján, élesben</td><td>Csupa nagybetű és felkiáltójel. A <code>DESIGN.md</code> tiltja a „Kattints ide!” típusú CTA-t; ez ugyanaz a család. A javítás megvan a gépeden.</td></tr>
+        <tr><td>„…kerül kalkulálásra”, „…kerül felszámolásra”</td><td>smink oldal, kiszállás</td><td>Hivatalos-passzív. <strong>„A kiszállás díját a távolság és az indulási idő alapján számolom ki, és előre megírom.”</strong></td></tr>
+        <tr><td>„Az árak tájékoztató jellegűek”</td><td>smink árblokk</td><td>Ellentmond a fölötte lévő „Átlátható, fix árak” mondatnak. Csere: 07-es szekció.</td></tr>
+        <tr><td>„vá<strong>rn</strong>adósság”</td><td>Notino, szemöldök laminálás festés nélkül</td><td>elgépelés</td></tr>
+        <tr><td>„Janssen ter<strong>mè</strong>kekkel”</td><td>Notino, Rólunk</td><td>rossz ékezet</td></tr>
+        <tr><td>„több héten <strong>àt</strong>”</td><td>Notino, szemöldök- és szempillafestés</td><td>rossz ékezet</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="sec-head"><span class="sec-n">14</span><h2>Pontozás</h2>
+  <p>A pontszám másodlagos — arra jó, hogy legyen mihez képest mérni. Az elsődleges a top 3.</p></div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Szint</th><th class="n">Pont</th><th style="width:140px">&nbsp;</th><th>Miért</th></tr></thead>
+      <tbody>
+        <tr><td>1 · Célzás</td><td class="n">11 / 15</td><td><span class="meter"><i class="mid" style="width:73%"></i></span></td><td>Tiszta geo és szolgáltatás. A hajtóerő viszont a gyengébbikre van kötve.</td></tr>
+        <tr><td>2 · Ígéret</td><td class="n">10 / 15</td><td><span class="meter"><i class="mid" style="width:67%"></i></span></td><td>Az alcímek jók, a headline-ok kategórianevek.</td></tr>
+        <tr><td>3 · Megkülönböztetés</td><td class="n">6 / 10</td><td><span class="meter"><i class="mid" style="width:60%"></i></span></td><td>Van valódi USP („egy vendég”, „minden benne van”), de az egyik blogcikkben lakik.</td></tr>
+        <tr><td>4 · Bizonyíték</td><td class="n">12 / 20</td><td><span class="meter"><i class="mid" style="width:60%"></i></span></td><td>Sok valódi vélemény és saját fotó — mind a döntési pontoktól távol.</td></tr>
+        <tr><td>5 · Sürgetés</td><td class="n">1 / 5</td><td><span class="meter"><i class="low" style="width:20%"></i></span></td><td>Egyetlen mondat, mélyen a lapon.</td></tr>
+        <tr><td>6 · Ár és érték</td><td class="n">7 / 10</td><td><span class="meter"><i class="mid" style="width:70%"></i></span></td><td>Kiváló árazás — mínusz a három eltérés a foglalórendszerrel.</td></tr>
+        <tr><td>7 · Vásárlási út</td><td class="n">5 / 15</td><td><span class="meter"><i class="low" style="width:33%"></i></span></td><td>A kezdőlapi gomb nem kattintható, 9 érintés a foglalásig, gomb-sivatagok.</td></tr>
+        <tr><td>8 · Vizuális réteg</td><td class="n">6 / 7</td><td><span class="meter"><i class="high" style="width:86%"></i></span></td><td>Saját fotók, profi portré, tiszta tipográfia. Mínusz: az üres első képernyő.</td></tr>
+        <tr><td>9 · Ismétlés és teszt</td><td class="n">1 / 3</td><td><span class="meter"><i class="low" style="width:33%"></i></span></td><td>Egyetlen ajánlat-variáns, strukturált vendégkérdezés nincs.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cols3" style="margin-top:18px">
+    <div class="panel"><p class="eyebrow">2026-08-15</p><p style="margin:6px 0 0;font-size:1.5rem;font-family:var(--f-display);font-weight:700;color:var(--ink)">61</p></div>
+    <div class="panel"><p class="eyebrow">2026-08-28</p><p style="margin:6px 0 0;font-size:1.5rem;font-family:var(--f-display);font-weight:700;color:var(--ink)">58</p></div>
+    <div class="panel ok"><p class="eyebrow">2026-09-08</p><p style="margin:6px 0 0;font-size:1.5rem;font-family:var(--f-display);font-weight:700;color:var(--ink)">59</p></div>
+  </div>
+  <p class="prose" style="margin-top:14px;font-size:.94rem">
+    A cikk-ajánlatdoboz és a blog-konverziós munka hozott, a most feltárt
+    ár-ellentmondás elvitt. A tényleges ugrás a deployban van: a gépeden lévő
+    három komponens élesítése önmagában 5–6 pontot ér.
+  </p>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="sec-head"><span class="sec-n">15</span><h2>Vakfoltok</h2>
+  <p>Amit a legtöbb audit nem néz meg — és amiért itt a legnagyobb tartalék.</p></div>
+
+  <div class="stack">
+    <div class="panel">
+      <h4 style="margin-bottom:6px">A kilépés utáni élet — a legnagyobb üres hely</h4>
+      <p style="margin:0;font-size:.95rem">Aki ma nem foglal, holnap foglalna. Ma <strong>semmi nem fogja meg</strong>: nincs e-mail-gyűjtés, nincs mentés, nincs visszahívás, nincs remarketing-lista. Egyetlen mechanizmusod van, és az kiváló: az esküvői naptár .ics-letöltése. Ez az egyetlen dolog, ami a látogató telefonján marad — nevezd meg jobban (10-es szekció), és hívd fel rá a figyelmet a naptár tetején is.</p>
+    </div>
+
+    <div class="panel">
+      <h4 style="margin-bottom:6px">A vásárlás utáni szakasz — a legolcsóbb bevétel, amit nem szedsz be</h4>
+      <p style="font-size:.95rem">A szempilla lifting 6–8 hétig tart. Az arckezelés-ciklus 28 nap. Ezek nem marketinges kitalációk, hanem <em>biológiai naptárak</em> — és ma egyik sem generál egyetlen üzenetet sem. Egy visszahívó SMS-sorozat az egyetlen dolog ebben az auditban, ami azonnali pénz.</p>
+      <div class="paste" style="margin-bottom:8px"><div class="paste-head"><span class="paste-lab">SMS · 7 héttel a lifting után</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Szia [Név]! Hét hete voltál nálam liftingen — most jön az a szakasz, amikor a szálak elkezdenek visszaállni. Ha szeretnéd, tartok neked helyet a jövő hétre: [link]. Fruzsi</p></div>
+      <div class="paste" style="margin:0"><div class="paste-head"><span class="paste-lab">SMS · 26 nappal az arckezelés után</span><button type="button" data-copy>Másol</button></div><p class="paste-txt">Szia [Név]! A bőröd megújulási ciklusa most fordul — a következő alkalom ilyenkor ér a legtöbbet. Beírjalak jövő hétre? [link]. Fruzsi</p></div>
+    </div>
+
+    <div class="panel">
+      <h4 style="margin-bottom:6px">Az offline súrlódás</h4>
+      <p style="margin:0;font-size:.95rem">A telefon él, de az oldal semmit nem mond arról, mikor és mennyi idő alatt kapsz választ. Az egyetlen ígéreted — „válasz munkanapokon pár órán belül” — az online foglalásra vonatkozik. Ha valaki szombat délután hív és nem veszed fel, nincs olyan mondatod, ami megtartaná. Egy sor a telefongomb mellé: <em>„Ha nem veszem fel, kezelésen vagyok — írj SMS-t, és visszahívlak.”</em></p>
+    </div>
+
+    <div class="panel">
+      <h4 style="margin-bottom:6px">A második kérdés</h4>
+      <p style="margin:0;font-size:.95rem">Az első kérdés: „megéri?” A második: „<em>jó, és most pontosan mi történik?</em>” Ezt jól kezeled — a négylépéses folyamat-blokk minden money page-en ott van, és ez ritka. Ami hiányzik belőle: mennyibe kerül a parkolás, mikor mehetek vízbe, mennyi idő múlva mehetek vissza dolgozni, és <strong>mennyi ideig tart valójában</strong> (lásd BIZ-2).</p>
+    </div>
+
+    <div class="panel warn">
+      <h4 style="margin-bottom:6px">A láthatósági plafon — és mikor ne csiszolj tovább</h4>
+      <p style="margin:0;font-size:.95rem">A saját korábbi auditjaid szerint <strong>nulla dofollow backlinked</strong> van (Ahrefs, 2026-07-31), a kezdőlap kannibalizálja a money page-ek fej-kulcsszavait, és a technikai SEO 100/100. Ez azt jelenti, hogy az on-page csiszolás közel van a plafonjához: több forgalmat a szövegtől nem fogsz kapni. <strong>Ezért fontos, amit ez a jelentés mond:</strong> nem több látogató kell, hanem hogy a meglévőkből többen jussanak el a gombig. A forgalom-oldali kar máshol van — linkek és Cégprofil —, és az nem ennek az auditnak a dolga.</p>
+    </div>
+
+    <div class="panel">
+      <h4 style="margin-bottom:6px">A saját döntéseid, amiket nem írok felül</h4>
+      <ul class="tight" style="font-size:.94rem;margin-top:6px">
+        <li>A kezdőlap H1-je („Kozmetikus Zuglóban”) tudatos SEO-döntés — az alternatíváim mind megtartják a kulcsszót.</li>
+        <li>A hero kicker chip-formája szándékos: a lámpanyaláb a viewport magasságával vándorol, ezért nem működne csupasz szöveg.</li>
+        <li>A hívás-gomb lefokozása mért adaton alapul (az online foglaló jobb vendég) — ezt megerősítem, nem javaslok visszalépést.</li>
+        <li>A <code>DESIGN.md</code> tiltja a szekciónkénti több elsődleges CTA-t. A ragadós sáv nem szekció, de ez a te döntésed.</li>
+        <li>A Notinóra mutató linkek <code>sponsored</code> jelölése, a self-serving <code>aggregateRating</code> mellőzése, a <code>&lt;video&gt;</code> SSR-ben tartása — mind helyes, hozzá ne nyúlj.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="sec-head"><span class="sec-n">16</span><h2>Rangsor</h2>
+  <p>Becsült hatás &times; ráfordítás szerint. A csillagozott öt hozza a hatás nagyjából 80%-át.</p></div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th class="n">#</th><th>Beavatkozás</th><th>Hatás</th><th>Idő</th><th>Típus</th></tr></thead>
+      <tbody>
+        <tr><td class="n"><strong>1 ★</strong></td><td><strong>Deployold a gépeden lévő három komponenst</strong> (TrustBar, BookingAssurance, StickyBookBar) — validálás után</td><td class="yes">nagy</td><td>10 perc</td><td>mechanikai</td></tr>
+        <tr><td class="n"><strong>2 ★</strong></td><td><strong>Szabadítsd fel a kezdőlap hero-gombjait</strong> mobilon — 188 px, három lépésben</td><td class="yes">nagy</td><td>40 perc</td><td>mechanikai</td></tr>
+        <tr><td class="n"><strong>3 ★</strong></td><td><strong>Hozd szinkronba az árakat és a neveket</strong> a foglalórendszerrel + hídszöveg a gombok alá</td><td class="yes">nagy</td><td>30 perc</td><td>bizalmi</td></tr>
+        <tr><td class="n"><strong>4 ★</strong></td><td><strong>Töltsd fel a garancia-jelvényt</strong> — vagy vedd le mind a négy oldalról</td><td class="yes">nagy</td><td>45 perc</td><td>kockázati</td></tr>
+        <tr><td class="n"><strong>5 ★</strong></td><td><strong>„Amitől a legtöbben félnek”</strong> szekció a két szemkezelés-oldalra</td><td class="yes">nagy</td><td>1 óra</td><td>kockázati</td></tr>
+        <tr><td class="n">6</td><td>Ragadós sáv + CTA-blokk a vélemények után a négy money page-en</td><td class="yes">nagy</td><td>1,5 óra</td><td>mechanikai</td></tr>
+        <tr><td class="n">7</td><td>★5,0 sor a smink és az arckezelés hero-jába (meglévő blokk átmásolása)</td><td class="yes">nagy</td><td>10 perc</td><td>relevancia</td></tr>
+        <tr><td class="n">8</td><td>A képesítésed a Rólam oldalra (a TODO helyére)</td><td>közepes</td><td>15 perc</td><td>bizalmi</td></tr>
+        <tr><td class="n">9</td><td>„Az árak tájékoztató jellegűek” cseréje</td><td>közepes</td><td>2 perc</td><td>gazdasági</td></tr>
+        <tr><td class="n">10</td><td>Az USP a money page-re: „a formázás és a festés az árban van”</td><td class="yes">nagy</td><td>15 perc</td><td>motivációs</td></tr>
+        <tr><td class="n">11</td><td>Fejléc-gomb 640 px alatt (<code>NavBar.tsx:147</code>, egy szó)</td><td>közepes</td><td>1 perc</td><td>mechanikai</td></tr>
+        <tr><td class="n">12</td><td>Négy valós sürgetés-mechanizmus bevezetése</td><td>közepes</td><td>30 perc</td><td>időzítési</td></tr>
+        <tr><td class="n">13</td><td>Vélemény-kérő üzenet bevezetése + a meglévő 60 kibányászása kifogások szerint</td><td class="yes">nagy</td><td>2 óra + folyamat</td><td>bizalmi</td></tr>
+        <tr><td class="n">14</td><td>Visszahívó SMS a 7. héten (lifting) és a 26. napon (arckezelés)</td><td class="yes">nagy</td><td>fél nap</td><td>utóélet</td></tr>
+        <tr><td class="n">15</td><td>Fizetési módok kiírása (miután eldöntötted, melyik igaz)</td><td>közepes</td><td>15 perc</td><td>gazdasági</td></tr>
+        <tr><td class="n">16</td><td>Galéria-képaláírások mit + mennyi idő + mennyiért sémára</td><td>közepes</td><td>1 óra</td><td>motivációs</td></tr>
+        <tr><td class="n">17</td><td>Headline-cserék a money page-eken (A-változatok)</td><td>közepes</td><td>1 óra</td><td>kognitív</td></tr>
+        <tr><td class="n">18</td><td>Időtartamok szinkronba hozása mind a 11 szolgáltatásnál</td><td>közepes</td><td>30 perc</td><td>bizalmi</td></tr>
+        <tr><td class="n">19</td><td>„Hasonló cikkek” a foglalás-blokk alá a cikksablonban</td><td>közepes</td><td>15 perc</td><td>időzítési</td></tr>
+        <tr><td class="n">20</td><td>Notino: a tiltás a leírás végére, három elgépelés javítása</td><td>közepes</td><td>20 perc</td><td>kognitív</td></tr>
+        <tr><td class="n">21</td><td>Nyelvi hibák (13-as szekció)</td><td>kicsi</td><td>10 perc</td><td>bizalmi</td></tr>
+        <tr><td class="n">22</td><td>51 szuperlatívusz lecserélése számra és eljárásra</td><td>közepes</td><td>2 óra</td><td>motivációs</td></tr>
+        <tr><td class="n">23</td><td>Belépő-ajánlat („küldj fotót, megírom”) bevezetése</td><td class="yes">nagy</td><td>fél nap</td><td>ajánlat</td></tr>
+        <tr><td class="n">24</td><td>H2-cserék (06-os szekció)</td><td>kicsi</td><td>30 perc</td><td>kognitív</td></tr>
+        <tr><td class="n">25</td><td>Vélemény az árkártyák mellé, kifogás szerint válogatva</td><td>közepes</td><td>1 óra</td><td>bizalmi</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel crit" style="margin-top:20px">
+    <p class="eyebrow" style="margin-bottom:8px">Amit ma este meg lehet csinálni</p>
+    <p style="margin:0">
+      Az 1-es, a 7-es, a 9-es és a 11-es együtt <strong>23 perc</strong>, és mind a
+      négy fájlszintű, alacsony kockázatú változtatás. Ha ma csak ennyire van
+      időd, ezt a négyet csináld meg — és utána deployolj.
+    </p>
+  </div>
+
+  <div class="panel" style="margin-top:14px">
+    <p class="eyebrow" style="margin-bottom:8px">Egy becslés, megjelölve becslésként</p>
+    <p style="margin:0;font-size:.95rem">
+      A kezdőlap ma 2 kattintható gombot ad 16,5 képernyőre, és a hero-gomb
+      0%-ban elérhető, amíg a sütisáv áll. Ha az 1–2. tétel után a hero-gomb
+      elérhetővé válik és a ragadós sáv végigkíséri a lapot, a kezdőlapról induló
+      Notino-kattintások <strong>nagyságrendileg</strong> a mostani másfél-kétszeresére
+      mehetnek. Ez a mérőszám a mért konverziód (Notino-kattintás), az alapja a
+      mai mérés, és <em>becslés, nem ígéret</em> — a valódi számot két, egymást
+      követő két-hetes időszak összevetése adja meg. A/B-tesztet ne futtass:
+      ekkora forgalomnál nincs szignifikancia.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+  <div class="sec-head"><span class="sec-n">17</span><h2>Amit nem néztem meg</h2>
+  <p>Hatókör-nyilatkozat. Ami itt szerepel, arról ne higgy semmit ebből a jelentésből.</p></div>
+
+  <div class="prose">
+    <ul class="tight">
+      <li><strong>A foglalási út utolsó három lépését</strong> ma nem tudtam újra végigjárni: a böngészőpanel rejtett állapotban futott, és a Notino modálja nem nyílt meg. A nap-, idősáv- és megerősítés-lépés a 2026-08-28-i bejárásból van. Foglalás nem történt.</li>
+      <li><strong>A Google Cégprofil élő értékelésszámát</strong> nem tudtam ellenőrizni: a Google süti-fala állta az utat, és nem fogadtam el nem-szükséges sütiket. A „60+” állítás a projekt saját, 2026-08-29-i mérésével (62 értékelés) konzisztens.</li>
+      <li><strong>A Google Ads fiókhoz nincs hozzáférésem.</strong> A hirdetési „40+ vélemény” állítás a repóban lévő kampányfájlokból származik — lehet, hogy már javítottad.</li>
+      <li><strong>Analitikai adatot nem húztam le.</strong> Az egyetlen forgalmi szám, amire hivatkozom (a blog 12%-os, a szolgáltatás-oldalak 80%-os konverziója), a saját 2026-09-07-i mérésedből van, a kódkommentek szerint.</li>
+      <li><strong>A working tree menet közben változott</strong> — 00:06-kor is. Lehet, hogy a jelentés írása közben már készül valami ebből. A „ma élesben” táblázat a ténylegesen kiszolgált HTML-ből készült, az a rész biztosan pontos.</li>
+      <li><strong>Az adatvédelmi és ÁSZF oldalt</strong> jogi tartalomként nem auditáltam, csak a fizetési módok pontján néztem bele.</li>
+      <li><strong>A szakmai állítások érvényességét</strong> (allergia-egyeztetés menete, kontaktlencse, festék-kezelés) nem tudom ellenőrizni. Ahol ilyet írtam, oda odaírtam: csak akkor tedd ki, ha tényleg így dolgozol.</li>
+      <li><strong>Kódot nem írtam át.</strong> Ez audit. Ha kéred, külön git ágon megcsinálom a top 3-at.</li>
+    </ul>
+  </div>
+</section>
+
+<p class="foot">
+  Vbro marketing-audit · 2026-09-08 · frubeauty.com<br>
+  Mérve: valódi Chrome, 375&times;812 mobil + desktop · 9 oldal, 13 komponens, 25 foglalható szolgáltatás<br>
+  Előző mérések: 2026-08-15 (61) · 2026-08-28 (58)
+</p>
+
+</div>
+
+<script>
+document.addEventListener('click', function (e) {
+  var btn = e.target.closest('[data-copy]');
+  if (!btn) return;
+  var box = btn.closest('.paste');
+  var txt = box ? box.querySelector('.paste-txt') : null;
+  if (!txt) return;
+  var value = txt.innerText;
+  var done = function () {
+    var old = btn.textContent;
+    btn.textContent = 'Kész';
+    setTimeout(function () { btn.textContent = old; }, 1400);
+  };
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(value).then(done, function () { selectFallback(txt); });
+    } else {
+      selectFallback(txt);
+    }
+  } catch (err) {
+    selectFallback(txt);
+  }
+  function selectFallback(node) {
+    var r = document.createRange();
+    r.selectNodeContents(node);
+    var s = window.getSelection();
+    s.removeAllRanges();
+    s.addRange(r);
+    btn.textContent = 'Kijelölve';
+    setTimeout(function () { btn.textContent = 'Másol'; }, 1600);
+  }
+});
+</script>

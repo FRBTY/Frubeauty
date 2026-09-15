@@ -39,7 +39,7 @@ Sok szalon külön számolja a formázást, a festést és a laminálást, így 
 
 ## Mennyibe kerül kerületenként Budapesten?
 
-Az „átlagár" félrevezető, mert a kerületek között több mint kétszeres a szórás — és mert a legtöbb helyen nem az szerepel a listán, amit a végén fizetsz. Öt budapesti szalon nyilvános árlistáját néztem meg, és mindenhol ugyanazt kerestem: **mennyi a laminálás önmagában, és mennyi úgy, hogy a formázás meg a festés is benne van.**
+Az „átlagár" félrevezető, mert a kerületek között több mint kétszeres a szórás — és mert a listaár meg a végösszeg nem mindenhol ugyanaz. Öt budapesti szalon nyilvános árlistáját néztem meg, és mindenhol ugyanazt kerestem: **mennyi a laminálás önmagában, és mennyi úgy, hogy a formázás meg a festés is benne van.**
 
 | Kerület | Ami a listán szerepel | Listaár | Amit ténylegesen fizetsz |
 |---|---|---|---|

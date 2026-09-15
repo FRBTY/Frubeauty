@@ -4,7 +4,7 @@ excerpt: "Mitől koreai egy szempilla lifting? Kíméletesebb hatóanyagok, pont
 category: "Szempilla"
 readingMinutes: 7
 publishedAt: 2026-04-28
-updatedAt: 2026-08-29
+updatedAt: 2026-09-12
 cover: "/img/szempillalifting-budapest-egressy-ut-munka-szempilla-oldal-2-kep.webp"
 coverWidth: 1200
 coverHeight: 1800
@@ -32,7 +32,7 @@ A koreai szempilla lifting célja ugyanaz, mint a hagyományosé — a saját pi
 
 ## Kinek ajánlom?
 
-Szinte mindenkinek, aki **természetes, mégis látható** eredményt szeretne — és különösen annak, akinek a pillái vékonyak, vagy már megsínylettek egy korábbi, erősebb kezelést. A koreai technika a FRUBEAUTY [szempilla lifting](/szempilla-lifting-zuglo/) szolgáltatásának alapja: festéssel együtt **12 000 Ft**, körülbelül 90 perc alatt.
+Szinte mindenkinek, aki **természetes, mégis látható** eredményt szeretne — és különösen annak, akinek a pillái vékonyak, vagy már megsínylettek egy korábbi, erősebb kezelést. A koreai technika a FRUBEAUTY [szempilla lifting](/szempilla-lifting-zuglo/) szolgáltatásának alapja: festéssel együtt **12 000 Ft**, körülbelül 75 perc alatt.
 
 ## Kinek nem ajánlom?
 
@@ -52,7 +52,7 @@ Ha bizonytalan vagy, foglalás előtt írj. Ha úgy látom, hogy most nem érdem
 
 ## Mennyibe kerül a koreai szempilla lifting Budapesten?
 
-A koreai szempilla lifting nálam, Zuglóban **12 000 Ft**, és ebben a festés is benne van. A kezelés körülbelül **90 perc**, és egy időpontban egy vendéggel dolgozom.
+A koreai szempilla lifting nálam, Zuglóban **12 000 Ft**, és ebben a festés is benne van. A kezelés körülbelül **75 perc**, és egy időpontban egy vendéggel dolgozom.
 
 Ami az árban van: a konzultáció, az ívválasztás, a lifting, a festés és az utóápolási tanácsok. Felár nincs — sem hosszabb pillákra, sem erősebb ívre.
 
@@ -80,6 +80,6 @@ Pont ez a koreai technika lényege: a kíméletesebb anyag kisebb terhelést jel
 Nem ajánlott. A hormonális változás miatt az eredmény kiszámíthatatlan, ezért várandósság alatt nem végzem el. Szoptatás alatt foglalás előtt egyeztessünk.
 
 **Mennyibe kerül?**
-A koreai szempilla lifting festéssel együtt 12 000 Ft, körülbelül 90 perc. A részletes árakat a [szempilla lifting árak 2026](/blog/szempilla-lifting-arak-2026/) cikkben írom le.
+A koreai szempilla lifting festéssel együtt 12 000 Ft, körülbelül 75 perc. A részletes árakat a [szempilla lifting árak 2026](/blog/szempilla-lifting-arak-2026/) cikkben írom le.
 
 Ha a lifting és a festés között döntenél, segít a [szempilla lifting vagy festés](/blog/szempilla-lifting-vagy-festes/) cikk; az árak részleteit a [szempilla lifting árak 2026](/blog/szempilla-lifting-arak-2026/) bejegyzésben találod, az eredmény megőrzéséhez pedig az [utóápolási útmutatót](/blog/szempilla-lifting-utoapolas/) érdemes elolvasnod.

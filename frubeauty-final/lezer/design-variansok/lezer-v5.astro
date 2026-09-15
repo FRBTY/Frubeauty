@@ -1,0 +1,360 @@
+---
+/**
+ * VARIÁNS 5 — „A KLINIKA”
+ * =============================================================================
+ * A KAR: prémium pozíció. Ez a variáns SZÁNDÉKOSAN felfüggeszti a
+ * direct-response szabályok egy részét — a vbro-marketing vakfolt-fájla pont ezt
+ * írja elő a luxus/prémium szegmensre:
+ *
+ *   kerek ár (L3 ellen) · kevesebb szó (L27 ellen) · visszafogott jelzők (L20
+ *   ellen) · nincs sürgetés (L15 ellen) · nincs áthúzott ár és nincs
+ *   „megtakarítás” badge (L4 ellen)
+ *
+ * Ami MARAD, és amire az egész oldal épül: a bizonyíték (L9, L13), a
+ * konkrétság (L8), a whitespace (L33) és a design (L34).
+ *
+ * EZ A VARIÁNS A KONTROLLCSOPORT. Ha ez nyer az V1 (A számla) ellen, az azt
+ * jelenti, hogy a szalon vendégköre nem ár-, hanem bizalom-vezérelt — és ez az
+ * információ többet ér, mint maga az oldal.
+ *
+ * SZÍNVILÁG: ez az egyetlen VILÁGOS oldal a site-on. A fejléc és a lábléc sötét
+ * marad — ez tudatos: sötét navigáció világos tartalom fölött. Ha a döntés erre
+ * a variánsra esik, a fejléc világos változata külön feladat.
+ *
+ * ELŐNÉZETI OLDAL: noindex + a sitemapból kizárva.
+ */
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteContact from '../components/SiteContact.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { Reveal } from '../components/Reveal';
+import { MagneticCTA } from '../components/MagneticCTA';
+import StickyBookBar from '../components/StickyBookBar.astro';
+import { CookieBanner } from '../components/CookieBanner';
+import { LaserDiodeAnimation } from '../components/lezer/LaserDiodeAnimation';
+import { siteConfig, relFor } from '../config/site';
+import {
+  zones, packages, machineFacts, processSteps, worksFor, worksNotFor,
+  commitments, faqs, testimonials, images, faqSchema, serviceSchema, howToSchema,
+} from '../data/lezer';
+
+const config = { ...siteConfig };
+---
+
+<Layout
+  title="[V5 · A KLINIKA] Lézeres szőrtelenítés Budapest | FRUBEAUTY"
+  description="Dióda lézeres szőrtelenítés három hullámhosszon, Budapest XIV. kerületében. Egyszerre egy vendég. Hat alkalom, 4–6 hetes közökkel, próbafolttal indulva."
+  robots="noindex, nofollow"
+  additionalSchemas={[faqSchema, serviceSchema, howToSchema]}
+  preloadImage={images.machineWide}
+>
+  <SiteHeader />
+
+  {/* ── Hero: egy mondat és sok levegő ───────────────────────────────────────
+       A prémium hero nem magyaráz. Az ár, a lista és a bizonyíték mind lent van
+       — itt csak annyi dolga van, hogy a látogató megérezze, hova érkezett. */}
+  <section class="pt-[calc(var(--header-h)+3rem)] sm:pt-[calc(var(--header-h)+8rem)] pb-16 sm:pb-24">
+    <div class="max-w-[1200px] mx-auto px-6 sm:px-10 lg:px-16">
+      <div class="hero-reveal max-w-[46rem]">
+        <p class="text-[11px] uppercase tracking-caps text-goldDeep">Dióda lézer · 755 · 808 · 1064 nm</p>
+        <h1 class="mt-10 font-display font-light text-ink leading-[1.06] tracking-tightest-" style="font-size: clamp(2.3rem, 6.2vw, 4.5rem);">Lézeres szőrtelenítés <em class="display">Budapesten</em>, egyszerre egy vendéggel.</h1>
+        <p class="mt-10 text-lg sm:text-xl text-ink/70 leading-[1.75] max-w-[46ch]">Hat alkalom, négy-hat hetes közökkel. Próbafolttal indulunk, és a bőrtípusod a Fitzpatrick-skálán beállítva, felírva marad.</p>
+        <div class="mt-12 flex flex-wrap items-center gap-4">
+          <MagneticCTA href={config.booking} external variant="primary">Próbafolt · 5 000 Ft</MagneticCTA>
+          <a href="#arak" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-ink/20 text-ink hover:bg-ink hover:text-linen transition-colors duration-200">Árak</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-16 sm:mt-24 max-w-[1200px] mx-auto px-6 sm:px-10 lg:px-16">
+      <figure class="overflow-hidden rounded-[2rem] bg-sand/40">
+        <img
+          src={images.machineWide}
+          alt="A dióda lézer kezelőegysége a FRUBEAUTY zuglói kezelőjében — 755, 808 és 1064 nm"
+          width="1200" height="942"
+          loading="eager" fetchpriority="high" decoding="async"
+          class="w-full h-auto"
+        />
+      </figure>
+      <figcaption class="mt-4 text-[11px] uppercase tracking-caps text-ink/65">1143 Budapest, Egressy út 16. · a saját kezelőm</figcaption>
+    </div>
+  </section>
+
+  {/* ── Négy adat, hajszálvonalon ─────────────────────────────────────────── */}
+  <section class="py-16 sm:py-20 border-y border-ink/10">
+    <div class="max-w-[1200px] mx-auto px-6 sm:px-10 lg:px-16">
+      <dl class="grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-8">
+        {[
+          { v: '★ 5,0', k: '60+ Google-értékelés', href: config.googleReviewsUrl },
+          { v: 'Három hullámhossz', k: 'egyszerre, bőrtípusra állítva' },
+          { v: 'Egy vendég', k: 'egy időpontban, végig' },
+          { v: '11 000 Ft', k: 'alkalmanként, hónalj sorozatban' },
+        ].map((f) => (
+          <div>
+            <dt class="font-display font-light text-ink leading-tight" style="font-size: clamp(1.25rem, 2.2vw, 1.75rem);">{f.v}</dt>
+            <dd class="mt-2.5 text-[11px] uppercase tracking-caps text-ink/65">
+              {f.href ? (
+                <a href={f.href} target="_blank" rel="noopener" class="hover:text-ink transition-colors">{f.k} →</a>
+              ) : f.k}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  {/* ── A gép ─────────────────────────────────────────────────────────────── */}
+  <section class="py-24 sm:py-36">
+    <div class="max-w-[1200px] mx-auto px-6 sm:px-10 lg:px-16">
+      <div class="grid lg:grid-cols-12 gap-14 lg:gap-20 items-start">
+        <Reveal client:visible as="div" className="lg:col-span-4">
+          <p class="text-[11px] uppercase tracking-caps text-goldDeep mb-6">A gép</p>
+          <h2 class="font-display font-light leading-[1.12] tracking-tight text-ink" style="font-size: clamp(1.875rem, 3.6vw, 2.75rem);">Három hullámhossz, <em class="display">egy fejben</em>.</h2>
+        </Reveal>
+        <div class="lg:col-span-8">
+          {machineFacts.map((m, i) => (
+            <Reveal client:visible as="div" delay={0.05 * i}>
+              <div class="border-t border-ink/12 py-8 first:pt-0 first:border-t-0">
+                <p class="font-display text-xl sm:text-2xl text-ink leading-snug">{m.feature}</p>
+                <p class="mt-4 text-[16px] text-ink/65 leading-[1.8] max-w-[62ch]">{m.benefit}</p>
+              </div>
+            </Reveal>
+          ))}
+          <figure class="mt-10 overflow-hidden rounded-2xl bg-sand/40">
+            <img src={images.fitzpatrick} alt="Bőrtípus-beállítás a Fitzpatrick-skálán a kezelőegység kijelzőjén" width="1300" height="1144" loading="lazy" decoding="async" class="w-full h-auto" />
+            <figcaption class="px-6 py-4 text-[11px] uppercase tracking-caps text-ink/65 border-t border-ink/10">A te bőrtípusod, beállítva és felírva</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── A mechanizmus ─────────────────────────────────────────────────────── */}
+  <section class="py-24 sm:py-36 bg-sand/25">
+    <div class="max-w-[1080px] mx-auto px-6 sm:px-10 lg:px-16">
+      <Reveal client:visible as="div" className="mb-12 max-w-[46ch]">
+        <p class="text-[11px] uppercase tracking-caps text-goldDeep mb-6">A mechanizmus</p>
+        <h2 class="font-display font-light leading-[1.12] tracking-tight text-ink" style="font-size: clamp(1.875rem, 3.6vw, 2.75rem);">Mi történik a bőr alatt, amíg a fej <em class="display">végigmegy rajtad</em>.</h2>
+      </Reveal>
+      <LaserDiodeAnimation client:visible tone="light" bare />
+    </div>
+  </section>
+
+  {/* ── A menet ───────────────────────────────────────────────────────────── */}
+  <section class="py-24 sm:py-36">
+    <div class="max-w-[1200px] mx-auto px-6 sm:px-10 lg:px-16">
+      <Reveal client:visible as="div" className="mb-14 max-w-[46ch]">
+        <p class="text-[11px] uppercase tracking-caps text-goldDeep mb-6">A menet</p>
+        <h2 class="font-display font-light leading-[1.12] tracking-tight text-ink" style="font-size: clamp(1.875rem, 3.6vw, 2.75rem);">A próbafolttól a <em class="display">hatodik alkalomig</em>.</h2>
+      </Reveal>
+      <ol class="grid sm:grid-cols-2 gap-x-14 gap-y-12">
+        {processSteps.map((s, i) => (
+          <Reveal client:visible as="div" delay={0.05 * i}>
+            <li class="border-t border-ink/12 pt-7">
+              <p class="font-display text-4xl font-light text-goldDeep/80 tabular-nums">{s.step}</p>
+              <h3 class="mt-4 font-display text-xl text-ink leading-snug">{s.title}</h3>
+              <p class="mt-3 text-[16px] text-ink/65 leading-[1.8]">{s.body}</p>
+            </li>
+          </Reveal>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  {/* ── Árak ────────────────────────────────────────────────────────────────
+       Prémium árlista: kerek számok, hajszálvonal, NINCS áthúzott ár, NINCS
+       „megtakarítás” badge és nincs szalag a középső csomagon. A kedvezmény
+       ténye megmarad (a sorozat-ár a kétharmada), csak nem kiabál. */}
+  <section id="arak" class="py-24 sm:py-36 bg-sand/25">
+    <div class="max-w-[1200px] mx-auto px-6 sm:px-10 lg:px-16">
+      <Reveal client:visible as="div" className="mb-14 max-w-[52ch]">
+        <p class="text-[11px] uppercase tracking-caps text-goldDeep mb-6">Árak</p>
+        <h2 class="font-display font-light leading-[1.12] tracking-tight text-ink" style="font-size: clamp(1.875rem, 3.6vw, 2.75rem);">Lézeres szőrtelenítés <em class="display">árak</em>.</h2>
+        <p class="mt-6 text-lg text-ink/65 leading-[1.75]">A sorozat hat alkalomra szól. Alkalmanként fizeted, a helyszínen — előre semmit.</p>
+      </Reveal>
+
+      <div>
+        {zones.map((z) => (
+          <Reveal client:visible as="div">
+            <div class="grid grid-cols-12 gap-x-6 gap-y-2 border-t border-ink/12 py-7 items-baseline">
+              <p class="col-span-3 sm:col-span-2 font-display text-xl text-ink">{z.tag}</p>
+              <p class="col-span-9 sm:col-span-5 text-[15px] text-ink/60 leading-snug">{z.areas}</p>
+              <div class="col-span-6 sm:col-span-2 sm:text-right">
+                <p class="text-[10px] uppercase tracking-caps text-ink/65 sm:hidden">Egy alkalom</p>
+                <p class="font-display text-xl text-ink/70 tabular-nums">{z.single}</p>
+              </div>
+              <div class="col-span-6 sm:col-span-3 text-right">
+                <p class="text-[10px] uppercase tracking-caps text-goldDeep sm:hidden">Sorozatban</p>
+                <p class="font-display text-xl text-ink tabular-nums">{z.serial}<span class="text-[13px] text-ink/65 font-normal"> / alkalom</span></p>
+              </div>
+            </div>
+          </Reveal>
+        ))}
+        <div class="border-t border-ink/25"></div>
+        <p class="mt-6 text-[14px] text-ink/65 leading-[1.8] max-w-[64ch]">A sorozat után évi egy-két karbantartó alkalom tartja szinten, az egyalkalmas áron. Ha a hatodik után azon a területen maradt kezelhető szál, a hetedik és a nyolcadik alkalom a sorozat-ár feléért megy.</p>
+      </div>
+
+      {/* Összevont sorozatok — dísz nélkül. */}
+      <div class="mt-20 grid lg:grid-cols-3 gap-x-14 gap-y-12">
+        {packages.map((p) => (
+          <Reveal client:visible as="div">
+            <div class={`border-t pt-7 ${p.highlight ? 'border-goldDeep' : 'border-ink/20'}`}>
+              <h3 class="font-display font-light text-ink leading-tight" style="font-size: clamp(1.5rem, 2.4vw, 1.875rem);">{p.title} <em class="display">{p.titleAccent}</em></h3>
+              <p class="mt-3 text-[14px] text-ink/65 leading-snug">{p.contains}</p>
+              <p class="mt-7 font-display text-3xl text-ink tabular-nums">{p.perVisit}<span class="text-[15px] text-ink/65 font-normal"> / alkalom</span></p>
+              <p class="mt-2 text-[14px] text-ink/65">Hat alkalom: {p.total} · {p.duration.replace('~ ', '')}</p>
+              <p class="mt-5 text-[14px] text-ink/65 leading-[1.75]">{p.bestFor.charAt(0).toUpperCase() + p.bestFor.slice(1)}</p>
+              <div class="mt-8">
+                <MagneticCTA href={config.booking} external variant="primary">Próbafolt</MagneticCTA>
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ── Alkalmasság ───────────────────────────────────────────────────────── */}
+  <section class="py-24 sm:py-36">
+    <div class="max-w-[1200px] mx-auto px-6 sm:px-10 lg:px-16">
+      <Reveal client:visible as="div" className="mb-14 max-w-[52ch]">
+        <p class="text-[11px] uppercase tracking-caps text-goldDeep mb-6">Alkalmasság</p>
+        <h2 class="font-display font-light leading-[1.12] tracking-tight text-ink" style="font-size: clamp(1.875rem, 3.6vw, 2.75rem);">Kinek működik — és kinek <em class="display">nem</em>.</h2>
+        <p class="mt-6 text-lg text-ink/65 leading-[1.75]">Ha a te szálad nem olyan, amin a lézer dolgozni tud, azt a próbafolton megmondom, és nem adok el sorozatot.</p>
+      </Reveal>
+      <div class="grid lg:grid-cols-2 gap-x-16">
+        <div>
+          <p class="text-[11px] uppercase tracking-caps text-goldDeep border-b border-ink/20 pb-4">Ezeken dolgozik</p>
+          <ul>
+            {worksFor.map((w) => (
+              <li class="border-b border-ink/10 py-5 text-[16px] text-ink/70 leading-[1.75]">{w}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="mt-14 lg:mt-0">
+          <p class="text-[11px] uppercase tracking-caps text-ink/65 border-b border-ink/20 pb-4">Ezeken nem</p>
+          <ul>
+            {worksNotFor.map((w) => (
+              <li class="border-b border-ink/10 py-5 text-[16px] text-ink/70 leading-[1.75]">{w}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Amit vállalok ─────────────────────────────────────────────────────── */}
+  <section class="py-24 sm:py-36 bg-sand/25">
+    <div class="max-w-[1200px] mx-auto px-6 sm:px-10 lg:px-16">
+      <Reveal client:visible as="div" className="mb-14 max-w-[52ch]">
+        <p class="text-[11px] uppercase tracking-caps text-goldDeep mb-6">Amit vállalok</p>
+        <h2 class="font-display font-light leading-[1.12] tracking-tight text-ink" style="font-size: clamp(1.875rem, 3.6vw, 2.75rem);">Három <em class="display">ellenőrizhető</em> feltétel.</h2>
+      </Reveal>
+      <div class="grid md:grid-cols-3 gap-x-14 gap-y-12">
+        {commitments.map((c) => (
+          <Reveal client:visible as="div">
+            <div class="border-t border-ink/20 pt-7">
+              <p class="font-display text-3xl font-light text-goldDeep/80 tabular-nums">{c.n}</p>
+              <h3 class="mt-4 font-display text-xl text-ink leading-snug">{c.title}</h3>
+              <p class="mt-3 text-[16px] text-ink/65 leading-[1.8]">{c.body}</p>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ── Bizonyíték és az ember ────────────────────────────────────────────── */}
+  <section class="py-24 sm:py-36">
+    <div class="max-w-[1200px] mx-auto px-6 sm:px-10 lg:px-16">
+      <div class="grid lg:grid-cols-12 gap-14 lg:gap-20 items-start">
+        <Reveal client:visible as="div" className="lg:col-span-6">
+          <p class="text-[11px] uppercase tracking-caps text-goldDeep mb-6">Bizonyíték</p>
+          <h2 class="font-display font-light leading-[1.12] tracking-tight text-ink" style="font-size: clamp(1.875rem, 3.6vw, 2.75rem);">Amit <em class="display">nem</em> tudok megmutatni.</h2>
+          <div class="mt-8 space-y-6 text-[17px] text-ink/70 leading-[1.85] max-w-[52ch]">
+            <p>Erről a gépről még nincs saját előtte-utána képem, és nincs egyetlen lézeres vendég-véleményem sem. Idegen képeket nem teszek ki helyette.</p>
+            <p>Amit meg tudok mutatni: a saját fotóidat. Minden alkalom előtt ugyanabban a fényben, ugyanarról a területről — a harmadik alkalomra a saját telefonodon látod, mi változott.</p>
+            <p>A lézer új. Az ember nem. Öt éve dolgozom Zuglóban, az Egressy úton.</p>
+          </div>
+
+          <div class="mt-12">
+            {testimonials.map((t) => (
+              <div class="border-t border-ink/12 py-7">
+                <p class="text-[16px] text-ink/70 leading-[1.8] max-w-[58ch]">„{t.text}”</p>
+                <p class="mt-4 text-[11px] uppercase tracking-caps text-ink/65">{t.name} · {t.service}</p>
+              </div>
+            ))}
+            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="mt-6 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-ink group hover:text-goldDeep transition-colors">Mind a 60+ értékelés a Google-on<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
+          </div>
+        </Reveal>
+        <Reveal client:visible as="div" className="lg:col-span-6" delay={0.1}>
+          <figure class="overflow-hidden rounded-[2rem] bg-sand/40">
+            <img src={images.portrait} alt="Pecze-Kovács Fruzsina kozmetikus a FRUBEAUTY zuglói szalonjában" width="1200" height="1864" loading="lazy" decoding="async" class="w-full h-auto" />
+          </figure>
+          <figcaption class="mt-4 text-[11px] uppercase tracking-caps text-ink/65">Pecze-Kovács Fruzsina — öt éve ugyanitt</figcaption>
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+  {/* ── GYIK ────────────────────────────────────────────────────────────────
+       Saját, világos változat: a közös FAQList sötét paletta alá van írva, azt
+       itt nem lehet használni. */}
+  <section class="py-24 sm:py-36 bg-sand/25">
+    <div class="max-w-[920px] mx-auto px-6 sm:px-10 lg:px-16">
+      <Reveal client:visible as="div" className="mb-14">
+        <p class="text-[11px] uppercase tracking-caps text-goldDeep mb-6">Kérdések</p>
+        <h2 class="font-display font-light leading-[1.12] tracking-tight text-ink" style="font-size: clamp(1.875rem, 3.6vw, 2.75rem);">Amit a <em class="display">próbafolt előtt</em> érdemes tudni.</h2>
+      </Reveal>
+      <div class="border-t border-ink/20">
+        {faqs.map((f) => (
+          <details class="group border-b border-ink/12">
+            <summary class="w-full py-6 flex cursor-pointer list-none items-center justify-between gap-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-goldDeep/40 rounded-md [&::-webkit-details-marker]:hidden">
+              <span class="font-display text-lg sm:text-xl text-ink pr-4">{f.q}</span>
+              <span class="flex-shrink-0 w-9 h-9 rounded-full border border-ink/20 text-ink flex items-center justify-center transition-[transform,color,background-color] duration-200 group-open:rotate-45 group-open:bg-ink group-open:text-linen motion-reduce:transition-none" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              </span>
+            </summary>
+            <p class="pb-7 pr-12 text-[16px] text-ink/65 leading-[1.8] max-w-[68ch]">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ── Záró: a sötét horgony ─────────────────────────────────────────────── */}
+  <SiteContact
+    eyebrow="Foglalás"
+    heading="Kezdjük egy <em class='display'>próbafolttal</em>."
+    intro="Huszonöt perc, 5 000 Ft, és beszámítom az első kezelés árába."
+    offer="Lézer"
+  />
+  <SiteFooter />
+  <StickyBookBar eyebrow="Próbafolt és konzultáció · ~25 perc" price="5 000 Ft" cta="Foglalok" />
+  <CookieBanner client:idle />
+</Layout>
+
+<style is:global>
+  /* Ez az egyetlen világos oldal a site-on. A Layout a <html>-re és a <body>-ra
+     is sötét alapot tesz — itt mindkettőt felülírjuk. Az `is:global` stílus
+     CSAK ennek az oldalnak a bundle-jébe kerül, tehát a többi oldalt nem
+     érinti. A záró SiteContact/SiteFooter szándékosan sötét marad. */
+  html {
+    background: #fbf6ef !important;
+  }
+  body {
+    background: #fbf6ef !important;
+    color: #2a211a !important;
+  }
+  ::selection {
+    background: #1a1410;
+    color: #fbf6ef;
+  }
+  /* Az <em class="display"> globálisan a világos aranyat kapja (sötét háttérre
+     hangolva) — világos alapon az sárgás és gyenge kontrasztú. Itt a mélyebb
+     arany megy, ami linen fölött 4,6:1. */
+  main em.display,
+  main .font-display em {
+    color: #8e6730;
+  }
+</style>

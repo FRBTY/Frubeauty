@@ -1,0 +1,482 @@
+---
+/**
+ * VARIÁNS 1 — „A SZÁMLA”
+ * =============================================================================
+ * A KAR: az árkifogás átkeretezése. A látogató a 66 000 Ft-ot a NULLÁHOZ méri,
+ * pedig már ma is fizet — csak részletekben, és örökre. Az egész oldal egyetlen
+ * mondat köré épül: „a lézer nem olcsóbb szolgáltatás, hanem véges”.
+ *
+ * Melyik Cashvertising-leckék dolgoznak itt (vbro-marketing):
+ *   L9  boríték-teszt — a kalkulátor a saját adatával bizonyítja az értéket
+ *   L20 PVA — „1 690 000 Ft 10 év alatt”, nem „sokat költesz”
+ *   L6  pozitív végeredmény — nem a kezelés, hanem a naptárból kieső 130 alkalom
+ *   L23 gyenge versenytárs-összevetés — „van, ahol…”, névtelenül (jogi védelem is)
+ *   L29 súrlódás — az ár ELSŐ képernyőn, kalkulátorral, nem a lap alján
+ *   L32 világos háttér — a kalkulátor linen kártyán ül, a számok így olvashatók
+ *
+ * ETIKAI DÖNTÉS, amit nem szabad visszacsinálni: a kalkulátor NEM állít gyanta-árat.
+ * A látogató adja meg a saját számát, mi csak szorzunk. Versenytárs-árat állítani,
+ * amit nem mértünk, Fttv.-kockázat is — és gyengébb is, mert vitatható.
+ *
+ * ELŐNÉZETI OLDAL: noindex + a sitemapból kizárva (astro.config.mjs filter).
+ */
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteContact from '../components/SiteContact.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { Reveal } from '../components/Reveal';
+import { MagneticCTA } from '../components/MagneticCTA';
+import { TestimonialsGrid } from '../components/TestimonialsGrid';
+import FAQList from '../components/FAQList.astro';
+import TrustBar from '../components/TrustBar.astro';
+import BookingAssurance from '../components/BookingAssurance.astro';
+import RiskReversal from '../components/RiskReversal.astro';
+import StickyBookBar from '../components/StickyBookBar.astro';
+import { CookieBanner } from '../components/CookieBanner';
+import { CostCalculator } from '../components/lezer/CostCalculator';
+import { LaserDiodeAnimation } from '../components/lezer/LaserDiodeAnimation';
+import { siteConfig, relFor } from '../config/site';
+import {
+  zones, packages, worksFor, worksNotFor, commitments, faqs, testimonials,
+  crossSell, images, faqSchema, serviceSchema, howToSchema,
+} from '../data/lezer';
+
+const config = { ...siteConfig };
+---
+
+<Layout
+  title="[V1 · A SZÁMLA] Lézeres szőrtelenítés Budapest – árak 11.000 Ft-tól | FRUBEAUTY"
+  description="Számold ki, mennyit fizetsz még a szőrtelenítésért. A hónalj-sorozat 66.000 Ft — egyszer. Soprano Titanium dióda lézer Budapesten, a XIV. kerületben."
+  robots="noindex, nofollow"
+  additionalSchemas={[faqSchema, serviceSchema, howToSchema]}
+>
+  <SiteHeader />
+
+  {/* ── Hero: a kalkulátor MAGA a hero ───────────────────────────────────────
+       Ez a variáns legmerészebb szerkezeti döntése. A szokásos sorrend
+       (állítás → bizonyíték → ár) itt megfordul: az ár azonnal ott van, mert
+       ennél a szolgáltatásnál az ár az, amiért jön. Aki nem tudja eldönteni,
+       hogy megéri-e, nem görget tovább — a kalkulátorral viszont ELDÖNTI. */}
+  <section class="relative overflow-hidden pt-[calc(var(--header-h)+1.5rem)] sm:pt-[calc(var(--header-h)+4.5rem)] pb-16 sm:pb-24">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+        <div class="hero-reveal lg:col-span-6 lg:pt-6">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Lézeres szőrtelenítés · 1143 Budapest · Egressy út 16.</p>
+          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.15rem, 5vw, 3.7rem);">Lézeres szőrtelenítés Budapesten — egy <em class="display">véges</em> költség egy végtelen helyett.</h1>
+          <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[54ch]">A gyantázás nem drágább. Csak részletekben fizeted, és soha nincs vége. <strong class="font-medium text-cream">Soprano Titanium</strong> dióda lézer három hullámhosszon — hónalj vagy bikinivonal sorozatban <strong class="font-medium text-cream">11 000 Ft alkalmanként</strong>, hat alkalom, és kész.</p>
+          <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] tracking-caps">
+            <span class="text-gold font-medium">★ 5,0</span>
+            <span class="text-creamMute/50" aria-hidden="true">·</span>
+            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="uppercase text-creamMute hover:text-cream transition-colors">60+ Google-értékelés →</a>
+            <span class="inline-flex items-center rounded-full border border-whisperStrong px-3 py-1 text-[11px] uppercase tracking-caps text-creamSoft">Kizárólag női vendégek</span>
+          </div>
+          <div class="mt-8 flex flex-wrap items-center gap-3">
+            <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Próbafoltot foglalok</a>
+            <a href="#arak" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Tételes árlista</a>
+          </div>
+          <p class="mt-4 text-[12px] text-creamMute">5 000 Ft · ~25 perc · beszámítom az első kezelés árába</p>
+          <BookingAssurance class="mt-6" offer="Lézer" />
+        </div>
+
+        <div class="lg:col-span-6">
+          <CostCalculator client:visible />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <TrustBar
+    items={[
+      { value: 'Soprano Titanium', label: '755 · 808 · 1064 nm egyszerre' },
+      { value: '11 000 Ft-tól', label: 'alkalmanként, sorozatban' },
+      { value: '0 Ft előre', label: 'a sorozatot alkalmanként fizeted' },
+    ]}
+  />
+
+  {/* ── Véges vs végtelen ────────────────────────────────────────────────────
+       A kalkulátor számot ad; ez a blokk KÉPET ad hozzá. A bal oszlop egy soha
+       véget nem érő sáv, a jobb hat pont és egy vonal vége. A vizuális
+       aszimmetria az érv — nem a szöveg. */}
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">A különbség</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Nem az ár a különbség. Az, hogy <em class="display">van-e vége</em>.</h2>
+      </Reveal>
+      <div class="grid md:grid-cols-2 gap-5 lg:gap-7">
+        <Reveal client:visible as="div">
+          <article class="h-full rounded-3xl border border-whisper bg-ink p-7 sm:p-9">
+            <p class="text-[11px] uppercase tracking-caps text-creamMute mb-6">Amit most csinálsz</p>
+            <div class="flex items-center gap-1.5 mb-6" aria-hidden="true">
+              {Array.from({ length: 13 }).map(() => (
+                <span class="h-9 w-1.5 rounded-full bg-creamMute/35"></span>
+              ))}
+              <span class="text-creamMute text-lg ml-1">…</span>
+            </div>
+            <p class="text-[15px] sm:text-base text-creamSoft leading-[1.75]">Évente 13 alkalom, ha négyhetente jársz. Jövőre ugyanennyi. Azután is. A számla minden évben újraindul, és minden évben ugyanannyi.</p>
+            <p class="mt-4 text-[15px] text-creamMute">Ez nem költség, hanem <span class="text-cream">előfizetés</span> — csak nincs lemondás gomb.</p>
+          </article>
+        </Reveal>
+        <Reveal client:visible as="div" delay={0.08}>
+          <article class="h-full rounded-3xl bg-inkDeep ring-2 ring-gold/40 p-7 sm:p-9 shadow-[0_20px_60px_-20px_rgba(184,136,74,0.35)]">
+            <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Amit itt csinálunk</p>
+            <div class="flex items-center gap-1.5 mb-6" aria-hidden="true">
+              {Array.from({ length: 6 }).map(() => (
+                <span class="h-9 w-1.5 rounded-full bg-gold"></span>
+              ))}
+              <span class="ml-2 h-px flex-1 bg-gold/30"></span>
+              <span class="text-gold text-[11px] uppercase tracking-caps">vége</span>
+            </div>
+            <p class="text-[15px] sm:text-base text-creamSoft leading-[1.75]">Hat alkalom, 4–6 hetes közökkel — hat-nyolc hónap. Utána a szálak nagy része nem nő vissza, és évi egy-két karbantartó alkalom tartja szinten.</p>
+            <p class="mt-4 text-[15px] text-creamSoft">A hónalj-sorozat <span class="text-gold font-medium">66 000 Ft</span>, alkalmanként fizetve. <span class="text-cream">Nem bérlet, nem előre utalás.</span></p>
+          </article>
+        </Reveal>
+      </div>
+      <RiskReversal class="mt-12 sm:mt-16" first="Próbafolttal kezdünk, csak utána a sorozat" />
+    </div>
+  </section>
+
+  {/* ── Tételes árlista ────────────────────────────────────────────────────── */}
+  <section id="arak" class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Árak</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Lézeres szőrtelenítés <em class="display">árak</em> — zónánként, tételesen.</h2>
+        <p class="mt-5 text-creamSoft leading-[1.7]">A sorozat-ár nagyjából az egyalkalmas ár kétharmada: <span class="text-cream">hat alkalomból kettőt nem fizetsz ki.</span></p>
+      </Reveal>
+
+      <div class="sm:hidden space-y-4">
+        {zones.map((z) => (
+          <article class="bg-ink border border-whisper rounded-2xl p-5">
+            <div class="flex items-center justify-between gap-4">
+              <span class="inline-flex items-center justify-center min-w-[2.75rem] rounded-full border border-gold/30 text-gold text-[12px] uppercase tracking-caps px-3 py-1.5">{z.tag}</span>
+              <span class="text-[11px] uppercase tracking-caps text-creamMute">{z.time}</span>
+            </div>
+            <p class="mt-3.5 text-[14px] text-creamSoft leading-snug">{z.areas}</p>
+            <div class="mt-4 pt-4 border-t border-whisper flex items-end justify-between gap-4">
+              <div>
+                <p class="text-[10px] uppercase tracking-caps text-creamMute">Egy alkalom</p>
+                <p class="font-display text-xl text-cream mt-1">{z.single}</p>
+              </div>
+              <div class="text-right">
+                <p class="text-[10px] uppercase tracking-caps text-gold">Sorozatban / alkalom</p>
+                <p class="font-display text-xl text-gold mt-1">{z.serial}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="hidden sm:block overflow-x-auto">
+        <table class="w-full min-w-[640px] border-collapse text-left">
+          <thead>
+            <tr class="border-b border-whisperStrong">
+              <th class="py-4 pr-4 text-[11px] uppercase tracking-caps text-creamMute font-normal">Zóna</th>
+              <th class="py-4 pr-4 text-[11px] uppercase tracking-caps text-creamMute font-normal">Területek</th>
+              <th class="py-4 pr-4 text-[11px] uppercase tracking-caps text-creamMute font-normal whitespace-nowrap">Egy alkalom</th>
+              <th class="py-4 text-[11px] uppercase tracking-caps text-gold font-normal whitespace-nowrap">Sorozatban / alkalom</th>
+            </tr>
+          </thead>
+          <tbody>
+            {zones.map((z) => (
+              <tr class="border-b border-whisper align-top">
+                <td class="py-5 pr-4">
+                  <span class="inline-flex items-center justify-center min-w-[2.75rem] rounded-full border border-gold/30 text-gold text-[12px] uppercase tracking-caps px-3 py-1.5">{z.tag}</span>
+                  <span class="block mt-2 text-[11px] uppercase tracking-caps text-creamMute">{z.time}</span>
+                </td>
+                <td class="py-5 pr-4 text-[14px] sm:text-[15px] text-creamSoft leading-snug max-w-[34ch]">{z.areas}</td>
+                <td class="py-5 pr-4 font-display text-xl sm:text-2xl text-cream whitespace-nowrap">{z.single}</td>
+                <td class="py-5 font-display text-xl sm:text-2xl text-gold whitespace-nowrap">{z.serial}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-6 text-[13px] text-creamMute leading-relaxed max-w-[62ch]">A sorozat hat alkalomra szól, 4–6 hetes közökkel. A karbantartó alkalmak a sorozat után az egyalkalmas áron mennek. Ha a hatodik után azon a területen maradt kezelhető szál, a hetedik és a nyolcadik alkalom a sorozat-ár feléért megy.</p>
+    </div>
+  </section>
+
+  {/* ── Csomagok ─────────────────────────────────────────────────────────── */}
+  <section id="csomagok" class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-14 max-w-2xl">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Csomagajánlatok</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Több terület <em class="display">egy időpontban</em> olcsóbb.</h2>
+        <p class="mt-5 text-creamSoft leading-[1.7]">Az indok valódi: három zóna egy időpontban egy időpont, nem három. <span class="text-cream">Az időt spórolod meg — és azt kapod vissza árban.</span></p>
+      </Reveal>
+      <p class="md:hidden text-[11px] uppercase tracking-caps text-creamMute mb-4">Húzd oldalra a másik két csomagért →</p>
+      <div class="flex md:grid md:grid-cols-3 gap-5 lg:gap-7 items-stretch overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0 pb-5 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {packages.map((p, i) => (
+          <Reveal client:visible as="div" delay={0.05 * i} className="h-full snap-center shrink-0 w-[86vw] max-w-[350px] md:w-auto md:max-w-none">
+            <article class={`relative h-full flex flex-col rounded-3xl p-7 sm:p-8 transition-all duration-500 ${p.highlight ? 'bg-inkDeep ring-2 ring-gold/50 md:scale-[1.02] md:-translate-y-1 shadow-[0_20px_60px_-20px_rgba(184,136,74,0.35)]' : 'bg-inkSoft border border-whisper hover:border-whisperStrong'}`}>
+              {p.ribbon && (
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+                  <span class="inline-block text-[10px] uppercase tracking-caps font-semibold bg-gold text-ink px-4 py-1.5 rounded-full whitespace-nowrap">{p.ribbon}</span>
+                </div>
+              )}
+              <p class={`text-[11px] uppercase tracking-caps mb-4 ${p.highlight ? 'text-gold' : 'text-creamMute'}`}>{p.tier}</p>
+              <h3 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.5rem, 2.4vw, 1.875rem);">{p.title}{' '}<em class="display">{p.titleAccent}</em></h3>
+              <p class="mt-2 text-sm text-creamMute leading-snug max-w-[30ch]">{p.subtitle}</p>
+              <p class="mt-3 text-[13px] text-cream leading-snug max-w-[30ch]">{p.contains}</p>
+              <p class="mt-4 text-[12px] leading-snug text-creamSoft max-w-[30ch]"><span class="text-gold">Neked való, ha</span> {p.bestFor}</p>
+              <div class="mt-6">
+                <p class="font-display text-3xl sm:text-4xl font-medium tracking-tight text-cream">{p.perVisit}<span class="text-base text-creamMute font-normal"> / alkalom</span></p>
+                <p class="text-sm text-creamSoft mt-2">Hat alkalom összesen: <span class="text-cream">{p.total}</span></p>
+                <p class="text-xs text-creamMute mt-1">Külön, alkalmanként: <span class="line-through">{p.priceOld}</span></p>
+              </div>
+              <p class="mt-4 text-[12px] italic text-creamSoft/70 leading-snug">{p.dailyEquivalent}</p>
+              <div class={`my-7 border-t ${p.highlight ? 'border-whisperStrong' : 'border-whisper'}`}></div>
+              <p class="text-[11px] uppercase tracking-caps text-creamMute mb-4">{p.duration}</p>
+              <ul class="space-y-3 flex-1">
+                {p.features.map((f) => (
+                  <li class="flex items-start gap-2.5">
+                    <span class="flex-shrink-0 w-4 h-4 rounded-full inline-flex items-center justify-center mt-0.5 bg-gold/15 text-gold" aria-hidden>
+                      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                    </span>
+                    <span class="text-[14px] text-creamSoft leading-snug">{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <div class="mt-8">
+                <MagneticCTA href={config.booking} external variant={p.highlight ? 'primary' : 'secondary'}>Próbafoltot foglalok</MagneticCTA>
+              </div>
+            </article>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ── A mechanizmus-animáció ──────────────────────────────────────────────
+       SZÁNDÉKOSAN a csomagok UTÁN: az árat előbb kell látnia, hogy legyen mit
+       igazolnia magának. Az animáció itt egyetlen munkát végez — megválaszolja,
+       miért hat alkalom, nem egy. Ez a kalkulátor számának a fedezete. */}
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-8 lg:px-12">
+      <LaserDiodeAnimation client:visible />
+    </div>
+  </section>
+
+  {/* ── Kinek működik és kinek nem ────────────────────────────────────────── */}
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Őszintén</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Kinek működik — és kinek <em class="display">nem</em>.</h2>
+        <p class="mt-5 text-creamSoft leading-[1.7]">Ezt a listát a legtöbb árlistáról kihagyják. Pedig ha a te szálad nem olyan, amin a lézer dolgozni tud, azt jobb most megtudnod, mint a harmadik alkalom után.</p>
+      </Reveal>
+      <div class="grid md:grid-cols-2 gap-5 lg:gap-7">
+        <Reveal client:visible as="div">
+          <div class="h-full bg-inkSoft border border-whisper rounded-3xl p-7 sm:p-8">
+            <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Ezeken dolgozik</p>
+            <ul class="space-y-3.5">
+              {worksFor.map((w) => (
+                <li class="flex items-start gap-3 py-2 border-b border-whisper last:border-b-0">
+                  <span class="flex-shrink-0 w-6 h-6 rounded-full bg-gold/15 text-gold inline-flex items-center justify-center mt-0.5" aria-hidden>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                  </span>
+                  <span class="text-[15px] text-creamSoft leading-snug">{w}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
+        <Reveal client:visible as="div" delay={0.08}>
+          <div class="h-full bg-inkSoft border border-whisper rounded-3xl p-7 sm:p-8">
+            <p class="text-[11px] uppercase tracking-caps text-creamMute mb-5">Ezeken nem — és ezt előre megmondom</p>
+            <ul class="space-y-3.5">
+              {worksNotFor.map((w) => (
+                <li class="flex items-start gap-3 py-2 border-b border-whisper last:border-b-0">
+                  <span class="flex-shrink-0 w-6 h-6 rounded-full bg-white/5 text-creamMute inline-flex items-center justify-center mt-0.5" aria-hidden>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                  </span>
+                  <span class="text-[15px] text-creamSoft leading-snug">{w}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Próbafolt-ajánlat ──────────────────────────────────────────────────── */}
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div">
+        <div class="rounded-3xl bg-inkDeep ring-2 ring-gold/40 p-8 sm:p-12 shadow-[0_20px_60px_-20px_rgba(184,136,74,0.35)]">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Az első lépés</p>
+          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.75rem, 3.6vw, 2.75rem);">Próbafolt és konzultáció — <em class="display">5 000 Ft</em>.</h2>
+          <p class="mt-6 text-creamSoft leading-[1.75] max-w-[58ch]">Ez nem kezelés. Ez az a 25 perc, ami eldönti, van-e értelme a többinek. Megnézem a szálad színét és vastagságát, beállítom a bőrtípusodat a Fitzpatrick-skálán, leadok néhány impulzust egy tenyérnyi területre — és megbeszéljük, hány alkalom kell, mennyibe kerül és mikorra lesz kész.</p>
+          <p class="mt-4 text-creamSoft leading-[1.75] max-w-[58ch]">Az <strong class="text-cream">5 000 Ft-ot beszámítom az első kezelés árába.</strong> Ha úgy döntesz, hogy nem folytatod, akkor sem kérek tőled többet.</p>
+          <p class="mt-4 text-creamSoft leading-[1.75] max-w-[58ch]">És ha a szálad ősz, fehér vagy nagyon világos szőke, <span class="text-gold">itt fogom megmondani, hogy ne költs erre.</span></p>
+          <div class="mt-9">
+            <MagneticCTA href={config.booking} external variant="primary">Próbafoltot foglalok</MagneticCTA>
+          </div>
+          <BookingAssurance class="mt-6" offer="Lézer" />
+        </div>
+      </Reveal>
+    </div>
+  </section>
+
+  {/* ── Amit vállalok ──────────────────────────────────────────────────────── */}
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Amit vállalok</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Három dolog, amit <em class="display">be is tudok tartani</em>.</h2>
+      </Reveal>
+      <div class="grid md:grid-cols-3 gap-5 lg:gap-7">
+        {commitments.map((c, i) => (
+          <Reveal client:visible as="div" delay={0.05 * i} className="h-full">
+            <article class="h-full bg-inkSoft border border-whisper rounded-3xl p-7 sm:p-8">
+              <p class="font-display text-4xl font-light text-gold mb-4">{c.n}</p>
+              <h3 class="font-medium text-lg text-cream leading-snug">{c.title}</h3>
+              <p class="mt-3 text-[15px] text-creamSoft leading-[1.7]">{c.body}</p>
+            </article>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ── Miért nem én vagyok a legolcsóbb ───────────────────────────────────── */}
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Az árról, őszintén</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Láttál olcsóbbat. <em class="display">Tudom.</em></h2>
+        <p class="mt-6 text-creamSoft text-base sm:text-lg leading-[1.75] max-w-[58ch]">Van, ahol 10 000 Ft egy hónalj — ott egymás után járnak a vendégek. És van, ahol 23 000 Ft, mert egy belvárosi klinika rezsije is benne van, <span class="text-cream">ugyanazzal a Soprano Titanium géptípussal, amivel én dolgozom.</span> Nálam egyszerre egy vendég van bent, és a hatodik alkalomnál ugyanaz az ember ül melletted, mint az elsőnél. Ha a legolcsóbbat keresed, nem én vagyok az.</p>
+      </Reveal>
+    </div>
+  </section>
+
+  {/* ── Bizonyíték-hiány ───────────────────────────────────────────────────── */}
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <Reveal client:visible as="div" className="lg:col-span-6">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Bizonyíték</p>
+          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Amit <em class="display">nem</em> tudok megmutatni — és mit teszek helyette.</h2>
+          <div class="mt-6 space-y-5 text-creamSoft leading-[1.7] text-[16px] sm:text-[17px] max-w-[54ch]">
+            <p>Erről a gépről még nincs saját előtte-utána képem, és nincs egyetlen lézeres vendég-véleményem sem. Ez így igaz, és nem fogok idegen képeket kirakni helyette.</p>
+            <p>Amit meg tudok mutatni: <span class="text-cream">a saját fotóidat</span>. Minden alkalom előtt ugyanabban a fényben, ugyanarról a területről készítek egy képet — a harmadik alkalomra a saját telefonodon látod, mi történt.</p>
+            <p><span class="text-cream">A lézer új. Az ember nem.</span> Öt éve dolgozom Zuglóban, az Egressy úton, <span class="text-gold">★5,0 átlaggal 60-nál több Google-értékelésből</span>.</p>
+          </div>
+          <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Az értékelések a Google-on<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
+        </Reveal>
+        <Reveal client:visible as="div" className="lg:col-span-6" delay={0.1}>
+          <figure class="overflow-hidden rounded-3xl ring-1 ring-white/10 bg-inkRise">
+            <img src={images.portrait} alt="Pecze-Kovács Fruzsina kozmetikus a FRUBEAUTY zuglói szalonjában, az Egressy úton" width="1200" height="1864" loading="lazy" decoding="async" class="w-full h-auto" />
+            <figcaption class="px-5 py-3 text-[11px] uppercase tracking-caps text-creamMute border-t border-whisper">Pecze-Kovács Fruzsina — öt éve ugyanitt</figcaption>
+          </figure>
+          <figure class="hidden sm:block mt-5 overflow-hidden rounded-3xl ring-1 ring-white/10 bg-inkRise">
+            <img src={images.fitzpatrick} alt="Bőrtípus-beállítás a Fitzpatrick-skálán a Soprano Titanium kijelzőjén — FRUBEAUTY, Budapest" width="1300" height="1144" loading="lazy" decoding="async" class="w-full h-auto" />
+            <figcaption class="px-5 py-3 text-[11px] uppercase tracking-caps text-creamMute border-t border-whisper">A te bőrtípusod, beállítva és felírva</figcaption>
+          </figure>
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Vélemények ─────────────────────────────────────────────────────────── */}
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl">
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Lézeres szőrtelenítés <em class="display">vélemények</em> — őszintén.</h2>
+        <p class="mt-4 text-creamSoft leading-[1.7] max-w-[54ch]">A lézerre még egyetlen véleményem sincs, mert most indult. Idegen szalonok értékeléseit nem fogom kitenni. Ezek a szempilla liftingről, a szemöldök lamináláról és a sminkről szólnak — azt viszont pontosan leírják, hogyan dolgozom.</p>
+      </Reveal>
+      <TestimonialsGrid client:visible items={testimonials} />
+    </div>
+  </section>
+
+  {/* ── GYIK ───────────────────────────────────────────────────────────────── */}
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Gyakori kérdések</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Amit a <em class="display">próbafolt előtt</em> érdemes tudni.</h2>
+      </Reveal>
+      <FAQList items={faqs} />
+    </div>
+  </section>
+
+  {/* ── Keresztértékesítés ─────────────────────────────────────────────────── */}
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 max-w-2xl">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Ha már úgyis itt vagy</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">A lézer mellé, <em class="display">ugyanabban az időpontban</em>.</h2>
+      </Reveal>
+      <div class="grid sm:grid-cols-3 gap-5 lg:gap-7">
+        {crossSell.map((s, i) => (
+          <Reveal client:visible as="div" delay={0.05 * i} className="h-full">
+            <a href={s.href} class="group h-full flex flex-col bg-ink border border-whisper rounded-3xl p-7 hover:border-whisperStrong transition-colors duration-500">
+              <h3 class="font-display text-xl font-medium text-cream leading-snug">{s.title}</h3>
+              <p class="mt-3 text-sm text-creamSoft leading-[1.7] flex-1">{s.body}</p>
+              <p class="mt-5 font-display text-2xl text-cream">{s.price}</p>
+              <span class="mt-4 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-creamMute group-hover:text-gold transition-colors">Részletek<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></span>
+            </a>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <SiteContact
+    eyebrow="Foglalás"
+    heading="Kezdjük egy <em class='display'>próbafolttal</em>."
+    intro="Huszonöt perc, 5 000 Ft, és beszámítom az első kezelés árába. Utána már tudni fogod, mennyi alkalom kell, mennyibe kerül, és hogy egyáltalán érdemes-e nekivágnod."
+    offer="Lézer"
+  />
+  <SiteFooter />
+  <StickyBookBar eyebrow="Próbafolt és konzultáció · ~25 perc" price="5 000 Ft" cta="Foglalok" />
+  <CookieBanner client:idle />
+</Layout>
+
+<style is:global>
+  /* A kalkulátor csúszkái. Natív range input, mert az a legjobb mobil
+     touch-célpont és ingyen akadálymentes (billentyűzet, képernyőolvasó) —
+     csak a megjelenést írjuk felül. A thumb 26 px, jóval a 44 px-es
+     tapintható sáv fölött a magas track-padding miatt. */
+  .fb-range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 26px;
+    background: transparent;
+    cursor: pointer;
+  }
+  .fb-range::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(26, 20, 16, 0.16);
+  }
+  .fb-range::-moz-range-track {
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(26, 20, 16, 0.16);
+  }
+  .fb-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 26px;
+    height: 26px;
+    margin-top: -11px;
+    border-radius: 999px;
+    background: #1a1410;
+    border: 3px solid #b8884a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+  .fb-range::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    background: #1a1410;
+    border: 3px solid #b8884a;
+  }
+  .fb-range:focus-visible::-webkit-slider-thumb {
+    outline: 2px solid rgba(184, 136, 74, 0.75);
+    outline-offset: 3px;
+  }
+</style>

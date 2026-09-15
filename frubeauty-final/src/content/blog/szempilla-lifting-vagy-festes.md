@@ -4,7 +4,7 @@ excerpt: "Szempilla lifting vagy festés? A lifting ívet ad és megemeli a szá
 category: "Szempilla"
 readingMinutes: 5
 publishedAt: 2026-04-12
-updatedAt: 2026-06-24
+updatedAt: 2026-09-12
 cover: "/img/BLOG_Szempilla_lifting_budapest-egressy_ut_zuglo.webp"
 coverWidth: 1400
 coverHeight: 1229
@@ -23,7 +23,7 @@ A lifting nem dúsít és nem növeszt új szálakat: a saját pilláidat emeli 
 
 **A hatás:** mintha a nap 24 órájában professzionális göndörítőt használnál. Nyitja a tekintetet, fáradt szemnél azonnali frissítő hatást ad.
 
-**Időigény és tartósság:** a lifting festéssel együtt körülbelül 90 perc a székben, az eredmény pedig 6–8 hétig tart — a pilláid természetes cserélődési ciklusától függően.
+**Időigény és tartósság:** a lifting festéssel együtt körülbelül 75 perc a székben, az eredmény pedig 6–8 hétig tart — a pilláid természetes cserélődési ciklusától függően.
 
 ## Tartós szempillafestés: amikor a szín a kulcs
 

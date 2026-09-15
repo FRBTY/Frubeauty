@@ -75,7 +75,7 @@ const businessSchema = {
       telephone: siteConfig.phone,
       email: siteConfig.email,
       knowsLanguage: 'hu',
-      priceRange: '4000–49500 Ft',
+      priceRange: '4000–48000 Ft',
       currenciesAccepted: 'HUF',
       paymentAccepted: 'Készpénz, Bankkártya',
       address: {
@@ -113,6 +113,15 @@ const businessSchema = {
         '@type': 'OfferCatalog',
         name: 'FRUBEAUTY szépségszalon szolgáltatások',
         itemListElement: [
+          {
+            // Lézeres szőrtelenítés: a katalógusban a SOROZAT alkalmankénti ára
+            // szerepel (S zóna), mert a vendég ebben az egységben dönt — az
+            // egyalkalmas 16 000 Ft félrevezetően magas belépőt sugallna.
+            '@type': 'Offer',
+            itemOffered: { '@type': 'Service', name: 'Dióda lézeres szőrtelenítés', url: 'https://frubeauty.com/lezeres-szortelenites-budapest/' },
+            price: '11000',
+            priceCurrency: 'HUF',
+          },
           {
             '@type': 'Offer',
             itemOffered: { '@type': 'Service', name: 'Szempilla lifting + festés', url: 'https://frubeauty.com/szempilla-lifting-zuglo/' },
@@ -813,6 +822,77 @@ const primaryGtagId = hasGoogleTag
       }
       @media (prefers-reduced-motion: reduce) {
         .zero-js-fade { animation: none; opacity: 1; }
+      }
+      /* ===== Foglalás-CTA: fénypászta ===============================
+         MIÉRT: a foglalás gomb az egyetlen elem, amire a látogatónak rá KELL
+         találnia, sötét alapon viszont az arany kitöltés statikus folt. Egy
+         lassan átfutó fénypászta a perifériás látást mozdítja meg — a szem ezt
+         akkor is elkapja, amikor épp a szöveget olvassa.
+
+         SZÁNDÉKOSAN VISSZAFOGOTT: hat másodpercenként EGY, ~0,8 másodperces
+         átfutás, nem pulzálás. A pulzáló gomb olcsónak hat, és egy prémium
+         kozmetikánál többet ront a bizalmon, mint amennyit a figyelemből nyer.
+
+         NULLA JS, NULLA ELRENDEZÉS-VÁLTOZÁS: egyetlen ::after pszeudoelem
+         transzformálódik (compositor-szál), tehát nincs reflow és nincs CLS.
+         A gomb overflow:hidden, így a pászta a pill formán belül marad.
+
+         A ragadós sáv gombja KÉSLELTETVE indul (.fb-book--late): a sáv végig a
+         képernyőn van, és ha egyszerre villanna a szekcióban lévő gombbal, az
+         hibának látszana. Eltolva ritmusnak.
+
+         CSAK a valódi foglalás gombokon van rajta — süti-elfogadáson,
+         árlistán, naptár-gombon nincs. */
+      .fb-book {
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+        transition: box-shadow 260ms ease, background-color 200ms ease;
+      }
+      .fb-book::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient(
+          105deg,
+          rgba(255, 255, 255, 0) 34%,
+          rgba(255, 255, 255, 0.55) 50%,
+          rgba(255, 255, 255, 0) 66%
+        );
+        transform: translateX(-135%);
+        /* A keverés a LÉNYEG: sima fehér átlátszóság a fekete feliratot is
+           kiszürkítené. Az overlay a világos arany alapot felragyogtatja, a
+           sötét betűket viszont sötéten hagyja — így fénylik a gomb, és közben
+           végig olvasható marad. */
+        mix-blend-mode: overlay;
+        animation: fbBookShine 6s linear 1.6s infinite;
+      }
+      .fb-book--late::after {
+        animation-delay: 4.4s;
+      }
+      @keyframes fbBookShine {
+        0% {
+          transform: translateX(-135%);
+        }
+        16% {
+          transform: translateX(135%);
+        }
+        100% {
+          transform: translateX(135%);
+        }
+      }
+      .fb-book:hover {
+        box-shadow: 0 14px 34px -12px rgba(184, 136, 74, 0.65);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .fb-book::after {
+          animation: none;
+          opacity: 0;
+        }
+        .fb-book:hover {
+          box-shadow: none;
+        }
       }
     </style>
   </body>

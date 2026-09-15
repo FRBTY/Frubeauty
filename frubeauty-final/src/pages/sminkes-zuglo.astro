@@ -29,32 +29,32 @@ const priceCategories = [
   ] },
   { eyebrow: 'Alkalmak és fotózás', title: 'Ünnepi, üzleti, kreatív.', items: [
     { name: 'Alkalmi smink', duration: '60–75 perc', description: 'Bálra, ballagásra, születésnapra vagy keresztelőre – a cél egy fotókész és tartós smink, ami egész nap a helyén marad.', price: '15 000 Ft' },
-    { name: 'Smink fotózásra', duration: '60 perc', description: 'Kismama-, családi, portré- és branding fotózásokhoz egyaránt ezt a precíz technológiát alkalmazom, hogy a képeken a legelőnyösebb, mégis teljesen természetes önmagad nyújtsd.', price: '17 000 Ft' },
+    { name: 'Smink fotózásra', duration: '60 perc', description: 'Kismama-, családi, portré- és branding fotózásokhoz egyaránt ezt a precíz technológiát alkalmazom, hogy a képeken a legelőnyösebb, mégis teljesen természetes önmagadat lásd.', price: '17 000 Ft' },
     { name: 'Nappali smink', duration: '45 perc', description: 'Visszafogott, természetes finish. Üzleti megbeszélésre, randira vagy egy „csak úgy” napra — ahol egy fáradt reggel után pár órát szeretnél spórolni magadnak.', price: '13 000 Ft' },
   ] },
-  { eyebrow: 'Tanácsadás és kiszállás', title: 'Extra opciók.', items: [
-    { name: 'Sminktanácsadás', duration: '120 perc', description: 'Nem új smink, hanem a meglévő rutin újragondolása: a te arcformádra, a te bőrödre. Megmutatom mit, hogyan, miért — és listát adok arról, mit érdemes kicserélni a kozmetikai táskádban.', price: '15 000 Ft' },
-    { name: 'Helyszíni kiszállás', duration: 'Egyeztetés alapján', description: 'A kiszállás díja minden esetben egyedileg, a pontos távolság és az indulási időpont függvényében kerül kalkulálásra.', price: 'Egyedi' },
+  { eyebrow: 'Oktatás és kiszállás', title: 'Extra opciók.', items: [
+    { name: 'Sminkoktatás', duration: '120 perc', description: 'A saját arcodon, a saját kezeddel tanulod meg. Végigmegyünk a bőrelőkészítésen, az alapozó árnyalatán és a szemformádhoz illő technikán — én mutatom, te csinálod. A végén listát kapsz arról, mi hiányzik a kozmetikai táskádból, és mi az, ami feleslegesen van benne.', price: '20 000 Ft' },
+    { name: 'Helyszíni kiszállás', duration: 'Egyeztetés alapján', description: 'A kiszállás díját minden esetben egyedileg számolom ki, a pontos távolság és az indulási időpont alapján.', price: 'Egyedi' },
   ] },
 ];
 
 const packages = [
   { tier: 'Alap', bestFor: 'egy adott eseményre kell: ballagásra, bálra, fotózásra.', title: 'Alkalmi', titleAccent: 'Smink', subtitle: 'Egy alkalom, egy esemény', priceOld: null as string | null, price: '15 000 Ft', priceMeta: 'egyedi smink · ~60–75 perc', dailyEquivalent: 'bőrelőkészítéssel és fixálással', savings: null as string | null, duration: '~ 60–75 perc', features: ['Bőrelőkészítés és hidratálás','Teljes alkalmi smink — szem, ajak, kontúr','Hosszan tartó fixálás','Professzionális termékek'], highlight: false, ribbon: null as string | null, footnote: null as string | null },
-  { tier: 'Ajánlott', bestFor: 'esküvőd lesz, és a nagy napon nem akarsz meglepetést.', title: 'Menyasszonyi', titleAccent: 'Csomag', subtitle: 'Próbasmink + Menyasszonyi smink együtt', priceOld: '45 000 Ft', price: '39 000 Ft', priceMeta: 'próba + esküvő · 2 alkalom', dailyEquivalent: 'két előre egyeztetett alkalom', savings: '6 000 Ft megtakarítás', duration: '~ 90–120 + 90 perc', features: ['Menyasszonyi próbasmink, dokumentálva','A nagy napi smink — a próba alapján','Bőrelőkészítés Janssen ápolókkal','Touch-up tippek és termékajánlás'], highlight: true, ribbon: 'Próba + nagy nap', footnote: '*Kiszállási díj külön kerül felszámolásra és a helyszínen fizetendő.' },
-  { tier: 'Prémium', bestFor: 'édesanyád is veled készülne ugyanazon a reggelen.', title: 'Teljes', titleAccent: 'Esküvő', subtitle: 'Menyasszony + örömanya egy napon', priceOld: '60 000 Ft', price: '51 000 Ft', priceMeta: 'menyasszony + örömanya · 1 reggel', dailyEquivalent: '≈ napi 1 700 Ft — egy esküvőre', savings: '9 000 Ft megtakarítás', duration: '~ 90 + 60–75 perc', features: ['Minden, ami a Menyasszonyi Csomagban','Örömanya smink — diszkrét, korhoz illő','Külön egyeztetés a sorrendről','Prioritásos szezonális időpont'], highlight: false, ribbon: null, footnote: '*Kiszállási díj külön kerül felszámolásra és a helyszínen fizetendő.' },
+  { tier: 'Ajánlott', bestFor: 'esküvőd lesz, és a nagy napon nem akarsz meglepetést.', title: 'Menyasszonyi', titleAccent: 'Csomag', subtitle: 'Próbasmink + Menyasszonyi smink együtt', priceOld: '45 000 Ft', price: '39 000 Ft', priceMeta: 'próba + esküvő · 2 alkalom', dailyEquivalent: 'két előre egyeztetett alkalom', savings: '6 000 Ft megtakarítás', duration: '~ 90–120 + 90 perc', features: ['Menyasszonyi próbasmink, dokumentálva','A nagy napi smink — a próba alapján','Bőrelőkészítés Janssen ápolókkal','Touch-up tippek és termékajánlás'], highlight: true, ribbon: 'Próba + nagy nap', footnote: '*A kiszállás díja külön jön, és a helyszínen fizeted.' },
+  { tier: 'Prémium', bestFor: 'édesanyád is veled készülne ugyanazon a reggelen.', title: 'Teljes', titleAccent: 'Esküvő', subtitle: 'Menyasszony + örömanya egy napon', priceOld: '60 000 Ft', price: '51 000 Ft', priceMeta: 'menyasszony + örömanya · 1 reggel', dailyEquivalent: 'Az örömanya smink külön 15 000 Ft', savings: '9 000 Ft megtakarítás', duration: '~ 90 + 60–75 perc', features: ['Minden, ami a Menyasszonyi Csomagban','Örömanya smink — diszkrét, korhoz illő','Külön egyeztetés a sorrendről','Prioritásos szezonális időpont'], highlight: false, ribbon: null, footnote: '*A kiszállás díja külön jön, és a helyszínen fizeted.' },
 ];
 
 const includedPoints = [
   { eyebrow: '01', title: 'Bőrelőkészítés és hidratálás', body: 'Minden smink alapos tisztítással és hidratálással indul. Ha az alap nem stabil, a smink sem tart.' },
   { eyebrow: '02', title: 'Hosszan tartó fixálás', body: 'Professzionális fixálók és technikák — a smink kibírja az ölelést, a könnyet, az evést és a délutáni táncot. Egy esküvőn ez nem extra, hanem alapelvárás.' },
   { eyebrow: '03', title: 'Bőrbarát alapanyagok', body: 'Csak professzionális, bőrgyógyászatilag tesztelt termékek — köztük Janssen ápolók a smink előtt. Érzékeny bőrre is alkalmas.' },
-  { eyebrow: '04', title: 'Folyamatos képzés', body: 'A folyamatos fejlődés nálam alapelv. Évente több továbbképzésen veszek részt, hogy a legújabb tartós technikák és a modern trendek éppúgy a kezemben legyenek, mint a tökéletesen kivitelezett klasszikus formák.' },
+  { eyebrow: '04', title: 'Folyamatos képzés', body: 'Évente több továbbképzésre járok — így a hosszan tartó fixálás új technikái és a klasszikus, letisztult formák is a kezemben vannak.' },
 ];
 
 const processSteps = [
   { step: '01', title: 'Foglalás és rövid egyeztetés', body: 'Foglalj időpontot a Notino felületén — a visszaigazolás után küldj át Instagramon vagy e-mailben 1–2 referenciaképet. Ennyi elég ahhoz, hogy teljesen felkészülten várjalak: tudjam, milyen hatást szeretnél, és milyen színvilágban gondolkodsz.' },
-  { step: '02', title: 'Próbasmink (csak menyasszonyoknak)', body: 'A próbasmink ideális időpontja az esküvő előtt 4–8 héttel van. Itt kísérletezzük ki és véglegesítjük a stílust, az ott készült fotó pedig a nagy napon a közös, tűpontos tervrajzunk lesz. Így az esküvő reggelén már nincs tippelgetés, csak magabiztos kivitelezés.' },
-  { step: '03', title: 'A smink napja', body: 'Bőrelőkészítés, alapozás, kontúrozás, szem, ajak, majd a fixálás. A folyamat minden lépését elmondom közben, és mivel együtt dolgozunk, menet közben is teljesen rugalmasan finomítunk ott, ahol szeretnéd. A cél, hogy a tükörbe nézve százszázalékosan elégedett légy.' },
+  { step: '02', title: 'Próbasmink — menyasszonyoknak', body: 'A próbasmink ideális időpontja az esküvő előtt 4–8 héttel van. Itt kísérletezzük ki és véglegesítjük a stílust, az ott készült fotó pedig a nagy napon a közös, tűpontos tervrajzunk lesz. Így az esküvő reggelén már nincs tippelgetés, csak magabiztos kivitelezés.' },
+  { step: '03', title: 'A smink napja', body: 'Bőrelőkészítés, alapozás, kontúrozás, szem, ajak, majd a fixálás. A folyamat minden lépését elmondom közben, és mivel együtt dolgozunk, menet közben is teljesen rugalmasan finomítunk ott, ahol szeretnéd. A cél, hogy a tükörbe nézve azt lásd, amit elképzeltél.' },
 ];
 
 const testimonials = [
@@ -69,10 +69,10 @@ const testimonials = [
 const faqs = [
   { q: 'Mikor érdemes próbasminkre menni?', a: 'Az esküvő előtt 4–8 héttel ideális. Elég idő van rá, hogy ha valami nem 100%-os, együtt finomhangoljuk — de még nem olyan közel a nagy nap, hogy stresszelnél miatta.' },
   { q: 'Mi van, ha a próbasminken nem tetszik az eredmény?', a: 'Pontosan ezért van a próbasmink. Ott derül ki, mi az, ami nem működik — és ott van idő átalakítani: más szemhéjszín, visszafogottabb kontúr, másik ajakárnyalat. A nagy napra az kerül, amiben a próbán megegyeztünk, és amiről fotó is készül. Ha a próbán semmi nem tetszik, akkor sem a nagy nap reggelén szembesülsz vele.' },
-  { q: 'Mit hozzak magammal alkalmi sminkre?', a: 'Egy referenciaképet a ruhádról (és ha tudod, a frizurádról). Próbasminkre érdemes smink nélkül érkezni — ekkor tisztán látjuk, miből indulunk.' },
+  { q: 'Mit hozzak magammal alkalmi sminkre?', a: 'Egy referenciaképet a ruhádról, és ha van, a frizurádról. Próbasminkre érdemes smink nélkül érkezni — ekkor tisztán látjuk, miből indulunk.' },
   { q: 'Mennyi ideig tart egy smink?', a: 'Nappali smink ~45 perc, alkalmi/menyasszonyi 60–90 perc, próbasmink 90–120 perc. Ha menet közben mégis finomítani szeretnél, számolj +15 perccel.' },
   { q: 'Bírja-e a smink a tánc + meleg + könnyek kombinációt?', a: 'Igen — a fixálás erre épül. Egész estés esküvőkön rendszeresen tesztelve, profi fixálókkal és technikákkal. Külön touch-up termékre csak az ajakra van szükség.' },
-  { q: 'Érzékeny a bőröm, ez gondot jelent?', a: 'A próbasmink pont azért van, hogy élesben teszteljük, hogyan reagál a bőröd az anyagokra. Így a nagy napon már semmilyen meglepetés nem érhet, csak a tökéletes, tartós végeredmény.' },
+  { q: 'Érzékeny a bőröm, ez gondot jelent?', a: 'A próbasmink pont azért van, hogy élesben teszteljük, hogyan reagál a bőröd az anyagokra. Így a nagy napon már nem érhet meglepetés: az kerül fel, amit a próbán együtt jóváhagytunk.' },
   { q: 'Kiszállás a helyszínre megoldható?', a: 'Igen, a díj a távolságtól és az érkezési időtől függ. Írj egy SMS-t a részletekkel, és megadom a pontos összeget 24 órán belül.' },
   { q: 'Mi történik, ha az esküvő elmarad vagy csúszik?', a: 'Szólj, amint tudod, és megkeressük az új dátumot — próbasminkre és a nagy napra egyaránt. Minél korábban jelzed, annál nagyobb az esély, hogy a kívánt reggeli időpont még szabad.' },
 ];
@@ -226,7 +226,7 @@ const config = { ...siteConfig };
           </div>
           <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">Az esküvői smink árak nálam tételesen: menyasszonyi smink <strong class="font-medium text-cream">30.000 Ft</strong>, próbasminkkel csomagban 39.000 Ft, alkalmi smink 15.000 Ft — mindegyik árban benne van a bőrelőkészítés és a hosszan tartó fixálás. Budapesten, a XIV. kerületi Egressy úton dolgozom, esküvői helyszínre kiszállással is.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
-            <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+            <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="fb-book inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
             <a href="#csomagok" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Árak</a>
           </div>
           <p class="mt-6 text-[12px] uppercase tracking-caps text-creamMute">Helyszíni kiszállás Budapesten és környékén · Egyedi egyeztetés</p>
@@ -255,7 +255,7 @@ const config = { ...siteConfig };
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Te maradsz <em class="display">te</em>. Csak ragyogóbban.</h2>
         </Reveal>
         <Reveal client:visible as="div" className="lg:col-span-7 space-y-5 text-creamSoft leading-[1.7] text-[16px] sm:text-[17px]" delay={0.1}>
-          <p>Az esküvői és alkalmi smink nálam nem maszk. A cél az, hogy a fotókon is a legfrissebb, <span class="text-cream">önazonos önmagad</span> lásd viszont – nem egy idegent.</p>
+          <p>Az esküvői és alkalmi smink nálam nem maszk. A cél az, hogy a fotókon is a legfrissebb, <span class="text-cream">önazonos önmagadat</span> lásd viszont.</p>
           <p>Ezért <span class="text-gold font-medium">nem hiszek</span> a túltolt, nehéz sminkekben. Olyan technikával dolgozom, amely kiemeli az adottságaidat; a fixálást az eseményhez és a bőrtípusodhoz igazítom.</p>
           <p>A nagy nap előtt próbasminket javaslok: itt egyeztetjük a színeket, az intenzitást és az összhatást, majd fotóval dokumentáljuk a közösen elfogadott tervet.</p>
           <p>Ha természetes, mégis megbízható sminket szeretnél, várlak szeretettel.</p>
@@ -309,7 +309,7 @@ const config = { ...siteConfig };
           </div>
         </div>
         <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
-          <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Menyasszonyi időpontot foglalok</a>
+          <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="fb-book inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Menyasszonyi időpontot foglalok</a>
           <a href="#csomagok" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Megnézem a csomagokat</a>
         </div>
         <p class="mt-5 text-[12px] uppercase tracking-caps text-creamMute">Próbasmink + nagy napi smink csomagban 39 000 Ft · Szezonban a szombatok gyorsan betelnek</p>
@@ -361,7 +361,7 @@ const config = { ...siteConfig };
       </div>
 
       <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
-        <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+        <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="fb-book inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
         <p class="text-[12px] uppercase tracking-caps text-creamMute">Az árak tájékoztató jellegűek · Kiszállás egyedi egyeztetés alapján</p>
       </div>
     </div>
@@ -406,9 +406,9 @@ const config = { ...siteConfig };
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
         <Reveal client:visible as="div" className="lg:col-span-5">
-          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Mit kapsz az árért</p>
-          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Nem csak a <em class="display">festéket</em>.</h2>
-          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">A smink ára a teljes folyamatot fedi — a bőrelőkészítéstől a záró fixálásig. Négy dologért fizetsz.</p>
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Mi van az árban</p>
+          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">A bőrelőkészítéstől <em class="display">a záró fixálásig</em>.</h2>
+          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">A smink ára a teljes folyamatot fedi — a bőrelőkészítéstől a záró fixálásig. Négy dolog van benne.</p>
         </Reveal>
         <div class="lg:col-span-7 grid sm:grid-cols-2 gap-5">
           {includedPoints.map((b, i) => (
@@ -430,7 +430,7 @@ const config = { ...siteConfig };
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <Reveal client:visible as="div" className="lg:col-span-6">
           <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Pár perc <em class="display">backstage</em>.</h2>
-          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">Egy podcast-felvétel előtti smink — pontosan ugyanaz a precíz technika, amit a nagy napodon is megkapsz. Természetes textúrák, fókuszált kontúrozás, hosszan tartó fixálás.</p>
+          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">Egy podcast-felvétel előtti smink — ugyanaz a technika, amivel a nagy napodon is dolgozom. Természetes textúrák, fókuszált kontúrozás, hosszan tartó fixálás.</p>
           <a href={config.instagram} target="_blank" rel="noopener" class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Több munkám Instán<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
         </Reveal>
         <Reveal client:visible as="div" className="lg:col-span-6" delay={0.1}>

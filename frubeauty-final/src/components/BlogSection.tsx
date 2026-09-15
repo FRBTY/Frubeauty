@@ -19,7 +19,7 @@ const defaultPosts: BlogPost[] = [
   {
     slug: 'szempilla-lifting-vagy-festes',
     title: 'Szempilla lifting vagy festés? A zuglói szakértő válaszol',
-    excerpt: 'Rengeteg nő téved abba a hibába, hogy egy trendi Insta-fotó alapján foglal liftinget — miközben festéssel vagy szemöldök-lamináltatással sokkal drámaibb eredményt érne el.',
+    excerpt: 'Egy Insta-fotó alapján könnyű liftinget foglalni — pedig van, akinél a festés vagy a szemöldök laminálás hoz nagyobb változást.',
     category: 'Szempilla',
     readingMinutes: 5,
     publishedAt: '2026-04-12',
@@ -29,7 +29,7 @@ const defaultPosts: BlogPost[] = [
   {
     slug: 'janssen-arckezeles-bortipusok',
     title: 'Janssen arckezelés bőrtípusonként: melyik protokoll hozza el a változást?',
-    excerpt: 'A legnagyobb hiba egy sablonos „tisztító arckezelésre” befizetni. A bőröd nem sablon — hét különböző Janssen protokoll közül melyikre van valójában szükséged.',
+    excerpt: 'A „tisztító arckezelés” nem egy dolog: hét különböző Janssen protokoll létezik. Végigmegyünk rajta, melyikre van szüksége a bőrödnek.',
     category: 'Arckezelés',
     readingMinutes: 8,
     publishedAt: '2026-03-28',
@@ -39,7 +39,7 @@ const defaultPosts: BlogPost[] = [
   {
     slug: 'eskuvoi-smink-felkesziules',
     title: 'Esküvői smink Budapesten: hogyan készülj a próbasminkre?',
-    excerpt: 'A próbasmink nem stílusgyakorlat, hanem a nagy napod legfontosabb vizuális szerződése. Mit hozz, mit hagyj otthon, és mi történik a 90 perc alatt.',
+    excerpt: 'A próbasminken dől el a nagy napi smink — és fotó is készül róla. Mit hozz, mit hagyj otthon, és mi történik a 90 perc alatt.',
     category: 'Alkalmi smink',
     readingMinutes: 7,
     publishedAt: '2026-02-15',

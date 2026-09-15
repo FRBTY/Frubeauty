@@ -22,15 +22,25 @@
  * partnerség a hitelesítés.
  */
 interface Props {
+  /**
+   * Vízszintes igazítás. A `mx-auto` FLEX-elemként középre húzza a jelvényt —
+   * a kezdőlap középre zárt heroján ez a helyes, a lézer oldal balra zárt
+   * bizalmi sorában viszont kilógott a sorból. Ezért prop, és nem utólagos
+   * osztály-felülírás: az `mx-0` ugyanolyan fajsúlyú, mint az `mx-auto`,
+   * tehát a stíluslap sorrendje döntene róla, nem mi.
+   */
+  align?: 'center' | 'start';
   /** Extra osztályok a kerethez (pl. alsó margó). */
   class?: string;
 }
-const { class: className = '' } = Astro.props;
+const { align = 'center', class: className = '' } = Astro.props;
 ---
 
 <p
+  data-partner-badge
   class:list={[
-    'w-fit mx-auto inline-flex items-center gap-2 rounded-full border border-gold/30 bg-inkDeep/70 px-4 py-1.5 text-[10px] sm:text-[11px] uppercase tracking-caps backdrop-blur-[2px]',
+    'w-fit inline-flex items-center gap-2 rounded-full border border-gold/30 bg-inkDeep/70 px-4 py-1.5 text-[10px] sm:text-[11px] uppercase tracking-caps backdrop-blur-[2px]',
+    align === 'center' && 'mx-auto',
     className,
   ]}
 >

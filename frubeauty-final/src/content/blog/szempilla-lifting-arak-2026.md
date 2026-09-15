@@ -4,7 +4,7 @@ excerpt: "A szempilla lifting Zuglóban 12 000 Ft, festéssel együtt. Tételes 
 category: "Szempilla"
 readingMinutes: 5
 publishedAt: 2026-06-10
-updatedAt: 2026-06-24
+updatedAt: 2026-09-12
 cover: "/img/szempilla-lifting-budapest-egressy-ut-munka.webp"
 coverWidth: 1200
 coverHeight: 1600
@@ -13,13 +13,13 @@ metaTitle: "Szempilla lifting árak 2026: 12 000 Ft, festéssel együtt"
 metaDescription: "Szempilla lifting árak 2026-ban Zuglóban: 12 000 Ft festéssel együtt, rejtett felár nélkül. Tételes árlista — mit tartalmaz az ár, és mitől függ."
 ---
 
-A szempilla lifting a FRUBEAUTY-nál Zuglóban 2026-ban **12 000 Ft**, és ebben a tartós festés is benne van. A kezelés körülbelül 90 perc, az eredmény 6–8 hétig tart. Ha a szemöldök laminálást is ugyanarra az alkalomra kéred, a kombinált csomag 18 000 Ft — 5 000 forinttal kevesebb, mintha a kettőt külön fizetnéd.
+A szempilla lifting a FRUBEAUTY-nál Zuglóban 2026-ban **12 000 Ft**, és ebben a tartós festés is benne van. A kezelés körülbelül 75 perc, az eredmény 6–8 hétig tart. Ha a szemöldök laminálást is ugyanarra az alkalomra kéred, a kombinált csomag 18 000 Ft — 5 000 forinttal kevesebb, mintha a kettőt külön fizetnéd.
 
 ## Szempilla-árak egy táblázatban
 
 | Kezelés | Időtartam | Ár |
 |---|---|---|
-| Szempilla lifting + festés | ~90 perc | **12 000 Ft** |
+| Szempilla lifting + festés | ~75 perc | **12 000 Ft** |
 | Teljes Tekintet csomag — lifting + szemöldök laminálás | ~120 perc | **18 000 Ft** *(külön 23 000 Ft lenne)* |
 | Szempillafestés önmagában | 30 perc | 4 000 Ft |
 
@@ -42,7 +42,7 @@ Mielőtt pusztán ár alapján foglalnál bárhová, három kérdést érdemes t
 
 - **Benne van-e a festés?** Sok szalonban a festés felár — nálam az alapár része.
 - **Milyen anyaggal dolgoznak?** A koreai lifting-rendszer drágább alapanyag, cserébe kíméletesebb a szálakhoz, és természetesebb ívet ad.
-- **Hány vendég van egyszerre?** Nálam egy. Az ár a nyugodt, pontos munkát is fedezi — nem a futószalagot.
+- **Hány vendég van egyszerre?** Nálam egy. Az ár a nyugodt, pontos munkát is fedezi.
 
 ## Megéri a szempilla lifting ára?
 
@@ -56,7 +56,7 @@ A szempilla lifting ára Budapesten nagyjából 8 000 és 15 000 Ft között moz
 
 - **A festés külön felár.** A „8 000 Ft-os" lifting a végén 11–12 000 Ft lesz, mert a festést rácsapják. Nálam a festés az alapár része.
 - **Túltartott alapanyag.** A lifting lényege egy lágyító–rögzítő hatóanyagpár. Ha túl sokáig hat (mert a vendégből „többet kell kihozni" gyorsan), a szál kiszárad, töredezik. A koreai rendszerrel pont ezt kerülöm el.
-- **Nincs előzetes konzultáció.** Érzékeny szem, korábbi allergia, ritka pilla — ezeket a kezelés előtt tisztázni kell. Ahol futószalagon dolgoznak, erre nincs idő.
+- **Nincs előzetes konzultáció.** Érzékeny szem, korábbi allergia, ritka pilla — ezeket a kezelés előtt tisztázni kell, és ehhez idő kell.
 
 Egy elrontott lifting után a saját pilláid heteken át sérültek maradnak — az „olcsó" ára végül a regenerálódás ideje lesz. Ezért nálam egyszerre egy vendég van, és az ár a nyugodt, pontos munkát is fedezi.
 
@@ -66,7 +66,7 @@ Egy elrontott lifting után a saját pilláid heteken át sérültek maradnak �
 A FRUBEAUTY-nál 2026-ban 12 000 Ft, és ebben a tartós festés is benne van. Rejtett felár nincs.
 
 **Benne van a festés az árban?**
-Igen. A szempilla lifting + festés együtt 12 000 Ft. Sok szalonban a festés külön 3–4 000 Ft, ezt érdemes rákérdezni áru-összehasonlításkor.
+Igen. A szempilla lifting + festés együtt 12 000 Ft. Sok szalonban a festés külön 3–4 000 Ft, ezt érdemes megkérdezni, amikor árakat hasonlítasz össze.
 
 **Mennyibe kerül a szempilla lifting és a szemöldök laminálás együtt?**
 A Teljes Tekintet csomag 18 000 Ft (külön a kettő 23 000 Ft lenne), tehát egyszerre 5 000 Ft-ot spórolsz, és egy alkalommal megvan mindkettő.

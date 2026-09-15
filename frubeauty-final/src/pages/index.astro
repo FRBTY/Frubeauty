@@ -50,8 +50,9 @@ const config = { ...siteConfig };
 // és a „szemöldök laminálás" (112 megjelenés/hó, GSC) a kezdőlapra rangsorolt helyette.
 // Szétbontva: minden fő szolgáltatás saját, kulcsszó-anchoros belső linket kap.
 const services = [
+  { title: 'Lézeres szőrtelenítés', subtitle: 'Soprano Titanium, három hullámhosszon', body: '755, 808 és 1064 nm egyszerre — vastag és vékony szálra, világos és sötétebb bőrre is külön beállítva. Hat-nyolc alkalom, négy-hat hetente.', priceFrom: '11 000 Ft-tól alkalmanként', duration: '15–70 perc', href: '/lezeres-szortelenites-budapest/', image: '/img/lezeres-szortelenites-soprano-titanium-kijelzo-zuglo.webp', alt: 'A Soprano Titanium dióda lézer kijelzője a FRUBEAUTY zuglói szalonjában — kezelési zónák és Fitzpatrick bőrtípus-beállítás' },
   { title: 'Arckezelés', subtitle: 'Janssen Cosmetics hatóanyagokkal', body: 'Bőranalízissel kezdünk, és az alapján választunk protokollt — mélytisztító, hidratáló vagy anti-aging. Nem a bőröd igazodik a kezeléshez, hanem fordítva.', priceFrom: '16 000 Ft-tól', duration: '60–120 perc', href: '/arckezeles-zuglo/', image: '/img/service-arckezeles.webp', alt: 'Arckezelés Janssen Cosmetics termékekkel a FRUBEAUTY szalonban' },
-  { title: 'Szempilla lifting', subtitle: 'Lifting + festés', body: 'Természetes íveltség, 6–8 hétig tartó eredmény. Reggel nincs többé szempillaspirál — felkelsz és kész vagy.', priceFrom: '12 000 Ft-tól', duration: '~ 90 perc', href: '/szempilla-lifting-zuglo/', image: '/img/szempilla-szemoldok-hero.webp', alt: 'Szempilla lifting előtte-utána a FRUBEAUTY szalonban' },
+  { title: 'Szempilla lifting', subtitle: 'Lifting + festés', body: 'Természetes íveltség, 6–8 hétig tartó eredmény. Reggel nincs többé szempillaspirál — felkelsz és kész vagy.', priceFrom: '12 000 Ft-tól', duration: '~ 75 perc', href: '/szempilla-lifting-zuglo/', image: '/img/szempilla-szemoldok-hero.webp', alt: 'Szempilla lifting előtte-utána a FRUBEAUTY szalonban' },
   { title: 'Szemöldök laminálás', subtitle: 'Formázás + festés', body: 'Dúsabb, rendezett szemöldök tű nélkül, koreai technikával — ~6 hétig tartós, ápolt tekintet.', priceFrom: '11 000 Ft-tól', duration: '~ 60 perc', href: '/szemoldok-laminalas-zuglo/', image: '/img/szemoldok-laminalas-zuglo-munka-uj.webp', alt: 'Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló' },
   { title: 'Smink', subtitle: 'Esküvő, ballagás, fotózás', body: 'Próbasmink, helyszíni igazítás, hosszan tartó eredmény. A stílust együtt találjuk ki.', priceFrom: '13 000 Ft-tól', duration: '60–90 perc', href: '/sminkes-zuglo/', image: '/img/smink-menyasszony-munka.webp', alt: 'Alkalmi esküvői smink a FRUBEAUTY szalonban' },
 ];
@@ -59,15 +60,15 @@ const services = [
 // Aspirational / future-self framing (#audit #3) — pain-first helyett identitás-építés.
 // Daniel Kahneman: people approach gains more strongly when self-image is positive.
 const audienceProfiles = [
-  { headline: 'Egy nyugodt 90 perc — és a tükörből a kipihent éned néz vissza', body: 'A Janssen mélyregeneráló kezelés visszahozza a bőr természetes ragyogását. Tedd magad a hét legfontosabb találkozójává.', cta: 'Arckezelések', href: '/arckezeles-zuglo/' },
+  { headline: 'Egy nyugodt 90 perc — és a tükörből a kipihent éned néz vissza', body: 'A Janssen mélyregeneráló kezelés visszahozza a bőr természetes ragyogását. Kilencven perc, amikor nem kell máshol lenned.', cta: 'Arckezelések', href: '/arckezeles-zuglo/' },
   { headline: 'Esküvő, ballagás vagy egy fontos esemény közeledik', body: 'Próbasmink, alkalmi smink és tartós szempilla-lift egy csomagban. Reggel mehetsz nyugodtan, a smink ott lesz este is.', cta: 'Alkalmi smink', href: '/sminkes-zuglo/' },
-  { headline: 'Képzeld el a reggelt smink nélkül — és mégis úgy érzed, készen állsz', body: 'A szempilla-lifting és szemöldök-laminálás 6–8 hétig megspórolja a reggeli sminket. Felkelsz, és kész vagy.', cta: 'Szempilla & szemöldök', href: '/szempilla-lifting-zuglo/' },
+  { headline: 'Olyan reggel, amikor smink nélkül is készen állsz', body: 'A szempilla-lifting és szemöldök-laminálás 6–8 hétig megspórolja a reggeli sminket. Felkelsz, és kész vagy.', cta: 'Szempilla & szemöldök', href: '/szempilla-lifting-zuglo/' },
 ];
 
 const processSteps = [
   { step: '01', title: 'Online foglalás egyszerűen a Notino felületén', body: 'Pár kattintás, választasz időpontot és kezelést.' },
   { step: '02', title: 'Ingyenes konzultáció', body: 'A kezelés előtt 10 percet beszélgetünk a bőrödről, az igényeidről, és a várható eredményről.' },
-  { step: '03', title: 'Személyre szabott kezelés', body: 'Nem sablon, hanem az aktuális állapotodra szabott protokoll. Mindent végig elmondok, amit csinálok.' },
+  { step: '03', title: 'Személyre szabott kezelés', body: 'Az aktuális bőrállapotodra szabott protokoll. Mindent végig elmondok, amit csinálok.' },
   { step: '04', title: 'Utógondozás', body: 'Megbeszéljük az otthoni teendőket, hogy az eredmény minél tovább tartson.' },
 ];
 
@@ -94,8 +95,8 @@ const testimonials = [
 // pontos fej-kulcsszavait („szempilla lifting”, „szemöldök laminálás”).
 const faqs = [
   { q: 'Hogyan tudok időpontot foglalni?', a: 'Online, a Notino felületén, a nap bármely szakában — a szabad időpontok valós időben látszanak. Ha bizonytalan vagy, melyik kezelés való neked, írj Instagramon vagy e-mailben, és segítek választani.' },
-  { q: 'Hol talállak meg, és mikor vagy nyitva?', a: '1143 Budapest, Egressy út 16. — Zuglóban, a XIV. kerületben. Hétfőtől péntekig 8:30–19:30, szombaton 8:00–13:00, vasárnap zárva.' },
-  { q: 'Mi történik az első alkalommal?', a: 'A kezelés előtt körülbelül 10 percet beszélgetünk arról, mit szeretnél és mire van szüksége a bőrödnek. Csak utána kezdünk — nem sablonnal dolgozom.' },
+  { q: 'Hol talállak meg, és mikor vagy nyitva?', a: '1143 Budapest, Egressy út 16. — Zuglóban, a XIV. kerületben. Hétfőtől péntekig 8:00–19:00, szombaton 8:00–13:00, vasárnap zárva.' },
+  { q: 'Mi történik az első alkalommal?', a: 'A kezelés előtt körülbelül 10 percet beszélgetünk arról, mit szeretnél és mire van szüksége a bőrödnek. Csak utána kezdünk, hogy a kezelés az aktuális bőrállapotodhoz igazodjon.' },
   { q: 'Egyszerre több kezelést is kérhetek?', a: 'Igen. A leggyakoribb kombináció a pilla- és szemöldökkezelés együtt: Teljes Tekintet csomagban 18 000 Ft a külön 23 000 Ft helyett, nagyjából 120 perc alatt.' },
   { q: 'Le lehet mondani az időpontot?', a: 'Igen, 24 órával az időpont előtt bármikor díjmentesen.' },
 ];
@@ -218,7 +219,7 @@ const homepageFaqSchema = {
             href={config.booking}
             target="_blank"
             rel={relFor(config.booking)}
-            class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200"
+            class="fb-book inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200"
           >
             Időpontot foglalok
           </a>
@@ -294,7 +295,7 @@ const homepageFaqSchema = {
       <WeddingCalendarCTA
         class="mt-14 sm:mt-16"
         cta="Megnyitom az esküvői szépségnaptárt"
-        body="Írd be az esküvőd dátumát, és megkapod a saját ütemterved: mikor legyen az arckezelés-kúra, a próbasmink, a szemöldök laminálás, a szempilla lifting és a menyasszonyi smink. Regisztráció nélkül, azonnal."
+        body="Írd be az esküvőd dátumát, és megkapod a saját ütemterved: mikor legyen az arckezelés-kúra, a próbasmink, a szemöldök laminálás, a szempilla lifting és a menyasszonyi smink. Regisztráció nélkül."
       />
     </div>
   </section>
@@ -356,7 +357,7 @@ const homepageFaqSchema = {
                 nyitányú, mint a /rolam/ oldal ugyanerről szóló szakasza — nem
                 akarunk két oldalon szinte azonos szövegtömböt. */}
             <p>
-              Kozmetikus, szempilla- és szemöldök-stylist Zuglóban. A legfontosabb döntésem a szalonnal kapcsolatban az, hogy <span class="text-cream">egyszerre csak egyetlen vendéget fogadok</span>: amíg nálam vagy, nem szól közbe senki, és nem néz rád egy idegen a szomszéd székből.
+              Kozmetikus, szempilla- és szemöldök-stylist Zuglóban. A legfontosabb döntésem a szalonnal kapcsolatban az, hogy <span class="text-cream">egyszerre csak egyetlen vendéget fogadok</span>: amíg nálam vagy, senki nem szól közbe, és nem kell osztoznod a figyelmemen.
             </p>
             <p>
               Arckezelést <span class="text-cream">Janssen Cosmetics</span> hatóanyagokkal végzek, szempilla liftinget és szemöldök laminálást koreai technikával. Minden alkalom egy rövid beszélgetéssel indul — mert amit <em class="display">te</em> szeretnél, és amire a bőrödnek éppen szüksége van, nem mindig ugyanaz. Munka közben végig elmondom, mit csinálok és miért.
@@ -460,29 +461,28 @@ const homepageFaqSchema = {
           <p class="mt-6 text-creamSoft text-base sm:text-lg max-w-[50ch] leading-[1.7]">
             Online foglalási rendszer 0–24 órában, válaszadás munkanapokon pár órán belül.
           </p>
-          {/* CSATORNA-HIERARCHIA. A telefongomb korábban tömör krém alapon,
-              „HÍVJ MOST!" felirattal állt itt — vagyis vizuálisan ERŐSEBB volt a
-              foglalásnál (a krém világosabb, mint az arany), és a hangneme is
-              sürgetőbb. Ez szembemegy a saját mért adattal: az online foglaló
-              jobb vendég, a telefonáló problémásabb, és a mért konverzió maga a
-              Notino-kattintás. A hívás megmarad — mert aki tényleg kérdezni akar,
-              annak kell —, de másodlagos, körvonalas gombként, semleges
-              felirattal. Nem vesszük el a lehetőséget, csak nem toljuk előre. */}
-          <div class="mt-9 flex flex-wrap items-center gap-3">
-            <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">
+          {/* IKERPÁR: ugyanez a foglalási blokk a SiteContact.astro-ban is
+              megvan. Ha itt módosítod, ott is módosítsd. */}
+          <div class="mt-9">
+            <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="fb-book inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">
               Időpontot foglalok
             </a>
-            <a
-              href={`tel:${config.phone}`}
-              class="inline-flex items-center justify-center px-6 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-creamSoft rounded-full hover:text-cream hover:bg-whisperOnDark active:scale-[0.97] transition-colors duration-150 gap-2"
-              aria-label={`Telefonos érdeklődés: ${config.phoneDisplay}`}
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden>
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
-              </svg>
-              Inkább telefonálok
-            </a>
           </div>
+
+          {/* ITT VOLT az „Inkább telefonálok" gomb. 2026-09-13-án LEKERÜLT, és
+              ne kerüljön vissza gombként. A története: eredetileg tömör krém
+              alapon, „HÍVJ MOST!" felirattal állt itt, vagyis vizuálisan ERŐSEBB
+              volt a foglalásnál; onnan fokoztuk le másodlagos, körvonalas
+              gombbá, most pedig teljesen le.
+
+              AZ OK a saját mért adat: az online foglaló jobb vendég, a telefonáló
+              problémásabb, és a mért konverzió maga a Notino-kattintás. Két egymás
+              melletti gomb ráadásul döntést kér a látogatótól, és aki habozik,
+              gyakran egyiket sem nyomja meg.
+
+              A TELEFONSZÁM NEM TŰNT EL: ott van a lap alján, a 404-en, az ÁSZF-ben
+              és az adatvédelmi tájékoztatóban, tehát aki hívni akar, megtalálja.
+              Nem a lehetőséget vettük el, csak nem kínáljuk fel gombként. */}
 
           {/* Kockázat-oldó sor a foglalás gomb alatt — lásd BookingAssurance.astro. */}
           <BookingAssurance class="mt-5" />
@@ -516,7 +516,7 @@ const homepageFaqSchema = {
               href={`mailto:${config.email}?subject=${encodeURIComponent('Érdeklődés a FRUBEAUTY oldalról')}`}
               class="mt-3 inline-flex items-center px-4 py-2 text-[11px] uppercase tracking-caps font-medium bg-gold text-ink rounded-full hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-150"
             >
-              Írj nekem emailt
+              Írj nekem e-mailt
             </a>
           </div>
 
@@ -543,7 +543,7 @@ const homepageFaqSchema = {
           </div>
 
           <div class="border-t border-whisper pt-6 sm:col-span-2">
-            <p class="text-[11px] uppercase tracking-caps text-creamMute mb-4">Kövess be Instán és Facebookon.</p>
+            <p class="text-[11px] uppercase tracking-caps text-creamMute mb-4">Friss munkák Instán és Facebookon.</p>
             <div class="flex items-center gap-3">
               <a
                 href={config.instagram}

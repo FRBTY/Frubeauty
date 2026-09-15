@@ -17,6 +17,7 @@ interface NavBarProps {
  */
 const navLinks = [
   { href: '/',                            label: 'Főoldal' },
+  { href: '/lezeres-szortelenites-budapest/', label: 'Lézer' },
   { href: '/arckezeles-zuglo/',            label: 'Arckezelés' },
   { href: '/sminkes-zuglo/',               label: 'Smink' },
   { href: '/szempilla-lifting-zuglo/',     label: 'Szempilla' },
@@ -144,7 +145,7 @@ export function NavBar({ bookingUrl, instagram, facebook }: NavBarProps) {
               href={bookingUrl}
               target="_blank"
               rel={relFor(bookingUrl)}
-              className="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink rounded-full hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-150"
+              className="fb-book hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink rounded-full hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-150"
             >
               Foglalás
             </a>
@@ -219,7 +220,7 @@ export function NavBar({ bookingUrl, instagram, facebook }: NavBarProps) {
             rel={relFor(bookingUrl)}
             tabIndex={menuOpen ? 0 : -1}
             onClick={() => setMenuOpen(false)}
-            className="mt-4 inline-flex items-center justify-center px-6 py-3.5 text-[13px] uppercase tracking-caps font-medium bg-gold text-ink rounded-full hover:bg-goldSoft transition-colors"
+            className="fb-book mt-4 inline-flex items-center justify-center px-6 py-3.5 text-[13px] uppercase tracking-caps font-medium bg-gold text-ink rounded-full hover:bg-goldSoft transition-colors"
           >
             Időpontot foglalok
           </a>

@@ -335,7 +335,7 @@ export function WeddingPlanner() {
     const isSaturday = weddingDate.getDay() === 6;
     if (daysToWedding <= 120) {
       return isSaturday
-        ? 'Szombat, főszezonban, és négy hónapon belül. Szombaton 8 és 13 óra között dolgozom, egyszerre egy vendéggel — egy esküvői reggel tehát egy menyasszony. Ha a dátumod fix, ezt ne halaszd tovább.'
+        ? 'Szombat, főszezonban, és négy hónapon belül. Szombaton 8 és 13 óra között dolgozom, egyszerre egy vendéggel — egy esküvői reggel tehát egy menyasszony. Ha a dátumod már fix, ez az a pont, ahol érdemes időpontot adni neki.'
         : 'Főszezonban vagy, négy hónapon belül. A reggeli időpontok ilyenkor fogynak el elsőként.';
     }
     return isSaturday
@@ -795,7 +795,7 @@ export function WeddingPlanner() {
                     {daysToWedding !== null && daysToWedding >= 10
                       ? 'Ennyi idő alatt a tekintet még beáll — nyolc nap kell hozzá —, és egy próbasmink is befér. Hívj fel, és a maradék napokból összerakom a legjobb sorrendet.'
                       : daysToWedding !== null && daysToWedding >= 2
-                        ? 'A smink ilyenkor is megoldható, és van, amit a tekintetből még be lehet csúsztatni. Hívj fel, és két perc alatt megmondom, mi fér bele.'
+                        ? 'A smink ilyenkor is megoldható, és van, amit a tekintetből még be lehet csúsztatni. Hívj fel, és megnézzük, mi fér bele.'
                         : 'Ez már nagyon szoros, de a smink még megoldható lehet. Hívj fel — megnézem, mit tudok kinyitni.'}
                   </p>
                   {/* Ha a hívás-gomb közvetlenül fentebb, az „Ezzel kezdd”

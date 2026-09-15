@@ -1,0 +1,620 @@
+<title>A rossz szegmens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap">
+
+<style>
+:root{
+  --ground:#FBFAF7; --surface:#FFFFFF; --panel:#F6F3ED;
+  --ink:#241E17; --ink-2:#6B6154; --ink-3:#8D8375;
+  --rule:#E3DED3; --rule-strong:#CFC7B7;
+  --accent:#8F621B; --accent-ink:#5E3F0E; --accent-soft:#F1E6CF;
+  --good:#2C6349; --warn:#9C5A16; --crit:#9B2F27;
+  --good-bg:#E4F0E9; --warn-bg:#F7E8D6; --crit-bg:#F7E1DE;
+  --measure:66ch;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#16120E; --surface:#1E1913; --panel:#231D16;
+    --ink:#F1EBE0; --ink-2:#A99D8B; --ink-3:#8A7F6E;
+    --rule:#332B22; --rule-strong:#473C2F;
+    --accent:#D7A34A; --accent-ink:#E9C177; --accent-soft:#33291A;
+    --good:#77C39A; --warn:#DFA25C; --crit:#DE7A70;
+    --good-bg:#1B2A22; --warn-bg:#2E2317; --crit-bg:#2E1D1B;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#16120E; --surface:#1E1913; --panel:#231D16;
+  --ink:#F1EBE0; --ink-2:#A99D8B; --ink-3:#8A7F6E;
+  --rule:#332B22; --rule-strong:#473C2F;
+  --accent:#D7A34A; --accent-ink:#E9C177; --accent-soft:#33291A;
+  --good:#77C39A; --warn:#DFA25C; --crit:#DE7A70;
+  --good-bg:#1B2A22; --warn-bg:#2E2317; --crit-bg:#2E1D1B;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:17px; line-height:1.62;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+h1,h2,h3{font-family:Fraunces,Georgia,"Times New Roman",serif;text-wrap:balance;margin:0;line-height:1.14}
+h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:600;font-variation-settings:"opsz" 144;letter-spacing:-.015em;line-height:1.11}
+h2{font-size:clamp(1.55rem,3.4vw,2.1rem);font-weight:600;font-variation-settings:"opsz" 144;line-height:1.18}
+h3{font-size:1.16rem;font-weight:700;font-variation-settings:"opsz" 24;line-height:1.32}
+p{margin:0}
+
+.eyebrow{
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);
+}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+
+header.top{border-bottom:1px solid var(--rule-strong);background:var(--surface);padding:56px 0 40px}
+.top-grid{display:flex;flex-direction:column;gap:22px}
+.kicker-row{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:baseline}
+.sub{color:var(--ink-2);font-size:1.06rem;max-width:62ch}
+
+.diag{background:var(--panel);border:1px solid var(--rule-strong);padding:30px;margin-top:40px}
+.diag .lead{
+  font-family:Fraunces,Georgia,serif;font-variation-settings:"opsz" 60;
+  font-size:clamp(1.22rem,2.6vw,1.6rem);line-height:1.36;font-weight:400;
+  max-width:54ch;margin-top:12px;
+}
+.diag em{font-style:normal;color:var(--accent-ink);font-weight:600;background:var(--accent-soft);padding:0 .18em}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:1px;background:var(--rule-strong);border:1px solid var(--rule-strong);margin-top:28px}
+.stat{background:var(--surface);padding:18px 20px 16px;display:flex;flex-direction:column;gap:5px}
+.stat .n{font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums;font-size:1.85rem;font-weight:700;line-height:1;letter-spacing:-.03em}
+.stat .l{font-size:.82rem;color:var(--ink-2);line-height:1.35}
+.stat.up .n{color:var(--good)} .stat.down .n{color:var(--crit)} .stat.flat .n{color:var(--warn)}
+
+section{padding:60px 0;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:0}
+.sec-head{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.sec-head p{color:var(--ink-2);max-width:var(--measure)}
+.body-stack{display:flex;flex-direction:column;gap:20px}
+.body-stack p{max-width:var(--measure)}
+
+.ladder{display:flex;flex-direction:column;border:1px solid var(--rule-strong)}
+.gate{display:grid;grid-template-columns:52px 1fr auto;gap:18px;align-items:start;padding:15px 18px;border-bottom:1px solid var(--rule);background:var(--surface)}
+.gate:last-child{border-bottom:0}
+.gate .idx{font-family:"JetBrains Mono",monospace;font-size:.78rem;color:var(--ink-3);padding-top:3px}
+.gate .what{display:flex;flex-direction:column;gap:3px}
+.gate .what b{font-size:1rem}
+.gate .what span{font-size:.9rem;color:var(--ink-2)}
+.verdict{font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;white-space:nowrap;border:1px solid transparent}
+.v-pass{background:var(--good-bg);color:var(--good);border-color:var(--good)}
+.v-warn{background:var(--warn-bg);color:var(--warn);border-color:var(--warn)}
+
+.tbl-wrap{overflow-x:auto;border:1px solid var(--rule-strong);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:.92rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{font-family:"JetBrains Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:400;background:var(--panel);border-bottom:1px solid var(--rule-strong);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.hi td{background:var(--warn-bg)}
+tr.ok td{background:var(--good-bg)}
+.q{font-family:"JetBrains Mono",monospace;font-size:.85rem}
+.sm{font-size:.8em;color:var(--ink-2)}
+caption{caption-side:bottom;text-align:left;padding:11px 14px;font-size:.82rem;color:var(--ink-3);border-top:1px solid var(--rule);line-height:1.5}
+
+.ev{font-family:"JetBrains Mono",monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border:1px solid var(--rule-strong);color:var(--ink-2);white-space:nowrap}
+.ev-m{border-color:var(--good);color:var(--good)}
+.ev-o{border-color:var(--accent);color:var(--accent-ink)}
+.ev-b{border-color:var(--ink-3);color:var(--ink-3)}
+
+.paste{border:1px solid var(--rule-strong);background:var(--surface);margin:14px 0}
+.paste-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 14px;background:var(--panel);border-bottom:1px solid var(--rule-strong)}
+.paste-head .lbl{font-family:"JetBrains Mono",monospace;font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-2)}
+.paste-body{padding:16px 18px;font-size:.95rem;white-space:pre-wrap;line-height:1.6;overflow-x:auto}
+.paste-body.code{font-family:"JetBrains Mono",monospace;font-size:.83rem;line-height:1.66}
+button.copy{font-family:"JetBrains Mono",monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;background:transparent;border:1px solid var(--rule-strong);color:var(--ink-2);padding:5px 10px;cursor:pointer}
+button.copy:hover{border-color:var(--accent);color:var(--accent-ink)}
+button.copy:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.move{border:1px solid var(--rule-strong);background:var(--surface);margin-bottom:26px}
+.move-head{padding:20px 22px 16px;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:8px}
+.move-meta{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-family:"JetBrains Mono",monospace;font-size:.67rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--rule-strong);color:var(--ink-2)}
+.tag.gain{border-color:var(--good);color:var(--good)}
+.tag.risk{border-color:var(--crit);color:var(--crit)}
+.move-body{padding:20px 22px 24px;display:flex;flex-direction:column;gap:14px}
+.move-body p{max-width:var(--measure)}
+.move-body h4{font-family:"Source Sans 3",sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin:8px 0 0}
+.note-p{font-size:.93rem;color:var(--ink-2)}
+
+.score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px}
+.axis{display:grid;grid-template-columns:1fr auto;gap:4px 14px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--rule)}
+.axis .an{font-size:.95rem}
+.axis .av{font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums;font-size:.95rem;font-weight:700}
+.axis .note{grid-column:1/-1;font-size:.84rem;color:var(--ink-2);line-height:1.5}
+.bar{height:6px;background:var(--rule);margin-top:16px}
+.bar i{display:block;height:100%;background:var(--accent)}
+
+ul.tight{margin:0;padding-left:1.15em;display:flex;flex-direction:column;gap:9px;max-width:var(--measure)}
+ul.tight li::marker{color:var(--accent)}
+.callout{border-left:3px solid var(--accent);background:var(--panel);padding:16px 20px;max-width:var(--measure)}
+.callout p+p{margin-top:10px}
+a{color:var(--accent-ink);text-decoration-thickness:1px;text-underline-offset:2px}
+
+footer{padding:44px 0 70px;color:var(--ink-3);font-size:.87rem}
+footer p{max-width:var(--measure)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:640px){
+  body{font-size:16px}
+  .gate{grid-template-columns:38px 1fr;gap:12px}
+  .gate .verdict{grid-column:2;justify-self:start;margin-top:6px}
+  .diag{padding:22px 20px}
+}
+</style>
+
+<header class="top">
+  <div class="wrap top-grid">
+    <div class="kicker-row">
+      <span class="eyebrow">Rank Pro audit &middot; frubeauty.com</span>
+      <span class="eyebrow">2026-08-28</span>
+      <span class="eyebrow">Mérési ablak: 2026-07-29 &rarr; 08-25</span>
+    </div>
+    <h1>A rossz szegmens</h1>
+    <p class="sub">A forgalom megduplázódott. A foglalás nem &mdash; és az adat pontosan megmondja, miért. Ez a riport a Search Console API adataiból, élő oldal-lekérésekből és mért fókusz-elemzésből dolgozik; minden állítás mellett ott a bizonyítási szint.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="diag">
+    <span class="eyebrow">Diagnózis</span>
+    <p class="lead">A weboldal nem a láthatóságon bukik &mdash; az egy hónap alatt <em>+87%</em>-ot nőtt. Azon bukik, hogy a megszerzett láthatóság <em>82%-a országos, hely nélküli lekérdezésekben</em> van, ahol a kattintási arány 0&ndash;1,7%, és ahol a kereső amúgy sem tud Zuglóba bejönni. Ott viszont, ahol helynév is van a keresésben, ugyanazon a pozíción <em>8%</em> a kattintás.</p>
+    <p style="max-width:54ch;margin-top:18px;color:var(--ink-2)">És egy második, ennél is fontosabb réteg, amit a Search Console <b>egyáltalán nem mutat</b>: hét élő térképcsomagból <em>ötben bent vagy</em>, a „szemöldök laminálás budapest” kifejezésre pedig <em>első</em>. A lokális láthatóságod erős &mdash; csak nem a weboldalon keresztül mérhető.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat up"><span class="n">142</span><span class="l">organikus kattintás / 28 nap<br>(előző 28 nap: 77)</span></div>
+    <div class="stat up"><span class="n">4 459</span><span class="l">megjelenés<br>(előző: 2 387)</span></div>
+    <div class="stat flat"><span class="n">3,18%</span><span class="l">CTR &mdash; gyakorlatilag változatlan (3,23%)</span></div>
+    <div class="stat down"><span class="n">&minus;62</span><span class="l">elmaradt kattintás a pozícióhoz képest</span></div>
+  </div>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">01 &mdash; A kapusor</span>
+      <h2>Mi az, ami már nem probléma</h2>
+      <p>A kapuk nem pontok, hanem előfeltételek: ha egy kapu bukik, alatta minden optimalizálás értéktelen. Itt a jó hír &mdash; <b>egyetlen kapu sem bukik.</b> Vagyis a szűk keresztmetszet nem technikai, és minden „javítsd a technikai SEO-t” típusú tanács ma nulla forintot hozna.</p>
+    </div>
+
+    <div class="ladder">
+      <div class="gate"><span class="idx">K1</span><span class="what"><b>Indexelhető</b><span>GSC URL-ellenőrzés (API), 7 URL: mind „Submitted and indexed”, googleCanonical = userCanonical, crawledAs MOBILE, robots ALLOWED.</span></span><span class="verdict v-pass">Átmegy &middot; mért</span></div>
+      <div class="gate"><span class="idx">K2</span><span class="what"><b>Létező szolgáltatás</b><span>Minden pénzoldal valós, ma végzett kezelést kínál, konkrét árral. A lézeres szőrtelenítésre nincs oldal &mdash; helyesen, mert még nem él.</span></span><span class="verdict v-pass">Átmegy</span></div>
+      <div class="gate"><span class="idx">K3</span><span class="what"><b>Az egy mondat</b><span>„Egy zuglói, egy-vendéges szalon koreai laminálás-technikája, konkrét árral (11 000 Ft), konkrét idővel (60 perc), 6 hetes tartóssággal és saját videóval a kezelésről.” Megvan.</span></span><span class="verdict v-pass">Átmegy</span></div>
+      <div class="gate"><span class="idx">K4</span><span class="what"><b>Renderelt bizonyíték</b><span>Élő lekérés + 390&times;844 mobil viewport: nincs vízszintes túlcsordulás, a H1, az ár-bekezdés és a foglalás-gomb egyaránt a hajtás fölött van.</span></span><span class="verdict v-pass">Átmegy &middot; megfigyelt</span></div>
+      <div class="gate"><span class="idx">+</span><span class="what"><b>Fókusz</b><span>Mért: 24/24 oldal a mag-témán belül, a kirajzolódó téma megegyezik a kimondottal. Nincs metszendő oldal &mdash; a „vágd ki a hígítókat” tanács itt nem alkalmazható.</span></span><span class="verdict v-pass">Rendben &middot; mért</span></div>
+      <div class="gate"><span class="idx">+</span><span class="what"><b>Belső linkelés</b><span>Mért: pénzoldalanként 33&ndash;38 kontextuális belső link, releváns anchorral (a navigáció és a lábléc kiszűrve). Ez nem szűk keresztmetszet.</span></span><span class="verdict v-pass">Rendben &middot; mért</span></div>
+      <div class="gate"><span class="idx">!</span><span class="what"><b>Rich result megjelenés</b><span>A <span class="mono">searchAppearance</span> lekérdezés <b>nulla sort</b> ad vissza a 28 napra. Van FAQPage, HowTo, VideoObject, Service és BreadcrumbList schema &mdash; és egyik sem termel kiemelt megjelenést. Kép-keresés: 16 megjelenés a 42,9. pozíción. Videó-keresés: 0 megjelenés.</span></span><span class="verdict v-warn">Nulla hozam &middot; mért</span></div>
+    </div>
+
+    <div class="callout" style="margin-top:22px">
+      <p><b>Amit ebből ki kell mondani:</b> a schema-réteg túl van építve, és a hozama ma nulla. A FAQ- és HowTo-gazdag találatokat a Google 2023-ban visszavonta, a videó-találat pedig 0 megjelenést hozott a videó-sitemap és a két <span class="mono">VideoObject</span> ellenére. <b>Ne tegyél bele több schemát</b>, és a videó-SEO-t tekintsd lezártnak &mdash; a következő órád nem itt térül meg.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">02 &mdash; A bizonyíték</span>
+      <h2>Ugyanaz a pozíció, ötszörös kattintás</h2>
+      <p>Ez a riport egyetlen legfontosabb táblázata. A 209 látható lekérdezést szándék szerint bontottam, majd pozíció-sávonként is. A 6&ndash;8. pozíció sávjában a helynevet tartalmazó keresések <b>8,0%</b>-on kattintanak, a helynév nélküli ár-keresések ugyanott <b>0,0%</b>-on. Ez nem a mintaméret zaja: z &asymp; &minus;2,3, azaz nagyjából 1% valószínűséggel véletlen.</p>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Szándék</th><th class="num">Megjelenés</th><th class="num">Kattintás</th><th class="num">CTR</th><th class="num">Átl. pozíció</th><th>Példa</th></tr></thead>
+        <tbody>
+          <tr class="ok"><td><b>Lokális</b> (helynév a keresésben)</td><td class="num">323</td><td class="num">16</td><td class="num"><b>4,95%</b></td><td class="num">8,5</td><td class="q">szemöldök laminálás budapest</td></tr>
+          <tr class="hi"><td><b>Tranzakciós</b> (ár / „mennyibe”, hely nélkül)</td><td class="num">912</td><td class="num">16</td><td class="num">1,75%</td><td class="num">8,8</td><td class="q">szemöldök laminálás árak</td></tr>
+          <tr><td><b>Egyéb</b> (általános, angol, márka-közeli)</td><td class="num">463</td><td class="num">5</td><td class="num">1,08%</td><td class="num">8,4</td><td class="q">eyebrow lamination</td></tr>
+          <tr class="hi"><td><b>Információs</b> („meddig”, „mit jelent”)</td><td class="num">92</td><td class="num">0</td><td class="num">0,00%</td><td class="num">9,4</td><td class="q">szemöldök laminálás meddig tart</td></tr>
+        </tbody>
+        <caption>Search Console API, 2026-07-29 &ndash; 08-25. A 209 látható lekérdezés 1 790 megjelenést fed le; a maradék 2 669 megjelenés anonimizált long tail, ami 105 kattintást hozott (3,93% CTR) &mdash; vagyis a <i>láthatatlan</i> rész teljesít jobban, mint a látható. <span class="ev ev-m">mért</span></caption>
+      </table>
+    </div>
+
+    <div class="tbl-wrap" style="margin-top:26px">
+      <table>
+        <thead><tr><th>CTR pozíció-sávonként</th><th class="num">1&ndash;3.</th><th class="num">4&ndash;5.</th><th class="num">6&ndash;8.</th><th class="num">9&ndash;12.</th><th class="num">13+</th></tr></thead>
+        <tbody>
+          <tr class="ok"><td><b>Lokális</b></td><td class="num">3,8%</td><td class="num">2,7%</td><td class="num"><b>8,0%</b><br><span class="sm">11/138</span></td><td class="num">3,2%</td><td class="num">1,7%</td></tr>
+          <tr class="hi"><td><b>Tranzakciós</b></td><td class="num">2,9%</td><td class="num">4,3%</td><td class="num"><b>0,0%</b><br><span class="sm">0/120</span></td><td class="num">1,7%<br><span class="sm">11/652</span></td><td class="num">2,8%</td></tr>
+          <tr><td><b>Információs</b></td><td class="num">0,0%</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">0,0%<br><span class="sm">0/88</span></td><td class="num">0,0%</td></tr>
+        </tbody>
+        <caption>Ugyanaz a pozíció, más szándék, ötszörös eredmény. A 9&ndash;12. sávban 652 tranzakciós megjelenés termel 11 kattintást &mdash; ez a növekedés zöme, és ez a legrosszabb minőségű forgalom. <span class="ev ev-m">mért</span></caption>
+      </table>
+    </div>
+
+    <div class="body-stack" style="margin-top:26px">
+      <p>A gyakorlati következmény kemény: <b>a júliusról augusztusra megduplázódott megjelenés-szám nem a foglalható közönségben nőtt.</b> Aki Debrecenből rákeres arra, hogy „szemöldök laminálás árak”, és a 11. helyen meglát egy zuglói szalont, az nem kattint &mdash; és jól teszi. Ha kattintana, sem lenne belőle foglalás.</p>
+      <p>Ugyanez fordítva: <span class="q">szemöldök laminálás budapest</span> &mdash; 81 megjelenés, <b>9 kattintás, 11,1% CTR</b> a 7,7. pozíción. Ez a legjobban teljesítő lekérdezés az egész oldalon, és ez a minta, amit sokszorozni kell.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">03 &mdash; Oldal-szintű rés</span>
+      <h2>62 kattintás egy hónap alatt</h2>
+      <p>Konzervatív, mobil-domináns CTR-görbéhez mérve minden 50 megjelenés fölötti oldalt. A „hiány” csak ott van beszámítva, ahol a z-érték &minus;1 alatt van, tehát ahol az eltérés nem magyarázható a mintamérettel.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Oldal</th><th class="num">Megj.</th><th class="num">Katt.</th><th class="num">Várható</th><th class="num">Hiány</th><th class="num">z</th><th class="num">Poz.</th></tr></thead>
+        <tbody>
+          <tr class="hi"><td class="q">/blog/szemoldok-laminalas-meddig-tart/</td><td class="num">342</td><td class="num">2</td><td class="num">13,7</td><td class="num"><b>&minus;11,7</b></td><td class="num">&minus;3,2</td><td class="num">7,3</td></tr>
+          <tr class="hi"><td class="q">/blog/szemoldok-laminalas-arak-2026/</td><td class="num">286</td><td class="num">0</td><td class="num">9,4</td><td class="num"><b>&minus;9,4</b></td><td class="num">&minus;3,1</td><td class="num">7,8</td></tr>
+          <tr class="hi"><td class="q">/blog/eskuvoi-smink-arak-budapest/</td><td class="num">400</td><td class="num">7</td><td class="num">16,0</td><td class="num"><b>&minus;9,0</b></td><td class="num">&minus;2,3</td><td class="num">7,2</td></tr>
+          <tr class="hi"><td class="q">/rolam/</td><td class="num">142</td><td class="num">1</td><td class="num">8,5</td><td class="num"><b>&minus;7,5</b></td><td class="num">&minus;2,7</td><td class="num">5,2</td></tr>
+          <tr><td class="q">/ <span class="sm">(kezdőlap)</span></td><td class="num">1732</td><td class="num">71</td><td class="num">86,6</td><td class="num">&minus;15,6</td><td class="num">&minus;1,7</td><td class="num">5,5</td></tr>
+          <tr><td class="q">/szemoldok-laminalas-zuglo/</td><td class="num">630</td><td class="num">15</td><td class="num">20,8</td><td class="num">&minus;5,8</td><td class="num">&minus;1,3</td><td class="num">8,4</td></tr>
+          <tr><td class="q">/blog/koreai-szempilla-lifting/</td><td class="num">625</td><td class="num">17</td><td class="num">20,6</td><td class="num">&minus;3,6</td><td class="num">&minus;0,8</td><td class="num">7,7</td></tr>
+          <tr class="ok"><td class="q">/szempilla-lifting-zuglo/</td><td class="num">179</td><td class="num">9</td><td class="num">5,0</td><td class="num">+4,0</td><td class="num">+1,8</td><td class="num">8,9</td></tr>
+          <tr class="ok"><td class="q">/sminkes-zuglo/</td><td class="num">422</td><td class="num">16</td><td class="num">13,9</td><td class="num">+2,1</td><td class="num">+0,6</td><td class="num">7,8</td></tr>
+        </tbody>
+        <caption>A két zöld sor a bizonyíték arra, hogy a szövegeddel nincs baj: a <b>pénzoldalak</b> a várható fölött teljesítenek (a szempilla-oldal 5,0%-os CTR-rel a legjobb az oldalon). A piros sorok kivétel nélkül <b>blogcikkek és a Rólam oldal</b> &mdash; vagyis pontosan az a réteg, ami országos, nem foglalható szándékot fog be. <span class="ev ev-m">mért</span></caption>
+      </table>
+    </div>
+
+    <div class="callout" style="margin-top:24px">
+      <p><b>Amit ez kizár:</b> a title és a meta leírás átírását. Élőben ellenőriztem mind a tíz fontos oldalt &mdash; a címek 49&ndash;59 karakteresek, a kulcsszó elöl van, ár és időtartam is szerepel bennük („Szemöldök laminálás Budapest, Zugló &ndash; 11.000 Ft”). Ezek jó címek. A vak átírás itt rontana, nem javítana.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">04 &mdash; Kannibalizáció</span>
+      <h2>339 megjelenés, nulla kattintás</h2>
+      <p>A szemöldök-klaszter három lekérdezésén az oldal <b>egyszer sem kapott kattintást</b> 28 nap alatt. Az ok minden esetben ugyanaz: nem a megfelelő oldal jelenik meg.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Lekérdezés</th><th class="num">Megj.</th><th class="num">Katt.</th><th>Melyik oldal jelenik meg</th><th class="num">Poz.</th></tr></thead>
+        <tbody>
+          <tr class="hi"><td class="q"><b>szemöldök laminálás</b></td><td class="num">108</td><td class="num">0</td><td class="q">/ &mdash; <b>a kezdőlap, nem a pénzoldal</b></td><td class="num">9,3</td></tr>
+          <tr class="hi"><td class="q"><b>szemöldök laminálás árak</b></td><td class="num">189</td><td class="num">0</td><td class="q">/szemoldok-laminalas-zuglo/ (140)<br>/blog/szemoldok-laminalas-arak-2026/ (49)</td><td class="num">11,4<br>14,8</td></tr>
+          <tr class="hi"><td class="q"><b>szemöldök laminálás ár</b></td><td class="num">42</td><td class="num">0</td><td class="q">/szemoldok-laminalas-zuglo/ (26)<br>/blog/szemoldok-laminalas-arak-2026/ (16)</td><td class="num">13,1<br>27,4</td></tr>
+          <tr><td class="q">esküvői smink árak</td><td class="num">96</td><td class="num">2</td><td class="q">/sminkes-zuglo/ (50) + blog (46)</td><td class="num">7,9 / 13,5</td></tr>
+          <tr><td class="q">szempilla lifting zugló</td><td class="num">61</td><td class="num">1</td><td class="q">négy saját URL osztozik rajta</td><td class="num">5,8&ndash;12,5</td></tr>
+        </tbody>
+        <caption>Search Console lekérdezés &times; oldal bontás. <span class="ev ev-m">mért</span></caption>
+      </table>
+    </div>
+    <div class="body-stack" style="margin-top:24px">
+      <p>És a legdrágább változat, ami nem is fér táblázatba: <b>a szempilla-klaszterben a blogcikk 3,5-szer annyi megjelenést visz, mint a pénzoldal</b> (625 vs. 179) &mdash; miközben a pénzoldal kattintási aránya majdnem a duplája (5,0% vs. 2,7%). A rossz oldal kapja a láthatóságot, a jó oldal a morzsákat.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">05 &mdash; A bírálói szem</span>
+      <h2>Amit a Google ténylegesen visszaad</h2>
+      <p>Hét élő találati listát néztem meg a saját böngésződben, a Google automatikus javítását kikapcsolva. Ez a rész két korábbi feltételezésemet is megdöntötte &mdash; mindkettőt ki is írom.</p>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Élő lekérdezés</th><th>Térképcsomag</th><th>Mit mutat a csomagban</th><th>Ki van fölötted</th></tr></thead>
+        <tbody>
+          <tr class="ok"><td class="q">szemöldök laminálás budapest</td><td><b>1. hely</b></td><td>„Szolgáltatások: Szemöldök-Laminálás”</td><td>senki</td></tr>
+          <tr class="ok"><td class="q">menyasszonyi smink budapest</td><td><b>bent, kétszer</b></td><td>Szépségszalon + Sminkmester, „Esküvői smink”</td><td>Hannasmink 5,0(44)</td></tr>
+          <tr class="ok"><td class="q">alkalmi smink budapest</td><td><b>bent</b></td><td>„Szolgáltatások: Esküvői smink”</td><td>Hannasmink, Dreamlashes, Czopkó Nóra</td></tr>
+          <tr class="ok"><td class="q">arckezelés zugló</td><td><b>bent</b></td><td>5,0 (62)</td><td>Vintage 4,9(224), Full Beauty 4,9(65), Varga Zs. 5,0(79)</td></tr>
+          <tr class="ok"><td class="q">szempilla lifting budapest</td><td><b>bent, 4. sor</b></td><td>„Szolgáltatások: Szempilla lifting”</td><td>Konnáth Evelin 4,9(<b>87</b>), King lashes 4,9(<b>79</b>)</td></tr>
+          <tr class="hi"><td class="q">kozmetikus zugló</td><td><b>nem vagy bent</b></td><td>&mdash;</td><td>FM 4,9(<b>195</b>), Natural Beauty 4,6(85), Négy Évszak 4,8(<b>75</b>) &mdash; mind „7&ndash;15 éve működik”</td></tr>
+          <tr class="hi"><td class="q">esküvői sminkes budapest</td><td><b>nem vagy bent</b></td><td>&mdash;</td><td>öt „Sminkmester”, akiknek a <b>profilnevébe</b> bele van írva a kulcsszó</td></tr>
+        </tbody>
+        <caption>Google-keresés a felhasználó saját böngészőjében, <span class="mono">hl=hu&amp;gl=hu&amp;nfpr=1</span>, 2026-08-28/29. Cégprofil: <b>FRUBEAUTY &ndash; Pecze-Kovács Fruzsina Kozmetikus</b>, 5,0 &middot; <b>62 vélemény</b>, Egressy út 16, 1143, Notino-foglalás bekötve, a véleményekre megy tulajdonosi válasz. <span class="ev ev-m">mért</span></caption>
+      </table>
+    </div>
+
+    <div class="callout" style="margin-top:24px">
+      <p><b>Két dolog, amit tévesen feltételeztem, és a mérés megcáfolt.</b></p>
+      <p><b>1.</b> Azt hittem, a smink-csomagokból azért hiányzol, mert nincs beállítva az „Esküvői smink” szolgáltatás a Cégprofilon. <b>Nem így van</b> &mdash; a menyasszonyi és az alkalmi smink csomagban ott vagy, a szolgáltatás-címkével együtt, sőt Sminkmester kategóriával is megjelensz. A Cégprofilod ezen a részén nincs mit javítani.</p>
+      <p><b>2.</b> Azt hittem, a lokális láthatóság a gyenge pont. <b>Fordítva van:</b> hét csomagból ötben bent vagy, egyben első. A weboldal organikus rétege a gyenge, nem a Cégprofil.</p>
+    </div>
+
+    <div class="body-stack" style="margin-top:26px">
+      <h3>Amiért kimaradsz a két hiányzó csomagból &mdash; és mit lehet vele kezdeni</h3>
+      <p><b>„kozmetikus zugló”:</b> a bent lévő négy szalonnak 75, 85, 195 és 224 véleménye van, és mindegyik mellett ott áll, hogy „több mint 7 / 10 / 15 éve működik”. Neked 62 véleményed van. Hogy ez tényleg a vélemény-szám és nem a földrajz, arra a legtisztább bizonyíték az, hogy a <b>Natural Beauty Kft. (4,6 &middot; 85 vélemény, „több mint 15 éve működik”) ugyanabban az épületben van, mint te</b> &mdash; Egressy út 16. &mdash;, és <b>ő bent van a csomagban, te nem</b>. Azonos cím, azonos távolság: a különbség a vélemény-szám és a működési idő. Ez nem beállítási hiba, hanem <b>küszöb</b> &mdash; és a vélemény-szám az egyetlen fele, amit befolyásolni tudsz. Ugyanez a küszöb tart a 4. sorban a „szempilla lifting budapest” csomagban is, ahol 87 és 79 véleményes szalonok vannak fölötted. <b>Ez a 62 &rarr; 85 lépés az egyetlen olyan beavatkozás ebben a riportban, ami két különböző csomagban egyszerre hat.</b></p>
+      <p><b>„esküvői sminkes budapest”:</b> az öt nyertes profilneve rendre így néz ki: <i>„Szépvölgyi Makeup &amp; Hair, Menyasszonyi sminkes, Alkalmi smink, Esküvői smink, Frizura, esküvői sminkes Budapest, Újpest”.</i> Ez kulcsszó-tömés a Cégprofil nevében, ami <b>a Google saját irányelvébe ütközik</b> &mdash; és nyilvánvalóan működik. <b>Nem javaslom, hogy lemásold.</b> A profilnév kulcsszavazása az a fajta lépés, amit egy szabálysértés-bejelentés bármikor visszavehet, és a te profilod tiszta. Két tiszta út marad: bejelenteni őket a Cégprofil „Módosítási javaslat” gombjával, vagy elfogadni, hogy ezt az <b>egy</b> kifejezés-változatot nem viszed &mdash; miközben a „menyasszonyi smink budapest” és az „alkalmi smink budapest” csomagban, ahol ugyanaz a vevő keres, <b>bent vagy</b>.</p>
+
+      <h3 style="margin-top:14px">A „szemöldök laminálás árak” találati lista &mdash; miért nem nyerhető</h3>
+      <p>Ez volt a legnagyobb nulla-kattintásos kifejezésed (175 megjelenés). Így néz ki élőben, fentről lefelé: <b>hirdetés-blokk hat sitelinkkel</b> &rarr; yst.hu árlista &rarr; <b>Reddit-szál</b> &rarr; Beauté Budapest országos ár-kalauz &rarr; <b>képcsomag</b> &rarr; <b>„Mások ezeket a kérdéseket is felteszik”</b> &rarr; három további árlista &rarr; <b>frubeauty.com</b> &rarr; még egy árlista &rarr; két újabb hirdetés.</p>
+      <p>Nincs AI-válasz &mdash; azt a hipotézist is elvethetjük. De a nyolcadik organikus hely mobilon a harmadik-negyedik képernyő, és <b>minden fölötted lévő találat egy árlista vagy egy országos ár-összehasonlító.</b> A lekérdezés domináns értelmezése az, hogy „mutass több szalont, hogy összehasonlíthassam” &mdash; erre egy egyszemélyes zuglói szalon szerkezetileg nem tud jó válasz lenni. A snippeted egyébként jó („Szemöldök laminálás Budapest &starf;5,0 &ndash; 11.000 Ft”), a pozíció rossz, és <b>ezt a kifejezést nem érdemes hajszolni.</b></p>
+
+      <h3 style="margin-top:14px">Két apró, mérhető hiba, amit menet közben találtam</h3>
+      <ul class="tight">
+        <li><b>A weboldal 50+ értékelést ír, a valóság 62.</b> Ez tíz helyen szerepel a meta leírásokban és a hero-blokkokban. A „60+ értékelés” egyszerre pontosabb és erősebb &mdash; ingyen CTR.</li>
+        <li><b>Az irányítószám két értéken fut &mdash; és a Google maga is bizonytalan.</b> Öt felület (Cégprofil, weboldal, JSON-LD, Cylex, Notino) <b>1143</b>-at ír; a Facebook-oldal <b>1149</b>-et, házszám nélkül. Közben a Google Térkép <i>épület</i>-rekordja az „Egressy út 16” címre szintén <b>1149</b>-et ad vissza, miközben a rajta ülő Cégprofilod 1143-at. Vagyis nem egyszerű elgépelés, hanem valóban kétértelmű cím. <b>Amit tenni kell:</b> nézd meg egy postai forrásból, melyik a helyes, és utána <b>mind a hat felületen ugyanaz szerepeljen</b> &mdash; a következetlenség önmagában is hígít, függetlenül attól, melyik szám nyer. A házszám a Facebookról mindenképp hiányzik, azt pótold.</li>
+        <li><b>Két Facebook-identitás fut párhuzamosan:</b> a „Pecze-Kovács Fruzsina Makeup &amp; Beauty” oldal (337 kedvelés) és a „Pecze-Kovács Fruzsina” profil (1,4 e követő, „Digital creator”). A weboldal JSON-LD-je az egyiket nevezi meg. Két azonosító ugyanarra a személyre hígítja az entitás-jeleket.</li>
+        <li><b>A márkanevedet a Google nem ismeri entitásként:</b> a „frubeauty” keresést automatikusan „true beauty”-re javítja, még a teljes cégnévvel együtt is. Ezt csak idő és külső említés oldja meg &mdash; de magyarázza, miért nem hoz a márkakeresés semmit.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">06 &mdash; A terv</span>
+      <h2>Öt beavatkozás, kész szöveggel</h2>
+      <p>Sorrend: ami a legolcsóbban hozza a legtöbb <i>foglalható</i> vendéget. Az első nem a weboldalon van &mdash; az élő találati listák után nem tudom jó lelkiismerettel máshova tenni. Minden szöveg beilleszthető állapotban van; ahol kockázat van, ott a visszalépési feltétel is ki van írva.</p>
+    </div>
+
+    <div class="move">
+      <div class="move-head">
+        <div class="move-meta"><span class="tag">01</span><span class="tag">heti 15 perc</span><span class="tag gain">két térképcsomagra hat egyszerre</span></div>
+        <h3>62 &rarr; 85 vélemény &mdash; az egyetlen kar, ami két helyen is nyit</h3>
+        <p class="note-p">Az élő csomagokban <b>ugyanaz a szám</b> áll közted és a következő hely között: a „kozmetikus zugló” csomagban 75, 85, 195 és 224 véleményes szalonok vannak bent, a „szempilla lifting budapest” csomagban 87 és 79 véleményes szalonok állnak fölötted. Neked 62 van, 5,0 átlaggal. <b>Ez nem beállítás, hanem küszöb</b> &mdash; és az egyetlen tétel a riportban, ami két különböző csomagban egyszerre mozdít.</p>
+      </div>
+      <div class="move-body">
+        <h4>A mechanika, nem a jószándék</h4>
+        <p class="note-p">Havi 8&ndash;10 új vélemény négy hónap alatt behozza a különbséget. Ehhez nem kampány kell, hanem <b>egy fix mozdulat a kezelés végén</b>: amíg a vendég a tükröt nézi, add oda a telefonod a már megnyitott értékelő-oldallal. Kérés e-mailben utólag: 5&ndash;10% válaszol. Kérés a helyszínen, megnyitott képernyővel: nagyságrenddel több.</p>
+        <div class="paste"><div class="paste-head"><span class="lbl">amit a kezelés végén mondasz &middot; szó szerint</span><button class="copy">Másolás</button></div><div class="paste-body">Örülök, hogy tetszik. Egy dolgot kérhetek? Egyedül dolgozom, és a Google-értékelés az egyetlen módja, hogy megtaláljanak az emberek. Két mondat is bőven elég — itt van megnyitva, ha most van rá egy perced.</div></div>
+        <p class="note-p">Ami ezt a mondatot működővé teszi: megmondja, <b>miért</b> kéred (egyedül dolgozol), <b>mennyi</b> munka (két mondat), és <b>most</b> kéred, nem később. Ha a vendég nemet mond, ejtsd &mdash; egy elkedvetlenített vendég többe kerül, mint egy vélemény.</p>
+
+        <h4>A szolgáltatás nevesítése a véleményben</h4>
+        <p class="note-p">A csomagokban látszik, hogy a Google a <span class="mono">Szolgáltatások:</span> címkét jeleníti meg a találatod alatt. A véleményekben megnevezett szolgáltatás ugyanezt a kapcsolatot erősíti &mdash; a mostani véleményeid közül több is konkrétan említi („szempilla lifting”, „szemöldök laminálás”), és pont ezekre a kifejezésekre vagy bent a csomagban. Amit tehetsz: a fenti mondat után egy fél mondat, <b>ha magától jön</b> &mdash; „ha leírod, mire jártál nálam, az sokat segít”. Kérni azt, hogy mit írjanak, nem szabad; azt kérni, hogy <i>miről</i> írjanak, szabad.</p>
+
+        <div class="callout">
+          <p><b>Amit nem javaslok:</b> vélemény-gyűjtő szoftvert, kedvezményt véleményért, vagy tömeges kikérdezést. Az első kettő irányelvsértés, a harmadik meg olyan hullámot csinál, ami a Google-nek gyanús. Havi 8&ndash;10, egyenletesen, kézzel.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="move">
+      <div class="move-head">
+        <div class="move-meta"><span class="tag">02</span><span class="tag">~1 óra munka</span><span class="tag gain">becsült +5&ndash;10 katt/hó</span><span class="tag risk">lefelé módosított becslés</span></div>
+        <h3>A szemöldök-klaszter szétválasztása szándék szerint</h3>
+        <p class="note-p">A blogcikk és a pénzoldal ma <b>ugyanarra</b> a kérdésre pályázik („mennyibe kerül”), és mindkettő veszít. A megoldás nem törlés és nem átirányítás &mdash; a blogcikk 286 megjelenést hoz. A megoldás az, hogy <b>más kérdésre</b> válaszoljanak.</p>
+        <p class="note-p"><b>Becslés-korrekció:</b> eredetileg +10&ndash;17 kattintást írtam ide. Miután megnéztem az élő találati listát, ezt <b>+5&ndash;10-re szállítom le</b>: a „szemöldök laminálás árak” egy országos ár-összehasonlító lekérdezés, ahol fölötted mindenki árlista vagy ár-kalauz, és ahol a megnyert kattintás sem lesz foglalás. A beavatkozás így is megéri &mdash; egy óra munka &mdash;, de ne ez legyen az, amitől eredményt vársz.</p>
+      </div>
+      <div class="move-body">
+        <h4>a) A blogcikk új címe és leírása &mdash; más szándék, nincs ütközés</h4>
+        <div class="paste"><div class="paste-head"><span class="lbl">title &middot; /blog/szemoldok-laminalas-arak-2026/ &middot; 57 karakter</span><button class="copy">Másolás</button></div><div class="paste-body">Szemöldök laminálás ár 2026: mitől 7 000 és mitől 13 000?</div></div>
+        <div class="paste"><div class="paste-head"><span class="lbl">meta description &middot; 156 karakter</span><button class="copy">Másolás</button></div><div class="paste-body">Miért kerül az egyik helyen 7 000, a másikon 13 000 Ft a szemöldök laminálás? Négy tétel, ami benne van az árban vagy nincs — és mit kérdezz, mielőtt foglalsz.</div></div>
+        <p class="note-p">Ezzel a blogcikk az ár <i>magyarázatát</i> viszi, a pénzoldal marad a „mennyi nálad, Budapesten” válasz. A jelenlegi cím („Szemöldök laminálás ára 2026 &mdash; ennyibe kerül Budapesten”) szó szerint a pénzoldal ígéretét ismétli.</p>
+
+        <h4>b) A pénzoldal kap explicit ár-szekciót</h4>
+        <p class="note-p">Ma a <span class="mono">/szemoldok-laminalas-zuglo/</span> egyetlen H2-je sem tartalmazza az „ár” szót, pedig 166 megjelenése jön ár-lekérdezésekből. Az ár a hero-bekezdésben ott van &mdash; de a H2-sor az, amit a Google a szakasz-egyezéshez olvas.</p>
+        <div class="paste"><div class="paste-head"><span class="lbl">új H2 + az alatta lévő bekezdés</span><button class="copy">Másolás</button></div><div class="paste-body">Mennyibe kerül a szemöldök laminálás Budapesten? — 11 000 Ft, tételesen
+
+Egy ár van, felár nincs. A 11 000 Ft-ban benne van a konzultáció, a formázás, a laminálás és a festés — összesen körülbelül 60 perc. Ami nincs benne: semmi. Ha a szemöldököd nagyon ritka, és a laminálás mellé hennát is szeretnél, azt még azelőtt megmondom, hogy hozzákezdenék — nem a végén derül ki.</div></div>
+
+        <h4>c) A blogcikk belső linkje a pénzoldalra &mdash; pontos anchorral</h4>
+        <div class="paste"><div class="paste-head"><span class="lbl">anchor szöveg &middot; a cikk törzsében, nem a végén</span><button class="copy">Másolás</button></div><div class="paste-body">szemöldök laminálás Budapesten — nálam 11 000 Ft, Zuglóban</div></div>
+
+        <div class="callout">
+          <p><b>Amit szándékosan NEM javaslok:</b> a kezdőlap gyengítését. A „szemöldök laminálás” fej-kulcsszóra a kezdőlap jelenik meg (9,3. pozíció, 0 kattintás), és korábban már volt kísérlet arra, hogy a szolgáltatás-kártya H3-jával át legyen adva a pénzoldalnak &mdash; nem működött. Ugyanazt a beavatkozást másodszor nem futtatjuk le. Az a), b) és c) pont a pénzoldal relevanciáját emeli, ami közvetve is ugyanoda hat, kockázat nélkül.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="move">
+      <div class="move-head">
+        <div class="move-meta"><span class="tag">03</span><span class="tag">~3 óra munka</span><span class="tag gain">becsült +8&ndash;14 katt/hó</span><span class="tag risk">1 kockázatos elem</span></div>
+        <h3>A koreai klaszter &mdash; a legnagyobb eszközöd, és a legvékonyabb oldalad</h3>
+        <p class="note-p">A „koreai” lekérdezés-csoport <b>384 megjelenést</b> hozott 28 nap alatt (316 + 34 + 24 + 10), és a nulláról nőtt ide. Ez az oldal legerősebb új eszköze &mdash; és a cikk, ami viszi, <b>472 szó</b>. A legtöbb megjelenést hozó blogoldalad a legvékonyabb.</p>
+      </div>
+      <div class="move-body">
+        <h4>a) A cikk mélyítése &mdash; négy új H2, mindegyik egy meg nem válaszolt kérdésre</h4>
+        <div class="paste"><div class="paste-head"><span class="lbl">H2-sor, ebben a sorrendben, a meglévők után</span><button class="copy">Másolás</button></div><div class="paste-body code">Mennyibe kerül a koreai szempilla lifting Budapesten?
+   -> Konkrét ár, mi van benne, mi nincs. Ma ez a kérdés
+      sehol nincs megválaszolva a cikkben.
+
+Kinek nem ajánlom
+   -> A ritka és a legerősebb tartalomfajta: amit NEM vállalsz,
+      és miért.
+
+Amit a harmadik héten látok — 200+ kezelés tapasztalatából
+   -> Saját megfigyelés, ami sehol máshol nincs meg. Ez teszi
+      az oldalt eredeti forrássá.
+
+Koreai lifting vagy műszempilla — ha most kellene választanod
+   -> Döntési tábla, nem esszé. Négy sor: ápolás, tartósság,
+      hatás, ár.</div></div>
+
+        <h4>b) A „Kinek nem ajánlom” szakasz &mdash; kész szöveg</h4>
+        <p class="note-p">Ez az a bekezdés, ami csak tőled jöhet. A Google minőségértékelői kézikönyve kifejezetten az <i>erőfeszítést, eredetiséget és szakértelmet</i> keresi &mdash; és semmi nem bizonyítja jobban a szakértelmet, mint az, ha valaki nemet mond egy fizető vendégnek. Írd át a saját tapasztalatodra, ahol az eltér &mdash; a szerkezet a lényeg.</p>
+        <div class="paste"><div class="paste-head"><span class="lbl">bekezdés &middot; a cikk törzsébe</span><button class="copy">Másolás</button></div><div class="paste-body">Kinek nem ajánlom
+
+Nem mindenkinek csinálom meg, és ezt inkább előre megmondom, mint utólag. Ha a pilláid nagyon rövidek — nagyjából 4 milliméter alatt —, a liftingnek nincs mibe kapaszkodnia: az ív nem látszik meg rajtuk, és 12 000 Ft-ot fizetnél azért, hogy két hét múlva ugyanott legyünk. Ilyenkor inkább a festést javaslom: olcsóbb, és többet ad.
+
+Nem csinálom meg akkor sem, ha három héten belül volt már liftinged máshol. A szálnak kell a szünet, különben töredezik — és az a fajta kár nem múlik el egy hónap alatt.
+
+Szemműtét vagy friss kötőhártya-gyulladás után legalább két hetet várunk. Terhesség alatt megcsinálom, de mindig elmondom előre: a hormonok miatt előfordul, hogy nem tart ki a szokásos 6–8 hetet, és nem szeretném, ha ez csalódásként érne.
+
+És van egy eset, amikor egyszerűen nem éri meg: ha holnap van az esküvőd. A lifting az első 24 órában dől el. Ha a ceremónia előtti napon ülsz be hozzám, nem tudom garantálni, hogy reggelre pont úgy áll, ahogy elképzelted. Az esküvő előtt 5–10 nappal a jó időpont.</div></div>
+
+        <h4>c) A pénzoldal H1-je kapja meg a „koreai” szót &mdash; alacsony kockázat</h4>
+        <div class="paste"><div class="paste-head"><span class="lbl">H1 &middot; /szempilla-lifting-zuglo/</span><button class="copy">Másolás</button></div><div class="paste-body">Szempilla lifting Budapesten — koreai technikával, ragasztó nélkül.</div></div>
+        <p class="note-p"><b>Kockázat és visszalépés:</b> a <span class="mono">title</span>-höz <b>ne</b> nyúlj. Ez az oldal ma 5,0%-os CTR-rel a legjobban teljesítő oldalad &mdash; a címét megváltoztatni nyereséghajszolás ott, ahol már nyersz. A H1 nem a találati szöveg, tehát a snippet nem változik tőle. Ha 4 hét múlva a <span class="q">koreai szempilla lifting budapest</span> lekérdezésen a pénzoldal nem vette át a blogtól a megjelenéseket, hagyd így és lépj tovább &mdash; ne kezdj el címet cserélgetni.</p>
+      </div>
+    </div>
+
+    <div class="move">
+      <div class="move-head">
+        <div class="move-meta"><span class="tag">04</span><span class="tag">~1 óra munka</span><span class="tag gain">a lokális megjelenés gyártása</span></div>
+        <h3>Megközelítés-blokk mind a négy pénzoldalra</h3>
+        <p class="note-p">Az adatban ott van, hogy az emberek <b>kerület szerint</b> keresnek: „szemöldök 14 kerület” (3,7. pozíció), „szempilla 14 kerület”, „smink 14 kerület”, „szemöldök 10 kerület”, „szemöldök 20 kerület”. Kis számok külön-külön &mdash; de ez az egyetlen szegmens, ahol <b>minden kattintás foglalható ember</b>. Nem kerület-oldalakat javaslok: az kapuoldal lenne, és szétverné a mért, ma 100%-os fókuszt. Egy szekciót javaslok, négy meglévő oldalon.</p>
+      </div>
+      <div class="move-body">
+        <div class="paste"><div class="paste-head"><span class="lbl">szekció &middot; minden pénzoldal aljára, a GYIK fölé</span><button class="copy">Másolás</button></div><div class="paste-body">Hogyan jutsz el hozzám
+
+Egressy út 16., Zuglóban, a XIV. kerületben. Örs vezér tere felől az M2-vel és a 77-es trolival 18 perc, a 32-es busszal és ugyanazzal a trolival 21. Jár erre az 1-es villamos és a 75-ös troli is, tehát a Hungária körút és a Kerepesi út felől is egyszerű. Az utcában délelőtt jellemzően van parkolóhely.
+
+Ha nem ismered a környéket, foglaláskor írd meg, honnan indulsz, és megírom a legrövidebb utat.</div></div>
+        <p class="note-p">A járatszámokat és a menetidőket <b>a Google saját útvonaltervezőjével ellenőriztem 2026-08-29-én</b> &mdash; az első változatban 3-as metrót írtam, ami téves volt (a vonal az <b>M2</b>). A parkolásra vonatkozó mondatot te tudod &mdash; ha nem igaz, húzd ki. Pontosan ez a fajta konkrétum az, amit egy minőségértékelő keres, amikor azt kérdezi, hogy az oldal <i>csinál-e valamit</i> a látogatóért.</p>
+      </div>
+    </div>
+
+    <div class="move">
+      <div class="move-head">
+        <div class="move-meta"><span class="tag">05</span><span class="tag">1&ndash;2 nap fejlesztés</span><span class="tag gain">a hiányzó 6 pont + az első linkek</span></div>
+        <h3>Az eszköz: esküvői szépségnaptár</h3>
+        <p class="note-p">Az oldalon ma <b>nincs egyetlen működő eszköz sem</b> &mdash; csak szöveg, kép és videó. A Google minőségértékelői kézikönyve szó szerint utasítja a bírálót, hogy <i>használja</i> a kalkulátort, ha van. Ez a pontozó legnagyobb egyben megszerezhető hiánya (B2: ma 4/10), és egyben az egyetlen olyan dolog, amire egy esküvői blognak <b>oka</b> lenne hivatkozni.</p>
+      </div>
+      <div class="move-body">
+        <h4>Specifikáció</h4>
+        <div class="paste"><div class="paste-head"><span class="lbl">eszköz-spec &middot; /eskuvoi-szepsegnaptar/</span><button class="copy">Másolás</button></div><div class="paste-body code">BEMENET   1 mező: az esküvő dátuma (dátumválasztó)
+          + jelölőnégyzetek: menyasszonyi smink / szemöldök
+            laminálás / szempilla lifting / arckezelés-kúra
+
+KIMENET   Dátumozott ütemterv, azonnal, e-mail-cím kérése NÉLKÜL.
+          A dátumok a valós tartósságokból számolódnak:
+
+          esküvő -8 hét   arckezelés-kúra 1. alkalom (3 kezelés kell)
+          esküvő -4 hét   arckezelés-kúra 2. alkalom
+          esküvő -3 hét   próbasmink   (maradjon idő javítani)
+          esküvő -10 nap  szemöldök laminálás
+                          (6 hét tartósság; nem előbb: elkopik,
+                           nem később: nem ül le)
+          esküvő -7 nap   szempilla lifting (6-8 hét tartósság)
+          esküvő -2 nap   arckezelés-kúra 3. alkalom
+          esküvő napja    menyasszonyi smink
+
+          Minden sor alatt EGY mondat, hogy MIÉRT pont akkor.
+          A lista végén: "Foglalás erre a napra ->" gomb tételenként.
+
+ADATFORRÁS A saját tartósság-adataid. Ezek már ki vannak írva az
+          oldalon (6 hét szemöldök, 6-8 hét pilla), tehát nem kell
+          hozzá új tudás — csak össze kell rakni.
+
+TILOS     E-mail-fal. Ha az eredmény cím mögé kerül, a bíráló
+          átverésként látja, a látogató visszaugrik — és a mérés
+          jó marad, miközben rossz jelet gyártasz. Az eredmény
+          jöjjön azonnal; a mentés UTÁNA legyen felajánlva.</div></div>
+        <p class="note-p">Miért pont ez: az esküvői ág a legmagasabb jegyértéked (30 000 &ndash; 51 000 Ft), a menyasszony <b>tényleg</b> nem tudja, mikor mit kell csináltatnia, és ez az a fajta oldal, amit egy esküvőszervező szívesebben linkel, mint ír. Ma <b>nulla</b> olyan dolog van a site-on, amire linkelni okuk lenne &mdash; ez lenne az első.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">07 &mdash; Pontszám</span>
+      <h2>75,5 / 100</h2>
+      <p>A pontozás a <span class="mono">/szemoldok-laminalas-zuglo/</span> oldalra vonatkozik, cél-lekérdezés: <span class="q">szemöldök laminálás budapest</span>. A böngésző-hozzáférés után <b>mind a 100 pont mérhetővé vált</b> &mdash; a Cégprofil, a katalógusok és a találati listák is ellenőrizve. Becsült pontok aránya: 0%.</p>
+    </div>
+    <div class="score-grid">
+      <div>
+        <span class="eyebrow">Oldal-pontszám</span>
+        <div style="margin-top:14px">
+          <div class="axis"><span class="an">A &mdash; Needs Met</span><span class="av">21/25</span><span class="note"><span class="ev ev-o">megfigyelt</span> Highly Meets. A domináns értelmezésre (mi ez, hol, mennyi) az első képernyőn megvan a válasz; a kisebb értelmezésre (meddig tart, miben más a microbladingnél) is van szakasz. Nem 24, mert arra, hogy „mikor tudok bejönni”, csak külső rendszer válaszol.</span></div>
+          <div class="axis"><span class="an">B1 &mdash; Eredetiség</span><span class="av">10/15</span><span class="note"><span class="ev ev-o">megfigyelt</span> Valós ár + valós folyamat + saját videó + saját fotók. Nincs saját mérés és nincs konkrét eset kimenetellel &mdash; ez tartja 13 alatt.</span></div>
+          <div class="axis"><span class="an">B2 &mdash; Erőfeszítés / funkció</span><span class="av">4/10</span><span class="note"><span class="ev ev-o">megfigyelt</span> Saját média van, működő eszköz nincs. <b>Ez a legnagyobb egyben megszerezhető hiány.</b></span></div>
+          <div class="axis"><span class="an">C &mdash; Az ígéret teljesítése</span><span class="av">19/20</span><span class="note"><span class="ev ev-o">megfigyelt</span> A cím 11 000 Ft-ot ígér; az első 60 szóban ott az ár, az idő és a tartósság. Ez az oldal legerősebb tengelye.</span></div>
+          <div class="axis"><span class="an">D &mdash; Technikai egészség</span><span class="av">13/15</span><span class="note"><span class="ev ev-m">mért</span> JSON-LD teljes, 33 belső link releváns anchorral, mobil valóság ellenőrizve, canonical rendben. Levonás: a kép- és videó-láthatóság gyakorlatilag nulla.</span></div>
+          <div class="axis"><span class="an">E1 &mdash; NAP-azonosság</span><span class="av">6,5/8</span><span class="note"><span class="ev ev-m">mért</span> Öt felület karakterre azonos: <b>Cégprofil</b> (a mester), weboldal, JSON-LD, Cylex/Nyitva.hu, Notino &mdash; <span class="mono">FRUBEAUTY &ndash; Pecze-Kovács Fruzsina Kozmetikus</span> &middot; <span class="mono">1143 Budapest, Egressy út 16.</span> &middot; <span class="mono">+36 70 215 9954</span>. Egyetlen ellentmondó felület: a <b>Facebook-oldal 1149-es irányítószámmal</b>, házszám nélkül &mdash; de a Google épület-rekordja is 1149-et ad, tehát a cím maga kétértelmű, nem a Facebook téved biztosan.</span></div>
+          <div class="axis"><span class="an">E2 &mdash; Off-site reputáció</span><span class="av">2/7</span><span class="note"><span class="ev ev-m">mért</span> A <span class="mono">-site:</span> keresés első képernyője: Instagram és Facebook (sajátok), Cylex, Nyitva.hu és Arany Vállalkozás (katalógus-önregisztrációk, mind Cylex-motoros), plusz a Notino szalon-profil. <b>Nulla független szerkesztői említés.</b> Ez nem negatív ítélet &mdash; a kézikönyv kimondja, hogy kis cégnek lehet kevés vagy semennyi reputációs jele, és ez sem magas, sem alacsony minőséget nem jelez.</span></div>
+        </div>
+        <div class="bar"><i style="width:75.5%"></i></div>
+        <p class="mono" style="margin-top:10px;font-size:.86rem;color:var(--ink-2)">75,5 / 100 &rarr; a „Versenyképes” sáv alja. Nyerhető pozíció.</p>
+      </div>
+
+      <div>
+        <span class="eyebrow">Domain-pontszám</span>
+        <div style="margin-top:14px">
+          <div class="axis"><span class="an">S1 &mdash; Fókusz</span><span class="av">27/30</span><span class="note"><span class="ev ev-m">mért</span> 24/24 oldal a mag-témán belül, a kirajzolódó téma megegyezik a kimondottal. <b>Nincs metszendő oldal.</b> Két gyengébben illeszkedő arckezelés-cikk lóg ki, de az valós szolgáltatási ág.</span></div>
+          <div class="axis"><span class="an">S2 &mdash; Halmozódás</span><span class="av">3/30</span><span class="note"><span class="ev ev-m">mért</span> Nulla dofollow backlink (Ahrefs, 2026-07-31), nincs idézhető eszköz, nincs publikált saját adat. <b>Ez a domain leggyengébb tengelye, és messze a legnagyobb rés.</b></span></div>
+          <div class="axis"><span class="an">S3 &mdash; Entitás-konzisztencia</span><span class="av">12/20</span><span class="note"><span class="ev ev-m">mért</span> Két ellentmondó felület, egyenként &minus;4: az <b>eltérő irányítószám a Facebookon</b> (1149 vs. a másik öt felület 1143-a, házszám nélkül), és a <b>két párhuzamos Facebook-identitás</b> ugyanarra a személyre. Mindkettő rendezhető, együtt fél óra.</span></div>
+          <div class="axis"><span class="an">S4 &mdash; Üzem</span><span class="av">10/20</span><span class="note"><span class="ev ev-m">mért</span> Oldal-ellenőrző: fut, dokumentáltan (5/5). <b>Vélemény-válasz: fut</b> &mdash; a Cégprofilon minden megnézett véleményre ment tulajdonosi válasz (5/5). Citációk: van lista, de nincs élő ellenőrzés dofollow/nofollow jelöléssel. Tartalom-feed: nem látok rendszeres, szűrt Cégprofil-posztolást.</span></div>
+        </div>
+        <div class="callout" style="margin-top:22px">
+          <p><b>A pontszám teljes haszna egy mondatban:</b> az oldal versenyképes (75,5), és a hiányzó 24,5 pont kétharmada <b>nem az oldalon van</b> &mdash; a hiányzó eszköz (B2: 4/10) és a hiányzó reputáció (E2: 2/7). Domain-szinten a fókusz kiváló (27/30), a halmozódás viszont gyakorlatilag nulla (3/30). Vagyis: az on-page munkából már majdnem minden meg van csinálva, amit érdemes &mdash; ami hátravan, az oldalon kívül van.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">08 &mdash; Amiről nem szívesen beszélünk</span>
+      <h2>Lehet, hogy nem a láthatóság a szűk keresztmetszet</h2>
+    </div>
+    <div class="body-stack">
+      <p>Ha a 02&ndash;05. beavatkozás jól sikerül, a becslésem <b>+20 &ndash; 40 kattintás havonta</b>. Ez a jelenlegi 142-höz mérve komoly szám &mdash; de tegyük mellé a valóságot: <b>ez a weboldal organikus csatornájának a plafonja</b> a mai megjelenés-számmal. A 4 459 megjelenésből néhány százat lehet még kattintássá alakítani, a többi országos szándék.</p>
+      <p>És most a kellemetlen rész, amit a Search Console nem mutat, mert nem is tud róla. <b>Hét élő térképcsomagból ötben bent vagy, egyben első.</b> A Cégprofilod tiszta: helyes cím, helyes telefonszám, bekötött Notino-foglalás, 5,0 átlag 62 véleménnyel, minden véleményre megy tulajdonosi válasz. A szolgáltatás-címkék működnek, a kategória rendben van.</p>
+      <p>Vagyis: a láthatóság <b>ott, ahol a foglalható vendég keres, már most jó</b>. Ha ennek ellenére kevés a foglalás, akkor a szűk keresztmetszet nagy valószínűséggel <b>nem a láthatóság</b>, hanem az alatta lévő három dolog egyike &mdash; és ezekből egyet sem tudtam megmérni ebben a futásban:</p>
+      <ul class="tight">
+        <li><b>A kereslet mérete a vonzáskörzetben.</b> A magyar keresési volumen ezekre a szolgáltatásokra kicsi. Lehet, hogy a zuglói szemöldök-laminálás iránti havi keresés egyszerűen kevesebb, mint amennyi időpontod van.</li>
+        <li><b>A konverzió a kattintás után.</b> Nem tudom, a 142 kattintásból hány jut el a Notino-foglalásig, és hány esik ki a külső rendszerbe átlépéskor. Erre indult egy külön elemzés, de a munkamenet-limit leállította.</li>
+        <li><b>A kapacitás.</b> Egyedül dolgozol, egy vendéggel egyszerre. Ha a naptár amúgy is tele van csúcsidőben, akkor a láthatóság-növelés nem foglalást hoz, hanem elutasított érdeklődőt.</li>
+      </ul>
+      <div class="callout">
+        <p><b>Egyetlen kérdés, ami eldönti, mit érdemes legközelebb csinálni:</b> az elmúlt hónapban hány olyan érdeklődő volt, akinek <b>nem tudtál</b> időpontot adni két héten belül?</p>
+        <p>Ha a válasz nulla vagy egy-kettő, akkor a láthatóság a szűk keresztmetszet, és a fenti terv a helyes sorrend. Ha öt fölött van, akkor <b>ne rangsort optimalizálj</b> &mdash; áremelés, csomag-átrendezés vagy hosszabb nyitvatartás hoz több pénzt, mint bármelyik SEO-lépés ebben a riportban.</p>
+      </div>
+      <p><b>A weboldal egyetlen valóban hiányzó darabja</b> ettől függetlenül igaz marad: <b>nulla dofollow backlinked van</b> (Ahrefs, 2026-07-31), és nincs semmi az oldalon, amire linkelni oka lenne bárkinek. Az esküvői szépségnaptár (05. beavatkozás) ezt oldaná meg &mdash; enélkül minden linkkérés szívességkérés.</p>
+
+      <h3 style="margin-top:12px">Kész outreach levél &mdash; az eszköz elkészülte UTÁN küldd</h3>
+      <p class="note-p">Címzett-kritérium: budapesti esküvői szolgáltató, akinek az oldalán <b>már van</b> ajánlott-partner vagy hasznos-linkek szekció, és aki nem sminkes (tehát nem versenytárs) &mdash; fotós, esküvőszervező, ruhaszalon, helyszín. Tíz ilyen, nem száz. A levelet én írtam, de <b>te küldd el</b>, és a nevet mindig írd át.</p>
+      <div class="paste"><div class="paste-head"><span class="lbl">e-mail &middot; tárgy + törzs</span><button class="copy">Másolás</button></div><div class="paste-body">Tárgy: készítettem egy visszaszámlálót a menyasszonyaidnak
+
+Szia [Név]!
+
+Fruzsina vagyok, zuglói kozmetikus — esküvői sminket és szemöldök-, szempilla-kezeléseket csinálok. A [konkrét dolog az oldalukról, egy mondat] miatt kerültetek a látókörömbe.
+
+Az elmúlt évben a menyasszonyaim ugyanazt kérdezték minden alkalommal: mikor kell csináltatni a szemöldököt, hogy az esküvő napjára pont üljön? Nem tudtam rá jó linket adni, ezért megcsináltam:
+
+[link]
+
+Beírod az esküvő dátumát, és kiadja, melyik kezelést mikor kell időzíteni — a valós tartósságokból számolva, nem tippre. Regisztráció nincs, e-mail-cím nem kell hozzá, az eredmény azonnal jön.
+
+Ha hasznosnak találod, tedd ki a [hasznos linkek / ajánlott partnerek] szekciótokba. Ha nem, az is teljesen rendben — akkor is örülök, ha egyszer összefutunk egy közös esküvőn.
+
+Fruzsina
+FRUBEAUTY · Egressy út 16., Budapest XIV.
++36 70 215 9954</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">09 &mdash; Hatókör</span>
+      <h2>Amit nem néztem meg, és miért</h2>
+      <p>A nem mért tengely nem közepes pont, hanem <span class="mono">n/a</span>. Itt van, mi maradt ki.</p>
+    </div>
+    <ul class="tight">
+      <li style="list-style:none;margin-left:-1.15em"><span class="ev ev-m">pótolva</span> &nbsp;A találati listák, a <span class="mono">-site:</span> reputációkeresés és a Cégprofil élő állapota <b>utólag mind ellenőrizve lett</b>, miután a Chrome-bővítmény csatlakozott &mdash; ezek eredménye a 05. és a 07. szakaszban van. Ezzel a pontozás 100%-ban mérhetővé vált. Az alábbiak maradtak nyitva.</li>
+      <li><b>A Cégprofil belső felülete</b> (statisztika, szolgáltatás-szerkesztő, poszt-előzmények). Kívülről, a találati listákból következtettem a szolgáltatás-címkékre &mdash; az látszik, hogy működnek, de a teljes beállítás-listát nem láttam.</li>
+      <li><b>A GA4 konverziós adat.</b> Nem tudom, a 142 kattintásból hány lett Notino-kattintás, tehát a kattintás&rarr;foglalás arányt nem tudom számolni. A mérőkódhoz elvből nem nyúlok. Ha megnyitod a GA4-et, a következő futásban ez a legfontosabb hiányzó szám.</li>
+      <li><b>A konverziós út (a foglalásig vezető kattintások).</b> Külön agent futott rá, de a munkamenet-limit miatt leállt, mielőtt eredményt adott volna. Ez a riport tehát a <i>láthatóságról</i> szól, nem arról, mi történik a kattintás után.</li>
+      <li><b>Manuális műveletek (manual actions).</b> Nincs rájuk nyilvános API, csak a Search Console felületén látszanak. Az adat mintázata (növekvő megjelenés, stabil pozíció) nem utal büntetésre, de ezt nem tudtam ellenőrizni.</li>
+      <li><b>Sebesség / Core Web Vitals.</b> Szándékosan hagytam ki: nincs elég forgalom CrUX-adathoz, tehát a mezei-adat alapú Page Experience jelzés nem áll rendelkezésre, és a további sebesség-csiszolásnak ma nincs mérhető rangsor-hozama.</li>
+    </ul>
+  </section>
+
+</div>
+
+<footer class="wrap">
+  <p>Forrás: Google Search Console API (Search Analytics + URL Inspection), 2026-07-29 &ndash; 2026-08-25 &middot; élő HTML-lekérések a frubeauty.com-ról &middot; mért fókusz-elemzés a build kimenetén &middot; Ahrefs backlink-audit, 2026-07-31.</p>
+  <p style="margin-top:10px">Bizonyítási szintek: <span class="ev ev-m">mért</span> eszközből vagy API-ból &middot; <span class="ev ev-o">megfigyelt</span> saját szemmel az élő oldalon &middot; <span class="ev ev-b">becsült</span> következtetés. A kattintás-becslések tartományok, nem ígéretek.</p>
+</footer>
+
+<script>
+document.querySelectorAll('button.copy').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var body=btn.closest('.paste').querySelector('.paste-body');
+    var txt=body.innerText;
+    var done=function(){var o=btn.textContent;btn.textContent='Másolva';setTimeout(function(){btn.textContent=o;},1400);};
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done,function(){fallbackCopy(txt,done);});
+    }else{fallbackCopy(txt,done);}
+  });
+});
+function fallbackCopy(txt,done){
+  try{
+    var ta=document.createElement('textarea');
+    ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();document.execCommand('copy');
+    document.body.removeChild(ta);done();
+  }catch(e){}
+}
+</script>

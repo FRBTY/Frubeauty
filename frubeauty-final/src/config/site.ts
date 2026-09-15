@@ -44,13 +44,13 @@ export const businessIdentity = {
   secondaryCategory: 'Szépségszalon',
   /** ~90 karakter — rövid katalógus-mezőkhöz, meta-jellegű helyekre. */
   descriptionShort:
-    'Kozmetikus Zuglóban: Janssen arckezelés, szempilla lifting, szemöldök laminálás, smink.',
+    'Kozmetikus Zuglóban: lézeres szőrtelenítés, Janssen arckezelés, szempilla és szemöldök, smink.',
   /** ~250 karakter — a legtöbb katalógus fő leírásmezője és a JSON-LD `description`. */
   descriptionMedium:
-    'A FRUBEAUTY Pecze-Kovács Fruzsina egyszemélyes kozmetikai szalonja Budapest XIV. kerületében, az Egressy úton. Janssen Cosmetics arckezelések, koreai technikás szempilla lifting és szemöldök laminálás, valamint esküvői és alkalmi smink. Egyszerre egy vendég, teljes figyelemmel.',
+    'A FRUBEAUTY Pecze-Kovács Fruzsina egyszemélyes kozmetikája Budapest XIV. kerületében, az Egressy úton. Dióda lézeres szőrtelenítés, Janssen arckezelés, koreai technikás szempilla lifting és szemöldök laminálás, esküvői és alkalmi smink. Egyszerre egy vendég.',
   /** ~600 karakter — részletes profilokhoz, ahol van hely kifejteni. */
   descriptionLong:
-    'A FRUBEAUTY Pecze-Kovács Fruzsina kozmetikus egyszemélyes szalonja Budapest XIV. kerületében, Zuglóban, az Egressy út 16. szám alatt. Az arckezelések kizárólag Janssen Cosmetics professzionális hatóanyagaival készülnek, minden alkalom bőranalízissel indul — mélytisztító, hidratáló és anti-aging protokollokkal. A szemkezelések koreai technikával: a szempilla lifting festéssel 12.000 Ft és 6–8 hétig tart, a szemöldök laminálás formázással és festéssel 11.000 Ft, tű és tetoválás nélkül. Emellett menyasszonyi próbasmink, esküvői és alkalmi smink, kiszállással. Egyszerre csak egy vendég, így nincs kapkodás.',
+    'A FRUBEAUTY Pecze-Kovács Fruzsina kozmetikus egyszemélyes szalonja Budapest XIV. kerületében, Zuglóban, az Egressy út 16. szám alatt. Soprano Titanium dióda lézeres szőrtelenítés három hullámhosszon, hat-nyolc alkalmas sorozatban, 11.000 Ft-tól alkalmanként. Az arckezelések Janssen Cosmetics hatóanyagaival, bőranalízissel indulnak — mélytisztító, hidratáló és anti-aging kezelésekkel. A szemkezelések koreai technikával: szempilla lifting festéssel 12.000 Ft, szemöldök laminálás festéssel 11.000 Ft, tű és tetoválás nélkül. Esküvői smink próbasminkkel, alkalmi smink, kiszállással. Egyszerre csak egy vendég, így nincs kapkodás.',
 } as const;
 
 /**
@@ -79,11 +79,11 @@ export function relFor(href: string): string {
 }
 
 export const openingHours = [
-  { day: 'Hétfő',     hours: '08:30 – 19:30' },
-  { day: 'Kedd',      hours: '08:30 – 19:30' },
-  { day: 'Szerda',    hours: '08:30 – 19:30' },
-  { day: 'Csütörtök', hours: '08:30 – 19:30' },
-  { day: 'Péntek',    hours: '08:30 – 19:30' },
+  { day: 'Hétfő',     hours: '08:00 – 19:00' },
+  { day: 'Kedd',      hours: '08:00 – 19:00' },
+  { day: 'Szerda',    hours: '08:00 – 19:00' },
+  { day: 'Csütörtök', hours: '08:00 – 19:00' },
+  { day: 'Péntek',    hours: '08:00 – 19:00' },
   { day: 'Szombat',   hours: '08:00 – 13:00' },
   { day: 'Vasárnap',  hours: 'Zárva' },
 ] as const;
@@ -95,8 +95,8 @@ export const openingHours = [
 export const openingHoursSchema = [
   {
     dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-    opens: '08:30',
-    closes: '19:30',
+    opens: '08:00',
+    closes: '19:00',
   },
   {
     dayOfWeek: ['Saturday'],

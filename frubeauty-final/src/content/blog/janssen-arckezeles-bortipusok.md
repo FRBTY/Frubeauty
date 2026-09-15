@@ -13,7 +13,7 @@ metaTitle: "Janssen arckezelés bőrtípusonként | FRUBEAUTY"
 metaDescription: "Melyik Janssen arckezelés való a bőrödnek? Hat célzott protokoll kombinált, zsíros, érzékeny, érett, vízhiányos és tini bőrre — árakkal, Zuglóból."
 ---
 
-A legnagyobb hiba, amit elkövethetsz, ha egy sablonos „tisztító arckezelésre” fizetsz be, ahol ugyanazt a krémet kenik rád, mint az előtted lévő öt vendégre. **A bőröd nem sablon alapján működik.** A zuglói stúdiómban hat célzott Janssen Cosmetics kabinprotokollal dolgozom — bőranalízis dönti el, melyik a tiéd.
+**A bőröd nem sablon alapján működik.** Ami az egyik arcon mélytisztítást kíván, a másikon éppen nyugtatást — és ugyanaz a bőr fél év múlva megint mást. A zuglói stúdiómban ezért hat célzott Janssen Cosmetics kabinprotokollal dolgozom, és bőranalízis dönti el, melyik a tiéd.
 
 Ez nem wellness-kényeztetés, hanem hatóanyag-központú bőrkorrekció: a német Janssen a kozmetikum és a dermatológia határán mozgó, úgynevezett cosmeceutical kategória egyik legkomolyabb márkája. Nézzük végig bőrtípusonként, melyik protokoll mit old meg — és mennyibe kerül.
 

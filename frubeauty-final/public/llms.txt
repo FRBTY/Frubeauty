@@ -23,33 +23,50 @@ minden katalógus-listázás ugyanezt a szöveget használja, karakterre azonosa
   esküvői sminkhez kiszállással
 
 ## Nyitvatartás
-- Hétfő–Péntek: 08:30–19:30
+- Hétfő–Péntek: 08:00–19:00
 - Szombat: 08:00–13:00
 - Vasárnap: zárva
 
 ## Leírás — rövid (≈90 karakter)
-Kozmetikus Zuglóban: Janssen arckezelés, szempilla lifting, szemöldök laminálás, smink.
+Kozmetikus Zuglóban: lézeres szőrtelenítés, Janssen arckezelés, szempilla és szemöldök, smink.
 
 ## Leírás — közepes (≈250 karakter)
-A FRUBEAUTY Pecze-Kovács Fruzsina egyszemélyes kozmetikai szalonja Budapest XIV.
-kerületében, az Egressy úton. Janssen Cosmetics arckezelések, koreai technikás
-szempilla lifting és szemöldök laminálás, valamint esküvői és alkalmi smink.
-Egyszerre egy vendég, teljes figyelemmel.
+A FRUBEAUTY Pecze-Kovács Fruzsina egyszemélyes kozmetikája Budapest XIV.
+kerületében, az Egressy úton. Dióda lézeres szőrtelenítés, Janssen arckezelés,
+koreai technikás szempilla lifting és szemöldök laminálás, esküvői és alkalmi
+smink. Egyszerre egy vendég.
 
 ## Leírás — hosszú (≈600 karakter)
 A FRUBEAUTY Pecze-Kovács Fruzsina kozmetikus egyszemélyes szalonja Budapest XIV.
-kerületében, Zuglóban, az Egressy út 16. szám alatt. Az arckezelések kizárólag
-Janssen Cosmetics professzionális hatóanyagaival készülnek, minden alkalom
-bőranalízissel indul — mélytisztító, hidratáló és anti-aging protokollokkal.
-A szemkezelések koreai technikával: a szempilla lifting festéssel 12.000 Ft és
-6–8 hétig tart, a szemöldök laminálás formázással és festéssel 11.000 Ft, tű és
-tetoválás nélkül. Emellett menyasszonyi próbasmink, esküvői és alkalmi smink,
-kiszállással. Egyszerre csak egy vendég, így nincs kapkodás.
+kerületében, Zuglóban, az Egressy út 16. szám alatt. Soprano Titanium dióda
+lézeres szőrtelenítés három hullámhosszon, hat-nyolc alkalmas sorozatban,
+11.000 Ft-tól alkalmanként. Az arckezelések Janssen Cosmetics hatóanyagaival,
+bőranalízissel indulnak — mélytisztító, hidratáló és anti-aging kezelésekkel.
+A szemkezelések koreai technikával: szempilla lifting festéssel 12.000 Ft,
+szemöldök laminálás festéssel 11.000 Ft, tű és tetoválás nélkül. Esküvői smink
+próbasminkkel, alkalmi smink, kiszállással. Egyszerre csak egy vendég, így
+nincs kapkodás.
 
 ## Szolgáltatások és árak
 
+### [Lézeres szőrtelenítés](https://frubeauty.com/lezeres-szortelenites-budapest/)
+Soprano Titanium dióda lézer, három hullámhosszon egyszerre (755, 808 és 1064 nm).
+Hat-nyolc alkalom, 4–6 hetente. Az árak a hat alkalmas sorozat alkalmankénti
+díjai, a helyszínen fizetve — a sorozatot nem kell előre kifizetni.
+Kizárólag női vendégek; teljes intim kezelés nincs, bikinivonal igen.
+
+- XS zóna (felső ajak · áll · szemöldök köze · fülkagyló · kézfej · lábfej · köldökvonal · mellbimbó udvara): 7 000 Ft · 10–15 perc · hat alkalom 42 000 Ft
+- S zóna (hónalj · bikinivonal · tarkó · nyak · arc oldala): 11 000 Ft · 15–20 perc · hat alkalom 66 000 Ft
+- M zóna (alkar · felkar · váll · has · derék · popsi · teljes arc): 16 000 Ft · 25–30 perc · hat alkalom 96 000 Ft
+- L zóna (lábszár · comb · teljes hát · teljes mellkas · teljes kar): 23 000 Ft · 35–45 perc · hat alkalom 138 000 Ft
+- XL zóna (teljes láb: comb és lábszár · teljes hát és váll): 33 000 Ft · 55–70 perc · hat alkalom 198 000 Ft
+- Gyakori párosok egy időpontban, alkalmanként: felső ajak + áll 12 000 Ft · hónalj + bikinivonal 18 000 Ft · bikinivonal + lábszár 30 000 Ft · teljes láb + hónalj 40 000 Ft
+- Sima Nyár csomag (hónalj + bikinivonal + lábszár): 37 000 Ft · ~95 perc · hat alkalom 222 000 Ft
+- Tetőtől Talpig csomag (hónalj + bikinivonal + teljes láb + alkar + felső ajak): 63 000 Ft · ~2 óra 45 perc · hat alkalom 378 000 Ft
+- Karbantartó alkalom a sorozat után (évi egy-kettő): hónalj 16 000 Ft · teljes láb 48 000 Ft
+
 ### [Szempilla és szemöldök](https://frubeauty.com/szempilla-lifting-zuglo/)
-- Szempilla lifting + festés: 12 000 Ft · ~90 perc · 6–8 hétig tartós
+- Szempilla lifting + festés: 12 000 Ft · ~75 perc · 6–8 hétig tartós
 - [Szemöldök laminálás + formázás + festés](https://frubeauty.com/szemoldok-laminalas-zuglo/): 11 000 Ft · ~60 perc · ~6 hétig tartós
 - Szemöldök laminálás festés nélkül + formázás: 9 000 Ft · 60 perc
 - Szemöldök- és szempillafestés: 7 000 Ft · 60 perc
@@ -75,7 +92,7 @@ kiszállással. Egyszerre csak egy vendég, így nincs kapkodás.
 - Menyasszonyi próbasmink: 15 000 Ft · 90–120 perc
 - Örömanya smink: 15 000 Ft · 60–75 perc
 - Alkalmi smink: 15 000 Ft · 60–75 perc
-- Sminktanácsadás: 15 000 Ft · 120 perc
+- Sminkoktatás: 20 000 Ft · 120 perc
 - Nappali smink: 13 000 Ft · 45 perc
 
 ### Esküvői csomagok

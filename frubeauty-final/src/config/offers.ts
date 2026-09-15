@@ -11,13 +11,20 @@
  *
  * A `notinoHint` értékei BETŰ SZERINT a Notino szolgáltatás-listájából valók.
  * Ha ott átnevezel egy szolgáltatást, ITT kell átírni — máshol nincs beégetve.
+ *
+ * KIVÉTEL a lézer: ott nincs egyetlen megnevezhető tétel, mert 2026-09-14 óta
+ * minden zóna a SAJÁT nevén szerepel („Hónalj – lézeres szőrtelenítés" stb.), és
+ * a korábbi gyűjtő „Lézeres szőrtelenítés – első alkalom" tétel megszűnt — a
+ * vendég rögtön arra a területre foglal, amit kezeltetni akar. A hint ezért ott
+ * mintát ad, nem pontos tételnevet.
  */
 export type OfferCategory =
   | 'Szempilla'
   | 'Szemöldök'
   | 'Arckezelés'
   | 'Alkalmi smink'
-  | 'Bőrápolás';
+  | 'Bőrápolás'
+  | 'Lézer';
 
 export interface Offer {
   /** A szolgáltatás teljes neve — ez a doboz címe. */
@@ -41,7 +48,7 @@ export const OFFERS = {
     service: 'Szempilla lifting festéssel',
     short: 'Szempilla lifting festéssel',
     price: '12 000 Ft',
-    facts: ['~90 perc', '6–8 hétig tartós', 'ragasztó és műszempilla nélkül'],
+    facts: ['~75 perc', '6–8 hétig tartós', 'ragasztó és műszempilla nélkül'],
     body:
       'Koreai technikával, a saját pilláidból — Zuglóban, az Egressy úton. Egyszerre egy vendég, így nincs kapkodás.',
     href: '/szempilla-lifting-zuglo/',
@@ -91,5 +98,16 @@ export const OFFERS = {
     href: '/sminkes-zuglo/',
     anchor: 'esküvői és alkalmi smink Budapesten',
     notinoHint: 'Alkalmi smink',
+  },
+  'Lézer': {
+    service: 'Lézeres szőrtelenítés',
+    short: 'Lézeres szőrtelenítés',
+    price: '11 000 Ft-tól alkalmanként',
+    facts: ['755 + 808 + 1064 nm', '6–8 alkalom, 4–6 hetente', 'a sorozatot nem kell előre kifizetni'],
+    body:
+      'Soprano Titanium dióda lézer három hullámhosszon, Zuglóban, egyszerre egy vendéggel. A foglalás előtt egy rövid egészségügyi előszűrésen futsz át, az első alkalmon pedig beállítom a bőrtípusodat, és rögtön kezelünk is.',
+    href: '/lezeres-szortelenites-budapest/',
+    anchor: 'lézeres szőrtelenítés Budapesten',
+    notinoHint: 'a kezelendő terület — például „Hónalj – lézeres szőrtelenítés”',
   },
 } satisfies Record<OfferCategory, Offer>;

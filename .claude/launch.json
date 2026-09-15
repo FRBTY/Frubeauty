@@ -4,14 +4,44 @@
     {
       "name": "frubeauty-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "frubeauty-final", "--", "--port", "4328"],
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "frubeauty-final",
+        "--",
+        "--port",
+        "4328"
+      ],
       "port": 4328
     },
     {
       "name": "frubeauty-preview",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "preview", "--prefix", "frubeauty-final", "--", "--port", "4327"],
+      "runtimeArgs": [
+        "run",
+        "preview",
+        "--prefix",
+        "frubeauty-final",
+        "--",
+        "--port",
+        "4327"
+      ],
       "port": 4327
+    },
+    {
+      "name": "lezer-preview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "frubeauty-final",
+        "--",
+        "--port",
+        "4331"
+      ],
+      "port": 4331
     }
   ]
 }

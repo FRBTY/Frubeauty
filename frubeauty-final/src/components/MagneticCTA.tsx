@@ -49,13 +49,20 @@ export function MagneticCTA({
       'border border-cream/30 text-cream hover:bg-cream hover:text-ink active:scale-[0.97]',
   };
 
+  // A fénypászta CSAK foglalás-linken és csak kitöltött gombon indokolt:
+  // a keretes másodlagos gomb nem versenyezhet az elsődlegessel.
+  const shine =
+    /notino\.hu/.test(href) && (variant === 'primary' || variant === 'on-dark-primary')
+      ? ' fb-book'
+      : '';
+
   return (
     <a
       href={href}
       target={external ? '_blank' : undefined}
       rel={external ? relFor(href) : undefined}
       aria-label={ariaLabel}
-      className={`${base} ${variants[variant]} ${className}`}
+      className={`${base} ${variants[variant]}${shine} ${className}`}
     >
       <span className="pointer-events-none">{children}</span>
     </a>
