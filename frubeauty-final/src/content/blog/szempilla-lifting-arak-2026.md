@@ -13,7 +13,7 @@ metaTitle: "Szempilla lifting árak 2026: 12 000 Ft, festéssel együtt"
 metaDescription: "Szempilla lifting árak 2026-ban Zuglóban: 12 000 Ft festéssel együtt, rejtett felár nélkül. Tételes árlista — mit tartalmaz az ár, és mitől függ."
 ---
 
-A szempilla lifting a FRUBEAUTY-nál Zuglóban 2026-ban **12 000 Ft**, és ebben a tartós festés is benne van. A kezelés körülbelül 75 perc, az eredmény 6–8 hétig tart. Ha a szemöldök laminálást is ugyanarra az alkalomra kéred, a kombinált csomag 18 000 Ft — 5 000 forinttal kevesebb, mintha a kettőt külön fizetnéd.
+A szempilla lifting a FRUBEAUTY-nál Zuglóban 2026-ban **12 000 Ft**, és ebben a tartós festés is benne van. A kezelés körülbelül 75 perc, az eredmény 6–8 hétig tart — a részletes leírás és az időpontfoglalás a [szempilla lifting Budapesten](/szempilla-lifting-zuglo/) oldalon van. Ha a szemöldök laminálást is ugyanarra az alkalomra kéred, a kombinált csomag 18 000 Ft — 5 000 forinttal kevesebb, mintha a kettőt külön fizetnéd.
 
 ## Szempilla-árak egy táblázatban
 

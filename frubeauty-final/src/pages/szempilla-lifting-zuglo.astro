@@ -350,6 +350,28 @@ const serviceSchemas = [
     </div>
   </section>
 
+  {/* ── Ár-szekció ──────────────────────────────────────────────────
+       A H2 a PONTOS "szempilla lifting árak" kifejezést viszi. Oka (GSC-audit, 09-15):
+       ezen az oldalon EGYETLEN H2 sem tartalmazta az "ár" szót, miközben a
+       /blog/szempilla-lifting-arak-2026/ 130 megjelenést visz az 5,0. helyen — ez az
+       oldal pedig 20-at a 13,2.-en. Ugyanaz a minta, ami a /sminkes-zuglo/-n már
+       fordítva működik (money page 9,2 vs blog 11,4). Az ár máshol csak a hero-ban,
+       a stat-sávon és a csomagkártyákon volt — szakasz-címben sehol. */}
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Árak · 2026</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Szempilla lifting árak — <em class="display">12 000 Ft</em>, tételesen.</h2>
+        <p class="mt-6 text-creamSoft text-base sm:text-lg leading-[1.75] max-w-[58ch]">
+          A <strong class="text-cream">12 000 Ft</strong>-ban benne van a konzultáció, a lifting koreai technikával és a szempilla festés — összesen körülbelül 75 perc. Felár nincs.
+        </p>
+        <p class="mt-4 text-creamSoft text-base sm:text-lg leading-[1.75] max-w-[58ch]">
+          Ha a szemöldököt is rendezzük ugyanazon az alkalmon, a Teljes Tekintet csomagot választom neked: <strong class="text-cream">18 000 Ft</strong> a külön 23 000 helyett, egy időpontban.
+        </p>
+      </Reveal>
+    </div>
+  </section>
+
   <section id="csomagajanlatok" class="py-20 sm:py-28">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div" className="mb-14 sm:mb-20 max-w-2xl">

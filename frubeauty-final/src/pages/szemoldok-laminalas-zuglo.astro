@@ -467,14 +467,17 @@ const breadcrumbSchema = {
   </section>
 
   {/* ── Ár-szekció ────────────────────────────────────────────────────────────
-       A H2 SZÁNDÉKOSAN tartalmazza az "ár"/"mennyibe kerül" kifejezést: az oldal
-       megjelenéseinek egy jelentős része ár-lekérdezésekből jön, de korábban
-       egyetlen H2 sem tartalmazta a szót — az ár csak a hero-bekezdésben volt.
+       A H2 SZÁNDÉKOSAN tartalmazza a PONTOS "szemöldök laminálás árak" kifejezést,
+       nem csak az "ár" szót. Oka (GSC-audit, 09-15): erre a konkrét lekérdezésre
+       két saját oldal versenyzett egymással — a /blog/szemoldok-laminalas-arak-2026/
+       117 megjelenéssel a 9,9. helyen, EZ az oldal 69 megjelenéssel a 12,5.-en.
+       A /sminkes-zuglo/-n a pontos egyezésű ár-H2 mellett fordított a sorrend
+       (money page 9,2 vs blog 11,4), ezért kapja meg ugyanazt a mintát.
        A H2-sort a Google a szakasz-egyezéshez olvassa. (Rank Pro audit, 08-28) */}
   <section class="py-20 sm:py-28 bg-inkSoft">
     <div class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div">
-        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Az ár nálam: <em class="display">11 000 Ft</em> — és mi van benne tételesen.</h2>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Szemöldök laminálás árak — <em class="display">11 000 Ft</em>, tételesen.</h2>
         <p class="mt-6 text-creamSoft text-base sm:text-lg leading-[1.75] max-w-[58ch]">
           Egy ár van, felár nincs. A <strong class="text-cream">11 000 Ft</strong>-ban benne van a konzultáció, a formázás, a laminálás és a festés — összesen körülbelül 60 perc. Ami nincs benne: semmi.
         </p>

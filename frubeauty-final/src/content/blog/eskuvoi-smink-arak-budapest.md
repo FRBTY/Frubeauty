@@ -66,7 +66,7 @@ A jó hír: a minőséghez nem a legdrágábbat kell választani — elég egy s
 - **Menyasszonyi csomag** (próbasmink + nagy napi smink) — 39 000 Ft *(6 000 Ft megtakarítás)*
 - **Teljes esküvő** (próbasmink + menyasszonyi smink + örömanya smink, egy reggelen) — 51 000 Ft *(9 000 Ft megtakarítás)*
 
-A részletes árlistát és a foglalás menetét a [sminkes oldalamon](/sminkes-zuglo/) találod, a próbasminkre való felkészülést pedig a [próbasmink-útmutatóban](/blog/eskuvoi-smink-felkesziules/) írtam le lépésről lépésre.
+A részletes árlistát és a foglalás menetét az [esküvői smink árak Budapesten](/sminkes-zuglo/) oldalon találod, a próbasminkre való felkészülést pedig a [próbasmink-útmutatóban](/blog/eskuvoi-smink-felkesziules/) írtam le lépésről lépésre.
 
 Ha közeledik a nagy nap — vagy csak egy fontos esemény —, írj bátran, és segítek eldönteni, melyik smink a tiéd.
 
