@@ -1,0 +1,509 @@
+<title>FRUBEAUTY keresőaudit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Libre+Franklin:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+  :root{
+    --ground:#FAF8F4;
+    --surface:#FFFFFF;
+    --sunk:#F2EEE6;
+    --ink:#1A1612;
+    --muted:#6B6154;
+    --hair:#E2DCD0;
+    --hair-strong:#CFC6B5;
+    --gold:#9C6F2F;
+    --gold-soft:#F0E4CE;
+    --good:#3D7049;
+    --good-bg:#E6F0E6;
+    --warn:#A8761C;
+    --warn-bg:#F7EDD8;
+    --crit:#9E3F35;
+    --crit-bg:#F7E3E0;
+    --shadow:0 1px 2px rgba(26,22,18,.05);
+
+    --f-display:"Fraunces","Iowan Old Style",Georgia,serif;
+    --f-body:"Libre Franklin","Helvetica Neue",Arial,sans-serif;
+    --f-mono:"JetBrains Mono","SFMono-Regular",Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#15120E;
+      --surface:#1E1A15;
+      --sunk:#100E0B;
+      --ink:#EFEAE1;
+      --muted:#A2988A;
+      --hair:#302A22;
+      --hair-strong:#463D31;
+      --gold:#D3A660;
+      --gold-soft:#3A2E1B;
+      --good:#7FBE8C;
+      --good-bg:#1D2A1F;
+      --warn:#DDAE5A;
+      --warn-bg:#2E2413;
+      --crit:#E0897D;
+      --crit-bg:#301A17;
+      --shadow:0 1px 2px rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#15120E;
+    --surface:#1E1A15;
+    --sunk:#100E0B;
+    --ink:#EFEAE1;
+    --muted:#A2988A;
+    --hair:#302A22;
+    --hair-strong:#463D31;
+    --gold:#D3A660;
+    --gold-soft:#3A2E1B;
+    --good:#7FBE8C;
+    --good-bg:#1D2A1F;
+    --warn:#DDAE5A;
+    --warn-bg:#2E2413;
+    --crit:#E0897D;
+    --crit-bg:#301A17;
+    --shadow:0 1px 2px rgba(0,0,0,.3);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--f-body);
+    font-size:16px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding-inline:20px;padding-block:56px 96px}
+
+  h1,h2,h3{font-family:var(--f-display);font-weight:400;text-wrap:balance;margin:0}
+  h1{font-size:clamp(2rem,5.2vw,3rem);line-height:1.14;letter-spacing:-.015em}
+  h2{font-size:clamp(1.4rem,3.2vw,1.85rem);line-height:1.2;letter-spacing:-.01em}
+  h3{font-size:1.06rem;font-weight:600;line-height:1.35;font-family:var(--f-body);letter-spacing:-.005em}
+  p{margin:0;max-width:68ch}
+  a{color:var(--gold)}
+  .eyebrow{
+    font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;
+    font-weight:600;color:var(--gold);margin:0
+  }
+
+  /* ---- header ---- */
+  header.masthead{display:flex;flex-direction:column;gap:14px;
+    padding-bottom:30px;border-bottom:2px solid var(--ink)}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.8rem;color:var(--muted)}
+  .meta span{white-space:nowrap}
+  .meta b{font-weight:500;color:var(--ink)}
+
+  /* ---- status strip ---- */
+  .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--hair);border:1px solid var(--hair);margin-top:34px}
+  .strip div{background:var(--surface);padding:16px 14px;display:flex;flex-direction:column;gap:3px}
+  .strip dt{font-size:.68rem;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+  .strip dd{margin:0;font-family:var(--f-display);font-size:1.7rem;line-height:1.05;
+    font-variant-numeric:tabular-nums}
+  .strip small{font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums}
+  @media (max-width:560px){.strip{grid-template-columns:repeat(2,1fr)}}
+
+  section{margin-top:64px;display:flex;flex-direction:column;gap:20px}
+  section > p + p{margin-top:-6px}
+
+  /* ---- finding blocks: ranked, so the numbers mean something ---- */
+  .rank{display:flex;gap:18px;align-items:baseline;border-top:1px solid var(--hair-strong);padding-top:20px}
+  .rank .n{font-family:var(--f-display);font-size:1.5rem;color:var(--gold);
+    font-variant-numeric:tabular-nums;line-height:1;flex:none;width:2ch}
+  .rank .t{display:flex;flex-direction:column;gap:7px}
+
+  /* ---- tables ---- */
+  .scroll{overflow-x:auto;border:1px solid var(--hair);background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:.855rem;min-width:460px}
+  caption{text-align:left;font-size:.78rem;color:var(--muted);padding:11px 14px;
+    border-bottom:1px solid var(--hair);background:var(--sunk)}
+  th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--hair);vertical-align:top}
+  thead th{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--muted);font-weight:600;background:var(--sunk)}
+  tbody tr:last-child td{border-bottom:0}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .q{font-family:var(--f-mono);font-size:.82em}
+  .url{font-family:var(--f-mono);font-size:.78em;word-break:break-all}
+  .win{color:var(--good);font-weight:600}
+  .lose{color:var(--crit);font-weight:600}
+
+  /* ---- pills ---- */
+  .pill{display:inline-block;font-size:.68rem;font-weight:600;letter-spacing:.05em;
+    text-transform:uppercase;padding:2px 8px;border-radius:2px;white-space:nowrap}
+  .p-good{background:var(--good-bg);color:var(--good)}
+  .p-warn{background:var(--warn-bg);color:var(--warn)}
+  .p-crit{background:var(--crit-bg);color:var(--crit)}
+
+  /* ---- callout ---- */
+  .note{border-left:3px solid var(--gold);background:var(--surface);
+    padding:16px 20px;display:flex;flex-direction:column;gap:9px;box-shadow:var(--shadow)}
+  .note p{max-width:62ch}
+
+  /* ---- change log ---- */
+  .changes{display:flex;flex-direction:column;gap:1px;background:var(--hair);
+    border:1px solid var(--hair)}
+  .change{background:var(--surface);padding:16px 18px;display:flex;flex-direction:column;gap:9px}
+  .ba{display:grid;grid-template-columns:auto 1fr;gap:5px 12px;font-size:.83rem;align-items:baseline}
+  .ba dt{color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.07em}
+  .ba dd{margin:0;font-family:var(--f-mono);font-size:.79rem;word-break:break-word}
+  .ba dd.old{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}
+
+  /* ---- health grid ---- */
+  .health{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;
+    background:var(--hair);border:1px solid var(--hair)}
+  .health div{background:var(--surface);padding:13px 15px;display:flex;flex-direction:column;gap:4px}
+  .health dt{font-size:.8rem;font-weight:500}
+  .health dd{margin:0;font-size:.79rem;color:var(--muted)}
+
+  ul{margin:0;padding-left:1.15em;display:flex;flex-direction:column;gap:7px;max-width:68ch}
+  li::marker{color:var(--gold)}
+
+  figure{margin:0;display:flex;flex-direction:column;gap:9px}
+  figcaption{font-size:.78rem;color:var(--muted)}
+  figure svg{width:100%;height:auto;display:block;aspect-ratio:700/250}
+
+  footer{margin-top:72px;padding-top:22px;border-top:1px solid var(--hair);
+    font-size:.79rem;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+  @media (prefers-reduced-motion:no-preference){a{transition:color .15s}}
+  a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Google Search Console · teljes audit</p>
+  <h1>A forgalom nem stagnál&nbsp;— megháromszorozódott</h1>
+  <div class="meta">
+    <span><b>frubeauty.com</b></span>
+    <span>Mérési ablak: <b>2026-08-16 – 09-12</b></span>
+    <span>Készült: <b>2026-09-15</b></span>
+    <span>Property: <b>sc-domain</b></span>
+  </div>
+</header>
+
+<dl class="strip">
+  <div><dt>Kattintás</dt><dd>171</dd><small>28 nap alatt</small></div>
+  <div><dt>Megjelenítés</dt><dd>5 460</dd><small>Web keresés</small></div>
+  <div><dt>Átlagos CTR</dt><dd>3,2%</dd><small>lokálisan 5,1%</small></div>
+  <div><dt>Átlagos pozíció</dt><dd>6,6</dd><small>page 1 alja</small></div>
+</dl>
+
+<section>
+  <h2>Amit az adat felülírt</h2>
+  <p>A korábbi feltételezés az volt, hogy a forgalom megállt. A napi bontás ennek az
+  ellenkezőjét mutatja: a kattintás és a megjelenítés is folyamatosan, meredeken nő,
+  és a növekedés nem lassul.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 250" width="700" height="250" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Napi átlagos kattintás és megjelenítés, június 13-tól szeptember 12-ig: 2,1-ről 7,3 kattintásra és 52-ről 209 megjelenítésre nőtt.">
+      <!-- grid -->
+      <g stroke="var(--hair)" stroke-width="1">
+        <line x1="56" y1="30"  x2="660" y2="30"></line>
+        <line x1="56" y1="76"  x2="660" y2="76"></line>
+        <line x1="56" y1="122" x2="660" y2="122"></line>
+        <line x1="56" y1="168" x2="660" y2="168"></line>
+      </g>
+      <line x1="56" y1="196" x2="660" y2="196" stroke="var(--hair-strong)" stroke-width="1"></line>
+      <!-- y labels: clicks/day scale 0..8 -->
+      <g font-family="JetBrains Mono, monospace" font-size="10" fill="var(--muted)" text-anchor="end">
+        <text x="47" y="34">8</text>
+        <text x="47" y="80">6</text>
+        <text x="47" y="126">4</text>
+        <text x="47" y="172">2</text>
+        <text x="47" y="200">0</text>
+      </g>
+      <!-- bars: impressions/day scaled (max 209 -> 166px) as soft background -->
+      <g fill="var(--gold-soft)">
+        <rect x="86"  y="155" width="74" height="41"></rect>
+        <rect x="236" y="127" width="74" height="69"></rect>
+        <rect x="386" y="63"  width="74" height="133"></rect>
+        <rect x="536" y="30"  width="74" height="166"></rect>
+      </g>
+      <!-- clicks/day line: 2.06, 2.77, 5.13, 7.33 -> y = 196 - v*20.75 -->
+      <polyline points="123,153 273,138 423,90 573,44" fill="none"
+                stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"></polyline>
+      <g fill="var(--gold)">
+        <circle cx="123" cy="153" r="4"></circle>
+        <circle cx="273" cy="138" r="4"></circle>
+        <circle cx="423" cy="90"  r="4"></circle>
+        <circle cx="573" cy="44"  r="4"></circle>
+      </g>
+      <!-- value labels -->
+      <g font-family="JetBrains Mono, monospace" font-size="11" fill="var(--ink)" text-anchor="middle" font-weight="500">
+        <text x="123" y="143">2,1</text>
+        <text x="273" y="128">2,8</text>
+        <text x="423" y="80">5,1</text>
+        <text x="573" y="34">7,3</text>
+      </g>
+      <!-- x labels -->
+      <g font-family="Libre Franklin, sans-serif" font-size="11" fill="var(--muted)" text-anchor="middle">
+        <text x="123" y="214">jún. 13–30.</text>
+        <text x="273" y="214">július</text>
+        <text x="423" y="214">augusztus</text>
+        <text x="573" y="214">szept. 1–12.</text>
+      </g>
+      <!-- legend -->
+      <g font-family="Libre Franklin, sans-serif" font-size="11" fill="var(--muted)">
+        <rect x="56" y="232" width="11" height="9" fill="var(--gold-soft)"></rect>
+        <text x="73" y="240">megjelenítés/nap (52 → 209)</text>
+        <line x1="290" y1="237" x2="308" y2="237" stroke="var(--gold)" stroke-width="2.5"></line>
+        <text x="314" y="240">kattintás/nap</text>
+      </g>
+    </svg>
+    <figcaption>Napi átlag időszakonként. A megjelenítés négyszereződött, a kattintás 3,6-szorozódott.
+    A CTR eközben 3,9% → 3,2% → 3,0% → 3,5%: lényegében változatlan, vagyis a növekedés
+    valódi láthatóság-növekedés, nem statisztikai zaj.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>A legfontosabb lelet</h2>
+
+  <div class="note">
+    <p><strong>Ha a keresésben benne van a helymegjelölés, ötször jobban konvertál —
+    ugyanazon az oldalon, ugyanazon a pozíción.</strong></p>
+    <p>A „budapest", „zugló", „14. kerület" szót tartalmazó lekérdezések összesítve
+    <strong>17 kattintás / 334 megjelenítés = 5,1% CTR</strong>. A helymegjelölés nélküli,
+    általános lekérdezések: <strong>13 kattintás / 1 334 megjelenítés = 1,0% CTR</strong>.</p>
+    <p>Ez azt jelenti, hogy a megjelenítések háromnegyede olyan keresésből jön,
+    ami szinte sosem hoz kattintást. A „kozmetikus" szó önmagában a 2,9. helyen áll
+    53 megjelenítéssel és <strong>nulla</strong> kattintással; a „kozmetikus budapest"
+    a 2,9. helyen 6,2%-ot hoz. Nem a pozíció a különbség, hanem a szándék.</p>
+  </div>
+
+  <p>A gyakorlati következmény: a növekedést nem az általános megjelenítés-szám emelése
+  hozza, hanem az, hogy több <em>helymegjelölt</em> keresésre kerülj be. Az általános
+  fej-kulcsszavak (<span class="q">beauty</span>, <span class="q">smink</span>,
+  <span class="q">kozmetikus</span>) látványos megjelenítés-számot adnak és nulla bevételt.</p>
+
+  <div class="scroll">
+    <table>
+      <caption>A két szándék-csoport szélső értékei · 28 nap</caption>
+      <thead>
+        <tr>
+          <th>Lekérdezés</th>
+          <th class="num">Poz.</th>
+          <th class="num">Megj.</th>
+          <th class="num">Katt.</th>
+          <th class="num">CTR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="q">esküvői smink budapest</td><td class="num">13,3</td><td class="num">9</td><td class="num">2</td><td class="num win">22,2%</td></tr>
+        <tr><td class="q">koreai szempilla lifting budapest</td><td class="num">7,5</td><td class="num">53</td><td class="num">6</td><td class="num win">11,3%</td></tr>
+        <tr><td class="q">kozmetika zugló egressy út</td><td class="num">4,0</td><td class="num">19</td><td class="num">2</td><td class="num win">10,5%</td></tr>
+        <tr><td class="q">szempilla lifting zugló</td><td class="num">3,3</td><td class="num">12</td><td class="num">1</td><td class="num win">8,3%</td></tr>
+        <tr><td class="q">szemöldök laminálás budapest</td><td class="num">5,3</td><td class="num">52</td><td class="num">4</td><td class="num win">7,7%</td></tr>
+        <tr><td class="q">kozmetikus budapest</td><td class="num">2,9</td><td class="num">16</td><td class="num">1</td><td class="num win">6,2%</td></tr>
+        <tr><td class="q">acne treatment</td><td class="num">6,7</td><td class="num">144</td><td class="num">0</td><td class="num lose">0%</td></tr>
+        <tr><td class="q">laminált szemöldök</td><td class="num">7,5</td><td class="num">66</td><td class="num">0</td><td class="num lose">0%</td></tr>
+        <tr><td class="q">menyasszonyi smink árak</td><td class="num">10,9</td><td class="num">56</td><td class="num">0</td><td class="num lose">0%</td></tr>
+        <tr><td class="q">kozmetikus</td><td class="num">2,9</td><td class="num">53</td><td class="num">0</td><td class="num lose">0%</td></tr>
+        <tr><td class="q">alkalmi smink árak</td><td class="num">7,6</td><td class="num">41</td><td class="num">0</td><td class="num lose">0%</td></tr>
+        <tr><td class="q">szemöldökfestés</td><td class="num">2,8</td><td class="num">34</td><td class="num">0</td><td class="num lose">0%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Négy lelet, érték szerint sorrendben</h2>
+
+  <div class="rank">
+    <div class="n">01</div>
+    <div class="t">
+      <h3>A kezdőlap a 2,6. helyen áll szemöldök-keresésekre, és nulla kattintást kap</h3>
+      <p>Négy szemöldök-lekérdezés, összesen <strong>91 megjelenítés a 2,6–6,8. pozíción,
+      nulla kattintással</strong>. Az ok a találat szövegében volt: a kezdőlap címében
+      egyetlen „szemöldök" szó sem szerepelt, tehát a kereső semmit nem látott
+      kiemelve a saját szavaiból.</p>
+      <p><span class="pill p-good">Javítva</span> A cím mostantól tartalmazza. Ha csak a
+      pozíciónak megfelelő átlagos CTR-t hozza, ez önmagában <strong>10–20 kattintás
+      havonta</strong>.</p>
+    </div>
+  </div>
+
+  <div class="rank">
+    <div class="n">02</div>
+    <div class="t">
+      <h3>Két saját oldal versenyez ugyanazon a konkrét lekérdezésen</h3>
+      <p>Nem hasonló kulcsszavakról van szó: pontos egyezésű szűréssel is két URL
+      osztozik ugyanazon a kifejezésen, és a Google váltogat köztük ahelyett,
+      hogy egyet erősítene.</p>
+    </div>
+  </div>
+
+  <div class="scroll">
+    <table>
+      <caption>Pontos egyezésű lekérdezés-szűrés · melyik saját oldal jelenik meg</caption>
+      <thead>
+        <tr>
+          <th>Lekérdezés</th>
+          <th>Oldal</th>
+          <th class="num">Megj.</th>
+          <th class="num">Poz.</th>
+          <th class="num">CTR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="q" rowspan="2">szemöldök laminálás árak</td><td class="url">/blog/szemoldok-laminalas-arak-2026/</td><td class="num">117</td><td class="num">9,9</td><td class="num">0,9%</td></tr>
+        <tr><td class="url">/szemoldok-laminalas-zuglo/</td><td class="num">69</td><td class="num lose">12,5</td><td class="num lose">0%</td></tr>
+        <tr><td class="q" rowspan="2">esküvői smink árak</td><td class="url">/sminkes-zuglo/</td><td class="num">38</td><td class="num win">9,2</td><td class="num win">5,3%</td></tr>
+        <tr><td class="url">/blog/eskuvoi-smink-arak-budapest/</td><td class="num">53</td><td class="num">11,4</td><td class="num lose">0%</td></tr>
+        <tr><td class="q" rowspan="2">koreai szempilla lifting</td><td class="url">/blog/koreai-szempilla-lifting/</td><td class="num">285</td><td class="num">8,2</td><td class="num">2,8%</td></tr>
+        <tr><td class="url">/ (kezdőlap)</td><td class="num">43</td><td class="num">8,5</td><td class="num">2,3%</td></tr>
+        <tr><td class="q">szemöldök laminálás</td><td class="url">/ (kezdőlap) — a szolgáltatás-oldal meg sem jelenik</td><td class="num">114</td><td class="num">7,8</td><td class="num">0,9%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>A <span class="url">/sminkes-zuglo/</span> sora mutatja a megoldást is: ezen az egy
+  oldalon <em>van</em> pontos egyezésű „Esküvői smink árak" szakaszcím és ártáblázat —
+  és itt fordított a sorrend, a szolgáltatás-oldal áll a blogja előtt, és egyedül ez
+  konvertál. A másik két szolgáltatás-oldalon ez a szakaszcím hiányzott.</p>
+
+  <div class="rank">
+    <div class="n">03</div>
+    <div class="t">
+      <h3>A mért forgalom háromnegyede nem látszik lekérdezés-szinten</h3>
+      <p>A 171 kattintásból a névvel látható lekérdezések csak <strong>40-et</strong>
+      magyaráznak. A maradék 131 olyan keresésből jön, amit a Google ritkasága miatt
+      anonimizál. Ez nem hiba — de azt jelenti, hogy a kulcsszó-optimalizálás
+      a forgalom kisebbik felét mozgatja, és a nagyobbik felét a hosszú farok viszi.</p>
+    </div>
+  </div>
+
+  <div class="rank">
+    <div class="n">04</div>
+    <div class="t">
+      <h3>Nemzetközi és képkeresési zaj hígítja a CTR-t</h3>
+      <p>Körülbelül <strong>460 külföldi megjelenítés</strong> hozott 9 kattintást
+      (Egyesült Királyság 106 megjelenítés / 0 kattintás, USA 66 / 0, Hollandia 40 / 0).
+      A képkeresés külön <strong>1 010 megjelenítés a 36,1. pozícióról</strong>, 5 kattintással.
+      Az <span class="q">acne treatment</span> egymaga 144 megjelenítés, nulla kattintás.</p>
+      <p><span class="pill p-warn">Nem beavatkozás</span> Ez nem javítandó hiba, hanem
+      értelmezési csapda: a webhely valódi magyar CTR-je 3,3%, nem 3,2% — és a nyers
+      megjelenítés-szám növekedésének egy része sosem lesz vendég.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Amit ebben a körben megcsináltam</h2>
+  <p>Öt fájl, <span class="q">+33 / −8</span> sor, külön git ágon
+  (<span class="q">seo/gsc-audit-2026-09-15</span>), önmagában visszafordítható commitban.
+  Build és SEO smoke teszt lefutott, mind a négy változás ellenőrizve a legenerált HTML-ben,
+  az új szakasz mobilon 375 képponton vízszintes túlcsordulás nélkül renderelődik.
+  <strong>Egyetlen árat és egyetlen üzleti tényt sem módosítottam.</strong></p>
+
+  <div class="changes">
+    <div class="change">
+      <h3>Kezdőlap — cím és leírás</h3>
+      <dl class="ba">
+        <dt>Volt</dt><dd class="old">Kozmetikus Zugló · Szempilla Stylist ★5,0 | FRUBEAUTY</dd>
+        <dt>Lett</dt><dd>Kozmetikus Zugló · Szempilla &amp; Szemöldök ★5,0 | FRUBEAUTY</dd>
+      </dl>
+      <p style="font-size:.84rem;color:var(--muted)">A „Kozmetikus Zugló" elöl maradt, mert
+      bizonyítottan az hozza a kattintást. A „Stylist" szóra nem érkezik keresés.</p>
+    </div>
+
+    <div class="change">
+      <h3>Szemöldök laminálás oldal — ár-szakaszcím pontos egyezésre</h3>
+      <dl class="ba">
+        <dt>Volt</dt><dd class="old">Az ár nálam: 11 000 Ft — és mi van benne tételesen.</dd>
+        <dt>Lett</dt><dd>Szemöldök laminálás árak — 11 000 Ft, tételesen.</dd>
+      </dl>
+    </div>
+
+    <div class="change">
+      <h3>Szempilla lifting oldal — új, önálló ár-szakasz</h3>
+      <p style="font-size:.88rem">Volt „Ami a szempilla lifting árában van" cím, de pontos
+      egyezésű <span class="q">szempilla lifting árak</span> szakaszcím és önálló ár-blokk nem.
+      Ez a leggyengébb szolgáltatás-oldal: 20 megjelenítés a 13,2. helyen, miközben a saját
+      ár-cikke 130-at visz az 5,0.-ről.</p>
+    </div>
+
+    <div class="change">
+      <h3>Blogcikkek — horgonyszövegek a szolgáltatás-oldalakra</h3>
+      <p style="font-size:.88rem">A szempilla-lifting ár-cikkben az egyetlen link a
+      82 sorból a 80.-on állt; most a nyitó bekezdésben is van egy, „szempilla lifting
+      Budapesten" horgonnyal. Az esküvői ár-cikkben a semmitmondó „sminkes oldalamon"
+      helyére „esküvői smink árak Budapesten" került.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Technikai állapot: tiszta</h2>
+  <p>A teljes riport-készletet végignéztem. Nincs olyan technikai hiba, ami a forgalmat
+  fogná vissza — a keresés-oldali alapok rendben vannak.</p>
+
+  <div class="health">
+    <div><dt>Indexelés</dt><dd>22 indexelt oldal. A 16 nem indexelt mind régi Wix-maradvány
+      (<span class="q">blank</span>, <span class="q">blank-1</span>, régi service-page URL-ek)
+      vagy jogi oldal.</dd></div>
+    <div><dt>„Átirányítási hiba" (2)</dt><dd>A két szolgáltatás-oldal per nélküli változata,
+      utolsó feltérképezés 2026-06-08. Googlebot fejléccel ma ellenőrizve: a 301
+      hibátlanul működik. <strong>Elavult adat.</strong></dd></div>
+    <div><dt>Webhelytérkép</dt><dd>25 URL, teljes, a lézer-oldal is benne van.
+      Utoljára beolvasva: szept. 13.</dd></div>
+    <div><dt>Kézi műveletek</dt><dd>Nincs. Biztonsági probléma sincs.</dd></div>
+    <div><dt>Strukturált adat</dt><dd>Morzsamenü 15 érvényes, videó 5 érvényes,
+      profiloldal 1 érvényes — <strong>nulla hibás elem</strong>.</dd></div>
+    <div><dt>Core Web Vitals</dt><dd>Egyik eszköztípusra sincs elég valós felhasználói adat.
+      A sebesség-csiszolásnak jelenleg <strong>nincs SEO-hozama</strong>.</dd></div>
+    <div><dt>Videó keresés</dt><dd>5 videó érvényesen indexelve, de
+      <strong>0 megjelenítés</strong> videókeresésben. Indexelve ≠ keresett.</dd></div>
+    <div><dt>Eszközmegoszlás</dt><dd>Mobil 133 kattintás / 3 835 megjelenítés,
+      asztali 38 / 1 532. A mobil CTR jobb (3,5% vs 2,5%).</dd></div>
+  </div>
+</section>
+
+<section>
+  <h2>A valódi plafon — és ez nem kódban van</h2>
+
+  <div class="note">
+    <p><strong>Két külső hivatkozás mutat a webhelyre.</strong> Egy az
+    <span class="q">infobel.com</span>-ról, egy a <span class="q">notino.hu</span>-ról.
+    A horgonyszövegük: „(üres)" és „website".</p>
+  </div>
+
+  <p>A megjelenítések túlnyomó része a <strong>7–13. pozíción</strong> áll. Ez a sáv a
+  magyar lokális találati listákon a térképcsomag és a fizetett hirdetések alatt van —
+  ott a CTR szerkezetileg 0–3%, függetlenül attól, milyen jó a cím. Amint az oldal
+  az 5. hely fölé ér, ugyanazok a lekérdezések 7–11%-ot hoznak; ezt a saját adatod
+  mutatja, nem egy iparági átlag.</p>
+
+  <p>Az on-page munka ezzel a körrel gyakorlatilag elfogyott: a technikai állapot tiszta,
+  a szakaszcímek egyeznek, a belső linkek a helyükön vannak. A 8. helyről a 4.-re a
+  <strong>tekintély</strong> visz — és ebből van a legkevesebb.</p>
+
+  <h3 style="margin-top:8px">A következő három lépés, hatás szerint</h3>
+  <ul>
+    <li><strong>Katalógus-hivatkozások.</strong> Az Aranyoldalak, a Firmania és a Nyitva.hu
+    dofollow linket adnak, és mindhármat ugyanaz az adatbázis hajtja — egy pontos
+    adatfelvitel egyszerre hármat mozdít. Jelenleg kettőről indulsz.</li>
+    <li><strong>Vélemény-tempó.</strong> A térképcsomagban a kötő korlát a vélemények száma.
+    Ez nem a weboldalon dől el, viszont közvetlenül hat arra a felületre, ahonnan a
+    helymegjelölt keresések — vagyis az ötször jobban konvertáló forgalom — jönnek.</li>
+    <li><strong>Az elavult átirányítás-validáció újraindítása</strong> a Search Console-ban.
+    Két kattintás, és leveszi a júniusi hibajelzést a két szolgáltatás-oldalról.
+    Ezt nem csináltam meg — a te fiókodban külső állapotot módosítana, szólj, ha menjek.</li>
+  </ul>
+
+  <p style="font-size:.88rem;color:var(--muted)">Amit <em>nem</em> érdemes csinálni:
+  disavow fájlt feltölteni a nofollow spam-domainek miatt, sebességet optimalizálni
+  SEO-indokkal, vagy általános fej-kulcsszavakra (<span class="q">kozmetikus</span>,
+  <span class="q">beauty</span>) hajtani. Mindhárom mérhetően nulla hozamú ezen a webhelyen.</p>
+</section>
+
+<footer>
+  <p>Forrás: Google Search Console, <span class="q">sc-domain:frubeauty.com</span>,
+  Web keresés, 2026-08-16 – 2026-09-12. A lekérdezés-szintű kannibalizációt pontos
+  egyezésű szűréssel ellenőriztem, nem tartalmazás szerint.</p>
+  <p>A kód-változások a <span class="q">seo/gsc-audit-2026-09-15</span> ágon,
+  a <span class="q">d25109f4</span> commitban.</p>
+</footer>
+
+</div>
