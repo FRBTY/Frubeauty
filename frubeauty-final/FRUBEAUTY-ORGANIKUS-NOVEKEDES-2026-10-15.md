@@ -2,7 +2,7 @@
 
 **Ág:** `seo/organikus-novekedes-2026-10-15` (a szülő repóban: `C:\Users\Bence\Desktop\frubeauty-final-v5`)
 **Commitok:** `a561f2ae` állapotrögzítés · `4028682a` belső linkek · `a6e54c51` 3 új cikk
-**Állapot:** a build és a `seo:smoke` zöld (33 oldal, 0 NUL-bájt). **Nincs élesítve**, a deploy a te jóváhagyásodra vár.
+**Állapot:** **ÉLESÍTVE 2026-10-15 23:52:49** (Netlify production, a tulajdonos futtatta). Élesben ellenőrizve: mind a 17 pont zöld (3 új URL 200 + FAQ JSON-LD + lábléc, kezdőlapi linkek, a /sminkes-zuglo/-n nincs alkalmi ár, RelatedArticles, sitemap, llms.txt, 0 NUL-bájt), a régi árcikk 301-e él. Az utómérés ablaka: 2026-10-16 → 11-09.
 **Adat:** GSC 2026-09-15 → 10-12 (28 nap, 3 nap késleltetés), service account; GA4 533860004; élő Google-SERP és automatikus kiegészítés (`hl=hu&gl=hu`), 2026-10-15.
 
 ---
