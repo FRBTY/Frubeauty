@@ -10,6 +10,8 @@ export interface ServiceCardData {
   href: string;
   image: string;
   alt: string;
+  /** Opcionális testvér-oldal a kártya szövege alatt — lásd a renderelésnél. */
+  also?: { lead: string; anchor: string; href: string };
 }
 
 export function ServiceCard({ service: s }: { service: ServiceCardData }) {
@@ -45,6 +47,24 @@ export function ServiceCard({ service: s }: { service: ServiceCardData }) {
           </a>
         </h3>
         <p className="mt-3 text-creamSoft leading-relaxed flex-1">{s.body}</p>
+        {/* SEO — testvér-oldal link (2026-10-15). A GSC szerint (09-15 – 10-12) a
+            „szemöldökfestés” 36 megjelenését és az „alkalmi smink árak/budapest”
+            egy részét a KEZDŐLAP viszi, miközben a 09-29-én indult saját oldalaik
+            (/szemoldokfestes-zuglo/: 5 megj., /alkalmi-smink-budapest/: 7) még
+            alig kapnak. A kezdőlapról eddig EGYETLEN belső link sem mutatott rájuk.
+            Szándékosan sima szövegsor, NEM címsor és NEM ár: a kezdőlap ne kapjon
+            újabb H3-at vagy árat ezekre a szavakra, csak terelje a jelzést. */}
+        {s.also && (
+          <p className="mt-3 text-sm text-creamMute leading-relaxed">
+            {s.also.lead}{' '}
+            <a
+              href={s.also.href}
+              className="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors"
+            >
+              {s.also.anchor}
+            </a>
+          </p>
+        )}
         <div className="mt-5 pt-5 border-t border-whisper flex flex-col gap-4">
           <div className="flex items-end justify-between gap-3">
             <div>

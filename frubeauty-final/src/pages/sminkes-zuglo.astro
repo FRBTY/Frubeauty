@@ -495,13 +495,17 @@ const config = { ...siteConfig };
     </div>
   </section>
 
-  {/* Átvezetés a másik szándékra: aki alkalmi sminket keres és ide érkezett. */}
+  {/* Átvezetés a másik szándékra: aki alkalmi sminket keres és ide érkezett.
+      2026-10-15: az alkalmi ár („15 000 Ft”) KIKERÜLT ebből a dobozból. A GSC szerint
+      (09-15 – 10-12) az „alkalmi smink árak” 45 megjelenését még MINDIG ez az oldal
+      viszi (6,8. hely), az alkalmi oldal csak 2-t. Az esküvői oldal ne válaszoljon az
+      alkalmi ár-kérdésre — mutasson oda, ahol a válasz van. */}
   <section class="py-16 sm:py-20">
     <div class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div" className="rounded-3xl border border-whisper bg-inkSoft p-7 sm:p-9 flex flex-wrap items-center justify-between gap-6">
         <div class="max-w-[52ch]">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-3">Nem esküvőre?</p>
-          <p class="text-creamSoft leading-[1.7]">Estélyre, szalagavatóra, ballagásra vagy fotózásra: az alkalmi smink 15 000 Ft, és külön oldalon van, a hozzá illő képekkel.</p>
+          <p class="text-creamSoft leading-[1.7]">Estélyre, szalagavatóra, ballagásra vagy fotózásra az <a href="/alkalmi-smink-budapest/" class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors">alkalmi smink árak</a> és a hozzá illő képek külön oldalon vannak.</p>
         </div>
         <a href="/alkalmi-smink-budapest/" class="inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Alkalmi smink Budapesten<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
       </Reveal>

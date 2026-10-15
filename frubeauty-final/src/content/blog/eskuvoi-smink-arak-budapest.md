@@ -24,7 +24,7 @@ Tájékozódásnak a budapesti piac jellemző sávjai — alul a kezdő, felül 
 | Szolgáltatás | Jellemző budapesti sáv | Nálam (FRUBEAUTY) |
 |---|---|---|
 | Nappali smink | 8 000–16 000 Ft | 13 000 Ft |
-| Alkalmi smink | 12 000–25 000 Ft | 15 000 Ft |
+| [Alkalmi smink](/alkalmi-smink-budapest/) | 12 000–25 000 Ft | 15 000 Ft |
 | Smink fotózásra | 13 000–25 000 Ft | 17 000 Ft |
 | Menyasszonyi próbasmink | 12 000–25 000 Ft | 15 000 Ft |
 | Menyasszonyi smink (nagy nap) | 25 000–60 000 Ft | 30 000 Ft |
@@ -62,9 +62,10 @@ A jó hír: a minőséghez nem a legdrágábbat kell választani — elég egy s
 
 ## Csomagok egy helyen
 
-- **Alkalmi smink** — 15 000 Ft
 - **Menyasszonyi csomag** (próbasmink + nagy napi smink) — 40 000 Ft *(5 000 Ft megtakarítás)*
 - **Teljes esküvő** (próbasmink + menyasszonyi smink + örömanya smink, egy reggelen) — 51 000 Ft *(9 000 Ft megtakarítás)*
+
+Estélyre, szalagavatóra vagy fotózásra szóló sminkhez az [alkalmi smink árak](/alkalmi-smink-budapest/) külön oldalon vannak.
 
 A részletes árlistát és a foglalás menetét az [esküvői smink árak Budapesten](/sminkes-zuglo/) oldalon találod, a próbasminkre való felkészülést pedig a [próbasmink-útmutatóban](/blog/eskuvoi-smink-felkesziules/) írtam le lépésről lépésre.
 

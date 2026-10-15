@@ -49,19 +49,26 @@ const config = { ...siteConfig };
 // linkelt — emiatt a dedikált /szemoldok-laminalas-zuglo oldal árva volt a kezdőlapról,
 // és a „szemöldök laminálás" (112 megjelenés/hó, GSC) a kezdőlapra rangsorolt helyette.
 // Szétbontva: minden fő szolgáltatás saját, kulcsszó-anchoros belső linket kap.
+// 2026-10-15: a szemöldök- és a smink-kártya `also` sort kapott a 09-29-én indult két
+// testvér-oldalra (/szemoldokfestes-zuglo/, /alkalmi-smink-budapest/) — lásd ServiceCard.tsx.
+// A smink-kártya alcíme azért lett „Esküvő, próbasminkkel”, mert a címsor-link a
+// /sminkes-zuglo/-ra visz, ami 09-29 óta TISZTÁN esküvői; a ballagás/fotózás az alkalmi oldalé.
 const services = [
   { title: 'Lézeres szőrtelenítés', subtitle: 'Soprano Titanium, három hullámhosszon', body: '755, 808 és 1064 nm egyszerre — vastag és vékony szálra, világos és sötétebb bőrre is külön beállítva. Hat-nyolc alkalom, négy-hat hetente.', priceFrom: '11 000 Ft-tól alkalmanként', duration: '15–70 perc', href: '/lezeres-szortelenites-budapest/', image: '/img/lezeres-szortelenites-soprano-titanium-kijelzo-zuglo.webp', alt: 'A Soprano Titanium dióda lézer kijelzője a FRUBEAUTY zuglói szalonjában — 808, 755 és 1064 nm, beállított impulzushosszal és frekvenciával' },
   { title: 'Arckezelés', subtitle: 'Janssen Cosmetics hatóanyagokkal', body: 'Bőranalízissel kezdünk, és az alapján választunk protokollt — mélytisztító, hidratáló vagy anti-aging. Nem a bőröd igazodik a kezeléshez, hanem fordítva.', priceFrom: '16 000 Ft-tól', duration: '60–120 perc', href: '/arckezeles-zuglo/', image: '/img/service-arckezeles.webp', alt: 'Arckezelés Janssen Cosmetics termékekkel a FRUBEAUTY szalonban' },
   { title: 'Szempilla lifting', subtitle: 'Lifting + festés', body: 'Természetes íveltség, 6–8 hétig tartó eredmény. Reggel nincs többé szempillaspirál — felkelsz és kész vagy.', priceFrom: '12 000 Ft-tól', duration: '~ 75 perc', href: '/szempilla-lifting-zuglo/', image: '/img/szempilla-szemoldok-hero.webp', alt: 'Szempilla lifting előtte-utána a FRUBEAUTY szalonban' },
-  { title: 'Szemöldök laminálás', subtitle: 'Formázás + festés', body: 'Dúsabb, rendezett szemöldök tű nélkül, koreai technikával — ~6 hétig tartós, ápolt tekintet.', priceFrom: '11 000 Ft-tól', duration: '~ 60 perc', href: '/szemoldok-laminalas-zuglo/', image: '/img/szemoldok-laminalas-zuglo-munka-uj.webp', alt: 'Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló' },
-  { title: 'Smink', subtitle: 'Esküvő, ballagás, fotózás', body: 'Próbasmink, helyszíni igazítás, hosszan tartó eredmény. A stílust együtt találjuk ki.', priceFrom: '13 000 Ft-tól', duration: '60–90 perc', href: '/sminkes-zuglo/', image: '/img/smink-menyasszony-munka.webp', alt: 'Alkalmi esküvői smink a FRUBEAUTY szalonban' },
+  { title: 'Szemöldök laminálás', subtitle: 'Formázás + festés', body: 'Dúsabb, rendezett szemöldök tű nélkül, koreai technikával — ~6 hétig tartós, ápolt tekintet.', priceFrom: '11 000 Ft-tól', duration: '~ 60 perc', href: '/szemoldok-laminalas-zuglo/', image: '/img/szemoldok-laminalas-zuglo-munka-uj.webp', alt: 'Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló', also: { lead: 'Laminálás nélkül, csak színnel és formával:', anchor: 'szemöldökfestés', href: '/szemoldokfestes-zuglo/' } },
+  { title: 'Smink', subtitle: 'Esküvő, próbasminkkel', body: 'Próbasmink, helyszíni igazítás, hosszan tartó eredmény. A stílust együtt találjuk ki.', priceFrom: '13 000 Ft-tól', duration: '60–90 perc', href: '/sminkes-zuglo/', image: '/img/smink-menyasszony-munka.webp', alt: 'Alkalmi esküvői smink a FRUBEAUTY szalonban', also: { lead: 'Estélyre, ballagásra, fotózásra:', anchor: 'alkalmi smink', href: '/alkalmi-smink-budapest/' } },
 ];
 
 // Aspirational / future-self framing (#audit #3) — pain-first helyett identitás-építés.
 // Daniel Kahneman: people approach gains more strongly when self-image is positive.
+// 2026-10-15: az „Alkalmi smink” gomb eddig a /sminkes-zuglo/-ra vitt — pontos
+// horgonnyal az esküvői oldalt erősítette az alkalmi keresésekre (GSC 09-15 – 10-12:
+// „alkalmi smink árak” 45 megj. a /sminkes-zuglo/-n, 2 az alkalmi oldalon).
 const audienceProfiles = [
   { headline: 'Egy nyugodt 90 perc — és a tükörből a kipihent éned néz vissza', body: 'A Janssen mélyregeneráló kezelés visszahozza a bőr természetes ragyogását. Kilencven perc, amikor nem kell máshol lenned.', cta: 'Arckezelések', href: '/arckezeles-zuglo/' },
-  { headline: 'Esküvő, ballagás vagy egy fontos esemény közeledik', body: 'Próbasmink, alkalmi smink és tartós szempilla-lift egy csomagban. Reggel mehetsz nyugodtan, a smink ott lesz este is.', cta: 'Alkalmi smink', href: '/sminkes-zuglo/' },
+  { headline: 'Esküvő, ballagás vagy egy fontos esemény közeledik', body: 'Próbasmink, alkalmi smink és tartós szempilla-lift egy csomagban. Reggel mehetsz nyugodtan, a smink ott lesz este is.', cta: 'Alkalmi smink', href: '/alkalmi-smink-budapest/' },
   { headline: 'Olyan reggel, amikor smink nélkül is készen állsz', body: 'A szempilla-lifting és szemöldök-laminálás 6–8 hétig megspórolja a reggeli sminket. Felkelsz, és kész vagy.', cta: 'Szempilla & szemöldök', href: '/szempilla-lifting-zuglo/' },
 ];
 
