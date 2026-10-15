@@ -9,8 +9,8 @@ cover: "/img/szemoldok-laminalas-budapest-egressy-ut-zuglo-munka.webp"
 coverWidth: 1100
 coverHeight: 1469
 coverAlt: "Szemöldök laminálás tartós eredménye — FRUBEAUTY Zugló"
-metaTitle: "Szemöldök laminálás meddig tart? 6 hét — ha ezt betartod"
-metaDescription: "6 hét az átlag, de 4 és 8 hét között bármi lehet. Az első 24 óra három szabálya dönti el, melyik lesz a tiéd — zuglói kozmetikustól, gyakorlatból."
+metaTitle: "Meddig tart a szemöldök laminálás? 4–8 hét, és ami eldönti"
+metaDescription: "Átlagosan 6 hét, de 4 és 8 hét között bármi lehet. Hogy melyik lesz a tiéd, azt főleg az első 24 óra dönti el: három szabály, zuglói gyakorlatból."
 ---
 
 A szemöldök laminálás eredménye átlagosan **6 hétig** tart — nagyjából addig, amíg a szemöldökszálak természetes cseréje le nem zajlik. A pontos tartósság két dolgon múlik: a saját szőrnövekedési ciklusodon, és azon, mennyire tartod be az első napok utóápolási szabályait.

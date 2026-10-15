@@ -1,0 +1,211 @@
+---
+/**
+ * Előtte–utána csúszka — a motion-rendszer 3. mozdulata („bizonyít", 2026-09-30).
+ *
+ * MIÉRT: a szempilla lifting eredménye maga a termék, de a galériában csak egy
+ * csempe volt a sok közül. Itt a vendég KEZÉBEN mozdul: ő húzza át az előtte
+ * állapotot az utánába. Az eredmény így nem állítás, hanem saját tapasztalat.
+ *
+ * EGY FÁJL, KÉT FÉL: a forrásfotó egy álló kompozit (felül előtte, alul utána).
+ * A két réteg UGYANAZT a képet mutatja, más-más ablakban — egyetlen letöltés.
+ * Az ablakokat a `geometry` prop adja (képenként mérve), a keret képaránya fix
+ * 1200/770. Recept egy új kompozithoz (forrás-px-ben):
+ *   1. keresd meg a varratot és a két pupilla (vagy fő tárgy) középpontját;
+ *   2. Z nagyítás: a látható szélesség W = 1200/Z, a két ablak x-eltérése a
+ *      pupillák dx-e, és mindkettőnek a képen belül kell maradnia;
+ *   3. H = W × 770/1200; az ablakok y-eltérése a pupillák dy-a, a varraton kívül;
+ *   4. w = Z×100%, h = (képmagasság/H)×100%, left = −x/W, top = −y/H.
+ * A hozzá tartozó mérés a szempilla-oldalon, a prop mellett áll.
+ *
+ * CSAK TRANSFORM ÉS CLIP-PATH MOZOG: a --pos változó a felső réteg clip-path-ját
+ * és egy teljes szélességű réteg translateX-ét vezérli (a %-os translate a réteg
+ * SAJÁT szélességéhez mér, ami itt a keret szélessége). Nincs `left` animálás,
+ * nincs reflow. A húzás közvetlen — késleltetés és görbe nélkül követi az ujjat.
+ *
+ * JELZÉS: amikor először ér a képernyőre, EGYSZER 50 → 68 → 50%-ot „lélegzik"
+ * 900 ms alatt, hogy látsszon: húzható. Szöveges „húzd el" utasítás szándékosan
+ * nincs (a tulajdonos hangnem-szabálya: ne mondjuk meg, mit tegyen).
+ * Csökkentett mozgásnál a lélegzés kimarad, a húzás megmarad.
+ *
+ * MÉRÉS: `ba_drag` GA4-esemény az ELSŐ húzáskor (oldalanként egyszer).
+ *
+ * BILLENTYŰZET: valódi range input (vizuálisan rejtett, de fókuszálható); a
+ * nyilak léptetnek, a fókuszt a fogantyú gyűrűje mutatja.
+ */
+interface Props {
+  src: string;
+  altBefore: string;
+  altAfter: string;
+  /** A kép mérete és a két ablak helye a keret %-ában — lásd a fenti receptet. */
+  geometry: {
+    w: string;
+    h: string;
+    before: { left: string; top: string };
+    after: { left: string; top: string };
+  };
+  class?: string;
+}
+
+const { src, altBefore, altAfter, geometry: g, class: className = '' } = Astro.props;
+const beforeStyle = `width: ${g.w}; height: ${g.h}; left: ${g.before.left}; top: ${g.before.top};`;
+const afterStyle = `width: ${g.w}; height: ${g.h}; left: ${g.after.left}; top: ${g.after.top};`;
+---
+
+<figure
+  class:list={['ba relative w-full overflow-hidden rounded-3xl bg-inkRise ring-1 ring-black select-none', className]}
+  style="aspect-ratio: 1200 / 770; --pos: 50%; touch-action: pan-y;"
+  data-ba
+>
+  <img
+    src={src}
+    alt={altBefore}
+    width="1200"
+    height="1577"
+    loading="lazy"
+    decoding="async"
+    draggable="false"
+    class="absolute max-w-none"
+    style={beforeStyle}
+  />
+  {/* Az „után" réteg SAJÁT alt szöveget kap (nem rejtett felolvasó-szöveget):
+      így a felolvasó mindkét állapotot bemondja, és a Google is képleírásként olvassa. */}
+  <div class="absolute inset-0" style="clip-path: inset(0 0 0 var(--pos));">
+    <img
+      src={src}
+      alt={altAfter}
+      width="1200"
+      height="1577"
+      loading="lazy"
+      decoding="async"
+      draggable="false"
+      class="absolute max-w-none"
+      style={afterStyle}
+    />
+  </div>
+
+  <p class="pointer-events-none absolute left-3 top-3 m-0 rounded-full bg-inkDeep/70 px-3 py-1 text-[11px] uppercase tracking-caps text-cream">Előtte</p>
+  <p class="pointer-events-none absolute right-3 top-3 m-0 rounded-full bg-inkDeep/70 px-3 py-1 text-[11px] uppercase tracking-caps text-cream">Utána</p>
+
+  <div class="pointer-events-none absolute inset-0" style="transform: translateX(var(--pos));" aria-hidden="true">
+    <div class="absolute inset-y-0 left-0 -ml-px w-0.5 bg-cream"></div>
+    <div class="ba-knob absolute left-0 top-1/2 -ml-[22px] -mt-[22px] flex h-11 w-11 items-center justify-center rounded-full bg-cream text-ink shadow-[0_8px_24px_rgba(0,0,0,0.45)]">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 7l-5 5 5 5M15 7l5 5-5 5"></path>
+      </svg>
+    </div>
+  </div>
+
+  <label class="sr-only">
+    Előtte–utána arány
+    <input type="range" min="0" max="100" step="1" value="50" data-ba-range />
+  </label>
+</figure>
+
+<style>
+  .ba { cursor: ew-resize; }
+  .ba:focus-within .ba-knob {
+    box-shadow: 0 0 0 3px rgba(217, 178, 125, 0.9), 0 8px 24px rgba(0, 0, 0, 0.45);
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var figs = document.querySelectorAll('[data-ba]:not([data-ba-ready])');
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function seg() {
+      var p = (location.pathname || '/').replace(/^\/+|\/+$/g, '');
+      return p === '' ? 'home' : p.split('/')[0];
+    }
+
+    figs.forEach(function (fig) {
+      fig.setAttribute('data-ba-ready', '1');
+      var range = fig.querySelector('[data-ba-range]');
+      var touched = false;
+      var sent = false;
+      var raf = 0;
+
+      function set(v) {
+        v = Math.max(0, Math.min(100, v));
+        fig.style.setProperty('--pos', v + '%');
+        if (range) range.value = String(Math.round(v));
+      }
+      function interacted() {
+        touched = true;
+        cancelAnimationFrame(raf);
+        if (sent) return;
+        sent = true;
+        try { if (window.gtag) window.gtag('event', 'ba_drag', { event_category: 'proof', event_label: seg() }); } catch (e) {}
+      }
+      function fromPointer(ev) {
+        var r = fig.getBoundingClientRect();
+        set(((ev.clientX - r.left) / r.width) * 100);
+      }
+
+      // Érintésnél a húzás csak VÍZSZINTES mozdulatra indul: a képen kezdődő
+      // függőleges görgetés (touch-action: pan-y) ne ugrassa el a fogantyút, és
+      // ne küldjön hamis ba_drag eseményt. Egy mozdulat nélküli koppintás a
+      // koppintás helyére teszi a vonalat. Egérnél azonnal indul.
+      var dragging = false;
+      var pending = false;
+      var sx = 0;
+      var sy = 0;
+      function begin(ev) {
+        dragging = true;
+        pending = false;
+        interacted();
+        try { fig.setPointerCapture(ev.pointerId); } catch (e) {}
+        fromPointer(ev);
+      }
+      fig.addEventListener('pointerdown', function (ev) {
+        sx = ev.clientX;
+        sy = ev.clientY;
+        pending = true;
+        if (ev.pointerType === 'mouse') begin(ev);
+      });
+      fig.addEventListener('pointermove', function (ev) {
+        if (dragging) { fromPointer(ev); return; }
+        if (!pending) return;
+        var dx = Math.abs(ev.clientX - sx);
+        var dy = Math.abs(ev.clientY - sy);
+        if (dx > 6 && dx > dy) begin(ev);
+        else if (dy > 6) pending = false;
+      });
+      fig.addEventListener('pointerup', function (ev) {
+        if (pending && !dragging) { interacted(); fromPointer(ev); }
+        dragging = false;
+        pending = false;
+      });
+      fig.addEventListener('pointercancel', function () {
+        dragging = false;
+        pending = false;
+      });
+
+      if (range) {
+        range.addEventListener('input', function () {
+          interacted();
+          set(Number(range.value));
+        });
+      }
+
+      // Egyszeri „lélegzés" az első megjelenéskor — 50 → 68 → 50, 900 ms.
+      if (reduced || !window.IntersectionObserver) return;
+      var io = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        setTimeout(function () {
+          if (touched) return;
+          var start = performance.now();
+          function tick(now) {
+            if (touched) return;
+            var t = Math.min(1, (now - start) / 900);
+            set(50 + 18 * Math.sin(Math.PI * t));
+            if (t < 1) raf = requestAnimationFrame(tick);
+          }
+          raf = requestAnimationFrame(tick);
+        }, 250);
+      }, { threshold: 0.6 });
+      io.observe(fig);
+    });
+  })();
+</script>

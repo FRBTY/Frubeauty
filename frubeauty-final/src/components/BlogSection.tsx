@@ -40,7 +40,7 @@ const defaultPosts: BlogPost[] = [
     slug: 'eskuvoi-smink-felkesziules',
     title: 'Esküvői smink Budapesten: hogyan készülj a próbasminkre?',
     excerpt: 'A próbasminken dől el a nagy napi smink — és fotó is készül róla. Mit hozz, mit hagyj otthon, és mi történik a 90 perc alatt.',
-    category: 'Alkalmi smink',
+    category: 'Esküvői smink',
     readingMinutes: 7,
     publishedAt: '2026-02-15',
     cover: '/img/eskuvoi-smink-felkesziules-blog-cover.webp',

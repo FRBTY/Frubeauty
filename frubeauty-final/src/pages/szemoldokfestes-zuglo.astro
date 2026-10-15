@@ -1,0 +1,259 @@
+---
+/**
+ * /szemoldokfestes-zuglo — szemöldökfestés és -formázás (2026-09-29).
+ *
+ * MIÉRT KÜLÖN OLDAL: a „szemöldökfestés" 320 keresés/hó (+52% éves alapon), a
+ * „szemöldök formázás" 140/hó Budapesten (Kulcsszótervező). Ezekre eddig a KEZDŐLAP
+ * jelent meg a 2,6–4. helyen, ~1% CTR-rel — a kereső egy „Kozmetikus Zugló" címet
+ * látott. Szeptemberben 13 foglalás jött ezekre a tételekre (Notino), tehát valódi,
+ * visszatérő kereslet: ez lesz egy későbbi munkatárs belépő szolgáltatása is.
+ *
+ * ÁRAK: a Notinóé (2026-09-29): formázás + festés 6 000 Ft / 55 perc, szemöldök- és
+ * szempillafestés 8 000 / 60, szedés + formázás 4 000 / 30, szempillafestés 4 000 / 25.
+ *
+ * AMIT SZÁNDÉKOSAN NEM TESZÜNK IDE: laminálásról szóló véleményt és laminálást mutató
+ * fotót „eredményként" — az félrevezető lenne egy festés-oldalon. Amint lesz saját
+ * festés előtte–utána fotó és festésről szóló vélemény, ide kerül.
+ * A festés tartóssága („3–4 hét") a tulajdonos szakmai megerősítése (2026-09-29).
+ */
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteContact from '../components/SiteContact.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { Reveal } from '../components/Reveal';
+import { ProcessSteps } from '../components/ProcessSteps';
+import FAQList from '../components/FAQList.astro';
+import RelatedArticles from '../components/RelatedArticles.astro';
+import TrustBar from '../components/TrustBar.astro';
+import BookingAssurance from '../components/BookingAssurance.astro';
+import StickyBookBar from '../components/StickyBookBar.astro';
+import { CookieBanner } from '../components/CookieBanner';
+import { siteConfig, relFor } from '../config/site';
+
+const priceItems = [
+  { name: 'Szemöldök formázás és festés', duration: '55 perc', description: 'A felesleges szálak kiszedése, az arcodhoz illő forma kialakítása és tartós festés egy alkalommal.', price: '6 000 Ft' },
+  { name: 'Szemöldök- és szempillafestés', duration: '60 perc', description: 'A szemöldököt és a szempillákat tartós festékkel festem be — kiemelve a tekintetet, ápolt, rendezett összhatással.', price: '8 000 Ft' },
+  { name: 'Szemöldök szedés, formázás', duration: '30 perc', description: 'Festés nélkül: tiszta vonal és rendezett forma, ha a szálaid színe jó.', price: '4 000 Ft' },
+  { name: 'Szempillafestés', duration: '25 perc', description: 'A szempillák hangsúlyosabbak lesznek a festésnek köszönhetően — világos pillánál különösen látványos.', price: '4 000 Ft' },
+];
+
+const processSteps = [
+  { step: '01', title: 'Konzultáció', body: 'Megnézzük a szálaid színét és növési irányát, és együtt választjuk ki az arcodhoz illő formát és árnyalatot.' },
+  { step: '02', title: 'Formázás', body: 'A felesleges szálakat kiszedem, és kialakítom a formát — a te arcodra, nem sablon szerint.' },
+  { step: '03', title: 'Festés', body: 'Tartós festékkel színezem a szálakat. A végén tükörbe nézel, és megbeszéljük, mikorra érdemes frissíteni.' },
+];
+
+const faqs = [
+  { q: 'Mennyibe kerül a szemöldökfestés és formázás?', a: 'A szemöldök formázás és festés 6 000 Ft, körülbelül 55 perc. A szempillafestéssel együtt 8 000 Ft, csak szedés és formázás festés nélkül 4 000 Ft.' },
+  { q: 'Meddig tart a szemöldökfestés?', a: 'A festék a szálakon jellemzően 3–4 hétig látszik, utána fakul, és a szemöldök is folyamatosan cserélődik. Ezért a legtöbben 3–4 hetente frissítik.' },
+  { q: 'Festés vagy laminálás kell nekem?', a: 'A festés színt és tiszta vonalat ad, a szálak állásán nem változtat. Ha a szálaid rendezetlenül vagy lefelé nőnek, a laminálás a jobb választás — nálam festéssel és formázással együtt 11 000 Ft.' },
+  { q: 'Csak szedést is kérhetek, festés nélkül?', a: 'Igen, a szemöldök szedés és formázás festés nélkül 4 000 Ft, körülbelül 30 perc.' },
+  { q: 'Érzékeny a bőröm vagy allergiás vagyok. Mit tegyek?', a: 'Várandósság, szoptatás, ismert allergia vagy bőrpanasz esetén foglalás előtt írj nekem, és átbeszéljük.' },
+  { q: 'Le lehet mondani vagy módosítani az időpontot?', a: 'Igen, 24 órával az időpont előtt bármikor díjmentesen.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Szemöldökfestés és formázás Zugló',
+  alternateName: ['Szemöldök formázás és festés', 'Szemöldök festés', 'Szemöldök szedés'],
+  description:
+    'Szemöldök formázás és tartós festés Budapesten, a XIV. kerületben: a forma az archoz igazítva, tű és tetoválás nélkül. Szempillafestéssel is foglalható.',
+  provider: {
+    '@type': 'BeautySalon',
+    '@id': 'https://frubeauty.com/#business',
+    name: 'FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus',
+    url: 'https://frubeauty.com',
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Budapest' },
+    { '@type': 'AdministrativeArea', name: 'Zugló' },
+  ],
+  offers: {
+    '@type': 'AggregateOffer',
+    lowPrice: '4000',
+    highPrice: '8000',
+    priceCurrency: 'HUF',
+    availability: 'https://schema.org/InStock',
+    priceValidUntil: '2026-12-31',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Szemöldökfestés és formázás árak — Zugló',
+    itemListElement: priceItems.map((it) => ({
+      '@type': 'Offer',
+      name: it.name,
+      price: it.price.replace(/[^\d]/g, ''),
+      priceCurrency: 'HUF',
+      availability: 'https://schema.org/InStock',
+    })),
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Főoldal', item: 'https://frubeauty.com' },
+    { '@type': 'ListItem', position: 2, name: 'Szemöldökfestés és formázás', item: 'https://frubeauty.com/szemoldokfestes-zuglo/' },
+  ],
+};
+
+const config = { ...siteConfig };
+const heroImage = '/img/szempilla-szemoldok-munka.webp';
+---
+
+<Layout
+  title="Szemöldökfestés és formázás Budapest – 6.000 Ft | FRUBEAUTY"
+  description="Szemöldökfestés és formázás Budapesten, Zuglóban: 6.000 Ft, kb. 55 perc. A formát az arcodhoz választom, tű és tetoválás nélkül. ★5,0 · 70+ Google-értékelés."
+  additionalSchemas={[faqSchema, serviceSchema, breadcrumbSchema]}
+  preloadImage={heroImage}
+>
+  <SiteHeader />
+
+  <section class="relative overflow-hidden pt-[calc(var(--header-h)+1.5rem)] sm:pt-[calc(var(--header-h)+6rem)] pb-16 sm:pb-24">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end">
+        <div class="hero-reveal lg:col-span-7">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Szemöldök · 1143 Budapest · XIV. kerület</p>
+          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Szemöldökfestés és <em class="display">formázás</em> Budapesten.</h1>
+          <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] tracking-caps">
+            <span class="text-gold font-medium">★ 5,0</span>
+            <span class="text-creamMute/50" aria-hidden="true">·</span>
+            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="uppercase text-creamMute hover:text-cream transition-colors">70+ Google-értékelés →</a>
+          </div>
+          {/* Tömör, számszerű válasz az első bekezdésben: ezt emelik ki az AI-összefoglalók. */}
+          <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">A szemöldök formázás és festés <strong class="font-medium text-cream">6.000 Ft</strong>, körülbelül 55 perc: a felesleges szálakat kiszedem, a formát az arcodhoz választom, és tartós festékkel színezem. A szempillafestéssel együtt 8.000 Ft. Budapesten, a XIV. kerületi Egressy úton, egyszerre egy vendéggel.</p>
+          <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
+            <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="fb-book inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+            <a href="#arak" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Árak</a>
+          </div>
+          <BookingAssurance class="mt-6" offer="Szemöldökfestés" />
+        </div>
+        <div class="lg:col-span-5">
+          <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-black">
+            <img src={heroImage} alt="Rendezett, festett szemöldök és ívelt pillák — FRUBEAUTY Zugló, Egressy út" width="800" height="1000" class="w-full h-full object-cover" loading="eager" fetchpriority="high" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <TrustBar
+    items={[
+      { value: '6 000 Ft', label: 'formázás és festés' },
+      { value: '~55 perc', label: 'egy alkalom' },
+      { value: 'Tű nélkül', label: 'tetoválás nélkül' },
+    ]}
+  />
+
+  <section id="arak" class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Árak · 2026</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Szemöldökfestés <em class="display">árak</em>.</h2>
+        <p class="mt-5 text-creamSoft leading-[1.7]">Fix árak, felár nélkül. Mindegyik külön is foglalható, és ha a szemöldök mellé a pillád is kéri, egy időpontban megcsinálom.</p>
+      </Reveal>
+
+      <div class="overflow-x-auto rounded-3xl border border-whisper bg-ink/40">
+        <table class="w-full text-left border-collapse">
+          <caption class="sr-only">Szemöldökfestés és formázás árak — FRUBEAUTY Zugló, Budapest XIV. kerület, 2026</caption>
+          <thead>
+            <tr class="border-b border-whisperStrong">
+              <th scope="col" class="py-4 px-5 sm:px-7 text-[11px] uppercase tracking-caps text-creamMute font-medium">Szolgáltatás</th>
+              <th scope="col" class="hidden sm:table-cell py-4 px-3 text-[11px] uppercase tracking-caps text-creamMute font-medium whitespace-nowrap">Időtartam</th>
+              <th scope="col" class="py-4 px-5 sm:px-7 text-[11px] uppercase tracking-caps text-creamMute font-medium text-right">Ár</th>
+            </tr>
+          </thead>
+          <tbody>
+            {priceItems.map((item) => (
+              <tr class="border-b border-whisper last:border-b-0 align-top">
+                <td class="py-5 px-5 sm:px-7">
+                  <span class="font-display text-base sm:text-lg font-medium text-cream leading-snug">{item.name}</span>
+                  <p class="mt-1.5 text-[13px] sm:text-sm text-creamSoft leading-relaxed max-w-[64ch]">{item.description}</p>
+                  <span class="sm:hidden mt-2 inline-block text-[11px] uppercase tracking-caps text-creamMute">{item.duration}</span>
+                </td>
+                <td class="hidden sm:table-cell py-5 px-3 text-[12px] uppercase tracking-caps text-creamMute whitespace-nowrap">{item.duration}</td>
+                <td class="py-5 px-5 sm:px-7 text-right"><span class="font-display text-lg sm:text-xl font-medium tracking-tight text-gold whitespace-nowrap">{item.price}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+        <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="fb-book inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-10">
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Festés vagy <em class="display">laminálás</em>?</h2>
+        <p class="mt-5 text-creamSoft leading-[1.7] max-w-[62ch]">A kettő más problémát old meg. A konzultáción megnézzük, melyik illik a szálaidhoz.</p>
+      </Reveal>
+      <Reveal client:visible as="div" delay={0.05} className="grid md:grid-cols-2 gap-5 sm:gap-6">
+        <article class="bg-inkSoft border border-whisper rounded-3xl p-6 sm:p-8">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-4">Formázás és festés · 6 000 Ft</p>
+          <h3 class="font-display text-xl font-medium text-cream mb-4 leading-snug">Ha a szálaid jól állnak</h3>
+          <p class="text-[15px] text-creamSoft leading-[1.7]">Színt és tiszta vonalat ad. A szálak állásán nem változtat, ezért akkor elég, ha a szemöldököd magától rendezett, csak halvány vagy formátlan.</p>
+        </article>
+        <article class="bg-inkSoft border border-whisper rounded-3xl p-6 sm:p-8">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-4">Laminálás · 11 000 Ft</p>
+          <h3 class="font-display text-xl font-medium text-cream mb-4 leading-snug">Ha a szálaid rendezetlenek</h3>
+          <p class="text-[15px] text-creamSoft leading-[1.7]">A lefelé vagy összevissza növő szálakat a kívánt irányba rögzíti, így a szemöldök dúsabbnak látszik. A formázás és a festés is benne van.</p>
+          <a href="/szemoldok-laminalas-zuglo/" class="mt-5 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Szemöldök laminálás<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
+        </article>
+      </Reveal>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl mx-auto text-center">
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Így zajlik — <em class="display">három lépés</em>.</h2>
+      </Reveal>
+      <ProcessSteps client:visible steps={processSteps} />
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 text-center">
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Amit a szemöldökfestésről <em class="display">kérdezni szoktak</em>.</h2>
+      </Reveal>
+      <FAQList items={faqs} />
+    </div>
+  </section>
+
+  <RelatedArticles
+    heading={'Szemöldök — <em class="display">kapcsolódó cikkek</em>.'}
+    slugs={['szemoldok-laminalas-arak-2026', 'szemoldok-laminalas-mit-jelent']}
+  />
+
+  <SiteContact offer="Szemöldökfestés" eyebrow="Foglalás" heading={'A formát <em class="display">az arcodhoz</em> választom.'} intro="Online foglalási rendszer 0–24 órában, a Notinón. A kezelés a helyszínen fizetendő." />
+
+  <SiteFooter />
+
+  <StickyBookBar eyebrow="Szemöldökfestés és formázás" price="6 000 Ft" />
+
+  <CookieBanner client:idle />
+
+  <div class="py-10 text-center border-t border-whisper">
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Vissza az oldal tetejére" class="inline-flex items-center gap-2 text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors duration-200">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
+      Vissza az oldal tetejére
+    </button>
+  </div>
+</Layout>

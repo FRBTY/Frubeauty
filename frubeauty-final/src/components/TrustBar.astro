@@ -5,13 +5,18 @@
  * MIÉRT ÍRÓDOTT ÚJRA: a sáv négy oldalon volt bemásolva, és mind a négyen az
  * ELSŐ cella — a legértékesebb hely a hero után — csak annyit mondott, hogy
  * „Google", alatta „Értékelések megnyitása". Vagyis a szalon legerősebb
- * bizonyítéka (5,0 átlag 60+ értékelésből) egyetlen semleges márkanévként
+ * bizonyítéka (5,0 átlag 70+ értékelésből) egyetlen semleges márkanévként
  * jelent meg, szám nélkül. A bizonyíték nem az, hogy létezik Google-profil,
  * hanem hogy mi áll rajta.
  *
- * A „60+" szándékosan kerekített: a pontos szám hetente nő, egy beégetett
- * „62" pedig hónapok múlva már alulmérné a szalont. A fölfelé kerekítés
- * tiltott, a lefelé nem — a „60+" mindig igaz marad.
+ * A „70+" szándékosan kerekített: a pontos szám hetente nő, egy beégetett
+ * pontos érték pedig hónapok múlva már alulmérné a szalont. A fölfelé
+ * kerekítés tiltott, a lefelé nem — a „70+" mindig igaz marad.
+ *
+ * A küszöböt a tulajdonos szava emeli, nem becslés: 2026-09-17-én lépte át a
+ * 70-et (előtte „60+" volt). A következő emelés is csak akkor jöhet, ha ő
+ * szól — a szám az oldalon 22 helyen szerepel, és mind a 22 innen, illetve
+ * a money page-ek meta leírásából jön.
  *
  * A csillag NEM aggregateRating strukturált adat: azt a Layout szándékosan nem
  * emitálja (self-serving jelölés, manual action kockázat). Ez tisztán vizuális,
@@ -63,7 +68,7 @@ const config = { ...siteConfig };
             rel="noopener"
             class="hover:text-cream transition-colors"
           >
-            60+ Google-értékelés &#8594;
+            70+ Google-értékelés &#8594;
           </a>
         </span>
       </div>

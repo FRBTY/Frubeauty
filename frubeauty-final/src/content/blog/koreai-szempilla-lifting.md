@@ -4,7 +4,7 @@ excerpt: "Mitől koreai egy szempilla lifting? Kíméletesebb hatóanyagok, pont
 category: "Szempilla"
 readingMinutes: 7
 publishedAt: 2026-04-28
-updatedAt: 2026-09-12
+updatedAt: 2026-09-29
 cover: "/img/szempillalifting-budapest-egressy-ut-munka-szempilla-oldal-2-kep.webp"
 coverWidth: 1200
 coverHeight: 1800
@@ -14,6 +14,8 @@ metaDescription: "Kíméletesebb hatóanyag, pontosabb ív, ragasztó nélkül �
 ---
 
 A koreai szempilla lifting célja ugyanaz, mint a hagyományosé — a saját pillák megemelése —, de **kíméletesebb hatóanyagokkal és pontosabb ívkialakítással** dolgozik. Kevésbé terheli a szálakat, természetesebb hatást ad, és mivel a pillák nem sérülnek, az eredmény jellemzően a teljes 6–8 hetes ciklust kitartja.
+
+Sokan koreai liftingnek, lash liftnek vagy szempilla laminálásnak hívják — mindhárom ugyanazt a kezelést jelenti.
 
 ## Miben más a koreai rendszer?
 
@@ -62,6 +64,26 @@ Ha a szemöldököt is rendeznéd ugyanabban az időpontban, a Teljes Tekintet c
 
 A pillákat egy szilikon emelőre fektetem, majd a lágyító oldat megnyitja a szál szerkezetét, hogy felvegye az emelt ívet. Ezt rögzítő, végül tápláló fázis követi — közben festés is történik, hogy a hatás teljes legyen. Végig csukott szemmel pihensz; a legtöbb vendég el is szundít. A folyamat **fájdalommentes**, mert a szemhéjat és a szálat sem éri tű vagy húzás.
 
+## Előtte és utána
+
+![Koreai szempilla lifting előtte és utána közelről — fent a kezelés előtt, lent utána, FRUBEAUTY Zugló](/img/szempilla-lifting-elotte-utana-kozelrol-zuglo-egressy-ut.webp)
+
+Fent a kezelés előtt, lent utána, ugyanazon a szemen. A saját pillák a tövüktől emelkednek, a festés pedig a világos végeket is láthatóvá teszi — műszál és ragasztó nélkül.
+
+## Vélemények a koreai szempilla liftingről
+
+A pillalifting nálam koreai technikával készül, tehát az alábbi értékelések erről a kezelésről szólnak. Mind a kettő a Google Cégprofilomról való, változtatás nélkül.
+
+> „Szempilla lifting a kedvencem, többször is voltam már és biztosan megyek még. Profi szakember, szívből ajánlom mindenkinek."
+>
+> **Kitti Varga-Tóth** · ★ 5,0 · többször visszatért
+
+> „Először jártam szempilla liftingen, így nagy bizalommal fordultam Fruzsinához, aki csodás munkát végzett, miközben jó hangulatban telt a kezelés!"
+>
+> **Marietta Kurja** · ★ 5,0 · az első liftingje volt
+
+A többit a [Google-értékelések](https://www.google.com/maps/place/Pecze-Kov%C3%A1cs+Fruzsina+Kozmetikus+-+Szempilla+%C3%A9s+Szem%C3%B6ld%C3%B6k+Stylist/@47.5057949,19.102677,16.86z/data=!4m8!3m7!1s0x4741dd4e35076b99:0x2c1e5cc27b785f95!8m2!3d47.5058846!4d19.1024696!9m1!1b1!16s%2Fg%2F11n53g1nrp) között olvashatod — 70+ vélemény, 5,0 átlag.
+
 ## Gyakori kérdések a koreai szempilla liftingről
 
 **Mi a különbség a koreai és a hagyományos szempilla lifting között?**
@@ -80,6 +102,6 @@ Pont ez a koreai technika lényege: a kíméletesebb anyag kisebb terhelést jel
 Nem ajánlott. A hormonális változás miatt az eredmény kiszámíthatatlan, ezért várandósság alatt nem végzem el. Szoptatás alatt foglalás előtt egyeztessünk.
 
 **Mennyibe kerül?**
-A koreai szempilla lifting festéssel együtt 12 000 Ft, körülbelül 75 perc. A részletes árakat a [szempilla lifting árak 2026](/blog/szempilla-lifting-arak-2026/) cikkben írom le.
+A koreai szempilla lifting festéssel együtt 12 000 Ft, körülbelül 75 perc. A tételes árlista a [szempilla lifting árak](/szempilla-lifting-zuglo/) oldalon van.
 
-Ha a lifting és a festés között döntenél, segít a [szempilla lifting vagy festés](/blog/szempilla-lifting-vagy-festes/) cikk; az árak részleteit a [szempilla lifting árak 2026](/blog/szempilla-lifting-arak-2026/) bejegyzésben találod, az eredmény megőrzéséhez pedig az [utóápolási útmutatót](/blog/szempilla-lifting-utoapolas/) érdemes elolvasnod.
+Ha a lifting és a festés között döntenél, segít a [szempilla lifting vagy festés](/blog/szempilla-lifting-vagy-festes/) cikk; az eredmény megőrzéséhez pedig az [utóápolási útmutatót](/blog/szempilla-lifting-utoapolas/) érdemes elolvasnod.

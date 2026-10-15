@@ -26,6 +26,22 @@
   force = true
 
 # ---------------------------------------------------------------------------
+# Kampány-rövidlink az SMS-hez. Egy SMS-ben 160 karakter van, és abból a teljes
+# /lezeres-szortelenites-budapest/ út 32-t vinne el — ezért kell a /lezer.
+#
+# 302, NEM 301: a 301-et a böngésző tartósan gyorsítótárazza, és egy lezárult
+# kampány után a /lezer más célra már nem lenne átirányítható azoknál, akik
+# egyszer megnyitották. Kampánylink legyen ideiglenes.
+#
+# Az UTM-et AZ ÁTIRÁNYÍTÁS teszi rá, nem az SMS: így a link rövid marad, a GA4
+# mégis külön látja az SMS-ből érkezőket, és a meglévő `book_click` eseményből
+# kiderül, hányan mentek tovább foglalni.
+[[redirects]]
+  from = "/lezer"
+  to = "/lezeres-szortelenites-budapest/?utm_source=sms&utm_medium=sms&utm_campaign=lezer_indulas"
+  status = 302
+
+# ---------------------------------------------------------------------------
 # 301 átirányítások: a RÉGI Wix-oldal még indexelt URL-jei → az új megfelelő oldalak.
 # A GSC-ben ezek a Wix-URL-ek MÉG INDEXELTEK (www.frubeauty.com/service-page/...),
 # így a rangsor/authority-jük a megfelelő money page-re terelendő.
@@ -42,6 +58,18 @@
   from = "/book-online"
   to = "/"
   status = 301
+
+# ---------------------------------------------------------------------------
+# 2026-09-29 — a szempilla-árcikk beolvad a money page-be. A cikk ugyanazt a saját
+# 12 000 Ft-os árat tételezte, amit a /szempilla-lifting-zuglo/ 09-15 óta pontos
+# „Szempilla lifting árak" H2-vel hoz; 90 nap alatt 2 kattintás 350 megjelenésből,
+# és a „szempilla lifting zugló"-n harmadik saját URL-ként versengett. A Netlify a
+# záró perjel nélküli változatot is ugyanerre a szabályra illeszti.
+[[redirects]]
+  from = "/blog/szempilla-lifting-arak-2026/"
+  to = "/szempilla-lifting-zuglo/"
+  status = 301
+  force = true
 
 # A statikus index.html változatok közvetlenül a végleges, záró perjeles URL-re mennek.
 [[redirects]]
@@ -77,14 +105,15 @@
   to = "/szemoldok-laminalas-zuglo/"
   status = 301
 
-# --- Szemöldök formázás és festés (Wix, külön indexelt slug) → szemöldök laminálás money page ---
+# --- Szemöldök formázás és festés (Wix, külön indexelt slug) → a saját oldala ---
+# 2026-09-29-ig a laminálás-oldalra ment, mert festés-oldal nem volt; most pontos egyezés.
 [[redirects]]
   from = "/service-page/szem%C3%B6ld%C3%B6k-form%C3%A1z%C3%A1s-%C3%A9s-fest%C3%A9s"
-  to = "/szemoldok-laminalas-zuglo/"
+  to = "/szemoldokfestes-zuglo/"
   status = 301
 [[redirects]]
   from = "/service-page/szemöldök-formázás-és-festés"
-  to = "/szemoldok-laminalas-zuglo/"
+  to = "/szemoldokfestes-zuglo/"
   status = 301
 
 # Nincs /service-page/* catch-all: csak a fenti, bizonyított legacy URL-ek
@@ -153,11 +182,11 @@
 
 [[redirects]]
   from = "/booking-calendar/szem%C3%B6ld%C3%B6k-form%C3%A1z%C3%A1s-%C3%A9s-fest%C3%A9s"
-  to = "/szemoldok-laminalas-zuglo/"
+  to = "/szemoldokfestes-zuglo/"
   status = 301
 [[redirects]]
   from = "/booking-calendar/szemöldök-formázás-és-festés"
-  to = "/szemoldok-laminalas-zuglo/"
+  to = "/szemoldokfestes-zuglo/"
   status = 301
 
 [[redirects]]

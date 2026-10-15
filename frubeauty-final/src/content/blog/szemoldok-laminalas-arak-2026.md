@@ -4,13 +4,13 @@ excerpt: "Budapesten 7 000 és 13 000 Ft között bármi lehet, és a különbs�
 category: "Szemöldök"
 readingMinutes: 7
 publishedAt: 2026-06-08
-updatedAt: 2026-09-07
+updatedAt: 2026-09-29
 cover: "/img/szemoldok-laminalas-budapest-egressy-ut-frubeauty-munka.webp"
 coverWidth: 1200
 coverHeight: 1800
 coverAlt: "Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló"
-metaTitle: "Szemöldök laminálás ára 2026: 7–13 000 Ft Budapesten"
-metaDescription: "Miért kerül az egyik helyen 7 000, a másikon 13 000 Ft a szemöldök laminálás? Négy tétel, ami benne van az árban vagy nincs — és mit kérdezz, mielőtt foglalsz."
+metaTitle: "Szemöldök laminálás árak 2026: mitől 7 és mitől 13 ezer?"
+metaDescription: "Budapesten 7 000 és 13 000 Ft között mozog a szemöldök laminálás ára. Négy tétel dönti el az árat: formázás, festés, utóápolás és a kezelés ideje."
 ---
 
 Budapesten a szemöldök laminálás listaára jellemzően **7 000 és 13 000 Ft** között mozog — a végösszeg viszont ennél feljebb is mehet, és a különbség majdnem mindig ugyanabból jön: **mit számolnak külön.** A meghirdetett ár sok helyen csak maga a laminálás — a formázás és a festés külön tétel, így a végösszeg csak a székben derül ki. Nálam Zuglóban **11 000 Ft** a teljes kezelés, és mind a három benne van. Lent tételesen: mi tartozik az árba, mire kérdezz rá, ha valahol feltűnően olcsó, és mikor elég az 5 000 Ft-os változat.
@@ -21,10 +21,10 @@ Budapesten a szemöldök laminálás listaára jellemzően **7 000 és 13 000 Ft
 |---|---|---|
 | Szemöldök laminálás + formázás + festés | ~60 perc | **11 000 Ft** |
 | Szemöldök laminálás festés nélkül + formázás | 60 perc | 9 000 Ft |
-| Szemöldök formázás + festés (laminálás nélkül) | 60 perc | 5 000 Ft |
+| Szemöldök formázás + festés (laminálás nélkül) | 55 perc | 6 000 Ft |
 | Teljes Tekintet csomag — laminálás + szempilla lifting | ~120 perc | **18 000 Ft** *(külön 23 000 Ft lenne)* |
 
-Ha a szálaid maguktól is jól állnak, és csak színt meg tiszta vonalat szeretnél, az 5 000 Ft-os formázás + festés is elég lehet. A laminálás akkor éri meg igazán, ha a szálak rendezetlenül vagy lefelé nőnek.
+Ha a szálaid maguktól is jól állnak, és csak színt meg tiszta vonalat szeretnél, a 6 000 Ft-os [szemöldök formázás és festés](/szemoldokfestes-zuglo/) is elég lehet. A laminálás akkor éri meg igazán, ha a szálak rendezetlenül vagy lefelé nőnek.
 
 ## Mit tartalmaz a szemöldök laminálás ára?
 
@@ -82,7 +82,7 @@ A FRUBEAUTY-nál 2026-ban 11 000 Ft, és ebben a formázás és a festés is ben
 Igen, mindkettő. A 11 000 Ft a teljes kezelés: laminálás + formázás + festés.
 
 **Mennyibe kerül laminálás nélkül, csak formázás és festés?**
-5 000 Ft. Ha a szálaid maguktól jól állnak, és csak tiszta vonalat meg színt szeretnél, ez is elég lehet.
+6 000 Ft. Ha a szálaid maguktól jól állnak, és csak tiszta vonalat meg színt szeretnél, ez is elég lehet.
 
 **Mennyibe kerül a szemöldök laminálás és a szempilla lifting együtt?**
 A Teljes Tekintet csomag 18 000 Ft (külön 23 000 Ft lenne) — egyszerre 5 000 Ft megtakarítás. A pillás rész részletei a [szempilla lifting](/szempilla-lifting-zuglo/) oldalon.

@@ -50,7 +50,7 @@ const config = { ...siteConfig };
 // és a „szemöldök laminálás" (112 megjelenés/hó, GSC) a kezdőlapra rangsorolt helyette.
 // Szétbontva: minden fő szolgáltatás saját, kulcsszó-anchoros belső linket kap.
 const services = [
-  { title: 'Lézeres szőrtelenítés', subtitle: 'Soprano Titanium, három hullámhosszon', body: '755, 808 és 1064 nm egyszerre — vastag és vékony szálra, világos és sötétebb bőrre is külön beállítva. Hat-nyolc alkalom, négy-hat hetente.', priceFrom: '11 000 Ft-tól alkalmanként', duration: '15–70 perc', href: '/lezeres-szortelenites-budapest/', image: '/img/lezeres-szortelenites-soprano-titanium-kijelzo-zuglo.webp', alt: 'A Soprano Titanium dióda lézer kijelzője a FRUBEAUTY zuglói szalonjában — kezelési zónák és Fitzpatrick bőrtípus-beállítás' },
+  { title: 'Lézeres szőrtelenítés', subtitle: 'Soprano Titanium, három hullámhosszon', body: '755, 808 és 1064 nm egyszerre — vastag és vékony szálra, világos és sötétebb bőrre is külön beállítva. Hat-nyolc alkalom, négy-hat hetente.', priceFrom: '11 000 Ft-tól alkalmanként', duration: '15–70 perc', href: '/lezeres-szortelenites-budapest/', image: '/img/lezeres-szortelenites-soprano-titanium-kijelzo-zuglo.webp', alt: 'A Soprano Titanium dióda lézer kijelzője a FRUBEAUTY zuglói szalonjában — 808, 755 és 1064 nm, beállított impulzushosszal és frekvenciával' },
   { title: 'Arckezelés', subtitle: 'Janssen Cosmetics hatóanyagokkal', body: 'Bőranalízissel kezdünk, és az alapján választunk protokollt — mélytisztító, hidratáló vagy anti-aging. Nem a bőröd igazodik a kezeléshez, hanem fordítva.', priceFrom: '16 000 Ft-tól', duration: '60–120 perc', href: '/arckezeles-zuglo/', image: '/img/service-arckezeles.webp', alt: 'Arckezelés Janssen Cosmetics termékekkel a FRUBEAUTY szalonban' },
   { title: 'Szempilla lifting', subtitle: 'Lifting + festés', body: 'Természetes íveltség, 6–8 hétig tartó eredmény. Reggel nincs többé szempillaspirál — felkelsz és kész vagy.', priceFrom: '12 000 Ft-tól', duration: '~ 75 perc', href: '/szempilla-lifting-zuglo/', image: '/img/szempilla-szemoldok-hero.webp', alt: 'Szempilla lifting előtte-utána a FRUBEAUTY szalonban' },
   { title: 'Szemöldök laminálás', subtitle: 'Formázás + festés', body: 'Dúsabb, rendezett szemöldök tű nélkül, koreai technikával — ~6 hétig tartós, ápolt tekintet.', priceFrom: '11 000 Ft-tól', duration: '~ 60 perc', href: '/szemoldok-laminalas-zuglo/', image: '/img/szemoldok-laminalas-zuglo-munka-uj.webp', alt: 'Szemöldök laminálás munka — előtte/utána, FRUBEAUTY Zugló' },
@@ -133,7 +133,7 @@ const homepageFaqSchema = {
 
 <Layout
   title="Kozmetikus Zugló · Szempilla & Szemöldök ★5,0 | FRUBEAUTY"
-  description="★5,0 · 60+ értékelés · Szemöldök laminálás, formázás és festés, szempilla lifting és Janssen arckezelés Zuglóban (Budapest, XIV.). 11.000 Ft-tól → Foglalj online!"
+  description="★5,0 · 70+ értékelés · Szemöldök laminálás, formázás és festés, szempilla lifting és Janssen arckezelés Zuglóban (Budapest, XIV.). 11.000 Ft-tól → Foglalj online!"
   additionalSchemas={[homepageFaqSchema]}
   preloadImage="/media/hero-poster.avif"
 >
@@ -159,7 +159,9 @@ const homepageFaqSchema = {
       érték változatlan: az a szélességre vonatkozik, telefonon sosem aktív. */}
   <section class="relative overflow-hidden pt-[calc(var(--header-h)+0.5rem)] sm:pt-[calc(var(--header-h)+9rem)]">
     <LampStatic>
-      <div class="hero-reveal text-center max-w-[920px] mx-auto">
+      {/* Hero-koreográfia: a .hero-reveal egyben emelte a blokkot, most elemenként
+          lépcsőzik (lásd Layout.astro, .hero-rise / .hero-soft). */}
+      <div class="text-center max-w-[920px] mx-auto">
         {/* A kicker korábban text-gold volt, csupasz szövegként a lámpa fényében:
             arany az aranyon = 1,0–2,9:1 kontraszt, optikailag eltűnt.
             Puszta fekete szöveg viszont nem megoldás, mert a lámpanyaláb függőleges
@@ -176,26 +178,26 @@ const homepageFaqSchema = {
         {/* Notino partner-jelvény — lásd PartnerBadge.astro. Fölötte áll az
             értékelés-chipnek, de halkabb nála: az értékelés a fő bizonyíték,
             a partnerség a hitelesítés. */}
-        <PartnerBadge class="mb-3 sm:mb-4" />
+        <PartnerBadge class="mb-3 sm:mb-4 hero-rise" />
 
         {/* A chip TARTALMA 2026-09-07-én cserélődött. Korábban „FRUBEAUTY ·
             Budapest XIV. · Zugló, Egressy út" állt itt: csupa cím-adat, nulla
             bizonyíték — miközben ez az oldal legnagyobb kontrasztú (~15:1),
             legelőrébb olvasott eleme. A márkanév a fejléc logójában amúgy is ott
             van fölötte, a pontos cím pedig a hero bekezdésében és a lap alján is.
-            Ide az kerül, amiért a látogató marad: az értékelés. A „60+"
+            Ide az kerül, amiért a látogató marad: az értékelés. A „70+"
             szándékosan kerekített lefelé — a pontos szám hetente nő, egy beégetett
             érték hónapok múlva alulmérné a szalont.
             NEM link: a hero tetejéről nem küldünk el senkit. Az ellenőrizhető,
             kattintható Google-hivatkozás egy képernyővel lejjebb, a bizalom-sávban
             van — előbb állítunk, közvetlenül utána bizonyítunk. */}
-        <p class="w-fit mx-auto mb-5 sm:mb-7 rounded-full bg-cream px-5 py-2 text-[11px] sm:text-xs uppercase tracking-caps text-inkDeep font-medium">
+        <p class="hero-rise w-fit mx-auto mb-5 sm:mb-7 rounded-full bg-cream px-5 py-2 text-[11px] sm:text-xs uppercase tracking-caps text-inkDeep font-medium">
           {/* A csillag SZÁNDÉKOSAN inline-block, nem flex-elem: a chip szövege
               mobilon két sorba tördel, és flex-konténerben az ikon ilyenkor a
               teljes blokk függőleges közepére, külön „sorba" került volna. */}
           <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="inline-block align-[-1px] mr-1.5" aria-hidden="true">
             <path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.5 5.79 22l2.39-8.15L2 9.36h7.61z" />
-          </svg>5,0 · 60+ Google-értékelés · Budapest, Zugló
+          </svg>5,0 · 70+ Google-értékelés · Budapest, Zugló
         </p>
         {/* Message match a Title-lel ("Kozmetikus Zugló · Szempilla Stylist"): a korábbi
             H1 ("Ébredj minden nap tökéletes bőrrel…") nulla kulcsszót vitt, így aki
@@ -204,17 +206,17 @@ const homepageFaqSchema = {
             SZÁNDÉKOSAN nincs benne szolgáltatás-fej-kulcsszó (szemöldök laminálás /
             szempilla lifting) — az a kezdőlap money-page-kannibalizációját erősítené. */}
         <h1
-          class="font-display font-light text-cream leading-[1.12] tracking-tightest-"
+          class="hero-rise hero-d1 font-display font-light text-cream leading-[1.12] tracking-tightest-"
           style="font-size: clamp(2rem, 5.5vw, 4.5rem);"
         >
           Kozmetikus <em class="display">Zuglóban</em>.
         </h1>
-        <p class="mt-6 sm:mt-8 text-base sm:text-lg text-creamSoft max-w-[58ch] mx-auto leading-[1.65] sm:leading-[1.7]">
+        <p class="hero-rise hero-d2 mt-6 sm:mt-8 text-base sm:text-lg text-creamSoft max-w-[58ch] mx-auto leading-[1.65] sm:leading-[1.7]">
           Kozmetikus és sminkes Zuglóban, a XIV. kerületi Egressy úton — személyre szabott arckezelés, tartós szempilla- és szemöldökkezelés, alkalmi smink. Egyszerre egy vendéggel, teljes figyelemmel.
         </p>
 
         {/* Static CTAs — no JS, no hydration. */}
-        <div class="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
+        <div class="hero-rise hero-d3 mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
           <a
             href={config.booking}
             target="_blank"
@@ -233,9 +235,9 @@ const homepageFaqSchema = {
 
         {/* A három leggyakoribb utolsó kifogás közvetlenül a gomb alatt, nem a
             lehajtható GYIK-ben — lásd BookingAssurance.astro. */}
-        <BookingAssurance class="mt-6" align="center" />
+        <BookingAssurance class="mt-6 hero-soft" align="center" />
 
-        <div class="mt-8 sm:mt-9 flex items-center justify-center gap-5 text-[12px] uppercase tracking-caps text-creamMute">
+        <div class="hero-soft mt-8 sm:mt-9 flex items-center justify-center gap-5 text-[12px] uppercase tracking-caps text-creamMute">
           <a href={config.instagram} target="_blank" rel="noopener" class="inline-flex items-center gap-2 hover:text-gold transition-colors duration-200" aria-label="Instagram">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden>
               <rect x="3" y="3" width="18" height="18" rx="5" />
@@ -582,7 +584,7 @@ const homepageFaqSchema = {
   {/* Telefonon a fejléc foglalás gombja nem renderel (NavBar.tsx:147), és a
       fejléc lefelé görgetéskor el is tűnik — a hero és a kapcsolat-szekció
       között eddig nem volt látható CTA. Lásd StickyBookBar.astro. */}
-  <StickyBookBar eyebrow="★ 5,0 · 60+ értékelés" price="Szabad időpontok" cta="Megnézem" />
+  <StickyBookBar eyebrow="★ 5,0 · 70+ értékelés" price="Szabad időpontok" cta="Megnézem" />
 
   <CookieBanner client:idle />
 

@@ -110,6 +110,7 @@
 import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteContact from '../components/SiteContact.astro';
+import RelatedArticles from '../components/RelatedArticles.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { Reveal } from '../components/Reveal';
 import { MagneticCTA } from '../components/MagneticCTA';
@@ -120,10 +121,13 @@ import BookingAssurance from '../components/BookingAssurance.astro';
 import PartnerBadge from '../components/PartnerBadge.astro';
 import StickyBookBar from '../components/StickyBookBar.astro';
 import { CookieBanner } from '../components/CookieBanner';
+import { ScrollVideo } from '../components/ScrollVideo';
 import { ConsultQuiz } from '../components/lezer/ConsultQuiz';
 import { LaserDiodeAnimation } from '../components/lezer/LaserDiodeAnimation';
 import { BookingScreening } from '../components/lezer/BookingScreening';
+import { AreaBuilder } from '../components/lezer/AreaBuilder';
 import { siteConfig, relFor } from '../config/site';
+import { videoObjectSchema } from '../config/videos';
 import {
   zones, packages, pairs, machineFacts, processSteps, worksFor, worksNotFor,
   commitments, faqs, crossSell, images,
@@ -131,12 +135,19 @@ import {
 } from '../data/lezer';
 
 const config = { ...siteConfig };
+// CÍM ÉS LEÍRÁS (2026-09-29): a „Dióda" előtag a „dióda lézeres szőrtelenítés"
+// (480 keresés/hó, Budapest) kifejezést is lefedi úgy, hogy a fej-kulcsszó
+// („lézeres szőrtelenítés budapest", 320/hó) SZÓ SZERINT benne marad — a 09-20-i
+// fókusz-döntést ez nem hígítja, szemben az „intim" beszúrásával. A leírás 309
+// karakterről ~150-re rövidült: a Google ~155-nél vágott, és épp az „alkalmanként
+// fizeted" esett ki. Visszaállítás: a két régi sor a git-történetben.
 ---
 
 <Layout
-  title="Lézeres szőrtelenítés Budapest – árak 11.000 Ft-tól | FRUBEAUTY"
-  description="Soprano Titanium dióda lézeres szőrtelenítés Budapesten, a XIV. kerületben: hónalj és bikinivonal sorozatban 11.000 Ft alkalmanként. Amit végleges szőrtelenítésnek hívnak: hat alkalom, négy-hat hetente. A sorozatot nem kell előre kifizetned. ★5,0 · 60+ értékelés."
-  additionalSchemas={[faqSchema, serviceSchema, howToSchema, breadcrumbSchema]}
+  title="Dióda lézeres szőrtelenítés Budapest – 11.000 Ft-tól"
+  description="Soprano Titanium dióda lézer Budapesten: hónalj 11.000 Ft, teljes intim 16.000 Ft alkalmanként, a sorozatot alkalmanként fizeted. Csak női vendégek."
+  additionalSchemas={[faqSchema, serviceSchema, howToSchema, breadcrumbSchema,
+    videoObjectSchema('lezeres-szortelenites-munkakozben')]}
 >
   <SiteHeader />
 
@@ -186,7 +197,7 @@ const config = { ...siteConfig };
               <PartnerBadge align="start" />
               <span class="inline-flex items-center gap-2 rounded-full border border-whisperStrong px-3.5 py-1.5 text-[10px] uppercase tracking-caps">
                 <span class="text-gold font-medium">★ 5,0</span>
-                <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="text-creamMute hover:text-cream transition-colors">60+ Google-értékelés</a>
+                <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="text-creamMute hover:text-cream transition-colors">70+ Google-értékelés</a>
               </span>
               <span class="fb-beam inline-flex items-center rounded-full border border-whisperStrong px-3.5 py-1.5 text-[10px] uppercase tracking-caps text-cream">Kizárólag női vendégek</span>
             </div>
@@ -216,7 +227,7 @@ const config = { ...siteConfig };
           <div class="mt-8 hidden lg:flex flex-wrap items-center gap-x-3 gap-y-2 text-[12px] tracking-caps">
             <span class="text-gold font-medium">★ 5,0</span>
             <span class="text-creamMute/50" aria-hidden="true">·</span>
-            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="uppercase text-creamMute hover:text-cream transition-colors">60+ Google-értékelés →</a>
+            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="uppercase text-creamMute hover:text-cream transition-colors">70+ Google-értékelés →</a>
             <span class="fb-beam inline-flex items-center rounded-full border border-whisperStrong px-3.5 py-1.5 text-[11px] uppercase tracking-caps text-cream">Kizárólag női vendégek</span>
           </div>
 
@@ -429,21 +440,54 @@ const config = { ...siteConfig };
           </div>
         </Reveal>
       </div>
+
+      {/* ── Szabad összeállítás ────────────────────────────────────────────
+           EGY VENDÉG KÉRÉSÉRE (2026-09-20): több területet szeretett volna, és
+           nem volt olyan csomag, amiben mind benne van. Idáig az árlista hat
+           kombinációra tudott árat mondani; aki ezeken kívül esett, a legfontosabb
+           kérdésére („mennyi lesz NEKEM?") nem kapott választ, csak ígéretet.
+
+           MIÉRT ITT, A LEGVÉGÉN: a legtöbb vendégnek a kész csomag a jó válasz.
+           Ha az összerakós felület van elöl, munkát adunk neki döntés helyett.
+           Ez a blokk annak szól, aki a kész válaszok közt nem találta meg magát.
+
+           Az árat a `lib/lezerArazas.ts` számolja — ugyanabból a szabályból,
+           amiből a fenti csomagárak. A motor a saját árlistánkból van
+           visszafejtve, és a build elszáll, ha a kettő elcsúszik. */}
+      <div id="osszeallitas" class="mt-16 sm:mt-24">
+        <Reveal client:visible as="div" className="max-w-2xl mb-9">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Ha egyik csomag sem passzol</p>
+          <h3 class="font-display font-light leading-[1.15] tracking-tight text-cream" style="font-size: clamp(1.5rem, 2.6vw, 2rem);">Állítsd össze a <em class="display">sajátodat</em>.</h3>
+          {/* A bevezető bekezdés SZÁNDÉKOSAN nincs itt (a tulajdonos kérésére,
+              2026-09-20). Előbb egy ígéretet tartalmazott („rögtön látod a hat
+              alkalom teljes összegét is”), utána a maradék („Pipáld ki, ami
+              zavar — bármit bármivel. Az árat egyben számolom.”) is kikerült:
+              a pipálható lista és mellette a panel magától elmondja ugyanezt.
+              A címsor elég. Ne írj ide újra felvezetőt. */}
+        </Reveal>
+        <AreaBuilder client:visible />
+      </div>
     </div>
   </section>
 
-  {/* ── Bikinivonal ──────────────────────────────────────────────────────────
+  {/* ── Bikinivonal és teljes intim ──────────────────────────────────────────
        Mért kereslet: a „bikinivonal + szőrtelenítés" változatok ~110/hó, az
        „intim lézeres szőrtelenítés" pedig +22% YoY — a kereslet gyantáról lézerre
-       vándorol („intim gyanta" ugyanekkor −45%). A szalon TELJES intimet nem
-       vállal, ezért a szekció a bikinivonalra szól, és ezt ki is mondja. */}
+       vándorol („intim gyanta" ugyanekkor −45%).
+
+       2026-09-20: a szalon MOSTANTÓL VÁLLALJA a teljes intimet is (M zóna,
+       16 000 Ft). Eddig a szekció azzal zárult, hogy „teljes intim kezelést nem
+       vállalok" — vagyis pont a gyorsabban növő keresletet küldtük el. A H2
+       SZÁNDÉKOSAN a bikinivonalat tartja elöl: az a mért, nagyobb kifejezés
+       (~110/hó), az intim a +22%-os feltörekvő. Mindkettő szerepel, a sorrend a
+       keresletet követi, nem az újdonságot. */}
   <section id="bikinivonal" class="py-20 sm:py-28 bg-inkSoft">
     <div class="max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-12">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
         <Reveal client:visible as="div" className="lg:col-span-5">
           <p class="text-[11px] uppercase tracking-caps text-gold mb-5">A leggyakoribb kérés</p>
-          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Bikinivonal lézeres <em class="display">szőrtelenítés</em>.</h2>
-          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">A bikinivonal a fürdőruhából kilógó rész. Ezt gyantáztatják a legtöbben, és ez az, ami a leggyorsabban nő vissza — ezért a legtöbb vendég ezzel kezdi a lézert.</p>
+          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Bikinivonal és teljes intim lézeres <em class="display">szőrtelenítés</em>.</h2>
+          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">A bikinivonal a fürdőruhából kilógó rész, a teljes intim pedig az egész terület. Ezt gyantáztatják a legtöbben, és ez az, ami a leggyorsabban nő vissza — ezért a legtöbb vendég ezzel kezdi a lézert.</p>
           <div class="mt-8">
             <MagneticCTA href={config.booking} external variant="primary">Időpontot foglalok</MagneticCTA>
           </div>
@@ -452,13 +496,13 @@ const config = { ...siteConfig };
           <Reveal client:visible as="div">
             <article class="bg-ink border border-whisper rounded-3xl p-6 sm:p-7">
               <h3 class="font-display text-lg sm:text-xl font-medium text-cream leading-snug">Mit jelent, és mennyibe kerül</h3>
-              <p class="mt-3 text-sm sm:text-[15px] text-creamSoft leading-[1.7]">S zóna: <span class="text-gold">11 000 Ft</span> alkalmanként, hat alkalom összesen <span class="text-cream">66 000 Ft</span>, körülbelül 20 perc. Teljes intim kezelést nem vállalok — a bikinivonalat igen.</p>
+              <p class="mt-3 text-sm sm:text-[15px] text-creamSoft leading-[1.7]">Bikinivonal, S zóna: <span class="text-gold">11 000 Ft</span> alkalmanként, hat alkalom összesen <span class="text-cream">66 000 Ft</span>, körülbelül 12 perc. Teljes intim, M zóna: <span class="text-gold">16 000 Ft</span> alkalmanként, hat alkalom <span class="text-cream">96 000 Ft</span>, körülbelül 18 perc.</p>
             </article>
           </Reveal>
           <Reveal client:visible as="div" delay={0.05}>
             <article class="bg-ink border border-whisper rounded-3xl p-6 sm:p-7">
               <h3 class="font-display text-lg sm:text-xl font-medium text-cream leading-snug">Nem kell kínosnak lennie</h3>
-              <p class="mt-3 text-sm sm:text-[15px] text-creamSoft leading-[1.7]">Egyszerre egy vendéget fogadok, más nincs bent a szalonban, és kizárólag nőket kezelek. Csak az a terület marad szabadon, amin épp dolgozunk, és ha szünetet kérsz, megállunk.</p>
+              <p class="mt-3 text-sm sm:text-[15px] text-creamSoft leading-[1.7]">Egyszerre egy vendéget fogadok, más nincs bent a szalonban, és kizárólag nőket kezelek. Csak az a terület marad szabadon, amin épp dolgozunk, és ha szünetet kérsz, megállunk. Ez a teljes intimre ugyanúgy áll.</p>
             </article>
           </Reveal>
           <Reveal client:visible as="div" delay={0.1}>
@@ -549,11 +593,11 @@ const config = { ...siteConfig };
           <Reveal client:visible as="div">
             <figure class="mt-6 overflow-hidden rounded-3xl ring-1 ring-white/10 bg-inkRise">
               <img
-                src={images.fitzpatrick}
-                alt="Bőrtípus-beállítás a Fitzpatrick-skálán a Soprano Titanium kijelzőjén — FRUBEAUTY, Budapest"
-                width="1300" height="1144" loading="lazy" decoding="async" class="w-full h-auto"
+                src={images.settings}
+                alt="A Soprano Titanium kijelzője a kezelés beállított értékeivel — impulzushossz, frekvencia és lefedett terület, FRUBEAUTY Budapest"
+                width="1300" height="1145" loading="lazy" decoding="async" class="w-full h-auto"
               />
-              <figcaption class="px-5 py-3 text-[11px] uppercase tracking-caps text-creamMute border-t border-whisper">A te bőrtípusod, beállítva és felírva</figcaption>
+              <figcaption class="px-5 py-3 text-[11px] uppercase tracking-caps text-creamMute border-t border-whisper">Az értékek, amiket a bőrödhöz állítok be</figcaption>
             </figure>
           </Reveal>
         </div>
@@ -569,6 +613,40 @@ const config = { ...siteConfig };
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Amit <em class="display">végleges szőrtelenítésnek</em> hívnak: hat alkalom.</h2>
       </Reveal>
       <ProcessSteps client:visible steps={processSteps} />
+
+      {/* ── A kezelés videón ───────────────────────────────────────────────
+           A lépések ALATT ül: előbb a szerkezet (mi történik és mikor), utána
+           a bizonyíték. Saját szekciót szándékosan NEM kap — az oldal szigorúan
+           váltja a sötét és a világosabb sávot, egy beszúrt szekció az egész
+           lenti ritmust eltolná.
+
+           NINCS CÍMSORA, ÉS NE IS KAPJON (2026-09-17, tulajdonosi döntés).
+           Volt rajta egy „Videón / Nem leírás. Ez történik egy alkalommal."
+           blokk — az esett ki, és nem stílus miatt. Két, az oldalon már
+           leírt szabályba ütközött:
+             1. Állított ahelyett, hogy mutatott volna (ugyanaz a hiba, amiért
+                a régi H1 megbukott) — a videó pont azt bizonyítja, amit a
+                címsor elmondott volna róla, három sorral előbb.
+             2. Ígéretet tett arra, amit a felület magától megmutat — ezért
+                ment ki korábban a „Két kérdés, és megmondom…" bevezető is.
+           Marad tehát a videó, a képaláírás és a gomb. A képaláírás az
+           egyetlen szöveg, és az is csak megnevezi, mit lát a szem.
+
+           Perf: a ScrollVideo `preload="none"`-nal SSR-el, tehát 0 byte, amíg
+           a látogató ide nem görget; a poszter AVIF/WebP. A videóból hiányzik
+           a hangsáv — némán megy, és így ~200 KB-tal kisebb. */}
+      <Reveal client:visible as="div" className="mt-16 sm:mt-20">
+        <div class="max-w-[380px] mx-auto text-center">
+          <ScrollVideo
+            client:visible
+            videoSrc="/media/lezeres-szortelenites-munkakozben-budapest-zuglo-egressy-ut.mp4"
+            posterSrc="/media/lezeres-szortelenites-munkakozben-budapest-zuglo-egressy-ut-poster.webp"
+            alt="Dióda lézeres szőrtelenítés munka közben a FRUBEAUTY zuglói kezelőjében — a kezelőfej végighalad a lábon"
+            caption="Beállítás a kijelzőn, hűtőgél, és a kezelőfej végighalad a területen."
+          />
+          <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="fb-book mt-8 inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+        </div>
+      </Reveal>
     </div>
   </section>
 
@@ -602,7 +680,7 @@ const config = { ...siteConfig };
       ezt külön meg kellett magyaráznia. Egy blokk, ami a saját jelenlétét
       mentegeti, többet visz el a bizalomból, mint amennyit hoz.
 
-      A Google-értékelés (★ 5,0 · 60+) a hero bizalmi sorában és a lap alján
+      A Google-értékelés (★ 5,0 · 70+) a hero bizalmi sorában és a lap alján
       ugyanúgy ott van, tehát a social proof nem tűnt el, csak nem tesz úgy,
       mintha a lézerről szólna. Ha lesz saját lézeres vélemény, ide jöjjön
       vissza — de csak akkor, és csak lézeressel. */}
@@ -643,6 +721,18 @@ const config = { ...siteConfig };
       </div>
     </div>
   </section>
+
+  {/* A lézer-klaszter két első cikke (2026-09-29). A cikkek a money page-re
+      linkelnek, ez a blokk vissza — így a klaszter kétirányú. A mért kereslet:
+      „lézeres szőrtelenítés vagy gyantázás" (a gyanta-kereslet vándorol: intim gyanta
+      −45%, lézeres intim +22%) és „hány alkalom" / „végleges szőrtelenítés" (880/hó).
+      2026-10-07: a harmadik cikk az árcikk — a „lézeres szőrtelenítés árak" SERP gyenge
+      (2016-os fórum, külföldi Reddit, aggregátor), és ezen a domainen az árcikk-minta
+      bizonyítottan rangsorol (szemöldök-árcikk 9,9. hely). */}
+  <RelatedArticles
+    heading={'Lézeres szőrtelenítés — <em class="display">a döntés előtt</em>.'}
+    slugs={['lezeres-szortelenites-arak-2026', 'lezeres-szortelenites-vagy-gyantazas', 'lezeres-szortelenites-hany-alkalom']}
+  />
 
   <SiteContact
     eyebrow="Foglalás"

@@ -21,8 +21,10 @@
 export type OfferCategory =
   | 'Szempilla'
   | 'Szemöldök'
+  | 'Szemöldökfestés'
   | 'Arckezelés'
   | 'Alkalmi smink'
+  | 'Esküvői smink'
   | 'Bőrápolás'
   | 'Lézer';
 
@@ -66,6 +68,20 @@ export const OFFERS = {
     anchor: 'szemöldök laminálás Zuglóban',
     notinoHint: 'Szemöldök laminálás Festéssel Formázással',
   },
+  // 2026-09-29: saját oldal (/szemoldokfestes-zuglo/) a „szemöldökfestés" (320/hó,
+  // +52%) és „szemöldök formázás" (140/hó) keresésre. Az ár a Notinóé (6 000 Ft,
+  // 55 perc) — a site korábban 5 000 Ft-ot írt, az volt elavult.
+  'Szemöldökfestés': {
+    service: 'Szemöldök formázás és festés',
+    short: 'Szemöldökfestés és formázás',
+    price: '6 000 Ft',
+    facts: ['~55 perc', 'a forma az arcodhoz', 'szempillafestéssel 8 000 Ft'],
+    body:
+      'A felesleges szálak kiszedése, a forma kialakítása és tartós festés egy alkalommal — Zuglóban, az Egressy úton.',
+    href: '/szemoldokfestes-zuglo/',
+    anchor: 'szemöldökfestés Zuglóban',
+    notinoHint: 'Szemöldök formázás és festés',
+  },
   Arckezelés: {
     service: 'Janssen arckezelés bőranalízissel',
     short: 'Janssen arckezelés',
@@ -88,16 +104,35 @@ export const OFFERS = {
     anchor: 'arckezelés Zuglóban',
     notinoHint: 'Kozmetikai kezelés',
   },
+  // 2026-09-29: a korábbi közös „Esküvői és alkalmi smink" ajánlat KETTÉVÁLT, mert
+  // a két szándék két oldalra költözött: az esküvői a /sminkes-zuglo/-n maradt (ott
+  // van a rangsor), az alkalmi saját oldalt kapott. A két esküvői blogcikk kategóriája
+  // ezért lett „Esküvői smink" — különben az ArticleOffer az alkalmi ajánlatot tenné
+  // egy menyasszonynak szóló cikk alá.
   'Alkalmi smink': {
-    service: 'Esküvői és alkalmi smink',
-    short: 'Esküvői és alkalmi smink',
-    price: '15 000 Ft-tól',
-    facts: ['menyasszonyi 30 000 Ft', 'próbasminkkel csomagban 39 000 Ft', 'kiszállással is'],
+    service: 'Alkalmi smink',
+    short: 'Alkalmi smink',
+    price: '15 000 Ft',
+    facts: ['60–75 perc', 'bőrelőkészítéssel és fixálással', 'fotózásra 17 000 Ft'],
     body:
-      'Alkalmi smink 15 000 Ft-tól, menyasszonyi smink próbasminkkel csomagban. Rejtett díj nincs — az árat előre tudod.',
-    href: '/sminkes-zuglo/',
-    anchor: 'esküvői és alkalmi smink Budapesten',
+      'Estélyre, szalagavatóra, ballagásra vagy fotózásra — Zuglóban, az Egressy úton, egyszerre egy vendéggel.',
+    href: '/alkalmi-smink-budapest/',
+    anchor: 'alkalmi smink Budapesten',
     notinoHint: 'Alkalmi smink',
+  },
+  // A Notino „Menyasszonyi csomag" tételének SAJÁT foglalási utasítása: a csomagot az
+  // esküvő NAPJÁRA kell foglalni, a próbasmink időpontját üzenetben egyeztetik. A hint
+  // ezt a sorrendet adja tovább, hogy a menyasszony ne a próbasmink dátumára foglaljon.
+  'Esküvői smink': {
+    service: 'Menyasszonyi smink próbasminkkel',
+    short: 'Menyasszonyi smink',
+    price: '30 000 Ft',
+    facts: ['próbasminkkel csomagban 40 000 Ft', 'örömanyával együtt 51 000 Ft', 'kiszállással is'],
+    body:
+      'A próbasminken beállítjuk a végleges stílust, és fotóval rögzítjük — a nagy napon ugyanaz kerül fel. Budapesten kiszállással is.',
+    href: '/sminkes-zuglo/',
+    anchor: 'esküvői smink Budapesten',
+    notinoHint: 'Menyasszonyi csomag — az esküvő napjára',
   },
   'Lézer': {
     service: 'Lézeres szőrtelenítés',

@@ -9,3 +9,6 @@ uj kepek/
 
 # Local Netlify folder
 .netlify
+
+# /brag videó munkafájljai (képkockák, kivágott klipek) — ~1,5 GB, a render.mjs újragenerálja
+brag-output/work/

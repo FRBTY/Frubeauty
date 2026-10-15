@@ -1,7 +1,7 @@
 ---
 title: "Esküvői smink Budapesten: így készülj a próbasminkre"
 excerpt: "Az esküvői próbasmink a nagy nap főpróbája: 90 perc alatt véglegesítjük a sminket, és fotó készül róla, hogy az esküvő reggelén ne kelljen tippelni. Mit hozz magaddal — lépésről lépésre."
-category: "Alkalmi smink"
+category: "Esküvői smink"
 readingMinutes: 7
 publishedAt: 2026-02-15
 updatedAt: 2026-08-15
@@ -62,7 +62,7 @@ Az esküvői smink nem egy szimpla alkalmi smink: olyan fixálási technikákkal
 
 **Próbasmink (90–120 perc, 15 000 Ft):** teljes körű stílustervezés, professzionális anyaghasználat, fotódokumentáció és receptúra — a használt termékek és árnyalatok pontos jegyzéke.
 
-**Menyasszonyi smink a nagy napon (30 000 Ft):** a jóváhagyott protokoll tiszta, stresszmentes kivitelezése. A kettő együtt a [menyasszonyi csomagban](/sminkes-zuglo/) 39 000 Ft — a részletes árakról az [esküvői smink árak](/blog/eskuvoi-smink-arak-budapest/) cikkben írok.
+**Menyasszonyi smink a nagy napon (30 000 Ft):** a jóváhagyott protokoll tiszta, stresszmentes kivitelezése. A kettő együtt a [menyasszonyi csomagban](/sminkes-zuglo/) 40 000 Ft — a részletes árakról az [esküvői smink árak](/blog/eskuvoi-smink-arak-budapest/) cikkben írok.
 
 Ha a saját dátumaidra kíváncsi vagy, az [esküvői szépségnaptárban](/eskuvoi-szepsegnaptar/) beírod az esküvőd napját, és megkapod az egész ütemtervet — melyik kezelés hányadikára kerüljön, és miért pont akkor.
 

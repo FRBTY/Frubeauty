@@ -54,4 +54,4 @@ Esküvőre, fotózásra a műszempilla látványosabb drámát ad; ha viszont á
 
 ## Még bizonytalan vagy?
 
-Ha valójában a festés és a lifting között ingadozol, a [szempilla lifting vagy festés](/blog/szempilla-lifting-vagy-festes/) cikk segít dönteni; a pontos árakat a [szempilla lifting árak 2026](/blog/szempilla-lifting-arak-2026/) bejegyzésben vezetem.
+Ha valójában a festés és a lifting között ingadozol, a [szempilla lifting vagy festés](/blog/szempilla-lifting-vagy-festes/) cikk segít dönteni; a pontos árakat a [szempilla lifting árak](/szempilla-lifting-zuglo/) oldalon vezetem.

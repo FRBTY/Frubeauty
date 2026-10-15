@@ -1,0 +1,266 @@
+=== 1. KAMPÁNY-SZINTŰ kizáró kulcsszavak — Lezer_V1 ===
+Google Ads -> Kampány -> Közönségek, kulcsszavak és tartalom -> Keresési kulcsszavak
+-> Kizáró kulcsszavak fül -> + -> Kampány kiválasztása -> beillesztés.
+
+--- KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás) ---
+szőrtelenítő
+szortelenito
+szőrtelenítők
+krém
+krem
+gép
+gep
+gépek
+gépet
+készülék
+keszulek
+készüléket
+epilátor
+epilator
+borotva
+borotválkozás
+spray
+hab
+olaj
+zselé
+zsele
+csipesz
+szálanként
+
+--- MÁRKA (készülék-gyártók) ---
+philips
+braun
+lumea
+remington
+veet
+sanitas
+"x epil"
+xepil
+beurer
+"silk expert"
+kristály
+rowenta
+panasonic
+bosch
+
+--- BOLT / VÁSÁRLÁS ---
+"media markt"
+mediamarkt
+emag
+alza
+rossmann
+dm
+tesco
+auchan
+árukereső
+arukereso
+eladó
+elado
+webshop
+rendelés
+vásárlás
+vasarlas
+olcsón
+használt
+hasznalt
+árgép
+
+--- OTTHONI / DIY ---
+otthoni
+otthon
+házilag
+hazilag
+diy
+"saját kezűleg"
+házi
+recept
+
+--- GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS ---
+"gép ár"
+"gép ára"
+"gép árak"
+bérlés
+berles
+kölcsönzés
+lízing
+salontech
+zeon
+viszonteladó
+forgalmazó
+tanfolyam
+képzés
+kepzes
+oktatás
+iskola
+okj
+állás
+munka
+franchise
+"üzleti terv"
+
+--- MÁS LÉZER-FELHASZNÁLÁS ---
+szemműtét
+szemlézer
+tetoválás
+tetkó
+tetovalas
+hegkezelés
+bőrmegújítás
+visszér
+hajbeültetés
+körömgomba
+fogfehérítés
+lézerterápia
+pattanás
+kutya
+macska
+állatorvos
+
+--- ÚJ 2026-09-20: ANGOL / ROSSZ SZOLGÁLTATÁS / VERSENYTÁRS ---
+laser
+"hair removal"
+electrolysis
+arckezelés
+arckezeles
+"dr b esth"
+
+--- ÚJ 2026-09: KÉSZÜLÉK ÉS NEM VÁLLALT ZÓNA ---
+elektromos
+szemöldök
+szemoldok
+orr
+fül
+ful
+homlok
+
+--- MÁS GÉPTÍPUS (nálunk dióda van) ---
+alexandrit
+elysion
+candela
+gentlemax
+deka
+quanta
+motus
+"rubin lézer"
+diolaze
+
+--- VERSENYTÁRS ---
+"alma beauty"
+foreverderm
+everderm
+skinspirit
+medaid
+evln
+"oxygen medical"
+bársony
+aesthetica
+"medicare esztétika"
+"inspira medical"
+"be pretty"
+"ikra beauty"
+lézi
+"laser studio"
+"lézer stúdió"
+"lezer studio"
+
+--- FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget) ---
+férfi
+férfiak
+férfiaknak
+férfias
+ferfi
+ferfiak
+ferfiaknak
+here
+herezacskó
+mellkas
+szakáll
+szakall
+pénisz
+urak
+men
+male
+"for men"
+
+--- NEM SZOLGÁLTATÁS-SZÁNDÉK ---
+veszélyei
+veszélyes
+mellékhatás
+wikipedia
+"mi az"
+ingyen
+ingyenes
+groupon
+kupon
+"ősz szőr"
+"fehér szőr"
+"szőke szőrre"
+"terhesség alatt"
+gyermeknek
+
+--- TÁVOLI VÁROS ---
+debrecen
+szeged
+győr
+gyor
+pécs
+pecs
+miskolc
+nyíregyháza
+kecskemét
+székesfehérvár
+szombathely
+veszprém
+tatabánya
+sopron
+eger
+zalaegerszeg
+kaposvár
+békéscsaba
+szolnok
+dunaújváros
+salgótarján
+esztergom
+siófok
+hévíz
+balaton
+ausztria
+bécs
+szlovákia
+románia
+kassa
+érd
+dunakeszi
+gödöllő
+vác
+
+
+=== 2. HIRDETÉSCSOPORT-SZINTŰ kizárók — CSAK ezekre a csoportokra ===
+Fej kulcsszo / Dioda lezer / Lezer arak / Zonak
+Kampány-szintre NEM mehetnek: megölnék az Alternativa csoportot,
+ami szándékosan ezekre a keresésekre megy.
+
+gyanta
+gyantázás
+gyantazas
+gyantázó
+gyantázni
+wax
+waxing
+cukorpaszta
+cukorpasztázás
+elektrolízis
+elektrolizis
+"tűs epilálás"
+"tus epilalas"
+shr
+ipl
+villanófényes
+villanofenyes
+epilálás
+epilalas
+szálankénti
+
+--- CSAK a(z) Fej kulcsszo csoportba (belso verseny) ---
+dioda
+dióda

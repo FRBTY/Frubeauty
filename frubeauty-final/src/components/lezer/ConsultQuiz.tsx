@@ -1,7 +1,12 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { track } from '../../lib/track';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { siteConfig, relFor } from '../../config/site';
-import { pairs, packages } from '../../data/lezer';
+import { areaCatalog } from '../../data/lezer';
+import {
+  kalkulal, percSzoveg, foglalasiJegyzet, gyujtotetelKell, NOTINO_KOMBINALT,
+} from '../../lib/lezerArazas';
+import { useVagolap } from './useVagolap';
 
 /**
  * „A konzultáció” — a V4 variáns motorja (a név a szerkezetre utal, nem szolgáltatásra).
@@ -16,13 +21,26 @@ import { pairs, packages } from '../../data/lezer';
  * való, de ez az egész oldal hitelesítő mozdulata — és üzletileg is ez a jó:
  * az a vendég úgyis visszakérné a pénzét a harmadik alkalom után.
  *
- * ÁRLOGIKA: kizárólag DOKUMENTÁLT árakkal dolgozik. Az összevont csomagárak a
- * `data/lezer.ts` csomag- és páros-listájából jönnek; ha a kiválasztás nem
- * egyezik egyikkel sem, a panel a tételes összeget mutatja, és kiírja, hogy egy
- * időpontban kedvezmény jár. Új árat NEM számol ki magának.
+ * ÁRLOGIKA (2026-09-20-tól): a `lib/lezerArazas.ts` motorja számol — ugyanaz,
+ * ami az árlista alján lévő szabad összeállítást is hajtja. Így a hero és az
+ * árlista SOHA nem mondhat kétféle árat ugyanarra a kiválasztásra.
+ *
+ * AMI ELŐTTE VOLT, ÉS MIÉRT DŐLT MEG: a panel csak a hat dokumentált
+ * kombinációra (négy páros, két csomag) mondott árat; minden más esetben a
+ * tételes összeget mutatta, és annyit, hogy „a pontos árat az első alkalom
+ * elején mondom meg”. Egy vendég pont ezt kifogásolta: több területet
+ * szeretett volna, amire nincs kész csomag — vagyis a kvíz a saját ígéretét
+ * („megmondom, mennyi lesz NEKED”) nem tartotta be. A motor a hat dokumentált
+ * árból van visszafejtve, tehát ez nem új árazás, hanem a meglévő kiterjesztése.
+ *
+ * A NYOLC TERÜLET, ami itt választható, SZÁNDÉKOSAN a leggyakoribbak: ez egy
+ * harminc másodperces kvíz a heróban, nem árlista. A teljes, huszonhét területes
+ * lista az `AreaBuilder`-ben él, az árszekció végén.
  */
 
-const HUF = new Intl.NumberFormat('hu-HU', { maximumFractionDigits: 0 });
+// `useGrouping: 'always'`: a hu-HU alapértelmezés négyjegyű számot NEM tagol
+// („8000 Ft”), az oldal többi ára viszont tagolva van („8 000 Ft”).
+const HUF = new Intl.NumberFormat('hu-HU', { maximumFractionDigits: 0, useGrouping: 'always' });
 const MONTHS = ['január', 'február', 'március', 'április', 'május', 'június', 'július', 'augusztus', 'szeptember', 'október', 'november', 'december'];
 
 type HairId = 'sotet' | 'kozepes' | 'vilagos' | 'osz';
@@ -35,89 +53,78 @@ const HAIRS: { id: HairId; label: string; hint: string }[] = [
 ];
 
 /**
- * A `minutes` a zóna FELSŐ kezelési ideje a lezer.ts árlistájából (XS 15,
- * S 20, M 30, L 45, XL 70), nem becsült átlag. Korábban közép-értékek voltak
- * itt, és pont ez vitt félre a Notino-időpontok felvitelénél: a kvíz rövidebb
- * időt mutatott, mint amennyit a foglalás valójában lefoglal.
+ * A heróban választható nyolc terület — a leggyakoribbak. Az ID-k a
+ * `data/lezer.ts` katalógusából valók, tehát a címke és az ár egy helyen él az
+ * árlistával; itt csak azt döntjük el, MELYIK nyolc jelenjen meg.
+ *
+ * Ha egy ID elgépelődik, a `keres()` dob, és a build hangosan elszáll —
+ * nem pedig csendben eltűnik egy gomb a heróból.
  */
-const AREAS = [
-  { id: 'felso-ajak', label: 'Felső ajak', price: 7000, minutes: 15 },
-  { id: 'all', label: 'Áll', price: 7000, minutes: 15 },
-  { id: 'honalj', label: 'Hónalj', price: 11000, minutes: 20 },
-  { id: 'bikinivonal', label: 'Bikinivonal', price: 11000, minutes: 20 },
-  { id: 'alkar', label: 'Alkar', price: 16000, minutes: 30 },
-  { id: 'has', label: 'Has', price: 16000, minutes: 30 },
-  { id: 'labszar', label: 'Lábszár', price: 23000, minutes: 45 },
-  { id: 'teljes-lab', label: 'Teljes láb', price: 33000, minutes: 70 },
+const HERO_AREA_IDS = [
+  'felso-ajak', 'all', 'honalj', 'bikinivonal', 'alkar', 'has', 'labszar', 'teljes-lab',
 ] as const;
 
-type AreaId = (typeof AREAS)[number]['id'];
-
-/**
- * Összevont árak. A SZÁM NEM ITT ÉL: a lezer.ts `pairs` és `packages`
- * listájából olvassuk ki, név szerint. A korábbi változat kézzel átmásolt
- * számokat tartott, és a 2026-09-13-i árkorrekciónál némán elavult volna —
- * a kvíz a régi árat mutatta volna az árlista mellett.
- *
- * Ha egy név elcsúszik, a `huf()` dob: a build hangosan elszáll, nem csendben
- * hazudik egy rossz árat.
- */
-const huf = (cimke: string | undefined, honnan: string) => {
-  const n = Number((cimke ?? '').replace(/\D/g, ''));
-  if (!n) throw new Error(`ConsultQuiz: nincs ár ehhez a tételhez: ${honnan}`);
-  return n;
+const keres = (id: string) => {
+  const a = areaCatalog.find((x) => x.id === id);
+  if (!a) throw new Error(`ConsultQuiz: nincs ilyen terület a katalógusban: ${id}`);
+  return a;
 };
-const parAr = (nev: string) => huf(pairs.find((x) => x.name === nev)?.per, nev);
-const csomagAr = (cim: string) =>
-  huf(packages.find((x) => `${x.title} ${x.titleAccent}` === cim)?.perVisit, cim);
 
-const COMBOS: { ids: AreaId[]; price: number; name: string }[] = [
-  { ids: ['felso-ajak', 'all'], price: parAr('Felső ajak + áll'), name: 'Felső ajak + áll' },
-  { ids: ['honalj', 'bikinivonal'], price: parAr('Hónalj + bikinivonal'), name: 'Hónalj + bikinivonal' },
-  { ids: ['bikinivonal', 'labszar'], price: parAr('Bikinivonal + lábszár'), name: 'Bikinivonal + lábszár' },
-  { ids: ['teljes-lab', 'honalj'], price: parAr('Teljes láb + hónalj'), name: 'Teljes láb + hónalj' },
-  { ids: ['honalj', 'bikinivonal', 'labszar'], price: csomagAr('Sima Nyár'), name: 'Sima Nyár csomag' },
-  { ids: ['honalj', 'bikinivonal', 'teljes-lab', 'alkar', 'felso-ajak'], price: csomagAr('Tetőtől Talpig'), name: 'Tetőtől Talpig csomag' },
-];
-
-const sameSet = (a: string[], b: string[]) =>
-  a.length === b.length && [...a].sort().join('|') === [...b].sort().join('|');
+const AREAS = HERO_AREA_IDS.map(keres);
 
 export function ConsultQuiz() {
   const reduced = useReducedMotion();
   const [step, setStep] = useState(0);
   const [hair, setHair] = useState<HairId | null>(null);
-  const [areas, setAreas] = useState<AreaId[]>([]);
+  const [areas, setAreas] = useState<string[]>([]);
 
-  const toggle = (id: AreaId) =>
+  const toggle = (id: string) =>
     setAreas((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
   const result = useMemo(() => {
     if (!hair || areas.length === 0) return null;
 
-    const picked = AREAS.filter((a) => areas.includes(a.id));
-    const itemised = picked.reduce((s, a) => s + a.price, 0);
-    // A lefoglalt sáv: a zónák felső kezelési ideje + EGYSZER 10 perc ráhagyás
-    // (fogadás, Fitzpatrick-beállítás, fotó). Ez a képlet adja vissza pontosan
-    // a Notinón felvitt időtartamokat — a hónalj 30, a Sima Nyár 95, a Tetőtől
-    // Talpig 165 percet. A ráhagyás alkalmanként egyszer van, nem zónánként.
-    const minutes = picked.length ? picked.reduce((s, a) => s + a.minutes, 0) + 10 : 0;
-    const combo = COMBOS.find((c) => sameSet(c.ids, areas));
-    const perVisit = combo ? combo.price : itemised;
-    const total = perVisit * 6;
+    // A teljes árlogika — ár, lefoglalt idő, megtakarítás, összevonás — a közös
+    // motorból jön. A lefoglalt sáv képlete (zónaidők + EGYSZER 10 perc
+    // ráhagyás, egyetlen zónánál 15) is ott él: ez adja vissza a Notinón
+    // felvitt időtartamokat, és a build méri, hogy tényleg vissza is adja.
+    const kalk = kalkulal([...areas]);
+    if (!kalk) return null;
 
     // Befejezés: 6 alkalom, 5 hetes átlagos közökkel.
     const finish = new Date();
     finish.setDate(finish.getDate() + 5 * 7 * 5);
 
     return {
-      picked, itemised, minutes, combo, perVisit, total,
+      picked: kalk.areas,
+      itemised: kalk.tetelesPerAlkalom,
+      minutes: kalk.perc,
+      combo: kalk.nev,
+      perVisit: kalk.perAlkalom,
+      total: kalk.hatAlkalom,
       finishLabel: `${MONTHS[finish.getMonth()]} ${finish.getFullYear()}`,
-      saving: combo ? itemised - combo.price : 0,
+      saving: kalk.megtakaritasPerAlkalom,
+      jegyzet: foglalasiJegyzet(kalk),
+      // Nem „egynél több terület”: a heróban választható nyolcból az alkarnak
+      // és a hasnak sincs saját Notino-tétele, azok egyedül is a gyűjtőtételen
+      // mennek. A lista a `lezerArazas.ts`-ben él, egy helyen.
+      kombinalt: gyujtotetelKell(kalk),
     };
   }, [hair, areas]);
 
+  const { masolva, kezi, masol } = useVagolap();
+
   const verdict = hair === 'osz' ? 'no' : hair === 'vilagos' ? 'maybe' : 'yes';
+
+  // GA4: a kvíz-tölcsér mérése (2026-09-29). A lézer-oldal foglalási kattintása 18%
+  // (28 látogatóból 5), a többi money page-é 31–58% — ebből derül ki, hogy a rés a
+  // kvíz ELŐTT, KÖZBEN vagy UTÁN van. A `verdict` azt is megmutatja, hány látogatót
+  // szűr ki szándékosan az ősz/fehér szálnál kiírt „ne költs erre" panel.
+  useEffect(() => {
+    if (step === 2 && result) {
+      track('lezer_quiz_complete', { verdict, areas: areas.length, per_visit: result.perVisit });
+    }
+  }, [step]);
 
   const steps = [
     {
@@ -191,7 +198,10 @@ export function ConsultQuiz() {
               </div>
             )}
 
-            {/* 2 — területek */}
+            {/* 2 — területek. Itt csak a nyolc leggyakoribb van; aki mást keres,
+                 az árlista alján a teljes listából rakhatja össze a sajátját.
+                 E nélkül a link nélkül ugyanabba a zsákutcába futna, ami miatt
+                 ez az egész átalakítás elkezdődött. */}
             {step === 1 && (
               <div className="mt-7 flex flex-wrap gap-2.5">
                 {AREAS.map((a) => {
@@ -210,6 +220,12 @@ export function ConsultQuiz() {
                     </button>
                   );
                 })}
+                <a
+                  href="#osszeallitas"
+                  className="self-center text-[13px] text-creamMute hover:text-cream underline underline-offset-4 decoration-whisperStrong transition-colors px-2"
+                >
+                  Más terület kell →
+                </a>
               </div>
             )}
 
@@ -244,7 +260,7 @@ export function ConsultQuiz() {
                       {verdict === 'maybe' ? 'Ezen a szálszínen bizonytalan' : 'Erre a szálszínre dolgozik a lézer'}
                     </p>
                     <h3 className="font-display font-light text-cream leading-[1.15]" style={{ fontSize: 'clamp(1.4rem, 3.2vw, 2.1rem)' }}>
-                      {result.combo ? result.combo.name : result.picked.map((p) => p.label).join(' + ')} —{' '}
+                      {result.combo ?? result.picked.map((p) => p.label).join(' + ')} —{' '}
                       <em className="display">{HUF.format(result.perVisit)} Ft</em> alkalmanként.
                     </h3>
 
@@ -279,18 +295,11 @@ export function ConsultQuiz() {
                       </div>
                     </dl>
 
-                    {result.combo && result.saving > 0 && (
+                    {result.saving > 0 && (
                       <p className="mt-6 text-[14px] text-creamSoft leading-[1.7] max-w-[58ch]">
                         Külön-külön ez alkalmanként {HUF.format(result.itemised)} Ft lenne. Egy időpontban{' '}
                         <span className="text-gold">{HUF.format(result.saving)} Ft-tal kevesebb</span> — mert egy időpont,
                         nem {result.picked.length}.
-                      </p>
-                    )}
-                    {!result.combo && result.picked.length > 1 && (
-                      <p className="mt-6 text-[14px] text-creamSoft leading-[1.7] max-w-[58ch]">
-                        Ez a tételes összeg. Ha ezeket egy időpontban csináljuk, kedvezmény jár rá — a hónalj és a
-                        bikinivonal például együtt 18 000 Ft alkalmanként a 22 000 helyett. A te összeállításodra az
-                        első alkalom elején mondom meg a pontos árat, mielőtt bármit elkezdenénk.
                       </p>
                     )}
 
@@ -303,10 +312,61 @@ export function ConsultQuiz() {
                       >
                         Időpontot foglalok
                       </a>
+                      {result.kombinalt && (
+                        <button
+                          type="button"
+                          onClick={() => masol(result.jegyzet)}
+                          className="inline-flex items-center gap-2 rounded-full border border-whisperStrong px-5 py-3 text-[12px] uppercase tracking-caps text-cream hover:bg-white/5 transition-colors"
+                        >
+                          {masolva ? (
+                            <>
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                                <polyline points="20 6 9 17 4 12" />
+                              </svg>
+                              Kimásolva
+                            </>
+                          ) : (
+                            'Másolom a listát'
+                          )}
+                        </button>
+                      )}
                       <button type="button" onClick={() => { setStep(0); setHair(null); setAreas([]); }} className="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors px-3">
                         Újrakezdem
                       </button>
                     </div>
+
+                    {kezi && (
+                      <div className="mt-4 max-w-[58ch]">
+                        <label className="block text-[11px] uppercase tracking-caps text-creamMute mb-2">
+                          Jelöld ki és másold
+                        </label>
+                        <textarea
+                          readOnly
+                          rows={3}
+                          value={result.jegyzet}
+                          onFocus={(e) => e.currentTarget.select()}
+                          className="w-full rounded-xl bg-ink border border-whisperStrong p-3 text-[13px] text-creamSoft leading-[1.6] resize-none focus:outline-none focus:border-gold/60"
+                        />
+                      </div>
+                    )}
+
+                    {/* A Notinón egyetlen tételre sem lehet közvetlenül linkelni,
+                        tehát meg kell mondani, mit keressen. Ugyanaz a szöveg, mint
+                        az árlista alján lévő kalkulátorban — egy forrásból. */}
+                    <p className="mt-5 text-[13px] text-creamSoft leading-[1.7] max-w-[58ch] border-l-2 border-gold/40 pl-3.5">
+                      {result.kombinalt ? (
+                        <>
+                          A Notinón ezt foglald: <span className="text-cream">{NOTINO_KOMBINALT}</span>, és illeszd be a
+                          megjegyzésbe a kimásolt listát. Az idősávot — ~{percSzoveg(result.minutes)} — én állítom be.
+                        </>
+                      ) : (
+                        <>
+                          A Notinón ezt foglald:{' '}
+                          <span className="text-cream">{result.picked[0].label} – lézeres szőrtelenítés</span>.
+                        </>
+                      )}
+                    </p>
+
                     <p className="mt-4 text-[12px] text-creamMute leading-relaxed max-w-[58ch]">
                       A naptár előtt megkérdezek néhány dolgot az egészségedről — hogy ne az időpontodon derüljön
                       ki, ha valamit ki kell várnunk.

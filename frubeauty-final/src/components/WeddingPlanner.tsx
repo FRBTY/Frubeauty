@@ -132,7 +132,7 @@ const STEP_PRICE: Record<string, number> = {
 
 /** Csomagárak. Csak akkor élnek, ha a csomag MINDEN alkalma még előttünk van. */
 const PACKAGES = {
-  menyasszonyiCsomag: 39000, // próbasmink + menyasszonyi smink (külön 45 000)
+  menyasszonyiCsomag: 40000, // próbasmink + menyasszonyi smink (külön 45 000) — 2026-09-29 óta 40 000, a Notinóval egyezően
   teljesEskuvo: 51000, // + örömanya, egy reggelen (külön 60 000)
   teljesTekintet: 18000, // laminálás + lifting egy időpontban (külön 23 000)
   signatureReset: 49500, // 3 alkalmas arckezelés-kúra (külön 58 500)

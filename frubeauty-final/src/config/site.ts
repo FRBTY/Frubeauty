@@ -40,8 +40,22 @@ export const businessIdentity = {
   name: 'FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus',
   /** Vállalkozási forma szerinti név — ahol jogi/számlázási nevet kérnek. */
   legalName: 'Pecze-Kovács Fruzsina e.v.',
-  primaryCategory: 'Kozmetikus',
-  secondaryCategory: 'Szépségszalon',
+  /**
+   * Más, TÉNYLEGESEN használt nevek (JSON-LD `alternateName`). A Google a
+   * „frubeauty" keresést „true beauty"-re javítja — a márka még nem önálló entitás,
+   * ezért kell kimondani, hogy ezek ugyanazt a vállalkozást jelölik. Csak élő
+   * listázás neve kerülhet ide: a harmadik a Notino-szalonoldal címe betű szerint.
+   */
+  alternateNames: [
+    'FRUBEAUTY',
+    'Pecze-Kovács Fruzsina Kozmetikus',
+    'Pecze-Kovács Fruzsina Kozmetikus, Sminkes, Szemöldök és szempilla stylist',
+  ],
+  // A Cégprofil TÉNYLEGES beállítása (2026-08-11, élőben ellenőrizve): az elsődleges
+  // „Szépségszalon" — a térképcsomag 12 nyerőjéből 12 ezt használja. A korábbi
+  // „Kozmetikus elsődleges" érték téves jegyzet volt; katalógusba ezt másold.
+  primaryCategory: 'Szépségszalon',
+  secondaryCategory: 'Kozmetikus',
   /** ~90 karakter — rövid katalógus-mezőkhöz, meta-jellegű helyekre. */
   descriptionShort:
     'Kozmetikus Zuglóban: lézeres szőrtelenítés, Janssen arckezelés, szempilla és szemöldök, smink.',

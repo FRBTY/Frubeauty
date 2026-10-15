@@ -81,6 +81,15 @@ export const siteVideos = {
     durationSeconds: 21,
     pageUrl: `${SITE}/sminkes-zuglo/`,
   },
+  'lezeres-szortelenites-munkakozben': {
+    slug: 'lezeres-szortelenites-munkakozben-budapest-zuglo-egressy-ut',
+    name: 'Lézeres szőrtelenítés munka közben — FRUBEAUTY Zugló, Egressy út',
+    description:
+      'Dióda lézeres szőrtelenítés a zuglói szalonban: a Soprano Titanium beállítása a kijelzőn, hűtőgél, majd a kezelőfej végighalad a lábon. Pecze-Kovács Fruzsina kozmetikus, Budapest XIV. kerület.',
+    uploadDate: '2026-09-17T10:00:00+02:00',
+    durationSeconds: 15,
+    pageUrl: `${SITE}/lezeres-szortelenites-budapest/`,
+  },
 } as const satisfies Record<string, SiteVideo>;
 
 export type VideoKey = keyof typeof siteVideos;

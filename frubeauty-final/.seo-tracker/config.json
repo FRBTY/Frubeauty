@@ -20,5 +20,7 @@
   "windowDays": 28,
   "historyDays": 490,
   "lagDays": 3,
-  "minImpressions": 15
+  "minImpressions": 15,
+  "artifactUrl": "https://claude.ai/artifact/EVWpLg6i1BDwv1J16vhJZT",
+  "lastRun": "2026-09-17"
 }

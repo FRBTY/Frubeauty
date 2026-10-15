@@ -85,9 +85,15 @@
 //
 // A `single` mező MARAD: a sorozat utáni karbantartó alkalom ára, és ez egy
 // valóban megvásárolható szolgáltatás. Csak nem a belépő táblázat oszlopa.
+export type ZoneTag = 'XS' | 'S' | 'M' | 'L' | 'XL';
+
 export interface Zone {
-  tag: string;
+  tag: ZoneTag;
   time: string;
+  /** A `time` FELSŐ értéke percben. Miért külön mező és nem string-feldolgozás:
+      a lefoglalt sáv képlete (zónaidő + 10 perc ráhagyás) ebből számol, és egy
+      elgépelt gondolatjel a `time`-ban némán rossz időpont-hosszat adna. */
+  maxMinutes: number;
   /** A sorozat UTÁNI karbantartó alkalom ára. Nem belépő ajánlat. */
   single: string;
   /** Alkalmankénti ár a hat alkalmas sorozatban. */
@@ -102,27 +108,35 @@ export interface Zone {
 
 export const zones: Zone[] = [
   {
-    tag: 'XS', time: '10–15 perc', single: '10 000 Ft', serial: '7 000 Ft', seriesTotal: '42 000 Ft',
+    tag: 'XS', time: '8–10 perc', maxMinutes: 10, single: '10 000 Ft', serial: '7 000 Ft', seriesTotal: '42 000 Ft',
     singleNum: 10000, serialNum: 7000,
     areas: 'felső ajak · áll · szemöldök köze · fülkagyló · kézfej · lábfej · köldökvonal · mellbimbó udvara',
   },
   {
-    tag: 'S', time: '15–20 perc', single: '16 000 Ft', serial: '11 000 Ft', seriesTotal: '66 000 Ft',
+    tag: 'S', time: '10–12 perc', maxMinutes: 12, single: '16 000 Ft', serial: '11 000 Ft', seriesTotal: '66 000 Ft',
     singleNum: 16000, serialNum: 11000,
     areas: 'hónalj · bikinivonal · tarkó · nyak · arc oldala',
   },
   {
-    tag: 'M', time: '25–30 perc', single: '24 000 Ft', serial: '16 000 Ft', seriesTotal: '96 000 Ft',
+    tag: 'M', time: '15–18 perc', maxMinutes: 18, single: '24 000 Ft', serial: '16 000 Ft', seriesTotal: '96 000 Ft',
     singleNum: 24000, serialNum: 16000,
-    areas: 'alkar · felkar · váll · has · derék · popsi · teljes arc',
+    // TELJES INTIM, 2026-09-20: a szolgáltatás addig nem létezett (az oldal öt
+    // helyen mondta, hogy nem vállaljuk), most viszont igen. A besorolás nem
+    // érzésre ment, hanem a lezer.ts egyetlen mérőszámával, a LEFOGLALT ÓRÁRA
+    // jutó nettóval: 16 000 Ft egy 45 perces sávon 10 667 Ft/óra, ami pontosan
+    // az S (9 429) és az L (11 500) közé esik. Az L ára ugyanezen a sávon
+    // 15 333 Ft/órát adna — 33%-kal a legjobb zóna (XL, 11 647) fölött, vagyis
+    // nem prémium lenne, hanem kilógás a létrából. Felület szerint is stimmel:
+    // a teljes intim nagyjából a bikinivonal duplája, ami itt pont egy lépcső.
+    areas: 'alkar · felkar · váll · has · derék · popsi · teljes intim · teljes arc',
   },
   {
-    tag: 'L', time: '35–45 perc', single: '34 000 Ft', serial: '23 000 Ft', seriesTotal: '138 000 Ft',
+    tag: 'L', time: '22–28 perc', maxMinutes: 28, single: '34 000 Ft', serial: '23 000 Ft', seriesTotal: '138 000 Ft',
     singleNum: 34000, serialNum: 23000,
     areas: 'lábszár · comb · teljes hát · teljes mellkas · teljes kar',
   },
   {
-    tag: 'XL', time: '55–70 perc', single: '48 000 Ft', serial: '33 000 Ft', seriesTotal: '198 000 Ft',
+    tag: 'XL', time: '35–42 perc', maxMinutes: 42, single: '48 000 Ft', serial: '33 000 Ft', seriesTotal: '198 000 Ft',
     singleNum: 48000, serialNum: 33000,
     areas: 'teljes láb (comb és lábszár) · teljes hát és váll',
   },
@@ -161,8 +175,15 @@ export interface Pkg {
       A SZÁMÍTÁS SZABÁLYA: a csomagban lévő zónák idejének FELSŐ értéke,
       plusz 10 perc. A tíz perc az öltözés, a Fitzpatrick-beállítás és a
       dokumentációs fotó — ez alkalmanként egyszer van, nem zónánként.
-      Ugyanez a szabály adja a Notinón az összes egyzónás szolgáltatás
-      hosszát is (XS 15+10=25, S 20+10=30, L 45+10=55, XL 70+10=80).
+
+      EGYETLEN ZÓNÁRA VISZONT 15 PERC A RÁHAGYÁS, nem tíz. Itt korábban az állt,
+      hogy „ugyanez a szabály adja az egyzónás Notino-tételek hosszát is
+      (XS 15+10=25, S 20+10=30…)" — ez 2026-09-20-ra MEGDŐLT: a Notinón felső
+      ajak 30, hónalj 35, lábszár 60, teljes láb 85 perc. A tulajdonos döntése
+      szerint a Notino a mérvadó, tehát a weboldal igazodott hozzá. A csomagok
+      ettől függetlenül maradnak tízen — azok a Notinón is így vannak felvive.
+      A képlet a `lib/lezerArazas.ts` `lefoglaltPerc()`-ében él, és az
+      `ellenorzes()` mind a nyolc élő Notino-idősávot méri build-időben.
 
       MIÉRT A FELSŐ ÉRTÉK: a tartomány szórása zónánként 5–15 perc, és ez
       összeadódik — a Tetőtől Talpig öt zónája 120 és 155 perc között bárhol
@@ -195,7 +216,8 @@ export const packages: Pkg[] = [
     savings: null,
     badge: 'A legkisebb elköteleződés',
     dailyEquivalent: '≈ napi 181 Ft az első évben — utána nulla',
-    duration: '~ 30 perc / alkalom',
+    // 2026-09-21: a kezelési idők rövidültek, egy S zóna sávja 22 perc.
+    duration: '~ 22 perc / alkalom',
     features: [
       'Egészségügyi előszűrés online, a foglalás előtt',
       'Bőrtípus-beállítás a Fitzpatrick-skálán, felírva',
@@ -217,7 +239,7 @@ export const packages: Pkg[] = [
     priceOld: '270 000 Ft',
     savings: '48 000 Ft megtakarítás',
     dailyEquivalent: '≈ napi 608 Ft az első évben',
-    duration: '~ 95 perc / alkalom',
+    duration: '~ 62 perc / alkalom',
     features: [
       'Három terület egyetlen időpontban, nem háromban',
       'Bőrtípus-beállítás a Fitzpatrick-skálán, felírva',
@@ -239,7 +261,7 @@ export const packages: Pkg[] = [
     priceOld: '468 000 Ft',
     savings: '90 000 Ft megtakarítás',
     dailyEquivalent: '≈ napi 1 036 Ft az első évben',
-    duration: '~ 2 óra 45 perc / alkalom',
+    duration: '~ 1 óra 45 perc / alkalom',
     features: [
       'Öt terület egyetlen időpontban',
       'Egyszerre egy vendég van bent — nem sietünk',
@@ -258,6 +280,89 @@ export const pairs = [
   { name: 'Hónalj + bikinivonal', per: '18 000 Ft', total: '108 000 Ft', apart: '132 000 Ft', save: '24 000 Ft' },
   { name: 'Bikinivonal + lábszár', per: '30 000 Ft', total: '180 000 Ft', apart: '204 000 Ft', save: '24 000 Ft' },
   { name: 'Teljes láb + hónalj', per: '40 000 Ft', total: '240 000 Ft', apart: '264 000 Ft', save: '24 000 Ft' },
+];
+
+// ── Kezelhető területek tételesen — a kalkulátor forrása ──────────────────────
+// MIÉRT KELLETT (2026-09-20): egy vendég azt írta, hogy több területet szeretne,
+// és nincs olyan csomag, amiben mind benne van. Igaza volt, és ez kódszinten is
+// látszott: a heróban lévő kvíz nyolc területet kínált, és ha a kiválasztás nem
+// egyezett a négy dokumentált párossal vagy a két csomaggal, nem mondott árat —
+// csak annyit, hogy „az első alkalom elején megmondom”. Vagyis pont a döntés
+// pillanatában hallgatott el.
+//
+// A `zones` tömb az ÁRLISTÁT rendereli (öt sáv, felsorolt területekkel). Ez a
+// katalógus ugyanazt a huszonhét területet adja tételesen, hogy ki lehessen
+// pipálni őket. A kettő nem él függetlenül: az ár és az idő itt sehol nincs
+// beégetve, a `zone` mezőn keresztül az árlistából jön — áremeléskor itt sincs
+// teendő.
+//
+// A `covers` az egymást TARTALMAZÓ területeké. Enélkül a kalkulátor 42 000 Ft-ot
+// mondana a „comb + lábszár”-ra, amit az árlista teljes lábként 33 000-ért ad.
+export interface Area {
+  id: string;
+  label: string;
+  zone: ZoneTag;
+  /** UI-csoport. A vendég a testén keresi a területet, nem zónaméret szerint. */
+  group: string;
+  /** Mely területeket foglalja magában. Ha ez be van pipálva, azok feleslegesek;
+      ha azok MIND be vannak pipálva, ez a nagyobb terület olcsóbb. */
+  covers?: string[];
+  /** Halk pontosítás ott, ahol a név önmagában félreérthető. */
+  hint?: string;
+}
+
+export const areaGroups = [
+  'Arc és nyak',
+  'Kar, váll, kéz',
+  'Törzs',
+  'Hónalj és intim terület',
+  'Láb',
+] as const;
+
+export const areaCatalog: Area[] = [
+  // Arc és nyak
+  { id: 'felso-ajak', label: 'Felső ajak', zone: 'XS', group: 'Arc és nyak' },
+  { id: 'all', label: 'Áll', zone: 'XS', group: 'Arc és nyak' },
+  { id: 'szemoldok-koze', label: 'Szemöldök köze', zone: 'XS', group: 'Arc és nyak' },
+  { id: 'fulkagylo', label: 'Fülkagyló', zone: 'XS', group: 'Arc és nyak' },
+  { id: 'arc-oldala', label: 'Arc oldala', zone: 'S', group: 'Arc és nyak', hint: 'pofacsont és állkapocs vonala' },
+  { id: 'teljes-arc', label: 'Teljes arc', zone: 'M', group: 'Arc és nyak', covers: ['felso-ajak', 'all', 'szemoldok-koze', 'arc-oldala'] },
+  { id: 'nyak', label: 'Nyak', zone: 'S', group: 'Arc és nyak' },
+  { id: 'tarko', label: 'Tarkó', zone: 'S', group: 'Arc és nyak' },
+
+  // Kar, váll, kéz
+  { id: 'kezfej', label: 'Kézfej', zone: 'XS', group: 'Kar, váll, kéz' },
+  { id: 'alkar', label: 'Alkar', zone: 'M', group: 'Kar, váll, kéz', hint: 'könyöktől a csuklóig' },
+  { id: 'felkar', label: 'Felkar', zone: 'M', group: 'Kar, váll, kéz', hint: 'váll és könyök között' },
+  { id: 'teljes-kar', label: 'Teljes kar', zone: 'L', group: 'Kar, váll, kéz', covers: ['alkar', 'felkar'] },
+  { id: 'vall', label: 'Váll', zone: 'M', group: 'Kar, váll, kéz' },
+
+  // Törzs
+  { id: 'koldokvonal', label: 'Köldökvonal', zone: 'XS', group: 'Törzs', hint: 'a köldöktől lefelé futó csík' },
+  { id: 'mellbimbo-udvara', label: 'Mellbimbó udvara', zone: 'XS', group: 'Törzs' },
+  { id: 'has', label: 'Has', zone: 'M', group: 'Törzs', covers: ['koldokvonal'] },
+  { id: 'derek', label: 'Derék', zone: 'M', group: 'Törzs' },
+  { id: 'teljes-mellkas', label: 'Teljes mellkas', zone: 'L', group: 'Törzs', covers: ['mellbimbo-udvara'] },
+  { id: 'teljes-hat', label: 'Teljes hát', zone: 'L', group: 'Törzs' },
+  { id: 'teljes-hat-vall', label: 'Teljes hát és váll', zone: 'XL', group: 'Törzs', covers: ['teljes-hat', 'vall'] },
+
+  // Hónalj és intim terület
+  { id: 'honalj', label: 'Hónalj', zone: 'S', group: 'Hónalj és intim terület' },
+  // Halk pontosítás SZÁNDÉKOSAN nincs (a tulajdonos kérésére, 2026-09-20).
+  { id: 'bikinivonal', label: 'Bikinivonal', zone: 'S', group: 'Hónalj és intim terület' },
+  // A `covers` itt EGYETLEN elemű, és ez szándékos: a teljes intim magában
+  // foglalja a bikinivonalat, tehát ha mindkettő ki van pipálva, a bikinivonal
+  // kiesik. Automatikus FELFELÉ váltás viszont nincs — arra a motor legalább
+  // két lefedett területet kér, és itt ez pont jó: egy bikinivonalat kérő
+  // vendégnek nem tolunk oda magától teljes intimet.
+  { id: 'teljes-intim', label: 'Teljes intim', zone: 'M', group: 'Hónalj és intim terület', covers: ['bikinivonal'] },
+  { id: 'popsi', label: 'Popsi', zone: 'M', group: 'Hónalj és intim terület' },
+
+  // Láb
+  { id: 'labfej', label: 'Lábfej', zone: 'XS', group: 'Láb' },
+  { id: 'labszar', label: 'Lábszár', zone: 'L', group: 'Láb', hint: 'térdtől lefelé' },
+  { id: 'comb', label: 'Comb', zone: 'L', group: 'Láb', hint: 'térdtől felfelé' },
+  { id: 'teljes-lab', label: 'Teljes láb', zone: 'XL', group: 'Láb', covers: ['comb', 'labszar'] },
 ];
 
 // ── A gép: jellemző + haszon párban ───────────────────────────────────────────
@@ -291,7 +396,7 @@ export const processSteps = [
   {
     step: '02',
     title: 'Az első alkalom',
-    body: 'Kitöltünk egy rövid adatlapot, megnézem a szálad színét és vastagságát, és beállítom a bőrtípusodat a Fitzpatrick-skálán — ezt fel is írom, hogy a hatodik alkalomkor ugyanaz menjen. Utána borotvált, tiszta bőrre dolgozunk: védőszemüveg, gél, és indul. Hónalj 15–20 perc, lábszár 40, teljes láb 60. Végig mondom, mi következik, és bármikor szólhatsz, hogy álljunk meg.',
+    body: 'Kitöltünk egy rövid adatlapot, megnézem a szálad színét és vastagságát, és beállítom a bőrtípusodat a Fitzpatrick-skálán — ezt fel is írom, hogy a hatodik alkalomkor ugyanaz menjen. Utána borotvált, tiszta bőrre dolgozunk: védőszemüveg, gél, és indul. Hónalj 10–12 perc, lábszár 28, teljes láb 42. Végig mondom, mi következik, és bármikor szólhatsz, hogy álljunk meg.',
   },
   {
     step: '03',
@@ -319,8 +424,9 @@ export const worksFor = [
 export const worksNotFor = [
   'Kizárólag női vendégeket kezelek.',
   'Várandósság és szoptatás idején nem kezelek.',
+  // A „Teljes intim kezelést nem vállalok" sor 2026-09-20-án KIKERÜLT: a
+  // szolgáltatás azóta létezik (M zóna, 16 000 Ft). Ne rakd vissza.
   'Pacemaker, szívbetegség, epilepszia és spaszticitás — ezek mellett nem vállalom a kezelést.',
-  'Teljes intim kezelést nem vállalok; a bikinivonalat igen.',
   'Ősz és fehér szál — ezen a lézer nem tud dolgozni: nincs a szálban festék, amit fel tudna melegíteni.',
   'Világosszőke és világosvörös szál — az eredmény gyengébb és nehezen kiszámítható, ezért előre nem tudok rá ígéretet tenni.',
   'Frissen barnult vagy szoláriumozott bőr — barnulás után 2–4 hét szünet szükséges, mielőtt elkezdjük.',
@@ -411,7 +517,7 @@ export const faqs = [
   },
   {
     q: 'Kínos lesz a bikinivonal kezelése?',
-    a: 'Egyszerre egy vendéget fogadok, más nincs bent a szalonban, és kizárólag nőket kezelek. Csak azt a területet hagyjuk szabadon, amin épp dolgozunk. Teljes intim kezelést nem vállalok — a bikinivonal a fürdőruhából kilógó rész.',
+    a: 'Egyszerre egy vendéget fogadok, más nincs bent a szalonban, és kizárólag nőket kezelek. Csak azt a területet hagyjuk szabadon, amin épp dolgozunk, és ha szünetet kérsz, megállunk. Bikinivonalat és teljes intim területet egyaránt kezelek.',
   },
   {
     q: 'Férfiakat is fogadsz?',
@@ -440,11 +546,20 @@ export const crossSell = [
 ];
 
 // ── Képek ─────────────────────────────────────────────────────────────────────
+// 2026-09-17: a gépről készült fotók CSERÉLVE. A korábbi felvételeken a kijelző
+// fóliával volt letakarva — a gyűrődés és a csillanás minden képen látszott, és
+// a képernyő szövege olvashatatlan volt. Az új, fólia nélküli fotóból két KÜLÖN
+// keret készült (`machine` = az egész gép, `settings` = szoros a kijelzőn), hogy
+// a „A gép" szekció két képe ne ugyanaz a kivágás legyen.
+//
+// A `fitzpatrick` kulcs ezért lett `settings`: az új fotón a kezelés paraméterei
+// állnak a képernyőn, nem a Fitzpatrick-skála — a régi néven hivatkozva a kép
+// olyat állított volna, amit nem mutat.
 export const images = {
   machine: '/img/lezeres-szortelenites-gep-zuglo-egressy-ut-budapest.webp',
   machineWide: '/img/lezeres-szortelenites-dioda-lezer-808-755-1064nm-zuglo.webp',
   head: '/img/dioda-lezer-kezelofej-kozelrol-frubeauty-zuglo.webp',
-  fitzpatrick: '/img/lezeres-szortelenites-bortipus-fitzpatrick-beallitas-zuglo.webp',
+  settings: '/img/lezeres-szortelenites-bortipus-fitzpatrick-beallitas-zuglo.webp',
   room: '/img/lezeres-szortelenites-kozmetika-zuglo-egressy-ut.webp',
   portrait: '/img/pecze-kovacs-fruzsina-zuglo-kozmetikus.webp',
 };

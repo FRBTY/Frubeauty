@@ -1,68 +1,63 @@
 {
-  "runDate": "2026-09-07",
-  "window": "2026-08-08 – 2026-09-04 (28 nap)",
-  "headline": "159 katt vs elozo 85 (+87%), de a vendegszam 70 -> 72. A korlat atkerult a keresesrol a konverziora.",
+  "generatedAt": "2026-09-17",
   "done": [
     {
-      "title": "13 celkulcsszo bekerult a tracker configba",
-      "detail": "Eddig ures volt, ezert a tracker nem tudta jelezni, ha egy kituzott kulcsszorol eltunik a lathatosag. A lista money-fokuszu: a ket 'SOHA' verdiktu kifejezes (szemoldok laminalas, szemoldok laminalas meddig tart) szandekosan KIMARADT — orszagos szandek, illetve az AI-osszefoglalo elviszi a valaszt.",
-      "files": [".seo-tracker/config.json"]
+      "title": "A „menyasszonyi smink árak” kulcsszó egyértelmű gazdát kapott",
+      "detail": "Ez a futás egyetlen valódi veszteséget talált. Like-for-like (ugyanaz a 105 lekérdezés mindkét ablakban) a site pozíciója JAVULT 8,59 → 8,21 és a kattintás +23%, de az esküvői klaszter 1,7 pozíciót esett — és az esés egyetlen lekérdezésre koncentrálódik: „menyasszonyi smink árak” 8,3 → 11,1, 2 kattintásról 0-ra. Ezen két saját URL versengett, egyik sem nyert (blogcikk poz 10,5 / 37 megjelenés, /sminkes-zuglo/ poz 13,6 / 20 megjelenés). A blogcikk vezet, de a „menyasszonyi” szó eddig CSAK a törzsszövegben szerepelt, se címben, se H2-ben. Most megkapta: a metaTitle és a metaDescription a menyasszonyi árral kezd (54 / 155 karakter), a piaci sáv H2-je pedig „alkalmi és esküvői” helyett „menyasszonyi és alkalmi” lett — a táblázat eddig is tartalmazta mindkettőt, a jelentés nem változott. Az „esküvői” nem tűnt el: a H1-ben és az URL-ben marad, azon a kulcsszón amúgy is a money page áll jobban (8,9 vs a blog 11,6). Ugyanez a játék múlt héten a szemöldök-klaszteren már bevált: a választott URL 11,7 → 9,8-ra jött fel 10 nap alatt.",
+      "files": ["src/content/blog/eskuvoi-smink-arak-budapest.md"]
     },
     {
-      "title": "Szolgaltatas-specifikus ajanlat-doboz minden blogcikkre",
-      "detail": "A mert problema: az organikus blog-forgalom 12%-on konvertal (25 latogatobol 3 jut el a foglalasig), a szolgaltatas-oldalak 80%-on. Az uj ArticleOffer.astro a blog `category` mezojebol vezeti le az ajanlatot (ar, idotartam, tartossag, piller-oldal link), igy mind a 14 cikkre mukodik. Ket helyen: slim sav a cikk elejen, teljes doboz a vegen. A book_click meres a Layout globalis szkriptjebol jon — elesben ellenorizve: data-book-cta=1, utm_campaign=blog.",
-      "files": ["src/components/ArticleOffer.astro", "src/pages/blog/[...slug].astro"]
+      "title": "A múlt heti kannibalizáció-feloldás visszamérve: hatott",
+      "detail": "A 2026-09-07-i beavatkozás a „szemöldök laminálás árak” kulcsszón eldöntötte a versenyt. Előtte: money page poz 11,5 / 119 megjelenés, blogcikk poz 11,7 / 78 — vagyis a két URL váltakozott. Most: blogcikk poz 9,8 / 125 megjelenés, money page poz 13,2 / 57. A Google egyértelműen a blogcikket választotta, és az ~2 pozíciót feljött. Ez az első visszamért bizonyíték arra, hogy ez a fogás ezen a site-on működik — ezért futtattam ugyanezt most az esküvői klaszterre.",
+      "files": []
     },
     {
-      "title": "Kannibalizacio-feloldas a szemoldok-ar kulcsszon",
-      "detail": "Elo SERP-en igazolva (2026-09-07): a /blog/szemoldok-laminalas-arak-2026/ all #11-en, de a GSC 3 honapos atlaga a /szemoldok-laminalas-zuglo/ penzoldalt adja rangsorolonak — a ket URL valtakozik. A penzoldal H2-je 'Mennyibe kerul a szemoldok laminalas Budapesten?'-rol 'Az ar nalam: 11 000 Ft'-ra szukult (sajat ar), a piaci ar-kerdes a blogcikke marad. A blogcikk metaTitle-je arra valt, amire a Google amugy is atirja a SERP-en, plusz foldrajzi ellel: 'Szemoldok laminalas ara 2026: 7-13 000 Ft Budapesten'.",
-      "files": ["src/pages/szemoldok-laminalas-zuglo.astro", "src/content/blog/szemoldok-laminalas-arak-2026.md"]
-    },
-    {
-      "title": "A .seo-tracker/ verziokovetesbe kerult",
-      "detail": "A mappa sajat .gitignore-ja eleve igy volt megirva (csak a credentials.json kizarva), de sosem lett hozzaadva. Innentol a snapshotokbol epul a tobbheti trend.",
-      "files": [".seo-tracker/snapshots/2026-08-28.json", ".seo-tracker/snapshots/2026-09-07.json"]
+      "title": "Technikai kereszt-ellenőrzés: nincs hiba (URL-duplikáció, kanonikus, indexelés)",
+      "detail": "Szisztematikus — nem vizuális — átfésülés mind a 22 oldalon: nincs trailing-slash pár, nincs www/non-www és nincs http/https variáns. A három kulcs-URL-t (/sminkes-zuglo/, /blog/eskuvoi-smink-arak-budapest/, /lezeres-szortelenites-budapest/) a GSC URL-inspectionnel is megkérdeztem: mindhárom „Submitted and indexed”, és mindháromnál a googleCanonical EGYEZIK a userCanonical-lal. A /sminkes-zuglo/ esése tehát NEM technikai ok — valódi rangsor-mozgás."
     }
   ],
   "next": [
     {
-      "title": "Merd meg, mi tortenik a foglalas gomb utan",
-      "detail": "Ez a legnagyobb vak folt: 2026-08-ban 77 kulonbozo ember kattintott a foglalasra, 72 vendeg lett — de a ketto kozott nincs adat. A book_click csak a Notino fele torteno atkattintas. Ket olcso ut, fejlesztes nelkul: a foglalorendszer sajat statisztikaja ugyanerre a ket honapra, es egy honapig minden uj vendegtol egy mondattal megkerdezni, hol talalt meg. A TULAJDONOS feladata, nem kodolando.",
+      "title": "Mélyítsd a /blog/koreai-szempilla-lifting/ cikket — ez a legnagyobb egyben álló lehetőség",
+      "detail": "318 megjelenés, poz 7,7, mindössze 7 kattintás — a becsült potenciál 35 kattintás/28 nap, ami a mostani teljes forgalom ötöde. Ráadásul magától is mozog: ez a futás legnagyobb emelkedője (+3 kattintás, poz +0,7), a „koreai szempilla lifting budapest” párja pedig +5 kattintás. Vagyis a Google már jutalmazza — a mélyítés most a legolcsóbb kattintás az egész site-on. Ez a tétel a múlt heti listán is szerepelt, és NEM készült el; mivel közben magától javult, nem elavult javaslat, hanem sürgősebb lett.",
       "impact": "magas",
-      "effort": "1 ora + 1 honap kezi jegyzet"
+      "effort": "2–3 óra tartalmi munka"
     },
     {
-      "title": "Merd meg az ajanlat-doboz hatasat, mielott tovabb nyulsz a bloghoz",
-      "detail": "A kiindulasi ertek: organikus blog landing page -> book_click = 12% (2026-08, GA4: 25 user / 3 esemeny). 3-4 het mulva ugyanez a lekerdezes megmondja, hatott-e. Ha 30% fole megy, a kovetkezo lepes a koreai cikk melyitese; ha nem mozdul, a doboz szovege a hibas, nem a helye — akkor az ajanlatot kell atirni, nem ujabb CTA-t rakni be.",
+      "title": "Mérd vissza a menyasszonyi konszolidációt 2–3 hét múlva, mielőtt bármi mást csinálnál az esküvői klaszterrel",
+      "detail": "A kiindulási érték, amihez hasonlítani kell: „menyasszonyi smink árak” poz 11,1, 55 megjelenés, 0 kattintás; a blogcikk ezen a kulcsszón poz 10,5. Ha a blogcikk 8 alá jön és jön kattintás, a fogás harmadszor is bevált, és mehet ugyanez a maradék két kannibalizált kulcsszóra. Ha 3 hét után sem mozdul, akkor NEM a cím a szűk keresztmetszet ezen a klaszteren, és irányt kell váltani — akkor a /sminkes-zuglo/ tartalmi mélysége a következő gyanúsított.",
       "impact": "magas",
-      "effort": "10 perc, 3-4 het mulva"
+      "effort": "10 perc (a következő /rank futás elvégzi)"
     },
     {
-      "title": "Melyitsd a /blog/koreai-szempilla-lifting/ cikket",
-      "detail": "Elo SERP: #8, nincs AI-osszefoglalo, a 9 kek linkbol 3 kilog (webshop, tanfolyam) — valodi versenytars ketto: browandmakeup.hu es pastelbeautique.com, egyikuk sem ir arat es egyikuk sem ad utoapolast. Hianyzo H2-k: meddig tart (onallo szekcio), logo szemhejra miert ez a technika, utoapolas az elso 24 oraban, ellenjavallatok, lifting+festes egyutt. FELTETEL: kell hozza sajat elotte-utana felvetel ES valos utankovetes (hany hettel kesobb jott vissza a vendeg) — enelkul a bovites nem ad information gaint, es nem erdemes megcsinalni.",
+      "title": "Külső linkek — ez a plafon, és nem mozdult",
+      "detail": "Az Ahrefs-audit (2026-07-31) szerint a dofollow backlinkek száma NULLA, mellette 415 nofollow spam-domain egy aktív kampányból (disavow NEM kell). A technikai SEO 100/100, a title/meta réseket a mintaméret-próba szerint már nem érdemes csiszolni: a CTR-rések közül csak kettő valódi jel, és mindkettő megnyerhetetlen forgalom. Ez azt jelenti, hogy az on-page kar lassan kifogy. A citációk (Aranyoldalak, Firmania, Nyitva.hu — mindhárom dofollow, egy adatbázisból) a legolcsóbb első lépés, utána jöhet a build-links skill.",
       "impact": "magas",
-      "effort": "2-4 honap a #4-5-ig",
-      "blockedBy": "sajat meresi adat a tulajdonostol"
+      "effort": "fél nap"
     },
     {
-      "title": "Kulso linkek — ez a plafon",
-      "detail": "A GSC szerint a teljes kulso linkprofil KET domain (infobel.com, notino.hu), mindketto a kezdolapra, horgonyszoveg nelkul. A tartalmi melyites a koreai kulcsszon a #8-rol nagyjabol a #4-5-ig visz; a top 3-hoz kulso hivatkozas kell. Lassu kar, ezert kell most elkezdeni. Reszletek: FRUBEAUTY-BACKLINK-CITACIO-CSOMAG-2026-07-26.md.",
-      "impact": "ez a plafon",
-      "effort": "folyamatos"
-    }
-  ],
-  "untouched": [
-    {
-      "title": "A 'szemoldok laminalas' es 'szemoldok laminalas meddig tart' organikus hajszolasa",
-      "why": "Elo SERP-en ellenorizve: az elso orszagos, tajekozodo szandek es a top 26-ban sem vagyunk bent; a masodik folott az AI-osszefoglalo teljesen megvalaszolja a kerdest (0,9% CTR a 8,2-es pozicion pontosan ez). A cikkek maradnak a topikus lefedettsegert, de kulon befektetest nem kapnak."
+      "title": "A /sminkes-zuglo/ belső link horgonya — most nem volt commitolható",
+      "detail": "A money page ár-szekciójából a blogcikkre mutató link horgonya jelenleg „esküvői smink ár-útmutató”. A konszolidáció után ennek „menyasszonyi smink árak Budapesten”-nek kellene lennie, hogy a belső jel is a kijelölt gazdára mutasson. NEM csináltam meg: a src/pages/sminkes-zuglo.astro-ban 105 sornyi nem commitolt munka áll, és az explicit-útvonalas commit magával vitte volna. Amint az a munka commitolva van vagy eldőlt a sorsa, ez egy egysoros változtatás.",
+      "impact": "közepes",
+      "effort": "5 perc, de előbb a munkafa rendezése kell"
     },
     {
-      "title": "A ket 'Redirect error' hibajelzes",
-      "why": "Alriasztas: a /szemoldok-laminalas-zuglo es /szempilla-lifting-zuglo slash nelkuli alakja, utolso bejaras 2026-06-08. 2026-09-07-en curl-lel ujra ellenorizve: egyetlen 301 -> 200. A validacio fut."
+      "title": "Nézd meg a GSC Videók riportját ~1 hét múlva a lézer oldalra",
+      "detail": "A lézeres szőrtelenítés videó 2026-09-17-én került ki, a GSC viszont az oldalt utoljára 09-14-én járta be — vagyis a videó még nincs indexelve, és ez normális. A /video-sitemap.xml már be van küldve és az URL nem változott, tehát külön beküldeni nem kell. Ha egy hét múlva a Videók riport nem látja, akkor érdemes ránézni: a poszter WebP (a Google nem támogatja az AVIF thumbnailt), a hossz 15 mp, a VideoObject négy kötelező mezője megvan.",
+      "impact": "közepes",
+      "effort": "5 perc"
     },
     {
-      "title": "A kezdolap ar-vezetett cime es a belso linkek",
-      "why": "A kezdolap hozza a kattintasok 56%-at es 71%-on konvertal — nem nyulunk hozza. A belso linkek szama (197) rendben van; az eloszlas lapos, de a link-hozzaadas itt mar nem hoz merheto tobbletet."
+      "title": "Amit SZÁNDÉKOSAN nem írtam át — és mi kell ahhoz, hogy hozzányúlj",
+      "detail": "1) A /sminkes-zuglo/ címe: az „esküvői smink árak” kulcsszón 8,9-en áll és stabil (9,1 → 9,7, a kattintás tartotta a 2-t). Amit működik, azt nem bontjuk meg — csak akkor nyúlj hozzá, ha 2 futáson át 11 alá esik. 2) A „kozmetikus” kulcsszó: poz 2,7, 56 megjelenés, 0 kattintás, a z-próba szerint VALÓDI jel (z=-2,70) — de ez a dokumentált mintázat: helymegjelölés nélküli fej-kulcsszóra a látogató nem a szalont keresi, és ugyanazon a pozíción ötödannyit konvertál. Ezt nem kergetjük. 3) Az „acne treatment” (143 megjelenés, 0 kattintás, z=-2,40): angol lekérdezés, a kezdőlapra érkezik. A külföldi forgalom a megjelenések 8,5%-a (461) és 43 országból jön — soha nem fog konvertálni, viszont lefelé húzza az összesített CTR-t. Emiatt a csupasz site-szintű CTR (3,07%) félrevezető; a magyar CTR 3,20%.",
+      "impact": "alacsony",
+      "effort": "0 — ez tudás, nem feladat"
+    },
+    {
+      "title": "Desktop CTR-esés — figyeld, egyelőre ne nyúlj hozzá",
+      "detail": "Mobil: kattintás 93 → 131, CTR 3,29% → 3,43%, pozíció 6,15 → 6,06 — minden javult, és a forgalom 78%-a mobil. Desktopon viszont a CTR 3,02% → 2,28% esett, miközben a pozíció JAVULT (8,13 → 7,65). A legvalószínűbb ok, hogy a desktop megjelenés-növekmény nagy része a nem-konvertáló angol/külföldi lekérdezésekből jön, amelyek desktopra húznak. Egy futásnyi adat kevés ehhez; ha jövő héten is így áll, érdemes desktop-bontásban megnézni a top lekérdezéseket.",
+      "impact": "alacsony",
+      "effort": "15 perc a következő futáson"
     }
   ]
 }

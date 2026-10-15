@@ -15,8 +15,9 @@ minden katalógus-listázás ugyanezt a szöveget használja, karakterre azonosa
 - E-mail: kfruzsi0197@gmail.com
 - Weboldal: https://frubeauty.com/
 - Koordináták: 47.5058846, 19.1024696
-- Elsődleges kategória: Kozmetikus
-- Másodlagos kategória: Szépségszalon
+- Elsődleges kategória: Szépségszalon
+- További kategóriák: Kozmetikus, Szemöldökszalon, Szempillaszalon, Sminkmester
+- Utolsó frissítés: 2026-09-29 (az árak a Notino foglalási felületével egyeztetve)
 - Nyelv: magyar
 - Fizetés: készpénz, bankkártya · pénznem: HUF
 - Ellátott terület: Budapest XIV. kerület (Zugló) és egész Budapest;
@@ -53,11 +54,11 @@ nincs kapkodás.
 Soprano Titanium dióda lézer, három hullámhosszon egyszerre (755, 808 és 1064 nm).
 Hat-nyolc alkalom, 4–6 hetente. Az árak a hat alkalmas sorozat alkalmankénti
 díjai, a helyszínen fizetve — a sorozatot nem kell előre kifizetni.
-Kizárólag női vendégek; teljes intim kezelés nincs, bikinivonal igen.
+Kizárólag női vendégek; bikinivonal és teljes intim terület egyaránt.
 
 - XS zóna (felső ajak · áll · szemöldök köze · fülkagyló · kézfej · lábfej · köldökvonal · mellbimbó udvara): 7 000 Ft · 10–15 perc · hat alkalom 42 000 Ft
 - S zóna (hónalj · bikinivonal · tarkó · nyak · arc oldala): 11 000 Ft · 15–20 perc · hat alkalom 66 000 Ft
-- M zóna (alkar · felkar · váll · has · derék · popsi · teljes arc): 16 000 Ft · 25–30 perc · hat alkalom 96 000 Ft
+- M zóna (teljes intim · alkar · felkar · váll · has · derék · popsi · teljes arc): 16 000 Ft · 25–30 perc · hat alkalom 96 000 Ft
 - L zóna (lábszár · comb · teljes hát · teljes mellkas · teljes kar): 23 000 Ft · 35–45 perc · hat alkalom 138 000 Ft
 - XL zóna (teljes láb: comb és lábszár · teljes hát és váll): 33 000 Ft · 55–70 perc · hat alkalom 198 000 Ft
 - Gyakori párosok egy időpontban, alkalmanként: felső ajak + áll 12 000 Ft · hónalj + bikinivonal 18 000 Ft · bikinivonal + lábszár 30 000 Ft · teljes láb + hónalj 40 000 Ft
@@ -69,9 +70,11 @@ Kizárólag női vendégek; teljes intim kezelés nincs, bikinivonal igen.
 - Szempilla lifting + festés: 12 000 Ft · ~75 perc · 6–8 hétig tartós
 - [Szemöldök laminálás + formázás + festés](https://frubeauty.com/szemoldok-laminalas-zuglo/): 11 000 Ft · ~60 perc · ~6 hétig tartós
 - Szemöldök laminálás festés nélkül + formázás: 9 000 Ft · 60 perc
-- Szemöldök- és szempillafestés: 7 000 Ft · 60 perc
-- Szemöldök formázás és festés: 5 000 Ft · 60 perc
-- Szempillafestés: 4 000 Ft · 30 perc
+- Szemöldök- és szempillafestés: 8 000 Ft · 60 perc
+- [Szemöldök formázás és festés](https://frubeauty.com/szemoldokfestes-zuglo/): 6 000 Ft · 55 perc
+- Szemöldök szedés, formázás (festés nélkül): 4 000 Ft · 30 perc
+- Szempillafestés: 4 000 Ft · 25 perc
+- A szempilla lifting más néven szempilla laminálás vagy lash lift — ugyanaz a kezelés.
 
 ### Csomagok
 - Teljes Tekintet (lifting + laminálás): 18 000 Ft · ~120 perc
@@ -86,17 +89,21 @@ Kizárólag női vendégek; teljes intim kezelés nincs, bikinivonal igen.
 - Young Skin tini arckezelés: 16 000 Ft · 60 perc
 - Relax & Glow arcmasszázs (kiegészítő): 11 000 Ft · 30 perc
 
-### [Alkalmi és esküvői smink](https://frubeauty.com/sminkes-zuglo/)
+### [Esküvői smink](https://frubeauty.com/sminkes-zuglo/)
 - Menyasszonyi smink a nagy napon: 30 000 Ft · 90 perc
-- Smink fotózásra: 17 000 Ft · 60 perc
-- Menyasszonyi próbasmink: 15 000 Ft · 90–120 perc
+- Menyasszonyi próbasmink: 15 000 Ft · 90–120 perc · az esküvő előtt 4–8 héttel
 - Örömanya smink: 15 000 Ft · 60–75 perc
-- Alkalmi smink: 15 000 Ft · 60–75 perc
-- Sminkoktatás: 20 000 Ft · 120 perc
-- Nappali smink: 13 000 Ft · 45 perc
+- Foglalás: a Notinón a Menyasszonyi csomagot az esküvő napjára kell foglalni, a próbasmink időpontját üzenetben vagy telefonon egyeztetjük.
+- Helyszíni kiszállás Budapesten és környékén, egyedi díjjal.
+
+### [Alkalmi smink](https://frubeauty.com/alkalmi-smink-budapest/)
+- Alkalmi smink (szalagavató, ballagás, estély, bál): 15 000 Ft · 60–75 perc
+- Smink fotózáshoz: 17 000 Ft · 60 perc
+- Mindennapi smink: 13 000 Ft · 45 perc
+- Sminkoktatás, személyes sminktanácsadás: 20 000 Ft · 120 perc
 
 ### Esküvői csomagok
-- Menyasszonyi Csomag (próbasmink + menyasszonyi smink): 39 000 Ft (külön 45 000 Ft)
+- Menyasszonyi Csomag (próbasmink + menyasszonyi smink): 40 000 Ft (külön 45 000 Ft)
 - Teljes Esküvő (menyasszonyi csomag + örömanya smink, egy reggelen): 51 000 Ft (külön 60 000 Ft)
 
 ## Foglalás
@@ -116,8 +123,22 @@ Kizárólag női vendégek; teljes intim kezelés nincs, bikinivonal igen.
 - [Google Térkép / értékelések](https://www.google.com/maps/place/Pecze-Kov%C3%A1cs+Fruzsina+Kozmetikus+-+Szempilla+%C3%A9s+Szem%C3%B6ld%C3%B6k+Stylist/@47.5058846,19.1024696,17z/)
 - [Notino szalonprofil](https://www.notino.hu/szalonok/pecze-kovacs-fruzsina-sminkes,-szemoldok-es-szempilla-stylist)
 
+## Rövid válaszok
+- Mennyibe kerül a szempilla lifting? Festéssel együtt 12 000 Ft, kb. 75 perc, 6–8 hétig tart. Koreai technika, ragasztó nélkül.
+- Mennyibe kerül a szemöldök laminálás? Formázással és festéssel 11 000 Ft, kb. 60 perc, átlagosan 6 hétig tart. Festés nélkül 9 000 Ft; szempilla liftinggel együtt (Teljes Tekintet) 18 000 Ft.
+- Mennyibe kerül a lézeres szőrtelenítés? A hónalj alkalmanként 11 000 Ft, a teljes intim 16 000 Ft; 6–8 alkalom kell, 4–6 hetente. A sorozatot alkalmanként, a helyszínen kell fizetni, előre nem.
+- Mennyibe kerül a menyasszonyi smink? 30 000 Ft; próbasminkkel csomagban 40 000 Ft; az örömanya sminkjével együtt 51 000 Ft.
+- Mennyibe kerül az alkalmi smink? 15 000 Ft; fotózáshoz 17 000 Ft.
+- Mennyibe kerül az arckezelés? A Janssen arckezelések bőranalízissel indulnak, 16 000 Ft-tól.
+- Kell-e előleg vagy kártyaadat a foglaláshoz? Nem; a kezelés a helyszínen fizetendő, 24 órával előtte díjmentesen lemondható.
+
 ## Blog / tartalomoldalak
 - [FRUBEAUTY blog](https://frubeauty.com/blog/)
+- [Lézeres szőrtelenítés árak 2026 — területenként](https://frubeauty.com/blog/lezeres-szortelenites-arak-2026/)
+- [Lézeres szőrtelenítés vagy gyantázás?](https://frubeauty.com/blog/lezeres-szortelenites-vagy-gyantazas/)
+- [Hány alkalom kell a lézeres szőrtelenítéshez?](https://frubeauty.com/blog/lezeres-szortelenites-hany-alkalom/)
+- [Koreai szempilla lifting — miben más?](https://frubeauty.com/blog/koreai-szempilla-lifting/)
+- [Esküvői smink árak Budapesten](https://frubeauty.com/blog/eskuvoi-smink-arak-budapest/)
 
 ## Ingyenes eszköz
 - [Esküvői szépségnaptár](https://frubeauty.com/eskuvoi-szepsegnaptar/) — a menyasszony beírja az esküvő dátumát, és megkapja a dátumozott ütemtervét: mikor legyen az arckezelés-kúra, a menyasszonyi próbasmink, a szemöldök laminálás, a szempilla lifting és a menyasszonyi smink. Regisztráció és e-mail-megadás nélkül, díjmentesen.

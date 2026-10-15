@@ -1,0 +1,347 @@
+---
+/**
+ * /alkalmi-smink-budapest — ALKALMI smink money page (2026-09-29).
+ *
+ * MIÉRT KÜLÖN OLDAL: az alkalmi smink eddig a /sminkes-zuglo/ része volt, egy
+ * „Esküvői smink árak… 30.000 Ft" cím alatt. A GSC szerint (90 nap) az „alkalmi
+ * smink árak" 173 megjelenést hozott a 7. helyen, 0,6% CTR-rel — az alkalmi kereső
+ * egy drága esküvői ajánlatot látott. A mért kereslet (Kulcsszótervező, Budapest):
+ * alkalmi smink 210 (+24%), smink budapest 260, sminktanácsadás 110, alkalmi smink
+ * budapest 90, szalagavató smink 50, smink fotózásra 30, estélyi 30, ballagási 30 —
+ * összesen ~800/hó, nagyjából annyi, mint az esküvői szándék.
+ *
+ * URL: `-budapest`, nem `-zuglo` — a kerületi változatra („sminkes zugló") nincs
+ * mérhető keresés, a „smink budapest"-re 260/hó van (ugyanaz az ok, mint a lézernél).
+ *
+ * TÉTELNEVEK: a Notino tételneveivel egyeznek („Mindennapi smink", „Smink
+ * fotózáshoz"), hogy a vendég ugyanazt keresse a foglalási listában, amit itt lát.
+ * Az örömanya smink a Notinón az „Alkalmi smink" tétel alatt foglalható — ezt a GYIK
+ * mondja ki, az ára viszont az esküvői oldalon él (a Teljes Esküvő csomag része).
+ *
+ * SZEZON: a szalagavatók november és február között vannak — ezért élesedett az
+ * oldal október elején, hogy a szezon elejére indexelve legyen.
+ */
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteContact from '../components/SiteContact.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { Reveal } from '../components/Reveal';
+import { ProcessSteps } from '../components/ProcessSteps';
+import { TestimonialsGrid } from '../components/TestimonialsGrid';
+import { GalleryGrid } from '../components/GalleryGrid';
+import FAQList from '../components/FAQList.astro';
+import RelatedArticles from '../components/RelatedArticles.astro';
+import TrustBar from '../components/TrustBar.astro';
+import BookingAssurance from '../components/BookingAssurance.astro';
+import StickyBookBar from '../components/StickyBookBar.astro';
+import { CookieBanner } from '../components/CookieBanner';
+import { HeroMedia } from '../components/HeroMedia';
+import { siteConfig, relFor } from '../config/site';
+
+const priceItems = [
+  { name: 'Alkalmi smink', duration: '60–75 perc', description: 'Bálra, ballagásra, szalagavatóra, születésnapra vagy keresztelőre — fotókész és tartós smink, ami egész nap a helyén marad.', price: '15 000 Ft' },
+  { name: 'Smink fotózáshoz', duration: '60 perc', description: 'Kismama-, családi, portré- és branding fotózásokhoz. A kamera többet lát, mint a tükör, ezért a textúrát és a fényt a képhez igazítom, hogy a fotókon is természetes önmagadat lásd.', price: '17 000 Ft' },
+  { name: 'Mindennapi smink', duration: '45 perc', description: 'Visszafogott, természetes nappali smink. Üzleti megbeszélésre, randira vagy egy „csak úgy” napra.', price: '13 000 Ft' },
+  { name: 'Sminkoktatás', duration: '120 perc', description: 'Személyes sminktanácsadás a saját arcodon, a saját kezeddel: bőrelőkészítés, az alapozó árnyalata és a szemformádhoz illő technika. A végén listát kapsz arról, mi hiányzik a kozmetikai táskádból, és mi az, ami feleslegesen van benne.', price: '20 000 Ft' },
+];
+
+const occasions = [
+  { title: 'Szalagavató', body: 'November és február között van a szezonja. A smink a színpadi fényben és a fotókon is kitart, a keringő végéig.' },
+  { title: 'Ballagás', body: 'Nappali fény, sok fotó, egész napos program: természetes, mégis kiemelt smink, ami délután is a helyén marad.' },
+  { title: 'Estély, bál, party', body: 'Hangsúlyosabb szem vagy ajak, az estéhez és a ruhádhoz igazítva, hosszan tartó fixálással.' },
+  { title: 'Fotózás', body: 'Kismama-, családi, portré- vagy branding fotózás: a smink a kamerának készül, nem csak a tükörnek.' },
+];
+
+const processSteps = [
+  { step: '01', title: 'Foglalás', body: 'A Notinón az „Alkalmi smink” tételt foglalod, vagy fotózáshoz a „Smink fotózáshoz” tételt. A visszaigazolás után küldj át Instagramon vagy e-mailben egy képet a ruhádról, hogy felkészülten várjalak.' },
+  { step: '02', title: 'Bőrelőkészítés és smink', body: 'Tisztítás és hidratálás után jön az alapozás, a szem és az ajak. Minden lépést elmondok közben, és ott finomítunk, ahol szeretnéd.' },
+  { step: '03', title: 'Fixálás', body: 'A végén professzionális fixálás, hogy a smink estig kitartson. Touch-upra legfeljebb az ajkon lesz szükség.' },
+];
+
+const testimonials = [
+  { name: 'Orosz-Adamcsek Zsuzsanna', rating: 5, text: 'Szinte azonnal kaptam időpontot, nagyon rugalmas volt Fruzsi. Minden kérésemet figyelembe vette és egy csodás sminket készített nekem. Visszatérek még hozzá a közeljövőben is.', outcome: 'Szinte azonnal kapott időpontot', service: 'Alkalmi smink' },
+  { name: 'Emese Simon', rating: 5, text: 'Csodaszép sminket kaptam, annyira tudta Fruzsina, hogy mi áll jól, könnyen ment a választás, és jól is éreztem magam benne egész nap egy esküvőn — tartósnak bizonyult.', outcome: 'Egy egész napot kibírt', service: 'Alkalmi smink' },
+  { name: 'Vivien Szűcsné Birnbaum', rating: 5, text: 'Kismama fotózásra készített nekem Fruzsi sminket. Szinte ötlet nélkül mentem, és megtalálta a hozzám legjobban illő sminket. Csodaszép sminkem lett, amit mindenki csak dicsért. Ugyanakkor nagyon tartós is volt, egész nap kitartott.', outcome: 'Egy egész fotózáson kitartott', service: 'Smink fotózáshoz' },
+  { name: 'Klaudia Vörös', rating: 5, text: 'Már többször vettem igénybe Fruzsi szolgáltatásait. Legutóbb egy csodaszép sminket készített a kismama fotózásomra. Maximálisan elégedett vagyok vele. Mindenkinek tiszta szívvel ajánlom!', outcome: 'Többször is visszatért', service: 'Smink fotózáshoz' },
+];
+
+const faqs = [
+  { q: 'Mennyibe kerül az alkalmi smink?', a: 'Az alkalmi smink 15 000 Ft, a smink fotózáshoz 17 000 Ft, a visszafogott mindennapi smink 13 000 Ft. Mindegyikben benne van a bőrelőkészítés és a fixálás, felár nincs.' },
+  { q: 'Mit hozzak magammal?', a: 'Egy képet a ruhádról, és ha van, a frizurádról. Érdemes smink nélkül érkezni — így tisztán látjuk, miből indulunk.' },
+  { q: 'Mennyi ideig tart?', a: 'A mindennapi smink körülbelül 45 perc, az alkalmi smink 60–75 perc, a smink fotózáshoz körülbelül 60 perc. Ha menet közben finomítani szeretnél, számolj +15 perccel.' },
+  { q: 'Kitart egész estig?', a: 'Igen, erre való a fixálás: kibírja a táncot, a meleget és a fotózást. Touch-upra legfeljebb az ajkon lesz szükség.' },
+  { q: 'Érzékeny a bőröm, ez gondot jelent?', a: 'Nem. A smink előtt Janssen ápolókkal készítem elő a bőrt, és bőrgyógyászatilag tesztelt, professzionális termékekkel dolgozom. Ha ismert allergiád van, foglalás előtt írj, és átbeszéljük.' },
+  { q: 'Örömanya sminket is itt foglalhatok?', a: 'Igen, a Notinón az örömanya smink az „Alkalmi smink” tétel alatt foglalható. Ha a menyasszony is nálam készül ugyanazon a reggelen, a Teljes Esküvő csomag a kedvezőbb — erről az esküvői smink oldalon olvashatsz.' },
+  { q: 'Ki tudsz jönni hozzám?', a: 'Igen, Budapesten és környékén. A kiszállás díja a távolságtól és az érkezési időtől függ; írj egy SMS-t a részletekkel, és 24 órán belül megadom a pontos összeget.' },
+  { q: 'Le lehet mondani vagy módosítani az időpontot?', a: 'Igen, 24 órával az időpont előtt bármikor díjmentesen.' },
+];
+
+// Csak alkalmi képek — vizuálisan válogatva (a /img fájlnevei nem megbízhatók). A hero
+// képe (piros ruhás estélyi smink) szándékosan nincs a galériában: egy képet egy
+// oldalon egyszer mutatunk.
+const galleryImages = [
+  '/img/alkalmi-smink-vendeg-zuglo-egressy-ut-budapest.webp',
+  '/img/alkalmi-smink-elotte-utana-zuglo-egressy-ut-budapest.webp',
+  '/img/alkalmi_kep_smink_alkalmi_smink_budapest_egressy_ut.webp',
+  '/img/nappali-smink-termeszetes-zuglo-egressy-ut-budapest.webp',
+  '/img/smink-budapest-alkalmi-egressy-ut-zuglo.webp',
+  '/img/smink-kismama-fotozas-budapest-egressy-ut.webp',
+];
+
+const galleryAlts = [
+  'Alkalmi smink hangsúlyos szemmel, feltűzött hajjal — FRUBEAUTY Budapest, Egressy út',
+  'Alkalmi smink előtte-utána — természetes, frissítő hatás, FRUBEAUTY Zugló',
+  'Estélyi smink aranyló szemhéjjal — FRUBEAUTY Budapest XIV. kerület',
+  'Mindennapi, természetes nappali smink — FRUBEAUTY Zugló, Egressy út',
+  'Smink fotózáshoz, meleg tónusokkal — FRUBEAUTY Budapest',
+  'Smink kismama-fotózáshoz, virágos ruhában — FRUBEAUTY Zugló',
+];
+
+// ── SEO: FAQPage ──────────────────────────────────────────────────────────
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
+
+// ── SEO: Service + tételes ajánlatok (a schema = a látható ár-tábla) ─────
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Alkalmi smink Budapest',
+  alternateName: ['Alkalmi sminkes', 'Smink fotózáshoz', 'Sminktanácsadás'],
+  description:
+    'Alkalmi smink szalagavatóra, ballagásra, estélyre és fotózásra Budapesten, a XIV. kerületben. Bőrelőkészítés, tartós fixálás, kiszállás Budapesten és környékén.',
+  provider: {
+    '@type': 'BeautySalon',
+    '@id': 'https://frubeauty.com/#business',
+    name: 'FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus',
+    url: 'https://frubeauty.com',
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Budapest' },
+    { '@type': 'AdministrativeArea', name: 'Zugló' },
+  ],
+  offers: {
+    '@type': 'AggregateOffer',
+    lowPrice: '13000',
+    highPrice: '20000',
+    priceCurrency: 'HUF',
+    availability: 'https://schema.org/InStock',
+    priceValidUntil: '2026-12-31',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Alkalmi smink árak — Budapest',
+    itemListElement: priceItems.map((it) => ({
+      '@type': 'Offer',
+      name: it.name,
+      price: it.price.replace(/[^\d]/g, ''),
+      priceCurrency: 'HUF',
+      availability: 'https://schema.org/InStock',
+    })),
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Főoldal', item: 'https://frubeauty.com' },
+    { '@type': 'ListItem', position: 2, name: 'Alkalmi smink Budapest', item: 'https://frubeauty.com/alkalmi-smink-budapest/' },
+  ],
+};
+
+const config = { ...siteConfig };
+const heroImage = '/img/budapest-egressy-ut-smink-frubeauty.webp';
+---
+
+<Layout
+  title="Alkalmi smink Budapest – 15.000 Ft, Zugló | FRUBEAUTY"
+  description="Alkalmi smink Budapesten, Zuglóban: estélyre, szalagavatóra, ballagásra és fotózásra 15.000 Ft. Fixálva, hogy estig tartson. ★5,0 · 70+ Google-értékelés."
+  additionalSchemas={[faqSchema, serviceSchema, breadcrumbSchema]}
+  preloadImage={heroImage}
+>
+  <SiteHeader />
+
+  <section class="relative overflow-hidden pt-[calc(var(--header-h)+1.5rem)] sm:pt-[calc(var(--header-h)+6rem)] pb-16 sm:pb-24">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end">
+        {/* Hero STATIKUS, JS nélkül (a szempilla-oldal mintájára): a kép SSR-ben
+            azonnal látszik, a Layout preloadImage propja előtölti. */}
+        <div class="hero-reveal lg:col-span-7">
+          <p class="text-[11px] uppercase tracking-caps text-gold mb-6">Alkalmi smink · 1143 Budapest · XIV. kerület</p>
+          <h1 class="font-display font-light text-cream leading-[1.04] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.5rem);">Alkalmi <em class="display">smink</em> Budapesten, Zuglóban.</h1>
+          <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] tracking-caps">
+            <span class="text-gold font-medium">★ 5,0</span>
+            <span class="text-creamMute/50" aria-hidden="true">·</span>
+            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="uppercase text-creamMute hover:text-cream transition-colors">70+ Google-értékelés →</a>
+          </div>
+          {/* Tömör, számszerű válasz az első bekezdésben: ezt emelik ki az AI-összefoglalók. */}
+          <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">Az alkalmi smink <strong class="font-medium text-cream">15.000 Ft</strong>: bőrelőkészítéssel, fotókész alapozással és hosszan tartó fixálással, hogy estig a helyén maradjon. Fotózáshoz 17.000 Ft, visszafogott mindennapi sminkhez 13.000 Ft. Budapesten, a XIV. kerületi Egressy úton dolgozom, egyszerre egy vendéggel.</p>
+          <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
+            <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="fb-book inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+            <a href="#arak" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium border border-whisperStrong text-cream hover:bg-white/5 active:scale-[0.97] transition-colors duration-200">Árak</a>
+          </div>
+          <BookingAssurance class="mt-6" offer="Alkalmi smink" />
+        </div>
+        <div class="lg:col-span-5">
+          <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-inkRise ring-1 ring-black">
+            <img src={heroImage} alt="Estélyi alkalmi smink vörös ajakkal, piros ruhához — FRUBEAUTY Budapest, Egressy út" width="800" height="1000" class="w-full h-full object-cover object-top" loading="eager" fetchpriority="high" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <TrustBar
+    items={[
+      { value: '15 000 Ft', label: 'alkalmi smink' },
+      { value: '17 000 Ft', label: 'fotózáshoz' },
+      { value: 'Estig', label: 'tartó fixálás' },
+    ]}
+  />
+
+  <section id="arak" class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Árak · 2026</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Alkalmi smink <em class="display">árak</em>.</h2>
+        <p class="mt-5 text-creamSoft leading-[1.7]">Fix árak, felár nélkül: minden tételben benne van a bőrelőkészítés, a smink és a fixálás. A helyszíni kiszállás díja külön, egyedi egyeztetés alapján.</p>
+      </Reveal>
+
+      <div class="overflow-x-auto rounded-3xl border border-whisper bg-ink/40">
+        <table class="w-full text-left border-collapse">
+          <caption class="sr-only">Alkalmi smink árak — FRUBEAUTY Zugló, Budapest XIV. kerület, 2026</caption>
+          <thead>
+            <tr class="border-b border-whisperStrong">
+              <th scope="col" class="py-4 px-5 sm:px-7 text-[11px] uppercase tracking-caps text-creamMute font-medium">Szolgáltatás</th>
+              <th scope="col" class="hidden sm:table-cell py-4 px-3 text-[11px] uppercase tracking-caps text-creamMute font-medium whitespace-nowrap">Időtartam</th>
+              <th scope="col" class="py-4 px-5 sm:px-7 text-[11px] uppercase tracking-caps text-creamMute font-medium text-right">Ár</th>
+            </tr>
+          </thead>
+          <tbody>
+            {priceItems.map((item) => (
+              <tr class="border-b border-whisper last:border-b-0 align-top">
+                <td class="py-5 px-5 sm:px-7">
+                  <span class="font-display text-base sm:text-lg font-medium text-cream leading-snug">{item.name}</span>
+                  <p class="mt-1.5 text-[13px] sm:text-sm text-creamSoft leading-relaxed max-w-[64ch]">{item.description}</p>
+                  <span class="sm:hidden mt-2 inline-block text-[11px] uppercase tracking-caps text-creamMute">{item.duration}</span>
+                </td>
+                <td class="hidden sm:table-cell py-5 px-3 text-[12px] uppercase tracking-caps text-creamMute whitespace-nowrap">{item.duration}</td>
+                <td class="py-5 px-5 sm:px-7 text-right"><span class="font-display text-lg sm:text-xl font-medium tracking-tight text-gold whitespace-nowrap">{item.price}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+        <a href={config.booking} target="_blank" rel={relFor(config.booking)} class="fb-book inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[12px] uppercase tracking-caps font-medium bg-gold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-200">Időpontot foglalok</a>
+        <p class="text-[12px] uppercase tracking-caps text-creamMute">Kiszállás Budapesten és környékén · egyedi egyeztetés</p>
+      </div>
+      <p class="mt-6 text-sm text-creamSoft leading-[1.7]">Esküvőre készülsz? A menyasszonyi smink próbasminkkel együtt az <a href="/sminkes-zuglo/" class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors">esküvői smink</a> oldalán van.</p>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Alkalmak</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Szalagavatóra, estélyre — <em class="display">fotózásra</em>.</h2>
+      </Reveal>
+      <div class="grid sm:grid-cols-2 gap-5">
+        {occasions.map((o, i) => (
+          <Reveal client:visible as="div" delay={0.05 * (i + 1)}>
+            <article class="bg-inkSoft border border-whisper rounded-3xl p-6 sm:p-7 h-full">
+              <h3 class="font-display text-lg sm:text-xl font-medium text-cream leading-snug">{o.title}</h3>
+              <p class="mt-3 text-sm sm:text-[15px] text-creamSoft leading-[1.7]">{o.body}</p>
+            </article>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl mx-auto text-center">
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Foglalástól az indulásig — <em class="display">három lépés</em>.</h2>
+      </Reveal>
+      <ProcessSteps client:visible steps={processSteps} />
+    </div>
+  </section>
+
+  {/* A podcast-backstage videó az esküvői oldalról költözött ide: nem esküvői smink,
+      hanem pont az a fajta alkalmi munka, amit ez az oldal ajánl. */}
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        <Reveal client:visible as="div" className="lg:col-span-6">
+          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Pár perc <em class="display">backstage</em>.</h2>
+          <p class="mt-6 text-creamSoft leading-[1.7] max-w-[50ch]">Egy podcast-felvétel előtti smink: természetes textúrák, fókuszált kontúrozás, hosszan tartó fixálás. Kamera elé, lámpafénybe készült.</p>
+          <a href={config.instagram} target="_blank" rel="noopener" class="mt-7 inline-flex items-center text-[12px] uppercase tracking-caps font-medium text-cream group hover:text-gold transition-colors">Több munkám Instán<span aria-hidden class="ml-2 transition-transform duration-300 ease-out group-hover:translate-x-1">→</span></a>
+        </Reveal>
+        <Reveal client:visible as="div" className="lg:col-span-6" delay={0.1}>
+          <HeroMedia client:visible videoSrc="/media/podcast-smink.mp4" posterSrc="/media/podcast-smink-poster.webp" alt="Pecze-Kovács Fruzsina smink munka közben egy podcast felvételen — FRUBEAUTY Zugló" aspect="9 / 16" maxWidthClass="max-w-[380px]" />
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl mx-auto text-center">
+        <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Munkáim</p>
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);"><em class="display">Vendégeim</em>.</h2>
+        <p class="mt-4 text-sm text-creamMute">Kattints a képekre a teljes nézethez</p>
+      </Reveal>
+      <GalleryGrid client:visible count={6} images={galleryImages} alts={galleryAlts} size="large" />
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28">
+    <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 flex flex-wrap items-end justify-between gap-6">
+        <div class="max-w-2xl">
+          <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Visszajelzés <em class="display">alkalmi sminkről</em>.</h2>
+        </div>
+        <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors">Összes Google-on →</a>
+      </Reveal>
+      <TestimonialsGrid client:visible items={testimonials} />
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28 bg-inkSoft">
+    <div class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
+      <Reveal client:visible as="div" className="mb-12 sm:mb-16 text-center">
+        <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Amit az alkalmi sminkről <em class="display">kérdezni szoktak</em>.</h2>
+      </Reveal>
+      <FAQList items={faqs} />
+    </div>
+  </section>
+
+  <RelatedArticles
+    heading={'Smink — <em class="display">kapcsolódó cikk</em>.'}
+    slugs={['eskuvoi-smink-arak-budapest']}
+  />
+
+  <SiteContact offer="Alkalmi smink" eyebrow="Foglalás" heading={'Egy este, amikor <em class="display">minden a helyén van</em>.'} intro="Online foglalási rendszer 0–24 órában. A Notinón az „Alkalmi smink” tételt keresd — fotózáshoz a „Smink fotózáshoz” tételt." />
+
+  <SiteFooter />
+
+  <StickyBookBar eyebrow="Alkalmi smink · Zugló" price="15 000 Ft" />
+
+  <CookieBanner client:idle />
+
+  <div class="py-10 text-center border-t border-whisper">
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Vissza az oldal tetejére" class="inline-flex items-center gap-2 text-[12px] uppercase tracking-caps font-medium text-cream hover:text-gold transition-colors duration-200">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>
+      Vissza az oldal tetejére
+    </button>
+  </div>
+</Layout>

@@ -44,7 +44,7 @@ const profileSchema = {
           <h1 class="font-display font-light text-cream leading-[1.05] tracking-tightest-" style="font-size: clamp(2.25rem, 6vw, 4.25rem);">Egy <em class="display">kozmetikus</em>, aki egyszerre csak rád figyel.</h1>
           <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">Pecze-Kovács Fruzsina vagyok, a FRUBEAUTY tulajdonosa és kozmetikusa a zuglói Egressy úton. Arckezeléssel, szempilla liftinggel és szemöldök laminálással foglalkozom — mindig egyetlen vendéggel egy időben, hogy a kezelés végig rólad szóljon.</p>
           <div class="mt-7 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] tracking-caps">
-            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="text-gold hover:text-cream transition-colors">★ 5,0 · 60+ Google értékelés</a>
+            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="text-gold hover:text-cream transition-colors">★ 5,0 · 70+ Google értékelés</a>
             <span class="text-creamMute/50" aria-hidden="true">·</span>
             <span class="text-creamMute">Egressy út 16. · XIV. kerület</span>
           </div>
@@ -97,11 +97,12 @@ const profileSchema = {
             <p>A részletes árakat és a kezelések menetét a szolgáltatás-oldalakon találod:
               <a href="/arckezeles-zuglo/" class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors">arckezelés</a>,
               <a href="/szempilla-lifting-zuglo/" class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors">szempilla lifting</a>,
-              <a href="/szemoldok-laminalas-zuglo/" class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors">szemöldök laminálás</a> és
-              <a href="/sminkes-zuglo/" class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors">alkalmi smink</a>.</p>
-            {/* TODO (opcionális, E-E-A-T erősítés — csak valós adattal töltsd ki):
-                konkrét szakképesítés (intézmény + év), a koreai lash lift képzés neve+éve,
-                hány éve dolgozol a szakmában, Janssen-partner státusz igazolása. */}
+              <a href="/szemoldok-laminalas-zuglo/" class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors">szemöldök laminálás</a>,
+              <a href="/sminkes-zuglo/" class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors">esküvői smink</a> és
+              <a href="/alkalmi-smink-budapest/" class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors">alkalmi smink</a>.</p>
+            {/* Végzettségek — a tulajdonos megerősítette (2026-09-29). Ugyanez él a
+                Layout.astro Person-sémájában (hasCredential) és az llms.txt-ben. */}
+            <p>2021 óta vagyok okleveles kozmetikus, 2025-ben pedig a Berki Mia Makeup Academy smink- és szempillaképzését végeztem el.</p>
           </div>
         </div>
       </div>
@@ -117,7 +118,7 @@ const profileSchema = {
   <SiteFooter />
   {/* Telefonon a fejléc foglalás gombja nem renderel (NavBar.tsx:147), és a
       fejléc lefelé görgetéskor eltűnik — lásd StickyBookBar.astro. */}
-  <StickyBookBar eyebrow="★ 5,0 · 60+ értékelés" price="Szabad időpontok" cta="Megnézem" />
+  <StickyBookBar eyebrow="★ 5,0 · 70+ értékelés" price="Szabad időpontok" cta="Megnézem" />
 
   <CookieBanner client:idle />
 </Layout>

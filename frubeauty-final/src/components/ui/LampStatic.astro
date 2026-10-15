@@ -84,8 +84,12 @@ const rootClass = `lamp-root relative flex flex-col items-center justify-center 
   /* A belépő animáció opacity-fade (kompozitált) — NEM width-et animál, ami
      minden képkockán layoutot kényszerítene a hero kritikus festési ablakában.
      A lámpa a végső méretén renderel, csak finoman beúszik. */
+  /* „A lámpa felkapcsol" (motion-rendszer, 2026-09-30): a fény nem sötétből
+     jön elő 300 ms várakozás után, hanem az első festéskor már 30%-on ég, és
+     900 ms alatt teljesre nő — egy időben a hero szövegének emelkedésével.
+     Csak háttér-réteg (gradiensek, nem LCP-jelölt), így az opacity itt szabad. */
   @keyframes lampFadeIn {
-    from { opacity: 0; }
+    from { opacity: 0.3; }
     to   { opacity: 1; }
   }
 
@@ -93,7 +97,7 @@ const rootClass = `lamp-root relative flex flex-col items-center justify-center 
   .lamp-cone-right {
     width: 30rem;
     opacity: 1;
-    animation: lampFadeIn 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+    animation: lampFadeIn 0.9s cubic-bezier(0.23, 1, 0.32, 1) both;
     /* Lágy felső él: a fénykúp teteje ne kemény vízszintes vonalként induljon
        (ez adta a "dobozos" hatást), hanem finoman ússzon ki a homályos izzóba.
        A maszk a kúp tetejét átlátszóra fokozza, így a nyaláb teteje izzás, nem él. */
@@ -101,10 +105,10 @@ const rootClass = `lamp-root relative flex flex-col items-center justify-center 
     mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.35) 22%, #fff 55%);
   }
   .lamp-bulb {
-    animation: lampFadeIn 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+    animation: lampFadeIn 0.9s cubic-bezier(0.23, 1, 0.32, 1) both;
   }
   .lamp-rail {
-    animation: lampFadeIn 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+    animation: lampFadeIn 0.9s cubic-bezier(0.23, 1, 0.32, 1) both;
   }
 
   @media (prefers-reduced-motion: reduce) {

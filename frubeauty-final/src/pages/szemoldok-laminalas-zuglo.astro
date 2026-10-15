@@ -156,18 +156,18 @@ const otherServices = [
         duration: '60 perc',
         description:
           'A szemöldököt és a szempillákat tartós festékkel festem be — kiemelve a tekintetet és ápolt, rendezett összhatást adva.',
-        price: '7 000 Ft',
+        price: '8 000 Ft',
       },
       {
         name: 'Szemöldök formázás és festés',
-        duration: '60 perc',
+        duration: '55 perc',
         description:
           'A szemöldök színezését, az ideális forma kialakítását és a felesleges szálak kiszedését tartalmazza.',
-        price: '5 000 Ft',
+        price: '6 000 Ft',
       },
       {
         name: 'Szempillafestés',
-        duration: '30 perc',
+        duration: '25 perc',
         description:
           'A szempillák hangsúlyosabbak lesznek a festésnek köszönhetően — világos pillának külön nagyon ajánlott.',
         price: '4 000 Ft',
@@ -342,7 +342,7 @@ const breadcrumbSchema = {
 
 <Layout
   title="Szemöldök laminálás Budapest, Zugló – 11.000 Ft | FRUBEAUTY"
-  description="Szemöldök laminálás Budapesten, a XIV. kerületben: formázással és festéssel együtt 11.000 Ft, ~60 perc, 6 hétig tartós. ★5,0 · 60+ értékelés. Foglalj online!"
+  description="Laminált szemöldök Budapesten, a XIV. kerületben: laminálás formázással és festéssel 11.000 Ft, kb. 60 perc, 6 hétig tartós. ★5,0 · 70+ Google-értékelés."
   additionalSchemas={[faqSchema, serviceSchema, howToSchema, ...videoSchemas, breadcrumbSchema]}
   preloadImage="/media/szemoldok-laminalas-munkakozben-budapest-egressy-ut-poster.avif"
 >
@@ -363,7 +363,7 @@ const breadcrumbSchema = {
           <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] tracking-caps">
             <span class="text-gold font-medium">★ 5,0</span>
             <span class="text-creamMute/50" aria-hidden="true">·</span>
-            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="uppercase text-creamMute hover:text-cream transition-colors">60+ Google-értékelés →</a>
+            <a href={config.googleReviewsUrl} target="_blank" rel="noopener" class="uppercase text-creamMute hover:text-cream transition-colors">70+ Google-értékelés →</a>
           </div>
           <p class="mt-6 text-base sm:text-lg text-creamSoft leading-[1.7] max-w-[58ch]">A szemöldök laminálás tűmentes kezelés: a saját szálaidat rögzíti a kívánt irányba, így rendezettebbnek és dúsabbnak látszanak. Budapesten, a XIV. kerületi Egressy úton, koreai technikával. Ár: <strong class="font-medium text-cream">11.000 Ft</strong> — a szemöldök formázás és a festés is benne van. ~60 perc, 6 hétig tart.</p>
           <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3">
@@ -579,7 +579,7 @@ const breadcrumbSchema = {
       <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Egyéb szolgáltatások</p>
         <h2 class="font-display font-light leading-[1.1] tracking-tight text-cream" style="font-size: clamp(1.875rem, 4vw, 3rem);">Gyorsabb, <em class="display">célzott</em> kezelések.</h2>
-        <p class="mt-5 text-creamSoft leading-[1.7]">Ha nincs szükséged a teljes laminálásra — csak egy festésre vagy formázásra — ezek a rövidebb, kiegészítő kezelések erre valók. Külön is foglalhatók.</p>
+        <p class="mt-5 text-creamSoft leading-[1.7]">Ha nincs szükséged a teljes laminálásra — csak egy festésre vagy formázásra — ezek a rövidebb, kiegészítő kezelések erre valók. Külön is foglalhatók. A részletek a <a href="/szemoldokfestes-zuglo/" class="text-cream underline decoration-gold/50 underline-offset-4 hover:text-gold transition-colors">szemöldökfestés és formázás</a> oldalán.</p>
       </Reveal>
       <PriceList client:visible categories={otherServices} />
     </div>
@@ -779,7 +779,7 @@ const breadcrumbSchema = {
   <SiteFooter />
   {/* Telefonon a fejléc foglalás gombja nem renderel (NavBar.tsx:147), és a
       fejléc lefelé görgetéskor eltűnik — lásd StickyBookBar.astro. */}
-  <StickyBookBar eyebrow="Szemöldök laminálás · 60 perc" price="11 000 Ft" />
+  <StickyBookBar offer="Szemöldök" price="11 000 Ft" />
 
   <CookieBanner client:visible />
 </Layout>

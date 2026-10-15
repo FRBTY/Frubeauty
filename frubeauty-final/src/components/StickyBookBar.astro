@@ -26,18 +26,40 @@
  *  - `env(safe-area-inset-bottom)`: iPhone home-indikátor alatt nem lóg be.
  */
 import { siteConfig, relFor } from '../config/site';
+import { OFFERS, type OfferCategory } from '../config/offers';
 
 interface Props {
-  /** Kisbetűs felső sor — a konkrét kezelés és az időtartam. */
-  eyebrow: string;
+  /** Kisbetűs felső sor. Ha az `offer` jogosult (lásd lent), a sor helyette a
+   *  szolgáltatás PONTOS Notino-neve — ez csak tartalék. */
+  eyebrow?: string;
+  /**
+   * A Notino-átadás (motion-rendszer, 2. mozdulat, 2026-09-30). Ha meg van adva:
+   *  1. a felső sor BETŰ SZERINT a Notino-lista tételneve (`notinoHint`), így a
+   *     25 tételes lista a vendégnek felismerés, nem keresés — ez minden
+   *     kattintót elér, nem csak a visszatérőket;
+   *  2. aki foglalásra kattintott, majd 15 percen belül visszatér erre a lapra,
+   *     a sáv helyén egy kártyát kap ugyanezzel a névvel és egy újranyitó gombbal.
+   * Mérés: `book_return` (a kártya megjelent) és `book_reclick` (újranyitotta).
+   * KIVÉTEL (itt sem a felső sor, sem a kártya nem a hintből épül, az `eyebrow`
+   * marad): a lézer — ott a hint minta, nem tételnév (lásd offers.ts) —, és az
+   * esküvői smink, ahol a hint a 40 000 Ft-os csomagot nevezi meg, az offer ára
+   * viszont a 30 000 Ft-os smink: a kettő együtt hamis árpárosítás lenne.
+   */
+  offer?: OfferCategory;
   /** Nagy, hangsúlyos ár. A CTA melletti ár az egyik legerősebb konverziós jel. */
   price: string;
   /** A gomb felirata. Alap: „Foglalok”. */
   cta?: string;
 }
 
-const { eyebrow, price, cta = 'Foglalok' } = Astro.props;
+const { eyebrow, offer, price, cta = 'Foglalok' } = Astro.props;
 const config = { ...siteConfig };
+const card = offer && offer !== 'Lézer' && offer !== 'Esküvői smink' ? OFFERS[offer] : undefined;
+const top = card ? card.notinoHint : (eyebrow ?? '');
+// A Notino-név lehet hosszú („Szemöldök laminálás Festéssel Formázással") —
+// levágva épp a felismerhetőségét vesztené el, ezért két sorra törhet.
+const topFromOffer = !!card;
+const cardMeta = card ? [card.facts.find((f) => /perc/.test(f)), card.price].filter(Boolean).join(' · ') : '';
 ---
 
 <div
@@ -52,26 +74,122 @@ const config = { ...siteConfig };
       class="max-w-[640px] mx-auto px-4 pt-3 flex items-center gap-4"
       style="padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));"
     >
+      {/* ── Élő ár ────────────────────────────────────────────────────────
+           A három szöveg-elem ID-t kapott, mert a lézer-oldal területválasztója
+           MENET KÖZBEN felülírja őket: ahogy a látogató pipálgat, itt fut az
+           aktuális összeg. A csere sima DOM-írás egy `lezer:valasztas`
+           eseményre — NEM React.
+
+           MIÉRT ÍGY: ez a sáv szándékosan statikus .astro (lásd a fejlécet), mert
+           a foglalás-link akkor van biztosan a DOM-ban, amikor a Layout
+           `decorate()` először lefut, és így a kampány-attribúció garantált.
+           Ha szigetté alakítanánk az élő árért, pont ezt veszítenénk el.
+           A `<a>` ezért érintetlen marad, csak a szövegek cserélődnek. */}
       <div class="min-w-0 flex-1">
-        <p class="text-[10px] uppercase tracking-caps text-creamMute truncate">
-          {eyebrow}
+        <p id="sticky-book-eyebrow" class:list={['text-[10px] uppercase tracking-caps text-creamMute', topFromOffer ? 'line-clamp-2 leading-snug' : 'truncate']}>
+          {top}
         </p>
-        <p class="font-display text-lg font-medium tracking-tight text-cream leading-tight truncate">
+        <p id="sticky-book-price" class="font-display text-lg font-medium tracking-tight text-cream leading-tight truncate">
           {price}
         </p>
+        <p id="sticky-book-hint" hidden class="mt-1 text-[10px] leading-snug text-creamMute"></p>
       </div>
       <a
         href={config.booking}
         target="_blank"
         rel={relFor(config.booking)}
+        id="sticky-book-cta"
         class="fb-book fb-book--late flex-shrink-0 inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-[12px] uppercase tracking-caps font-semibold text-ink hover:bg-goldSoft active:scale-[0.97] active:translate-y-px transition-colors duration-150"
       >
-        {cta}
-        <span aria-hidden="true">&#8594;</span>
+        {/* Két címke-állapot. A kattintás után a Notino új lapon nyílik, és ez a
+            gomb „Megnyitva" állapotra vált (240 ms) — ha a lap a háttérben nyílt
+            meg, vagy a vendég visszanéz, látja, hogy a foglalás már ott vár.
+            Visszatéréskor visszaáll. A link maga végig ugyanaz, újra kattintható. */}
+        <span data-label-idle>
+          <span class="inline-flex items-center gap-2">
+            {cta}
+            <span aria-hidden="true">&#8594;</span>
+          </span>
+        </span>
+        <span data-label-open hidden>
+          <span class="sticky-swap inline-flex items-center gap-2">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+            Megnyitva
+            <span aria-hidden="true">&#8599;</span>
+          </span>
+        </span>
       </a>
     </div>
   </div>
 </div>
+
+{card && (
+  <div
+    id="book-return"
+    data-open="false"
+    hidden
+    role="dialog"
+    aria-labelledby="book-return-name"
+    class="book-return fixed inset-x-3 bottom-3 z-40 lg:left-auto lg:right-6 lg:bottom-6 lg:w-[380px]"
+  >
+    <div
+      class="flex flex-col gap-3 rounded-3xl border border-gold/45 bg-inkSoft px-5 pt-5 shadow-[0_-20px_60px_-20px_rgba(0,0,0,0.85)]"
+      style="padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));"
+    >
+      <div class="flex items-start justify-between gap-3">
+        <p class="mt-2.5 text-[11px] uppercase tracking-caps font-medium text-goldSoft">A Notinón így szerepel</p>
+        <button
+          type="button"
+          data-book-return-close
+          aria-label="Bezárom"
+          class="-mr-2 -mt-1 inline-flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-creamMute hover:bg-whisper hover:text-cream transition-colors duration-150"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </button>
+      </div>
+      <p id="book-return-name" class="-mt-2 font-display text-2xl leading-tight text-cream">{card.notinoHint}</p>
+      <p class="text-sm text-creamMute">{cardMeta}</p>
+      <a
+        href={config.booking}
+        target="_blank"
+        rel={relFor(config.booking)}
+        data-book-reclick
+        class="fb-book mt-1 inline-flex min-h-[52px] items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gold px-5 text-[12px] uppercase tracking-caps font-semibold text-ink hover:bg-goldSoft active:scale-[0.97] transition-colors duration-150"
+      >
+        {/* Ugyanaz az első személyű ige, mint a felső sáv „Folytatom a Notinón →"
+            szövegében — a két felület egy hangon szól. */}
+        Folytatom a foglalást
+        <span aria-hidden="true">&#8599;</span>
+      </a>
+    </div>
+  </div>
+)}
+
+<style>
+  /* Visszatérő kártya: alulról, a ragadós sáv HELYÉRE (a sáv közben elrejtőzik),
+     720 ms drawer-görbével. Záráskor gyorsabban megy, mint jött. */
+  .book-return {
+    transform: translateY(calc(100% + 24px));
+    transition: transform 240ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .book-return[data-open='true'] {
+    transform: none;
+    transition-duration: 720ms;
+    transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  @keyframes stickySwap {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .sticky-swap {
+    animation: stickySwap 240ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .book-return { transform: none; opacity: 0; transition: opacity 120ms linear; }
+    .book-return[data-open='true'] { opacity: 1; }
+    .sticky-swap { animation: none; }
+  }
+</style>
 
 <script is:inline>
   (function () {
@@ -81,6 +199,8 @@ const config = { ...siteConfig };
     var SHOW_AFTER = 480;
     var contactVisible = false;
     var consentPending = false;
+    // Amíg a visszatérő kártya nyitva van, a sáv a helyét adja át neki.
+    var returnOpen = false;
 
     try {
       consentPending = !window.localStorage.getItem('frubeauty_cookie_consent_v1');
@@ -92,7 +212,7 @@ const config = { ...siteConfig };
     });
 
     function evaluate() {
-      var show = window.scrollY > SHOW_AFTER && !contactVisible && !consentPending;
+      var show = window.scrollY > SHOW_AFTER && !contactVisible && !consentPending && !returnOpen;
       bar.dataset.visible = show ? 'true' : 'false';
     }
 
@@ -105,6 +225,33 @@ const config = { ...siteConfig };
         evaluate();
       }).observe(contact);
     }
+
+    // ── Élő ár a területválasztóból ──────────────────────────────────────
+    // A lézer-oldal `AreaBuilder` szigete minden pipálásnál elküldi az aktuális
+    // állást. Üres kiválasztásnál `detail: null` jön, és visszaáll az eredeti,
+    // szerver-oldalon renderelt szöveg. Más oldalakon az esemény sosem tüzel,
+    // tehát ott ez a blokk nem csinál semmit.
+    var eyebrowEl = document.getElementById('sticky-book-eyebrow');
+    var priceEl = document.getElementById('sticky-book-price');
+    var hintEl = document.getElementById('sticky-book-hint');
+    var alapEyebrow = eyebrowEl ? eyebrowEl.textContent : '';
+    var alapPrice = priceEl ? priceEl.textContent : '';
+
+    window.addEventListener('lezer:valasztas', function (ev) {
+      if (!eyebrowEl || !priceEl || !hintEl) return;
+      var d = ev.detail;
+      if (!d) {
+        eyebrowEl.textContent = alapEyebrow;
+        priceEl.textContent = alapPrice;
+        hintEl.hidden = true;
+        hintEl.textContent = '';
+        return;
+      }
+      eyebrowEl.textContent = d.eyebrow;
+      priceEl.textContent = d.price;
+      hintEl.textContent = d.hint;
+      hintEl.hidden = !d.hint;
+    });
 
     var ticking = false;
     window.addEventListener(
@@ -119,6 +266,87 @@ const config = { ...siteConfig };
       },
       { passive: true }
     );
+
+    // ── Notino-átadás (motion-rendszer, 2. mozdulat) ───────────────────────
+    // A kattintás és a Notino közé SEMMI nem kerül: a link a saját dolgát végzi
+    // (új lap), itt csak egy időbélyeg íródik, és a sáv gombja állapotot vált.
+    // Ha a vendég 15 percen belül visszatér erre a lapra, a sáv helyén kap egy
+    // kártyát a pontos Notino-névvel — munkamenetenként egyszer.
+    // A book_click-et továbbra is a Layout globális figyelője küldi; ez a blokk
+    // csak a két új eseményt: book_return és book_reclick.
+    // Amíg a süti-banner döntésre vár, a kártya nem nyílik (ugyanazt a sávot
+    // foglalnák el, és a banner z-[60]-on fölé kerülne).
+    var KEY = 'fb_handoff_ts';
+    var SHOWN = 'fb_handoff_shown';
+    var WINDOW_MS = 15 * 60 * 1000;
+    var card = document.getElementById('book-return');
+    var cta = document.getElementById('sticky-book-cta');
+    var idleLabel = cta && cta.querySelector('[data-label-idle]');
+    var openLabel = cta && cta.querySelector('[data-label-open]');
+
+    function ssGet(k) { try { return window.sessionStorage.getItem(k); } catch (e) { return null; } }
+    function ssSet(k, v) { try { window.sessionStorage.setItem(k, v); } catch (e) {} }
+    function seg() {
+      var p = (location.pathname || '/').replace(/^\/+|\/+$/g, '');
+      return p === '' ? 'home' : p.split('/')[0];
+    }
+    function send(name) {
+      try { if (window.gtag) window.gtag('event', name, { event_category: 'handoff', event_label: seg() }); } catch (e) {}
+    }
+    function setOpened(on) {
+      if (!idleLabel || !openLabel) return;
+      idleLabel.hidden = on;
+      openLabel.hidden = !on;
+    }
+    function openCard() {
+      returnOpen = true;
+      evaluate();
+      // A felső „Félbemaradt egy foglalásod" sáv (AnnouncementBar) ugyanerre a
+      // helyzetre szól, de név és gomb nélkül — amíg ez a kártya él, átadja a helyét.
+      try { window.dispatchEvent(new CustomEvent('fb:book-return')); } catch (e) {}
+      card.hidden = false;
+      // Két képkocka: a `hidden` levétele után kell egy festés a kiinduló
+      // állapotban, különben az átmenet nem fut le, csak megjelenik.
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(function () { card.dataset.open = 'true'; });
+      });
+    }
+    function closeCard() {
+      if (!card || !returnOpen) return;
+      card.dataset.open = 'false';
+      returnOpen = false;
+      window.setTimeout(function () {
+        if (!returnOpen) card.hidden = true;
+        evaluate();
+      }, 260);
+    }
+
+    document.addEventListener('click', function (ev) {
+      if (!(ev.target instanceof Element)) return;
+      var a = ev.target.closest('a[href*="notino.hu"]');
+      if (!a) {
+        if (ev.target.closest('[data-book-return-close]')) closeCard();
+        return;
+      }
+      ssSet(KEY, String(Date.now()));
+      if (a.hasAttribute('data-book-reclick')) {
+        send('book_reclick');
+        closeCard();
+      }
+      setOpened(true);
+    }, true);
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState !== 'visible') return;
+      setOpened(false);
+      if (!card || returnOpen || consentPending) return;
+      var ts = Number(ssGet(KEY)) || 0;
+      if (!ts || Date.now() - ts > WINDOW_MS) return;
+      if (ssGet(SHOWN) === '1') return;
+      ssSet(SHOWN, '1');
+      openCard();
+      send('book_return');
+    });
 
     evaluate();
   })();

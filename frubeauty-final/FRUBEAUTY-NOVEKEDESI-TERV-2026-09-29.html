@@ -1,0 +1,850 @@
+<title>FRUBEAUTY Q4 Növekedési Terv</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: egyhasábos munkadokumentum, desktopon bal oldali tartalomjegyzékkel; a táblák és kódok saját görgetésben. */
+:root{
+  --paper:#FAF8F5; --surface:#FFFFFF; --ink:#1A1410; --ink2:#4A3F36; --muted:#786C61; --line:#E6DFD6;
+  --gold:#8E6430; --goldsoft:#F3E9DA; --code:#F3EFE9;
+  --good:#2E6A4E; --goodsoft:#E3F0E8; --warn:#8F5712; --warnsoft:#F7EBD8; --bad:#9E3B2B; --badsoft:#F6E2DD;
+  --display:'Fraunces',Georgia,'Times New Roman',serif;
+  --body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#15110E; --surface:#1D1814; --ink:#F2EBE2; --ink2:#D3C7B9; --muted:#A39588; --line:#352C25;
+  --gold:#D2A566; --goldsoft:#2B2219; --code:#211B16;
+  --good:#79C49D; --goodsoft:#1B2A22; --warn:#E3A95C; --warnsoft:#2E2416; --bad:#E58470; --badsoft:#321C18; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#15110E; --surface:#1D1814; --ink:#F2EBE2; --ink2:#D3C7B9; --muted:#A39588; --line:#352C25;
+  --gold:#D2A566; --goldsoft:#2B2219; --code:#211B16;
+  --good:#79C49D; --goodsoft:#1B2A22; --warn:#E3A95C; --warnsoft:#2E2416; --bad:#E58470; --badsoft:#321C18; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;padding-inline:16px;padding-block:0}
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:40px;padding-block:40px 80px}
+@media (min-width:1040px){.wrap{grid-template-columns:210px minmax(0,1fr)}}
+nav.toc{display:none}
+@media (min-width:1040px){nav.toc{display:block;position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;font-size:13.5px}}
+nav.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+nav.toc a{color:var(--muted);text-decoration:none}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--gold)}
+nav.toc .sub{padding-left:14px;font-size:12.5px}
+main{min-width:0}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(1.9rem,4.4vw,2.9rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.45rem,2.8vw,1.95rem);margin-top:64px;padding-top:24px;border-top:1px solid var(--line)}
+h3{font-size:1.2rem;margin-top:36px}
+p{margin:12px 0;max-width:72ch}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.lead{font-size:1.08rem;color:var(--ink2);max-width:70ch}
+.muted{color:var(--muted)}
+.small{font-size:13.5px}
+a{color:var(--gold)}
+strong{font-weight:600}
+.num{font-variant-numeric:tabular-nums}
+/* KPI */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:28px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:6px}
+.kpi b{font-family:var(--display);font-size:1.75rem;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.1}
+.kpi span{font-size:13.5px;color:var(--ink2);line-height:1.45}
+/* facts */
+.facts{margin:20px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.facts li{padding:12px 14px;border-left:3px solid var(--line);background:var(--surface);border-radius:0 8px 8px 0}
+.facts li.alert{border-left-color:var(--bad)}
+.facts li.win{border-left-color:var(--good)}
+.facts li.note{border-left-color:var(--gold)}
+/* tables */
+.tbl{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:640px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{font-weight:600;font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;background:var(--code)}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td code,p code,li code{font-family:var(--mono);font-size:12.5px;background:var(--code);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+.bar{display:flex;align-items:center;gap:8px;min-width:150px}
+.bar i{display:block;height:8px;border-radius:4px;background:var(--gold);min-width:2px}
+.bar em{font-style:normal;font-variant-numeric:tabular-nums;font-size:13px;white-space:nowrap}
+.bar.zero i{background:var(--bad)}
+/* pills */
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:999px;white-space:nowrap;border:1px solid transparent}
+.p-keep{background:var(--code);color:var(--muted);border-color:var(--line)}
+.p-mod{background:var(--goldsoft);color:var(--gold)}
+.p-new{background:var(--goodsoft);color:var(--good)}
+.p-cut{background:var(--badsoft);color:var(--bad)}
+.who{font-family:var(--mono);font-size:11px;padding:1px 6px;border-radius:4px;background:var(--code);color:var(--ink2);white-space:nowrap}
+/* snippets */
+.snip{margin:14px 0;border:1px solid var(--line);border-radius:10px;background:var(--surface);overflow:hidden}
+.snip-h{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--code)}
+.snip-h span{font-size:13px;color:var(--ink2);font-weight:500;min-width:0;overflow-wrap:anywhere}
+.snip pre{margin:0;padding:12px 14px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.55;white-space:pre}
+.snip .txt{padding:12px 14px;font-size:14.5px;line-height:1.6}
+.snip .txt p{margin:0 0 8px}
+.snip .txt p:last-child{margin:0}
+button.copy{font:500 12px var(--body);color:var(--gold);background:transparent;border:1px solid var(--line);border-radius:6px;padding:4px 10px;cursor:pointer;flex:none}
+button.copy:hover{border-color:var(--gold)}
+button.copy:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.cnt{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+/* title cards */
+.tcard{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:14px 16px;margin:14px 0;display:flex;flex-direction:column;gap:8px}
+.tcard .url{font-family:var(--mono);font-size:12.5px;color:var(--gold);overflow-wrap:anywhere}
+.tcard .data{font-size:13.5px;color:var(--ink2)}
+.tcard .old{font-size:13.5px;color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+.field{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:10px;align-items:start}
+.field .lbl{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:3px}
+.field .val{font-size:14.5px;min-width:0}
+@media (max-width:560px){.field{grid-template-columns:minmax(0,1fr) auto}.field .lbl{grid-column:1/-1;padding:0}}
+/* wireframe */
+.wf{display:flex;flex-direction:column;gap:8px;margin:18px 0}
+.wf-row{display:grid;grid-template-columns:44px minmax(0,220px) minmax(0,1fr);gap:14px;align-items:start;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.wf-row.dashed{border-style:dashed}
+.wf-n{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:2px;font-variant-numeric:tabular-nums}
+.wf-name{display:flex;flex-direction:column;gap:6px}
+.wf-name b{font-weight:600;font-size:14.5px;line-height:1.35}
+.wf-spec{font-size:14px;color:var(--ink2);min-width:0}
+.wf-spec p{margin:0 0 6px}
+.wf-spec p:last-child{margin:0}
+@media (max-width:640px){.wf-row{grid-template-columns:34px minmax(0,1fr)}.wf-spec{grid-column:1/-1}}
+/* roadmap */
+.phase{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin:14px 0;overflow:hidden}
+.phase-h{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;padding:12px 16px;background:var(--code);border-bottom:1px solid var(--line)}
+.phase-h b{font-family:var(--display);font-size:1.1rem;font-weight:600}
+.phase-h span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.phase ul{margin:0;padding:12px 16px 14px 34px;display:flex;flex-direction:column;gap:8px;font-size:14.5px}
+.phase li{max-width:88ch}
+.gate{border:1px solid var(--gold);background:var(--goldsoft);border-radius:10px;padding:14px 16px;margin:16px 0}
+.gate b{color:var(--gold)}
+ul.plain{padding-left:20px}
+ul.plain li{margin:6px 0;max-width:80ch}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:16px 0;font-size:14px}
+.flow span{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.flow i{font-style:normal;color:var(--muted)}
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+<nav class="toc" aria-label="Tartalom">
+  <ol>
+    <li><a href="#osszegzes">Összegzés</a></li>
+    <li><a href="#gsc">1. GSC-elemzés</a></li>
+    <li class="sub"><a href="#quickwins">Quick wins</a></li>
+    <li class="sub"><a href="#ctr">CTR: cím és leírás</a></li>
+    <li class="sub"><a href="#kannibal">Kannibalizáció</a></li>
+    <li class="sub"><a href="#gap">Hiányzó oldalak</a></li>
+    <li><a href="#geo">2. Vakfoltok és GEO</a></li>
+    <li class="sub"><a href="#vakfolt">Láthatósági rés</a></li>
+    <li class="sub"><a href="#entitas">Entitások, LSI</a></li>
+    <li class="sub"><a href="#gbp">Cégprofil</a></li>
+    <li class="sub"><a href="#ai">AI-keresők</a></li>
+    <li class="sub"><a href="#schema">JSON-LD</a></li>
+    <li><a href="#wireframe">3. Wireframe</a></li>
+    <li class="sub"><a href="#wf-lezer">Lézer</a></li>
+    <li class="sub"><a href="#wf-eskuvoi">Esküvői smink</a></li>
+    <li class="sub"><a href="#wf-alkalmi">Alkalmi smink (új)</a></li>
+    <li><a href="#roadmap">4. 90 napos terv</a></li>
+    <li class="sub"><a href="#mechanika">Munkatárs-mechanika</a></li>
+    <li class="sub"><a href="#hetek">Hétről hétre</a></li>
+    <li class="sub"><a href="#kpi">Mérőszámok</a></li>
+  </ol>
+</nav>
+
+<main>
+<header id="osszegzes">
+  <div class="eyebrow">frubeauty.com · adatzárás 2026-09-29</div>
+  <h1 style="margin-top:10px">Út az 1,5 millióig és az első munkatársig</h1>
+  <p class="lead">Négy forrásból készült: Search Console (90 nap, 383 lekérdezés, 25 oldal), GA4 (utolsó 30 nap), Notino (2026. szeptember 1–28.) és Kulcsszótervező (Budapest, 2025. szept.–2026. aug., 48 új és 73 korábban mért kifejezés). Minden javaslat mellett ott van a szám, amiből következik.</p>
+
+  <div class="kpis">
+    <div class="kpi"><b class="num">1 002 500 Ft</b><span>szeptemberi lezárt bevétel (1–28., 77 foglalás). Az 1 milliós mérföldkő megvan.</span></div>
+    <div class="kpi"><b class="num">57%</b><span>foglalt idő a munkanapok műszakidejéből (98,25 / 172 óra). Az 1,5 M ennek ~85%-a.</span></div>
+    <div class="kpi"><b class="num">73%</b><span>a bevételből szempilla és szemöldök (62 / 77 foglalás, 736 000 Ft).</span></div>
+    <div class="kpi"><b class="num">0,5%</b><span>láthatóság a „szempilla lifting”-re: 2 400 keresés/hó, 90 nap alatt 33 megjelenés.</span></div>
+  </div>
+
+  <h3>Öt tény, ami a sorrendet eldönti</h3>
+  <ul class="facts">
+    <li class="alert"><strong>Mind a 6 Google Ads-kampány szünetel.</strong> A felület 09-29-én azt írja: „Egyik hirdetése sem jelenik meg”, a GA4-ben az utolsó fizetett munkamenet 09-25-i. Az előző 30 napban a fizetett keresés 79 embert hozott, a sminkes oldalon 31%-os foglalási kattintással. A szeptemberi 1 M ebben a forgalomban készült. Ha a leállítás nem szándékos, ez az első teendő, minden SEO-lépés előtt.</li>
+    <li class="note"><strong>A lézer organikusan 0%-on áll, a foglalási lánc viszont működik.</strong> A „lézeres szőrtelenítés” (3 600/hó), a „végleges szőrtelenítés” (880) és a „dióda lézeres szőrtelenítés” (480) keresésekre 0 megjelenés jött. Közben szeptember 21. és 27. között 3 visszaigazolt októberi foglalás érkezett, ebből 2 Kombinált. Szeptemberben lezárt lézeres alkalom nem volt.</li>
+    <li class="win"><strong>A koreai szempilla lifting cikk foglalási aránya 12%-ról 58%-ra nőtt</strong> (12 organikus látogatóból 7 kattintott foglalásra) az ArticleOffer-doboz óta. A 08-29-i terv feltétele (30% fölött jöhet a mélyítés) teljesült.</li>
+    <li class="win"><strong>A 09-15-i kezdőlap-címcsere működik.</strong> „Szemöldök laminálás”: 0 kattintás / 109 megjelenés helyett 3 / 150, a pozíció 8,4-ről 6,5-re javult (28 nap vs. előző 28 nap).</li>
+    <li class="note"><strong>Az AI-asszisztensek hozzák a legjobb forgalmat.</strong> 30 nap alatt 12 ember érkezett így, közülük 8 kattintott foglalásra; a kezdőlapon 8-ból 6. A ChatGPT júniustól 39 látogatót hozott 32 kulcseseménnyel.</li>
+  </ul>
+  <p class="small muted">Adatkorlát: a GSC a kattintások nagy részét anonimizálja. 90 nap alatt az oldalszintű 418 kattintásból csak 92 látszik lekérdezés szinten. A lekérdezés-táblák ezért a mintázatot mutatják, a teljes forgalmat nem. A GA4 a Consent Mode miatt csak a hozzájáruló látogatókat méri, ezért a foglalási arányokat használom, az abszolút számokat nem.</p>
+</header>
+
+<!-- ============================================================ 1 -->
+<h2 id="gsc">1. GSC-minták és lehetőségek</h2>
+
+<h3 id="quickwins">1.1 Quick wins: 4–15. hely, sok megjelenés</h3>
+<p>Az utolsó 90 nap (06-29 – 09-26), megjelenés szerint rendezve. A „Teendő” oszlop szerint egy sor vagy on-page feladat, vagy tudatos döntés arról, hogy ott nem az oldal a szűk keresztmetszet.</p>
+<div class="tbl"><table>
+<thead><tr><th>Kifejezés</th><th class="r">Megj.</th><th class="r">Poz.</th><th class="r">Katt.</th><th>Rangsoroló URL</th><th>Teendő</th></tr></thead>
+<tbody>
+<tr><td>koreai szempilla lifting</td><td class="r">621</td><td class="r">8,0</td><td class="r">12</td><td><code>/blog/koreai-szempilla-lifting/</code></td><td>Mélyítés 472 → ~1 400 szóra, lent a vázlat. A keresés 320/hó, +336% éves alapon.</td></tr>
+<tr><td>szemöldök laminálás árak + ár</td><td class="r">450</td><td class="r">10,9</td><td class="r">2</td><td>ár-blog 281 · money page 204</td><td>A blog marad az „árak” gazdája (1.3), címcsere a CTR-hez (1.2).</td></tr>
+<tr><td>szemöldök laminálás</td><td class="r">370</td><td class="r">9,2</td><td class="r">4</td><td><code>/</code> (337)</td><td>On-page kész, a címcsere már hat. A következő lépés dofollow link közvetlenül a money page-re.</td></tr>
+<tr><td>esküvői smink árak</td><td class="r">235</td><td class="r">9,3</td><td class="r">6</td><td><code>/sminkes-zuglo/</code> (156 @ 7,5)</td><td>Új cím „esküvői sminkes” + „menyasszonyi smink árak” szavakkal (1.2), az árak a 2. szekcióba (3.2).</td></tr>
+<tr><td>szemöldök laminálás meddig tart</td><td class="r">211</td><td class="r">8,2</td><td class="r">1</td><td>blog (209)</td><td>Címcsere (1.2): a mostani cím maga a válasz, ezért nem kattintanak.</td></tr>
+<tr><td>alkalmi smink árak</td><td class="r">173</td><td class="r">7,0</td><td class="r">1</td><td><code>/sminkes-zuglo/</code> (160 @ 6,4)</td><td>Saját oldal: <code>/alkalmi-smink-budapest/</code> (1.4, 3.3).</td></tr>
+<tr><td>menyasszonyi smink árak</td><td class="r">127</td><td class="r">9,2</td><td class="r">2</td><td>sminkes 72 · blog 59</td><td>A kifejezés a sminkes oldal címébe kerül (1.2).</td></tr>
+<tr><td>alkalmi smink budapest</td><td class="r">94</td><td class="r">12,1</td><td class="r">1</td><td><code>/sminkes-zuglo/</code></td><td>Az alkalmi oldal H1-e és címe.</td></tr>
+<tr><td>kozmetikus zugló</td><td class="r">81</td><td class="r">16,3</td><td class="r">2</td><td><code>/</code></td><td>28 napon már 14,0. Nem on-page kérdés: térképcsomag és vélemények (2.3).</td></tr>
+<tr><td>laminált szemöldök (+ laminalt szemoldok)</td><td class="r">101</td><td class="r">7,8</td><td class="r">0</td><td><code>/szemoldok-laminalas-zuglo/</code></td><td>A „Laminált szemöldök” a meta leírás elejére (1.2), hogy vastagon jelenjen meg a találatban.</td></tr>
+<tr><td>koreai szempilla lifting budapest</td><td class="r">69</td><td class="r">7,7</td><td class="r">9</td><td>blog</td><td>13% CTR, jól teljesít. A mélyítéssel együtt mozog.</td></tr>
+<tr><td>szempilla lifting zugló</td><td class="r">62</td><td class="r">5,0</td><td class="r">6</td><td>kezdőlap 46 · money page 35 · ár-blog 28</td><td>Háromfelé szakad. Az ár-blog 301-gyel a money page-re (1.3).</td></tr>
+</tbody></table></div>
+
+<h3>A koreai cikk mélyítése: kész vázlat</h3>
+<p>Az ArticleOffer-doboz marad a cikk elején és végén, mert az hozta az 58%-ot. A mélyítés H2-szerkezete:</p>
+<div class="tbl"><table>
+<thead><tr><th>H2</th><th>Tartalom</th><th>Melyik lekérdezést szolgálja</th></tr></thead>
+<tbody>
+<tr><td>Koreai szempilla lifting Budapesten: ár, idő, tartósság</td><td>Az első 60 szó a tényeket adja: 12 000 Ft festéssel, kb. 75 perc, 6–8 hét, Egressy út 16.</td><td>koreai szempilla lifting budapest (69 megj., 13% CTR)</td></tr>
+<tr><td>Miben más, mint a hagyományos lifting?</td><td>A mostani törzs, változatlanul.</td><td>koreai szempilla lifting (621)</td></tr>
+<tr><td>Koreai szempilla lifting vélemények</td><td>3 valódi Google-vélemény szó szerint, dátummal. Ha kevés a koreai-specifikus, a szempilla liftingről szólók is jók.</td><td>koreai szempilla lifting vélemények (22 megj. a 4,7. helyen)</td></tr>
+<tr><td>Előtte és utána</td><td>2 saját fotópár, a képfájlnévben a kifejezéssel.</td><td>képkeresés (a 09-15-i audit szerint 1 010 megjelenés a 36. helyen)</td></tr>
+<tr><td>Kinek való, és kinek nem</td><td>Rövid lista, a tulajdonos szakmai tapasztalatából.</td><td>bizalom, a döntés előtti kérdés</td></tr>
+<tr><td>Az első 24 óra</td><td>Utóápolás 3–4 pontban, link a meglévő utóápolás-cikkre.</td><td>belső link a klaszterben</td></tr>
+</tbody></table></div>
+
+<h3 id="ctr">1.2 CTR-kiemelés: kész címek és leírások</h3>
+<p>Az oldalak, ahol sok a megjelenés és kevés a kattintás. A cím legfeljebb 60 karakter, a leírás legfeljebb ~155, hogy mobilon se vágja le a Google. Minden szöveg átment a tulajdonos hat hangnem-szabályán: nincs felszólítás a vendég saját életére, nincs zárójeles utóirat és nincs versenytárs-ár a money page-eken.</p>
+
+<div class="tcard">
+  <div class="url">/blog/szemoldok-laminalas-meddig-tart/</div>
+  <div class="data">90 nap: 1 031 megjelenés, 4 kattintás (0,4%), 6,8. hely. A cím kiírja a választ („6 hét”), ezért a kereső a találati oldalon megkapja, és nem kattint.</div>
+  <div class="old">Szemöldök laminálás meddig tart? 6 hét — ha ezt betartod</div>
+  <div class="field"><span class="lbl">Cím</span><span class="val copytext">Meddig tart a szemöldök laminálás? 4–8 hét, és ami eldönti</span><button class="copy" type="button">Másolás</button></div>
+  <div class="field"><span class="lbl">Leírás</span><span class="val copytext">Átlagosan 6 hét, de 4 és 8 hét között bármi lehet. Hogy melyik lesz a tiéd, azt főleg az első 24 óra dönti el: három szabály, zuglói gyakorlatból.</span><button class="copy" type="button">Másolás</button></div>
+</div>
+
+<div class="tcard">
+  <div class="url">/szemoldok-laminalas-zuglo/</div>
+  <div class="data">„laminált szemöldök” + „laminalt szemoldok”: 101 megjelenés, 0 kattintás a 7,8. helyen. A cím működik (a „szemöldök laminálás budapest”-en 6,9% CTR), ezért csak a leírás változik.</div>
+  <div class="field"><span class="lbl">Cím</span><span class="val">változatlan</span><span></span></div>
+  <div class="field"><span class="lbl">Leírás</span><span class="val copytext">Laminált szemöldök Budapesten, a XIV. kerületben: laminálás formázással és festéssel 11.000 Ft, kb. 60 perc, 6 hétig tartós. ★5,0 · 70+ Google-értékelés.</span><button class="copy" type="button">Másolás</button></div>
+</div>
+
+<div class="tcard">
+  <div class="url">/szempilla-lifting-zuglo/</div>
+  <div class="data">A „szempilla lifting festéssel” és a „szempilla lifting és festés” (25 megj.) a festés-blogra fut 0 kattintással, pedig ez a money page szolgáltatásneve. A „koreai” trend (+336%) a leírás elején vastagon jelenik meg.</div>
+  <div class="old">Szempilla lifting Budapest, Zugló – 12.000 Ft | FRUBEAUTY</div>
+  <div class="field"><span class="lbl">Cím</span><span class="val copytext">Szempilla lifting festéssel Budapest – 12.000 Ft | FRUBEAUTY</span><button class="copy" type="button">Másolás</button></div>
+  <div class="field"><span class="lbl">Leírás</span><span class="val copytext">Koreai szempilla lifting festéssel Budapesten, Zuglóban: 12.000 Ft, kb. 75 perc, ragasztó nélkül, 6–8 hétig ívelt pillák. ★5,0 · 70+ Google-értékelés.</span><button class="copy" type="button">Másolás</button></div>
+</div>
+
+<div class="tcard">
+  <div class="url">/sminkes-zuglo/ (esküvői fókusszal, lásd 3.2)</div>
+  <div class="data">Az „esküvői sminkes” havi 260 keresésére 0 megjelenés, a „menyasszonyi smink” (170/hó) 0,4%-on áll. Az „esküvői smink árak” pontos egyezése a H2-ben marad. Visszalépési szabály: ha az „esküvői smink árak” 3 hét alatt 3 helynél többet esik (28 napos bázis: 6,9), a régi cím visszakerül.</div>
+  <div class="old">Esküvői smink árak Budapest 2026 – 30.000 Ft | FRUBEAUTY</div>
+  <div class="field"><span class="lbl">Cím</span><span class="val copytext">Esküvői sminkes Budapest · menyasszonyi smink árak 2026</span><button class="copy" type="button">Másolás</button></div>
+  <div class="field"><span class="lbl">Leírás</span><span class="val copytext">Menyasszonyi smink 30.000 Ft, próbasminkkel csomagban 39.000 Ft, örömanyával együtt 51.000 Ft. Budapesten kiszállással, a sminkről videó minden szögből.</span><button class="copy" type="button">Másolás</button></div>
+</div>
+
+<div class="tcard">
+  <div class="url">/alkalmi-smink-budapest/ (új oldal)</div>
+  <div class="data">Az „alkalmi smink árak” a 7. helyen 0,6% CTR-t hoz, az „esküvői smink árak” a 9.-en 2,6%-ot. Az alkalmi kereső ma egy „Esküvői… 30.000 Ft” címet lát.</div>
+  <div class="field"><span class="lbl">Cím</span><span class="val copytext">Alkalmi smink Budapest – 15.000 Ft, Zugló | FRUBEAUTY</span><button class="copy" type="button">Másolás</button></div>
+  <div class="field"><span class="lbl">Leírás</span><span class="val copytext">Alkalmi smink Budapesten, Zuglóban: estélyre, szalagavatóra, ballagásra és fotózásra 15.000 Ft. Fixálva, hogy estig tartson. ★5,0 · 70+ Google-értékelés.</span><button class="copy" type="button">Másolás</button></div>
+</div>
+
+<div class="tcard">
+  <div class="url">/blog/szemoldok-laminalas-arak-2026/</div>
+  <div class="data">Az „árak” lekérdezésen 234 megjelenés, 2 kattintás a 10,9. helyen. A cím egyes számot mond („ára”), a nagyobb lekérdezés viszont a többes („árak”: 380 vs. „ár”: 70).</div>
+  <div class="old">Szemöldök laminálás ára 2026: 7–13 000 Ft Budapesten</div>
+  <div class="field"><span class="lbl">Cím</span><span class="val copytext">Szemöldök laminálás árak 2026: mitől 7 és mitől 13 ezer?</span><button class="copy" type="button">Másolás</button></div>
+  <div class="field"><span class="lbl">Leírás</span><span class="val copytext">Budapesten 7 000 és 13 000 Ft között mozog a szemöldök laminálás ára. Négy tétel dönti el az árat: formázás, festés, utóápolás és a kezelés ideje.</span><button class="copy" type="button">Másolás</button></div>
+</div>
+
+<div class="tcard">
+  <div class="url">/lezeres-szortelenites-budapest/</div>
+  <div class="data">A leírás 309 karakteres, a Google ~155-nél levágja, így a „nem kell előre fizetni” kiesik. Az új cím a „dióda lézeres szőrtelenítés” (480/hó) kifejezést is lefedi úgy, hogy a „lézeres szőrtelenítés budapest” szó szerint benne marad. A 09-20-i fókuszdöntést nem sérti, de a tulajdonos dönt.</div>
+  <div class="old">Lézeres szőrtelenítés Budapest – árak 11.000 Ft-tól | FRUBEAUTY</div>
+  <div class="field"><span class="lbl">Cím</span><span class="val copytext">Dióda lézeres szőrtelenítés Budapest – 11.000 Ft-tól</span><button class="copy" type="button">Másolás</button></div>
+  <div class="field"><span class="lbl">Leírás</span><span class="val copytext">Soprano Titanium dióda lézer Budapesten: hónalj 11.000 Ft, teljes intim 16.000 Ft alkalmanként, a sorozatot alkalmanként fizeted. Csak női vendégek.</span><button class="copy" type="button">Másolás</button></div>
+</div>
+
+<p class="small muted">A kezdőlap címe nem változik: a 09-15-i csere mérhetően hat. A „szemöldökfestés” cím az új oldalhoz tartozik (1.4).</p>
+
+<h3 id="kannibal">1.3 Kannibalizáció: döntések</h3>
+<div class="tbl"><table>
+<thead><tr><th>Lekérdezés</th><th>Versengő URL-ek (90 nap)</th><th>Döntés</th><th>Miért</th></tr></thead>
+<tbody>
+<tr><td>szemöldök laminálás árak / ár</td><td>ár-blog 281 megj. · money page 204 megj.; 28 napon a blog 117 @ 10,2, a money page 6 @ 15,8</td><td><strong>A blog az „árak” gazdája.</strong> A money page a „szemöldök laminálás budapest”-et viszi, ott 76%-os a láthatósága és 6,9% a CTR-je.</td><td>A 08-29-i élő SERP ár-kalauzokat rangsorol (Reddit, országos összevetések). A 41c930a2-es szándék-szétválasztás élesben van, és a Google a blogot választotta. A piaci ársávot a money page a versenytárs-ár tilalma miatt nem hozhatja.</td></tr>
+<tr><td>szempilla lifting ár · szempilla lifting zugló</td><td>kezdőlap 46 · money page 35 · <code>/blog/szempilla-lifting-arak-2026/</code> 28 + 13</td><td><strong>301: ár-blog → <code>/szempilla-lifting-zuglo/</code></strong></td><td>A cikk ugyanazt a saját 12 000 Ft-os árat tételezi, amit a money page 09-15 óta pontos „Szempilla lifting árak” H2-vel hoz. 90 nap alatt 2 kattintás 350 megjelenésből, 28 napon 0 / 169. Nincs benne olyan, amit a money page ne vinne.</td></tr>
+<tr><td>szempilla lifting festéssel / és festés</td><td><code>/blog/szempilla-lifting-vagy-festes/</code> 23 megj., 0 katt.</td><td>A money page címébe bekerül a „festéssel” (1.2). A cikk H1-e a „vagy” kérdésnél marad.</td><td>A „Szempilla lifting festéssel” a Notino-tétel neve, tehát tranzakciós szándék.</td></tr>
+<tr><td>menyasszonyi smink árak</td><td>sminkes 72 @ 8,8 · blog 59 @ 10,7</td><td>Mindkettő marad. A money page címe kimondja (1.2), a blog a piaci sávot (25–60 ezer) viszi.</td><td>Két különböző szándék: „mennyi nálad” és „mennyi a piacon”.</td></tr>
+<tr><td>szemöldök laminálás (fej)</td><td>kezdőlap 337 @ 8,3 · money page 0</td><td>Nincs on-page teendő.</td><td>A kezdőlap tekintéllyel nyer (08-09-i mérés); a de-optimalizálása csak megjelenést vinne el. A kar a dofollow link a money page-re (esküvői partnerek, Janssen kozmetikus-kereső).</td></tr>
+</tbody></table></div>
+
+<div class="snip">
+  <div class="snip-h"><span>netlify.toml: a szempilla-árcikk átirányítása</span><button class="copy" type="button">Másolás</button></div>
+<pre>[[redirects]]
+  from = "/blog/szempilla-lifting-arak-2026/"
+  to = "/szempilla-lifting-zuglo/"
+  status = 301
+  force = true</pre>
+</div>
+<p class="small">A 301 mellé öt belső link is átírandó, különben belső átirányítási lánc marad: <code>src/pages/szempilla-lifting-zuglo.astro:588</code> (RelatedArticles slug), <code>koreai-szempilla-lifting.md:97</code>, <code>szempilla-lifting-vagy-festes.md:61</code>, <code>szempilla-lifting-utoapolas.md:67</code>, és maga a cikk-fájl törlendő a <code>src/content/blog/</code>-ból, hogy a sitemapből is kikerüljön.</p>
+
+<h3 id="gap">1.4 Gap: hiányzó vagy rossz landing oldalak</h3>
+<p>A Kulcsszótervező budapesti volumenét vetettem össze a GSC-megjelenéssel. A kérdés mindig az, hogy hiányzik-e oldal, vagy van oldal, csak nem rangsorol. A kettő más munkát jelent.</p>
+<div class="tbl"><table>
+<thead><tr><th>Szándék</th><th class="r">Keresés/hó</th><th>Mai láthatóság</th><th>Mi hiányzik</th><th>Döntés</th></tr></thead>
+<tbody>
+<tr><td><strong>Alkalmi smink</strong><br><span class="small muted">alkalmi smink 210 (+24%), smink budapest 260, sminktanácsadás 110, alkalmi smink budapest 90, szalagavató 50, fotózásra 30, estélyi 30, ballagási 30</span></td><td class="r">~810</td><td>0,2–0,8%</td><td>Nincs saját oldal. Az esküvői címet látó alkalmi kereső a 7. helyről 0,6%-ban kattint.</td><td><span class="pill p-new">új oldal</span> <code>/alkalmi-smink-budapest/</code>. A szalagavató-szezon novembertől februárig tart, ezért október közepéig élesíteni kell.</td></tr>
+<tr><td><strong>Esküvői sminkes</strong><br><span class="small muted">esküvői smink 320, esküvői sminkes 260, menyasszonyi smink 170</span></td><td class="r">750</td><td>0–0,8%</td><td>Van oldal, de a címe nem mondja ki a „sminkes” és a „menyasszonyi” szót, és az árak csak a 4. szekcióban jönnek.</td><td><span class="pill p-mod">átalakítás</span> A <code>/sminkes-zuglo/</code> tisztán esküvői lesz (3.2), az URL marad, mert ez a rangsor.</td></tr>
+<tr><td><strong>Szemöldökfestés és -formázás</strong><br><span class="small muted">szemöldökfestés 320 (+52%), szemöldök formázás 140, formázás budapest 20, henna 20</span></td><td class="r">~500</td><td>10–13%, a kezdőlappal, ~1% CTR</td><td>Nincs oldal: a kereső a 2,6–4. helyen egy „Kozmetikus Zugló” címet lát. Szeptemberben 13 foglalás jött ezekre.</td><td><span class="pill p-new">új oldal</span> <code>/szemoldokfestes-zuglo/</code>, cím: „Szemöldökfestés és formázás Budapest – 5.000 Ft | FRUBEAUTY”. Ez lesz a munkatárs belépő szolgáltatása is (4.). Az ár a Notinón ellenőrizendő: az llms.txt 5 000 Ft-ot ír, a szeptemberi átlag 5 571 Ft.</td></tr>
+<tr><td><strong>Szempilla laminálás</strong> (a lifting másik neve)</td><td class="r">110</td><td>0%</td><td>Egyszer szerepel a törzsszövegben, címsorban sehol. A „szempilla laminálás árak” a szemöldök-árcikkre fut (16 megj. a 2,9. helyen).</td><td><span class="pill p-mod">kiegészítés</span> Nem kell új oldal: GYIK-kérdés („Szempilla laminálás vagy lifting?”) és <code>alternateName</code> a Service-sémában.</td></tr>
+<tr><td><strong>Arctisztítás</strong><br><span class="small muted">arctisztítás 90, arctisztítás budapest 40, arckezelés budapest 170 (+91% éves alapon)</span></td><td class="r">300</td><td>0–1%</td><td>Az oldalon csak felvezető címkeként szerepel („Arctisztító kezelések”), H2-ként nem.</td><td><span class="pill p-mod">kiegészítés</span> H2: „Arctisztítás és mélytisztító arckezelés Budapesten”.</td></tr>
+<tr><td><strong>Dióda lézer</strong><br><span class="small muted">lézeres szőrtelenítés 3 600, végleges szőrtelenítés 880, dióda lézeres 480, lézeres szőrtelenítés budapest 320, gyantázás budapest 320, vélemények 160, árak 140 (+89%)</span></td><td class="r">~5 900</td><td>0–0,5% (64. hely)</td><td>Van oldal (09-12 óta, 2,5 hetes). A támogató klaszter hiányzik: nincs cikk, nincs lézeres vélemény, nincs dofollow link.</td><td><span class="pill p-new">2 cikk</span> „Lézeres szőrtelenítés vagy gyantázás?” (az intim gyanta −45%, a lézeres intim +22%, a kereslet vándorol) és „Hány alkalom kell a lézeres szőrtelenítéshez?”. Vélemény-blokk az első vendégek után (3.1).</td></tr>
+<tr><td><strong>Kozmetikus (fej)</strong><br><span class="small muted">kozmetikus 4 400, kozmetikus budapest 880, kozmetikus zugló 170</span></td><td class="r">5 450</td><td>1,2–16%</td><td>Nem oldal kérdése: a helymegjelölt keresés ugyanazon a helyen 5-ször jobban kattint, és ezt a térképcsomag dönti el.</td><td>Vélemények és Cégprofil (2.3). Kerület-oldalt nem érdemes építeni: a „kozmetikus 14 kerület” 10/hó.</td></tr>
+</tbody></table></div>
+
+<!-- ============================================================ 2 -->
+<h2 id="geo">2. Vakfoltok és lokális AI (GEO)</h2>
+
+<h3 id="vakfolt">2.1 Láthatósági rés: ahol van keresés, de nincs megjelenés</h3>
+<p>Láthatóság = 90 napos GSC-megjelenés ÷ (havi keresés × 3). Ahol ez közel 0, a keresést más kapja. A mutató durva: a Kulcsszótervező kerekít és összevonja a közeli változatokat, a GSC pedig egy keresésnél két saját URL-t is számolhat. Ezért ahol 100% fölötti érték jön ki, az csak annyit jelent, hogy ott jelen vagyunk. Szűrve: szolgáltatás-szándék, a férfi-, gép- és otthoni kifejezések nélkül.</p>
+<div class="tbl"><table>
+<thead><tr><th>Kifejezés</th><th class="r">Keresés/hó</th><th class="r">Megj. 90 nap</th><th class="r">Poz.</th><th>Láthatóság</th><th>Hová tartozik</th></tr></thead>
+<tbody>
+<tr><td>lézeres szőrtelenítés</td><td class="r">3 600</td><td class="r">0</td><td class="r">—</td><td><div class="bar zero"><i style="width:2px"></i><em>0%</em></div></td><td>lézer-oldal + klaszter</td></tr>
+<tr><td>szempilla lifting</td><td class="r">2 400</td><td class="r">33</td><td class="r">9,8</td><td><div class="bar"><i style="width:1%"></i><em>0,5%</em></div></td><td>szempilla money page + térképcsomag</td></tr>
+<tr><td>szemöldök laminálás</td><td class="r">1 900</td><td class="r">370</td><td class="r">9,2</td><td><div class="bar"><i style="width:6.5%"></i><em>6,5%</em></div></td><td>kezdőlap nyer; link a money page-re</td></tr>
+<tr><td>kozmetikus budapest</td><td class="r">880</td><td class="r">39</td><td class="r">2,6</td><td><div class="bar"><i style="width:1.5%"></i><em>1,5%</em></div></td><td>térképcsomag</td></tr>
+<tr><td>végleges szőrtelenítés</td><td class="r">880</td><td class="r">0</td><td class="r">—</td><td><div class="bar zero"><i style="width:2px"></i><em>0%</em></div></td><td>lézer-oldal H2 + „hány alkalom” cikk</td></tr>
+<tr><td>dióda lézeres szőrtelenítés</td><td class="r">480</td><td class="r">0</td><td class="r">—</td><td><div class="bar zero"><i style="width:2px"></i><em>0%</em></div></td><td>lézer-oldal címe (1.2)</td></tr>
+<tr><td>szemöldökfestés</td><td class="r">320</td><td class="r">94</td><td class="r">4,0</td><td><div class="bar"><i style="width:9.8%"></i><em>9,8%</em></div></td><td>új: /szemoldokfestes-zuglo/</td></tr>
+<tr><td>esküvői smink</td><td class="r">320</td><td class="r">8</td><td class="r">10,4</td><td><div class="bar"><i style="width:1%"></i><em>0,8%</em></div></td><td>/sminkes-zuglo/ (esküvői)</td></tr>
+<tr><td>koreai szempilla lifting</td><td class="r">320</td><td class="r">621</td><td class="r">8,0</td><td><div class="bar"><i style="width:64.7%"></i><em>65%</em></div></td><td>blog, jól áll</td></tr>
+<tr><td>lézeres szőrtelenítés budapest</td><td class="r">320</td><td class="r">5</td><td class="r">64,0</td><td><div class="bar"><i style="width:1%"></i><em>0,5%</em></div></td><td>lézer-oldal</td></tr>
+<tr><td>smink budapest</td><td class="r">260</td><td class="r">6</td><td class="r">20,3</td><td><div class="bar"><i style="width:1%"></i><em>0,8%</em></div></td><td>új: alkalmi oldal</td></tr>
+<tr><td>esküvői sminkes</td><td class="r">260</td><td class="r">0</td><td class="r">—</td><td><div class="bar zero"><i style="width:2px"></i><em>0%</em></div></td><td>/sminkes-zuglo/ címe</td></tr>
+<tr><td>alkalmi smink</td><td class="r">210</td><td class="r">1</td><td class="r">12,0</td><td><div class="bar"><i style="width:1%"></i><em>0,2%</em></div></td><td>új: alkalmi oldal</td></tr>
+<tr><td>arckezelés budapest</td><td class="r">170</td><td class="r">5</td><td class="r">2,4</td><td><div class="bar"><i style="width:1%"></i><em>1,0%</em></div></td><td>/arckezeles-zuglo/</td></tr>
+<tr><td>szempilla lifting budapest</td><td class="r">170</td><td class="r">16</td><td class="r">8,0</td><td><div class="bar"><i style="width:3.1%"></i><em>3,1%</em></div></td><td>szempilla money page</td></tr>
+<tr><td>menyasszonyi smink</td><td class="r">170</td><td class="r">2</td><td class="r">3,5</td><td><div class="bar"><i style="width:1%"></i><em>0,4%</em></div></td><td>/sminkes-zuglo/ címe</td></tr>
+<tr><td>lézeres szőrtelenítés vélemény(ek)</td><td class="r">160</td><td class="r">0</td><td class="r">—</td><td><div class="bar zero"><i style="width:2px"></i><em>0%</em></div></td><td>lézer-oldal vélemény-blokk (3.1)</td></tr>
+<tr><td>lézeres szőrtelenítés árak</td><td class="r">140</td><td class="r">0</td><td class="r">—</td><td><div class="bar zero"><i style="width:2px"></i><em>0%</em></div></td><td>lézer-oldal, H2 már megvan</td></tr>
+<tr><td>szempilla laminálás</td><td class="r">110</td><td class="r">0</td><td class="r">—</td><td><div class="bar zero"><i style="width:2px"></i><em>0%</em></div></td><td>szempilla money page, GYIK</td></tr>
+<tr><td>sminktanácsadás</td><td class="r">110</td><td class="r">0</td><td class="r">—</td><td><div class="bar zero"><i style="width:2px"></i><em>0%</em></div></td><td>alkalmi oldal, a „Sminkoktatás” Notino-tétellel</td></tr>
+<tr><td>szemöldök laminálás budapest</td><td class="r">70</td><td class="r">159</td><td class="r">6,8</td><td><div class="bar"><i style="width:75.7%"></i><em>76%</em></div></td><td>money page, jól áll</td></tr>
+</tbody></table></div>
+<p class="small muted">Kerületi kifejezések: „kozmetikus 14 kerület” 10/hó, „szempilla lifting zugló” 20/hó, „lézeres szőrtelenítés zugló” és „sminkes zugló” nem mérhető. A kerületi szándék a térképcsomagban dől el, kerület-oldalak építése nem éri meg. Versenytárs-neveket itt szándékosan nem írok: ehhez a körhöz nem futott élő organikus SERP-lekérdezés, és a 08-29-i térképcsomag-adat már a memóriában van.</p>
+
+<h3 id="entitas">2.2 Entitások és LSI: mit kell kimondani, és hol</h3>
+<p>Az AI-összefoglalók (AI Overviews, Perplexity, ChatGPT) akkor idéznek egy forrást, ha az egyértelműen azonosítható entitás, és tömör, számszerű választ ad. Az első oszlop az egyértelműsítés, a második a mért szinonimák és kapcsolódó kifejezések.</p>
+<div class="tbl"><table>
+<thead><tr><th>Szolgáltatás</th><th>Kötelező entitások</th><th>LSI és szinonimák (mért, /hó)</th><th>Hová</th></tr></thead>
+<tbody>
+<tr><td>Lézer</td><td>dióda lézer; Soprano Titanium; 755 / 808 / 1064 nm; Fitzpatrick-skála; próbafolt; 6–8 alkalom, 4–6 hetente; csak női vendég. Gyártóra vonatkozó állítás nem kerülhet bele.</td><td>végleges szőrtelenítés 880, dióda lézeres szőrtelenítés 480, tartós szőrtelenítés 90, bikinivonal/intim lézeres 110 (+22%), vélemények 160, árak 140 (+89%), akció 40 (+400%)</td><td>lézer-oldal H2/GYIK, GBP-szolgáltatásleírások, llms.txt</td></tr>
+<tr><td>Szempilla</td><td>koreai technika; ragasztómentes; festéssel; 6–8 hét; kb. 75 perc</td><td>koreai szempilla lifting 320 (+336%), szempilla laminálás 110, szempilla lifting ár 110 (+57%), lash lift budapest 50 (+133%)</td><td>money page GYIK, Service <code>alternateName</code></td></tr>
+<tr><td>Szemöldök</td><td>laminálás formázással és festéssel; tű és tetoválás nélkül; kb. 6 hét</td><td>laminált szemöldök (101 GSC-megj.), szemöldökfestés 320 (+52%), szemöldök formázás 140, henna szemöldök 20 (+200%), microblading budapest 30</td><td>money page leírás, új festés-oldal</td></tr>
+<tr><td>Arckezelés</td><td>Janssen Cosmetics; bőranalízis; Deep Clean Expert, Hydro Radiance, Timeless Lift, Clear Balance</td><td>arckezelés budapest 170 (+91%), arckezelés 170 (+21%), arctisztítás 90, arctisztítás budapest 40</td><td>/arckezeles-zuglo/ H2</td></tr>
+<tr><td>Smink</td><td>próbasmink; kiszállás; fixálás; videó minden szögből</td><td>esküvői smink 320, esküvői sminkes 260, alkalmi smink 210 (+24%), menyasszonyi smink 170, sminktanácsadás 110, szalagavató smink 50, örömanya smink 20</td><td>esküvői és alkalmi oldal, GBP</td></tr>
+<tr><td>Hely</td><td>Zugló = Budapest XIV. kerület (Wikidata Q228445); Budapest (Q1781); Egressy út 16., 1143</td><td>a legközelebbi megálló és a parkolás: a tulajdonos adja meg, mert ezt nem ellenőriztem</td><td>minden money page lábléc-blokkja, GBP-leírás</td></tr>
+</tbody></table></div>
+
+<h3 id="gbp">2.3 Cégprofil (GBP): kész szövegek</h3>
+<p>Az elsődleges kategória marad „Szépségszalon”: a 08-11-i élő mérésen a 12 nyerőből 12 ezt használta. A lokális keresés 5-ször jobban kattint ugyanazon a helyen (5,1% vs. 1,0%), és a térképcsomagban a vélemény-szám a kötő korlát.</p>
+<ul class="plain">
+  <li><span class="who">Bence</span> <strong>Új további kategória a lézerhez.</strong> A kategóriaválasztóba a „lézer” szót gépelve jön fel (angolul „Laser hair removal service”). Ma 4 további kategória van, a limit 9. Alá 7 szolgáltatás kerül a Notino-nevekkel: Hónalj, Bikinivonal, Teljes intim, Lábszár, Teljes láb, Felső ajak, Áll – lézeres szőrtelenítés.</li>
+  <li><span class="who">Bence</span> <strong>5. termék a lézerhez, URL-lel.</strong> Ma 4 termék linkel a money page-ekre (08-11 óta), a lézer-oldalra egy sem. Név: „Lézeres szőrtelenítés – hónalj, sorozatban”, 11 000 Ft, URL: <code>https://frubeauty.com/lezeres-szortelenites-budapest/?utm_source=google&amp;utm_medium=organic&amp;utm_campaign=gbp-termek</code>. A fotó kötelező, erre jó a Soprano-kijelző saját fotója.</li>
+  <li><span class="who">Fruzsi</span> <strong>Vélemény-ütem: 70+ → 85+ december 1-ig</strong>, ez hetente ~4. A kezelés végén, a vendég telefonján megnyitva. Minden vendégnek szól, nem csak az elégedetteknek, mert a szelektív kérés sérti a Google szabályát.</li>
+</ul>
+
+<div class="snip">
+  <div class="snip-h"><span>Cégprofil leírás (a GBP limitje 750 karakter)</span><span class="cnt" data-count="gbpdesc"></span><button class="copy" type="button">Másolás</button></div>
+  <div class="txt copytext" id="gbpdesc">Pecze-Kovács Fruzsina kozmetikus szalonja Budapest XIV. kerületében, Zuglóban, az Egressy út 16. alatt. Koreai technikás szempilla lifting festéssel, szemöldök laminálás formázással és festéssel, szemöldökfestés és formázás. Janssen Cosmetics arckezelések bőranalízissel: mélytisztító, hidratáló és anti-aging kezelés. Dióda lézeres szőrtelenítés Soprano Titanium géppel, női vendégeknek, 6–8 alkalmas sorozatban; a sorozatot alkalmanként fizeted. Esküvői és menyasszonyi smink próbasminkkel, alkalmi smink szalagavatóra, estélyre, fotózásra, kiszállással is. Egyszerre egy vendéggel dolgozom, így minden kezelésre jut idő. Időpontot online, a Notinón lehet foglalni.</div>
+</div>
+<p class="small muted">A munkatárs felvételekor az „Egyszerre egy vendéggel dolgozom” mondatot a 4. részben leírt döntés szerint kell átírni.</p>
+
+<div class="snip">
+  <div class="snip-h"><span>Vélemény-kérés (SMS vagy QR-kártya)</span><button class="copy" type="button">Másolás</button></div>
+  <div class="txt copytext">Köszönöm, hogy ma nálam voltál! Egy pár mondatos Google-értékelés sokat segít annak, aki most keres kozmetikust. Azzal segítesz a legtöbbet, ha leírod, milyen kezelésen voltál. [Google-értékelés link]</div>
+</div>
+
+<h3>Heti Cégprofil-posztok: négy kész szöveg</h3>
+<p class="small">Mindegyik gombja „Foglalás”, a céloldal a money page, UTM-mel: <code>?utm_source=google&amp;utm_medium=organic&amp;utm_campaign=gbp-poszt</code>. Hetente egy, ebben a sorrendben. A szalagavatós a novemberi szezonkezdetre időzítve.</p>
+<div class="snip"><div class="snip-h"><span>1. hét · lézer → /lezeres-szortelenites-budapest/</span><button class="copy" type="button">Másolás</button></div><div class="txt copytext">Az ősszel kezdett lézeres sorozat nyárra a végére ér: 6–8 alkalom, négy-hat hetente. Dióda lézer, Soprano Titanium géppel, női vendégeknek. A hónalj alkalmanként 11 000 Ft, és a sorozatot is alkalmanként fizeted. Az első alkalom konzultációval és próbafolttal indul.</div></div>
+<div class="snip"><div class="snip-h"><span>2. hét · koreai szempilla lifting → /szempilla-lifting-zuglo/</span><button class="copy" type="button">Másolás</button></div><div class="txt copytext">Koreai szempilla lifting festéssel, ragasztó nélkül: 12 000 Ft, kb. 75 perc, és 6–8 hétig ívelt, sötétebb pillák. Egyszerre egy vendéggel dolgozom, így az ívet a te szemformádhoz választom.</div></div>
+<div class="snip"><div class="snip-h"><span>3. hét · szemöldök laminálás → /szemoldok-laminalas-zuglo/</span><button class="copy" type="button">Másolás</button></div><div class="txt copytext">Szemöldök laminálás formázással és festéssel: 11 000 Ft, kb. 60 perc, tű és tetoválás nélkül. A laminált szemöldök kb. 6 hétig tartja a formát, amit az arcodhoz választok.</div></div>
+<div class="snip"><div class="snip-h"><span>4. hét · alkalmi smink → /alkalmi-smink-budapest/</span><button class="copy" type="button">Másolás</button></div><div class="txt copytext">Szalagavatóra, estélyre, fotózásra: alkalmi smink 15 000 Ft Zuglóban. Fixálva, hogy az utolsó táncig tartson.</div></div>
+
+<h3 id="ai">2.4 AI-keresők: a hét lépés, ami hiányzik</h3>
+<div class="tbl"><table>
+<thead><tr><th>Lépés</th><th>Miért</th><th>Ki</th></tr></thead>
+<tbody>
+<tr><td><strong>Bing Webmaster Tools</strong>, importálás a Search Console-ból (oldal + sitemap)</td><td>A ChatGPT keresője a Bing indexét használja, és a ChatGPT júniustól 39 látogatót hozott 32 kulcseseménnyel.</td><td><span class="who">Bence</span></td></tr>
+<tr><td><strong>Bing Places</strong>, importálás a Cégprofilból</td><td>A Bing és a Copilot lokális találataihoz kell. 10 perc, és a citáció-csomagban 07-26 óta nyitott.</td><td><span class="who">Bence</span></td></tr>
+<tr><td><strong>Apple Business Connect</strong></td><td>Apple Térkép és Siri. A korábbi anyag-mappa eltűnt, de a recept és a képspecifikáció megvan.</td><td><span class="who">Bence</span></td></tr>
+<tr><td><strong>Ár-egyeztetés az llms.txt-ben</strong></td><td>Az AI a legkönnyebben kiolvasható árat idézi. Az llms.txt szerint a szemöldök- és szempillafestés 7 000 Ft, a Notinón szeptemberben 6 foglalás hozott 48 000 Ft-ot, ez 8 000 Ft/alkalom. A Notino az igazság forrása.</td><td><span class="who">Web</span></td></tr>
+<tr><td><strong>„Röviden” bekezdés</strong> az 5 money page-en, a H1 alatti bevezető helyére (nem mellé, mert a tulajdonos szabálya szerint nem magyarázunk kétszer)</td><td>40–60 szavas, számszerű válasz, amit az összefoglalók szó szerint kiemelnek. Kész szövegek lent.</td><td><span class="who">Web</span></td></tr>
+<tr><td><strong>Végzettségek a Person-sémában</strong> (<code>hasCredential</code>)</td><td>A szakértelem gépi jele. Ehhez a tulajdonos oklevelei kellenek (Janssen-képzés, lifting-képzés, lézeres biztonsági képzés); ezek nélkül nem írható.</td><td><span class="who">Fruzsi</span></td></tr>
+<tr><td><strong>Harmadik fél említései</strong>: Arany Oldalak (geokódolási hiba miatt elakadt), Janssen kozmetikus-kereső (kész levél), 3 esküvői partner-oldal (dofollow)</td><td>Az LLM-ek a független forrásokat idézik, nem a saját oldalt. A kész levelek: <code>FRUBEAUTY-BACKLINK-LEVELEK-2026-09-07.md</code>.</td><td><span class="who">Bence</span></td></tr>
+</tbody></table></div>
+
+<h3>„Röviden” bekezdések: kész szövegek</h3>
+<div class="snip"><div class="snip-h"><span>/szempilla-lifting-zuglo/</span><button class="copy" type="button">Másolás</button></div><div class="txt copytext">Röviden: a szempilla lifting festéssel 12 000 Ft, kb. 75 perc, és 6–8 hétig tart. Koreai technikával, ragasztó nélkül dolgozom, Budapest XIV. kerületében, az Egressy út 16. alatt. Időpontot online, a Notinón lehet foglalni, és a helyszínen fizeted.</div></div>
+<div class="snip"><div class="snip-h"><span>/szemoldok-laminalas-zuglo/</span><button class="copy" type="button">Másolás</button></div><div class="txt copytext">Röviden: a szemöldök laminálás formázással és festéssel 11 000 Ft, kb. 60 perc, és átlagosan 6 hétig tart. Festés nélkül 9 000 Ft; szempilla liftinggel együtt a Teljes Tekintet csomag 18 000 Ft. Budapest XIV. kerület, Egressy út 16.</div></div>
+<div class="snip"><div class="snip-h"><span>/lezeres-szortelenites-budapest/</span><button class="copy" type="button">Másolás</button></div><div class="txt copytext">Röviden: dióda lézeres szőrtelenítés Soprano Titanium géppel, női vendégeknek. Hat-nyolc alkalom kell, négy-hat hetente. A hónalj alkalmanként 11 000 Ft, a teljes intim 16 000 Ft, és a sorozatot alkalmanként fizeted. Az első alkalom konzultációval és próbafolttal indul.</div></div>
+<div class="snip"><div class="snip-h"><span>/sminkes-zuglo/ (esküvői)</span><button class="copy" type="button">Másolás</button></div><div class="txt copytext">Röviden: a menyasszonyi smink 30 000 Ft, próbasminkkel csomagban 39 000 Ft, az örömanya sminkjével együtt 51 000 Ft. Budapesten kiszállással is. A próbasmink az első lépés, utána foglaljuk le az esküvő napját.</div></div>
+<div class="snip"><div class="snip-h"><span>/arckezeles-zuglo/</span><button class="copy" type="button">Másolás</button></div><div class="txt copytext">Röviden: a Janssen arckezelések bőranalízissel indulnak, 16 000 Ft-tól. Mélytisztító, hidratáló és anti-aging kezelés közül a bőröd aktuális állapota szerint választok. Budapest XIV. kerület, Egressy út 16.</div></div>
+
+<h3 id="schema">2.5 BeautySalon / LocalBusiness JSON-LD</h3>
+<p>A <code>BeautySalon</code> a schema.org-ban a <code>LocalBusiness</code> altípusa (LocalBusiness → HealthAndBeautyBusiness → BeautySalon), így egy csomópont mindkettőnek számít. Két külön csomópont ugyanarra a címre két entitást jelentene, és szétosztaná a jelet. Az alábbi kód a mostani <code>Layout.astro</code> @graph-ját bővíti, az adatok a <code>site.ts</code>-ből, a Notinóról és a money page-ekről valók.</p>
+<p>Újdonságok a mostanihoz képest:</p>
+<ul class="plain">
+  <li><code>alternateName</code> a GBP-névvel: a Google a „frubeauty” keresést ma „true beauty”-re javítja, ez az entitás-összekötés egyik jele.</li>
+  <li><code>knowsAbout</code> Wikidata-hivatkozásokkal (Q783007 lézeres szőrtelenítés, Q2474068 kozmetológia), <code>additionalType</code> Q1195245 (szépségszalon), <code>areaServed</code> Wikidata-azonosítóval.</li>
+  <li><code>potentialAction</code> <code>ReserveAction</code>: a foglalás gépileg is olvasható belépési pontja.</li>
+  <li>Offer-katalógus a szeptemberi valós kínálattal: Teljes Tekintet csomag, menyasszonyi csomag, lézer zóna-szinten.</li>
+  <li><code>numberOfEmployees</code> és <code>employee</code>-tömb, hogy a munkatárs belépésekor csak egy sort kelljen hozzáadni.</li>
+</ul>
+<p>Szándékosan maradt ki két mező. Az <code>aggregateRating</code> saját oldalon önmagunkról nem ad csillagot, és manuális intézkedés kockázatával jár. A <code>logo</code> azért nincs benne, mert a favicon webfontos szöveges SVG, ami a Google-nél helyettesítő betűvel renderelődik. Ha lesz legalább 112×112-es PNG-logó, ide kerül.</p>
+
+<div class="snip">
+  <div class="snip-h"><span>JSON-LD: BeautySalon + Person + WebSite (@graph)</span><button class="copy" type="button">Másolás</button></div>
+<pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BeautySalon",
+      "@id": "https://frubeauty.com/#business",
+      "additionalType": "https://www.wikidata.org/wiki/Q1195245",
+      "name": "FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus",
+      "alternateName": [
+        "FRUBEAUTY",
+        "Pecze-Kovács Fruzsina Kozmetikus - Szempilla és Szemöldök Stylist"
+      ],
+      "legalName": "Pecze-Kovács Fruzsina e.v.",
+      "description": "A FRUBEAUTY Pecze-Kovács Fruzsina egyszemélyes kozmetikája Budapest XIV. kerületében, az Egressy úton. Dióda lézeres szőrtelenítés, Janssen arckezelés, koreai technikás szempilla lifting és szemöldök laminálás, esküvői és alkalmi smink. Egyszerre egy vendég.",
+      "url": "https://frubeauty.com/",
+      "image": [
+        "https://frubeauty.com/og-image.jpg",
+        "https://frubeauty.com/img/fruzsina-portrait.jpg",
+        "https://frubeauty.com/img/lezeres-szortelenites-gep-zuglo-egressy-ut-budapest.webp",
+        "https://frubeauty.com/img/eskuvoi-smink-budapest-egressy-ut-zuglo.webp"
+      ],
+      "telephone": "+36702159954",
+      "email": "kfruzsi0197@gmail.com",
+      "priceRange": "4000–63000 Ft",
+      "currenciesAccepted": "HUF",
+      "paymentAccepted": "Készpénz, Bankkártya",
+      "knowsLanguage": "hu",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Egressy út 16.",
+        "addressLocality": "Budapest",
+        "addressRegion": "Zugló (XIV. kerület)",
+        "postalCode": "1143",
+        "addressCountry": "HU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 47.5058846,
+        "longitude": 19.1024696
+      },
+      "hasMap": "https://www.google.com/maps/place/Pecze-Kov%C3%A1cs+Fruzsina+Kozmetikus+-+Szempilla+%C3%A9s+Szem%C3%B6ld%C3%B6k+Stylist/@47.5058846,19.1024696,17z/data=!3m1!4b1!4m6!3m5!1s0x4741dd4e35076b99:0x2c1e5cc27b785f95!8m2!3d47.5058846!4d19.1024696!16s%2Fg%2F11n53g1nrp",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "08:00",
+          "closes": "19:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:00",
+          "closes": "13:00"
+        }
+      ],
+      "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "Zugló (XIV. kerület)",
+          "sameAs": "https://www.wikidata.org/wiki/Q228445"
+        },
+        {
+          "@type": "City",
+          "name": "Budapest",
+          "sameAs": "https://www.wikidata.org/wiki/Q1781"
+        }
+      ],
+      "knowsAbout": [
+        { "@type": "Thing", "name": "Lézeres szőrtelenítés", "sameAs": "https://www.wikidata.org/wiki/Q783007" },
+        { "@type": "Thing", "name": "Kozmetológia", "sameAs": "https://www.wikidata.org/wiki/Q2474068" },
+        "Dióda lézer",
+        "Koreai szempilla lifting",
+        "Szempilla laminálás",
+        "Szemöldök laminálás",
+        "Szemöldökfestés",
+        "Janssen Cosmetics arckezelés",
+        "Esküvői smink",
+        "Menyasszonyi smink",
+        "Alkalmi smink"
+      ],
+      "founder": { "@id": "https://frubeauty.com/#fruzsina" },
+      "employee": [
+        { "@id": "https://frubeauty.com/#fruzsina" }
+      ],
+      "numberOfEmployees": { "@type": "QuantitativeValue", "value": 1 },
+      "potentialAction": {
+        "@type": "ReserveAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.notino.hu/szalonok/pecze-kovacs-fruzsina-sminkes,-szemoldok-es-szempilla-stylist",
+          "inLanguage": "hu",
+          "actionPlatform": [
+            "https://schema.org/DesktopWebPlatform",
+            "https://schema.org/MobileWebPlatform"
+          ]
+        },
+        "result": { "@type": "Reservation", "name": "Időpontfoglalás" }
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "FRUBEAUTY szolgáltatások és árak",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "price": "12000",
+            "priceCurrency": "HUF",
+            "url": "https://frubeauty.com/szempilla-lifting-zuglo/",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Koreai szempilla lifting festéssel",
+              "alternateName": ["Szempilla laminálás", "Lash lift"]
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "11000",
+            "priceCurrency": "HUF",
+            "url": "https://frubeauty.com/szemoldok-laminalas-zuglo/",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Szemöldök laminálás formázással és festéssel",
+              "alternateName": "Laminált szemöldök"
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "18000",
+            "priceCurrency": "HUF",
+            "url": "https://frubeauty.com/szempilla-lifting-zuglo/",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Teljes Tekintet csomag: szempilla lifting és szemöldök laminálás"
+            }
+          },
+          {
+            "@type": "Offer",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "16000",
+              "priceCurrency": "HUF"
+            },
+            "url": "https://frubeauty.com/arckezeles-zuglo/",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Janssen arckezelés bőranalízissel"
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "11000",
+            "priceCurrency": "HUF",
+            "url": "https://frubeauty.com/lezeres-szortelenites-budapest/",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Dióda lézeres szőrtelenítés – hónalj, sorozatban alkalmanként",
+              "alternateName": ["Lézeres szőrtelenítés", "Végleges szőrtelenítés"]
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "30000",
+            "priceCurrency": "HUF",
+            "url": "https://frubeauty.com/sminkes-zuglo/",
+            "itemOffered": { "@type": "Service", "name": "Menyasszonyi smink" }
+          },
+          {
+            "@type": "Offer",
+            "price": "39000",
+            "priceCurrency": "HUF",
+            "url": "https://frubeauty.com/sminkes-zuglo/",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Menyasszonyi csomag: próbasmink és esküvői smink"
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "15000",
+            "priceCurrency": "HUF",
+            "url": "https://frubeauty.com/sminkes-zuglo/",
+            "itemOffered": { "@type": "Service", "name": "Alkalmi smink" }
+          }
+        ]
+      },
+      "sameAs": [
+        "https://www.instagram.com/frubeauty/",
+        "https://www.facebook.com/profile.php?id=61572135977337",
+        "https://www.google.com/maps/place/Pecze-Kov%C3%A1cs+Fruzsina+Kozmetikus+-+Szempilla+%C3%A9s+Szem%C3%B6ld%C3%B6k+Stylist/@47.5058846,19.1024696,17z/data=!3m1!4b1!4m6!3m5!1s0x4741dd4e35076b99:0x2c1e5cc27b785f95!8m2!3d47.5058846!4d19.1024696!16s%2Fg%2F11n53g1nrp",
+        "https://www.notino.hu/szalonok/pecze-kovacs-fruzsina-sminkes,-szemoldok-es-szempilla-stylist"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://frubeauty.com/#fruzsina",
+      "name": "Pecze-Kovács Fruzsina",
+      "jobTitle": "Kozmetikus, szempilla- és szemöldök-stylist, sminkes",
+      "url": "https://frubeauty.com/rolam/",
+      "mainEntityOfPage": "https://frubeauty.com/rolam/",
+      "image": "https://frubeauty.com/img/fruzsina-portrait.jpg",
+      "worksFor": { "@id": "https://frubeauty.com/#business" },
+      "knowsAbout": [
+        "Koreai szempilla lifting",
+        "Szemöldök laminálás",
+        "Janssen arckezelés",
+        { "@type": "Thing", "name": "Lézeres szőrtelenítés", "sameAs": "https://www.wikidata.org/wiki/Q783007" },
+        "Esküvői smink",
+        "Alkalmi smink"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/frubeauty/",
+        "https://www.facebook.com/profile.php?id=61572135977337",
+        "https://www.notino.hu/szalonok/pecze-kovacs-fruzsina-sminkes,-szemoldok-es-szempilla-stylist"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://frubeauty.com/#website",
+      "url": "https://frubeauty.com/",
+      "name": "FRUBEAUTY",
+      "publisher": { "@id": "https://frubeauty.com/#business" },
+      "inLanguage": "hu-HU"
+    }
+  ]
+}
+&lt;/script&gt;</pre>
+</div>
+<p class="small">Ellenőrzés élesítés után: Rich Results Test és a schema.org validátor a kezdőlapra. Az alkalmi smink Offer URL-je az új oldal élesítésekor átírandó <code>/alkalmi-smink-budapest/</code>-ra.</p>
+
+<!-- ============================================================ 3 -->
+<h2 id="wireframe">3. Landing-struktúra és CRO</h2>
+<p>A két oldal már létezik, ezért a wireframe a célszerkezetet mutatja mobilon (390 px), szekciónként jelölve: <span class="pill p-keep">marad</span> <span class="pill p-mod">módosul</span> <span class="pill p-new">új</span> <span class="pill p-cut">kikerül</span>. A számozás a képernyőn lévő sorrend. A mért kiindulópont a GA4 foglalási kattintás-aránya (utolsó 30 nap, egyedi látogatók):</p>
+<div class="tbl"><table>
+<thead><tr><th>Belépő oldal</th><th>Csatorna</th><th class="r">Látogató</th><th class="r">Foglalásra kattintott</th><th class="r">Arány</th></tr></thead>
+<tbody>
+<tr><td>kezdőlap</td><td>organikus</td><td class="r">52</td><td class="r">22</td><td class="r">42%</td></tr>
+<tr><td>koreai szempilla lifting cikk</td><td>organikus</td><td class="r">12</td><td class="r">7</td><td class="r">58%</td></tr>
+<tr><td>/sminkes-zuglo/</td><td>fizetett</td><td class="r">54</td><td class="r">17</td><td class="r">31%</td></tr>
+<tr><td>/lezeres-szortelenites-budapest/</td><td>összes</td><td class="r">28</td><td class="r">5</td><td class="r">18%</td></tr>
+</tbody></table></div>
+
+<h3 id="wf-lezer">3.1 Dióda lézeres szőrtelenítés: <code>/lezeres-szortelenites-budapest/</code></h3>
+<p>A lézer-oldal 18%-on áll, a többi money page 31–58%-on. A különbség oka valószínűleg nem a szekció-sorrend: 6–8 alkalmas, 66 000–378 000 Ft-os döntésről van szó, egyetlen lézeres vélemény nélkül. Az ár a 09-12-i mérés után 3,3 képernyő mélyen van, és a tulajdonos 09-13 és 09-15 között több blokkot is kivetetett. Ezért a szerkezet szinte végig marad: egy szekció új, és az is feltételes. Egy mérési rés viszont van: a kvíz és az összeállító nem küld GA4-eseményt, így ma nem tudjuk, hol vész el a 82%.</p>
+<div class="wf">
+  <div class="wf-row"><div class="wf-n">0</div><div class="wf-name"><b>Sticky foglalás-sáv (alul)</b><span class="pill p-keep">marad</span></div><div class="wf-spec"><p>„Lézeres szőrtelenítés · Zugló — 11 000 Ft-tól” + Időpont foglalása.</p></div></div>
+  <div class="wf-row"><div class="wf-n">1</div><div class="wf-name"><b>Hero + ConsultQuiz</b><span class="pill p-mod">mérés</span></div><div class="wf-spec"><p>H1: „Lézeres szőrtelenítés Budapesten — tartósan sima bőr.” Alatta a „6–8 alkalom” sor, a chipek (csak női vendég · Soprano Titanium · ★5,0), az elsődleges CTA a Notino-tétel nevével, mobilon a H1 után a kvíz. A V4-es döntés szerint marad.</p><p><strong>Új:</strong> két GA4-esemény, <code>quiz_complete</code> (paraméter: az eredmény típusa, például „ne költs erre” vagy ajánlott csomag) és <code>area_builder_select</code> (a kiválasztott zónák száma). Így kiderül, hogy a 18% a kvíz előtt, közben vagy után vész el.</p></div></div>
+  <div class="wf-row"><div class="wf-n">2</div><div class="wf-name"><b>Mechanizmus-animáció</b><span class="pill p-keep">marad</span></div><div class="wf-spec"><p>Az egyetlen szekció, ami az ár elé kerülhet, mert az árat indokolja.</p></div></div>
+  <div class="wf-row"><div class="wf-n">3</div><div class="wf-name"><b>#csomagok · #arak · #osszeallitas</b><span class="pill p-keep">marad</span></div><div class="wf-spec"><p>A három októberi foglalásból kettő Kombinált, vagyis az összeállító és a „Kombinált lézeres szőrtelenítés” Notino-tétel útja működik. Nem bontjuk szét.</p></div></div>
+  <div class="wf-row dashed"><div class="wf-n">4</div><div class="wf-name"><b>Lézeres szőrtelenítés vélemények</b><span class="pill p-new">új · feltételes</span></div><div class="wf-spec"><p>Csak akkor kerül ki, ha legalább 3 lézeres Google-vélemény van. Az első vendégek október 2-án, 19-én és 23-án jönnek, így leghamarabb október végén. 3 kártya szó szerint, dátummal és kezelt zónával, alattuk link a Google-profilra.</p><p>Miért most mehet vissza: a 09-13-i kivétel oka az volt, hogy a kártyák más kezelésekről szóltak. Ez az ok megszűnik. A „vélemény(ek)” klaszter 160 keresés/hó, 0%-os láthatósággal.</p></div></div>
+  <div class="wf-row"><div class="wf-n">5</div><div class="wf-name"><b>#bikinivonal (+ teljes intim)</b><span class="pill p-keep">marad</span></div><div class="wf-spec"><p>A mért intim-kereslet (110/hó, +22%) itt van lefedve.</p></div></div>
+  <div class="wf-row"><div class="wf-n">6</div><div class="wf-name"><b>Kinek működik — és kinek nem</b><span class="pill p-keep">marad</span></div><div class="wf-spec"><p>Az oldal hitelesítő mozdulata, ne „optimalizáljuk”.</p></div></div>
+  <div class="wf-row"><div class="wf-n">7</div><div class="wf-name"><b>Három hullámhossz (gép)</b><span class="pill p-keep">marad</span></div><div class="wf-spec"><p>Soprano Titanium, saját kijelzőfotóval. Gyártói állítás továbbra sem kerülhet bele.</p></div></div>
+  <div class="wf-row"><div class="wf-n">8</div><div class="wf-name"><b>Amit végleges szőrtelenítésnek hívnak: hat alkalom</b><span class="pill p-keep">marad</span></div><div class="wf-spec"><p>Ez a H2 viszi a „végleges szőrtelenítés” (880/hó) kifejezést. A „Hány alkalom kell?” cikk ide linkel vissza.</p></div></div>
+  <div class="wf-row"><div class="wf-n">9</div><div class="wf-name"><b>Három dolog, amire számíthatsz</b><span class="pill p-keep">marad</span></div><div class="wf-spec"><p>A vállalások. A kockázatoldás már hat helyen szerepel az oldalon, ennél több ne legyen.</p></div></div>
+  <div class="wf-row"><div class="wf-n">10</div><div class="wf-name"><b>GYIK (14 kérdés)</b><span class="pill p-keep">marad</span></div><div class="wf-spec"><p>A mért kérdés-kulcsszavak (hány alkalom, mennyibe kerül, végleges-e, előre fizetni) le vannak fedve.</p></div></div>
+  <div class="wf-row"><div class="wf-n">11</div><div class="wf-name"><b>A lézer mellé, ugyanabban az időpontban</b><span class="pill p-keep">marad</span></div><div class="wf-spec"><p>Keresztértékesítés: ettől lesz üzlet a lézer (lásd a 08-18-i üzleti tervet).</p></div></div>
+  <div class="wf-row"><div class="wf-n">12</div><div class="wf-name"><b>Olvasnivaló a döntés előtt</b><span class="pill p-new">új</span></div><div class="wf-spec"><p>RelatedArticles a két új lézer-cikkre („vagy gyantázás?”, „hány alkalom?”). A klaszter így kétirányú: a cikkek a money page-re, a money page a cikkekre linkel.</p></div></div>
+</div>
+
+<h3 id="wf-eskuvoi">3.2 Esküvői smink: a <code>/sminkes-zuglo/</code> esküvői fókuszra</h3>
+<p>Az URL marad, mert ez viszi az „esküvői smink árak” rangsort (28 nap: 6,9). Az alkalmi tartalom az új oldalra költözik. A két legfontosabb változás: az ár a 4. szekcióból a 2.-ba kerül, mert az esküvői megjelenések közel 9/10-e ár-lekérdezés (esküvői smink árak 235, menyasszonyi smink árak 127), és az elsődleges CTA a próbasmink lesz.</p>
+<div class="wf">
+  <div class="wf-row"><div class="wf-n">0</div><div class="wf-name"><b>Sticky foglalás-sáv</b><span class="pill p-mod">módosul</span></div><div class="wf-spec"><p>„Esküvői smink · próbasminkkel 39 000 Ft” + gomb: „Próbasmink foglalása”.</p></div></div>
+  <div class="wf-row"><div class="wf-n">1</div><div class="wf-name"><b>Hero</b><span class="pill p-mod">módosul</span></div><div class="wf-spec"><p>H1: „Esküvői smink Budapesten, próbasminkkel.” Tény-sor alatta: „Menyasszonyi smink 30 000 Ft · próbasminkkel 39 000 Ft · kiszállással”. Utána a „Röviden” bekezdés (2.4).</p><p>Elsődleges CTA: „Próbasmink foglalása” → Notino „Menyasszonyi sminkpróba”, alatta a tétel neve. Másodlagos szöveges link: „Esküvői szépségnaptár: mikor mi következik” → <code>/eskuvoi-szepsegnaptar/</code>. Chipek: ★5,0 · 70+ Google-értékelés · videó minden szögből · kiszállás Budapesten.</p><p>Miért a próba az első gomb: a menyasszony a próba után dönt. A 15 000 Ft-os próba a legkisebb elköteleződés, és ebből lesz a 39 000 Ft-os csomag. A Notinón ellenőrizendő, hány hónapra előre enged foglalni: ha nem 9–12 hónapra, a nap lefoglalása a próbán történik.</p></div></div>
+  <div class="wf-row"><div class="wf-n">2</div><div class="wf-name"><b>Esküvői és menyasszonyi smink árak 2026</b><span class="pill p-mod">4. → 2. hely</span></div><div class="wf-spec"><p>H2 pontos egyezéssel. 3 kártya: Menyasszonyi smink 30 000 · <strong>Menyasszonyi Csomag 39 000</strong> (kiemelve, próba + a nap, 6 000 Ft megtakarítás) · Teljes Esküvő 51 000 (örömanyával, 9 000 Ft megtakarítás). Kerek árak, a Teljes Esküvő kedvezménye marad a nagyobb.</p></div></div>
+  <div class="wf-row"><div class="wf-n">3</div><div class="wf-name"><b>Videó minden szögből</b><span class="pill p-keep">marad</span></div><div class="wf-spec"><p>A bizonyíték közvetlenül az ár után jön: ez felel a „megéri-e ennyit” kérdésre.</p></div></div>
+  <div class="wf-row"><div class="wf-n">4</div><div class="wf-name"><b>Foglalástól a táncos órákig: három lépés</b><span class="pill p-keep">marad</span></div><div class="wf-spec"><p>Próbasmink → a nap lefoglalása → a nap.</p></div></div>
+  <div class="wf-row"><div class="wf-n">5</div><div class="wf-name"><b>A bőrelőkészítéstől a záró fixálásig</b><span class="pill p-keep">marad</span></div><div class="wf-spec"><p>Mi van az árban.</p></div></div>
+  <div class="wf-row"><div class="wf-n">6</div><div class="wf-name"><b>Vendégeim (galéria)</b><span class="pill p-mod">módosul</span></div><div class="wf-spec"><p>Csak esküvői és menyasszonyi képek. Az alkalmi képek az új oldalra kerülnek.</p></div></div>
+  <div class="wf-row"><div class="wf-n">7</div><div class="wf-name"><b>Visszajelzés sminkről</b><span class="pill p-mod">módosul</span></div><div class="wf-spec"><p>Csak menyasszonyi vélemények.</p></div></div>
+  <div class="wf-row"><div class="wf-n">8</div><div class="wf-name"><b>Esküvői szépségnaptár</b><span class="pill p-keep">marad</span></div><div class="wf-spec"><p>WeddingCalendarCTA, az eszköz egyben link-forrás is.</p></div></div>
+  <div class="wf-row"><div class="wf-n">9</div><div class="wf-name"><b>GYIK</b><span class="pill p-mod">+2 kérdés</span></div><div class="wf-spec"><p>„Hány hónappal az esküvő előtt érdemes foglalni?” és „Budapesten kívülre is jössz?” A válaszokat a tulajdonos adja meg, mert ezek az ő szabályai.</p></div></div>
+  <div class="wf-row"><div class="wf-n">10</div><div class="wf-name"><b>Átvezetés az alkalmi sminkre</b><span class="pill p-new">új</span></div><div class="wf-spec"><p>Egy sor: „Estélyre, szalagavatóra vagy fotózásra lenne? Alkalmi smink Budapesten →”</p></div></div>
+  <div class="wf-row"><div class="wf-n">—</div><div class="wf-name"><b>Alkalmi-smink blokkok és árak</b><span class="pill p-cut">kikerül</span></div><div class="wf-spec"><p>Átköltöznek a <code>/alkalmi-smink-budapest/</code>-ra.</p></div></div>
+</div>
+
+<h3 id="wf-alkalmi">3.3 Új oldal: <code>/alkalmi-smink-budapest/</code></h3>
+<p>~810 keresés/hó, ma 0,2–0,8%-os láthatósággal. A szalagavató-szezon miatt október közepéig élesíteni kell. Sémák a meglévő sminkes minta szerint: Service + Offer + FAQPage + BreadcrumbList.</p>
+<div class="wf">
+  <div class="wf-row"><div class="wf-n">1</div><div class="wf-name"><b>Hero</b><span class="pill p-new">új</span></div><div class="wf-spec"><p>H1: „Alkalmi smink Budapesten, Zuglóban.” Tény-sor: „15 000 Ft · estélyre, szalagavatóra, ballagásra, fotózásra”. CTA: Időpont foglalása → Notino „Alkalmi smink”.</p></div></div>
+  <div class="wf-row"><div class="wf-n">2</div><div class="wf-name"><b>Alkalmi smink árak</b><span class="pill p-new">új</span></div><div class="wf-spec"><p>Alkalmi smink 15 000 · Smink fotózáshoz · Mindennapi smink · Sminkoktatás. Ez utóbbi viszi a „sminktanácsadás” keresést (110/hó). Az árak a Notinóról jönnek.</p></div></div>
+  <div class="wf-row"><div class="wf-n">3</div><div class="wf-name"><b>Alkalmak</b><span class="pill p-new">új</span></div><div class="wf-spec"><p>Négy H3: szalagavató (50/hó, november–február), ballagás (30), estély és party (30), fotózás (30).</p></div></div>
+  <div class="wf-row"><div class="wf-n">4</div><div class="wf-name"><b>Galéria</b><span class="pill p-new">új</span></div><div class="wf-spec"><p>A <code>/img</code>-ben 7 kész alkalmi kép van (alkalmi-smink-*, smink-budapest-alkalmi-*, nappali-smink-*, smink-kismama-fotozas-*). Vizuálisan kell dedupolni, nem fájlnév alapján.</p></div></div>
+  <div class="wf-row"><div class="wf-n">5</div><div class="wf-name"><b>Vélemények · GYIK · átvezetés az esküvőire</b><span class="pill p-new">új</span></div><div class="wf-spec"><p>Csak alkalmi vélemények. A GYIK-ben: tartósság, bőrtípus, szempilla, érkezés smink nélkül.</p></div></div>
+</div>
+
+<!-- ============================================================ 4 -->
+<h2 id="roadmap">4. 90 napos skálázási terv (09-30 – 12-28)</h2>
+
+<h3>A matek, amiből a sorrend következik</h3>
+<div class="tbl"><table>
+<thead><tr><th>Szeptember 1–28.</th><th class="r">Érték</th><th>Mit jelent</th></tr></thead>
+<tbody>
+<tr><td>Lezárt foglalás · bevétel</td><td class="r">77 · 1 002 500 Ft</td><td>13 019 Ft/foglalás, 10 204 Ft/foglalt óra, átlag 77 perc</td></tr>
+<tr><td>Munkanap · teljesen blokkolt nap</td><td class="r">17 · 7</td><td>a 172 műszakórából 98,25 volt foglalt, ez 57%</td></tr>
+<tr><td>1,5 M Ft a mostani mixszel</td><td class="r">115 foglalás · 147 óra</td><td>+38 foglalás/hó; a 17 munkanap műszakidejének 85%-a, vagyis a gyakorlatban teli naptár</td></tr>
+<tr><td>Létrehozott foglalás forrása</td><td class="r">web 49 · app 25 · szalon 15</td><td>a webes foglalás augusztusban 40 volt, szeptemberben 49 (+22%)</td></tr>
+<tr><td>Szolgáltatás-mix</td><td class="r">szempilla/szemöldök 62 · arc 10 · smink 4 · lézer 0</td><td>a munkatárs naptárát a szempilla- és szemöldök-sor tölti fel</td></tr>
+</tbody></table></div>
+<p>A 90 napos cél az 1,5 M elérése, és a munkatárs felvétele akkor, amikor a kapu (lent) kinyílik. A bevétel júliustól szeptemberig havi ~4–5%-kal nőtt (917 → 954 → 1 002 ezer), ez a tempó 2027 nyarára érne 1,5 M-ig. A különbséget három kar adhatja, és mindhárom kell:</p>
+<ul class="plain">
+  <li><strong>Lézer:</strong> a három októberi foglalás átlaga becslés szerint ~35 000 Ft, így havi 10 lézer-foglalás ~350 000 Ft bruttó. Ebből a gép tulajdonosáé a fele.</li>
+  <li><strong>Az Ads-forgalom megtartása:</strong> a szeptemberi bázis még futó kampányokkal készült.</li>
+  <li><strong>Új organikus és térképes foglalások:</strong> az új oldalak, a vélemények és a decemberi alkalmi-smink szezon.</li>
+</ul>
+
+<h3 id="mechanika">Hogyan tölti fel a SEO a munkatárs naptárát automatikusan</h3>
+<div class="flow"><span>Keresés: szolgáltatás + Budapest</span><i>→</i><span>szolgáltatás-oldal / térképcsomag</span><i>→</i><span>Notino-tétel, munkatárs-függetlenül</span><i>→</i><span>az a kozmetikus, akinél szabad hely van</span></div>
+<p>A kereső szolgáltatást keres, nem embert. Ha az oldal a szolgáltatást és a módszert adja el, és a Notino-tétel bármelyik munkatárshoz foglalható, a foglalás oda kerül, ahol hely van. Ehhez három feltétel kell:</p>
+<ul class="plain">
+  <li>A kereslet a szempilla- és szemöldök-sorra érkezzen. Ez a bevétel 73%-a, és itt a legnagyobb a rés: a „szempilla lifting” 0,5%, a „szemöldök laminálás” 6,5%.</li>
+  <li>A Notinón a munkatárs ugyanazokat a tételeket kapja, online foglalással és „bármelyik munkatárs” választással.</li>
+  <li>A foglalási döntés ne Fruzsi személyén múljon ezeken az oldalakon. A GBP-név személyes marad (átnevezni kockázatos), de a szempilla- és szemöldök-oldalakon a módszer a termék: koreai technika, egy vendég egy kezelőnél.</li>
+</ul>
+<div class="gate"><b>Felvételi kapu.</b> A felvétel akkor indul, ha a Notino „Naptár kihasználtsága” szerint 4 egymást követő héten a foglalt idő eléri a munkanapok műszakidejének 80%-át (szeptemberben 57% volt), vagy ha a szempilla lifting legközelebbi szabad időpontja 3 egymást követő hétfőn 7 napnál messzebb van. Előbb nem: egy korai felvétel a meglévő keresletet osztaná meg, újat nem hozna.</div>
+
+<h3 id="hetek">Hétről hétre</h3>
+<p class="small"><span class="who">Web</span> kód és tartalom a repóban · <span class="who">Bence</span> fiókok (Ads, GBP, Bing, Apple, levelek) · <span class="who">Fruzsi</span> szalon és döntések</p>
+
+<div class="phase"><div class="phase-h"><b>1. hét</b><span>09-30 – 10-06 · alap és gyors javítások</span></div><ul>
+  <li><span class="who">Bence</span> Ads: döntés a szünetről. Ha nem szándékos, a V3.0_Optimized, a Sminkes_Kampany és a Lezer_V1 újraindítása (a legutóbbi CPA-k: 1 014 / 875 / 2 374 Ft).</li>
+  <li><span class="who">Web</span> A 7 cím és leírás (1.2), a szempilla-árcikk 301-e az 5 belső linkkel (1.3), a JSON-LD (2.5), a „Röviden” bekezdések (2.4) és az llms.txt ár-egyeztetése. Utána deploy és indexelés-kérés a 7 URL-re.</li>
+  <li><span class="who">Bence</span> GBP: lézer-kategória, 7 lézer-szolgáltatás, lézer-termék URL-lel, új leírás (2.3).</li>
+  <li><span class="who">Bence</span> Bing Webmaster Tools (importálás a GSC-ből) és Bing Places (importálás a GBP-ből).</li>
+  <li><span class="who">Fruzsi</span> Vélemény-kérés minden kezelés végén (2.3), cél heti ~4.</li>
+</ul></div>
+
+<div class="phase"><div class="phase-h"><b>2–3. hét</b><span>10-07 – 10-20 · a két smink-oldal és a koreai cikk</span></div><ul>
+  <li><span class="who">Web</span> A <code>/alkalmi-smink-budapest/</code> élesítése (3.3) és a <code>/sminkes-zuglo/</code> esküvői átrendezése (3.2), a visszalépési szabállyal.</li>
+  <li><span class="who">Web</span> A koreai cikk mélyítése (1.1).</li>
+  <li><span class="who">Web</span> A <code>quiz_complete</code> és <code>area_builder_select</code> GA4-esemény a lézer-oldalon.</li>
+  <li><span class="who">Bence</span> Apple Business Connect.</li>
+  <li><span class="who">Fruzsi</span> Visszafoglalás a kezelés végén: a következő időpont a távozás előtt legyen meg (szempilla 6–8 hét, laminálás ~6 hét, festés 3–4 hét). A munkatárs naptárát leggyorsabban a visszatérő vendég tölti.</li>
+</ul></div>
+
+<div class="phase"><div class="phase-h"><b>4–6. hét</b><span>10-21 – 11-10 · lézer-bizalom és linkek</span></div><ul>
+  <li><span class="who">Fruzsi</span> Az első 3 lézeres vendég (10-02, 10-19, 10-23) után lézer-specifikus vélemény-kérés.</li>
+  <li><span class="who">Web</span> 3 lézeres vélemény után a vélemény-blokk a lézer-oldalra (3.1/4). Megjelenik a 2 lézer-cikk, és bekerül a „szempilla laminálás” GYIK és az arctisztítás H2.</li>
+  <li><span class="who">Web</span> <code>/szemoldokfestes-zuglo/</code> élesítése, előtte a Notino-ár ellenőrzése.</li>
+  <li><span class="who">Bence</span> 3 esküvői partner-megkeresés és a Janssen kozmetikus-kereső levele (kész szövegek: <code>FRUBEAUTY-BACKLINK-LEVELEK-2026-09-07.md</code>). Ezek az első dofollow linkek, amelyek közvetlenül a money page-ekre mutatnak.</li>
+  <li><span class="who">Bence</span> Heti GBP-poszt (2.3).</li>
+</ul></div>
+
+<div class="phase"><div class="phase-h"><b>7–9. hét</b><span>11-11 – 12-01 · 1. mérés és a munkatárs-architektúra</span></div><ul>
+  <li><span class="who">Web</span> Mérés a bázishoz képest (lent), a lézer-oldal kvíz-tölcsére az új eseményekből, a szempilla-árcikk 301-e utáni pozíciók.</li>
+  <li><span class="who">Fruzsi</span> <strong>Döntés a munkatárs-modellről</strong>, a felvétel előtt:<br>A) ugyanaz a kezelőszék, Fruzsi szabad sávjaiban (szeptemberben 7 teljesen blokkolt nap és a szombat délutánok). Ekkor az „egyszerre egy vendég” igaz marad.<br>B) második kezelőhely. Ekkor az állítás 39 előfordulását (19 fájlban, köztük a GBP-leírás, a JSON-LD és az llms.txt) át kell írni „egy vendég, egy kozmetikus” formára.<br>Amíg a kihasználtság 85% alatt van, az A a kisebb kockázat.</li>
+  <li><span class="who">Web</span> A <code>/csapat/</code> oldal váza a <code>/rolam/</code> mellé (nem helyette), a munkatárs Person-sémájának sablonja, a „Röviden” bekezdések átnézése, hogy ne állítsák, hogy minden kezelést Fruzsi végez.</li>
+  <li><span class="who">Bence</span> Próbafelvétel a Notinón: teszt-munkatárs egy tétellel, hogy lássuk, hogyan osztja a foglalást a „bármelyik munkatárs” opció. Utána törlés.</li>
+</ul></div>
+
+<div class="phase"><div class="phase-h"><b>10–13. hét</b><span>12-02 – 12-28 · felvételi kapu</span></div><ul>
+  <li><span class="who">Fruzsi</span> <strong>Ha a kapu nyitva:</strong> felvétel a szempilla- és szemöldök-sorra. Belépő szolgáltatás a szemöldökfestés és -formázás (5 000 Ft körül, gyorsan tanítható, 3–4 hetente visszatér), utána a lifting és a laminálás.</li>
+  <li><span class="who">Bence</span> Notino: a munkatárs felvétele, a szolgáltatások hozzárendelése, online foglalás BE, automatikus visszaigazolás KI (ahogy most). GBP: csapatfotó, a vélemény-kérésbe a munkatárs neve.</li>
+  <li><span class="who">Web</span> JSON-LD: <code>employee</code>-tömb bővítése és <code>numberOfEmployees</code> 2-re, a munkatárs Person-csomópontja (sablon lent), a <code>/csapat/</code> élesítése.</li>
+  <li><strong>Ha a kapu zárva:</strong> nincs felvétel. A következő negyedév a keresleté: a szempilla lifting fej-kulcsszó (2 400/hó) és a térképcsomag.</li>
+</ul></div>
+
+<div class="snip">
+  <div class="snip-h"><span>A munkatárs Person-csomópontja (sablon, a felvételkor kitöltendő)</span><button class="copy" type="button">Másolás</button></div>
+<pre>{
+  "@type": "Person",
+  "@id": "https://frubeauty.com/#munkatars-1",
+  "name": "[Teljes név]",
+  "jobTitle": "Szempilla- és szemöldök-stylist",
+  "url": "https://frubeauty.com/csapat/",
+  "image": "https://frubeauty.com/img/[nev]-portre.webp",
+  "worksFor": { "@id": "https://frubeauty.com/#business" },
+  "knowsAbout": ["Koreai szempilla lifting", "Szemöldök laminálás", "Szemöldökfestés"]
+}
+// + a BeautySalon csomópontban:
+// "employee": [{ "@id": "https://frubeauty.com/#fruzsina" }, { "@id": "https://frubeauty.com/#munkatars-1" }],
+// "numberOfEmployees": { "@type": "QuantitativeValue", "value": 2 }</pre>
+</div>
+
+<h3 id="kpi">Mérőszámok: bázis és 90 napos cél</h3>
+<p class="small muted">A célok irányt jelölnek, nem előrejelzések. A forrásokat havonta a <code>/lanc</code> parancs méri végig.</p>
+<div class="tbl"><table>
+<thead><tr><th>Mutató</th><th>Forrás</th><th class="r">Bázis</th><th class="r">Cél (december)</th></tr></thead>
+<tbody>
+<tr><td>Lezárt bevétel / hó</td><td>Notino</td><td class="r">1 002 500 Ft</td><td class="r">1 500 000 Ft</td></tr>
+<tr><td>Lezárt foglalás / hó</td><td>Notino</td><td class="r">77</td><td class="r">115</td></tr>
+<tr><td>Foglalt idő / műszakidő (munkanapokon)</td><td>Notino</td><td class="r">57%</td><td class="r">80–85%</td></tr>
+<tr><td>Webes foglalás / hó</td><td>Notino</td><td class="r">49</td><td class="r">80</td></tr>
+<tr><td>Lézer: lezárt foglalás / hó</td><td>Notino</td><td class="r">0 (októberre 3 visszaigazolt)</td><td class="r">10–12</td></tr>
+<tr><td>Google-vélemények</td><td>GBP</td><td class="r">70+</td><td class="r">85+</td></tr>
+<tr><td>Organikus kattintás / 28 nap</td><td>GSC</td><td class="r">171</td><td class="r">250</td></tr>
+<tr><td>AI-asszisztens látogató / 30 nap</td><td>GA4</td><td class="r">12</td><td class="r">25</td></tr>
+<tr><td>Foglalási kattintás a lézer-oldalon</td><td>GA4</td><td class="r">18%</td><td class="r">30%</td></tr>
+<tr><td>„esküvői smink árak” pozíció</td><td>GSC</td><td class="r">6,9</td><td class="r">≤ 5 (visszalépés, ha 10 fölé megy)</td></tr>
+</tbody></table></div>
+
+<h3>Amit NEM érdemes csinálni</h3>
+<ul class="plain">
+  <li>Kerület-oldalakat építeni: a „kozmetikus 14 kerület” 10/hó, a lézeres és a sminkes kerületi változat nem mérhető.</li>
+  <li>A GBP elsődleges kategóriáját „Kozmetikus”-ra állítani: a nyerő 12-ből 12 „Szépségszalon”.</li>
+  <li>A kezdőlapot de-optimalizálni a szemöldök fej-kulcsszóra: tekintéllyel nyer, a money page nem venné át a helyét.</li>
+  <li>A szemöldök-árcikket a money page-be olvasztani: a SERP ár-kalauzt akar, és a money page nem hozhat versenytárs-árat.</li>
+  <li>Önmagunkról <code>aggregateRating</code>-et tenni a sémába.</li>
+  <li>A kapu előtt munkatársat felvenni.</li>
+</ul>
+
+<footer>
+  Források: Google Search Console API (sc-domain:frubeauty.com, 2026-06-29 – 09-26 és 28 napos ablakok) · GA4 property 533860004 (2026-08-30 – 09-28) · Notino Partner statisztika (2026-09-01 – 09-28), foglaláslista (a vendégnevek nem kerültek rögzítésre) · Google Ads Kulcsszótervező, Budapest (város), 2025. szept. – 2026. aug. · a repó korábbi kulcsszó-exportjai (lezer/GKP-*.tsv, FRUBEAUTY-SMINK-KULCSSZOKUTATAS-2026-08-13.md) · Wikidata (Q783007, Q1195245, Q228445, Q2474068, Q1781).
+</footer>
+</main>
+</div>
+
+<script>
+(function(){
+  function textOf(btn){
+    var scope = btn.closest('.field') || btn.closest('.snip');
+    if(!scope) return '';
+    var t = scope.querySelector('.copytext') || scope.querySelector('pre');
+    return t ? t.innerText.trim() : '';
+  }
+  document.querySelectorAll('button.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var txt = textOf(btn);
+      var done = function(){ var o = btn.textContent; btn.textContent = 'Másolva'; setTimeout(function(){ btn.textContent = o; }, 1400); };
+      var fallback = function(){
+        var scope = btn.closest('.field') || btn.closest('.snip');
+        var el = scope && (scope.querySelector('.copytext') || scope.querySelector('pre'));
+        if(!el) return;
+        var r = document.createRange(); r.selectNodeContents(el);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = 'Kijelölve, Ctrl+C';
+        setTimeout(function(){ btn.textContent = 'Másolás'; }, 2200);
+      };
+      try {
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(txt).then(done, fallback);
+        } else { fallback(); }
+      } catch(e){ fallback(); }
+    });
+  });
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    var t = document.getElementById(el.getAttribute('data-count'));
+    if(t) el.textContent = t.innerText.trim().length + ' / 750 karakter';
+  });
+})();
+</script>

@@ -1,6 +1,23 @@
 # FRUBEAUTY — Backlink és citáció csomag
 
-**Dátum:** 2026-07-26 · **Módszer:** minden célpont élő magyar SERP-ből azonosítva (`hl=hu&gl=hu`) és egyenként ellenőrizve, hogy valóban katalógus-e és fogad-e jelentkezést. Nem generikus katalóguslista.
+**Dátum:** 2026-07-26 · **Frissítve: 2026-09-18** · **Módszer:** minden célpont élő magyar SERP-ből azonosítva (`hl=hu&gl=hu`) és egyenként ellenőrizve, hogy valóban katalógus-e és fogad-e jelentkezést. Nem generikus katalóguslista.
+
+---
+
+## ⚠️ FRISSÍTÉS 2026-09-18 — mi változott a júliusi verzióhoz képest
+
+A csomag hét hete készen áll, és azóta is **nulla dofollow backlink** van (Ahrefs, 2026-07-31). Mielőtt nekiülsz, öt dolgot javítani kellett benne — ezek közül kettő olyan, hogy a régi szöveget követve **rosszat tettél volna**:
+
+| # | Mi volt | Mi a helyes | Miért |
+|---|---|---|---|
+| 1 | „Kategória: Kozmetikus (elsődleges)" | **Szépségszalon marad elsődlegesnek** | 2026-08-11-én élőben ellenőrizve: a térképcsomag 12 nyertese közül 12 ezt használja. A „Kozmetikus"-ra átállítás a júliusi csomag téves jegyzete volt. **Ne írd át a GBP-ben.** |
+| 2 | Apple Business Connect: „az anyagok készen állnak a `Desktop\FRUBEAUTY-APPLE-BUSINESS\` mappában" | **A mappa nincs meg** (2026-08-07-re eltűnt) | A recept és a képspecek érvényesek, de az anyagokat újra kell generálni. Ne keresd azt a mappát. |
+| 3 | A hosszú leírás: „5,0 csillag 52 értékelésből" | **70+ vélemény** | A tulajdonos 2026-09-17-én lépte át a 70-et. |
+| 4 | A szolgáltatás-lista nem tartalmazta a lézert | **Bekerült** | A `/lezeres-szortelenites-budapest/` 2026-09-12 óta él (Soprano Titanium, 11 000 Ft-tól). Egy teljes bevételi ág hiányzott minden citációból. |
+| 5 | A Cylex-regisztráció státusza ismeretlen volt | ✅ **Átfutott, és 2 dofollow linket ad** | 2026-09-18-án élőben ellenőrizve: Cylex + Firmania + Nyitva.hu mind fent van, a Firmania „Tulajdonos által ellenőrzött" 2026.08.18-i dátummal. A Firmania és a Nyitva.hu ikonos „Weboldal" gombja `rel` nélküli → dofollow. **Ne regisztrálj újra** — lásd az A3 alatti dobozt. |
+| 6 | Az Arany Oldalak a Cylex-családba sorolva | **Független tőle** | A Cylex-adatbázis a Cylexet, a Firmaniát és a Nyitva.hu-t hajtja — az Arany Oldalak külön rendszer. Ezért ez az egyetlen katalógus, amit a Cylex elakadása NEM blokkol, és ezért lett ez az első lépés. |
+
+**Ami NEM változott:** a NAP-blokk többi sora, a telefonszám, a nyitvatartás és a Sáv B teljes logikája. Azokat élőben ellenőriztük, és azóta sem mozdultak.
 
 ---
 
@@ -31,7 +48,7 @@ Cím:        1143 Budapest, Egressy út 16.
 Telefon:    +36 70 215 9954
 E-mail:     kfruzsi0197@gmail.com
 Weboldal:   https://frubeauty.com/
-Kategória:  Kozmetikus (elsődleges) · Szépségszalon (másodlagos)
+Kategória:  Szépségszalon (elsődleges — MARADJON) · Kozmetikus (másodlagos)
 Koordináta: 47.5058846, 19.1024696
 Nyitvatartás:
   Hétfő–Péntek  08:30–19:30
@@ -43,18 +60,20 @@ Nyitvatartás:
 >
 > **Élesben verifikálva:** a kezdőlap és mind a három aloldal `"name":"FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus"`-t szolgál ki, a JSON-LD hibátlanul parse-olódik (BeautySalon + Person + WebSite, illetve FAQPage). **A Sáv A citációk mostantól indíthatók** — a fenti NAP-blokk és az, amit a site állít magáról, egyezik.
 
-> **Ellenőrizendő a GBP-ben:** a Google tudáspanel jelenleg **„Szépségszalon"**-t ír kategóriaként, nem „Kozmetikus"-t. Lehet, hogy csak általánosított címkét jelenít meg, de érdemes ránézni, hogy az elsődleges kategória tényleg `Kozmetikus`-e.
+> **✅ LEZÁRVA (2026-08-11).** A fenti kérdés — „tényleg Kozmetikus-e az elsődleges kategória" — meg lett vizsgálva élőben, és a válasz az, hogy **a Szépségszalon a helyes, és maradjon is az**. A „szemöldök laminálás budapest" térképcsomagjának mind a 12 nyertese ezt a kategóriát használja. A júliusi csomag „Kozmetikus (elsődleges)" ajánlása téves volt; átírni nemcsak fölösleges, hanem kifejezetten rossz ötlet.
 
 ### Leírások — három hosszban, copy-paste
 
-**Rövid (≈90 karakter, rövid mezőkhöz):**
-> Kozmetikus Zuglóban: Janssen arckezelés, szempilla lifting, szemöldök laminálás, smink.
+> **Frissítve 2026-09-18.** Mindhárom változatba bekerült a **lézeres szőrtelenítés**, és a vélemény-szám 52-ről **70+**-ra javítva. A régi szövegeket ne használd — a lézer hiánya miatt egy teljes szolgáltatási ág maradt ki minden katalógusból.
 
-**Közepes (≈250 karakter, a legtöbb katalógus fő mezője):**
-> A FRUBEAUTY Pecze-Kovács Fruzsina egyszemélyes kozmetikai szalonja Budapest XIV. kerületében, az Egressy úton. Janssen Cosmetics arckezelések, koreai technikás szempilla lifting és szemöldök laminálás, valamint esküvői és alkalmi smink. Egyszerre egy vendég, teljes figyelemmel.
+**Rövid (≈95 karakter, rövid mezőkhöz):**
+> Kozmetikus Zuglóban: lézeres szőrtelenítés, Janssen arckezelés, szempilla lifting, szemöldök laminálás.
 
-**Hosszú (≈600 karakter, részletes profilokhoz):**
-> A FRUBEAUTY Pecze-Kovács Fruzsina kozmetikus egyszemélyes szalonja Budapest XIV. kerületében, Zuglóban, az Egressy út 16. szám alatt. Az arckezeléseket kizárólag Janssen Cosmetics professzionális hatóanyagaival végzem, minden alkalom bőranalízissel indul — mélytisztító, hidratáló és anti-aging protokollokkal. A szemkezelések koreai technikával készülnek: a szempilla lifting festéssel 12.000 Ft és 6–8 hétig tart, a szemöldök laminálás formázással és festéssel 11.000 Ft, tű és tetoválás nélkül. Emellett menyasszonyi próbasminket, esküvői és alkalmi sminket is vállalok, kiszállással. Egyszerre csak egy vendéget fogadok, így nincs kapkodás. Online foglalás, 5,0 csillag 52 értékelésből.
+**Közepes (≈280 karakter, a legtöbb katalógus fő mezője):**
+> A FRUBEAUTY Pecze-Kovács Fruzsina egyszemélyes kozmetikai szalonja Budapest XIV. kerületében, az Egressy úton. Soprano Titanium dióda lézeres szőrtelenítés, Janssen Cosmetics arckezelések, koreai technikás szempilla lifting és szemöldök laminálás, valamint esküvői és alkalmi smink. Egyszerre egy vendég, teljes figyelemmel.
+
+**Hosszú (≈700 karakter, részletes profilokhoz):**
+> A FRUBEAUTY Pecze-Kovács Fruzsina kozmetikus egyszemélyes szalonja Budapest XIV. kerületében, Zuglóban, az Egressy út 16. szám alatt. Lézeres szőrtelenítést Soprano Titanium dióda lézerrel végzek, három hullámhosszon — hónalj vagy bikinivonal sorozatban 11.000 Ft alkalmanként. Az arckezeléseket kizárólag Janssen Cosmetics professzionális hatóanyagaival végzem, minden alkalom bőranalízissel indul — mélytisztító, hidratáló és anti-aging protokollokkal. A szemkezelések koreai technikával készülnek: a szempilla lifting festéssel 12.000 Ft és 6–8 hétig tart, a szemöldök laminálás formázással és festéssel 11.000 Ft, tű és tetoválás nélkül. Emellett menyasszonyi próbasminket, esküvői és alkalmi sminket is vállalok, kiszállással. Egyszerre csak egy vendéget fogadok, így nincs kapkodás. Online foglalás, 5,0 csillag 70+ értékelésből.
 
 ---
 
@@ -65,14 +84,55 @@ Elvárás: **nem hoznak organikus rangsort.** A térképes találatot, a márkaf
 | # | Célpont | Bizonyíték / miért | Belépés | Ellenőrizve |
 |---|---|---|---|---|
 | A1 | **Bing Places** | A Bing/Copilot lokális találataihoz kell; a GBP-ből importálható, 10 perc | bingplaces.com | — |
-| A2 | **Apple Business Connect** | iPhone Térkép + Siri. **Az anyagok már készen állnak** a `Desktop\FRUBEAUTY-APPLE-BUSINESS\` mappában | businessconnect.apple.com | memória |
-| A3 | **Cylex Magyarország** | Élő SERP-ben látszik a „Szépségszalon, kozmetika XIV. Kerület, Zugló, Budapest" kategórialapja | `cylex.hu/register-company` | ✅ böngészővel |
-| A4 | **Arany Oldalak** | 593 800 céggel a legnagyobb magyar katalógus, ingyenes regisztráció | `aranyoldalak.hu/regisztracio` | ✅ |
+| A2 | **Apple Business Connect** | iPhone Térkép + Siri. ⚠️ **A `Desktop\FRUBEAUTY-APPLE-BUSINESS\` mappa 2026-08-07-re eltűnt** — a recept és a képspecek érvényesek, de az anyagokat újra kell generálni | businessconnect.apple.com | memória |
+| ~~A3~~ | **Cylex-család: Cylex + Firmania + Nyitva.hu** | ✅ **KÉSZ.** Egy regisztráció három megjelenés, ebből a Firmania és a Nyitva.hu **dofollow**. Beküldve 2026-08-07, élesben 2026-08-18. **NE regisztrálj újra** — a duplikátum adatlap rosszabb, mint a hiány | — | ✅ 2026-09-18: élőben ellenőrizve |
+| A4 | **Arany Oldalak** | 593 800 céggel a legnagyobb magyar katalógus, ingyenes, **független a Cylex-hálótól**. A dofollow **2026-09-18-án újra ellenőrizve élő cégadatlapon**: a weboldal-linkek `rel` nélküliek → valódi dofollow. ⚠️ **DE a regisztráció nálunk nem megy: „geo" hibára fut** (a tulajdonos többször próbálta) — lásd a lenti dobozt | `aranyoldalak.hu/regisztracio` | ⚠️ 2026-09-18: reg. hibás |
 | A5 | **ittlakunk.hu XIV. kerület** | **#8 helyen rangsorol a „kozmetikus 14 kerület"-re** — hiperlokális, pont a te kerületed | `14.kerulet.ittlakunk.hu/holmi/letrehozas` (Bolt/Szolgáltatás) | ✅ böngészővel |
 | A6 | **Miutcánk** | Szomszédsági közösség, Zugló-fókusz; nem SEO-erő, hanem valódi helyi elérés | `miutcank.hu/regisztracio` | ✅ |
 | A7 | **azeskuvo.hu** | Esküvő-specifikus NAP-citáció a `/sminkes-zuglo/`-hoz; 23 sminkes a kategóriában, ingyenes regisztráció. **Linket nem ad** (a webcím szövegként jelenik meg) — ezért van itt és nem a Sáv B-ben | `azeskuvo.hu/regisztracio` | ✅ forráskódból |
 
-**Időigény összesen: ~2,5 óra.** Mind a hét ingyenes.
+**Időigény összesen: ~2,5 óra.** Mind ingyenes.
+
+### ✅ A Cylex-regisztráció ÁTFUTOTT — és már két dofollow linket ad
+
+**Élőben ellenőrizve 2026-09-18-án**, mindhárom katalógus SAJÁT keresőjével és a renderelt DOM `rel` attribútumaival:
+
+| Katalógus | Adatlap | Weboldal-link | Érték |
+|---|---|---|---|
+| **Cylex** | ✅ fent van | van | citáció (a Cylex maga nofollow) |
+| **Firmania** | ✅ fent van, „Tulajdonos által ellenőrzött", frissítve **2026.08.18.** | ikonos „Weboldal" gomb **`rel` nélkül** | ✅ **DOFOLLOW** |
+| **Nyitva.hu** | ✅ fent van | ikonos „Weboldal" gomb **`rel` nélkül** | ✅ **DOFOLLOW** |
+
+A 08-07-i beküldés tehát **11 nap alatt átfutott**, a Cylex által ígért 2–3 héten belül. A NAP-adat helyes mindhárom helyen: `FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus` · Egressy út 16, 1143 Budapest XIV · +36 70 215 9954 · https://frubeauty.com/
+
+> **A memória pontosan megjósolta a mintát:** a szöveges `https://frubeauty.com/` link `rel="nofollow"`, de az **ikonos „Weboldal" gomb** rel nélkül van. Ha valaki csak a szöveges linket nézi, tévesen arra jut, hogy nincs dofollow.
+
+> **Csapda, amit könnyű félreolvasni:** az Egressy út 16-on van egy másik Firmania/Nyitva-adatlap is, a **„Natural Beauty Szépségszalon"** (+36 1 220 4677, naturalbeauty.hu). Az NEM a te adatlapod. Azonos címen futó, eltérő NAP-adatként inkább gyengíti az entitás-egyezést — ha a katalógus engedi, érdemes jelenteni elavultként.
+
+### ⚠️ Az Arany Oldalak regisztrációja „geo" hibára fut (2026-09-18)
+
+A tulajdonos többször próbálta, mindig ugyanaz. Amit ellenőriztem:
+
+- **A link értéke valós:** élő cégadatlapon a weboldal-linkek `rel` nélküliek → **dofollow**. A katalógus él, 1200 kozmetikai céggel.
+- **A `/regisztracio` oldalon nincs geo mező** — az csak e-mail + jelszó. A hiba tehát a bejelentkezés utáni **cégadatlap** lépésben van, ahol a címet geokódolják.
+- **Figyelmeztető jelek a platformról:** a footer copyrightja 2021-en áll, és a saját keresőjük irreleváns tartalmat (kalóz felirat-oldalakat) dob ki találatként. Ez nem egy karbantartott rendszer.
+
+**Ügyfélszolgálat** (az üzemeltető MTT Media Kft.): `ugyfelszolgalat@mtt.hu` · +36 1 67 77 400 · +36 20 7777 360
+
+**A döntés, amit javaslok: ne harcolj tovább ezzel az űrlappal.** A 3. dofollow domainhez a **B1 (Janssen)** jobb választás minden szempontból:
+
+| | Arany Oldalak | Janssen kozmetikus-kereső |
+|---|---|---|
+| Témabeli illeszkedés | általános katalógus | **a márka, amivel kizárólag dolgozol** |
+| Link-erő | gyenge (katalógus-link) | **erős, releváns** |
+| Állapot | törött űrlap, elhanyagolt platform | üres kereső-oldal → elsőként kerülhetsz fel |
+| Ráfordítás | ismeretlen, már többször elbukott | **egy e-mail, ami már meg van írva** |
+
+A kész levél: `FRUBEAUTY-BACKLINK-LEVELEK-2026-09-07.md`, 1. levél — *„Kozmetikus-kereső — feltölthető vagyok elsőként?"*
+
+Ha mégis meg akarod csinálni az Arany Oldalakat: jelentkezz be, és onnantól a cégadatlap kitöltése végigvihető Claude in Chrome-mal — a geo hibát élőben megnézzük.
+
+> **Módszertani tanulság, ami sok időt spórol:** a `WebSearch` (amerikai index) **nem alkalmas** magyar katalógus-listázás ellenőrzésére — ezekre a JS-ből renderelt aloldalakra nem lát rá, és 2026-09-18-án hamis negatívot adott mind a háromra. A `curl` sem jó: a Firmania szerveroldalon 5,9 KB-os vázat ad vissza. **Autoritatív forrás: a katalógus saját keresője, valódi böngészőben**, a `rel` attribútumot pedig a renderelt DOM-ból kell kiolvasni.
 
 ---
 
@@ -91,7 +151,7 @@ Kizárólag Janssen hatóanyagokkal dolgozol — ez egy **beszállítói kapcsol
 Ez **jobb tárgyalási pozíció**, mint egy kész lista lett volna, mert konkrét kérésed van egy konkrét oldalra. Amit kérni kell, ebben a sorrendben:
 
 1. **Felkerülés a `/kozmetikus-kereso/` oldalra**, a weboldalra mutató linkkel. Ha az oldal üresen áll, ajánld fel, hogy te vagy az első listázott — az ő oldaluknak is jobb egy feltöltött kereső, mint egy üres.
-2. Ha a kereső halott projekt: **esettanulmány vagy interjú** a blogjukra (`/blog/` aktív, rendszeresen posztolnak) vagy a közösségi felületeikre — kozmetikus-portré, protokoll-bemutató, előtte/utána. Ehhez van anyagod (fotók, 52 értékelés, konkrét protokollok).
+2. Ha a kereső halott projekt: **esettanulmány vagy interjú** a blogjukra (`/blog/` aktív, rendszeresen posztolnak) vagy a közösségi felületeikre — kozmetikus-portré, protokoll-bemutató, előtte/utána. Ehhez van anyagod (fotók, 70+ értékelés, konkrét protokollok).
 3. Harmadik szál: **workshopok**. Van `/workshopok/` oldaluk és nyílt napjaik (2024, 2025). Egy résztvevői/oktatói szereplés jellemzően névvel + linkkel jár.
 
 Kapcsolat: `shop@janssen-cosmetics.hu` · +36 1 708 5738 · Facebook/Instagram `@janssencosmeticshu` · üzemeltető **Time Reverse 21 Kft.**, 1117 Budapest, Sopron út 18. (H–P 9:00–17:00)
@@ -167,7 +227,7 @@ Itt van a valódi esküvői link-forrás, és pont az ellenkezője a katalógusn
 
 Kapcsolat: `iroda@ceremoniamesterszovetseg.hu` · +36 1 501 3463
 
-Ez a sáv B egyetlen olyan eleme, ahol egy jól megírt e-mail önmagában elég lehet — érdemes a `/sminkes-zuglo/` oldalt, az 52 értékelést és a konkrét esküvői referenciákat mellékelni.
+Ez a sáv B egyetlen olyan eleme, ahol egy jól megírt e-mail önmagában elég lehet — érdemes a `/sminkes-zuglo/` oldalt, a 70+ értékelést és a konkrét esküvői referenciákat mellékelni.
 
 ### B5 — Amit NEM érdemes csinálni
 
@@ -201,7 +261,17 @@ Ide tartozik a B4a négy esküvői portálja is: `eskuvo.online` (a webcím logi
 
 **2–3. hét — B3 + a B4b megkeresések.** Ha a fentiek megvannak.
 
-**Cél 30 napra:** hivatkozó domainek **1 → 5+**. A GSC `Links` riportjában mérhető.
+**Cél 30 napra:** hivatkozó **dofollow** domainek **0 → 4+**. A júliusi csomag még „1 → 5+"-öt írt, de a 2026-07-31-i Ahrefs-audit pontosította a kiindulást: a dofollow linkek száma **nulla** (a GSC-ben látszó notino.hu és infobel.com nem ad átadható erőt). A 415 nofollow spam-domain egy külső kampányból jön — **disavow-olni NEM kell**, a Google ezeket magától figyelmen kívül hagyja.
+
+Mérés: GSC `Links` riport + Ahrefs.
+
+**A 2026-09-18-i élő állapot: 2 dofollow domain már megvan** (firmania.hu, nyitva.hu) — mindkettő 2026-08-18 óta. A 2026-07-31-i Ahrefs-audit „0 dofollow" megállapítása **nem mond ennek ellent**: az a mérés három héttel a listázások élesedése ELŐTT készült.
+
+Innen a 4-es célig két darab hiányzik:
+- **A4 (Arany Oldalak)** = +1 dofollow, független rendszer, ~20 perc → **ez a következő lépés**
+- **B1 (Janssen)** vagy **B4c (Ceremóniamester Szövetség)** = +1, e-mailbe kerül
+
+Következő mérési pont: **2026-10-18**. Ha az Ahrefs addigra sem látja a firmania.hu/nyitva.hu linket, az nem a listázás hibája, hanem a crawl-késés — a GSC `Links` riportja a megbízhatóbb visszajelzés.
 
 ---
 

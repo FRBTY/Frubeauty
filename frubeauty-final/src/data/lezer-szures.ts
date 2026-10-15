@@ -256,13 +256,10 @@ export const screenGroups: ScreenGroup[] = [
         verdict: 'care',
         answer: 'Magán a tetováláson nem lehet lézerezni, de körülötte igen — a tetovált részt kihagyom.',
       },
-      {
-        id: 'intim',
-        label: 'Teljes intim területet szeretnék kezeltetni',
-        verdict: 'care',
-        answer:
-          'Teljes intim kezelést nem vállalok. A bikinivonalat — vagyis a fürdőruhából kilógó részt — igen, úgyhogy ha arra jössz, minden rendben.',
-      },
+      // A „Teljes intim területet szeretnék kezeltetni" tétel 2026-09-20-án
+      // KIKERÜLT az előszűrésből: `care` volt, mert nem vállaltuk. Azóta
+      // vállaljuk (M zóna, 16 000 Ft), tehát nincs mit átbeszélni — előszűrő
+      // kérdésnek maradni itt azt sugallná, hogy valami gond van vele.
       {
         id: 'pcos',
         label: 'PCOS vagy más hormonális ok áll a szőrnövekedés mögött',

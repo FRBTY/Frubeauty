@@ -1,0 +1,289 @@
+﻿Campaign,Ad Group,Keyword,Match Type,Szint / indok
+Lezer_V1,,szőrtelenítő,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,szortelenito,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,szőrtelenítők,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,krém,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,krem,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,gép,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,gep,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,gépek,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,gépet,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,készülék,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,keszulek,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,készüléket,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,epilátor,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,epilator,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,borotva,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,borotválkozás,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,spray,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,hab,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,olaj,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,zselé,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,zsele,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,csipesz,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,szálanként,Broad,"KÉSZÜLÉK (szőrtelenítŐ = gép, nem szolgáltatás)"
+Lezer_V1,,philips,Broad,MÁRKA (készülék-gyártók)
+Lezer_V1,,braun,Broad,MÁRKA (készülék-gyártók)
+Lezer_V1,,lumea,Broad,MÁRKA (készülék-gyártók)
+Lezer_V1,,remington,Broad,MÁRKA (készülék-gyártók)
+Lezer_V1,,veet,Broad,MÁRKA (készülék-gyártók)
+Lezer_V1,,sanitas,Broad,MÁRKA (készülék-gyártók)
+Lezer_V1,,x epil,Phrase,MÁRKA (készülék-gyártók)
+Lezer_V1,,xepil,Broad,MÁRKA (készülék-gyártók)
+Lezer_V1,,beurer,Broad,MÁRKA (készülék-gyártók)
+Lezer_V1,,silk expert,Phrase,MÁRKA (készülék-gyártók)
+Lezer_V1,,kristály,Broad,MÁRKA (készülék-gyártók)
+Lezer_V1,,rowenta,Broad,MÁRKA (készülék-gyártók)
+Lezer_V1,,panasonic,Broad,MÁRKA (készülék-gyártók)
+Lezer_V1,,bosch,Broad,MÁRKA (készülék-gyártók)
+Lezer_V1,,media markt,Phrase,BOLT / VÁSÁRLÁS
+Lezer_V1,,mediamarkt,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,emag,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,alza,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,rossmann,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,dm,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,tesco,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,auchan,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,árukereső,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,arukereso,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,eladó,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,elado,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,webshop,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,rendelés,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,vásárlás,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,vasarlas,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,olcsón,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,használt,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,hasznalt,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,árgép,Broad,BOLT / VÁSÁRLÁS
+Lezer_V1,,otthoni,Broad,OTTHONI / DIY
+Lezer_V1,,otthon,Broad,OTTHONI / DIY
+Lezer_V1,,házilag,Broad,OTTHONI / DIY
+Lezer_V1,,hazilag,Broad,OTTHONI / DIY
+Lezer_V1,,diy,Broad,OTTHONI / DIY
+Lezer_V1,,saját kezűleg,Phrase,OTTHONI / DIY
+Lezer_V1,,házi,Broad,OTTHONI / DIY
+Lezer_V1,,recept,Broad,OTTHONI / DIY
+Lezer_V1,,gép ár,Phrase,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,gép ára,Phrase,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,gép árak,Phrase,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,bérlés,Broad,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,berles,Broad,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,kölcsönzés,Broad,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,lízing,Broad,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,salontech,Broad,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,zeon,Broad,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,viszonteladó,Broad,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,forgalmazó,Broad,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,tanfolyam,Broad,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,képzés,Broad,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,kepzes,Broad,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,oktatás,Broad,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,iskola,Broad,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,okj,Broad,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,állás,Broad,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,munka,Broad,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,franchise,Broad,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,üzleti terv,Phrase,GÉPVÁSÁRLÁS / ÜZLET / KÉPZÉS
+Lezer_V1,,szemműtét,Broad,MÁS LÉZER-FELHASZNÁLÁS
+Lezer_V1,,szemlézer,Broad,MÁS LÉZER-FELHASZNÁLÁS
+Lezer_V1,,tetoválás,Broad,MÁS LÉZER-FELHASZNÁLÁS
+Lezer_V1,,tetkó,Broad,MÁS LÉZER-FELHASZNÁLÁS
+Lezer_V1,,tetovalas,Broad,MÁS LÉZER-FELHASZNÁLÁS
+Lezer_V1,,hegkezelés,Broad,MÁS LÉZER-FELHASZNÁLÁS
+Lezer_V1,,bőrmegújítás,Broad,MÁS LÉZER-FELHASZNÁLÁS
+Lezer_V1,,visszér,Broad,MÁS LÉZER-FELHASZNÁLÁS
+Lezer_V1,,hajbeültetés,Broad,MÁS LÉZER-FELHASZNÁLÁS
+Lezer_V1,,körömgomba,Broad,MÁS LÉZER-FELHASZNÁLÁS
+Lezer_V1,,fogfehérítés,Broad,MÁS LÉZER-FELHASZNÁLÁS
+Lezer_V1,,lézerterápia,Broad,MÁS LÉZER-FELHASZNÁLÁS
+Lezer_V1,,pattanás,Broad,MÁS LÉZER-FELHASZNÁLÁS
+Lezer_V1,,kutya,Broad,MÁS LÉZER-FELHASZNÁLÁS
+Lezer_V1,,macska,Broad,MÁS LÉZER-FELHASZNÁLÁS
+Lezer_V1,,állatorvos,Broad,MÁS LÉZER-FELHASZNÁLÁS
+Lezer_V1,,laser,Broad,ÚJ 2026-09-20: ANGOL / ROSSZ SZOLGÁLTATÁS / VERSENYTÁRS
+Lezer_V1,,hair removal,Phrase,ÚJ 2026-09-20: ANGOL / ROSSZ SZOLGÁLTATÁS / VERSENYTÁRS
+Lezer_V1,,electrolysis,Broad,ÚJ 2026-09-20: ANGOL / ROSSZ SZOLGÁLTATÁS / VERSENYTÁRS
+Lezer_V1,,arckezelés,Broad,ÚJ 2026-09-20: ANGOL / ROSSZ SZOLGÁLTATÁS / VERSENYTÁRS
+Lezer_V1,,arckezeles,Broad,ÚJ 2026-09-20: ANGOL / ROSSZ SZOLGÁLTATÁS / VERSENYTÁRS
+Lezer_V1,,dr b esth,Phrase,ÚJ 2026-09-20: ANGOL / ROSSZ SZOLGÁLTATÁS / VERSENYTÁRS
+Lezer_V1,,elektromos,Broad,ÚJ 2026-09: KÉSZÜLÉK ÉS NEM VÁLLALT ZÓNA
+Lezer_V1,,szemöldök,Broad,ÚJ 2026-09: KÉSZÜLÉK ÉS NEM VÁLLALT ZÓNA
+Lezer_V1,,szemoldok,Broad,ÚJ 2026-09: KÉSZÜLÉK ÉS NEM VÁLLALT ZÓNA
+Lezer_V1,,orr,Broad,ÚJ 2026-09: KÉSZÜLÉK ÉS NEM VÁLLALT ZÓNA
+Lezer_V1,,fül,Broad,ÚJ 2026-09: KÉSZÜLÉK ÉS NEM VÁLLALT ZÓNA
+Lezer_V1,,ful,Broad,ÚJ 2026-09: KÉSZÜLÉK ÉS NEM VÁLLALT ZÓNA
+Lezer_V1,,homlok,Broad,ÚJ 2026-09: KÉSZÜLÉK ÉS NEM VÁLLALT ZÓNA
+Lezer_V1,,alexandrit,Broad,MÁS GÉPTÍPUS (nálunk dióda van)
+Lezer_V1,,elysion,Broad,MÁS GÉPTÍPUS (nálunk dióda van)
+Lezer_V1,,candela,Broad,MÁS GÉPTÍPUS (nálunk dióda van)
+Lezer_V1,,gentlemax,Broad,MÁS GÉPTÍPUS (nálunk dióda van)
+Lezer_V1,,deka,Broad,MÁS GÉPTÍPUS (nálunk dióda van)
+Lezer_V1,,quanta,Broad,MÁS GÉPTÍPUS (nálunk dióda van)
+Lezer_V1,,motus,Broad,MÁS GÉPTÍPUS (nálunk dióda van)
+Lezer_V1,,rubin lézer,Phrase,MÁS GÉPTÍPUS (nálunk dióda van)
+Lezer_V1,,diolaze,Broad,MÁS GÉPTÍPUS (nálunk dióda van)
+Lezer_V1,,alma beauty,Phrase,VERSENYTÁRS
+Lezer_V1,,foreverderm,Broad,VERSENYTÁRS
+Lezer_V1,,everderm,Broad,VERSENYTÁRS
+Lezer_V1,,skinspirit,Broad,VERSENYTÁRS
+Lezer_V1,,medaid,Broad,VERSENYTÁRS
+Lezer_V1,,evln,Broad,VERSENYTÁRS
+Lezer_V1,,oxygen medical,Phrase,VERSENYTÁRS
+Lezer_V1,,bársony,Broad,VERSENYTÁRS
+Lezer_V1,,aesthetica,Broad,VERSENYTÁRS
+Lezer_V1,,medicare esztétika,Phrase,VERSENYTÁRS
+Lezer_V1,,inspira medical,Phrase,VERSENYTÁRS
+Lezer_V1,,be pretty,Phrase,VERSENYTÁRS
+Lezer_V1,,ikra beauty,Phrase,VERSENYTÁRS
+Lezer_V1,,lézi,Broad,VERSENYTÁRS
+Lezer_V1,,laser studio,Phrase,VERSENYTÁRS
+Lezer_V1,,lézer stúdió,Phrase,VERSENYTÁRS
+Lezer_V1,,lezer studio,Phrase,VERSENYTÁRS
+Lezer_V1,,férfi,Broad,FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget)
+Lezer_V1,,férfiak,Broad,FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget)
+Lezer_V1,,férfiaknak,Broad,FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget)
+Lezer_V1,,férfias,Broad,FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget)
+Lezer_V1,,ferfi,Broad,FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget)
+Lezer_V1,,ferfiak,Broad,FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget)
+Lezer_V1,,ferfiaknak,Broad,FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget)
+Lezer_V1,,here,Broad,FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget)
+Lezer_V1,,herezacskó,Broad,FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget)
+Lezer_V1,,mellkas,Broad,FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget)
+Lezer_V1,,szakáll,Broad,FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget)
+Lezer_V1,,szakall,Broad,FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget)
+Lezer_V1,,pénisz,Broad,FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget)
+Lezer_V1,,urak,Broad,FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget)
+Lezer_V1,,men,Broad,FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget)
+Lezer_V1,,male,Broad,FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget)
+Lezer_V1,,for men,Phrase,FÉRFI SZÁNDÉK (a szalon nem vállal férfi vendéget)
+Lezer_V1,,veszélyei,Broad,NEM SZOLGÁLTATÁS-SZÁNDÉK
+Lezer_V1,,veszélyes,Broad,NEM SZOLGÁLTATÁS-SZÁNDÉK
+Lezer_V1,,mellékhatás,Broad,NEM SZOLGÁLTATÁS-SZÁNDÉK
+Lezer_V1,,wikipedia,Broad,NEM SZOLGÁLTATÁS-SZÁNDÉK
+Lezer_V1,,mi az,Phrase,NEM SZOLGÁLTATÁS-SZÁNDÉK
+Lezer_V1,,ingyen,Broad,NEM SZOLGÁLTATÁS-SZÁNDÉK
+Lezer_V1,,ingyenes,Broad,NEM SZOLGÁLTATÁS-SZÁNDÉK
+Lezer_V1,,groupon,Broad,NEM SZOLGÁLTATÁS-SZÁNDÉK
+Lezer_V1,,kupon,Broad,NEM SZOLGÁLTATÁS-SZÁNDÉK
+Lezer_V1,,ősz szőr,Phrase,NEM SZOLGÁLTATÁS-SZÁNDÉK
+Lezer_V1,,fehér szőr,Phrase,NEM SZOLGÁLTATÁS-SZÁNDÉK
+Lezer_V1,,szőke szőrre,Phrase,NEM SZOLGÁLTATÁS-SZÁNDÉK
+Lezer_V1,,terhesség alatt,Phrase,NEM SZOLGÁLTATÁS-SZÁNDÉK
+Lezer_V1,,gyermeknek,Broad,NEM SZOLGÁLTATÁS-SZÁNDÉK
+Lezer_V1,,debrecen,Broad,TÁVOLI VÁROS
+Lezer_V1,,szeged,Broad,TÁVOLI VÁROS
+Lezer_V1,,győr,Broad,TÁVOLI VÁROS
+Lezer_V1,,gyor,Broad,TÁVOLI VÁROS
+Lezer_V1,,pécs,Broad,TÁVOLI VÁROS
+Lezer_V1,,pecs,Broad,TÁVOLI VÁROS
+Lezer_V1,,miskolc,Broad,TÁVOLI VÁROS
+Lezer_V1,,nyíregyháza,Broad,TÁVOLI VÁROS
+Lezer_V1,,kecskemét,Broad,TÁVOLI VÁROS
+Lezer_V1,,székesfehérvár,Broad,TÁVOLI VÁROS
+Lezer_V1,,szombathely,Broad,TÁVOLI VÁROS
+Lezer_V1,,veszprém,Broad,TÁVOLI VÁROS
+Lezer_V1,,tatabánya,Broad,TÁVOLI VÁROS
+Lezer_V1,,sopron,Broad,TÁVOLI VÁROS
+Lezer_V1,,eger,Broad,TÁVOLI VÁROS
+Lezer_V1,,zalaegerszeg,Broad,TÁVOLI VÁROS
+Lezer_V1,,kaposvár,Broad,TÁVOLI VÁROS
+Lezer_V1,,békéscsaba,Broad,TÁVOLI VÁROS
+Lezer_V1,,szolnok,Broad,TÁVOLI VÁROS
+Lezer_V1,,dunaújváros,Broad,TÁVOLI VÁROS
+Lezer_V1,,salgótarján,Broad,TÁVOLI VÁROS
+Lezer_V1,,esztergom,Broad,TÁVOLI VÁROS
+Lezer_V1,,siófok,Broad,TÁVOLI VÁROS
+Lezer_V1,,hévíz,Broad,TÁVOLI VÁROS
+Lezer_V1,,balaton,Broad,TÁVOLI VÁROS
+Lezer_V1,,ausztria,Broad,TÁVOLI VÁROS
+Lezer_V1,,bécs,Broad,TÁVOLI VÁROS
+Lezer_V1,,szlovákia,Broad,TÁVOLI VÁROS
+Lezer_V1,,románia,Broad,TÁVOLI VÁROS
+Lezer_V1,,kassa,Broad,TÁVOLI VÁROS
+Lezer_V1,,érd,Broad,TÁVOLI VÁROS
+Lezer_V1,,dunakeszi,Broad,TÁVOLI VÁROS
+Lezer_V1,,gödöllő,Broad,TÁVOLI VÁROS
+Lezer_V1,,vác,Broad,TÁVOLI VÁROS
+Lezer_V1,Fej kulcsszo,gyanta,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,gyantázás,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,gyantazas,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,gyantázó,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,gyantázni,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,wax,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,waxing,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,cukorpaszta,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,cukorpasztázás,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,elektrolízis,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,elektrolizis,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,tűs epilálás,Phrase,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,tus epilalas,Phrase,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,shr,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,ipl,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,villanófényes,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,villanofenyes,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,epilálás,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,epilalas,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,szálankénti,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Fej kulcsszo,dioda,Broad,BELSŐ VERSENY — csak ebben a csoportban
+Lezer_V1,Fej kulcsszo,dióda,Broad,BELSŐ VERSENY — csak ebben a csoportban
+Lezer_V1,Dioda lezer,gyanta,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,gyantázás,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,gyantazas,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,gyantázó,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,gyantázni,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,wax,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,waxing,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,cukorpaszta,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,cukorpasztázás,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,elektrolízis,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,elektrolizis,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,tűs epilálás,Phrase,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,tus epilalas,Phrase,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,shr,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,ipl,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,villanófényes,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,villanofenyes,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,epilálás,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,epilalas,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Dioda lezer,szálankénti,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,gyanta,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,gyantázás,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,gyantazas,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,gyantázó,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,gyantázni,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,wax,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,waxing,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,cukorpaszta,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,cukorpasztázás,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,elektrolízis,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,elektrolizis,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,tűs epilálás,Phrase,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,tus epilalas,Phrase,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,shr,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,ipl,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,villanófényes,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,villanofenyes,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,epilálás,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,epilalas,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Lezer arak,szálankénti,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,gyanta,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,gyantázás,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,gyantazas,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,gyantázó,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,gyantázni,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,wax,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,waxing,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,cukorpaszta,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,cukorpasztázás,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,elektrolízis,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,elektrolizis,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,tűs epilálás,Phrase,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,tus epilalas,Phrase,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,shr,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,ipl,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,villanófényes,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,villanofenyes,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,epilálás,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,epilalas,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten
+Lezer_V1,Zonak,szálankénti,Broad,ALTERNATÍV MÓDSZER — csak csoport-szinten

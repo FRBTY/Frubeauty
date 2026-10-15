@@ -329,8 +329,12 @@ const faqSchema =
       cikk olvasása közben semmilyen látható CTA nincs a képernyőn: a fejléc
       gombja mobilon nem renderel, az ajánlat-doboz pedig a cikk végén ül.
       Lásd StickyBookBar.astro és src/config/offers.ts. */}
+  {/* 2026-09-30: az `offer`-rel a felső sor a pontos Notino-név lesz, és a
+      visszatérő kártya is innen épül; a `short` csak tartalék a kivételeknek
+      (lézer, esküvői) — lásd StickyBookBar `offer` prop. */}
   <StickyBookBar
     eyebrow={OFFERS[post.data.category].short}
+    offer={post.data.category}
     price={OFFERS[post.data.category].price}
   />
 

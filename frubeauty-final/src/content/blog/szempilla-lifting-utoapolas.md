@@ -64,6 +64,6 @@ Egy fontos megkötés: két lifting között hagyj időt a pilláidnak — a tú
 
 Ez a hét pont nem bonyolult — de együtt döntik el, hogy a lifting három hét múlva már „kiengedett”, vagy nyolc héten át ugyanolyan szép, mint a kezelés másnapján.
 
-Ha élőben is átbeszélnéd a részleteket — vagy még csak ismerkedsz a kezeléssel —, nézd meg a [szempilla lifting Zuglóban](/szempilla-lifting-zuglo/) oldalt, ahol az árakat és a menetet is megtalálod; az aktuális árakról a [szempilla lifting árak 2026](/blog/szempilla-lifting-arak-2026/) cikkben írok.
+Ha élőben is átbeszélnéd a részleteket — vagy még csak ismerkedsz a kezeléssel —, nézd meg a [szempilla lifting Zuglóban](/szempilla-lifting-zuglo/) oldalt, ahol az aktuális árakat és a menetet is megtalálod.
 
 [Foglalj időpontot a Notino felületén →](https://www.notino.hu/szalonok/pecze-kovacs-fruzsina-sminkes,-szemoldok-es-szempilla-stylist/)

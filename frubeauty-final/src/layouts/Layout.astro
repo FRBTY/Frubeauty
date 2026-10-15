@@ -62,20 +62,36 @@ const businessSchema = {
   '@context': 'https://schema.org',
   '@graph': [
     {
+      // A BeautySalon a schema.org-ban LocalBusiness-altípus (LocalBusiness →
+      // HealthAndBeautyBusiness → BeautySalon), így EZ az egy csomópont a
+      // LocalBusiness is. Külön LocalBusiness-csomópont ugyanerre a címre két
+      // entitást jelentene, és szétosztaná a jelet.
       '@type': 'BeautySalon',
       '@id': 'https://frubeauty.com/#business',
+      // Wikidata: szépségszalon — az AI-keresők ezzel kötik a fogalomhoz.
+      additionalType: 'https://www.wikidata.org/wiki/Q1195245',
       name: businessIdentity.name,
+      alternateName: [...businessIdentity.alternateNames],
       legalName: businessIdentity.legalName,
       // A katalógus-űrlapok és az AI-összefoglalók ezt a mezőt olvassák először,
       // ha „mivel foglalkozik a vállalkozás" a kérdés. Ugyanaz a szöveg megy a
       // citációkba is (site.ts) — a NAP-egyezés a leírásra is vonatkozik.
       description: businessIdentity.descriptionMedium,
       url: 'https://frubeauty.com',
-      image: ['https://frubeauty.com/og-image.jpg'],
+      image: [
+        'https://frubeauty.com/og-image.jpg',
+        'https://frubeauty.com/img/fruzsina-portrait.jpg',
+        'https://frubeauty.com/img/lezeres-szortelenites-gep-zuglo-egressy-ut-budapest.webp',
+        'https://frubeauty.com/img/eskuvoi-smink-budapest-egressy-ut-zuglo.webp',
+      ],
+      // A logo mező SZÁNDÉKOSAN nincs: a favicon webfontos szöveges SVG, amit a Google
+      // helyettesítő betűvel renderel. Ha lesz legalább 112×112-es PNG-logó, ide kerül.
       telephone: siteConfig.phone,
       email: siteConfig.email,
       knowsLanguage: 'hu',
-      priceRange: '4000–48000 Ft',
+      // Legolcsóbb tétel: szempillafestés 4 000 Ft; legdrágább egy alkalomra:
+      // Tetőtől Talpig lézer-csomag 63 000 Ft (2026-09-29, Notino).
+      priceRange: '4000–63000 Ft',
       currenciesAccepted: 'HUF',
       paymentAccepted: 'Készpénz, Bankkártya',
       address: {
@@ -93,7 +109,24 @@ const businessSchema = {
       },
       hasMap: siteConfig.mapsUrl,
       founder: { '@id': 'https://frubeauty.com/#fruzsina' },
-      employee: { '@id': 'https://frubeauty.com/#fruzsina' },
+      // Tömb, hogy egy munkatárs felvételekor csak egy sor kerüljön bele (+ a saját
+      // Person-csomópontja lent, és a numberOfEmployees átírása).
+      employee: [{ '@id': 'https://frubeauty.com/#fruzsina' }],
+      numberOfEmployees: { '@type': 'QuantitativeValue', value: 1 },
+      // A foglalás gépileg olvasható belépési pontja (AI-asszisztensek, Google).
+      potentialAction: {
+        '@type': 'ReserveAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: siteConfig.booking,
+          inLanguage: 'hu',
+          actionPlatform: [
+            'https://schema.org/DesktopWebPlatform',
+            'https://schema.org/MobileWebPlatform',
+          ],
+        },
+        result: { '@type': 'Reservation', name: 'Időpontfoglalás' },
+      },
       openingHoursSpecification: openingHoursSchema.map((h) => ({
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: h.dayOfWeek,
@@ -106,8 +139,24 @@ const businessSchema = {
       // A csillagokat a Google Business Profile hozza a Mapsen/lokális találatban
       // és az Ads helybővítményben — arra támaszkodunk.
       areaServed: [
-        { '@type': 'AdministrativeArea', name: 'Zugló (XIV. kerület)' },
-        { '@type': 'City', name: 'Budapest' },
+        { '@type': 'AdministrativeArea', name: 'Zugló (XIV. kerület)', sameAs: 'https://www.wikidata.org/wiki/Q228445' },
+        { '@type': 'City', name: 'Budapest', sameAs: 'https://www.wikidata.org/wiki/Q1781' },
+      ],
+      // Wikidata-egyértelműsítés, ahol van ellenőrzött elem (2026-09-29): Q783007
+      // lézeres szőrtelenítés, Q2474068 kozmetológia. A szempilla liftingnek és a
+      // szemöldök laminálásnak nincs Wikidata-eleme — ott a név marad.
+      knowsAbout: [
+        { '@type': 'Thing', name: 'Lézeres szőrtelenítés', sameAs: 'https://www.wikidata.org/wiki/Q783007' },
+        { '@type': 'Thing', name: 'Kozmetológia', sameAs: 'https://www.wikidata.org/wiki/Q2474068' },
+        'Dióda lézer',
+        'Koreai szempilla lifting',
+        'Szempilla laminálás',
+        'Szemöldök laminálás',
+        'Szemöldökfestés',
+        'Janssen Cosmetics arckezelés',
+        'Esküvői smink',
+        'Menyasszonyi smink',
+        'Alkalmi smink',
       ],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
@@ -124,14 +173,26 @@ const businessSchema = {
           },
           {
             '@type': 'Offer',
-            itemOffered: { '@type': 'Service', name: 'Szempilla lifting + festés', url: 'https://frubeauty.com/szempilla-lifting-zuglo/' },
+            itemOffered: { '@type': 'Service', name: 'Koreai szempilla lifting festéssel', alternateName: ['Szempilla laminálás', 'Lash lift'], url: 'https://frubeauty.com/szempilla-lifting-zuglo/' },
             price: '12000',
             priceCurrency: 'HUF',
           },
           {
             '@type': 'Offer',
-            itemOffered: { '@type': 'Service', name: 'Szemöldök laminálás + formázás', url: 'https://frubeauty.com/szemoldok-laminalas-zuglo/' },
+            itemOffered: { '@type': 'Service', name: 'Szemöldök laminálás formázással és festéssel', alternateName: 'Laminált szemöldök', url: 'https://frubeauty.com/szemoldok-laminalas-zuglo/' },
             price: '11000',
+            priceCurrency: 'HUF',
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: { '@type': 'Service', name: 'Teljes Tekintet csomag: szempilla lifting és szemöldök laminálás', url: 'https://frubeauty.com/szempilla-lifting-zuglo/' },
+            price: '18000',
+            priceCurrency: 'HUF',
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: { '@type': 'Service', name: 'Szemöldök formázás és festés', url: 'https://frubeauty.com/szemoldokfestes-zuglo/' },
+            price: '6000',
             priceCurrency: 'HUF',
           },
           {
@@ -146,10 +207,25 @@ const businessSchema = {
             price: '16000',
             priceCurrency: 'HUF',
           },
+          // 2026-09-29: a smink két oldalra vált — az esküvői a /sminkes-zuglo/-n,
+          // az alkalmi az /alkalmi-smink-budapest/-en. A Menyasszonyi csomag ára
+          // 2026-09-29 óta 40 000 Ft (a tulajdonos döntése, a Notinóval egyezően).
           {
             '@type': 'Offer',
-            itemOffered: { '@type': 'Service', name: 'Alkalmi és esküvői smink', url: 'https://frubeauty.com/sminkes-zuglo/' },
-            price: '13000',
+            itemOffered: { '@type': 'Service', name: 'Menyasszonyi smink', url: 'https://frubeauty.com/sminkes-zuglo/' },
+            price: '30000',
+            priceCurrency: 'HUF',
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: { '@type': 'Service', name: 'Menyasszonyi csomag: próbasmink és esküvői smink', url: 'https://frubeauty.com/sminkes-zuglo/' },
+            price: '40000',
+            priceCurrency: 'HUF',
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: { '@type': 'Service', name: 'Alkalmi smink', url: 'https://frubeauty.com/alkalmi-smink-budapest/' },
+            price: '15000',
             priceCurrency: 'HUF',
           },
         ],
@@ -166,14 +242,33 @@ const businessSchema = {
       url: 'https://frubeauty.com/rolam/',
       mainEntityOfPage: 'https://frubeauty.com/rolam/',
       name: 'Pecze-Kovács Fruzsina',
-      jobTitle: 'Kozmetikus, szempilla- és szemöldök-stylist',
+      jobTitle: 'Kozmetikus, szempilla- és szemöldök-stylist, sminkes',
       image: 'https://frubeauty.com/img/fruzsina-portrait.jpg',
       worksFor: { '@id': 'https://frubeauty.com/#business' },
+      // Végzettségek — a tulajdonos megerősítette (2026-09-29). Ugyanez látható a
+      // /rolam/ oldalon és az llms.txt „Szakértő" blokkjában; a három egyezzen.
+      hasCredential: [
+        {
+          '@type': 'EducationalOccupationalCredential',
+          credentialCategory: 'Szakképesítés',
+          name: 'Kozmetikus képesítés',
+          dateCreated: '2021',
+        },
+        {
+          '@type': 'EducationalOccupationalCredential',
+          credentialCategory: 'Képzés',
+          name: 'Smink- és szempillaképzés',
+          dateCreated: '2025',
+          recognizedBy: { '@type': 'Organization', name: 'Berki Mia Makeup Academy' },
+        },
+      ],
       knowsAbout: [
         'szempilla lifting',
         'szemöldök laminálás',
         'koreai lash lift',
         'Janssen arckezelés',
+        { '@type': 'Thing', name: 'lézeres szőrtelenítés', sameAs: 'https://www.wikidata.org/wiki/Q783007' },
+        'esküvői smink',
         'alkalmi smink',
       ],
       // A Notino-oldal címe szó szerint „Pecze-Kovács Fruzsina Kozmetikus,
@@ -811,6 +906,32 @@ const primaryGtagId = hasGoogleTag
       }
       @media (prefers-reduced-motion: reduce) {
         .hero-reveal { animation: none; opacity: 1; }
+      }
+
+      /* ===== Hero-koreográfia (motion-rendszer, 2026-09-30) =====================
+         A .hero-reveal az egész blokkot EGYBEN emelte. Itt ugyanaz a 12 px-es,
+         csak transformos emelkedés elemenként, 60 ms-os lépcsőben fut, és a
+         foglalás gombnál ér véget: a szem sorban halad, és a gombnál áll meg.
+         Az LCP-szabály változatlan: a .hero-rise opacity-je VÉGIG 1 (lásd fent),
+         halványulni csak a .hero-soft-os, nem-LCP elemek halványulnak
+         (biztosítékok, közösségi linkek). Összesen < 700 ms.
+         A késleltető osztályok SZÁNDÉKOSAN a .hero-rise UTÁN állnak: az
+         `animation` rövidítés nullázná a delay-t, ha fordított lenne a sorrend. */
+      .hero-rise {
+        animation: heroFadeUp 0.56s cubic-bezier(0.23, 1, 0.32, 1) both;
+      }
+      .hero-d1 { animation-delay: 60ms; }
+      .hero-d2 { animation-delay: 120ms; }
+      .hero-d3 { animation-delay: 180ms; }
+      @keyframes heroSoftIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .hero-soft {
+        animation: heroSoftIn 0.24s cubic-bezier(0.23, 1, 0.32, 1) 0.3s both;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .hero-rise, .hero-soft { animation: none; opacity: 1; }
       }
 
       @keyframes zeroJsFade {

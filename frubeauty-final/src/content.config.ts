@@ -21,7 +21,9 @@ const blog = defineCollection({
     // „kapcsolódó posztok” blokkja (blog/[...slug].astro, azonos kategória) keresztbe
     // ajánlott pilla- és szemöldök-tartalmat. A szétválasztás szűkíti a topikus
     // klasztereket — minden cikk a saját témáján belül linkel tovább.
-    category: z.enum(['Szempilla', 'Szemöldök', 'Arckezelés', 'Alkalmi smink', 'Bőrápolás']),
+    // 2026-09-29: + 'Esküvői smink' (az esküvői cikkek saját ajánlatot kapnak) és
+    // + 'Lézer' (az első két lézeres cikk). Minden érték kulcs az OFFERS-ben is.
+    category: z.enum(['Szempilla', 'Szemöldök', 'Arckezelés', 'Alkalmi smink', 'Esküvői smink', 'Bőrápolás', 'Lézer']),
     readingMinutes: z.number().int().positive().max(30),
     publishedAt: z.coerce.date(),
     updatedAt: z.coerce.date().optional(),

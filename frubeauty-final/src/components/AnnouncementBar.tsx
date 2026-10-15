@@ -105,6 +105,16 @@ export function AnnouncementBar({ enabled = true }: AnnouncementBarProps) {
     } catch { setVisible(true); }
   }, [shouldShow]);
 
+  // A ragadós sáv visszatérő kártyája (StickyBookBar, `offer` prop) ugyanerre a
+  // helyzetre szól, de a pontos Notino-névvel és gombbal. Ha az megnyílt, ez a
+  // sáv erre a lapmegtekintésre visszahúzódik — két egyidejű emlékeztető zaj.
+  // Nem tartós elrejtés (a DISMISS_KEY-hez nem nyúl): a következő oldalon újra él.
+  useEffect(() => {
+    const onReturn = () => setVisible(false);
+    window.addEventListener('fb:book-return', onReturn);
+    return () => window.removeEventListener('fb:book-return', onReturn);
+  }, []);
+
   function dismiss() {
     setVisible(false);
     try { window.localStorage.setItem(DISMISS_KEY, '1'); } catch {}
