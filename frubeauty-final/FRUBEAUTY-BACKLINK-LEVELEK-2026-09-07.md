@@ -155,7 +155,11 @@ alapja, és az `infobel.com` link is bizonyítja, hogy a katalógusok megjelenne
 | **Firmania** | dofollow |
 | **Nyitva.hu** | dofollow |
 
-⚠️ **Mindhármat ugyanaz a Cylex-adatbázis hajtja** — ha az egyikbe hibás adatot viszel be,
+> **JAVÍTÁS 2026-10-15:** a Cylex-adatbázis a **Cylexet, a Firmaniát és a Nyitva.hu-t** hajtja — ez a
+> három 2026-08-18 óta fent van, a Firmania és a Nyitva.hu linkje dofollow (2026-09-18-án élőben ellenőrizve).
+> Az **Aranyoldalak FÜGGETLEN** rendszer, a regisztrációja „geo” hibára fut. Az alábbi régi mondat téves volt.
+
+~~Mindhármat ugyanaz a Cylex-adatbázis hajtja~~ — ha az egyikbe hibás adatot viszel be,
 mindhárom helyen hibás lesz. Ezért egyszer, pontosan, a lenti blokkot bemásolva:
 
 ```

@@ -1,0 +1,344 @@
+{
+ "ablak": [
+  "2026-09-15",
+  "2026-10-12"
+ ],
+ "forras": "GSC sc-domain:frubeauty.com, service account; GA4 533860004 organikus landingPage",
+ "oldalak": {
+  "/": {
+   "katt": 89,
+   "megj": 2090,
+   "ctr": 4.3,
+   "poz": 5.0,
+   "ga_belepo": 56,
+   "ga_book_click": 24
+  },
+  "/sminkes-zuglo/": {
+   "katt": 9,
+   "megj": 490,
+   "ctr": 1.8,
+   "poz": 7.7,
+   "ga_belepo": 4,
+   "ga_book_click": 1
+  },
+  "/alkalmi-smink-budapest/": {
+   "katt": 2,
+   "megj": 35,
+   "ctr": 5.7,
+   "poz": 6.1,
+   "ga_belepo": 1,
+   "ga_book_click": 0
+  },
+  "/szemoldokfestes-zuglo/": {
+   "katt": 0,
+   "megj": 5,
+   "ctr": 0.0,
+   "poz": 3.2,
+   "ga_belepo": 0,
+   "ga_book_click": 0
+  },
+  "/szempilla-lifting-zuglo/": {
+   "katt": 6,
+   "megj": 89,
+   "ctr": 6.7,
+   "poz": 8.8,
+   "ga_belepo": 6,
+   "ga_book_click": 1
+  },
+  "/blog/eskuvoi-smink-arak-budapest/": {
+   "katt": 4,
+   "megj": 145,
+   "ctr": 2.8,
+   "poz": 9.2,
+   "ga_belepo": 2,
+   "ga_book_click": 0
+  },
+  "/blog/szemoldok-laminalas-arak-2026/": {
+   "katt": 2,
+   "megj": 281,
+   "ctr": 0.7,
+   "poz": 6.4,
+   "ga_belepo": 0,
+   "ga_book_click": 0
+  },
+  "/blog/szempilla-lifting-utoapolas/": {
+   "katt": 0,
+   "megj": 7,
+   "ctr": 0.0,
+   "poz": 13.4,
+   "ga_belepo": 0,
+   "ga_book_click": 0
+  },
+  "/blog/szempilla-lifting-arak-2026/": {
+   "katt": 1,
+   "megj": 135,
+   "ctr": 0.7,
+   "poz": 6.4,
+   "ga_belepo": 0,
+   "ga_book_click": 0
+  },
+  "/blog/szempilla-lifting-meddig-tart/": {
+   "katt": 0,
+   "megj": 0,
+   "ctr": null,
+   "poz": null,
+   "ga_belepo": 0,
+   "ga_book_click": 0
+  },
+  "/blog/szempilla-lifting-karos/": {
+   "katt": 0,
+   "megj": 0,
+   "ctr": null,
+   "poz": null,
+   "ga_belepo": 0,
+   "ga_book_click": 0
+  },
+  "/blog/szemoldokfestes-meddig-tart/": {
+   "katt": 0,
+   "megj": 0,
+   "ctr": null,
+   "poz": null,
+   "ga_belepo": 0,
+   "ga_book_click": 0
+  }
+ },
+ "kulcsszavak": {
+  "alkalmi smink árak": {
+   "minta": "^alkalmi smink árak$",
+   "cel": "/alkalmi-smink-budapest/",
+   "osszes": {
+    "katt": 1,
+    "megj": 60,
+    "ctr": 1.7,
+    "poz": 7.5
+   },
+   "cel_urlen": {
+    "katt": 0,
+    "megj": 2,
+    "ctr": 0.0,
+    "poz": 6.5
+   },
+   "oldalankent": {
+    "/sminkes-zuglo/": {
+     "katt": 1,
+     "megj": 45,
+     "ctr": 2.2,
+     "poz": 6.8
+    },
+    "/": {
+     "katt": 0,
+     "megj": 8,
+     "ctr": 0.0,
+     "poz": 5.5
+    },
+    "/blog/eskuvoi-smink-arak-budapest/": {
+     "katt": 0,
+     "megj": 5,
+     "ctr": 0.0,
+     "poz": 16.8
+    },
+    "/alkalmi-smink-budapest/": {
+     "katt": 0,
+     "megj": 2,
+     "ctr": 0.0,
+     "poz": 6.5
+    }
+   }
+  },
+  "alkalmi smink budapest": {
+   "minta": "^alkalmi smink budapest$",
+   "cel": "/alkalmi-smink-budapest/",
+   "osszes": {
+    "katt": 1,
+    "megj": 30,
+    "ctr": 3.3,
+    "poz": 10.8
+   },
+   "cel_urlen": {
+    "katt": 0,
+    "megj": 5,
+    "ctr": 0.0,
+    "poz": 10.8
+   },
+   "oldalankent": {
+    "/sminkes-zuglo/": {
+     "katt": 1,
+     "megj": 22,
+     "ctr": 4.5,
+     "poz": 11.1
+    },
+    "/alkalmi-smink-budapest/": {
+     "katt": 0,
+     "megj": 5,
+     "ctr": 0.0,
+     "poz": 10.8
+    },
+    "/": {
+     "katt": 0,
+     "megj": 3,
+     "ctr": 0.0,
+     "poz": 8.3
+    }
+   }
+  },
+  "szemöldökfestés (3 írásmód)": {
+   "minta": "^(szemöldökfestés|szemöldök festés|szemoldok festes|szemoldokfestes)$",
+   "cel": "/szemoldokfestes-zuglo/",
+   "osszes": {
+    "katt": 0,
+    "megj": 36,
+    "ctr": 0.0,
+    "poz": 3.7
+   },
+   "cel_urlen": {
+    "katt": 0,
+    "megj": 0,
+    "ctr": null,
+    "poz": null
+   },
+   "oldalankent": {
+    "/": {
+     "katt": 0,
+     "megj": 36,
+     "ctr": 0.0,
+     "poz": 3.7
+    }
+   }
+  },
+  "szempilla lifting ár/árak": {
+   "minta": "^szempilla lifting ár(ak)?$",
+   "cel": "/szempilla-lifting-zuglo/",
+   "osszes": {
+    "katt": 0,
+    "megj": 26,
+    "ctr": 0.0,
+    "poz": 7.4
+   },
+   "cel_urlen": {
+    "katt": 0,
+    "megj": 1,
+    "ctr": 0.0,
+    "poz": 17.0
+   },
+   "oldalankent": {
+    "/blog/szempilla-lifting-arak-2026/": {
+     "katt": 0,
+     "megj": 22,
+     "ctr": 0.0,
+     "poz": 7.3
+    },
+    "/blog/koreai-szempilla-lifting/": {
+     "katt": 0,
+     "megj": 2,
+     "ctr": 0.0,
+     "poz": 2.0
+    },
+    "/blog/szemoldok-laminalas-arak-2026/": {
+     "katt": 0,
+     "megj": 1,
+     "ctr": 0.0,
+     "poz": 11.0
+    },
+    "/szempilla-lifting-zuglo/": {
+     "katt": 0,
+     "megj": 1,
+     "ctr": 0.0,
+     "poz": 17.0
+    }
+   }
+  },
+  "esküvői smink árak": {
+   "minta": "^esküvői smink árak$",
+   "cel": "/sminkes-zuglo/",
+   "osszes": {
+    "katt": 1,
+    "megj": 82,
+    "ctr": 1.2,
+    "poz": 9.3
+   },
+   "cel_urlen": {
+    "katt": 1,
+    "megj": 60,
+    "ctr": 1.7,
+    "poz": 7.3
+   },
+   "oldalankent": {
+    "/sminkes-zuglo/": {
+     "katt": 1,
+     "megj": 60,
+     "ctr": 1.7,
+     "poz": 7.3
+    },
+    "/blog/eskuvoi-smink-arak-budapest/": {
+     "katt": 0,
+     "megj": 13,
+     "ctr": 0.0,
+     "poz": 19.7
+    },
+    "/": {
+     "katt": 0,
+     "megj": 9,
+     "ctr": 0.0,
+     "poz": 7.8
+    }
+   }
+  },
+  "szempilla lifting meddig tart": {
+   "minta": "szempilla.*(meddig|mennyi ideig|tartós)",
+   "cel": "/blog/szempilla-lifting-meddig-tart/",
+   "osszes": {
+    "katt": 0,
+    "megj": 0,
+    "ctr": null,
+    "poz": null
+   },
+   "cel_urlen": {
+    "katt": 0,
+    "megj": 0,
+    "ctr": null,
+    "poz": null
+   },
+   "oldalankent": {}
+  },
+  "szempilla lifting káros": {
+   "minta": "szempilla.*(káros|karos|árt)",
+   "cel": "/blog/szempilla-lifting-karos/",
+   "osszes": {
+    "katt": 0,
+    "megj": 0,
+    "ctr": null,
+    "poz": null
+   },
+   "cel_urlen": {
+    "katt": 0,
+    "megj": 0,
+    "ctr": null,
+    "poz": null
+   },
+   "oldalankent": {}
+  },
+  "szemöldökfestés meddig tart": {
+   "minta": "szem(ö|o)ld(ö|o)k ?fest.*(meddig|mennyi ideig|tart)",
+   "cel": "/blog/szemoldokfestes-meddig-tart/",
+   "osszes": {
+    "katt": 0,
+    "megj": 0,
+    "ctr": null,
+    "poz": null
+   },
+   "cel_urlen": {
+    "katt": 0,
+    "megj": 0,
+    "ctr": null,
+    "poz": null
+   },
+   "oldalankent": {}
+  }
+ },
+ "site": {
+  "katt": 165,
+  "megj": 4671,
+  "ga_org_belepo": 103,
+  "ga_org_book_click": 38
+ }
+}
