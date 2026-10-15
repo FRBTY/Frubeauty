@@ -23,7 +23,9 @@ const blog = defineCollection({
     // klasztereket — minden cikk a saját témáján belül linkel tovább.
     // 2026-09-29: + 'Esküvői smink' (az esküvői cikkek saját ajánlatot kapnak) és
     // + 'Lézer' (az első két lézeres cikk). Minden érték kulcs az OFFERS-ben is.
-    category: z.enum(['Szempilla', 'Szemöldök', 'Arckezelés', 'Alkalmi smink', 'Esküvői smink', 'Bőrápolás', 'Lézer']),
+    // 2026-10-15: + 'Szemöldökfestés' — a festés-cikk ajánlat-doboza a 6 000 Ft-os
+    // festést mutassa, ne a 11 000 Ft-os laminálást (az OFFERS-ben 09-29 óta megvan).
+    category: z.enum(['Szempilla', 'Szemöldök', 'Szemöldökfestés', 'Arckezelés', 'Alkalmi smink', 'Esküvői smink', 'Bőrápolás', 'Lézer']),
     readingMinutes: z.number().int().positive().max(30),
     publishedAt: z.coerce.date(),
     updatedAt: z.coerce.date().optional(),

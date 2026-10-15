@@ -48,7 +48,7 @@ Egy kevés **pillaszérum** vagy ricinusolaj a szálak hosszára (a tőtől elta
 
 ## 7. Időzítsd jól a következő alkalmat
 
-A lifting addig tart, amíg a kezelt szálak a természetes ciklusukban ki nem hullanak — nagyjából **6–8 hét**. A folyamatos, szép eredményért érdemes a következő időpontot a 6. hét környékére foglalni, mielőtt az ív teljesen „kinő”.
+A lifting addig tart, amíg a kezelt szálak a természetes ciklusukban ki nem hullanak — nagyjából **6–8 hét**. A folyamatos, szép eredményért érdemes a következő időpontot a 6. hét környékére foglalni, mielőtt az ív teljesen „kinő”. Hogy miért pont ennyi, és honnan látszik, hogy ideje jönni, azt a [meddig tart a szempilla lifting](/blog/szempilla-lifting-meddig-tart/) cikkben írtam le.
 
 Egy fontos megkötés: két lifting között hagyj időt a pilláidnak — a túl gyakori ismétlés kiszáríthatja a szálakat. Egy jó szakember azt is megmondja, ha még várnod kell.
 
