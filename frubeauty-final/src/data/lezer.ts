@@ -527,6 +527,14 @@ export const faqs = [
     q: 'Le lehet mondani vagy módosítani az időpontot?',
     a: 'Igen, 24 órával az időpont előtt bármikor díjmentesen.',
   },
+  // A helyi kérdés az AI-asszisztensek miatt került be: a 2026-10-19-i panelen a
+  // „lézeres szőrtelenítés Zuglóban, hova menjek?" típusú kérdésekre a Google
+  // AI-módja azokat az oldalakat idézte, amelyek kimondják a kerületet és a
+  // megközelítést. A közlekedési adat ugyanaz, mint a SiteContact blokkban.
+  {
+    q: 'Hol van a szalon, és honnan könnyű odajutni?',
+    a: 'Zuglóban, a XIV. kerületben: 1143 Budapest, Egressy út 16. Az Örs vezér tere felől az M2-vel és a 77-es trolival 18 perc. Jár erre az 1-es villamos és a 75-ös troli is, így a Hungária körút és a Kerepesi út felől is egyszerű. Parkolni a helyszínen lehet, fizetős.',
+  },
 ];
 
 // A lézerre MÉG NINCS saját vendég-véleményem — ezek a meglévő kezelésekről
