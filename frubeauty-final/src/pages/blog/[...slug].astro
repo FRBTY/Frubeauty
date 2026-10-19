@@ -101,12 +101,20 @@ function extractFaq(body: string | undefined): { q: string; a: string }[] {
   );
   if (!section) return [];
   const pairs: { q: string; a: string }[] = [];
-  const re = /\*\*(.+?\?)\*\*\s*\n+([\s\S]*?)(?=\n\s*\n|\n\*\*|$)/g;
-  let m: RegExpExecArray | null;
-  while ((m = re.exec(section[1])) !== null) {
-    const q = stripInlineMd(m[1]);
-    const a = stripInlineMd(m[2]);
-    if (q && a) pairs.push({ q, a });
+  // Két forrásformátum, ugyanaz, mint az astro.config.mjs rehypeFaqAccordion-jében:
+  // `**Kérdés?**` + válasz-bekezdés, illetve `### Kérdés?` + a következő bekezdés
+  // (a lézer-árcikk így íródott, ezért eddig nem kapott FAQPage-schemát).
+  const patterns = [
+    /\*\*(.+?\?)\*\*\s*\n+([\s\S]*?)(?=\n\s*\n|\n\*\*|$)/g,
+    /^###\s+(.+?\?)\s*\n+([^\n#][^\n]*)/gm,
+  ];
+  for (const re of patterns) {
+    let m: RegExpExecArray | null;
+    while ((m = re.exec(section[1])) !== null) {
+      const q = stripInlineMd(m[1]);
+      const a = stripInlineMd(m[2]);
+      if (q && a) pairs.push({ q, a });
+    }
   }
   return pairs;
 }
@@ -279,12 +287,14 @@ const faqSchema =
                 href={`/blog/${p.data.slug ?? p.id}/`}
                 class="group flex flex-col h-full bg-ink border border-whisper rounded-3xl overflow-hidden md:hover:border-whisperStrong transition-colors duration-500"
               >
-                <div class="aspect-[16/10] overflow-hidden bg-inkRise">
+                {/* 2026-10-19: 16:10 helyett 4:5 / négyzet. A borítók állók (0,56–1,04),
+                    a fekvő keret félszemet és kettévágott előtte-utána képet mutatott. */}
+                <div class="aspect-[4/5] md:aspect-square overflow-hidden bg-inkRise">
                   <img
                     src={p.data.cover}
                     alt={p.data.coverAlt}
-                    width="800"
-                    height="500"
+                    width={p.data.coverWidth ?? 800}
+                    height={p.data.coverHeight ?? 1000}
                     loading="lazy"
                     class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   />
@@ -340,6 +350,69 @@ const faqSchema =
 
   <CookieBanner client:load />
 </Layout>
+
+<script>
+  // GYIK-akkordeon mozgása. A markup build időben készül (astro.config.mjs,
+  // rehypeFaqAccordion); JS nélkül a natív <details> nyit-zár. Itt csak a
+  // magasság-animáció, az egyszerre-egy-nyitva viselkedés és a mérés jön hozzá.
+  import { track } from '../../lib/track';
+
+  const DURATION = 280;
+  const EASE = 'cubic-bezier(0.2, 0.8, 0.2, 1)';
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const running = new WeakMap<HTMLDetailsElement, Animation>();
+  // A célállapot külön kell: csukás közben az `open` még igaz, és egy gyors
+  // második kattintásnak az új célt kell megfordítania, nem a régit.
+  const target = new WeakMap<HTMLDetailsElement, boolean>();
+
+  function animateTo(item: HTMLDetailsElement, open: boolean): void {
+    target.set(item, open);
+    const panel = item.querySelector<HTMLElement>('.faq-a');
+    if (!panel || reduceMotion.matches) {
+      item.open = open;
+      return;
+    }
+    // A kiinduló magasságot a futó animáció leállítása ELŐTT mérjük, különben
+    // a félúton megfordított mozgás a teljes magasságról ugrana vissza.
+    const from = item.open ? panel.offsetHeight : 0;
+    running.get(item)?.cancel();
+    if (open) item.open = true;
+    item.classList.toggle('is-opening', open);
+    const to = open ? panel.scrollHeight : 0;
+    const anim = panel.animate(
+      [{ height: `${from}px` }, { height: `${to}px` }],
+      { duration: DURATION, easing: EASE },
+    );
+    running.set(item, anim);
+    anim.onfinish = () => {
+      running.delete(item);
+      item.classList.remove('is-opening');
+      if (!open) item.open = false;
+    };
+    anim.oncancel = () => item.classList.remove('is-opening');
+  }
+
+  document.querySelectorAll<HTMLElement>('.faq-acc').forEach((group) => {
+    const items = Array.from(group.querySelectorAll<HTMLDetailsElement>('details.faq-item'));
+    items.forEach((item) => {
+      const summary = item.querySelector('summary');
+      summary?.addEventListener('click', (e) => {
+        e.preventDefault();
+        const willOpen = !(target.get(item) ?? item.open);
+        if (willOpen) {
+          items
+            .filter((o) => o !== item && (target.get(o) ?? o.open))
+            .forEach((o) => animateTo(o, false));
+          track('faq_open', {
+            question: (summary.textContent ?? '').trim().slice(0, 100),
+            page_path: location.pathname,
+          });
+        }
+        animateTo(item, willOpen);
+      });
+    });
+  });
+</script>
 
 <style is:global>
   /* ===== Prose typography for blog posts =====
@@ -508,5 +581,112 @@ const faqSchema =
     .prose-frubeauty table { font-size: 0.85em; }
     .prose-frubeauty thead th,
     .prose-frubeauty tbody td { padding: 0.55em 0.7em; }
+  }
+
+  /* ===== GYIK-akkordeon =====
+     Markup: astro.config.mjs → rehypeFaqAccordion. Mozgás: az oldal <script>-je.
+     A kérdés a cikk H2-je alatt kártyasor, a válasz a nyitáskor csúszik le;
+     a jel plusszból mínuszba fordul, a nyitott sor aranyra vált. */
+  .prose-frubeauty .faq-acc {
+    max-width: 65ch;
+    margin-block: 1.5em 2em;
+    display: grid;
+    gap: 0.625rem;
+  }
+  .prose-frubeauty .faq-item {
+    border: 1px solid rgba(245, 232, 211, 0.1);
+    border-radius: 1rem;
+    background: rgba(245, 232, 211, 0.025);
+    transition: border-color 280ms ease, background-color 280ms ease;
+  }
+  .prose-frubeauty .faq-item:hover { border-color: rgba(245, 232, 211, 0.2); }
+  .prose-frubeauty .faq-item[open] {
+    border-color: rgba(184, 136, 74, 0.45); /* gold */
+    background: rgba(184, 136, 74, 0.06);
+  }
+  .prose-frubeauty .faq-q {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.05rem 1.15rem 1.05rem 1.35rem;
+    cursor: pointer;
+    border-radius: 1rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .prose-frubeauty .faq-q::-webkit-details-marker { display: none; }
+  .prose-frubeauty .faq-q:focus-visible {
+    outline: 2px solid rgba(184, 136, 74, 0.7);
+    outline-offset: 3px;
+  }
+  .prose-frubeauty .faq-qt {
+    font-family: 'Fraunces', ui-serif, Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(1.0625rem, 1.6vw, 1.1875rem);
+    line-height: 1.35;
+    color: rgb(245 232 211); /* cream */
+    transition: color 280ms ease;
+  }
+  /* A forrásban a kérdés <strong>; a félkövért a Fraunces 500 adja, ne duplázzuk. */
+  .prose-frubeauty .faq-qt strong { font-weight: inherit; color: inherit; }
+  .prose-frubeauty .faq-item[open] .faq-qt { color: rgb(201 163 108); } /* goldSoft */
+
+  /* Plusz → mínusz: két vonal, a függőleges összecsukódik. */
+  .prose-frubeauty .faq-icon {
+    position: relative;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 999px;
+    border: 1px solid rgba(245, 232, 211, 0.22);
+    transition: background-color 280ms ease, border-color 280ms ease, transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .prose-frubeauty .faq-icon::before,
+  .prose-frubeauty .faq-icon::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 1.5px;
+    margin: -0.75px 0 0 -6px;
+    background: rgb(245 232 211);
+    border-radius: 1px;
+    transition: transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 280ms ease;
+  }
+  .prose-frubeauty .faq-icon::after { transform: rotate(90deg); }
+  .prose-frubeauty .faq-q:hover .faq-icon { border-color: rgba(184, 136, 74, 0.6); }
+  .prose-frubeauty .faq-item[open] .faq-icon {
+    background: rgb(184 136 74);
+    border-color: rgb(184 136 74);
+    transform: rotate(180deg);
+  }
+  .prose-frubeauty .faq-item[open] .faq-icon::before,
+  .prose-frubeauty .faq-item[open] .faq-icon::after { background: rgb(26 20 16); } /* ink */
+  .prose-frubeauty .faq-item[open] .faq-icon::after { transform: rotate(90deg) scaleX(0); }
+
+  .prose-frubeauty .faq-a { overflow: hidden; }
+  .prose-frubeauty .faq-a-inner {
+    padding: 0 1.35rem 1.25rem;
+    max-width: 60ch;
+  }
+  .prose-frubeauty .faq-a-inner > p { margin: 0; }
+  .prose-frubeauty .faq-a-inner > p + p { margin-top: 0.9em; }
+  /* A válasz szövege a nyitás közben enyhén felúszik — a magasságot a szkript animálja. */
+  .prose-frubeauty .faq-item.is-opening .faq-a-inner {
+    animation: faq-rise 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  @keyframes faq-rise {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .prose-frubeauty .faq-item,
+    .prose-frubeauty .faq-qt,
+    .prose-frubeauty .faq-icon,
+    .prose-frubeauty .faq-icon::before,
+    .prose-frubeauty .faq-icon::after { transition: none; }
+    .prose-frubeauty .faq-item.is-opening .faq-a-inner { animation: none; }
   }
 </style>

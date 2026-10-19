@@ -50,7 +50,8 @@ const posts = slugs
                 href={url}
                 class="flex flex-col h-full rounded-3xl overflow-hidden bg-ink border border-whisper hover:border-whisperStrong transition-colors duration-500"
               >
-                <div class="relative overflow-hidden" style="aspect-ratio: 3 / 2;">
+                {/* 2026-10-19: 3:2 helyett 4:5 — a blog-borítók állók, a fekvő keret levágta őket. */}
+                <div class="relative overflow-hidden" style="aspect-ratio: 4 / 5;">
                   <img
                     src={post.data.cover}
                     alt={post.data.coverAlt}

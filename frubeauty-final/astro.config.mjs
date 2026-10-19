@@ -99,10 +99,110 @@ function rehypeExternalLinkRel() {
   };
 }
 
+// GYIK-akkordeon: a cikkek „Gyakori kerdesek" szekciojat build idoben <details>
+// elemekke alakitja. A valasz szovege zart allapotban is a HTML-ben marad, igy a
+// Google es az AI-asszisztensek ugyanazt olvassak, mint eddig; a FAQPage-schema
+// a blog/[...slug].astro-ban a markdown-torzsbol keszul, ehhez nem nyul.
+// Ket forrasformatumot ismer:
+//   A) **Kerdes?** + valasz ugyanabban a bekezdesben (a cikkek tobbsege)
+//   B) ### Kerdes? + a kovetkezo EGY blokk a valasz (lezer-arcikk)
+// A kerdesnek nem minosulo bekezdes (pl. a zaro „Idopontot ... foglalhatsz") a
+// csoporton kivul marad. A mozgast a blog-oldal szkriptje adja; JS nelkul a natív
+// <details> mukodik.
+function rehypeFaqAccordion() {
+  const isEl = (n, tag) => n && n.type === 'element' && (!tag || n.tagName === tag);
+  const textOf = (n) =>
+    n.type === 'text' ? n.value : Array.isArray(n.children) ? n.children.map(textOf).join('') : '';
+  const isWs = (n) => n.type === 'text' && !n.value.trim();
+  const FAQ_H2 = /^(gyakori kérdések|gyik|kérdések)/i;
+
+  const item = (questionChildren, answerBlocks) => ({
+    type: 'element',
+    tagName: 'details',
+    properties: { className: ['faq-item'] },
+    children: [
+      {
+        type: 'element',
+        tagName: 'summary',
+        properties: { className: ['faq-q'] },
+        children: [
+          { type: 'element', tagName: 'span', properties: { className: ['faq-qt'] }, children: questionChildren },
+          { type: 'element', tagName: 'span', properties: { className: ['faq-icon'], ariaHidden: 'true' }, children: [] },
+        ],
+      },
+      {
+        type: 'element',
+        tagName: 'div',
+        properties: { className: ['faq-a'] },
+        children: [{ type: 'element', tagName: 'div', properties: { className: ['faq-a-inner'] }, children: answerBlocks }],
+      },
+    ],
+  });
+
+  // A) formatum: <p><strong>Kerdes?</strong>\nValasz…</p>
+  const fromStrongParagraph = (p) => {
+    const kids = p.children.filter((c) => !isWs(c));
+    const first = kids[0];
+    if (!isEl(first, 'strong') || !textOf(first).trim().endsWith('?')) return null;
+    const rest = p.children.slice(p.children.indexOf(first) + 1);
+    while (rest.length && (isWs(rest[0]) || isEl(rest[0], 'br'))) rest.shift();
+    if (rest[0] && rest[0].type === 'text') rest[0] = { ...rest[0], value: rest[0].value.replace(/^\s+/, '') };
+    if (!rest.length) return null;
+    return item(first.children, [{ type: 'element', tagName: 'p', properties: {}, children: rest }]);
+  };
+
+  return (tree) => {
+    const out = [];
+    let inFaq = false;
+    let group = null;
+    const closeGroup = () => {
+      if (group) out.push(group);
+      group = null;
+    };
+    const pushItem = (it) => {
+      if (!group) group = { type: 'element', tagName: 'div', properties: { className: ['faq-acc'] }, children: [] };
+      group.children.push(it);
+    };
+    const nodes = tree.children;
+    for (let i = 0; i < nodes.length; i++) {
+      const n = nodes[i];
+      if (isEl(n, 'h2')) {
+        closeGroup();
+        inFaq = FAQ_H2.test(textOf(n).trim());
+        out.push(n);
+        continue;
+      }
+      if (!inFaq || isWs(n)) {
+        if (!isWs(n)) closeGroup();
+        out.push(n);
+        continue;
+      }
+      if (isEl(n, 'p')) {
+        const it = fromStrongParagraph(n);
+        if (it) { pushItem(it); continue; }
+      }
+      if (isEl(n, 'h3') && textOf(n).trim().endsWith('?')) {
+        let j = i + 1;
+        while (j < nodes.length && isWs(nodes[j])) j++;
+        const ans = nodes[j];
+        if (ans && (isEl(ans, 'p') || isEl(ans, 'ul') || isEl(ans, 'ol'))) {
+          pushItem(item(n.children, [ans]));
+          i = j;
+          continue;
+        }
+      }
+      closeGroup();
+      out.push(n);
+    }
+    closeGroup();
+    tree.children = out;
+  };
+}
+
 export default defineConfig({
   site: 'https://frubeauty.com',
   markdown: {
-    rehypePlugins: [rehypeResponsiveTables, rehypeExternalLinkRel],
+    rehypePlugins: [rehypeResponsiveTables, rehypeExternalLinkRel, rehypeFaqAccordion],
   },
   // Netlify a záró slash nélküli URL-eket 301-gyel a slashes verzióra irányítja.
   // A 'always' + 'directory' formátummal a belső linkek, a sitemap és a kanonikus
