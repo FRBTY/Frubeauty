@@ -1,0 +1,195 @@
+<title>Miért áll a forgalom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Elrendezés: egy hasábos munkadokumentum; fent a mátrix (hol vagy most), alatta a bizonyíték, a teendők és a mérési terv. */
+:root{
+  --bg:#f7f5f1; --surface:#ffffff; --fg:#1d1a17; --muted:#6b645c; --line:#e3ddd4;
+  --gold:#9a7428; --gold-soft:#f1e6cf;
+  --ok:#2f6b45; --ok-bg:#e3f0e7; --mid:#8a5a0b; --mid-bg:#f6ead2; --bad:#9b2f2f; --bad-bg:#f6e0de; --na:#77716a; --na-bg:#eceae6;
+  --display:"Fraunces", Georgia, "Times New Roman", serif;
+  --body:"Inter Tight", "Segoe UI", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#171411; --surface:#211d19; --fg:#efe9e1; --muted:#a59c91; --line:#38312a;
+  --gold:#d6ad5c; --gold-soft:#3a2f1c;
+  --ok:#8fd0a5; --ok-bg:#1f3427; --mid:#e7bd6a; --mid-bg:#3a2e16; --bad:#ee9a93; --bad-bg:#3d2220; --na:#a59c91; --na-bg:#2a2622; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#171411; --surface:#211d19; --fg:#efe9e1; --muted:#a59c91; --line:#38312a;
+  --gold:#d6ad5c; --gold-soft:#3a2f1c;
+  --ok:#8fd0a5; --ok-bg:#1f3427; --mid:#e7bd6a; --mid-bg:#3a2e16; --bad:#ee9a93; --bad-bg:#3d2220; --na:#a59c91; --na-bg:#2a2622; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);padding-inline:16px;padding-block:40px 80px}
+.wrap{max-width:960px;margin:0 auto;display:grid;gap:56px}
+h1,h2,h3{font-family:var(--display);font-weight:300;text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(2rem,5vw,3rem);font-variation-settings:"opsz" 144}
+h2{font-size:clamp(1.45rem,3vw,1.9rem);font-variation-settings:"opsz" 72;margin-bottom:16px}
+h3{font-family:var(--body);font-weight:600;font-size:1rem;margin:20px 0 6px}
+p{margin:0 0 12px;max-width:68ch}
+.kicker{font:500 12px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.lede{font-size:1.1rem;color:var(--muted);max-width:62ch;margin-top:14px}
+.meta{font:12px/1.5 var(--mono);color:var(--muted);margin-top:16px}
+ol.key{margin:0;padding-left:22px;display:grid;gap:10px;max-width:72ch}
+ol.key li::marker{color:var(--gold);font-weight:600}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 11px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.num{text-align:right;white-space:nowrap}
+.chip{display:inline-block;padding:1px 8px;border-radius:999px;font:500 12px/1.6 var(--body);white-space:nowrap}
+.ok{background:var(--ok-bg);color:var(--ok)} .mid{background:var(--mid-bg);color:var(--mid)} .bad{background:var(--bad-bg);color:var(--bad)} .na{background:var(--na-bg);color:var(--na)}
+.grid td{text-align:center;font:500 13px var(--mono)} .grid td:first-child{text-align:left;font:500 13px var(--body);white-space:nowrap}
+.g1{background:var(--ok-bg);color:var(--ok)} .g2{background:var(--mid-bg);color:var(--mid)} .g3{color:var(--muted)}
+.note{font-size:13px;color:var(--muted);margin-top:10px;max-width:72ch}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px 18px;min-width:0}
+.card .big{font:300 2rem/1.1 var(--display);font-variant-numeric:tabular-nums}
+.card .lab{font-size:13px;color:var(--muted)}
+.copy{position:relative;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px;padding:14px 16px;margin:8px 0 18px;white-space:pre-wrap;font-size:15px;max-width:72ch}
+.copy button{position:absolute;top:8px;right:8px;font:500 12px var(--body);border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:4px;padding:3px 9px;cursor:pointer}
+.copy button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+a{color:var(--gold)}
+.who{font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+code{font:13px var(--mono);background:var(--gold-soft);padding:1px 5px;border-radius:3px}
+</style>
+<div class="wrap">
+
+<header>
+  <div class="kicker">GSC-audit · 2026. október 19.</div>
+  <h1>Miért áll augusztus óta a frubeauty.com forgalma</h1>
+  <p class="lede">A Search Console-adat a property indulása (május 18.) óta, napi bontásban, lekérdezés × oldal × eszköz × ország szerint. Mellette Google Trends, GA4, a Notino-foglalások, élő találati oldalak és 32 URL indexelési állapota.</p>
+  <div class="meta">Ablakok: A = 08-10 → 09-06, B = 09-17 → 10-14 · ugyanazzal a módszerrel újramérhető</div>
+</header>
+
+<section>
+  <h2>Az ítélet egy mondatban</h2>
+  <p style="font-size:1.15rem;max-width:66ch">Az organikus Google-forgalom nem stagnál: szezonálisan zsugorodó keresletben tartja a szintjét, mert a helyezések javultak. A teljes látogatottság azért esett, mert szeptember 25-én leállt a Google Ads. A növekedés plafonja az, hogy a fő kifejezésekre a weboldal csak a térképen van elöl, az organikus listában nem, és a térképről a vendég a Cégprofilra kattint, nem a weboldalra.</p>
+</section>
+
+<section>
+  <h2>Röviden</h2>
+  <ol class="key">
+    <li><strong>A látogatottság-esés a hirdetésből jön.</strong> A google/cpc heti 20–44 munkamenetről nullára esett (GA4, hozzájárulással mért). Az organikus Google ugyanebben az időben heti 39 körülről 57-re nőtt.</li>
+    <li><strong>A fő szolgáltatások kereslete nyár óta csökken.</strong> Google Trends: a „szempilla lifting” májusban 84, augusztusban 60, októberben 53; a „szemöldök laminálás” júniusban-júliusban 33, ősszel 20. Közben az átlagpozíció 7,0-ról 6,1-re javult, ezért a kattintás nem esett.</li>
+    <li><strong>A jó pozíciókon szokatlanul alacsony a CTR:</strong> az 1–3. helyen 3,3%, a 4–6. helyen 1,6%. A fő kifejezések találati oldalán az organikus lista fölött 5 hirdetés, a térképcsomag és egy videóblokk áll. A „szemöldök laminálás” organikus top 8-ában nem vagy benne, a GSC mégis 5,2-es pozíciót mér: ez a térképes megjelenésed.</li>
+    <li><strong>Márkás keresés gyakorlatilag nincs:</strong> hetente 0–17 megjelenés a „frubeauty / pecze / fruzsi” kifejezésekre. Minden látogató felfedezésből jön, ezért a forgalom a kategória-kereslettel együtt mozog.</li>
+    <li><strong>A foglalás nem stagnál.</strong> Notino: augusztusban 68, szeptemberben 81 lezárt foglalás (eddigi csúcs), október 1–18-án 41, kevesebb műszakóra mellett. A foglalás/műszakóra 0,26 → 0,32 → 0,29.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>Hetek egymás mellett</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Hét (hétfő)</th><th>GSC katt</th><th>GSC megj</th><th>Poz.</th><th>GA4 google/organic</th><th>GA4 google/cpc</th><th>GA4 összes</th></tr></thead>
+    <tbody>
+      <tr><td>08-10</td><td class="num">36</td><td class="num">1 279</td><td class="num">7,0</td><td class="num">39</td><td class="num">32</td><td class="num">92</td></tr>
+      <tr><td>08-17</td><td class="num">40</td><td class="num">1 222</td><td class="num">6,8</td><td class="num">47</td><td class="num">44</td><td class="num">111</td></tr>
+      <tr><td>08-24</td><td class="num">36</td><td class="num">1 342</td><td class="num">6,9</td><td class="num">30</td><td class="num">17</td><td class="num">62</td></tr>
+      <tr><td>08-31</td><td class="num">46</td><td class="num">1 405</td><td class="num">6,7</td><td class="num">37</td><td class="num">31</td><td class="num">87</td></tr>
+      <tr><td>09-07</td><td class="num">50</td><td class="num">1 490</td><td class="num">6,0</td><td class="num">56</td><td class="num">28</td><td class="num">139</td></tr>
+      <tr><td>09-14</td><td class="num">41</td><td class="num">1 252</td><td class="num">6,4</td><td class="num">40</td><td class="num">20</td><td class="num">110</td></tr>
+      <tr><td>09-21</td><td class="num">34</td><td class="num">1 018</td><td class="num">6,5</td><td class="num">35</td><td class="num">9</td><td class="num">75</td></tr>
+      <tr><td>09-28</td><td class="num">42</td><td class="num">1 164</td><td class="num">6,5</td><td class="num">47</td><td class="num">1</td><td class="num">86</td></tr>
+      <tr><td>10-05</td><td class="num">44</td><td class="num">1 263</td><td class="num">6,2</td><td class="num">31</td><td class="num">0</td><td class="num">55</td></tr>
+      <tr><td>10-12</td><td class="num">41*</td><td class="num">1 270*</td><td class="num">6,1</td><td class="num">57</td><td class="num">0</td><td class="num">76</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">* Az utolsó hét 2–3 napja friss, még változhat. A GA4 csak a sütikhez hozzájárulókat méri, ezért kisebb a GSC-nél. A GSC a kattintások 61–87%-át anonimizálja, vagyis a lekérdezés-szintű kép csak a kattintások negyedét mutatja.</p>
+</section>
+
+<section>
+  <h2>Kereslet, helyezés, CTR: melyik tényező áll</h2>
+  <div class="cols">
+    <div class="card"><div class="lab">Kereslet (Trends, A → B)</div><div class="big">−5…−12%</div><div class="lab">szemöldök laminálás 21 → 20, szempilla lifting 60 → 53. Májushoz képest −37%.</div></div>
+    <div class="card"><div class="lab">Helyezés (megjelenéssel súlyozva)</div><div class="big">7,0 → 6,1</div><div class="lab">A legtöbb nagy lekérdezésen javult. A „szemöldök laminálás” 8,1 → 5,2.</div></div>
+    <div class="card"><div class="lab">CTR</div><div class="big">3,3–3,6%</div><div class="lab">Hétről hétre stabil. Nem romlott, de a jó pozíciókhoz képest alacsony.</div></div>
+  </div>
+  <h3>Lekérdezés-szintű felbontás (A → B, látható lekérdezések)</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Klaszter</th><th>Megj. A</th><th>Megj. B</th><th>Stabil pozíción</th><th>Helyezés romlott</th><th>Helyezés javult</th><th>Új / elveszett</th></tr></thead>
+    <tbody>
+      <tr><td>Szemöldök</td><td class="num">831</td><td class="num">608</td><td class="num">−85</td><td class="num">−5</td><td class="num">−63</td><td class="num">+5 / −75</td></tr>
+      <tr><td>Szempilla</td><td class="num">521</td><td class="num">601</td><td class="num">−6</td><td class="num">−16</td><td class="num">+82</td><td class="num">+42 / −22</td></tr>
+      <tr><td>Smink</td><td class="num">330</td><td class="num">282</td><td class="num">−8</td><td class="num">−7</td><td class="num">−18</td><td class="num">+16 / −31</td></tr>
+      <tr><td>Arc / kozmetikus</td><td class="num">166</td><td class="num">147</td><td class="num">−23</td><td class="num">0</td><td class="num">+6</td><td class="num">+32 / −34</td></tr>
+      <tr><td>Lézer</td><td class="num">0</td><td class="num">50</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">+50 / 0</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">A „helyezés javult” oszlop negatív értéke azt jelenti, hogy a pozíció javult, a megjelenés mégis csökkent: ez a kereslet csökkenése. A legnagyobb vesztő a „szemöldök laminálás árak” (196 → 66). Ott a blogcikk és a szolgáltatás-oldal cserélgeti egymást: augusztusban a szolgáltatás-oldal heti 50 megjelenést vitt a 10. helyen, szeptember közepe óta a blogcikk viszi.</p>
+</section>
+
+<section>
+  <h2>A plafon: hol nem vagy ott</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Kifejezés</th><th>Megj. (B, 28 nap)</th><th>GSC poz.</th><th>Élő organikus top 8–10</th><th>Fölötte</th></tr></thead>
+    <tbody>
+      <tr><td>szempilla lifting (~2 400/hó)</td><td class="num">24</td><td class="num">14,5</td><td><span class="chip bad">nincs</span></td><td>5 hirdetés, térkép, videó</td></tr>
+      <tr><td>szemöldök laminálás</td><td class="num">224</td><td class="num">5,2</td><td><span class="chip bad">nincs</span> (a pozíció a térképé)</td><td>5 hirdetés, térkép, videó</td></tr>
+      <tr><td>koreai szempilla lifting</td><td class="num">397</td><td class="num">6,2</td><td><span class="chip ok">4.</span></td><td>5 hirdetés, térkép, videó</td></tr>
+      <tr><td>kozmetikus zugló</td><td class="num">44</td><td class="num">11,0</td><td><span class="chip na">most nem mértem</span></td><td>—</td></tr>
+      <tr><td>lézeres szőrtelenítés budapest</td><td class="num">11</td><td class="num">63,6</td><td><span class="chip bad">nincs</span> (GSC szerint)</td><td>—</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">A megjelenések 31%-a a 4–6., 34%-a a 7–10. pozíción jön, 2–3% körüli CTR-rel. A 08-29-i mérés szerint a helymegjelölt keresés ugyanazon a pozíción ötször jobban konvertál: a vidéki kereső hiába lát az 5. helyen, nem fog Zuglóba jönni. A GSC nem ad városbontást, ezért ez a rész közvetlenül nem mérhető.</p>
+</section>
+
+<section>
+  <h2>A beavatkozások nyoma az idősorban</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Élesítés</th><th>Ablak (nap)</th><th>Katt/nap</th><th>Megj/nap</th><th>z (kattintás)</th><th>Értelmezés</th></tr></thead>
+    <tbody>
+      <tr><td>08-15 áremelés</td><td>14/14</td><td class="num">5,1 → 5,6</td><td class="num">157 → 179</td><td class="num">0,8</td><td>nincs jel</td></tr>
+      <tr><td>09-15 négy on-page javítás</td><td>14/14</td><td class="num">7,0 → 5,3</td><td class="num">209 → 159</td><td class="num">−2,4</td><td><span class="chip mid">esés, de egybeesik a szezonnal</span></td></tr>
+      <tr><td>09-29 SEO-csomag</td><td>14/14</td><td class="num">5,3 → 6,5</td><td class="num">159 → 175</td><td class="num">2,0</td><td><span class="chip ok">emelkedés</span></td></tr>
+      <tr><td>10-07 lézer-árcikk</td><td>8/8</td><td class="num">6,1 → 6,6</td><td class="num">168 → 189</td><td class="num">0,6</td><td>korai</td></tr>
+      <tr><td>10-15 belső linkek + 3 cikk</td><td>4/1</td><td colspan="3">kevés nap</td><td>a 11-12-i utómérés dönti el</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">A 09-15-i esés nagyobb, mint a Trends szerinti keresletcsökkenés, de a látható lekérdezéseken a helyezések javultak. Az esést nagyrészt a kezdőlap anonim megjelenése viszi (604 → 455 hetente). A Cégprofil weboldal-linkje a kezdőlapra mutat, ezért ez valószínűleg a térképes megjelenés csökkenése. A kezdőlap-title visszaállítását nem javaslom: az ok nem bizonyított, és a 10-15-i mérési ablakot is megzavarná.</p>
+</section>
+
+<section>
+  <h2>Indexelés és technika</h2>
+  <p>32 URL a sitemapben. 29 indexelt, és sehol nincs eltérés a saját és a Google által választott kanonikus URL között. Az <code>/aszf/</code> „felfedezve, nem indexelve”, az <code>/adatvedelem/</code> ismeretlen: jogi oldalak, nem gond. <strong>Egy valódi hiány:</strong> a <code>/blog/szempilla-lifting-karos/</code> (10-15) a Google számára még ismeretlen.</p>
+  <p>A kódban most nincs olyan javítás, amely mérhetően mozdítaná a görbét: a 09-15-i on-page kör nem hatott, a technikai alap rendben van. Ezért ebben a körben nem nyúltam a kódhoz.</p>
+</section>
+
+<section>
+  <h2>Teendők</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>#</th><th>Mit</th><th>Miért</th><th>Ki</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Olvasd ki a Cégprofil „Teljesítmény” adatait</strong> augusztusra, szeptemberre és októberre: megjelenés a Keresőben és a Térképen, weboldal-kattintás, hívás, útvonaltervezés, foglalás.</td><td>A forgalom nagy része a térképen dől el, és ez a weboldal-statisztikában nem látszik. Enélkül nem tudjuk, hogy a kezdőlap-esés térképes visszaesés-e.</td><td><span class="who">Bence · 10 perc</span></td></tr>
+      <tr><td>2</td><td><strong>A Cégprofil weboldal-linkjét állítsd át erre:</strong> <code>https://frubeauty.com/?utm_source=google&amp;utm_medium=organic&amp;utm_campaign=cegprofil</code></td><td>Így a GA4 külön mutatja, ki jön a térképről és ki az organikus listából. A kezdőlap kanonikus címe miatt a GSC-t nem zavarja.</td><td><span class="who">Bence · 2 perc</span></td></tr>
+      <tr><td>3</td><td><strong>Súlypont a téli szolgáltatásokra: arckezelés és lézer.</strong> A 10-19-i láthatósági riport 1., 2., 5. és 6. teendője (vélemények, Bing, Salonic).</td><td>Trends: az arckezelés tavaly novembertől januárig 58, a lézer 71 volt, miközben a szempilla és a szemöldök kereslete télen tovább csökken.</td><td><span class="who">Fruzsi + Bence</span></td></tr>
+      <tr><td>4</td><td><strong>Indexelés kérése:</strong> <code>https://frubeauty.com/blog/szempilla-lifting-karos/</code></td><td>Az egyetlen ismeretlen tartalmi oldal.</td><td><span class="who">Bence · 1 perc</span></td></tr>
+      <tr><td>5</td><td><strong>Döntés a hirdetésről, ha a látogatószám a cél.</strong> A látogatás-esést a hirdetés leállása okozta, a foglalás viszont nélküle is csúcson volt szeptemberben. Ez tulajdonosi döntés, nem javaslat.</td><td>A Q4-terv szerint nem költötök hirdetésre. A szám csak azt mutatja, mennyi forgalom múlt rajta.</td><td><span class="who">tulajdonos</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="note"><strong>Tudatosan nem javaslom:</strong> újabb title- vagy H2-kört, a 09-15-i kezdőlap-title visszaállítását, új szempilla- vagy szemöldök-cikket (a kereslet télen csökken), és sebesség-optimalizálást (nincs CrUX-adat, nincs SEO-hozama).</p>
+</section>
+
+<section>
+  <h2>Mérési terv, előre rögzítve</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Mérőszám</th><th>Most (B ablak)</th><th>Siker, ha</th><th>Mikor</th><th>Forrás</th></tr></thead>
+    <tbody>
+      <tr><td>GSC kattintás/nap</td><td class="num">5,7</td><td>≥ 5,7 novemberben, miközben a szempilla-kereslet tovább esik</td><td>12-14</td><td>GSC + Trends</td></tr>
+      <tr><td>Arc + lézer látható megjelenés/nap</td><td class="num">7,0</td><td>≥ 14</td><td>12-14</td><td>GSC</td></tr>
+      <tr><td>Cégprofil-forgalom a GA4-ben</td><td>nem látszik</td><td>a „cegprofil” kampány megjelenik</td><td>a 2. teendő után 1 héttel</td><td>GA4</td></tr>
+      <tr><td>Foglalás / műszakóra</td><td class="num">0,29</td><td>≥ 0,29 novemberben</td><td>12-02</td><td>Notino</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">A 11-12-i és a 11-16-i ütemezett mérést ez a terv nem érinti: ebben a körben kódváltozás nem volt.</p>
+</section>
+
+<section>
+  <h2>Módszer és amit nem mértem</h2>
+  <p>GSC service account, 2026-05-18 → 10-18, webes keresés, a pozíció megjelenéssel súlyozva. Google Trends: HU, 12 hónap, kifejezésenként külön normalizálva, ezért csak trendet mutat, volument nem. GA4 533860004, hetente forrás szerint. Notino Partner-statisztika, csak olvasás. Élő SERP Budapestről, <code>pws=0</code>. URL Inspection mind a 32 sitemap-URL-re.</p>
+  <p><strong>Nem mértem:</strong> a Cégprofil teljesítményadatait (a csatlakoztatott böngészőből nem érhető el), a Kulcsszótervezőt (kétlépcsős azonosítás), a kép- és videókeresést, és a városbontást (a GSC nem ad ilyet).</p>
+</section>
+
+</div>
