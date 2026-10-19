@@ -1,0 +1,830 @@
+{
+ "date": "2026-10-19",
+ "method": {
+  "grid": "Google Maps (google.com/maps/search, 15z), headless Chrome, hu-HU, 9 pont × 7 kifejezés, top ~20",
+  "ai": "1 futás/prompt, kijelentkezett vagy ideiglenes munkamenet — sztochasztikus, újramérésnél 2–3 futás kell",
+  "gsc": "2026-07-19→10-17 query×page; a kattintások 75%-a anonim"
+ },
+ "gsc90": {
+  "lezer": {
+   "clicks": 3,
+   "impr": 61,
+   "pos": 25.5
+  },
+  "smink": {
+   "clicks": 19,
+   "impr": 971,
+   "pos": 9.6
+  },
+  "arc_kozmetikus": {
+   "clicks": 9,
+   "impr": 451,
+   "pos": 8.2
+  },
+  "site": {
+   "clicks": 489,
+   "impr": 16852
+  },
+  "pages": {
+   "lezer": {
+    "clicks": 4,
+    "impr": 118,
+    "pos": 19
+   },
+   "arckezeles": {
+    "clicks": 12,
+    "impr": 234,
+    "pos": 8.1
+   },
+   "sminkes": {
+    "clicks": 39,
+    "impr": 1490,
+    "pos": 7.6
+   }
+  }
+ },
+ "demand": {
+  "lezer_bp_gkp": 7330,
+  "smink_bp_gkp": 1300,
+  "trends_hu_ratio": {
+   "lezer": 1,
+   "arckezeles": 0.47,
+   "kozmetikus": 3.9
+  }
+ },
+ "grid": [
+  {
+   "kw": "lézeres szőrtelenítés",
+   "pt": "XIV Herminamező",
+   "rank": 4,
+   "top3": [
+    "Nitsch Bettina Beauty",
+    "Király Beauty-Végleges lézeres szőrtelenítés 16. kerület Baross Egészségközpont",
+    "Menta Studio"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "lézeres szőrtelenítés",
+   "pt": "XIV Bosnyák tér",
+   "rank": 5,
+   "top3": [
+    "Nitsch Bettina Beauty",
+    "Király Beauty-Végleges lézeres szőrtelenítés 16. kerület Baross Egészségközpont",
+    "Menta Studio"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "lézeres szőrtelenítés",
+   "pt": "XIII Angyalföld",
+   "rank": 0,
+   "top3": [
+    "Nitsch Bettina Beauty",
+    "Végleges Szőrtelenítés - SkinSpirit Diódalézer Szalon",
+    "Silky Beauty Stúdió"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "lézeres szőrtelenítés",
+   "pt": "VII Keleti",
+   "rank": 4,
+   "top3": [
+    "Bársony Orvos-Esztétika",
+    "Király Beauty-Végleges lézeres szőrtelenítés 16. kerület Baross Egészségközpont",
+    "Farkas Erika kozmetikus"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "lézeres szőrtelenítés",
+   "pt": "V Belváros",
+   "rank": 0,
+   "top3": [
+    "Bársony Orvos-Esztétika",
+    "Muffin Skin Lab",
+    "L'intimage Professional Waxing & Beauty Salon"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "lézeres szőrtelenítés",
+   "pt": "X Kőbánya",
+   "rank": 7,
+   "top3": [
+    "Király Beauty-Végleges lézeres szőrtelenítés 16. kerület Baross Egészségközpont",
+    "Nitsch Bettina Beauty",
+    "Menta Studio"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "lézeres szőrtelenítés",
+   "pt": "XV Rákospalota",
+   "rank": 9,
+   "top3": [
+    "Nitsch Bettina Beauty",
+    "Király Beauty-Végleges lézeres szőrtelenítés 16. kerület Baross Egészségközpont",
+    "Végleges szőrtelenítés Budapest, Újpest - Ultrahangos zsírbontás"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "intim lézeres szőrtelenítés",
+   "pt": "XIV Egressy (FRU)",
+   "rank": 3,
+   "top3": [
+    "Nitsch Bettina Beauty",
+    "Bársony Orvos-Esztétika",
+    "FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "lézeres szőrtelenítés",
+   "pt": "XVI Mátyásföld",
+   "rank": 13,
+   "top3": [
+    "Király Beauty-Végleges lézeres szőrtelenítés 16. kerület Baross Egészségközpont",
+    "Spirit Health&Beauty",
+    "Király Beauty-Végleges lézeres szőrtelenítés 16. kerület Baross Egészségközpont"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "intim lézeres szőrtelenítés",
+   "pt": "XIV Bosnyák tér",
+   "rank": 3,
+   "top3": [
+    "Király Beauty-Végleges lézeres szőrtelenítés 16. kerület Baross Egészségközpont",
+    "Nitsch Bettina Beauty",
+    "FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "intim lézeres szőrtelenítés",
+   "pt": "XIV Herminamező",
+   "rank": 3,
+   "top3": [
+    "Nitsch Bettina Beauty",
+    "Bársony Orvos-Esztétika",
+    "FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "intim lézeres szőrtelenítés",
+   "pt": "XIII Angyalföld",
+   "rank": 11,
+   "top3": [
+    "Végleges Szőrtelenítés - SkinSpirit Diódalézer Szalon",
+    "Nitsch Bettina Beauty",
+    "Végleges Szőrtelenítés - SkinSpirit Diódalézer Szalon"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "lézeres szőrtelenítés",
+   "pt": "XIV Egressy (FRU)",
+   "rank": 4,
+   "top3": [
+    "Király Beauty-Végleges lézeres szőrtelenítés 16. kerület Baross Egészségközpont",
+    "Nitsch Bettina Beauty",
+    "Menta Studio"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "intim lézeres szőrtelenítés",
+   "pt": "V Belváros",
+   "rank": 0,
+   "top3": [
+    "Nitsch Bettina Beauty",
+    "Bársony Orvos-Esztétika",
+    "L'intimage Professional Waxing & Beauty Salon"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "intim lézeres szőrtelenítés",
+   "pt": "X Kőbánya",
+   "rank": 4,
+   "top3": [
+    "Király Beauty-Végleges lézeres szőrtelenítés 16. kerület Baross Egészségközpont",
+    "Nitsch Bettina Beauty",
+    "Laser Clinic Europe SUGÁR"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "intim lézeres szőrtelenítés",
+   "pt": "XVI Mátyásföld",
+   "rank": 7,
+   "top3": [
+    "Király Beauty-Végleges lézeres szőrtelenítés 16. kerület Baross Egészségközpont",
+    "Spirit Health&Beauty",
+    "Szentmiklóssy Krisztina sminktetoválás és kozmetika Budapest"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "intim lézeres szőrtelenítés",
+   "pt": "XV Rákospalota",
+   "rank": 5,
+   "top3": [
+    "Secret Medical - Magánegészségügyi és Orvosesztétikai Központ",
+    "Király Beauty-Végleges lézeres szőrtelenítés 16. kerület Baross Egészségközpont",
+    "Végleges szőrtelenítés Budapest, Újpest - Ultrahangos zsírbontás"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "arckezelés",
+   "pt": "XIV Egressy (FRU)",
+   "rank": 3,
+   "top3": [
+    "Budapest Skincare Professzionális Arckezelések, Head Spa, Thai Massage",
+    "Farkas Erika kozmetikus",
+    "FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "arckezelés",
+   "pt": "XIV Bosnyák tér",
+   "rank": 7,
+   "top3": [
+    "FM Szépségszalon",
+    "Budapest Skincare Professzionális Arckezelések, Head Spa, Thai Massage",
+    "Beauty & Art Studio"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "intim lézeres szőrtelenítés",
+   "pt": "VII Keleti",
+   "rank": 4,
+   "top3": [
+    "Nitsch Bettina Beauty",
+    "Bársony Orvos-Esztétika",
+    "L'intimage Professional Waxing & Beauty Salon"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "arckezelés",
+   "pt": "XIV Herminamező",
+   "rank": 4,
+   "top3": [
+    "Budapest Skincare Professzionális Arckezelések, Head Spa, Thai Massage",
+    "INFUBAR Aesthetics & Healthcare Center",
+    "Vivibeauty"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "arckezelés",
+   "pt": "VII Keleti",
+   "rank": 6,
+   "top3": [
+    "Budapest Skincare Professzionális Arckezelések, Head Spa, Thai Massage",
+    "Perfect Laser - Absolute Anti Aging",
+    "Budapest Skincare Professzionális Arckezelések, Head Spa, Thai Massage"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "arckezelés",
+   "pt": "XIII Angyalföld",
+   "rank": 0,
+   "top3": [
+    "Skintim Tizenhárom",
+    "Budapest Skincare Professzionális Arckezelések, Head Spa, Thai Massage",
+    "Kozmetikai Szalon- High Care Center Arc- és Testkozmetika - 13. kerület"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "arckezelés",
+   "pt": "V Belváros",
+   "rank": 0,
+   "top3": [
+    "Dream Body & More, Elysion Pro Laser Hair Removal & LPG Anti-Cellulite Beauty Salon",
+    "INFUBAR Aesthetics & Healthcare Center",
+    "Budapest Skincare Professzionális Arckezelések, Head Spa, Thai Massage"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "arckezelés",
+   "pt": "XVI Mátyásföld",
+   "rank": 0,
+   "top3": [
+    "Budapest Skincare Professzionális Arckezelések, Head Spa, Thai Massage",
+    "Signora Szépségszalon",
+    "Szentmiklóssy Krisztina sminktetoválás és kozmetika Budapest"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "kozmetikus",
+   "pt": "XIV Egressy (FRU)",
+   "rank": 6,
+   "top3": [
+    "Farkas Erika kozmetikus",
+    "Clare Kozmetika és Szépség Stúdió",
+    "Diva Estiva Kozmetika"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "arckezelés",
+   "pt": "XV Rákospalota",
+   "rank": 0,
+   "top3": [
+    "Budapest Skincare Professzionális Arckezelések, Head Spa, Thai Massage",
+    "Elysian Skin Kozmetika",
+    "LRK-kozmetika"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "arckezelés",
+   "pt": "X Kőbánya",
+   "rank": 11,
+   "top3": [
+    "Budapest Skincare Professzionális Arckezelések, Head Spa, Thai Massage",
+    "Signora Szépségszalon",
+    "High Care Zugló Bp. XIV.kerület"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "kozmetikus",
+   "pt": "XIV Herminamező",
+   "rank": 8,
+   "top3": [
+    "Elysian Skin Kozmetika",
+    "Padma Szépségszalon",
+    "Surányi Head Spa Zugló – Head spa, vegyszermentes fodrászat, kozmetika, oxigénterápia, Nail Spa"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "kozmetikus",
+   "pt": "XIII Angyalföld",
+   "rank": 0,
+   "top3": [
+    "Skintim Tizenhárom",
+    "Full Beauty Orvos Esztétikai Szalon",
+    "Happy Beauty Skins Szépségszalon"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "kozmetikus",
+   "pt": "VII Keleti",
+   "rank": 7,
+   "top3": [
+    "Elysian Skin Kozmetika",
+    "Secret Medical - Magánegészségügyi és Orvosesztétikai Központ",
+    "Farkas Erika kozmetikus"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "kozmetikus",
+   "pt": "V Belváros",
+   "rank": 0,
+   "top3": [
+    "Padma Szépségszalon",
+    "SOS Pretty",
+    "Penelope's Beauty kozmetika"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "kozmetikus",
+   "pt": "X Kőbánya",
+   "rank": 12,
+   "top3": [
+    "Main Street Beauty & Pilates",
+    "Signora Szépségszalon",
+    "Tárnok Tünde kozmetikus, Zugló"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "kozmetikus",
+   "pt": "XVI Mátyásföld",
+   "rank": 0,
+   "top3": [
+    "Signora Szépségszalon",
+    "INFUBAR Aesthetics & Healthcare Center",
+    "HoldCsillag Kozmetika"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "kozmetikus",
+   "pt": "XIV Bosnyák tér",
+   "rank": 0,
+   "top3": [
+    "FM Szépségszalon",
+    "Megtisztulás Szalon",
+    "Beauty & Art Studio"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "kozmetikus",
+   "pt": "XV Rákospalota",
+   "rank": 0,
+   "top3": [
+    "Főnix Bio Szépségliget",
+    "Elysian Skin Kozmetika",
+    "Rabnecz Szalon"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "sminkes",
+   "pt": "XIV Herminamező",
+   "rank": 0,
+   "top3": [
+    "Hannasmink",
+    "Medgyesi Rita sminkes fodrász",
+    "Berki Viki Make-up Artist"
+   ],
+   "n": 12
+  },
+  {
+   "kw": "sminkes",
+   "pt": "XIV Egressy (FRU)",
+   "rank": 0,
+   "top3": [
+    "Hannasmink",
+    "Gold Aesthetic & Rose Hill szépségszalon",
+    "Fenes Klaudia Sminkes"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "sminkes",
+   "pt": "XIV Bosnyák tér",
+   "rank": 0,
+   "top3": [
+    "Hannasmink",
+    "FM Szépségszalon",
+    "Fenes Klaudia Sminkes"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "sminkes",
+   "pt": "XIII Angyalföld",
+   "rank": 0,
+   "top3": [
+    "Hannasmink",
+    "Beautysalon by Anna Visnyár",
+    "Sándor Ramóna - kozmetikus, sminkes"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "sminkes",
+   "pt": "X Kőbánya",
+   "rank": 0,
+   "top3": [
+    "Hannasmink",
+    "Máté Anna sminkes",
+    "Fenes Klaudia Sminkes"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "sminkes",
+   "pt": "V Belváros",
+   "rank": 0,
+   "top3": [
+    "Hannasmink",
+    "Main Street Beauty & Pilates",
+    "Professional MakeUp Artist Budapest"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "sminkes",
+   "pt": "XVI Mátyásföld",
+   "rank": 0,
+   "top3": [
+    "Hannasmink",
+    "Medgyesi Rita sminkes fodrász",
+    "Szász Alexandra - Természetes sminktetoválás"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "sminkes",
+   "pt": "VII Keleti",
+   "rank": 0,
+   "top3": [
+    "Hannasmink",
+    "Main Street Beauty & Pilates",
+    "Professional MakeUp Artist Budapest"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "esküvői smink",
+   "pt": "XIV Egressy (FRU)",
+   "rank": 3,
+   "top3": [
+    "Hannasmink",
+    "Fenes Klaudia Sminkes",
+    "FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "esküvői smink",
+   "pt": "XIV Bosnyák tér",
+   "rank": 4,
+   "top3": [
+    "Hannasmink",
+    "Patkós Alexandra Exclusive Beauty",
+    "Fenes Klaudia Sminkes"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "esküvői smink",
+   "pt": "XIV Herminamező",
+   "rank": 3,
+   "top3": [
+    "Hannasmink",
+    "Patkós Alexandra Exclusive Beauty",
+    "FRUBEAUTY – Pecze-Kovács Fruzsina Kozmetikus"
+   ],
+   "n": 18
+  },
+  {
+   "kw": "sminkes",
+   "pt": "XV Rákospalota",
+   "rank": 0,
+   "top3": [
+    "Főnix Bio Szépségliget",
+    "Hannasmink",
+    "Linda Simkó Professional Makeup Artist"
+   ],
+   "n": 18
+  },
+  {
+   "kw": "esküvői smink",
+   "pt": "XIII Angyalföld",
+   "rank": 8,
+   "top3": [
+    "Hannasmink",
+    "Máté Anna sminkes",
+    "Bridal Beauty - smink és frizura"
+   ],
+   "n": 18
+  },
+  {
+   "kw": "esküvői smink",
+   "pt": "VII Keleti",
+   "rank": 7,
+   "top3": [
+    "Hannasmink",
+    "Máté Anna sminkes",
+    "Fashion Motel - Make-up by Lili | Esküvői, alkalmi smink Budapesten"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "esküvői smink",
+   "pt": "XVI Mátyásföld",
+   "rank": 6,
+   "top3": [
+    "Hannasmink",
+    "Linda Simkó Professional Makeup Artist",
+    "Fenes Klaudia Sminkes"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "esküvői smink",
+   "pt": "XV Rákospalota",
+   "rank": 8,
+   "top3": [
+    "Linda Simkó Professional Makeup Artist",
+    "Hannasmink",
+    "Linda Simkó Professional Makeup Artist"
+   ],
+   "n": 18
+  },
+  {
+   "kw": "alkalmi smink",
+   "pt": "XIV Egressy (FRU)",
+   "rank": 6,
+   "top3": [
+    "Hannasmink",
+    "Beautysalon by Anna Visnyár",
+    "Fenes Klaudia Sminkes"
+   ],
+   "n": 18
+  },
+  {
+   "kw": "alkalmi smink",
+   "pt": "XIV Bosnyák tér",
+   "rank": 6,
+   "top3": [
+    "Hannasmink",
+    "Medgyesi Rita sminkes fodrász",
+    "Fenes Klaudia Sminkes"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "alkalmi smink",
+   "pt": "XIV Herminamező",
+   "rank": 6,
+   "top3": [
+    "Hannasmink",
+    "Main Street Beauty & Pilates",
+    "Berki Viki Make-up Artist"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "esküvői smink",
+   "pt": "X Kőbánya",
+   "rank": 6,
+   "top3": [
+    "Hannasmink",
+    "Medgyesi Rita sminkes fodrász",
+    "Fenes Klaudia Sminkes"
+   ],
+   "n": 18
+  },
+  {
+   "kw": "alkalmi smink",
+   "pt": "XIII Angyalföld",
+   "rank": 15,
+   "top3": [
+    "Hannasmink",
+    "Gold Aesthetic & Rose Hill szépségszalon",
+    "Fashion Motel - Make-up by Lili | Esküvői, alkalmi smink Budapesten"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "esküvői smink",
+   "pt": "V Belváros",
+   "rank": 0,
+   "top3": [
+    "Hannasmink",
+    "Medgyesi Rita sminkes fodrász",
+    "Liv Rideg Makeup Studio"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "alkalmi smink",
+   "pt": "V Belváros",
+   "rank": 0,
+   "top3": [
+    "Hannasmink",
+    "Tükröm Tükröm Beauty Salon",
+    "Fashion Motel - Make-up by Lili | Esküvői, alkalmi smink Budapesten"
+   ],
+   "n": 18
+  },
+  {
+   "kw": "alkalmi smink",
+   "pt": "VII Keleti",
+   "rank": 10,
+   "top3": [
+    "Hannasmink",
+    "Medgyesi Rita sminkes fodrász",
+    "Fashion Motel - Make-up by Lili | Esküvői, alkalmi smink Budapesten"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "alkalmi smink",
+   "pt": "XVI Mátyásföld",
+   "rank": 8,
+   "top3": [
+    "Hannasmink",
+    "Medgyesi Rita sminkes fodrász",
+    "Fenes Klaudia Sminkes"
+   ],
+   "n": 18
+  },
+  {
+   "kw": "alkalmi smink",
+   "pt": "X Kőbánya",
+   "rank": 7,
+   "top3": [
+    "Hannasmink",
+    "Medgyesi Rita sminkes fodrász",
+    "Fenes Klaudia Sminkes"
+   ],
+   "n": 16
+  },
+  {
+   "kw": "alkalmi smink",
+   "pt": "XV Rákospalota",
+   "rank": 10,
+   "top3": [
+    "Hannasmink",
+    "Beautysalon by Anna Visnyár",
+    "Fashion Motel - Make-up by Lili | Esküvői, alkalmi smink Budapesten"
+   ],
+   "n": 16
+  }
+ ],
+ "ai": [
+  {
+   "engine": "ChatGPT (kijelentkezve, ideiglenes)",
+   "prompt": "Hol érdemes lézeres szőrtelenítést csináltatni Budapesten? Melyik szalonokat ajánlod?",
+   "fru": null,
+   "note": "5 ajánlott: Bársony, Dr. B-ESTH, inglow, Bioskin, Heaven (Notino-link)"
+  },
+  {
+   "engine": "ChatGPT",
+   "prompt": "Zuglóban vagy a XIV. kerületben hol tudok lézeres szőrtelenítést csináltatni? Intim területre is.",
+   "fru": 1,
+   "note": "forrás: frubeauty.com/blog/lezeres-szortelenites-arak-2026; a 3. helyen Natural Beauty ugyanazon a címen, 1149, 24 000 Ft intim"
+  },
+  {
+   "engine": "ChatGPT",
+   "prompt": "Ajánlj jó kozmetikust Zuglóban arckezelésre.",
+   "fru": 1,
+   "note": "forrás: /arckezeles-zuglo/ + kezdőlap; mellette salonic.hu, notino"
+  },
+  {
+   "engine": "ChatGPT",
+   "prompt": "Ajánlj esküvői sminkest Budapesten, aki próbasminket is csinál.",
+   "fru": 2,
+   "note": "1. The Makeup Lab"
+  },
+  {
+   "engine": "ChatGPT",
+   "prompt": "Alkalmi smink Budapesten, ballagásra, hova menjek? Pest, XIV. kerület környéke.",
+   "fru": 1,
+   "note": "15 000 Ft, 76 értékelés"
+  },
+  {
+   "engine": "Google AI Mode",
+   "prompt": "hol érdemes lézeres szőrtelenítést csináltatni budapesten",
+   "fru": null,
+   "note": "9 szolgáltató: ForeverDerm, Alma Beauty, Dunaderm, IdealMed, SkinSpirit, Szabó Zsuzsi, Laser Clinic Europe, Multi Beauty, SkinVital"
+  },
+  {
+   "engine": "Google AI Mode",
+   "prompt": "lézeres szőrtelenítés zuglóban hova menjek",
+   "fru": null,
+   "note": "Zugló Orvosi Lézer Központ, FM Szépségszalon, SkinForYou"
+  },
+  {
+   "engine": "Google AI Mode",
+   "prompt": "jó kozmetikus zugló arckezelés",
+   "fru": null,
+   "note": "Zsolnay, EliteSkinCare, High Care, Molnár Vanda, Laser Clinic Europe SUGÁR, BioKozmetika"
+  },
+  {
+   "engine": "Google AI Mode",
+   "prompt": "ajánlj esküvői sminkest budapesten",
+   "fru": 5,
+   "note": "Ungvári Brigi, Juju, Makeup For Love, Szépvölgyi, FRUBEAUTY, Beauté"
+  },
+  {
+   "engine": "Perplexity (kijelentkezve)",
+   "prompt": "Lézeres szőrtelenítés Zuglóban vagy a XIV. kerületben, hova menjek?",
+   "fru": null,
+   "note": "J.Laser, Full Body Laser, SkinSpirit, Heaven…; források zuglolezer, herminabeauty, skinforyou"
+  },
+  {
+   "engine": "Perplexity",
+   "prompt": "Ajánlj jó kozmetikust Zuglóban arckezelésre",
+   "fru": "idézve, helyek közt nincs",
+   "note": "BioKozmetika (76), Vivibeauty (47)"
+  },
+  {
+   "engine": "Perplexity",
+   "prompt": "Ajánlj esküvői sminkest Budapesten",
+   "fru": null,
+   "note": "Liv Rideg, Hannasmink, Tóth Rita…"
+  },
+  {
+   "engine": "Bing",
+   "prompt": "lézeres szőrtelenítés zugló",
+   "fru": null,
+   "note": "Bing Maps adatlap létezik, DE 1149-es irányítószámmal, kategória: Szépségápolás és wellnessfürdő"
+  }
+ ]
+}
