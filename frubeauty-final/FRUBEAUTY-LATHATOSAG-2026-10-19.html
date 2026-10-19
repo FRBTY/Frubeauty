@@ -1,0 +1,219 @@
+<title>FRUBEAUTY láthatósági térkép</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Elrendezés: egy hasábos munkadokumentum; fent a mátrix (hol vagy most), alatta a bizonyíték, a teendők és a mérési terv. */
+:root{
+  --bg:#f7f5f1; --surface:#ffffff; --fg:#1d1a17; --muted:#6b645c; --line:#e3ddd4;
+  --gold:#9a7428; --gold-soft:#f1e6cf;
+  --ok:#2f6b45; --ok-bg:#e3f0e7; --mid:#8a5a0b; --mid-bg:#f6ead2; --bad:#9b2f2f; --bad-bg:#f6e0de; --na:#77716a; --na-bg:#eceae6;
+  --display:"Fraunces", Georgia, "Times New Roman", serif;
+  --body:"Inter Tight", "Segoe UI", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#171411; --surface:#211d19; --fg:#efe9e1; --muted:#a59c91; --line:#38312a;
+  --gold:#d6ad5c; --gold-soft:#3a2f1c;
+  --ok:#8fd0a5; --ok-bg:#1f3427; --mid:#e7bd6a; --mid-bg:#3a2e16; --bad:#ee9a93; --bad-bg:#3d2220; --na:#a59c91; --na-bg:#2a2622; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#171411; --surface:#211d19; --fg:#efe9e1; --muted:#a59c91; --line:#38312a;
+  --gold:#d6ad5c; --gold-soft:#3a2f1c;
+  --ok:#8fd0a5; --ok-bg:#1f3427; --mid:#e7bd6a; --mid-bg:#3a2e16; --bad:#ee9a93; --bad-bg:#3d2220; --na:#a59c91; --na-bg:#2a2622; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);padding-inline:16px;padding-block:40px 80px}
+.wrap{max-width:960px;margin:0 auto;display:grid;gap:56px}
+h1,h2,h3{font-family:var(--display);font-weight:300;text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(2rem,5vw,3rem);font-variation-settings:"opsz" 144}
+h2{font-size:clamp(1.45rem,3vw,1.9rem);font-variation-settings:"opsz" 72;margin-bottom:16px}
+h3{font-family:var(--body);font-weight:600;font-size:1rem;margin:20px 0 6px}
+p{margin:0 0 12px;max-width:68ch}
+.kicker{font:500 12px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.lede{font-size:1.1rem;color:var(--muted);max-width:62ch;margin-top:14px}
+.meta{font:12px/1.5 var(--mono);color:var(--muted);margin-top:16px}
+ol.key{margin:0;padding-left:22px;display:grid;gap:10px;max-width:72ch}
+ol.key li::marker{color:var(--gold);font-weight:600}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 11px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.num{text-align:right;white-space:nowrap}
+.chip{display:inline-block;padding:1px 8px;border-radius:999px;font:500 12px/1.6 var(--body);white-space:nowrap}
+.ok{background:var(--ok-bg);color:var(--ok)} .mid{background:var(--mid-bg);color:var(--mid)} .bad{background:var(--bad-bg);color:var(--bad)} .na{background:var(--na-bg);color:var(--na)}
+.grid td{text-align:center;font:500 13px var(--mono)} .grid td:first-child{text-align:left;font:500 13px var(--body);white-space:nowrap}
+.g1{background:var(--ok-bg);color:var(--ok)} .g2{background:var(--mid-bg);color:var(--mid)} .g3{color:var(--muted)}
+.note{font-size:13px;color:var(--muted);margin-top:10px;max-width:72ch}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px 18px;min-width:0}
+.card .big{font:300 2rem/1.1 var(--display);font-variant-numeric:tabular-nums}
+.card .lab{font-size:13px;color:var(--muted)}
+.copy{position:relative;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px;padding:14px 16px;margin:8px 0 18px;white-space:pre-wrap;font-size:15px;max-width:72ch}
+.copy button{position:absolute;top:8px;right:8px;font:500 12px var(--body);border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:4px;padding:3px 9px;cursor:pointer}
+.copy button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+a{color:var(--gold)}
+.who{font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+code{font:13px var(--mono);background:var(--gold-soft);padding:1px 5px;border-radius:3px}
+</style>
+
+<div class="wrap">
+
+<header>
+  <div class="kicker">Alapmérés · 2026. október 19.</div>
+  <h1>Hol talál meg ma a vendég: Google, térkép és AI</h1>
+  <p class="lede">Lézeres szőrtelenítés, smink és arckezelés. Kilenc budapesti pontról mért térképrangsor, 13 valódi kérdés négy AI-asszisztensnek, 90 nap nyers Search Console-adat. Mellettük a teendők sorrendje és a mérés, amivel el lehet dönteni, mi hatott.</p>
+  <div class="meta">Ág: seo/ai-lathatosag-2026-10-19 · commitok: 11ad27b9, 632616fc · nyers adat: .seo-tracker/baseline-2026-10-19-ai-terkep.json</div>
+</header>
+
+<section>
+  <h2>Röviden</h2>
+  <ol class="key">
+    <li><strong>A ChatGPT már ajánl, ha a kérdés helyhez kötött.</strong> A zuglói lézer-, a zuglói arckezelés- és a XIV. kerületi alkalmi smink-kérdésre a FRUBEAUTY az első, az esküvői sminkre budapesti szinten a második. Budapesti szintű lézer-kérdésre nem szerepelsz.</li>
+    <li><strong>A Google AI-módja a gyenge pont.</strong> Ugyanarra a zuglói lézer- és arckezelés-kérdésre téged kihagy. A webes találati listából válogat, és ott a „lézeres szőrtelenítés zugló” top 9-ében nem vagy benne. A Salonic katalógus és egyoldalas kis szalonoldalak viszont igen.</li>
+    <li><strong>A lézerben a kereslet és a láthatóság között a legnagyobb a rés.</strong> Budapesten havi kb. 7 300 lézeres keresés van, a weboldal 90 nap alatt 61 megjelenést kapott rájuk. A térképen a fő kifejezésre Zugló környékén a 3–5. helyen vagy. A 9 mért pontból egyiken sem kerülsz a top 3-ba.</li>
+    <li><strong>Ugyanazon a címen egy másik szalon is lézerez, más árakkal.</strong> A ChatGPT a „Natural Beauty Szépségszalon”-t (Egressy út 16., 1149, teljes intim 24 000 Ft) a FRUBEAUTY mellett külön ajánlja. A Bing Térképen a saját adatlapod is 1149-es irányítószámmal szerepel.</li>
+    <li><strong>A heti kattintás augusztus óta platón áll</strong> (35–50/hét). Az on-page kör ezt nem mozdította. A kar a térkép-prominencia (vélemények), a külső források, amelyekből az AI idéz, és a Bing-réteg.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>Hol vagy most: szolgáltatás × csatorna</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Kérdés típusa</th><th>Google organikus</th><th>Google Térkép (9 pont)</th><th>ChatGPT</th><th>Google AI-mód</th><th>Perplexity</th><th>Bing</th></tr></thead>
+    <tbody>
+      <tr><td>Lézer, Budapest</td><td><span class="chip bad">~60. hely</span></td><td><span class="chip mid">4–13., top 3: 0/9</span></td><td><span class="chip bad">nincs</span></td><td><span class="chip bad">nincs</span></td><td><span class="chip na">nem mért</span></td><td><span class="chip na">nem mért</span></td></tr>
+      <tr><td>Lézer, Zugló</td><td><span class="chip bad">nincs top 9</span></td><td><span class="chip mid">3–4. Zuglóban</span></td><td><span class="chip ok">1.</span></td><td><span class="chip bad">nincs</span></td><td><span class="chip bad">nincs</span></td><td><span class="chip bad">nincs</span></td></tr>
+      <tr><td>Intim lézer</td><td><span class="chip na">kevés adat</span></td><td><span class="chip ok">top 3: 3/9</span></td><td><span class="chip ok">1. (Zugló)</span></td><td><span class="chip na">nem mért</span></td><td><span class="chip na">nem mért</span></td><td><span class="chip na">nem mért</span></td></tr>
+      <tr><td>Arckezelés / kozmetikus, Zugló</td><td><span class="chip mid">10. („arckezelés zugló”)</span></td><td><span class="chip mid">3–11., kozmetikus 6–12.</span></td><td><span class="chip ok">1.</span></td><td><span class="chip bad">nincs</span></td><td><span class="chip mid">idézi, a helyek közt nincs</span></td><td><span class="chip na">nem mért</span></td></tr>
+      <tr><td>Esküvői smink, Budapest</td><td><span class="chip mid">9,7. („árak”)</span></td><td><span class="chip mid">top 3: 2/9</span></td><td><span class="chip ok">2.</span></td><td><span class="chip ok">5. a listán</span></td><td><span class="chip bad">nincs</span></td><td><span class="chip na">nem mért</span></td></tr>
+      <tr><td>Alkalmi smink</td><td><span class="chip mid">7,6–12,2.</span></td><td><span class="chip mid">6–15., top 3: 0/9</span></td><td><span class="chip ok">1. (XIV.)</span></td><td><span class="chip na">nem mért</span></td><td><span class="chip na">nem mért</span></td><td><span class="chip na">nem mért</span></td></tr>
+      <tr><td>„sminkes”</td><td><span class="chip na">—</span></td><td><span class="chip bad">nincs 9/9 ponton</span></td><td colspan="4"><span class="chip na">nem mért</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Az AI-oszlopokban promptonként egy futás van, kijelentkezett vagy ideiglenes munkamenetből. Az AI-válasz futásról futásra változik, ezért ez irány, nem pontos helyezés. Az újramérésnél promptonként 3 futás lesz.</p>
+</section>
+
+<section>
+  <h2>Kereslet és amit ebből látsz</h2>
+  <div class="cols">
+    <div class="card"><div class="lab">Lézer, budapesti keresés / hó</div><div class="big">~7 300</div><div class="lab">Kulcsszótervező (fej, dióda, árak, zónák). A weboldal 90 nap alatt: 61 megjelenés, 3 kattintás.</div></div>
+    <div class="card"><div class="lab">Smink, szolgáltatás-szándék / hó</div><div class="big">~1 300</div><div class="lab">Kulcsszótervező, „sminkes” nélkül. A weboldal 90 nap alatt: 971 megjelenés, 19 kattintás.</div></div>
+    <div class="card"><div class="lab">Arc: Trends-arány a lézerhez</div><div class="big">0,5× · 4×</div><div class="lab">„arckezelés” kb. a lézer fele, „kozmetikus” kb. négyszerese, országosan. 90 nap: 451 megjelenés, ebből az arckezelés-oldalon 4.</div></div>
+  </div>
+  <p class="note">A Kulcsszótervező most nem volt elérhető: a Google Ads kétlépcsős azonosítást kér, ezt nem állítottam be. A lézer- és smink-volumen a szeptemberi és augusztusi mérésből jön, az arcé Google Trends-arány. A Search Console a kattintások 75%-át anonimizálja (489-ből 120 látszik lekérdezés-szinten), ezért a fenti klaszterszámok alsó becslések.</p>
+</section>
+
+<section>
+  <h2>Térkép-rács: hányadik vagy az egyes pontokon</h2>
+  <div class="scroll"><table class="grid">
+    <thead><tr><th>Kifejezés</th><th>XIV Egressy</th><th>XIV Herminamező</th><th>XIV Bosnyák</th><th>VII Keleti</th><th>X Kőbánya</th><th>XV Rákospalota</th><th>XVI Mátyásföld</th><th>XIII Angyalföld</th><th>V Belváros</th></tr></thead>
+    <tbody>
+      <tr><td>lézeres szőrtelenítés</td><td class="g2">4</td><td class="g2">4</td><td class="g2">5</td><td class="g2">4</td><td class="g2">7</td><td class="g2">9</td><td class="g3">13</td><td class="g3">–</td><td class="g3">–</td></tr>
+      <tr><td>intim lézeres szőrtelenítés</td><td class="g1">3</td><td class="g1">3</td><td class="g1">3</td><td class="g2">4</td><td class="g2">4</td><td class="g2">5</td><td class="g2">7</td><td class="g3">11</td><td class="g3">–</td></tr>
+      <tr><td>arckezelés</td><td class="g1">3</td><td class="g2">4</td><td class="g2">7</td><td class="g2">6</td><td class="g3">11</td><td class="g3">–</td><td class="g3">–</td><td class="g3">–</td><td class="g3">–</td></tr>
+      <tr><td>kozmetikus</td><td class="g2">6</td><td class="g2">8</td><td class="g3">–</td><td class="g2">7</td><td class="g3">12</td><td class="g3">–</td><td class="g3">–</td><td class="g3">–</td><td class="g3">–</td></tr>
+      <tr><td>esküvői smink</td><td class="g1">3</td><td class="g1">3</td><td class="g2">4</td><td class="g2">7</td><td class="g2">6</td><td class="g2">8</td><td class="g2">6</td><td class="g2">8</td><td class="g3">–</td></tr>
+      <tr><td>alkalmi smink</td><td class="g2">6</td><td class="g2">6</td><td class="g2">6</td><td class="g3">10</td><td class="g2">7</td><td class="g3">10</td><td class="g2">8</td><td class="g3">15</td><td class="g3">–</td></tr>
+      <tr><td>sminkes</td><td class="g3">–</td><td class="g3">–</td><td class="g3">–</td><td class="g3">–</td><td class="g3">–</td><td class="g3">–</td><td class="g3">–</td><td class="g3">–</td><td class="g3">–</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Google Térkép-lista (google.com/maps, 15-ös nagyítás), hu-HU, a top ~20 találatból. Zöld: top 3, borostyán: 4–9., „–”: nincs a top ~20-ban. A Térkép-alkalmazás sorrendje rokona a keresőbeli térképcsomagnak, de nem azonos vele: 10-15-én a keresőben a lézerre 1–2. helyet mértünk. Kik nyernek: lézerre Király Beauty (16. ker.) és Nitsch Bettina, arckezelésre Budapest Skincare, sminkre Hannasmink 9/9 ponton.</p>
+</section>
+
+<section>
+  <h2>Miért itt tartasz</h2>
+  <h3>1. A prominencia a térképen és a budapesti AI-válaszokban</h3>
+  <p>A budapesti lézer-listákra kerülők 184–608 értékelésnél tartanak, és mind konkrét bizonyítékot közölnek: kezelésszám, évek, géptípus, bérlet. Neked 76 értékelésed van, és a lézer nem szerepel egyikben sem. A géptípust (Soprano Titanium, 755/808/1064 nm) az oldal már megnevezi, ezért ez nem on-page hiány.</p>
+  <h3>2. Hiányzol azokból a forrásokból, amelyekből a Google AI-mód és a Perplexity idéz</h3>
+  <p>A „lézeres szőrtelenítés zugló” top 9-ében a Salonic zuglói lézer-szűrője a 4., és csak 3 szalont mutat. Az „arckezelés zugló” listán is 4. Ugyanezt a Salonicot a ChatGPT is idézte. A 9. helyen egy Zugló Facebook-csoport bejegyzése áll.</p>
+  <h3>3. Entitás-zaj az Egressy út 16-on</h3>
+  <p>Két vállalkozás hirdet lézert ugyanazon a címen, eltérő árakkal és telefonszámmal. A Bing a te adatlapodat is 1149-es irányítószámmal tárolja (helyesen 1143). Az AI-asszisztensek ilyenkor vagy mindkettőt felsorolják, vagy egyiket sem tartják megbízhatónak.</p>
+  <h3>4. A lézeroldal nem mondta ki a kerületet</h3>
+  <p>A H1 „Budapesten” volt, Zuglót csak a szövegben említette. Ezt javítottam (lásd lent). Kis beavatkozás, és csak a helyhez kötött kérdésekre hat.</p>
+</section>
+
+<section>
+  <h2>Teendők, várható hatás szerint</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>#</th><th>Mit</th><th>Mire hat</th><th>Ki · mikor</th><th>Ráfordítás</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Lézeres véleménykérés</strong> mindenkinek, aki szeptember óta lézeren volt, és mostantól minden lézeres kezelés után. A szöveg kész: <code>FRUBEAUTY-LEZER-VELEMENYKERES-2026-10-15.md</code>.</td><td>térkép top 3 lézerre; budapesti AI-listák</td><td><span class="who">Fruzsi · most</span></td><td>10 perc/hét</td></tr>
+      <tr><td>2</td><td><strong>Bing Places</strong>: adatlap igénylése, irányítószám 1149 → 1143, kategória, szolgáltatások, leírás (szöveg lent).</td><td>Copilot, Bing-alapú ChatGPT-keresés</td><td><span class="who">Bence · e héten</span></td><td>20 perc</td></tr>
+      <tr><td>3</td><td><strong>Deploy</strong> erről az ágról, utána <code>npm run indexnow</code> és GSC-indexeléskérés a lézer- és az arckezelés-oldalra.</td><td>Google AI-mód zuglói kérdései, Bing frissesség</td><td><span class="who">Bence · e héten</span></td><td>10 perc</td></tr>
+      <tr><td>4</td><td><strong>Döntés az Egressy út 16-i két lézer-ajánlatról.</strong> Ha a naturalbeauty.hu a gép tulajdonosáé, egyeztessetek: egy ár és egy foglalási út, vagy a két oldal hivatkozzon egymásra.</td><td>AI-válaszok egyértelműsége</td><td><span class="who">Fruzsi + tulajdonos</span></td><td>1 beszélgetés</td></tr>
+      <tr><td>5</td><td><strong>Salonic-profil</strong> (lézer, arckezelés, smink, XIV. kerület), ha van naptár nélküli vagy Notino mellett vihető profil. Ha csak saját naptárral megy, a dupla naptár nem éri meg.</td><td>Google AI-mód, ChatGPT-források</td><td><span class="who">Bence · utánajárás</span></td><td>30 perc</td></tr>
+      <tr><td>6</td><td><strong>Arckezelés-véleménykérés</strong> (szöveg lent): a vendég írja le, hogy arckezelésen volt.</td><td>„kozmetikus” térkép 6–12. → top 3</td><td><span class="who">Fruzsi · minden arckezelés után</span></td><td>1 perc/vendég</td></tr>
+      <tr><td>7</td><td><strong>Bemutatkozó bejegyzés a Zugló Facebook-csoportban</strong> (szöveg lent), a csoport szabályai szerint, kedvezmény nélkül.</td><td>„lézeres szőrtelenítés zugló” SERP, helyi ismertség</td><td><span class="who">Fruzsi · egyszer</span></td><td>5 perc</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note"><strong>Tudatosan nem javaslom:</strong> kerület-oldalakat (a kerületi kifejezésekre nincs mérhető keresés), a Cégprofil-név kulcsszóval tömését a „sminkes” miatt (irányelvsértés, a smink-kapacitást amúgy is a szombat köti), további on-page kört (a 09-15-i kör mérhetően nem hatott), és Ads-költést.</p>
+</section>
+
+<section>
+  <h2>Amit a kódban elvégeztem</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Hol</th><th>Mit</th><th>Ellenőrzés</th></tr></thead>
+    <tbody>
+      <tr><td>/lezeres-szortelenites-budapest/</td><td>H1: „Lézeres szőrtelenítés Budapesten, Zuglóban — tartósan sima bőr.”</td><td>build + smoke zöld; mobilon (390 px) három sorba tör, nem csúszik szét</td></tr>
+      <tr><td>/lezeres-szortelenites-budapest/</td><td>Új GYIK: „Hol van a szalon, és honnan könnyű odajutni?”. A közlekedési adat a meglévő Megközelítés-blokkból jön, új állítás nincs benne.</td><td>a FAQPage JSON-LD-ben 15 kérdés, az új köztük</td></tr>
+      <tr><td>/arckezeles-zuglo/</td><td>Felső sor: „Kozmetikus Zuglóban · Arckezelés · 1143 Budapest”</td><td>build-kimenetben ellenőrizve</td></tr>
+      <tr><td>IndexNow</td><td><code>public/447cf…6fb9.txt</code> kulcsfájl és <code>scripts/indexnow.mjs</code> (<code>npm run indexnow</code>). A szkript előbb ellenőrzi, élesben van-e a kulcs.</td><td>még nem futott, a kulcs a deploy után lesz élő</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">A két érintett oldal nincs benne a 11-12-i organikus utómérés célkészletében (alkalmi smink, szemöldökfestés, szempilla-ár), ezért a deploy azt nem zavarja. A Motion-arányra (Notino-foglalás / book_click) egy H1 és egy GYIK-sor érdemben nem hat.</p>
+</section>
+
+<section>
+  <h2>Bemásolható szövegek</h2>
+
+  <h3>Bing Places — leírás</h3>
+  <div class="copy" id="t1">FRUBEAUTY – Pecze-Kovács Fruzsina kozmetikus egyszemélyes szalonja Budapest XIV. kerületében, Zuglóban, az Egressy út 16. szám alatt. Dióda lézeres szőrtelenítés Soprano Titanium géppel, három hullámhosszon, csak női vendégeknek, 11 000 Ft-tól alkalmanként; a sorozatot alkalmanként kell fizetni. Arckezelések Janssen Cosmetics hatóanyagokkal, bőranalízissel. Szempilla lifting, szemöldök laminálás és festés. Esküvői smink próbasminkkel, alkalmi smink. Online foglalás a Notinón, kártyaadat nélkül.<button type="button" data-copy="t1">Másolás</button></div>
+  <p class="note">Mezők: cím <strong>1143</strong> Budapest, Egressy út 16. · telefon +36 70 215 9954 · web https://frubeauty.com · elsődleges kategória: Szépségszalon, további: Kozmetikus, Szőrtelenítés, Sminkes. A nyitvatartást a Cégprofilból másold, hogy karakterre egyezzen.</p>
+
+  <h3>Véleménykérés arckezelés után</h3>
+  <div class="copy" id="t2">Köszönöm, hogy ma nálam voltál arckezelésen! Ha leírod a Google-ben, milyen kezelésen voltál és milyen volt, azzal annak segítesz, aki most keres kozmetikust: [link]
+Fruzsi<button type="button" data-copy="t2">Másolás</button></div>
+
+  <h3>Zugló Facebook-csoport — bemutatkozás</h3>
+  <div class="copy" id="t3">Sziasztok! Fruzsi vagyok, kozmetikus az Egressy út 16-ban. Szeptember óta lézeres szőrtelenítést is csinálok, Soprano Titanium dióda lézerrel, kizárólag női vendégeknek. Egyszerre egy vendéggel dolgozom, a sorozatot alkalmanként lehet fizetni, a hónalj 11 000 Ft alkalmanként.
+Ha valakinek kérdése van, hány alkalom kell, fáj-e, vagy működik-e a saját szőrére, írjon nyugodtan ide vagy üzenetben.
+Az árakat és a részleteket itt találjátok: https://frubeauty.com/lezeres-szortelenites-budapest/<button type="button" data-copy="t3">Másolás</button></div>
+  <p class="note">Csak akkor tedd ki, ha a csoport engedi a helyi vállalkozások bemutatkozását. Kedvezményt ne kínálj érte. A csoport-bejegyzés most a 9. helyen van a „lézeres szőrtelenítés zugló” keresésre, vagyis a Google ezt a fajta tartalmat ott mutatja.</p>
+</section>
+
+<section>
+  <h2>Mérési terv, előre rögzítve</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Hipotézis</th><th>Mérőszám és most</th><th>Siker, ha</th><th>Mikor</th><th>Ki igazolja</th></tr></thead>
+    <tbody>
+      <tr><td>Lézeres vélemények → térkép</td><td>top 3 a „lézeres szőrtelenítés”-re: 0/9 pont; lézert említő vélemény: 0</td><td>≥ 5 lézeres vélemény, és top 3 ≥ 3/9 ponton</td><td>11-16, majd 12-14</td><td>Google Térkép, rács-újramérés</td></tr>
+      <tr><td>Kerület-relevancia + IndexNow → AI-mód</td><td>Google AI-mód zuglói lézer- és arckezelés-kérdés: 0/2</td><td>≥ 1/2 kérdésben szerepelsz, 3 futásból legalább egyszer</td><td>12-14</td><td>promptpanel újrafuttatása tiszta munkamenetből</td></tr>
+      <tr><td>Organikus helyi lézer</td><td>„lézeres szőrtelenítés zugló”: nincs top 9</td><td>top 10</td><td>12-14</td><td>élő SERP, GSC</td></tr>
+      <tr><td>Bing-javítás</td><td>Bing Térkép irányítószám: 1149</td><td>1143, és a Bing AI a zuglói lézerre megnevez</td><td>11-16</td><td>Bing</td></tr>
+      <tr><td>Végeredmény: foglalás</td><td>okt. lezárt foglalás a Notinón (lézer és összes)</td><td>nov. lézeres lezárt foglalás &gt; okt., a kapacitás-blokkokat leszámítva</td><td>12-02</td><td>Notino-statisztika, „Honnan talált ránk?” kérdés foglaláskor</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">A 11-12-i Motion- és organikus kiértékelést ez a terv nem írja felül; az újramérés ezért 11-16-án kezdődik. Az AI-panel minden promptját háromszor kell futtatni, mert egy futás véletlen is lehet. A rács-szkript: <code>.seo-tracker/tools/terkep-grid.mjs</code>, a pontok és kifejezések a baseline-fájlban vannak.</p>
+</section>
+
+<section>
+  <h2>Módszer és amit nem mértem</h2>
+  <p><strong>Search Console:</strong> 2026-07-19 → 10-17, lekérdezés × oldal, service account. <strong>Térkép:</strong> headless Chrome, Google Térkép-lista, 9 pont × 7 kifejezés, 10-19 délelőtt. <strong>AI-panel:</strong> ChatGPT (kijelentkezve, ideiglenes csevegés), Google AI-mód (udm=50), Perplexity (kijelentkezve), Bing, promptonként 1 futás.</p>
+  <p><strong>Nem mértem:</strong> Gemini-alkalmazás, Copilot-csevegés és Siri (Apple Maps). A Kulcsszótervezőt sem, mert kétlépcsős azonosítást kér. Az Ahrefs-csomag nem ad kulcsszó- és AI-adatot („Insufficient plan”). Kérdés hozzád: a naturalbeauty.hu a lézergép tulajdonosáé? A 4. teendő ettől függ.</p>
+</section>
+
+</div>
+
+<script>
+document.querySelectorAll('[data-copy]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var box = document.getElementById(btn.getAttribute('data-copy'));
+    var text = box.innerText.replace(/Másolás$|Másolva$/,'').trim();
+    var done = function(){ btn.textContent = 'Másolva'; setTimeout(function(){ btn.textContent = 'Másolás'; }, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function(){ selectBox(box); });
+    } else { selectBox(box); }
+  });
+});
+function selectBox(box){ var r = document.createRange(); r.selectNodeContents(box); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); }
+</script>
