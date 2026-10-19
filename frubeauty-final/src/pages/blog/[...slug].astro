@@ -11,6 +11,8 @@
  * in a stylesheet bigger than the page itself; the handcrafted scope is ~80 lines.
  */
 import { getCollection, render } from 'astro:content';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import Layout from '../../layouts/Layout.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import SiteContact from '../../components/SiteContact.astro';
@@ -31,6 +33,23 @@ export async function getStaticPaths() {
 
 const { post, allPosts } = Astro.props;
 const { Content } = await render(post);
+
+// ── LCP: a borító a mobil LCP-elem (Lighthouse, 2026-10-19). A kisebb változatokat
+// a scripts/blog-cover-variants.mjs készíti; csak a ténylegesen létező fájl kerül a
+// srcset-be, így egy új cikk a szkript lefuttatása nélkül is hibátlanul renderel.
+// A sizes a borító-konténer valódi szélessége (max-w 700, px-5 / sm:px-8 / lg:px-12).
+const COVER_WIDTHS = [640, 1000];
+const coverSrcset = post.data.cover.endsWith('.webp')
+  ? [
+      ...COVER_WIDTHS.map((w) => ({ w, src: post.data.cover.replace(/\.webp$/, `-${w}w.webp`) }))
+        // A build a projektgyökérből fut; az import.meta.url itt a lefordított chunkra mutatna.
+        .filter(({ src }) => existsSync(join(process.cwd(), 'public', src))),
+      ...(post.data.coverWidth ? [{ w: post.data.coverWidth, src: post.data.cover }] : []),
+    ]
+      .map(({ w, src }) => `${src} ${w}w`)
+      .join(', ')
+  : '';
+const coverSizes = '(min-width: 1024px) 604px, (min-width: 640px) 636px, calc(100vw - 40px)';
 
 const dateFormatter = new Intl.DateTimeFormat('hu-HU', {
   year: 'numeric',
@@ -138,6 +157,9 @@ const faqSchema =
   description={post.data.metaDescription ?? post.data.excerpt}
   image={post.data.cover}
   imageAlt={post.data.coverAlt}
+  preloadImage={post.data.cover}
+  preloadImageSrcset={coverSrcset || undefined}
+  preloadImageSizes={coverSrcset ? coverSizes : undefined}
   canonical={`https://frubeauty.com/blog/${post.data.slug ?? post.id}/`}
   ogType="article"
   publishedTime={post.data.publishedAt.toISOString()}
@@ -154,7 +176,12 @@ const faqSchema =
   {/* ============ COVER + META ============ */}
   <article class="pt-[calc(var(--header-h)+1.5rem)] sm:pt-[calc(var(--header-h)+6rem)]">
     <header class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
-      <Reveal client:load as="div" distance={20}>
+      {/* 2026-10-19: a fejléc és a borító STATIKUS (.hero-reveal, csak transform),
+          nem <Reveal client:load>. A React-sziget átlátszóról indult, és a
+          borító — a mobil LCP-elem — csak hidratálás után festődött: lokálisan
+          2,4–6,6 mp Render Delay. Ugyanaz a minta, mint a szolgáltatás-oldalak
+          hero-jában (lásd Layout.astro, .hero-reveal). */}
+      <div class="hero-reveal">
         {/* flex-wrap: a „Frissítve" dátummal négy elem kerül a sorba, ami 375 px-en
             túlcsordult (nowrap mellett 352 > 335 px). Tördeléssel tisztán tör. */}
         <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] uppercase tracking-caps text-creamMute mb-6">
@@ -200,13 +227,15 @@ const faqSchema =
             <span class="text-creamMute" itemprop="jobTitle"> — kozmetikus &amp; sminkes, Zugló</span>
           </p>
         </address>
-      </Reveal>
+      </div>
     </header>
 
-    <Reveal client:load as="div" className="max-w-[700px] mx-auto px-5 sm:px-8 lg:px-12 mt-12 sm:mt-16" delay={0.1} distance={20}>
+    <div class="hero-reveal max-w-[700px] mx-auto px-5 sm:px-8 lg:px-12 mt-12 sm:mt-16">
       <div class="rounded-3xl bg-inkRise ring-1 ring-black">
         <img
           src={post.data.cover}
+          srcset={coverSrcset || undefined}
+          sizes={coverSrcset ? coverSizes : undefined}
           alt={post.data.coverAlt}
           width={post.data.coverWidth}
           height={post.data.coverHeight}
@@ -215,7 +244,7 @@ const faqSchema =
           fetchpriority="high"
         />
       </div>
-    </Reveal>
+    </div>
 
     {/* ============ BODY ============ */}
     <div class="max-w-[900px] mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-24">

@@ -20,6 +20,10 @@ export interface Props {
   /** Above-the-fold LCP image to preload. Pass undefined on text-led pages so
       we don't waste mobile bandwidth preloading an image that isn't the LCP. */
   preloadImage?: string;
+  /** Ha az LCP-kép srcset-tel jelenik meg, az előtöltésnek UGYANAZT a srcset-et
+      és sizes-t kell kapnia, különben a böngésző két különböző fájlt tölt le. */
+  preloadImageSrcset?: string;
+  preloadImageSizes?: string;
   /** Extra JSON-LD schema objects (FAQPage, Service stb.) az adott aloldalhoz.
       A Layout a <head>-ben rendereli őket a globális businessSchema után. */
   additionalSchemas?: object[];
@@ -43,6 +47,8 @@ const {
   robots = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
   includeBusinessSchema = true,
   preloadImage,
+  preloadImageSrcset,
+  preloadImageSizes,
   additionalSchemas = [],
   ogType = 'website',
   publishedTime,
@@ -309,7 +315,7 @@ const primaryGtagId = hasGoogleTag
     <meta name="theme-color" content="#1A1410" />
     {canonical && <link rel="canonical" href={canonical} />}
     {preloadImage && (
-      <link rel="preload" as="image" href={preloadImage} type={preloadImage.endsWith('.avif') ? 'image/avif' : 'image/webp'} fetchpriority="high" />
+      <link rel="preload" as="image" href={preloadImage} imagesrcset={preloadImageSrcset} imagesizes={preloadImageSizes} type={preloadImage.endsWith('.avif') ? 'image/avif' : 'image/webp'} fetchpriority="high" />
     )}
     <title>{title}</title>
     <meta name="description" content={description} />
