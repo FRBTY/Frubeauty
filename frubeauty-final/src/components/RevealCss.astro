@@ -1,0 +1,62 @@
+---
+/**
+ * Görgetésre beúszó blokk React és framer-motion NÉLKÜL (2026-10-20).
+ *
+ * Ugyanazt adja, mint a Reveal.tsx (24 px-es emelkedés + áttűnés, 0,65 s, egyszer),
+ * de egy ~0,5 KB-os szkripttel. A blogcikken a framer-motion (111 KB) KIZÁRÓLAG a
+ * Reveal-szigetek miatt töltött be, és a főszálat terhelte, amikor a borító (az LCP)
+ * már megérkezett. Mért élesben: render delay 1,9 s.
+ *
+ * Biztonság: a tartalom alapból LÁTHATÓ. Csak az a blokk rejtőzik el, ami a
+ * szkript futásakor még a képernyő alatt van — így JS nélkül, vagy ha az elem
+ * eleve látszik, semmi nem villan és semmi nem marad átlátszó.
+ */
+interface Props {
+  as?: 'div' | 'section' | 'article' | 'nav' | 'header';
+  class?: string;
+  /** Késleltetés másodpercben (a Reveal `delay` propjának megfelelője). */
+  delay?: number;
+  [key: string]: unknown;
+}
+
+const { as: Tag = 'div', class: className, delay = 0, ...rest } = Astro.props;
+---
+
+<Tag class:list={['rv', className]} style={delay ? `--rv-delay:${delay}s` : undefined} {...rest}>
+  <slot />
+</Tag>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const els = Array.from(document.querySelectorAll<HTMLElement>('.rv'));
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          e.target.classList.add('rv-in');
+          io.unobserve(e.target);
+        }
+      },
+      { rootMargin: '0px 0px -80px 0px' },
+    );
+    for (const el of els) {
+      // Ami már látszik, az marad, ahogy van — nem rejtjük el utólag.
+      if (el.getBoundingClientRect().top < window.innerHeight) continue;
+      el.classList.add('rv-wait');
+      io.observe(el);
+    }
+  }
+</script>
+
+<style is:global>
+  .rv.rv-wait {
+    transition:
+      opacity 0.65s cubic-bezier(0.23, 1, 0.32, 1) var(--rv-delay, 0s),
+      transform 0.65s cubic-bezier(0.23, 1, 0.32, 1) var(--rv-delay, 0s);
+  }
+  .rv.rv-wait:not(.rv-in) {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+</style>

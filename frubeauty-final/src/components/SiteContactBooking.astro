@@ -1,0 +1,51 @@
+---
+/** A SiteContact bal oszlopa (foglalás). Kiemelve, hogy a SiteContact React- vagy
+    CSS-burkolóval is renderelhesse ugyanazt a tartalmat — lásd SiteContact.astro. */
+import { MagneticCTA } from './MagneticCTA';
+import BookingAssurance from './BookingAssurance.astro';
+import { siteConfig } from '../config/site';
+import type { OfferCategory } from '../config/offers';
+
+interface Props {
+  heading: string;
+  eyebrow: string;
+  intro: string;
+  offer?: OfferCategory;
+}
+const { heading, eyebrow, intro, offer } = Astro.props;
+const config = { ...siteConfig };
+---
+<p class="text-[11px] uppercase tracking-caps text-gold mb-5">{eyebrow}</p>
+<h2
+  class="font-display font-light leading-[1.05] tracking-tight text-cream"
+  style="font-size: clamp(2rem, 4.5vw, 3.5rem);"
+  set:html={heading}
+/>
+<p class="mt-6 text-creamSoft text-base sm:text-lg max-w-[50ch] leading-[1.7]">
+  {intro}
+</p>
+<div class="mt-9">
+  <MagneticCTA href={config.booking} external variant="on-dark-primary">
+    Időpontot foglalok
+  </MagneticCTA>
+</div>
+
+{/* ITT VOLT az „Inkább telefonálok" gomb. 2026-09-13-án LEKERÜLT, és ne
+    kerüljön vissza gombként. A története: eredetileg tömör krém alapon,
+    „HÍVJ MOST!" felirattal állt itt, vagyis vizuálisan ERŐSEBB volt a
+    foglalásnál; onnan fokoztuk le másodlagos, körvonalas gombbá, most
+    pedig teljesen le.
+
+    AZ OK a saját mért adat: az online foglaló jobb vendég, a telefonáló
+    problémásabb, és a mért konverzió maga a Notino-kattintás. Két
+    egymás melletti gomb döntést kér a látogatótól, és aki habozik, az
+    gyakran egyiket sem nyomja meg. A lézernél ehhez még hozzájön, hogy
+    a foglalás előtt egészségügyi előszűrés fut — élőszóban ugyanazt a
+    huszonöt kizáró tételt kellene végigvenni.
+
+    A TELEFONSZÁM NEM TŰNT EL: ott van a lap alján, a 404-en, az ÁSZF-ben
+    és az adatvédelmi tájékoztatóban, tehát aki hívni akar, megtalálja.
+    Nem a lehetőséget vettük el, csak nem kínáljuk fel gombként. */}
+
+{/* Kockázat-oldó sor a foglalás gomb alatt — lásd BookingAssurance.astro. */}
+<BookingAssurance class="mt-5" offer={offer} />

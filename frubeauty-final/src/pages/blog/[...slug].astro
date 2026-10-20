@@ -20,7 +20,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
 import ArticleOffer from '../../components/ArticleOffer.astro';
 import StickyBookBar from '../../components/StickyBookBar.astro';
 import { OFFERS } from '../../config/offers';
-import { Reveal } from '../../components/Reveal';
+import RevealCss from '../../components/RevealCss.astro';
 import { CookieBanner } from '../../components/CookieBanner';
 
 export async function getStaticPaths() {
@@ -263,7 +263,7 @@ const faqSchema =
   {(prev || next) && (
     <section class="pb-16 sm:pb-24 border-t border-whisper">
       <div class="max-w-[1100px] mx-auto px-5 sm:px-8 lg:px-12 pt-12 sm:pt-16">
-        <Reveal client:visible as="nav" className="grid sm:grid-cols-2 gap-6 sm:gap-8" aria-label="Cikkek navigáció">
+        <RevealCss as="nav" class="grid sm:grid-cols-2 gap-6 sm:gap-8" aria-label="Cikkek navigáció">
           {prev ? (
             <a
               href={`/blog/${prev.data.slug ?? prev.id}/`}
@@ -286,7 +286,7 @@ const faqSchema =
               </span>
             </a>
           ) : <div aria-hidden></div>}
-        </Reveal>
+        </RevealCss>
       </div>
     </section>
   )}
@@ -295,7 +295,7 @@ const faqSchema =
   {related.length > 0 && (
     <section class="py-20 sm:py-28 bg-inkSoft">
       <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
-        <Reveal client:visible as="div" className="mb-10 sm:mb-12 flex flex-wrap items-end justify-between gap-6">
+        <RevealCss class="mb-10 sm:mb-12 flex flex-wrap items-end justify-between gap-6">
           <div>
             <p class="text-[11px] uppercase tracking-caps text-gold mb-4">Hasonló cikkek</p>
             <h2
@@ -308,10 +308,10 @@ const faqSchema =
           <a href="/blog/" class="text-[12px] uppercase tracking-caps text-creamMute hover:text-cream transition-colors">
             Összes cikk →
           </a>
-        </Reveal>
+        </RevealCss>
         <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
           {related.map((p) => (
-            <Reveal client:visible as="article">
+            <RevealCss as="article">
               <a
                 href={`/blog/${p.data.slug ?? p.id}/`}
                 class="group flex flex-col h-full bg-ink border border-whisper rounded-3xl overflow-hidden md:hover:border-whisperStrong transition-colors duration-500"
@@ -339,7 +339,7 @@ const faqSchema =
                   </h3>
                 </div>
               </a>
-            </Reveal>
+            </RevealCss>
           ))}
         </div>
       </div>
@@ -348,6 +348,7 @@ const faqSchema =
 
   {/* ============ KAPCSOLAT / FOGLALÁS ============ */}
   <SiteContact
+    cssReveal
     offer={post.data.category}
     eyebrow="Foglalás"
     heading={'Készen állsz a <em class="display">személyes</em> változásra?'}
