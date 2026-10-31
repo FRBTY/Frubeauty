@@ -1,0 +1,389 @@
+{
+ "date": "2026-10-31",
+ "window": "2026-09-12..2026-10-30",
+ "method": "GSC API (service account) + élő Google SERP a beépített böngészőből (Zugló IP, desktop) + GKP-export 2026-08-18",
+ "gsc": {
+  "pages": [
+   {
+    "page": "https://frubeauty.com/blog/lezeres-szortelenites-hany-alkalom/",
+    "clicks": 7,
+    "impr": 352,
+    "pos": 5
+   },
+   {
+    "page": "https://frubeauty.com/lezeres-szortelenites-budapest/",
+    "clicks": 5,
+    "impr": 143,
+    "pos": 19.5
+   },
+   {
+    "page": "https://frubeauty.com/blog/lezeres-szortelenites-arak-2026/",
+    "clicks": 0,
+    "impr": 226,
+    "pos": 6.7
+   },
+   {
+    "page": "https://frubeauty.com/blog/lezeres-szortelenites-vagy-gyantazas/",
+    "clicks": 0,
+    "impr": 48,
+    "pos": 7
+   }
+  ],
+  "pages_oct": [
+   {
+    "page": "https://frubeauty.com/blog/lezeres-szortelenites-hany-alkalom/",
+    "clicks": 5,
+    "impr": 343,
+    "pos": 5
+   },
+   {
+    "page": "https://frubeauty.com/lezeres-szortelenites-budapest/",
+    "clicks": 3,
+    "impr": 71,
+    "pos": 25.5
+   },
+   {
+    "page": "https://frubeauty.com/blog/lezeres-szortelenites-arak-2026/",
+    "clicks": 0,
+    "impr": 226,
+    "pos": 6.7
+   },
+   {
+    "page": "https://frubeauty.com/blog/lezeres-szortelenites-vagy-gyantazas/",
+    "clicks": 0,
+    "impr": 47,
+    "pos": 6.9
+   }
+  ],
+  "query_page": [
+   {
+    "q": "budapest lézeres szőrtelenítés",
+    "page": "/",
+    "c": 1,
+    "i": 1,
+    "p": 2
+   },
+   {
+    "q": "dióda lézeres szőrtelenítés hány alkalom",
+    "page": "/blog/lezeres-szortelenites-hany-alkalom/",
+    "c": 1,
+    "i": 6,
+    "p": 7.7
+   },
+   {
+    "q": "lézeres szőrtelenítés",
+    "page": "/",
+    "c": 1,
+    "i": 15,
+    "p": 2.8
+   },
+   {
+    "q": "lézeres szőrtelenítés hány alkalom",
+    "page": "/blog/lezeres-szortelenites-hany-alkalom/",
+    "c": 1,
+    "i": 7,
+    "p": 7.1
+   },
+   {
+    "q": "bikini",
+    "page": "/lezeres-szortelenites-budapest/",
+    "c": 0,
+    "i": 1,
+    "p": 3
+   },
+   {
+    "q": "bikinivonal lézeres szőrtelenítés",
+    "page": "/",
+    "c": 0,
+    "i": 1,
+    "p": 2
+   },
+   {
+    "q": "budapest lézeres szőrtelenítés",
+    "page": "/lezeres-szortelenites-budapest/",
+    "c": 0,
+    "i": 1,
+    "p": 66
+   },
+   {
+    "q": "diodalezeres szortelenites",
+    "page": "/lezeres-szortelenites-budapest/",
+    "c": 0,
+    "i": 1,
+    "p": 78
+   },
+   {
+    "q": "dióda lézeres szőrtelenítés",
+    "page": "/",
+    "c": 0,
+    "i": 4,
+    "p": 3.8
+   },
+   {
+    "q": "dióda lézeres szőrtelenítés budapest",
+    "page": "/",
+    "c": 0,
+    "i": 3,
+    "p": 1.3
+   },
+   {
+    "q": "dióda lézeres szőrtelenítés ára",
+    "page": "/blog/lezeres-szortelenites-arak-2026/",
+    "c": 0,
+    "i": 3,
+    "p": 1
+   },
+   {
+    "q": "dióda lézeres szőrtelenítés árak",
+    "page": "/blog/lezeres-szortelenites-arak-2026/",
+    "c": 0,
+    "i": 6,
+    "p": 1
+   },
+   {
+    "q": "elysion pro lézeres szőrtelenítés",
+    "page": "/",
+    "c": 0,
+    "i": 1,
+    "p": 5
+   },
+   {
+    "q": "intim lézeres szőrtelenítés",
+    "page": "/",
+    "c": 0,
+    "i": 1,
+    "p": 2
+   },
+   {
+    "q": "intim szortelenites",
+    "page": "/",
+    "c": 0,
+    "i": 1,
+    "p": 3
+   },
+   {
+    "q": "intim szörtelenítés",
+    "page": "/",
+    "c": 0,
+    "i": 1,
+    "p": 2
+   },
+   {
+    "q": "intim szőrtelenítés",
+    "page": "/",
+    "c": 0,
+    "i": 4,
+    "p": 3.8
+   },
+   {
+    "q": "lezeres szortelenites budapest",
+    "page": "/lezeres-szortelenites-budapest/",
+    "c": 0,
+    "i": 1,
+    "p": 79
+   },
+   {
+    "q": "lézeres arckezelés",
+    "page": "/",
+    "c": 0,
+    "i": 1,
+    "p": 3
+   },
+   {
+    "q": "lézeres szőrtelenítés",
+    "page": "/blog/lezeres-szortelenites-hany-alkalom/",
+    "c": 0,
+    "i": 5,
+    "p": 5.6
+   },
+   {
+    "q": "lézeres szőrtelenítés",
+    "page": "/rolam/",
+    "c": 0,
+    "i": 2,
+    "p": 2.5
+   },
+   {
+    "q": "lézeres szőrtelenítés budapest",
+    "page": "/",
+    "c": 0,
+    "i": 1,
+    "p": 1
+   },
+   {
+    "q": "lézeres szőrtelenítés budapest",
+    "page": "/lezeres-szortelenites-budapest/",
+    "c": 0,
+    "i": 15,
+    "p": 64.4
+   },
+   {
+    "q": "lézeres szőrtelenítés hány alkalom szükséges",
+    "page": "/blog/lezeres-szortelenites-hany-alkalom/",
+    "c": 0,
+    "i": 2,
+    "p": 21
+   },
+   {
+    "q": "lézeres szőrtelenítés hány éves kortól",
+    "page": "/blog/lezeres-szortelenites-hany-alkalom/",
+    "c": 0,
+    "i": 1,
+    "p": 27
+   },
+   {
+    "q": "lézeres szőrtelenítés mellékhatásai",
+    "page": "/blog/lezeres-szortelenites-hany-alkalom/",
+    "c": 0,
+    "i": 1,
+    "p": 5
+   },
+   {
+    "q": "lézeres szőrtelenítés tanácsadás budapest",
+    "page": "/lezeres-szortelenites-budapest/",
+    "c": 0,
+    "i": 4,
+    "p": 74.3
+   },
+   {
+    "q": "lézeres szőrtelenítés ár",
+    "page": "/blog/lezeres-szortelenites-arak-2026/",
+    "c": 0,
+    "i": 1,
+    "p": 25
+   },
+   {
+    "q": "lézeres szőrtelenítés ára",
+    "page": "/blog/lezeres-szortelenites-arak-2026/",
+    "c": 0,
+    "i": 3,
+    "p": 23
+   },
+   {
+    "q": "lézeres szőrtelenítés árak",
+    "page": "/",
+    "c": 0,
+    "i": 1,
+    "p": 3
+   },
+   {
+    "q": "lézeres szőrtelenítés árak",
+    "page": "/blog/lezeres-szortelenites-arak-2026/",
+    "c": 0,
+    "i": 13,
+    "p": 21.2
+   },
+   {
+    "q": "mennyibe kerül a lézeres szőrtelenítés",
+    "page": "/blog/lezeres-szortelenites-arak-2026/",
+    "c": 0,
+    "i": 4,
+    "p": 10
+   },
+   {
+    "q": "mennyibe kerül a végleges szőrtelenítés",
+    "page": "/blog/lezeres-szortelenites-arak-2026/",
+    "c": 0,
+    "i": 1,
+    "p": 1
+   },
+   {
+    "q": "tartós szőrtelenítés árak",
+    "page": "/blog/lezeres-szortelenites-arak-2026/",
+    "c": 0,
+    "i": 1,
+    "p": 25
+   },
+   {
+    "q": "végleges lézeres szőrtelenítés árak",
+    "page": "/blog/lezeres-szortelenites-arak-2026/",
+    "c": 0,
+    "i": 1,
+    "p": 12
+   },
+   {
+    "q": "végleges lézeres szőrtelenítés árak",
+    "page": "/lezeres-szortelenites-budapest/",
+    "c": 0,
+    "i": 1,
+    "p": 78
+   },
+   {
+    "q": "végleges szőrtelenítés",
+    "page": "/blog/lezeres-szortelenites-hany-alkalom/",
+    "c": 0,
+    "i": 1,
+    "p": 4
+   },
+   {
+    "q": "végleges szőrtelenítés budapest",
+    "page": "/lezeres-szortelenites-budapest/",
+    "c": 0,
+    "i": 3,
+    "p": 56.7
+   },
+   {
+    "q": "végleges szőrtelenítés ára",
+    "page": "/blog/lezeres-szortelenites-arak-2026/",
+    "c": 0,
+    "i": 1,
+    "p": 7
+   },
+   {
+    "q": "végleges szőrtelenítés árak",
+    "page": "/blog/lezeres-szortelenites-arak-2026/",
+    "c": 0,
+    "i": 2,
+    "p": 26.5
+   },
+   {
+    "q": "végleges szőrtelenítés árak",
+    "page": "/lezeres-szortelenites-budapest/",
+    "c": 0,
+    "i": 1,
+    "p": 58
+   }
+  ]
+ },
+ "serp": {
+  "lézeres szőrtelenítés budapest": {
+   "organic": [
+    "everdermlaser.hu/lezeres-szortelenites",
+    "barsony.hu/kezeles/vegleges-lezeres-szortelenites",
+    "aesthetica.hu/kezeleseink/lezeres-szortelenites",
+    "lezeresszortelenitesbudapest.hu",
+    "almabeauty.hu",
+    "inspiramedical.hu/szortelenites",
+    "idealmed.hu/lezeres-szortelenites",
+    "plumeriaszalon.hu",
+    "beprettystudio.hu",
+    "silkybeauty.hu"
+   ],
+   "fru_organic": "nincs a top 30-ban",
+   "fru_local": 3
+  },
+  "lézeres szőrtelenítés": {
+   "fru_local": 1
+  },
+  "lézeres szőrtelenítés árak": {
+   "fru_local": 2
+  },
+  "dióda lézeres szőrtelenítés budapest": {
+   "fru_local": null
+  },
+  "végleges szőrtelenítés budapest": {
+   "fru_local": null
+  },
+  "intim lézeres szőrtelenítés": {
+   "fru_local": null,
+   "fru_any": true
+  }
+ },
+ "title_change": {
+  "from": "Dióda lézeres szőrtelenítés Budapest – 11.000 Ft-tól",
+  "to": "Végleges dióda lézeres szőrtelenítés Budapest – 11.000 Ft-tól",
+  "commit": "1836ad86",
+  "deployed": false
+ },
+ "remeasure": "2026-12-01"
+}
