@@ -90,7 +90,7 @@ repóból nem látszik.** Ez a három a legnagyobb kar, ellenőrizd őket.
 
 ## 6. Kódváltozás
 
-Ág: `seo/lezer-vegleges-title-2026-10-31`, commit `1836ad86`. **Nincs deployolva.**
+Ág: `seo/lezer-vegleges-title-2026-10-31`, commit `1836ad86`. **Élesben 2026-10-31 15:26** (Netlify deploy `6ae5fa59`; az élő title visszaellenőrizve, IndexNow 200, sitemap újraküldve a GSC-be).
 
 - title: `Dióda lézeres szőrtelenítés Budapest – 11.000 Ft-tól` → **`Végleges dióda lézeres szőrtelenítés Budapest – 11.000 Ft-tól`**
 - build ✅, `seo:smoke` ✅ (33 oldal).
