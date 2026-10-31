@@ -72,6 +72,11 @@ A lézerre a mai adat az ellenkezőjét mutatja. **A kettő egyszerre nem lehet 
 
 Kockázat: a kategóriaváltás után a Google néha újraellenőrzést kér, ilyenkor a profil pár napig „függő” állapotba kerülhet.
 
+**A TESZT ELINDULT 2026-10-31 ~16:10.** Elsődleges: Lézeres szőrtelenítés; másodlagos: Kozmetikus, Szemöldökszalon,
+Szempillaszalon, Sminkmester, Szépségszalon. A Google percek alatt jóváhagyta, a Térkép-adatlap már az új kategóriát mutatja.
+Előtte: elsődleges Szépségszalon; másodlagos Kozmetikus, Szemöldökszalon, Szempillaszalon, Sminkmester, Lézeres szőrtelenítés.
+Újramérés ütemezve: **11-14** (2 hét, előzetes) és **11-28** (4 hét, döntés). A visszaállítás a user jóváhagyásával történik.
+
 #### A teszt nullpontja (lemérve 2026-10-31, `.seo-tracker/grid-2026-10-31-kozmetika-26pont.json`)
 
 | Kulcsszó | FRU 1. hely | FRU top 3 | FRU a listán | **Visszaállítás, ha a top 3 ez alá esik** |
