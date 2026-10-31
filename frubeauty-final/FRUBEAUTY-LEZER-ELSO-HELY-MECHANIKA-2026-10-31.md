@@ -72,6 +72,31 @@ A lézerre a mai adat az ellenkezőjét mutatja. **A kettő egyszerre nem lehet 
 
 Kockázat: a kategóriaváltás után a Google néha újraellenőrzést kér, ilyenkor a profil pár napig „függő” állapotba kerülhet.
 
+#### A teszt nullpontja (lemérve 2026-10-31, `.seo-tracker/grid-2026-10-31-kozmetika-26pont.json`)
+
+| Kulcsszó | FRU 1. hely | FRU top 3 | FRU a listán | **Visszaállítás, ha a top 3 ez alá esik** |
+|---|---|---|---|---|
+| lézeres szőrtelenítés | 1 | 6 | 19 | (cél: nő) |
+| lézeres szőrtelenítés budapest | 1 | 11 | 22 | (cél: nő) |
+| intim lézeres szőrtelenítés | 4 | 12 | 25 | (cél: nő) |
+| szempilla lifting | 2 | 5 | 16 | **4** |
+| szemöldök laminálás | 5 | **15** | 23 | **12** |
+| kozmetikus zugló | 0 | 0 | 0 | (lásd lent) |
+
+A szemöldök laminálás a legérzékenyebb pont, mert ott a FRU már most erős (15/26 top 3, a top 3-helyek 95%-a „Szépségszalon”).
+
+#### Azonos címen két „Szépségszalon”: a Natural Beauty Kft.
+
+A **Natural Beauty Kft.** ugyanazon a címen (Egressy út 16.) ugyanazzal a „Szépségszalon” kategóriával szerepel. A 4 kulcsszó
+104 mért cellájából **egyikben sem jelenik meg a FRU-val együtt**:
+- a „kozmetikus zugló”-ra 15 pontban a Natural Beauty van bent, a FRU egyikben sem, a saját címén sem;
+- a szempilla-, szemöldök- és lézerkulcsszavakra a FRU van bent, a Natural Beauty sehol.
+
+Ez a Google azonos-cím szűrőjére utal: egy címről, egy kategóriában csak az egyik cég jelenik meg. A „kozmetikus zugló” 69. helye
+(GSC) ezzel magyarázható, nem a szöveggel. **Ez a kategóriateszt mellett szól:** ha a FRU elsődleges kategóriája eltér a
+Natural Beautyétól, a két profil kevésbé „ütközik”. A teszt ezt is megmutatja a „kozmetikus zugló” soron.
+Nyitott kérdés a 10-19-i mérésből: a Natural Beauty a lézergép tulajdonosáé? Ha igen, a két profil viszonyát vele együtt érdemes rendezni.
+
 ### 2. Cím, attribútum, Névjegy (5 perc, nincs kockázat)
 
 - **Cím:** a Cégprofilban ellenőrizd az irányítószámot. A Posta szerint 1143, a Térkép 1149-et mutat. Ha a mezőben 1143 áll, és
