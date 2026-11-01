@@ -227,6 +227,12 @@ const faqSchema =
             <span class="text-creamMute" itemprop="jobTitle"> — kozmetikus &amp; sminkes, Zugló</span>
           </p>
         </address>
+        {/* A cikk témájához tartozó szolgáltatás + ár, mielőtt olvasni kezd.
+            A mért probléma: a blogról érkező organikus látogatók 12%-a jut el a
+            foglalásig, a szolgáltatás-oldalakról 80% (GA4, 2026-08).
+            2026-11-01: a borító FÖLÉ került, mert az álló borító (1200×1800)
+            mobilon a második-harmadik képernyőre tolta (MiroFish + leltár). */}
+        <div class="mt-8"><ArticleOffer category={post.data.category} variant="slim" /></div>
       </div>
     </header>
 
@@ -248,10 +254,6 @@ const faqSchema =
 
     {/* ============ BODY ============ */}
     <div class="max-w-[900px] mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-24">
-      {/* A cikk témájához tartozó szolgáltatás + ár, mielőtt olvasni kezd.
-          A mért probléma: a blogról érkező organikus látogatók 12%-a jut el a
-          foglalásig, a szolgáltatás-oldalakról 80% (GA4, 2026-08). */}
-      <ArticleOffer category={post.data.category} variant="slim" />
       <div class="prose-frubeauty">
         <Content />
       </div>
