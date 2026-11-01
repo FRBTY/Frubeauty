@@ -219,8 +219,10 @@ const homepageFaqSchema = {
           Kozmetikus <em class="display">Zuglóban</em>.
         </h1>
         <p class="hero-rise hero-d2 mt-6 sm:mt-8 text-base sm:text-lg text-creamSoft max-w-[58ch] mx-auto leading-[1.65] sm:leading-[1.7]">
-          Kozmetikus és sminkes Zuglóban, a XIV. kerületi Egressy úton — személyre szabott arckezelés, tartós szempilla- és szemöldökkezelés, alkalmi smink. Egyszerre egy vendéggel, teljes figyelemmel.
+          Szemöldök laminálás 11 000 Ft, szempilla lifting 12 000 Ft, arckezelés 16 000 Ft-tól, lézeres szőrtelenítés 7 000 Ft-tól. A XIV. kerületi Egressy úton, egyszerre egy vendéggel.
         </p>
+        {/* 2026-11-01, MiroFish + súrlódás-leltár: az új látogató első kérdése az ár,
+            ezért az alcím árakat mond a szolgáltatás-felsorolás helyett. */}
 
         {/* Static CTAs — no JS, no hydration. */}
         <div class="hero-rise hero-d3 mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
@@ -243,6 +245,9 @@ const homepageFaqSchema = {
         {/* A három leggyakoribb utolsó kifogás közvetlenül a gomb alatt, nem a
             lehajtható GYIK-ben — lásd BookingAssurance.astro. */}
         <BookingAssurance class="mt-6 hero-soft" align="center" />
+        {/* A szimulált látogatók 3/3 futásban azt kérdezték, milyen gyorsan kapnak
+            időpontot; erre egy valódi Google-vélemény felel. */}
+        <p class="hero-soft mt-4 text-[13px] text-creamSoft italic">„Szinte azonnal kaptam időpontot.” <span class="not-italic text-creamMute">— Zsuzsanna, Google</span></p>
 
         <div class="hero-soft mt-8 sm:mt-9 flex items-center justify-center gap-5 text-[12px] uppercase tracking-caps text-creamMute">
           <a href={config.instagram} target="_blank" rel="noopener" class="inline-flex items-center gap-2 hover:text-gold transition-colors duration-200" aria-label="Instagram">
