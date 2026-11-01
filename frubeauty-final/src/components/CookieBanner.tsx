@@ -16,6 +16,8 @@ const CONSENT_KEY = 'frubeauty_cookie_consent_v1';
  *  - Mobile: full-width bar anchored to the very bottom edge (bottom-0, rounded-t-2xl)
  *    so it sits below viewport content and cannot overlap hero CTA buttons.
  *  - Desktop (sm+): compact card, bottom-right corner.
+ *  - 2026-11-01: mobilon rövid szöveg + kisebb padding, mert a sáv a hero alsó
+ *    negyedét takarta mind a 4 belépő oldalon. A consent-logika változatlan.
  *
  * Consent wiring: on every decision this dispatches a `cookie-consent`
  * CustomEvent (detail: 'all' | 'essential'). The inline gtag script in
@@ -64,15 +66,15 @@ export function CookieBanner() {
           aria-describedby="cookie-banner-body"
           /* Mobile: full-width bottom bar, flush to screen edge — cannot overlap content above.
              Desktop (sm+): compact card anchored bottom-right, away from page CTAs. */
-          className="fixed bottom-0 inset-x-0 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-md sm:rounded-2xl z-[60] bg-inkRise text-creamSoft border border-whisperStrong rounded-t-2xl shadow-[0_-8px_40px_-10px_rgba(0,0,0,0.5)] sm:shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)] px-5 py-5 sm:p-6"
+          className="fixed bottom-0 inset-x-0 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-md sm:rounded-2xl z-[60] bg-inkRise text-creamSoft border border-whisperStrong rounded-t-2xl shadow-[0_-8px_40px_-10px_rgba(0,0,0,0.5)] sm:shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)] px-4 py-3 sm:p-6"
         >
-          <p id="cookie-banner-body" className="text-sm leading-relaxed text-creamSoft/90">
-            Weboldalunk működéséhez elengedhetetlen, valamint a látogatottság elemzéséhez és a hirdetéseink optimalizálásához statisztikai és marketing sütiket használunk. Az „Összes elfogadása” gombbal hozzájárulsz az adatok feldolgozásához. A beállításaidat bármikor módosíthatod.{' '}
+          <p id="cookie-banner-body" className="text-[13px] sm:text-sm leading-snug sm:leading-relaxed text-creamSoft/90">
+            Statisztikai és marketing sütiket csak a hozzájárulásoddal használunk, a döntésedet bármikor módosíthatod.{' '}
             <a href="/adatvedelem/" className="underline underline-offset-2 hover:text-gold transition-colors">
               Részletek
             </a>
           </p>
-          <div className="mt-4 flex flex-row gap-2">
+          <div className="mt-3 sm:mt-4 flex flex-row gap-2">
             <button
               type="button"
               onClick={() => decide('all')}
