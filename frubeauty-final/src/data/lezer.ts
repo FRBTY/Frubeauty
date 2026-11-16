@@ -583,6 +583,10 @@ export const faqSchema = {
   })),
 };
 
+/* A jelenlegi lézerárak utolsó érvényes napja: 2027-03-01-től új árlista él
+   (FRUBEAUTY-ARAZAS-2027.md). Árcserekor ezt a dátumot is léptetni kell. */
+const PRICE_VALID_UNTIL = '2027-02-28';
+
 export const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
@@ -597,15 +601,28 @@ export const serviceSchema = {
     { '@type': 'City', name: 'Budapest' },
     { '@type': 'AdministrativeArea', name: 'Zugló' },
   ],
-  offers: {
-    '@type': 'AggregateOffer',
-    priceCurrency: 'HUF',
-    lowPrice: '7000',
-    highPrice: '378000',
-    offerCount: '8',
-    availability: 'https://schema.org/InStock',
-    priceValidUntil: '2026-12-31',
-  },
+  /* Alkalmankénti árak, tételenként. Korábban egyetlen AggregateOffer állt itt,
+     ami az alkalmi zónaárat (7 000 Ft) és a hatalkalmas csomag teljes árát
+     (378 000 Ft) egy sávba keverte. A lista a `zones` és a `packages` tömbből
+     épül, árváltozáskor ide nem kell nyúlni, csak a dátumhoz. */
+  offers: [
+    ...zones.map((z) => ({
+      '@type': 'Offer',
+      name: `${z.tag} zóna, sorozatban alkalmanként: ${z.areas.split(' · ').join(', ')}`,
+      price: String(z.serialNum),
+      priceCurrency: 'HUF',
+      availability: 'https://schema.org/InStock',
+      priceValidUntil: PRICE_VALID_UNTIL,
+    })),
+    ...packages.map((p) => ({
+      '@type': 'Offer',
+      name: `${p.title} ${p.titleAccent} csomag, alkalmanként: ${p.contains}`,
+      price: p.perVisit.replace(/\D/g, ''),
+      priceCurrency: 'HUF',
+      availability: 'https://schema.org/InStock',
+      priceValidUntil: PRICE_VALID_UNTIL,
+    })),
+  ],
 };
 
 export const howToSchema = {

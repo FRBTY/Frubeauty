@@ -499,8 +499,30 @@ const primaryGtagId = hasGoogleTag
           } catch (e) {}
         }
         // Online foglalási szándék — Notino-linkre kattintás.
-        function fireEvents() {
-          try { if (window.gtag) window.gtag('event', 'book_click', { event_category: 'cta', event_label: pathSegment() }); } catch (e) {}
+        // Melyik CTA-ról indult a foglalás: ragadós sáv, megjelölt szekció
+        // (`data-track-section`), fejléc vagy lábléc.
+        function ctaLocation(el) {
+          if (el.closest('#sticky-book')) return 'sticky';
+          var sec = el.closest('[data-track-section]');
+          if (sec) return sec.getAttribute('data-track-section') || 'egyeb';
+          if (el.closest('header')) return 'fejlec';
+          if (el.closest('footer')) return 'lablec';
+          return 'egyeb';
+        }
+        // A lézeres oldalon az előszűrő panel (`data-fb-screening`) elkapja az
+        // első kattintást, a book_click csak a panel saját linkjén megy ki.
+        // Ezért az eredeti CTA helyét itt, a window capture fázisában jegyezzük
+        // meg: ez a figyelő a sziget hidratálása előtt regisztrál, tehát előbb fut.
+        var lastCtaLoc = '';
+        window.addEventListener('click', function (ev) {
+          if (!(ev.target instanceof Element)) return;
+          var l = ev.target.closest('a[href*="' + BOOKING_HOST + '"]');
+          if (l && !l.closest('[data-fb-screening]')) lastCtaLoc = ctaLocation(l);
+        }, true);
+        function fireEvents(link) {
+          var loc = 'egyeb';
+          try { loc = link.closest('[data-fb-screening]') ? (lastCtaLoc || 'eloszuro') : ctaLocation(link); } catch (e) {}
+          try { if (window.gtag) window.gtag('event', 'book_click', { event_category: 'cta', event_label: pathSegment(), cta_location: loc, service: pathSegment() }); } catch (e) {}
           try { if (window.fbq) window.fbq('track', 'InitiateCheckout'); } catch (e) {}
           fireAdsConversion(BOOK_SEND_TO);
         }
@@ -516,7 +538,8 @@ const primaryGtagId = hasGoogleTag
         // foglalási szándék.
         document.addEventListener('click', function (ev) {
           if (!(ev.target instanceof Element)) return;
-          if (ev.target.closest('a[href*="' + BOOKING_HOST + '"]')) { fireEvents(); return; }
+          var bookLink = ev.target.closest('a[href*="' + BOOKING_HOST + '"]');
+          if (bookLink) { fireEvents(bookLink); return; }
           if (ev.target.closest('a[href^="tel:"]')) { fireCallEvents(); return; }
         }, true);
 

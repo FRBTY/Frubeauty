@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { track } from '../../lib/track';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { siteConfig, relFor } from '../../config/site';
@@ -78,6 +78,7 @@ export function ConsultQuiz() {
   const [hair, setHair] = useState<HairId | null>(null);
   const [areas, setAreas] = useState<string[]>([]);
 
+  const started = useRef(false);
   const toggle = (id: string) =>
     setAreas((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
@@ -183,6 +184,11 @@ export function ConsultQuiz() {
                       key={h.id}
                       type="button"
                       onClick={() => {
+                        // Első érintés: a kvíz-indítás mérése, oldalmegtekintésenként egyszer.
+                        if (!started.current) {
+                          started.current = true;
+                          track('lezer_quiz_start');
+                        }
                         setHair(h.id);
                         window.setTimeout(() => setStep(1), reduced ? 0 : 220);
                       }}

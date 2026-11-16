@@ -160,7 +160,7 @@ const config = { ...siteConfig };
        A hero STATIKUS a bal oldalon (nincs Reveal/framer-motion a kritikus úton),
        a jobb oldali kvíz `client:visible`. A H1 az első sorban kimondja a
        szolgáltatást és a várost, a második sorban a horgot. */}
-  <section class="relative overflow-hidden pt-[calc(var(--header-h)+1.5rem)] sm:pt-[calc(var(--header-h)+4.5rem)] pb-16 sm:pb-24">
+  <section data-track-section="hero" class="relative overflow-hidden pt-[calc(var(--header-h)+1.5rem)] sm:pt-[calc(var(--header-h)+4.5rem)] pb-16 sm:pb-24">
     {/* Fényudvar — tisztán CSS, nulla JS és nulla kép. */}
     <div
       class="pointer-events-none absolute inset-0 -z-10"
@@ -263,7 +263,7 @@ const config = { ...siteConfig };
        Egyetlen munkát végez: megmutatja, MIÉRT nem elég egy alkalom. Ez a
        kategória legdrágább kifogása, és a fenti bekezdés állításának a fedezete.
        Magától megy végig, körbe — nem kell hozzá kattintani. */}
-  <section class="py-20 sm:py-28 bg-inkSoft">
+  <section data-track-section="mukodes" class="py-20 sm:py-28 bg-inkSoft">
     <div class="max-w-[1080px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div" className="mb-9 max-w-[52ch]">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-4">A mechanizmus</p>
@@ -278,7 +278,7 @@ const config = { ...siteConfig };
        A H2 SZÁNDÉKOSAN tartalmazza az „árak" szót: a „lézeres szőrtelenítés
        árak" lekérdezés 12 hónap alatt +89%-ot nőtt, és a Google a
        szakasz-egyezéshez a H2-sort olvassa. */}
-  <section id="arak" class="py-20 sm:py-28">
+  <section data-track-section="arak" id="arak" class="py-20 sm:py-28">
     <div class="max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">A teljes árlista</p>
@@ -489,7 +489,7 @@ const config = { ...siteConfig };
        SZÁNDÉKOSAN a bikinivonalat tartja elöl: az a mért, nagyobb kifejezés
        (~110/hó), az intim a +22%-os feltörekvő. Mindkettő szerepel, a sorrend a
        keresletet követi, nem az újdonságot. */}
-  <section id="bikinivonal" class="py-20 sm:py-28 bg-inkSoft">
+  <section data-track-section="intim" id="bikinivonal" class="py-20 sm:py-28 bg-inkSoft">
     <div class="max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-12">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
         <Reveal client:visible as="div" className="lg:col-span-5">
@@ -528,7 +528,7 @@ const config = { ...siteConfig };
        A kvíz a leggyakoribb kizáró okot (szálszín) már lekérdezte. Ez itt a
        TELJES lista — és szándékosan az oldal felső harmadában van: ez szűri ki a
        rossz foglalást, és ez hitelesíti az összes többi állítást. */}
-  <section class="py-20 sm:py-28">
+  <section data-track-section="kinek" class="py-20 sm:py-28">
     <div class="max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Mielőtt foglalsz</p>
@@ -572,7 +572,7 @@ const config = { ...siteConfig };
   {/* ── A gép ────────────────────────────────────────────────────────────────
        Jellemző + haszon párban. A bal oldal minden sora a kijelzőn is
        ELLENŐRIZHETŐ — a fotók ugyanezt mutatják. Márkanevet nem állítunk. */}
-  <section class="py-20 sm:py-28 bg-inkSoft">
+  <section data-track-section="hullamhossz" class="py-20 sm:py-28 bg-inkSoft">
     <div class="max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-12">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
         <Reveal client:visible as="div" className="lg:col-span-5">
@@ -614,7 +614,7 @@ const config = { ...siteConfig };
   </section>
 
   {/* ── A menet ───────────────────────────────────────────────────────────── */}
-  <section class="py-20 sm:py-28">
+  <section data-track-section="menet" class="py-20 sm:py-28">
     <div class="max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl mx-auto text-center">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">A menet</p>
@@ -662,7 +662,7 @@ const config = { ...siteConfig };
        FONTOS: ez NEM garancia, és nem is szabad annak nevezni — a szalonnak nincs
        formális elégedettségi garanciája (2026-09-07-i visszaigazolás), a korábbi
        badge-et pont ezért vettük le az oldalakról. */}
-  <section class="py-20 sm:py-28 bg-inkSoft">
+  <section data-track-section="garancia" class="py-20 sm:py-28 bg-inkSoft">
     <div class="max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Amit vállalok</p>
@@ -694,7 +694,7 @@ const config = { ...siteConfig };
       vissza — de csak akkor, és csak lézeressel. */}
 
   {/* ── GYIK ──────────────────────────────────────────────────────────────── */}
-  <section class="py-20 sm:py-28">
+  <section data-track-section="gyik" class="py-20 sm:py-28">
     <div class="max-w-[920px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div" className="mb-12 sm:mb-16">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Gyakori kérdések</p>
@@ -708,7 +708,7 @@ const config = { ...siteConfig };
        Üzletileg ez a szekció a lézer valódi hozama: a sorozat miatt ugyanaz a
        vendég hat-nyolc alkalommal visszajön, és minden alkalom egy találkozás a
        többi szolgáltatással. Belső linkként is dolgozik (hub-and-spoke). */}
-  <section class="py-20 sm:py-28 bg-inkSoft">
+  <section data-track-section="kiegeszitok" class="py-20 sm:py-28 bg-inkSoft">
     <div class="max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-12">
       <Reveal client:visible as="div" className="mb-12 sm:mb-16 max-w-2xl">
         <p class="text-[11px] uppercase tracking-caps text-gold mb-5">Ha már úgyis itt vagy</p>
@@ -759,6 +759,46 @@ const config = { ...siteConfig };
        kritikus útján futnia, de a látogató első kattintására már készen kell
        állnia. */}
   <BookingScreening client:idle />
+
+  {/* Mérés: melyik szekcióig jut el a látogató, és melyik kérdést nyitja ki.
+       Oldalmegtekintésenként szekciónként egy esemény. A hero kritikus útján
+       nem fut: üresjáratban indul. */}
+  <script is:inline>
+    (function () {
+      function send(name, params) {
+        try { if (window.gtag) window.gtag('event', name, params); } catch (e) {}
+      }
+      function init() {
+        var secs = document.querySelectorAll('[data-track-section]');
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              if (!en.isIntersecting) return;
+              io.unobserve(en.target);
+              send('lezer_section_view', { section: en.target.getAttribute('data-track-section') });
+            });
+          }, { rootMargin: '0px 0px -40% 0px' });
+          secs.forEach(function (s) { io.observe(s); });
+        }
+        var gyik = document.querySelector('[data-track-section="gyik"]');
+        if (gyik) {
+          var seen = {};
+          gyik.querySelectorAll('details').forEach(function (d, i) {
+            d.addEventListener('toggle', function () {
+              if (!d.open || seen[i]) return;
+              seen[i] = 1;
+              var q = d.querySelector('summary');
+              send('faq_open', {
+                question_id: (i + 1) + ' ' + (q ? q.textContent.trim().slice(0, 80) : ''),
+              });
+            });
+          });
+        }
+      }
+      if ('requestIdleCallback' in window) requestIdleCallback(init, { timeout: 3000 });
+      else setTimeout(init, 1200);
+    })();
+  </script>
   <CookieBanner client:idle />
 </Layout>
 
