@@ -86,7 +86,7 @@ Alkalmanként, a helyszínen, a kezelés után, a sorozat árán. Bérlet és el
 Két árlista csak akkor vethető össze, ha ugyanazt jelenti benne minden szó. Négy dolog szokta a különbséget adni:
 
 1. **Orvosi rendelő vagy kozmetika.** Klinikai környezetben az ár jellemzően magasabb, mert orvosi háttér és más fenntartási költség áll mögötte.
-2. **A géptípus.** Dióda, alexandrit vagy IPL: más a működésük, más a beszerzési áruk, és nem minden bőr- és szőrtípusra ugyanúgy alkalmasak.
+2. **A géptípus.** Dióda, alexandrit vagy IPL: más a működésük, más a beszerzési áruk, és nem minden bőr- és szőrtípusra ugyanúgy alkalmasak. A különbséget az [IPL vagy dióda lézer](/blog/ipl-vagy-dioda-lezer/) cikkben írtam le.
 3. **Bérlet vagy alkalom.** Sok helyen a sorozatot előre kell kifizetni, és az akciós árak gyakran ehhez kötődnek.
 4. **Mekkora a terület.** A „láb” lehet lábszár vagy teljes láb, az „intim” lehet bikinivonal vagy teljes intim. Egy alacsonyabb ár néha egyszerűen kisebb területre szól.
 

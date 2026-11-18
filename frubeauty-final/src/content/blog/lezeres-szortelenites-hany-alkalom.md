@@ -34,7 +34,7 @@ Hogy soha többé egyetlen szál sem nő ki, azt nem ígérem — ezért hívja 
 
 **A szálad színétől.** Sötétszőke, barna és fekete szálon dolgozik a legjobban. Világosszőkén és világosvörösön gyengébb és nehezen kiszámítható, ősz és fehér szálon pedig nem működik, mert nincs benne festék, amit a lézer felmelegíthetne.
 
-**A területtől és az októl.** Ha a szőrnövekedés mögött hormonális ok áll — például PCOS —, az arcon és az állon rendszeres karbantartással kell számolni: ott a lézer nem lezárja a kérdést, hanem kezelhetővé teszi.
+**A területtől és az októl.** Ha a szőrnövekedés mögött hormonális ok áll — például PCOS —, az arcon és az állon rendszeres karbantartással kell számolni: ott a lézer nem lezárja a kérdést, hanem kezelhetővé teszi. Erről a [PCOS és arcszőrzet](/blog/pcos-arcszorzet-lezeres-szortelenites/) cikkben írok részletesen.
 
 **A rendszerességtől.** A négy-hat hetes ritmus a lényeg. Két alkalom között a borotválás belefér, a gyanta, az epilálás és a csipesz viszont nem, mert a lézernek a hagymában lévő szálra van szüksége.
 
@@ -65,7 +65,7 @@ Konzultációval és próbafolttal indul: beállítom a bőrtípusodat a Fitzpat
 A hat-nyolc alkalom egy sáv: hogy hol áll meg, az a szál színén, vastagságán és a területen múlik. A sorozat közben látjuk, merre halad, és ha hat alkalom után elég, nem kell tovább jönnöd.
 
 **Mit csinálok a kezelés előtt?**
-A kezelés előtti nap vagy aznap reggel borotvált bőr kell. Két hétig nincs napozás és szolárium, a kezelés napján pedig nincs dezodor vagy testápoló a területen.
+A kezelés előtti nap vagy aznap reggel borotvált bőr kell. Két hétig nincs napozás és szolárium, a kezelés napján pedig nincs dezodor vagy testápoló a területen. A teljes lista, és hogy mi történik utána, a [lézeres szőrtelenítés előtt és után](/blog/lezeres-szortelenites-elott-utan/) cikkben van.
 
 **Fáj?**
 A legtöbb vendég meleg gumipöccintésnek írja le. A kezelőfej hűtött, és ha sok, lejjebb veszem az energiát.
